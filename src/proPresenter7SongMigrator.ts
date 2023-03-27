@@ -50,10 +50,12 @@ import { Song, Verse } from './types';
 const DEFAULT_BES_ARRANGEMENT = 'BES arrangement';
 const OUT_DIR = './pp7-songs';
 
+const FONT_SIZE = 90;
+
 const FONT_CONFIG = {
-  name: 'OpenSans-Regular',
-  size: 70,
-  family: 'Open Sans',
+  name: 'BebasNeue-Bold',
+  size: FONT_SIZE,
+  family: 'Bebas Neue',
 };
 
 const TEXT_FILL_CONFIG = {
@@ -98,7 +100,7 @@ const encodeVerseContentToUnicodeRTFFormat = (verseContent: string) =>
 
 const convertToRtf = (multiLineVerseContent: string) => {
   return (
-    '{\\rtf1\\ansi\\ansicpg1252\\cocoartf2639\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 OpenSans-Regular;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c100000;}\n\\deftab720\n\\pard\\lang1048\\qc\\partightenfactor0\n\n\\f0\\fs140 \\cf2' +
+    '{\\rtf1\\ansi\\ansicpg1252\\cocoartf2639\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 BebasNeue-Bold;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c100000;}\n\\deftab720\n\\pard\\lang1048\\qc\\partightenfactor0\n\n\\f0\\fs140 \\cf2' +
     multiLineVerseContent.replace(/\n/g, '\\\n') +
     '}'
   );
@@ -110,6 +112,7 @@ const createTextFromSection = (verse: string) =>
       font: Graphics_Text_Attributes_Font.create(FONT_CONFIG),
       customAttributes: [
         Graphics_Text_Attributes_CustomAttribute.create({
+          originalFontSize: FONT_SIZE,
           capitalization:
             Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_ALL_CAPS,
         }),
@@ -117,16 +120,18 @@ const createTextFromSection = (verse: string) =>
       capitalization:
         Graphics_Text_Attributes_Capitalization.CAPITALIZATION_ALL_CAPS,
       textSolidFill: Color.create(TEXT_FILL_CONFIG),
+      kerning: 1,
       paragraphStyle: Graphics_Text_Attributes_Paragraph.create({
         alignment:
           Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_CENTER,
-        lineHeightMultiple: 1.2,
+        lineHeightMultiple: 1,
+        lineSpacing: 1.2,
+        paragraphSpacing: 4.2,
         defaultTabInterval: 36,
       }),
     }),
     scaleBehavior: Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_DOWN,
     transform: Graphics_Text_Transform.TRANSFORM_NONE,
-    isSuperscriptStandardized: true,
     verticalAlignment:
       Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_MIDDLE,
     rtfData: Buffer.from(
@@ -286,7 +291,7 @@ export const processSongAndPersistToFile = (song: Song) => {
   const presentation = Presentation.create({
     ccli: Presentation_CCLI.create({
       publisher: 'Biserica Emanuel Sibiu',
-      author: 'Ioan Lucuț, Diana Manta',
+      author: 'Ioan Lucuț',
       songTitle: title,
       copyrightYear: 2023,
       album: 'Biserica Emanuel Sibiu 2023',
