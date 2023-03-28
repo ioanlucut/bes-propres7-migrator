@@ -1,5 +1,4 @@
 import { randomUUID } from 'crypto';
-import fs from 'fs';
 import {
   ApplicationInfo,
   ApplicationInfo_Application,
@@ -45,10 +44,9 @@ import {
   Graphics_Text_VerticalAlignment,
 } from '../proto/graphicsData';
 import { Group } from '../proto/groups';
-import { Song, Verse } from './types';
+import { Song, SongSection, Verse } from './types';
 
 const DEFAULT_BES_ARRANGEMENT = 'BES arrangement';
-const OUT_DIR = './pp7-songs';
 
 const FONT_SIZE = 90;
 
@@ -233,7 +231,7 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
         alpha: 1,
       }),
     }),
-    slide: slide,
+    slide,
     type: Action_ActionType.ACTION_TYPE_PRESENTATION_SLIDE,
   });
 
@@ -250,7 +248,7 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
   const cueGroup = Presentation_CueGroup.create({
     group: Group.create({
       uuid: groupUUID,
-      name: `Group: ${sectionLabel}`,
+      name: sectionLabel,
       color: Color.create({
         green: 0.467,
         blue: 0.8,
@@ -263,8 +261,8 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
   return { cue, cueGroup };
 };
 
-export const processSongAndPersistToFile = (song: Song) => {
-  const { verses, title } = song;
+export const convertSongToProPresenter7 = (song: Song): Presentation => {
+  const { verses, title, sequence } = song;
 
   const applicationInfo = ApplicationInfo.create(APPLICATION_INFO);
 
@@ -272,7 +270,21 @@ export const processSongAndPersistToFile = (song: Song) => {
     string: randomUUID(),
   });
 
-  const slidesConfig = verses.map((verse) => processVerse(verse, song));
+  const songConfigHashMap = {} as Record<
+    SongSection,
+    {
+      cue: Cue;
+      cueGroup: Presentation_CueGroup;
+    }
+  >;
+
+  const slidesConfig = verses.map((verse) => {
+    const { cue, cueGroup } = processVerse(verse, song);
+
+    songConfigHashMap[verse.section] = { cue, cueGroup };
+
+    return { cue, cueGroup };
+  });
 
   const arrangementUUID = UUID.create({
     string: randomUUID(),
@@ -282,13 +294,13 @@ export const processSongAndPersistToFile = (song: Song) => {
     Presentation_Arrangement.create({
       uuid: arrangementUUID,
       name: DEFAULT_BES_ARRANGEMENT,
-      groupIdentifiers: slidesConfig.map(
-        ({ cueGroup }) => cueGroup?.group?.uuid as UUID,
+      groupIdentifiers: sequence.map(
+        (section) => songConfigHashMap[section]?.cueGroup?.group?.uuid as UUID,
       ),
     }),
   ];
 
-  const presentation = Presentation.create({
+  return Presentation.create({
     ccli: Presentation_CCLI.create({
       publisher: 'Biserica Emanuel Sibiu',
       author: 'Ioan Lucuț',
@@ -299,15 +311,10 @@ export const processSongAndPersistToFile = (song: Song) => {
     }),
     applicationInfo,
     uuid: presentationUUId,
-    name: `BES ~ ${title}`,
+    name: `${title} ~ Biserica Emanuel Sibiu`,
     cues: slidesConfig.map(({ cue }) => cue),
     cueGroups: slidesConfig.map(({ cueGroup }) => cueGroup),
     arrangements,
     selectedArrangement: arrangementUUID,
   });
-
-  fs.writeFileSync(
-    `${OUT_DIR}/${title} ~ BES PP7 2023.pro`,
-    Buffer.from(Presentation.encode(presentation).finish()),
-  );
 };
