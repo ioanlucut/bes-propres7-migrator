@@ -7,7 +7,7 @@
     "test:ci": "NODE_ENV=test jest --runInBand --no-cache",
     "test:watch": "NODE_ENV=test TZ='Europe/Berlin' jest --watch --logHeapUsage",
     "test": "npm run test:watch",
-    "migrate:all": "ts-node ./migratorRunner.ts"
+    "migrate:all": "ts-node index.ts"
   },
   "author": "Ioan Lucut",
   "license": "ISC",
@@ -22,11 +22,11 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.3",
+    "@tsconfig/node-lts": "^18.12.1",
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.5.0",
     "@types/lodash": "^4.14.191",
-    "@types/node": "^18.15.10",
+    "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.36.0",

@@ -10,6 +10,7 @@ import {
   Presentation,
   Presentation_Arrangement,
   Presentation_CCLI,
+  Presentation_ContentDestination,
   Presentation_CueGroup,
 } from '../proto/presentation';
 import { Cue } from '../proto/cue';
@@ -48,7 +49,7 @@ import { Song, SongSection, Verse } from './types';
 
 const DEFAULT_BES_ARRANGEMENT = 'BES arrangement';
 
-const FONT_SIZE = 90;
+const FONT_SIZE = 92;
 
 const FONT_CONFIG = {
   name: 'BebasNeue-Bold',
@@ -146,8 +147,8 @@ const APPLICATION_INFO = {
 };
 
 const GRAPHIC_SIZE = {
-  width: 1920,
-  height: 1080,
+  width: 2048,
+  height: 1280,
 };
 
 const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
@@ -210,7 +211,7 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
         uuid: UUID.create({
           string: randomUUID(),
         }),
-        drawsBackgroundColor: true,
+        drawsBackgroundColor: false,
         size: Graphics_Size.create(GRAPHIC_SIZE),
         elements: [slideElement],
       }),
@@ -301,6 +302,9 @@ export const convertSongToProPresenter7 = (song: Song): Presentation => {
   ];
 
   return Presentation.create({
+    category: 'Generated Worship Songs ~ BBE 2023',
+    contentDestination:
+      Presentation_ContentDestination.CONTENT_DESTINATION_GLOBAL,
     ccli: Presentation_CCLI.create({
       publisher: 'Biserica Emanuel Sibiu',
       author: 'Ioan Lucuț',
