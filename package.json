@@ -6,7 +6,7 @@
   "scripts": {
     "test:ci": "NODE_ENV=test jest --runInBand --no-cache",
     "test:watch": "NODE_ENV=test TZ='Europe/Berlin' jest --watch --logHeapUsage",
-    "test": "npm run test:watch",
+    "test": "is-ci-cli test:ci test:watch",
     "migrate:all": "ts-node index.ts"
   },
   "author": "Ioan Lucut",
