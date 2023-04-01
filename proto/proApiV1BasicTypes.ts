@@ -1,10 +1,360 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { UUID } from "./basicTypes";
-import { UInt32Value } from "./google/protobuf/wrappers";
-import { Timestamp } from "./rvtimestamp";
+import _m0 from 'protobufjs/minimal';
+import { UUID } from './basicTypes';
+import { UInt32Value } from './google/protobuf/wrappers';
+import { Timestamp } from './rvtimestamp';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
+
+export enum APIV1TimerOperation {
+  start = 0,
+  stop = 1,
+  reset = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1TimerOperationFromJSON(object: any): APIV1TimerOperation {
+  switch (object) {
+    case 0:
+    case 'start':
+      return APIV1TimerOperation.start;
+    case 1:
+    case 'stop':
+      return APIV1TimerOperation.stop;
+    case 2:
+    case 'reset':
+      return APIV1TimerOperation.reset;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1TimerOperation.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1TimerOperationToJSON(object: APIV1TimerOperation): string {
+  switch (object) {
+    case APIV1TimerOperation.start:
+      return 'start';
+    case APIV1TimerOperation.stop:
+      return 'stop';
+    case APIV1TimerOperation.reset:
+      return 'reset';
+    case APIV1TimerOperation.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1CaptureDestination {
+  disk = 0,
+  rtmp = 1,
+  resi = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1CaptureDestinationFromJSON(
+  object: any,
+): APIV1CaptureDestination {
+  switch (object) {
+    case 0:
+    case 'disk':
+      return APIV1CaptureDestination.disk;
+    case 1:
+    case 'rtmp':
+      return APIV1CaptureDestination.rtmp;
+    case 2:
+    case 'resi':
+      return APIV1CaptureDestination.resi;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1CaptureDestination.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1CaptureDestinationToJSON(
+  object: APIV1CaptureDestination,
+): string {
+  switch (object) {
+    case APIV1CaptureDestination.disk:
+      return 'disk';
+    case APIV1CaptureDestination.rtmp:
+      return 'rtmp';
+    case APIV1CaptureDestination.resi:
+      return 'resi';
+    case APIV1CaptureDestination.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1LayerType {
+  audio = 0,
+  props = 1,
+  messages = 2,
+  announcements = 3,
+  slide = 4,
+  media = 5,
+  video_input = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1LayerTypeFromJSON(object: any): APIV1LayerType {
+  switch (object) {
+    case 0:
+    case 'audio':
+      return APIV1LayerType.audio;
+    case 1:
+    case 'props':
+      return APIV1LayerType.props;
+    case 2:
+    case 'messages':
+      return APIV1LayerType.messages;
+    case 3:
+    case 'announcements':
+      return APIV1LayerType.announcements;
+    case 4:
+    case 'slide':
+      return APIV1LayerType.slide;
+    case 5:
+    case 'media':
+      return APIV1LayerType.media;
+    case 6:
+    case 'video_input':
+      return APIV1LayerType.video_input;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1LayerType.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1LayerTypeToJSON(object: APIV1LayerType): string {
+  switch (object) {
+    case APIV1LayerType.audio:
+      return 'audio';
+    case APIV1LayerType.props:
+      return 'props';
+    case APIV1LayerType.messages:
+      return 'messages';
+    case APIV1LayerType.announcements:
+      return 'announcements';
+    case APIV1LayerType.slide:
+      return 'slide';
+    case APIV1LayerType.media:
+      return 'media';
+    case APIV1LayerType.video_input:
+      return 'video_input';
+    case APIV1LayerType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1TimelineOperation {
+  play = 0,
+  pause = 1,
+  rewind = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1TimelineOperationFromJSON(
+  object: any,
+): APIV1TimelineOperation {
+  switch (object) {
+    case 0:
+    case 'play':
+      return APIV1TimelineOperation.play;
+    case 1:
+    case 'pause':
+      return APIV1TimelineOperation.pause;
+    case 2:
+    case 'rewind':
+      return APIV1TimelineOperation.rewind;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1TimelineOperation.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1TimelineOperationToJSON(
+  object: APIV1TimelineOperation,
+): string {
+  switch (object) {
+    case APIV1TimelineOperation.play:
+      return 'play';
+    case APIV1TimelineOperation.pause:
+      return 'pause';
+    case APIV1TimelineOperation.rewind:
+      return 'rewind';
+    case APIV1TimelineOperation.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1ScreenType {
+  audience = 0,
+  stage = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1ScreenTypeFromJSON(object: any): APIV1ScreenType {
+  switch (object) {
+    case 0:
+    case 'audience':
+      return APIV1ScreenType.audience;
+    case 1:
+    case 'stage':
+      return APIV1ScreenType.stage;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1ScreenType.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1ScreenTypeToJSON(object: APIV1ScreenType): string {
+  switch (object) {
+    case APIV1ScreenType.audience:
+      return 'audience';
+    case APIV1ScreenType.stage:
+      return 'stage';
+    case APIV1ScreenType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1CaptureStatus {
+  active = 0,
+  inactive = 1,
+  caution = 2,
+  error = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1CaptureStatusFromJSON(object: any): APIV1CaptureStatus {
+  switch (object) {
+    case 0:
+    case 'active':
+      return APIV1CaptureStatus.active;
+    case 1:
+    case 'inactive':
+      return APIV1CaptureStatus.inactive;
+    case 2:
+    case 'caution':
+      return APIV1CaptureStatus.caution;
+    case 3:
+    case 'error':
+      return APIV1CaptureStatus.error;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1CaptureStatus.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1CaptureStatusToJSON(object: APIV1CaptureStatus): string {
+  switch (object) {
+    case APIV1CaptureStatus.active:
+      return 'active';
+    case APIV1CaptureStatus.inactive:
+      return 'inactive';
+    case APIV1CaptureStatus.caution:
+      return 'caution';
+    case APIV1CaptureStatus.error:
+      return 'error';
+    case APIV1CaptureStatus.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1TimerState {
+  stopped = 0,
+  running = 1,
+  complete = 2,
+  overrunning = 3,
+  overran = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1TimerStateFromJSON(object: any): APIV1TimerState {
+  switch (object) {
+    case 0:
+    case 'stopped':
+      return APIV1TimerState.stopped;
+    case 1:
+    case 'running':
+      return APIV1TimerState.running;
+    case 2:
+    case 'complete':
+      return APIV1TimerState.complete;
+    case 3:
+    case 'overrunning':
+      return APIV1TimerState.overrunning;
+    case 4:
+    case 'overran':
+      return APIV1TimerState.overran;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1TimerState.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1TimerStateToJSON(object: APIV1TimerState): string {
+  switch (object) {
+    case APIV1TimerState.stopped:
+      return 'stopped';
+    case APIV1TimerState.running:
+      return 'running';
+    case APIV1TimerState.complete:
+      return 'complete';
+    case APIV1TimerState.overrunning:
+      return 'overrunning';
+    case APIV1TimerState.overran:
+      return 'overran';
+    case APIV1TimerState.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum APIV1ContentType {
+  PNG = 0,
+  JPEG = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1ContentTypeFromJSON(object: any): APIV1ContentType {
+  switch (object) {
+    case 0:
+    case 'PNG':
+      return APIV1ContentType.PNG;
+    case 1:
+    case 'JPEG':
+      return APIV1ContentType.JPEG;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1ContentType.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1ContentTypeToJSON(object: APIV1ContentType): string {
+  switch (object) {
+    case APIV1ContentType.PNG:
+      return 'PNG';
+    case APIV1ContentType.JPEG:
+      return 'JPEG';
+    case APIV1ContentType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
 
 export interface APIV1Identifier {
   uuid: string;
@@ -29,30 +379,34 @@ export enum APIV1Playlist_APIV1PlaylistType {
   UNRECOGNIZED = -1,
 }
 
-export function aPIV1Playlist_APIV1PlaylistTypeFromJSON(object: any): APIV1Playlist_APIV1PlaylistType {
+export function aPIV1Playlist_APIV1PlaylistTypeFromJSON(
+  object: any,
+): APIV1Playlist_APIV1PlaylistType {
   switch (object) {
     case 0:
-    case "group":
+    case 'group':
       return APIV1Playlist_APIV1PlaylistType.group;
     case 1:
-    case "playlist":
+    case 'playlist':
       return APIV1Playlist_APIV1PlaylistType.playlist;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1Playlist_APIV1PlaylistType.UNRECOGNIZED;
   }
 }
 
-export function aPIV1Playlist_APIV1PlaylistTypeToJSON(object: APIV1Playlist_APIV1PlaylistType): string {
+export function aPIV1Playlist_APIV1PlaylistTypeToJSON(
+  object: APIV1Playlist_APIV1PlaylistType,
+): string {
   switch (object) {
     case APIV1Playlist_APIV1PlaylistType.group:
-      return "group";
+      return 'group';
     case APIV1Playlist_APIV1PlaylistType.playlist:
-      return "playlist";
+      return 'playlist';
     case APIV1Playlist_APIV1PlaylistType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -80,16 +434,16 @@ export function aPIV1MediaPlaylistItem_APIV1MediaPlaylistItemTypeFromJSON(
 ): APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType {
   switch (object) {
     case 0:
-    case "audio":
+    case 'audio':
       return APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.audio;
     case 1:
-    case "image":
+    case 'image':
       return APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.image;
     case 2:
-    case "video":
+    case 'video':
       return APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.video;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.UNRECOGNIZED;
   }
@@ -100,14 +454,14 @@ export function aPIV1MediaPlaylistItem_APIV1MediaPlaylistItemTypeToJSON(
 ): string {
   switch (object) {
     case APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.audio:
-      return "audio";
+      return 'audio';
     case APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.image:
-      return "image";
+      return 'image';
     case APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.video:
-      return "video";
+      return 'video';
     case APIV1MediaPlaylistItem_APIV1MediaPlaylistItemType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -130,50 +484,54 @@ export enum APIV1PlaylistItem_APIV1PlaylistItemType {
   UNRECOGNIZED = -1,
 }
 
-export function aPIV1PlaylistItem_APIV1PlaylistItemTypeFromJSON(object: any): APIV1PlaylistItem_APIV1PlaylistItemType {
+export function aPIV1PlaylistItem_APIV1PlaylistItemTypeFromJSON(
+  object: any,
+): APIV1PlaylistItem_APIV1PlaylistItemType {
   switch (object) {
     case 0:
-    case "presentation":
+    case 'presentation':
       return APIV1PlaylistItem_APIV1PlaylistItemType.presentation;
     case 1:
-    case "placeholder":
+    case 'placeholder':
       return APIV1PlaylistItem_APIV1PlaylistItemType.placeholder;
     case 2:
-    case "header":
+    case 'header':
       return APIV1PlaylistItem_APIV1PlaylistItemType.header;
     case 3:
-    case "media":
+    case 'media':
       return APIV1PlaylistItem_APIV1PlaylistItemType.media;
     case 4:
-    case "audio":
+    case 'audio':
       return APIV1PlaylistItem_APIV1PlaylistItemType.audio;
     case 5:
-    case "livevideo":
+    case 'livevideo':
       return APIV1PlaylistItem_APIV1PlaylistItemType.livevideo;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1PlaylistItem_APIV1PlaylistItemType.UNRECOGNIZED;
   }
 }
 
-export function aPIV1PlaylistItem_APIV1PlaylistItemTypeToJSON(object: APIV1PlaylistItem_APIV1PlaylistItemType): string {
+export function aPIV1PlaylistItem_APIV1PlaylistItemTypeToJSON(
+  object: APIV1PlaylistItem_APIV1PlaylistItemType,
+): string {
   switch (object) {
     case APIV1PlaylistItem_APIV1PlaylistItemType.presentation:
-      return "presentation";
+      return 'presentation';
     case APIV1PlaylistItem_APIV1PlaylistItemType.placeholder:
-      return "placeholder";
+      return 'placeholder';
     case APIV1PlaylistItem_APIV1PlaylistItemType.header:
-      return "header";
+      return 'header';
     case APIV1PlaylistItem_APIV1PlaylistItemType.media:
-      return "media";
+      return 'media';
     case APIV1PlaylistItem_APIV1PlaylistItemType.audio:
-      return "audio";
+      return 'audio';
     case APIV1PlaylistItem_APIV1PlaylistItemType.livevideo:
-      return "livevideo";
+      return 'livevideo';
     case APIV1PlaylistItem_APIV1PlaylistItemType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -204,31 +562,31 @@ export function aPIV1ClearGroup_APIV1ClearGroupLayerTypeFromJSON(
 ): APIV1ClearGroup_APIV1ClearGroupLayerType {
   switch (object) {
     case 0:
-    case "music":
+    case 'music':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.music;
     case 1:
-    case "audio_effects":
+    case 'audio_effects':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.audio_effects;
     case 2:
-    case "props":
+    case 'props':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.props;
     case 3:
-    case "messages":
+    case 'messages':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.messages;
     case 4:
-    case "announcements":
+    case 'announcements':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.announcements;
     case 5:
-    case "presentation":
+    case 'presentation':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.presentation;
     case 6:
-    case "presentation_media":
+    case 'presentation_media':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.presentation_media;
     case 7:
-    case "video_input":
+    case 'video_input':
       return APIV1ClearGroup_APIV1ClearGroupLayerType.video_input;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1ClearGroup_APIV1ClearGroupLayerType.UNRECOGNIZED;
   }
@@ -239,24 +597,24 @@ export function aPIV1ClearGroup_APIV1ClearGroupLayerTypeToJSON(
 ): string {
   switch (object) {
     case APIV1ClearGroup_APIV1ClearGroupLayerType.music:
-      return "music";
+      return 'music';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.audio_effects:
-      return "audio_effects";
+      return 'audio_effects';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.props:
-      return "props";
+      return 'props';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.messages:
-      return "messages";
+      return 'messages';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.announcements:
-      return "announcements";
+      return 'announcements';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.presentation:
-      return "presentation";
+      return 'presentation';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.presentation_media:
-      return "presentation_media";
+      return 'presentation_media';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.video_input:
-      return "video_input";
+      return 'video_input';
     case APIV1ClearGroup_APIV1ClearGroupLayerType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -307,22 +665,22 @@ export function aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFo
 ): APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat {
   switch (object) {
     case 0:
-    case "none":
+    case 'none':
       return APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.none;
     case 1:
-    case "short":
+    case 'short':
       return APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.short;
     case 2:
-    case "medium":
+    case 'medium':
       return APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.medium;
     case 3:
-    case "long":
+    case 'long':
       return APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.long;
     case 4:
-    case "full":
+    case 'full':
       return APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.full;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.UNRECOGNIZED;
   }
@@ -333,18 +691,18 @@ export function aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFo
 ): string {
   switch (object) {
     case APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.none:
-      return "none";
+      return 'none';
     case APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.short:
-      return "short";
+      return 'short';
     case APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.medium:
-      return "medium";
+      return 'medium';
     case APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.long:
-      return "long";
+      return 'long';
     case APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.full:
-      return "full";
+      return 'full';
     case APIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormat.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -356,56 +714,56 @@ export interface APIV1Timer {
   elapsed?: APIV1Timer_APIV1TimerElapsed | undefined;
 }
 
-export interface APIV1Timer_APIV1TimerCountdown {
-  duration: number;
-}
-
-export interface APIV1Timer_APIV1TimerCountdownToTime {
-  timeOfDay: number;
-  period: APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod;
-}
-
-export enum APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod {
+export enum APIV1Timer_APIV1TimePeriod {
   am = 0,
   pm = 1,
   is_24_hour = 2,
   UNRECOGNIZED = -1,
 }
 
-export function aPIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriodFromJSON(
+export function aPIV1Timer_APIV1TimePeriodFromJSON(
   object: any,
-): APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod {
+): APIV1Timer_APIV1TimePeriod {
   switch (object) {
     case 0:
-    case "am":
-      return APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.am;
+    case 'am':
+      return APIV1Timer_APIV1TimePeriod.am;
     case 1:
-    case "pm":
-      return APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.pm;
+    case 'pm':
+      return APIV1Timer_APIV1TimePeriod.pm;
     case 2:
-    case "is_24_hour":
-      return APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.is_24_hour;
+    case 'is_24_hour':
+      return APIV1Timer_APIV1TimePeriod.is_24_hour;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
-      return APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.UNRECOGNIZED;
+      return APIV1Timer_APIV1TimePeriod.UNRECOGNIZED;
   }
 }
 
-export function aPIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriodToJSON(
-  object: APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod,
+export function aPIV1Timer_APIV1TimePeriodToJSON(
+  object: APIV1Timer_APIV1TimePeriod,
 ): string {
   switch (object) {
-    case APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.am:
-      return "am";
-    case APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.pm:
-      return "pm";
-    case APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.is_24_hour:
-      return "is_24_hour";
-    case APIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriod.UNRECOGNIZED:
+    case APIV1Timer_APIV1TimePeriod.am:
+      return 'am';
+    case APIV1Timer_APIV1TimePeriod.pm:
+      return 'pm';
+    case APIV1Timer_APIV1TimePeriod.is_24_hour:
+      return 'is_24_hour';
+    case APIV1Timer_APIV1TimePeriod.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
+}
+
+export interface APIV1Timer_APIV1TimerCountdown {
+  duration: number;
+}
+
+export interface APIV1Timer_APIV1TimerCountdownToTime {
+  timeOfDay: number;
+  period: APIV1Timer_APIV1TimePeriod;
 }
 
 export interface APIV1Timer_APIV1TimerElapsed {
@@ -435,22 +793,22 @@ export function aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(
 ): APIV1TimerFormat_APIV1TimerUnitDisplayFormat {
   switch (object) {
     case 0:
-    case "none":
+    case 'none':
       return APIV1TimerFormat_APIV1TimerUnitDisplayFormat.none;
     case 1:
-    case "short":
+    case 'short':
       return APIV1TimerFormat_APIV1TimerUnitDisplayFormat.short;
     case 2:
-    case "long":
+    case 'long':
       return APIV1TimerFormat_APIV1TimerUnitDisplayFormat.long;
     case 3:
-    case "remove_short":
+    case 'remove_short':
       return APIV1TimerFormat_APIV1TimerUnitDisplayFormat.remove_short;
     case 4:
-    case "remove_long":
+    case 'remove_long':
       return APIV1TimerFormat_APIV1TimerUnitDisplayFormat.remove_long;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1TimerFormat_APIV1TimerUnitDisplayFormat.UNRECOGNIZED;
   }
@@ -461,76 +819,25 @@ export function aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(
 ): string {
   switch (object) {
     case APIV1TimerFormat_APIV1TimerUnitDisplayFormat.none:
-      return "none";
+      return 'none';
     case APIV1TimerFormat_APIV1TimerUnitDisplayFormat.short:
-      return "short";
+      return 'short';
     case APIV1TimerFormat_APIV1TimerUnitDisplayFormat.long:
-      return "long";
+      return 'long';
     case APIV1TimerFormat_APIV1TimerUnitDisplayFormat.remove_short:
-      return "remove_short";
+      return 'remove_short';
     case APIV1TimerFormat_APIV1TimerUnitDisplayFormat.remove_long:
-      return "remove_long";
+      return 'remove_long';
     case APIV1TimerFormat_APIV1TimerUnitDisplayFormat.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 export interface APIV1TimerValue {
   id: APIV1Identifier | undefined;
   time: string;
-  state: APIV1TimerValue_APIV1TimerState;
-}
-
-export enum APIV1TimerValue_APIV1TimerState {
-  stopped = 0,
-  running = 1,
-  complete = 2,
-  overrunning = 3,
-  overran = 4,
-  UNRECOGNIZED = -1,
-}
-
-export function aPIV1TimerValue_APIV1TimerStateFromJSON(object: any): APIV1TimerValue_APIV1TimerState {
-  switch (object) {
-    case 0:
-    case "stopped":
-      return APIV1TimerValue_APIV1TimerState.stopped;
-    case 1:
-    case "running":
-      return APIV1TimerValue_APIV1TimerState.running;
-    case 2:
-    case "complete":
-      return APIV1TimerValue_APIV1TimerState.complete;
-    case 3:
-    case "overrunning":
-      return APIV1TimerValue_APIV1TimerState.overrunning;
-    case 4:
-    case "overran":
-      return APIV1TimerValue_APIV1TimerState.overran;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return APIV1TimerValue_APIV1TimerState.UNRECOGNIZED;
-  }
-}
-
-export function aPIV1TimerValue_APIV1TimerStateToJSON(object: APIV1TimerValue_APIV1TimerState): string {
-  switch (object) {
-    case APIV1TimerValue_APIV1TimerState.stopped:
-      return "stopped";
-    case APIV1TimerValue_APIV1TimerState.running:
-      return "running";
-    case APIV1TimerValue_APIV1TimerState.complete:
-      return "complete";
-    case APIV1TimerValue_APIV1TimerState.overrunning:
-      return "overrunning";
-    case APIV1TimerValue_APIV1TimerState.overran:
-      return "overran";
-    case APIV1TimerValue_APIV1TimerState.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
+  state: APIV1TimerState;
 }
 
 export interface APIV1Color {
@@ -577,6 +884,49 @@ export interface APIV1GroupMemberStatus {
   connectionStatus: APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus;
 }
 
+export enum APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus {
+  CONNECTION_STATUS_UNKNOWN = 0,
+  CONNECTION_STATUS_CONNECTED = 1,
+  CONNECTION_STATUS_DISCONNECTED = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusFromJSON(
+  object: any,
+): APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus {
+  switch (object) {
+    case 0:
+    case 'CONNECTION_STATUS_UNKNOWN':
+      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_UNKNOWN;
+    case 1:
+    case 'CONNECTION_STATUS_CONNECTED':
+      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_CONNECTED;
+    case 2:
+    case 'CONNECTION_STATUS_DISCONNECTED':
+      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_DISCONNECTED;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.UNRECOGNIZED;
+  }
+}
+
+export function aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusToJSON(
+  object: APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus,
+): string {
+  switch (object) {
+    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_UNKNOWN:
+      return 'CONNECTION_STATUS_UNKNOWN';
+    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_CONNECTED:
+      return 'CONNECTION_STATUS_CONNECTED';
+    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_DISCONNECTED:
+      return 'CONNECTION_STATUS_DISCONNECTED';
+    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
 export enum APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform {
   PLATFORM_UNKNOWN = 0,
   PLATFORM_MACOS = 1,
@@ -590,19 +940,19 @@ export function aPIV1GroupMemberStatus_APIV1GroupMemberStatusPlatformFromJSON(
 ): APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform {
   switch (object) {
     case 0:
-    case "PLATFORM_UNKNOWN":
+    case 'PLATFORM_UNKNOWN':
       return APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_UNKNOWN;
     case 1:
-    case "PLATFORM_MACOS":
+    case 'PLATFORM_MACOS':
       return APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_MACOS;
     case 2:
-    case "PLATFORM_WIN32":
+    case 'PLATFORM_WIN32':
       return APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_WIN32;
     case 3:
-    case "PLATFORM_WEB":
+    case 'PLATFORM_WEB':
       return APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_WEB;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.UNRECOGNIZED;
   }
@@ -613,59 +963,16 @@ export function aPIV1GroupMemberStatus_APIV1GroupMemberStatusPlatformToJSON(
 ): string {
   switch (object) {
     case APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_UNKNOWN:
-      return "PLATFORM_UNKNOWN";
+      return 'PLATFORM_UNKNOWN';
     case APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_MACOS:
-      return "PLATFORM_MACOS";
+      return 'PLATFORM_MACOS';
     case APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_WIN32:
-      return "PLATFORM_WIN32";
+      return 'PLATFORM_WIN32';
     case APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.PLATFORM_WEB:
-      return "PLATFORM_WEB";
+      return 'PLATFORM_WEB';
     case APIV1GroupMemberStatus_APIV1GroupMemberStatusPlatform.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus {
-  CONNECTION_STATUS_UNKNOWN = 0,
-  CONNECTION_STATUS_CONNECTED = 1,
-  CONNECTION_STATUS_DISCONNECTED = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusFromJSON(
-  object: any,
-): APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus {
-  switch (object) {
-    case 0:
-    case "CONNECTION_STATUS_UNKNOWN":
-      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_UNKNOWN;
-    case 1:
-    case "CONNECTION_STATUS_CONNECTED":
-      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_CONNECTED;
-    case 2:
-    case "CONNECTION_STATUS_DISCONNECTED":
-      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_DISCONNECTED;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.UNRECOGNIZED;
-  }
-}
-
-export function aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusToJSON(
-  object: APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus,
-): string {
-  switch (object) {
-    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_UNKNOWN:
-      return "CONNECTION_STATUS_UNKNOWN";
-    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_CONNECTED:
-      return "CONNECTION_STATUS_CONNECTED";
-    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.CONNECTION_STATUS_DISCONNECTED:
-      return "CONNECTION_STATUS_DISCONNECTED";
-    case APIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatus.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -689,40 +996,44 @@ export enum APIV1ErrorResponse_APIV1ErrorType {
   UNRECOGNIZED = -1,
 }
 
-export function aPIV1ErrorResponse_APIV1ErrorTypeFromJSON(object: any): APIV1ErrorResponse_APIV1ErrorType {
+export function aPIV1ErrorResponse_APIV1ErrorTypeFromJSON(
+  object: any,
+): APIV1ErrorResponse_APIV1ErrorType {
   switch (object) {
     case 0:
-    case "NOT_FOUND":
+    case 'NOT_FOUND':
       return APIV1ErrorResponse_APIV1ErrorType.NOT_FOUND;
     case 1:
-    case "BAD_REQUEST":
+    case 'BAD_REQUEST':
       return APIV1ErrorResponse_APIV1ErrorType.BAD_REQUEST;
     case 2:
-    case "INTERNAL_ERROR":
+    case 'INTERNAL_ERROR':
       return APIV1ErrorResponse_APIV1ErrorType.INTERNAL_ERROR;
     case 3:
-    case "UNAUTHORIZED":
+    case 'UNAUTHORIZED':
       return APIV1ErrorResponse_APIV1ErrorType.UNAUTHORIZED;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1ErrorResponse_APIV1ErrorType.UNRECOGNIZED;
   }
 }
 
-export function aPIV1ErrorResponse_APIV1ErrorTypeToJSON(object: APIV1ErrorResponse_APIV1ErrorType): string {
+export function aPIV1ErrorResponse_APIV1ErrorTypeToJSON(
+  object: APIV1ErrorResponse_APIV1ErrorType,
+): string {
   switch (object) {
     case APIV1ErrorResponse_APIV1ErrorType.NOT_FOUND:
-      return "NOT_FOUND";
+      return 'NOT_FOUND';
     case APIV1ErrorResponse_APIV1ErrorType.BAD_REQUEST:
-      return "BAD_REQUEST";
+      return 'BAD_REQUEST';
     case APIV1ErrorResponse_APIV1ErrorType.INTERNAL_ERROR:
-      return "INTERNAL_ERROR";
+      return 'INTERNAL_ERROR';
     case APIV1ErrorResponse_APIV1ErrorType.UNAUTHORIZED:
-      return "UNAUTHORIZED";
+      return 'UNAUTHORIZED';
     case APIV1ErrorResponse_APIV1ErrorType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -779,30 +1090,34 @@ export enum APIV1Presentation_Destination {
   UNRECOGNIZED = -1,
 }
 
-export function aPIV1Presentation_DestinationFromJSON(object: any): APIV1Presentation_Destination {
+export function aPIV1Presentation_DestinationFromJSON(
+  object: any,
+): APIV1Presentation_Destination {
   switch (object) {
     case 0:
-    case "presentation":
+    case 'presentation':
       return APIV1Presentation_Destination.presentation;
     case 1:
-    case "announcements":
+    case 'announcements':
       return APIV1Presentation_Destination.announcements;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return APIV1Presentation_Destination.UNRECOGNIZED;
   }
 }
 
-export function aPIV1Presentation_DestinationToJSON(object: APIV1Presentation_Destination): string {
+export function aPIV1Presentation_DestinationToJSON(
+  object: APIV1Presentation_Destination,
+): string {
   switch (object) {
     case APIV1Presentation_Destination.presentation:
-      return "presentation";
+      return 'presentation';
     case APIV1Presentation_Destination.announcements:
-      return "announcements";
+      return 'announcements';
     case APIV1Presentation_Destination.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -855,40 +1170,7 @@ export interface APIV1SlideDisplayDetails {
 export interface APIV1ScreenConfig {
   id: APIV1Identifier | undefined;
   size: APIV1Size | undefined;
-  screenType: APIV1ScreenConfig_APIV1ScreenType;
-}
-
-export enum APIV1ScreenConfig_APIV1ScreenType {
-  audience = 0,
-  stage = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function aPIV1ScreenConfig_APIV1ScreenTypeFromJSON(object: any): APIV1ScreenConfig_APIV1ScreenType {
-  switch (object) {
-    case 0:
-    case "audience":
-      return APIV1ScreenConfig_APIV1ScreenType.audience;
-    case 1:
-    case "stage":
-      return APIV1ScreenConfig_APIV1ScreenType.stage;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return APIV1ScreenConfig_APIV1ScreenType.UNRECOGNIZED;
-  }
-}
-
-export function aPIV1ScreenConfig_APIV1ScreenTypeToJSON(object: APIV1ScreenConfig_APIV1ScreenType): string {
-  switch (object) {
-    case APIV1ScreenConfig_APIV1ScreenType.audience:
-      return "audience";
-    case APIV1ScreenConfig_APIV1ScreenType.stage:
-      return "stage";
-    case APIV1ScreenConfig_APIV1ScreenType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
+  screenType: APIV1ScreenType;
 }
 
 export interface APIV1PropData {
@@ -897,15 +1179,18 @@ export interface APIV1PropData {
 }
 
 function createBaseAPIV1Identifier(): APIV1Identifier {
-  return { uuid: "", name: "", index: 0 };
+  return { uuid: '', name: '', index: 0 };
 }
 
 export const APIV1Identifier = {
-  encode(message: APIV1Identifier, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.uuid !== "") {
+  encode(
+    message: APIV1Identifier,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.uuid !== '') {
       writer.uint32(10).string(message.uuid);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     if (message.index !== 0) {
@@ -915,7 +1200,8 @@ export const APIV1Identifier = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Identifier {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Identifier();
     while (reader.pos < end) {
@@ -953,8 +1239,8 @@ export const APIV1Identifier = {
 
   fromJSON(object: any): APIV1Identifier {
     return {
-      uuid: isSet(object.uuid) ? String(object.uuid) : "",
-      name: isSet(object.name) ? String(object.name) : "",
+      uuid: isSet(object.uuid) ? String(object.uuid) : '',
+      name: isSet(object.name) ? String(object.name) : '',
       index: isSet(object.index) ? Number(object.index) : 0,
     };
   },
@@ -967,14 +1253,18 @@ export const APIV1Identifier = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Identifier>, I>>(base?: I): APIV1Identifier {
+  create<I extends Exact<DeepPartial<APIV1Identifier>, I>>(
+    base?: I,
+  ): APIV1Identifier {
     return APIV1Identifier.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Identifier>, I>>(object: I): APIV1Identifier {
+  fromPartial<I extends Exact<DeepPartial<APIV1Identifier>, I>>(
+    object: I,
+  ): APIV1Identifier {
     const message = createBaseAPIV1Identifier();
-    message.uuid = object.uuid ?? "";
-    message.name = object.name ?? "";
+    message.uuid = object.uuid ?? '';
+    message.name = object.name ?? '';
     message.index = object.index ?? 0;
     return message;
   },
@@ -985,18 +1275,25 @@ function createBaseAPIV1SlideIndex(): APIV1SlideIndex {
 }
 
 export const APIV1SlideIndex = {
-  encode(message: APIV1SlideIndex, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1SlideIndex,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
     if (message.presentationId !== undefined) {
-      APIV1Identifier.encode(message.presentationId, writer.uint32(18).fork()).ldelim();
+      APIV1Identifier.encode(
+        message.presentationId,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1SlideIndex {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1SlideIndex();
     while (reader.pos < end) {
@@ -1014,7 +1311,10 @@ export const APIV1SlideIndex = {
             break;
           }
 
-          message.presentationId = APIV1Identifier.decode(reader, reader.uint32());
+          message.presentationId = APIV1Identifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1028,7 +1328,9 @@ export const APIV1SlideIndex = {
   fromJSON(object: any): APIV1SlideIndex {
     return {
       index: isSet(object.index) ? Number(object.index) : 0,
-      presentationId: isSet(object.presentationId) ? APIV1Identifier.fromJSON(object.presentationId) : undefined,
+      presentationId: isSet(object.presentationId)
+        ? APIV1Identifier.fromJSON(object.presentationId)
+        : undefined,
     };
   },
 
@@ -1036,20 +1338,27 @@ export const APIV1SlideIndex = {
     const obj: any = {};
     message.index !== undefined && (obj.index = Math.round(message.index));
     message.presentationId !== undefined &&
-      (obj.presentationId = message.presentationId ? APIV1Identifier.toJSON(message.presentationId) : undefined);
+      (obj.presentationId = message.presentationId
+        ? APIV1Identifier.toJSON(message.presentationId)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1SlideIndex>, I>>(base?: I): APIV1SlideIndex {
+  create<I extends Exact<DeepPartial<APIV1SlideIndex>, I>>(
+    base?: I,
+  ): APIV1SlideIndex {
     return APIV1SlideIndex.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1SlideIndex>, I>>(object: I): APIV1SlideIndex {
+  fromPartial<I extends Exact<DeepPartial<APIV1SlideIndex>, I>>(
+    object: I,
+  ): APIV1SlideIndex {
     const message = createBaseAPIV1SlideIndex();
     message.index = object.index ?? 0;
-    message.presentationId = (object.presentationId !== undefined && object.presentationId !== null)
-      ? APIV1Identifier.fromPartial(object.presentationId)
-      : undefined;
+    message.presentationId =
+      object.presentationId !== undefined && object.presentationId !== null
+        ? APIV1Identifier.fromPartial(object.presentationId)
+        : undefined;
     return message;
   },
 };
@@ -1059,7 +1368,10 @@ function createBaseAPIV1Playlist(): APIV1Playlist {
 }
 
 export const APIV1Playlist = {
-  encode(message: APIV1Playlist, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Playlist,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -1073,7 +1385,8 @@ export const APIV1Playlist = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Playlist {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Playlist();
     while (reader.pos < end) {
@@ -1112,32 +1425,48 @@ export const APIV1Playlist = {
   fromJSON(object: any): APIV1Playlist {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      type: isSet(object.type) ? aPIV1Playlist_APIV1PlaylistTypeFromJSON(object.type) : 0,
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => APIV1Playlist.fromJSON(e)) : [],
+      type: isSet(object.type)
+        ? aPIV1Playlist_APIV1PlaylistTypeFromJSON(object.type)
+        : 0,
+      children: Array.isArray(object?.children)
+        ? object.children.map((e: any) => APIV1Playlist.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: APIV1Playlist): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.type !== undefined && (obj.type = aPIV1Playlist_APIV1PlaylistTypeToJSON(message.type));
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.type !== undefined &&
+      (obj.type = aPIV1Playlist_APIV1PlaylistTypeToJSON(message.type));
     if (message.children) {
-      obj.children = message.children.map((e) => e ? APIV1Playlist.toJSON(e) : undefined);
+      obj.children = message.children.map((e) =>
+        e ? APIV1Playlist.toJSON(e) : undefined,
+      );
     } else {
       obj.children = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Playlist>, I>>(base?: I): APIV1Playlist {
+  create<I extends Exact<DeepPartial<APIV1Playlist>, I>>(
+    base?: I,
+  ): APIV1Playlist {
     return APIV1Playlist.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Playlist>, I>>(object: I): APIV1Playlist {
+  fromPartial<I extends Exact<DeepPartial<APIV1Playlist>, I>>(
+    object: I,
+  ): APIV1Playlist {
     const message = createBaseAPIV1Playlist();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
     message.type = object.type ?? 0;
-    message.children = object.children?.map((e) => APIV1Playlist.fromPartial(e)) || [];
+    message.children =
+      object.children?.map((e) => APIV1Playlist.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1147,9 +1476,15 @@ function createBaseAPIV1PlaylistAndItem(): APIV1PlaylistAndItem {
 }
 
 export const APIV1PlaylistAndItem = {
-  encode(message: APIV1PlaylistAndItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1PlaylistAndItem,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.playlist !== undefined) {
-      APIV1Identifier.encode(message.playlist, writer.uint32(10).fork()).ldelim();
+      APIV1Identifier.encode(
+        message.playlist,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.item !== undefined) {
       APIV1Identifier.encode(message.item, writer.uint32(18).fork()).ldelim();
@@ -1157,8 +1492,12 @@ export const APIV1PlaylistAndItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1PlaylistAndItem {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1PlaylistAndItem {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1PlaylistAndItem();
     while (reader.pos < end) {
@@ -1189,48 +1528,66 @@ export const APIV1PlaylistAndItem = {
 
   fromJSON(object: any): APIV1PlaylistAndItem {
     return {
-      playlist: isSet(object.playlist) ? APIV1Identifier.fromJSON(object.playlist) : undefined,
-      item: isSet(object.item) ? APIV1Identifier.fromJSON(object.item) : undefined,
+      playlist: isSet(object.playlist)
+        ? APIV1Identifier.fromJSON(object.playlist)
+        : undefined,
+      item: isSet(object.item)
+        ? APIV1Identifier.fromJSON(object.item)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1PlaylistAndItem): unknown {
     const obj: any = {};
     message.playlist !== undefined &&
-      (obj.playlist = message.playlist ? APIV1Identifier.toJSON(message.playlist) : undefined);
-    message.item !== undefined && (obj.item = message.item ? APIV1Identifier.toJSON(message.item) : undefined);
+      (obj.playlist = message.playlist
+        ? APIV1Identifier.toJSON(message.playlist)
+        : undefined);
+    message.item !== undefined &&
+      (obj.item = message.item
+        ? APIV1Identifier.toJSON(message.item)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1PlaylistAndItem>, I>>(base?: I): APIV1PlaylistAndItem {
+  create<I extends Exact<DeepPartial<APIV1PlaylistAndItem>, I>>(
+    base?: I,
+  ): APIV1PlaylistAndItem {
     return APIV1PlaylistAndItem.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1PlaylistAndItem>, I>>(object: I): APIV1PlaylistAndItem {
+  fromPartial<I extends Exact<DeepPartial<APIV1PlaylistAndItem>, I>>(
+    object: I,
+  ): APIV1PlaylistAndItem {
     const message = createBaseAPIV1PlaylistAndItem();
-    message.playlist = (object.playlist !== undefined && object.playlist !== null)
-      ? APIV1Identifier.fromPartial(object.playlist)
-      : undefined;
-    message.item = (object.item !== undefined && object.item !== null)
-      ? APIV1Identifier.fromPartial(object.item)
-      : undefined;
+    message.playlist =
+      object.playlist !== undefined && object.playlist !== null
+        ? APIV1Identifier.fromPartial(object.playlist)
+        : undefined;
+    message.item =
+      object.item !== undefined && object.item !== null
+        ? APIV1Identifier.fromPartial(object.item)
+        : undefined;
     return message;
   },
 };
 
 function createBaseAPIV1MediaPlaylistItem(): APIV1MediaPlaylistItem {
-  return { id: undefined, type: 0, artist: "", duration: 0 };
+  return { id: undefined, type: 0, artist: '', duration: 0 };
 }
 
 export const APIV1MediaPlaylistItem = {
-  encode(message: APIV1MediaPlaylistItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1MediaPlaylistItem,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.artist !== "") {
+    if (message.artist !== '') {
       writer.uint32(26).string(message.artist);
     }
     if (message.duration !== 0) {
@@ -1239,8 +1596,12 @@ export const APIV1MediaPlaylistItem = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1MediaPlaylistItem {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1MediaPlaylistItem {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1MediaPlaylistItem();
     while (reader.pos < end) {
@@ -1286,41 +1647,65 @@ export const APIV1MediaPlaylistItem = {
   fromJSON(object: any): APIV1MediaPlaylistItem {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      type: isSet(object.type) ? aPIV1MediaPlaylistItem_APIV1MediaPlaylistItemTypeFromJSON(object.type) : 0,
-      artist: isSet(object.artist) ? String(object.artist) : "",
+      type: isSet(object.type)
+        ? aPIV1MediaPlaylistItem_APIV1MediaPlaylistItemTypeFromJSON(object.type)
+        : 0,
+      artist: isSet(object.artist) ? String(object.artist) : '',
       duration: isSet(object.duration) ? Number(object.duration) : 0,
     };
   },
 
   toJSON(message: APIV1MediaPlaylistItem): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.type !== undefined && (obj.type = aPIV1MediaPlaylistItem_APIV1MediaPlaylistItemTypeToJSON(message.type));
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.type !== undefined &&
+      (obj.type = aPIV1MediaPlaylistItem_APIV1MediaPlaylistItemTypeToJSON(
+        message.type,
+      ));
     message.artist !== undefined && (obj.artist = message.artist);
-    message.duration !== undefined && (obj.duration = Math.round(message.duration));
+    message.duration !== undefined &&
+      (obj.duration = Math.round(message.duration));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1MediaPlaylistItem>, I>>(base?: I): APIV1MediaPlaylistItem {
+  create<I extends Exact<DeepPartial<APIV1MediaPlaylistItem>, I>>(
+    base?: I,
+  ): APIV1MediaPlaylistItem {
     return APIV1MediaPlaylistItem.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1MediaPlaylistItem>, I>>(object: I): APIV1MediaPlaylistItem {
+  fromPartial<I extends Exact<DeepPartial<APIV1MediaPlaylistItem>, I>>(
+    object: I,
+  ): APIV1MediaPlaylistItem {
     const message = createBaseAPIV1MediaPlaylistItem();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
     message.type = object.type ?? 0;
-    message.artist = object.artist ?? "";
+    message.artist = object.artist ?? '';
     message.duration = object.duration ?? 0;
     return message;
   },
 };
 
 function createBaseAPIV1PlaylistItem(): APIV1PlaylistItem {
-  return { id: undefined, type: 0, isHidden: false, isPco: false, headerColor: undefined, duration: undefined };
+  return {
+    id: undefined,
+    type: 0,
+    isHidden: false,
+    isPco: false,
+    headerColor: undefined,
+    duration: undefined,
+  };
 }
 
 export const APIV1PlaylistItem = {
-  encode(message: APIV1PlaylistItem, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1PlaylistItem,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -1337,13 +1722,17 @@ export const APIV1PlaylistItem = {
       APIV1Color.encode(message.headerColor, writer.uint32(42).fork()).ldelim();
     }
     if (message.duration !== undefined) {
-      UInt32Value.encode({ value: message.duration! }, writer.uint32(50).fork()).ldelim();
+      UInt32Value.encode(
+        { value: message.duration! },
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1PlaylistItem {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1PlaylistItem();
     while (reader.pos < end) {
@@ -1403,39 +1792,55 @@ export const APIV1PlaylistItem = {
   fromJSON(object: any): APIV1PlaylistItem {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      type: isSet(object.type) ? aPIV1PlaylistItem_APIV1PlaylistItemTypeFromJSON(object.type) : 0,
+      type: isSet(object.type)
+        ? aPIV1PlaylistItem_APIV1PlaylistItemTypeFromJSON(object.type)
+        : 0,
       isHidden: isSet(object.isHidden) ? Boolean(object.isHidden) : false,
       isPco: isSet(object.isPco) ? Boolean(object.isPco) : false,
-      headerColor: isSet(object.headerColor) ? APIV1Color.fromJSON(object.headerColor) : undefined,
+      headerColor: isSet(object.headerColor)
+        ? APIV1Color.fromJSON(object.headerColor)
+        : undefined,
       duration: isSet(object.duration) ? Number(object.duration) : undefined,
     };
   },
 
   toJSON(message: APIV1PlaylistItem): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.type !== undefined && (obj.type = aPIV1PlaylistItem_APIV1PlaylistItemTypeToJSON(message.type));
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.type !== undefined &&
+      (obj.type = aPIV1PlaylistItem_APIV1PlaylistItemTypeToJSON(message.type));
     message.isHidden !== undefined && (obj.isHidden = message.isHidden);
     message.isPco !== undefined && (obj.isPco = message.isPco);
     message.headerColor !== undefined &&
-      (obj.headerColor = message.headerColor ? APIV1Color.toJSON(message.headerColor) : undefined);
+      (obj.headerColor = message.headerColor
+        ? APIV1Color.toJSON(message.headerColor)
+        : undefined);
     message.duration !== undefined && (obj.duration = message.duration);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1PlaylistItem>, I>>(base?: I): APIV1PlaylistItem {
+  create<I extends Exact<DeepPartial<APIV1PlaylistItem>, I>>(
+    base?: I,
+  ): APIV1PlaylistItem {
     return APIV1PlaylistItem.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1PlaylistItem>, I>>(object: I): APIV1PlaylistItem {
+  fromPartial<I extends Exact<DeepPartial<APIV1PlaylistItem>, I>>(
+    object: I,
+  ): APIV1PlaylistItem {
     const message = createBaseAPIV1PlaylistItem();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
     message.type = object.type ?? 0;
     message.isHidden = object.isHidden ?? false;
     message.isPco = object.isPco ?? false;
-    message.headerColor = (object.headerColor !== undefined && object.headerColor !== null)
-      ? APIV1Color.fromPartial(object.headerColor)
-      : undefined;
+    message.headerColor =
+      object.headerColor !== undefined && object.headerColor !== null
+        ? APIV1Color.fromPartial(object.headerColor)
+        : undefined;
     message.duration = object.duration ?? undefined;
     return message;
   },
@@ -1444,7 +1849,7 @@ export const APIV1PlaylistItem = {
 function createBaseAPIV1ClearGroup(): APIV1ClearGroup {
   return {
     id: undefined,
-    icon: "",
+    icon: '',
     tint: undefined,
     layers: [],
     stopTimelineAnnouncements: false,
@@ -1454,11 +1859,14 @@ function createBaseAPIV1ClearGroup(): APIV1ClearGroup {
 }
 
 export const APIV1ClearGroup = {
-  encode(message: APIV1ClearGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1ClearGroup,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.icon !== "") {
+    if (message.icon !== '') {
       writer.uint32(18).string(message.icon);
     }
     if (message.tint !== undefined) {
@@ -1482,7 +1890,8 @@ export const APIV1ClearGroup = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1ClearGroup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1ClearGroup();
     while (reader.pos < end) {
@@ -1558,10 +1967,12 @@ export const APIV1ClearGroup = {
   fromJSON(object: any): APIV1ClearGroup {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      icon: isSet(object.icon) ? String(object.icon) : "",
+      icon: isSet(object.icon) ? String(object.icon) : '',
       tint: isSet(object.tint) ? APIV1Color.fromJSON(object.tint) : undefined,
       layers: Array.isArray(object?.layers)
-        ? object.layers.map((e: any) => aPIV1ClearGroup_APIV1ClearGroupLayerTypeFromJSON(e))
+        ? object.layers.map((e: any) =>
+            aPIV1ClearGroup_APIV1ClearGroupLayerTypeFromJSON(e),
+          )
         : [],
       stopTimelineAnnouncements: isSet(object.stopTimelineAnnouncements)
         ? Boolean(object.stopTimelineAnnouncements)
@@ -1569,40 +1980,57 @@ export const APIV1ClearGroup = {
       stopTimelinePresentation: isSet(object.stopTimelinePresentation)
         ? Boolean(object.stopTimelinePresentation)
         : false,
-      clearNextPresentation: isSet(object.clearNextPresentation) ? Boolean(object.clearNextPresentation) : false,
+      clearNextPresentation: isSet(object.clearNextPresentation)
+        ? Boolean(object.clearNextPresentation)
+        : false,
     };
   },
 
   toJSON(message: APIV1ClearGroup): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     message.icon !== undefined && (obj.icon = message.icon);
-    message.tint !== undefined && (obj.tint = message.tint ? APIV1Color.toJSON(message.tint) : undefined);
+    message.tint !== undefined &&
+      (obj.tint = message.tint ? APIV1Color.toJSON(message.tint) : undefined);
     if (message.layers) {
-      obj.layers = message.layers.map((e) => aPIV1ClearGroup_APIV1ClearGroupLayerTypeToJSON(e));
+      obj.layers = message.layers.map((e) =>
+        aPIV1ClearGroup_APIV1ClearGroupLayerTypeToJSON(e),
+      );
     } else {
       obj.layers = [];
     }
     message.stopTimelineAnnouncements !== undefined &&
       (obj.stopTimelineAnnouncements = message.stopTimelineAnnouncements);
-    message.stopTimelinePresentation !== undefined && (obj.stopTimelinePresentation = message.stopTimelinePresentation);
-    message.clearNextPresentation !== undefined && (obj.clearNextPresentation = message.clearNextPresentation);
+    message.stopTimelinePresentation !== undefined &&
+      (obj.stopTimelinePresentation = message.stopTimelinePresentation);
+    message.clearNextPresentation !== undefined &&
+      (obj.clearNextPresentation = message.clearNextPresentation);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1ClearGroup>, I>>(base?: I): APIV1ClearGroup {
+  create<I extends Exact<DeepPartial<APIV1ClearGroup>, I>>(
+    base?: I,
+  ): APIV1ClearGroup {
     return APIV1ClearGroup.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1ClearGroup>, I>>(object: I): APIV1ClearGroup {
+  fromPartial<I extends Exact<DeepPartial<APIV1ClearGroup>, I>>(
+    object: I,
+  ): APIV1ClearGroup {
     const message = createBaseAPIV1ClearGroup();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.icon = object.icon ?? "";
-    message.tint = (object.tint !== undefined && object.tint !== null)
-      ? APIV1Color.fromPartial(object.tint)
-      : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.icon = object.icon ?? '';
+    message.tint =
+      object.tint !== undefined && object.tint !== null
+        ? APIV1Color.fromPartial(object.tint)
+        : undefined;
     message.layers = object.layers?.map((e) => e) || [];
-    message.stopTimelineAnnouncements = object.stopTimelineAnnouncements ?? false;
+    message.stopTimelineAnnouncements =
+      object.stopTimelineAnnouncements ?? false;
     message.stopTimelinePresentation = object.stopTimelinePresentation ?? false;
     message.clearNextPresentation = object.clearNextPresentation ?? false;
     return message;
@@ -1610,19 +2038,25 @@ export const APIV1ClearGroup = {
 };
 
 function createBaseAPIV1Message(): APIV1Message {
-  return { id: undefined, message: "", tokens: [], theme: undefined };
+  return { id: undefined, message: '', tokens: [], theme: undefined };
 }
 
 export const APIV1Message = {
-  encode(message: APIV1Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Message,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.message !== "") {
+    if (message.message !== '') {
       writer.uint32(18).string(message.message);
     }
     for (const v of message.tokens) {
-      APIV1Message_APIV1MessageToken.encode(v!, writer.uint32(26).fork()).ldelim();
+      APIV1Message_APIV1MessageToken.encode(
+        v!,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.theme !== undefined) {
       APIV1Identifier.encode(message.theme, writer.uint32(34).fork()).ldelim();
@@ -1631,7 +2065,8 @@ export const APIV1Message = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Message {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Message();
     while (reader.pos < end) {
@@ -1656,7 +2091,9 @@ export const APIV1Message = {
             break;
           }
 
-          message.tokens.push(APIV1Message_APIV1MessageToken.decode(reader, reader.uint32()));
+          message.tokens.push(
+            APIV1Message_APIV1MessageToken.decode(reader, reader.uint32()),
+          );
           continue;
         case 4:
           if (tag != 34) {
@@ -1677,66 +2114,103 @@ export const APIV1Message = {
   fromJSON(object: any): APIV1Message {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      message: isSet(object.message) ? String(object.message) : "",
+      message: isSet(object.message) ? String(object.message) : '',
       tokens: Array.isArray(object?.tokens)
-        ? object.tokens.map((e: any) => APIV1Message_APIV1MessageToken.fromJSON(e))
+        ? object.tokens.map((e: any) =>
+            APIV1Message_APIV1MessageToken.fromJSON(e),
+          )
         : [],
-      theme: isSet(object.theme) ? APIV1Identifier.fromJSON(object.theme) : undefined,
+      theme: isSet(object.theme)
+        ? APIV1Identifier.fromJSON(object.theme)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1Message): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     message.message !== undefined && (obj.message = message.message);
     if (message.tokens) {
-      obj.tokens = message.tokens.map((e) => e ? APIV1Message_APIV1MessageToken.toJSON(e) : undefined);
+      obj.tokens = message.tokens.map((e) =>
+        e ? APIV1Message_APIV1MessageToken.toJSON(e) : undefined,
+      );
     } else {
       obj.tokens = [];
     }
-    message.theme !== undefined && (obj.theme = message.theme ? APIV1Identifier.toJSON(message.theme) : undefined);
+    message.theme !== undefined &&
+      (obj.theme = message.theme
+        ? APIV1Identifier.toJSON(message.theme)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Message>, I>>(base?: I): APIV1Message {
+  create<I extends Exact<DeepPartial<APIV1Message>, I>>(
+    base?: I,
+  ): APIV1Message {
     return APIV1Message.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Message>, I>>(object: I): APIV1Message {
+  fromPartial<I extends Exact<DeepPartial<APIV1Message>, I>>(
+    object: I,
+  ): APIV1Message {
     const message = createBaseAPIV1Message();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.message = object.message ?? "";
-    message.tokens = object.tokens?.map((e) => APIV1Message_APIV1MessageToken.fromPartial(e)) || [];
-    message.theme = (object.theme !== undefined && object.theme !== null)
-      ? APIV1Identifier.fromPartial(object.theme)
-      : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.message = object.message ?? '';
+    message.tokens =
+      object.tokens?.map((e) =>
+        APIV1Message_APIV1MessageToken.fromPartial(e),
+      ) || [];
+    message.theme =
+      object.theme !== undefined && object.theme !== null
+        ? APIV1Identifier.fromPartial(object.theme)
+        : undefined;
     return message;
   },
 };
 
 function createBaseAPIV1Message_APIV1MessageToken(): APIV1Message_APIV1MessageToken {
-  return { name: "", text: undefined, timer: undefined, clock: undefined };
+  return { name: '', text: undefined, timer: undefined, clock: undefined };
 }
 
 export const APIV1Message_APIV1MessageToken = {
-  encode(message: APIV1Message_APIV1MessageToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: APIV1Message_APIV1MessageToken,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     if (message.text !== undefined) {
-      APIV1Message_APIV1MessageToken_APIV1TextToken.encode(message.text, writer.uint32(18).fork()).ldelim();
+      APIV1Message_APIV1MessageToken_APIV1TextToken.encode(
+        message.text,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.timer !== undefined) {
-      APIV1Message_APIV1MessageToken_APIV1TimerToken.encode(message.timer, writer.uint32(26).fork()).ldelim();
+      APIV1Message_APIV1MessageToken_APIV1TimerToken.encode(
+        message.timer,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.clock !== undefined) {
-      APIV1Message_APIV1MessageToken_APIV1ClockToken.encode(message.clock, writer.uint32(34).fork()).ldelim();
+      APIV1Message_APIV1MessageToken_APIV1ClockToken.encode(
+        message.clock,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Message_APIV1MessageToken {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Message_APIV1MessageToken {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Message_APIV1MessageToken();
     while (reader.pos < end) {
@@ -1754,21 +2228,30 @@ export const APIV1Message_APIV1MessageToken = {
             break;
           }
 
-          message.text = APIV1Message_APIV1MessageToken_APIV1TextToken.decode(reader, reader.uint32());
+          message.text = APIV1Message_APIV1MessageToken_APIV1TextToken.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.timer = APIV1Message_APIV1MessageToken_APIV1TimerToken.decode(reader, reader.uint32());
+          message.timer = APIV1Message_APIV1MessageToken_APIV1TimerToken.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.clock = APIV1Message_APIV1MessageToken_APIV1ClockToken.decode(reader, reader.uint32());
+          message.clock = APIV1Message_APIV1MessageToken_APIV1ClockToken.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1781,10 +2264,16 @@ export const APIV1Message_APIV1MessageToken = {
 
   fromJSON(object: any): APIV1Message_APIV1MessageToken {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      text: isSet(object.text) ? APIV1Message_APIV1MessageToken_APIV1TextToken.fromJSON(object.text) : undefined,
-      timer: isSet(object.timer) ? APIV1Message_APIV1MessageToken_APIV1TimerToken.fromJSON(object.timer) : undefined,
-      clock: isSet(object.clock) ? APIV1Message_APIV1MessageToken_APIV1ClockToken.fromJSON(object.clock) : undefined,
+      name: isSet(object.name) ? String(object.name) : '',
+      text: isSet(object.text)
+        ? APIV1Message_APIV1MessageToken_APIV1TextToken.fromJSON(object.text)
+        : undefined,
+      timer: isSet(object.timer)
+        ? APIV1Message_APIV1MessageToken_APIV1TimerToken.fromJSON(object.timer)
+        : undefined,
+      clock: isSet(object.clock)
+        ? APIV1Message_APIV1MessageToken_APIV1ClockToken.fromJSON(object.clock)
+        : undefined,
     };
   },
 
@@ -1792,15 +2281,23 @@ export const APIV1Message_APIV1MessageToken = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.text !== undefined &&
-      (obj.text = message.text ? APIV1Message_APIV1MessageToken_APIV1TextToken.toJSON(message.text) : undefined);
+      (obj.text = message.text
+        ? APIV1Message_APIV1MessageToken_APIV1TextToken.toJSON(message.text)
+        : undefined);
     message.timer !== undefined &&
-      (obj.timer = message.timer ? APIV1Message_APIV1MessageToken_APIV1TimerToken.toJSON(message.timer) : undefined);
+      (obj.timer = message.timer
+        ? APIV1Message_APIV1MessageToken_APIV1TimerToken.toJSON(message.timer)
+        : undefined);
     message.clock !== undefined &&
-      (obj.clock = message.clock ? APIV1Message_APIV1MessageToken_APIV1ClockToken.toJSON(message.clock) : undefined);
+      (obj.clock = message.clock
+        ? APIV1Message_APIV1MessageToken_APIV1ClockToken.toJSON(message.clock)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken>, I>>(base?: I): APIV1Message_APIV1MessageToken {
+  create<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken>, I>>(
+    base?: I,
+  ): APIV1Message_APIV1MessageToken {
     return APIV1Message_APIV1MessageToken.fromPartial(base ?? {});
   },
 
@@ -1808,34 +2305,48 @@ export const APIV1Message_APIV1MessageToken = {
     object: I,
   ): APIV1Message_APIV1MessageToken {
     const message = createBaseAPIV1Message_APIV1MessageToken();
-    message.name = object.name ?? "";
-    message.text = (object.text !== undefined && object.text !== null)
-      ? APIV1Message_APIV1MessageToken_APIV1TextToken.fromPartial(object.text)
-      : undefined;
-    message.timer = (object.timer !== undefined && object.timer !== null)
-      ? APIV1Message_APIV1MessageToken_APIV1TimerToken.fromPartial(object.timer)
-      : undefined;
-    message.clock = (object.clock !== undefined && object.clock !== null)
-      ? APIV1Message_APIV1MessageToken_APIV1ClockToken.fromPartial(object.clock)
-      : undefined;
+    message.name = object.name ?? '';
+    message.text =
+      object.text !== undefined && object.text !== null
+        ? APIV1Message_APIV1MessageToken_APIV1TextToken.fromPartial(object.text)
+        : undefined;
+    message.timer =
+      object.timer !== undefined && object.timer !== null
+        ? APIV1Message_APIV1MessageToken_APIV1TimerToken.fromPartial(
+            object.timer,
+          )
+        : undefined;
+    message.clock =
+      object.clock !== undefined && object.clock !== null
+        ? APIV1Message_APIV1MessageToken_APIV1ClockToken.fromPartial(
+            object.clock,
+          )
+        : undefined;
     return message;
   },
 };
 
 function createBaseAPIV1Message_APIV1MessageToken_APIV1TextToken(): APIV1Message_APIV1MessageToken_APIV1TextToken {
-  return { text: "" };
+  return { text: '' };
 }
 
 export const APIV1Message_APIV1MessageToken_APIV1TextToken = {
-  encode(message: APIV1Message_APIV1MessageToken_APIV1TextToken, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.text !== "") {
+  encode(
+    message: APIV1Message_APIV1MessageToken_APIV1TextToken,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.text !== '') {
       writer.uint32(10).string(message.text);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Message_APIV1MessageToken_APIV1TextToken {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Message_APIV1MessageToken_APIV1TextToken {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Message_APIV1MessageToken_APIV1TextToken();
     while (reader.pos < end) {
@@ -1858,7 +2369,7 @@ export const APIV1Message_APIV1MessageToken_APIV1TextToken = {
   },
 
   fromJSON(object: any): APIV1Message_APIV1MessageToken_APIV1TextToken {
-    return { text: isSet(object.text) ? String(object.text) : "" };
+    return { text: isSet(object.text) ? String(object.text) : '' };
   },
 
   toJSON(message: APIV1Message_APIV1MessageToken_APIV1TextToken): unknown {
@@ -1867,17 +2378,25 @@ export const APIV1Message_APIV1MessageToken_APIV1TextToken = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken_APIV1TextToken>, I>>(
-    base?: I,
-  ): APIV1Message_APIV1MessageToken_APIV1TextToken {
-    return APIV1Message_APIV1MessageToken_APIV1TextToken.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<APIV1Message_APIV1MessageToken_APIV1TextToken>,
+      I
+    >,
+  >(base?: I): APIV1Message_APIV1MessageToken_APIV1TextToken {
+    return APIV1Message_APIV1MessageToken_APIV1TextToken.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken_APIV1TextToken>, I>>(
-    object: I,
-  ): APIV1Message_APIV1MessageToken_APIV1TextToken {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<APIV1Message_APIV1MessageToken_APIV1TextToken>,
+      I
+    >,
+  >(object: I): APIV1Message_APIV1MessageToken_APIV1TextToken {
     const message = createBaseAPIV1Message_APIV1MessageToken_APIV1TextToken();
-    message.text = object.text ?? "";
+    message.text = object.text ?? '';
     return message;
   },
 };
@@ -1905,22 +2424,38 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.format !== undefined) {
-      APIV1TimerFormat.encode(message.format, writer.uint32(50).fork()).ldelim();
+      APIV1TimerFormat.encode(
+        message.format,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.countdown !== undefined) {
-      APIV1Timer_APIV1TimerCountdown.encode(message.countdown, writer.uint32(26).fork()).ldelim();
+      APIV1Timer_APIV1TimerCountdown.encode(
+        message.countdown,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.countDownToTime !== undefined) {
-      APIV1Timer_APIV1TimerCountdownToTime.encode(message.countDownToTime, writer.uint32(34).fork()).ldelim();
+      APIV1Timer_APIV1TimerCountdownToTime.encode(
+        message.countDownToTime,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.elapsed !== undefined) {
-      APIV1Timer_APIV1TimerElapsed.encode(message.elapsed, writer.uint32(42).fork()).ldelim();
+      APIV1Timer_APIV1TimerElapsed.encode(
+        message.elapsed,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Message_APIV1MessageToken_APIV1TimerToken {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Message_APIV1MessageToken_APIV1TimerToken {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Message_APIV1MessageToken_APIV1TimerToken();
     while (reader.pos < end) {
@@ -1952,21 +2487,30 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
             break;
           }
 
-          message.countdown = APIV1Timer_APIV1TimerCountdown.decode(reader, reader.uint32());
+          message.countdown = APIV1Timer_APIV1TimerCountdown.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.countDownToTime = APIV1Timer_APIV1TimerCountdownToTime.decode(reader, reader.uint32());
+          message.countDownToTime = APIV1Timer_APIV1TimerCountdownToTime.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.elapsed = APIV1Timer_APIV1TimerElapsed.decode(reader, reader.uint32());
+          message.elapsed = APIV1Timer_APIV1TimerElapsed.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1980,55 +2524,90 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
   fromJSON(object: any): APIV1Message_APIV1MessageToken_APIV1TimerToken {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      allowsOverrun: isSet(object.allowsOverrun) ? Boolean(object.allowsOverrun) : false,
-      format: isSet(object.format) ? APIV1TimerFormat.fromJSON(object.format) : undefined,
-      countdown: isSet(object.countdown) ? APIV1Timer_APIV1TimerCountdown.fromJSON(object.countdown) : undefined,
+      allowsOverrun: isSet(object.allowsOverrun)
+        ? Boolean(object.allowsOverrun)
+        : false,
+      format: isSet(object.format)
+        ? APIV1TimerFormat.fromJSON(object.format)
+        : undefined,
+      countdown: isSet(object.countdown)
+        ? APIV1Timer_APIV1TimerCountdown.fromJSON(object.countdown)
+        : undefined,
       countDownToTime: isSet(object.countDownToTime)
         ? APIV1Timer_APIV1TimerCountdownToTime.fromJSON(object.countDownToTime)
         : undefined,
-      elapsed: isSet(object.elapsed) ? APIV1Timer_APIV1TimerElapsed.fromJSON(object.elapsed) : undefined,
+      elapsed: isSet(object.elapsed)
+        ? APIV1Timer_APIV1TimerElapsed.fromJSON(object.elapsed)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1Message_APIV1MessageToken_APIV1TimerToken): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.allowsOverrun !== undefined && (obj.allowsOverrun = message.allowsOverrun);
-    message.format !== undefined && (obj.format = message.format ? APIV1TimerFormat.toJSON(message.format) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.allowsOverrun !== undefined &&
+      (obj.allowsOverrun = message.allowsOverrun);
+    message.format !== undefined &&
+      (obj.format = message.format
+        ? APIV1TimerFormat.toJSON(message.format)
+        : undefined);
     message.countdown !== undefined &&
-      (obj.countdown = message.countdown ? APIV1Timer_APIV1TimerCountdown.toJSON(message.countdown) : undefined);
-    message.countDownToTime !== undefined && (obj.countDownToTime = message.countDownToTime
-      ? APIV1Timer_APIV1TimerCountdownToTime.toJSON(message.countDownToTime)
-      : undefined);
+      (obj.countdown = message.countdown
+        ? APIV1Timer_APIV1TimerCountdown.toJSON(message.countdown)
+        : undefined);
+    message.countDownToTime !== undefined &&
+      (obj.countDownToTime = message.countDownToTime
+        ? APIV1Timer_APIV1TimerCountdownToTime.toJSON(message.countDownToTime)
+        : undefined);
     message.elapsed !== undefined &&
-      (obj.elapsed = message.elapsed ? APIV1Timer_APIV1TimerElapsed.toJSON(message.elapsed) : undefined);
+      (obj.elapsed = message.elapsed
+        ? APIV1Timer_APIV1TimerElapsed.toJSON(message.elapsed)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken_APIV1TimerToken>, I>>(
-    base?: I,
-  ): APIV1Message_APIV1MessageToken_APIV1TimerToken {
-    return APIV1Message_APIV1MessageToken_APIV1TimerToken.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<APIV1Message_APIV1MessageToken_APIV1TimerToken>,
+      I
+    >,
+  >(base?: I): APIV1Message_APIV1MessageToken_APIV1TimerToken {
+    return APIV1Message_APIV1MessageToken_APIV1TimerToken.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken_APIV1TimerToken>, I>>(
-    object: I,
-  ): APIV1Message_APIV1MessageToken_APIV1TimerToken {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<APIV1Message_APIV1MessageToken_APIV1TimerToken>,
+      I
+    >,
+  >(object: I): APIV1Message_APIV1MessageToken_APIV1TimerToken {
     const message = createBaseAPIV1Message_APIV1MessageToken_APIV1TimerToken();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
     message.allowsOverrun = object.allowsOverrun ?? false;
-    message.format = (object.format !== undefined && object.format !== null)
-      ? APIV1TimerFormat.fromPartial(object.format)
-      : undefined;
-    message.countdown = (object.countdown !== undefined && object.countdown !== null)
-      ? APIV1Timer_APIV1TimerCountdown.fromPartial(object.countdown)
-      : undefined;
-    message.countDownToTime = (object.countDownToTime !== undefined && object.countDownToTime !== null)
-      ? APIV1Timer_APIV1TimerCountdownToTime.fromPartial(object.countDownToTime)
-      : undefined;
-    message.elapsed = (object.elapsed !== undefined && object.elapsed !== null)
-      ? APIV1Timer_APIV1TimerElapsed.fromPartial(object.elapsed)
-      : undefined;
+    message.format =
+      object.format !== undefined && object.format !== null
+        ? APIV1TimerFormat.fromPartial(object.format)
+        : undefined;
+    message.countdown =
+      object.countdown !== undefined && object.countdown !== null
+        ? APIV1Timer_APIV1TimerCountdown.fromPartial(object.countdown)
+        : undefined;
+    message.countDownToTime =
+      object.countDownToTime !== undefined && object.countDownToTime !== null
+        ? APIV1Timer_APIV1TimerCountdownToTime.fromPartial(
+            object.countDownToTime,
+          )
+        : undefined;
+    message.elapsed =
+      object.elapsed !== undefined && object.elapsed !== null
+        ? APIV1Timer_APIV1TimerElapsed.fromPartial(object.elapsed)
+        : undefined;
     return message;
   },
 };
@@ -2054,8 +2633,12 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Message_APIV1MessageToken_APIV1ClockToken {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Message_APIV1MessageToken_APIV1ClockToken {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Message_APIV1MessageToken_APIV1ClockToken();
     while (reader.pos < end) {
@@ -2094,10 +2677,14 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
   fromJSON(object: any): APIV1Message_APIV1MessageToken_APIV1ClockToken {
     return {
       date: isSet(object.date)
-        ? aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatFromJSON(object.date)
+        ? aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatFromJSON(
+            object.date,
+          )
         : 0,
       time: isSet(object.time)
-        ? aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatFromJSON(object.time)
+        ? aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatFromJSON(
+            object.time,
+          )
         : 0,
       is24Hours: isSet(object.is24Hours) ? Boolean(object.is24Hours) : false,
     };
@@ -2106,22 +2693,36 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
   toJSON(message: APIV1Message_APIV1MessageToken_APIV1ClockToken): unknown {
     const obj: any = {};
     message.date !== undefined &&
-      (obj.date = aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatToJSON(message.date));
+      (obj.date =
+        aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatToJSON(
+          message.date,
+        ));
     message.time !== undefined &&
-      (obj.time = aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatToJSON(message.time));
+      (obj.time =
+        aPIV1Message_APIV1MessageToken_APIV1ClockToken_APIV1ClockTokenFormatToJSON(
+          message.time,
+        ));
     message.is24Hours !== undefined && (obj.is24Hours = message.is24Hours);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken_APIV1ClockToken>, I>>(
-    base?: I,
-  ): APIV1Message_APIV1MessageToken_APIV1ClockToken {
-    return APIV1Message_APIV1MessageToken_APIV1ClockToken.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<APIV1Message_APIV1MessageToken_APIV1ClockToken>,
+      I
+    >,
+  >(base?: I): APIV1Message_APIV1MessageToken_APIV1ClockToken {
+    return APIV1Message_APIV1MessageToken_APIV1ClockToken.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Message_APIV1MessageToken_APIV1ClockToken>, I>>(
-    object: I,
-  ): APIV1Message_APIV1MessageToken_APIV1ClockToken {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<APIV1Message_APIV1MessageToken_APIV1ClockToken>,
+      I
+    >,
+  >(object: I): APIV1Message_APIV1MessageToken_APIV1ClockToken {
     const message = createBaseAPIV1Message_APIV1MessageToken_APIV1ClockToken();
     message.date = object.date ?? 0;
     message.time = object.time ?? 0;
@@ -2131,11 +2732,20 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
 };
 
 function createBaseAPIV1Timer(): APIV1Timer {
-  return { id: undefined, allowsOverrun: false, countdown: undefined, countDownToTime: undefined, elapsed: undefined };
+  return {
+    id: undefined,
+    allowsOverrun: false,
+    countdown: undefined,
+    countDownToTime: undefined,
+    elapsed: undefined,
+  };
 }
 
 export const APIV1Timer = {
-  encode(message: APIV1Timer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Timer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -2143,19 +2753,29 @@ export const APIV1Timer = {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.countdown !== undefined) {
-      APIV1Timer_APIV1TimerCountdown.encode(message.countdown, writer.uint32(26).fork()).ldelim();
+      APIV1Timer_APIV1TimerCountdown.encode(
+        message.countdown,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.countDownToTime !== undefined) {
-      APIV1Timer_APIV1TimerCountdownToTime.encode(message.countDownToTime, writer.uint32(34).fork()).ldelim();
+      APIV1Timer_APIV1TimerCountdownToTime.encode(
+        message.countDownToTime,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.elapsed !== undefined) {
-      APIV1Timer_APIV1TimerElapsed.encode(message.elapsed, writer.uint32(42).fork()).ldelim();
+      APIV1Timer_APIV1TimerElapsed.encode(
+        message.elapsed,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Timer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Timer();
     while (reader.pos < end) {
@@ -2180,21 +2800,30 @@ export const APIV1Timer = {
             break;
           }
 
-          message.countdown = APIV1Timer_APIV1TimerCountdown.decode(reader, reader.uint32());
+          message.countdown = APIV1Timer_APIV1TimerCountdown.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.countDownToTime = APIV1Timer_APIV1TimerCountdownToTime.decode(reader, reader.uint32());
+          message.countDownToTime = APIV1Timer_APIV1TimerCountdownToTime.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.elapsed = APIV1Timer_APIV1TimerElapsed.decode(reader, reader.uint32());
+          message.elapsed = APIV1Timer_APIV1TimerElapsed.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2208,26 +2837,39 @@ export const APIV1Timer = {
   fromJSON(object: any): APIV1Timer {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      allowsOverrun: isSet(object.allowsOverrun) ? Boolean(object.allowsOverrun) : false,
-      countdown: isSet(object.countdown) ? APIV1Timer_APIV1TimerCountdown.fromJSON(object.countdown) : undefined,
+      allowsOverrun: isSet(object.allowsOverrun)
+        ? Boolean(object.allowsOverrun)
+        : false,
+      countdown: isSet(object.countdown)
+        ? APIV1Timer_APIV1TimerCountdown.fromJSON(object.countdown)
+        : undefined,
       countDownToTime: isSet(object.countDownToTime)
         ? APIV1Timer_APIV1TimerCountdownToTime.fromJSON(object.countDownToTime)
         : undefined,
-      elapsed: isSet(object.elapsed) ? APIV1Timer_APIV1TimerElapsed.fromJSON(object.elapsed) : undefined,
+      elapsed: isSet(object.elapsed)
+        ? APIV1Timer_APIV1TimerElapsed.fromJSON(object.elapsed)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1Timer): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.allowsOverrun !== undefined && (obj.allowsOverrun = message.allowsOverrun);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.allowsOverrun !== undefined &&
+      (obj.allowsOverrun = message.allowsOverrun);
     message.countdown !== undefined &&
-      (obj.countdown = message.countdown ? APIV1Timer_APIV1TimerCountdown.toJSON(message.countdown) : undefined);
-    message.countDownToTime !== undefined && (obj.countDownToTime = message.countDownToTime
-      ? APIV1Timer_APIV1TimerCountdownToTime.toJSON(message.countDownToTime)
-      : undefined);
+      (obj.countdown = message.countdown
+        ? APIV1Timer_APIV1TimerCountdown.toJSON(message.countdown)
+        : undefined);
+    message.countDownToTime !== undefined &&
+      (obj.countDownToTime = message.countDownToTime
+        ? APIV1Timer_APIV1TimerCountdownToTime.toJSON(message.countDownToTime)
+        : undefined);
     message.elapsed !== undefined &&
-      (obj.elapsed = message.elapsed ? APIV1Timer_APIV1TimerElapsed.toJSON(message.elapsed) : undefined);
+      (obj.elapsed = message.elapsed
+        ? APIV1Timer_APIV1TimerElapsed.toJSON(message.elapsed)
+        : undefined);
     return obj;
   },
 
@@ -2235,19 +2877,29 @@ export const APIV1Timer = {
     return APIV1Timer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Timer>, I>>(object: I): APIV1Timer {
+  fromPartial<I extends Exact<DeepPartial<APIV1Timer>, I>>(
+    object: I,
+  ): APIV1Timer {
     const message = createBaseAPIV1Timer();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
     message.allowsOverrun = object.allowsOverrun ?? false;
-    message.countdown = (object.countdown !== undefined && object.countdown !== null)
-      ? APIV1Timer_APIV1TimerCountdown.fromPartial(object.countdown)
-      : undefined;
-    message.countDownToTime = (object.countDownToTime !== undefined && object.countDownToTime !== null)
-      ? APIV1Timer_APIV1TimerCountdownToTime.fromPartial(object.countDownToTime)
-      : undefined;
-    message.elapsed = (object.elapsed !== undefined && object.elapsed !== null)
-      ? APIV1Timer_APIV1TimerElapsed.fromPartial(object.elapsed)
-      : undefined;
+    message.countdown =
+      object.countdown !== undefined && object.countdown !== null
+        ? APIV1Timer_APIV1TimerCountdown.fromPartial(object.countdown)
+        : undefined;
+    message.countDownToTime =
+      object.countDownToTime !== undefined && object.countDownToTime !== null
+        ? APIV1Timer_APIV1TimerCountdownToTime.fromPartial(
+            object.countDownToTime,
+          )
+        : undefined;
+    message.elapsed =
+      object.elapsed !== undefined && object.elapsed !== null
+        ? APIV1Timer_APIV1TimerElapsed.fromPartial(object.elapsed)
+        : undefined;
     return message;
   },
 };
@@ -2257,15 +2909,22 @@ function createBaseAPIV1Timer_APIV1TimerCountdown(): APIV1Timer_APIV1TimerCountd
 }
 
 export const APIV1Timer_APIV1TimerCountdown = {
-  encode(message: APIV1Timer_APIV1TimerCountdown, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Timer_APIV1TimerCountdown,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.duration !== 0) {
       writer.uint32(8).int32(message.duration);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Timer_APIV1TimerCountdown {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Timer_APIV1TimerCountdown {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Timer_APIV1TimerCountdown();
     while (reader.pos < end) {
@@ -2293,11 +2952,14 @@ export const APIV1Timer_APIV1TimerCountdown = {
 
   toJSON(message: APIV1Timer_APIV1TimerCountdown): unknown {
     const obj: any = {};
-    message.duration !== undefined && (obj.duration = Math.round(message.duration));
+    message.duration !== undefined &&
+      (obj.duration = Math.round(message.duration));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerCountdown>, I>>(base?: I): APIV1Timer_APIV1TimerCountdown {
+  create<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerCountdown>, I>>(
+    base?: I,
+  ): APIV1Timer_APIV1TimerCountdown {
     return APIV1Timer_APIV1TimerCountdown.fromPartial(base ?? {});
   },
 
@@ -2315,7 +2977,10 @@ function createBaseAPIV1Timer_APIV1TimerCountdownToTime(): APIV1Timer_APIV1Timer
 }
 
 export const APIV1Timer_APIV1TimerCountdownToTime = {
-  encode(message: APIV1Timer_APIV1TimerCountdownToTime, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Timer_APIV1TimerCountdownToTime,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.timeOfDay !== 0) {
       writer.uint32(8).int32(message.timeOfDay);
     }
@@ -2325,8 +2990,12 @@ export const APIV1Timer_APIV1TimerCountdownToTime = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Timer_APIV1TimerCountdownToTime {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Timer_APIV1TimerCountdownToTime {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Timer_APIV1TimerCountdownToTime();
     while (reader.pos < end) {
@@ -2358,15 +3027,18 @@ export const APIV1Timer_APIV1TimerCountdownToTime = {
   fromJSON(object: any): APIV1Timer_APIV1TimerCountdownToTime {
     return {
       timeOfDay: isSet(object.timeOfDay) ? Number(object.timeOfDay) : 0,
-      period: isSet(object.period) ? aPIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriodFromJSON(object.period) : 0,
+      period: isSet(object.period)
+        ? aPIV1Timer_APIV1TimePeriodFromJSON(object.period)
+        : 0,
     };
   },
 
   toJSON(message: APIV1Timer_APIV1TimerCountdownToTime): unknown {
     const obj: any = {};
-    message.timeOfDay !== undefined && (obj.timeOfDay = Math.round(message.timeOfDay));
+    message.timeOfDay !== undefined &&
+      (obj.timeOfDay = Math.round(message.timeOfDay));
     message.period !== undefined &&
-      (obj.period = aPIV1Timer_APIV1TimerCountdownToTime_APIV1TimePeriodToJSON(message.period));
+      (obj.period = aPIV1Timer_APIV1TimePeriodToJSON(message.period));
     return obj;
   },
 
@@ -2376,9 +3048,9 @@ export const APIV1Timer_APIV1TimerCountdownToTime = {
     return APIV1Timer_APIV1TimerCountdownToTime.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerCountdownToTime>, I>>(
-    object: I,
-  ): APIV1Timer_APIV1TimerCountdownToTime {
+  fromPartial<
+    I extends Exact<DeepPartial<APIV1Timer_APIV1TimerCountdownToTime>, I>,
+  >(object: I): APIV1Timer_APIV1TimerCountdownToTime {
     const message = createBaseAPIV1Timer_APIV1TimerCountdownToTime();
     message.timeOfDay = object.timeOfDay ?? 0;
     message.period = object.period ?? 0;
@@ -2391,7 +3063,10 @@ function createBaseAPIV1Timer_APIV1TimerElapsed(): APIV1Timer_APIV1TimerElapsed 
 }
 
 export const APIV1Timer_APIV1TimerElapsed = {
-  encode(message: APIV1Timer_APIV1TimerElapsed, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Timer_APIV1TimerElapsed,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.startTime !== 0) {
       writer.uint32(8).int32(message.startTime);
     }
@@ -2404,8 +3079,12 @@ export const APIV1Timer_APIV1TimerElapsed = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Timer_APIV1TimerElapsed {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Timer_APIV1TimerElapsed {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Timer_APIV1TimerElapsed();
     while (reader.pos < end) {
@@ -2451,17 +3130,23 @@ export const APIV1Timer_APIV1TimerElapsed = {
 
   toJSON(message: APIV1Timer_APIV1TimerElapsed): unknown {
     const obj: any = {};
-    message.startTime !== undefined && (obj.startTime = Math.round(message.startTime));
-    message.endTime !== undefined && (obj.endTime = Math.round(message.endTime));
+    message.startTime !== undefined &&
+      (obj.startTime = Math.round(message.startTime));
+    message.endTime !== undefined &&
+      (obj.endTime = Math.round(message.endTime));
     message.hasEndTime !== undefined && (obj.hasEndTime = message.hasEndTime);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerElapsed>, I>>(base?: I): APIV1Timer_APIV1TimerElapsed {
+  create<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerElapsed>, I>>(
+    base?: I,
+  ): APIV1Timer_APIV1TimerElapsed {
     return APIV1Timer_APIV1TimerElapsed.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerElapsed>, I>>(object: I): APIV1Timer_APIV1TimerElapsed {
+  fromPartial<I extends Exact<DeepPartial<APIV1Timer_APIV1TimerElapsed>, I>>(
+    object: I,
+  ): APIV1Timer_APIV1TimerElapsed {
     const message = createBaseAPIV1Timer_APIV1TimerElapsed();
     message.startTime = object.startTime ?? 0;
     message.endTime = object.endTime ?? 0;
@@ -2475,7 +3160,10 @@ function createBaseAPIV1TimerFormat(): APIV1TimerFormat {
 }
 
 export const APIV1TimerFormat = {
-  encode(message: APIV1TimerFormat, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1TimerFormat,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.hour !== 0) {
       writer.uint32(48).int32(message.hour);
     }
@@ -2492,7 +3180,8 @@ export const APIV1TimerFormat = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1TimerFormat {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1TimerFormat();
     while (reader.pos < end) {
@@ -2537,30 +3226,53 @@ export const APIV1TimerFormat = {
 
   fromJSON(object: any): APIV1TimerFormat {
     return {
-      hour: isSet(object.hour) ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.hour) : 0,
-      minute: isSet(object.minute) ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.minute) : 0,
-      second: isSet(object.second) ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.second) : 0,
+      hour: isSet(object.hour)
+        ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.hour)
+        : 0,
+      minute: isSet(object.minute)
+        ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.minute)
+        : 0,
+      second: isSet(object.second)
+        ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.second)
+        : 0,
       millisecond: isSet(object.millisecond)
-        ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(object.millisecond)
+        ? aPIV1TimerFormat_APIV1TimerUnitDisplayFormatFromJSON(
+            object.millisecond,
+          )
         : 0,
     };
   },
 
   toJSON(message: APIV1TimerFormat): unknown {
     const obj: any = {};
-    message.hour !== undefined && (obj.hour = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(message.hour));
-    message.minute !== undefined && (obj.minute = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(message.minute));
-    message.second !== undefined && (obj.second = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(message.second));
+    message.hour !== undefined &&
+      (obj.hour = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(
+        message.hour,
+      ));
+    message.minute !== undefined &&
+      (obj.minute = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(
+        message.minute,
+      ));
+    message.second !== undefined &&
+      (obj.second = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(
+        message.second,
+      ));
     message.millisecond !== undefined &&
-      (obj.millisecond = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(message.millisecond));
+      (obj.millisecond = aPIV1TimerFormat_APIV1TimerUnitDisplayFormatToJSON(
+        message.millisecond,
+      ));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1TimerFormat>, I>>(base?: I): APIV1TimerFormat {
+  create<I extends Exact<DeepPartial<APIV1TimerFormat>, I>>(
+    base?: I,
+  ): APIV1TimerFormat {
     return APIV1TimerFormat.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1TimerFormat>, I>>(object: I): APIV1TimerFormat {
+  fromPartial<I extends Exact<DeepPartial<APIV1TimerFormat>, I>>(
+    object: I,
+  ): APIV1TimerFormat {
     const message = createBaseAPIV1TimerFormat();
     message.hour = object.hour ?? 0;
     message.minute = object.minute ?? 0;
@@ -2571,15 +3283,18 @@ export const APIV1TimerFormat = {
 };
 
 function createBaseAPIV1TimerValue(): APIV1TimerValue {
-  return { id: undefined, time: "", state: 0 };
+  return { id: undefined, time: '', state: 0 };
 }
 
 export const APIV1TimerValue = {
-  encode(message: APIV1TimerValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1TimerValue,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.time !== "") {
+    if (message.time !== '') {
       writer.uint32(18).string(message.time);
     }
     if (message.state !== 0) {
@@ -2589,7 +3304,8 @@ export const APIV1TimerValue = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1TimerValue {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1TimerValue();
     while (reader.pos < end) {
@@ -2628,27 +3344,36 @@ export const APIV1TimerValue = {
   fromJSON(object: any): APIV1TimerValue {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      time: isSet(object.time) ? String(object.time) : "",
-      state: isSet(object.state) ? aPIV1TimerValue_APIV1TimerStateFromJSON(object.state) : 0,
+      time: isSet(object.time) ? String(object.time) : '',
+      state: isSet(object.state) ? aPIV1TimerStateFromJSON(object.state) : 0,
     };
   },
 
   toJSON(message: APIV1TimerValue): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     message.time !== undefined && (obj.time = message.time);
-    message.state !== undefined && (obj.state = aPIV1TimerValue_APIV1TimerStateToJSON(message.state));
+    message.state !== undefined &&
+      (obj.state = aPIV1TimerStateToJSON(message.state));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1TimerValue>, I>>(base?: I): APIV1TimerValue {
+  create<I extends Exact<DeepPartial<APIV1TimerValue>, I>>(
+    base?: I,
+  ): APIV1TimerValue {
     return APIV1TimerValue.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1TimerValue>, I>>(object: I): APIV1TimerValue {
+  fromPartial<I extends Exact<DeepPartial<APIV1TimerValue>, I>>(
+    object: I,
+  ): APIV1TimerValue {
     const message = createBaseAPIV1TimerValue();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.time = object.time ?? "";
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.time = object.time ?? '';
     message.state = object.state ?? 0;
     return message;
   },
@@ -2659,7 +3384,10 @@ function createBaseAPIV1Color(): APIV1Color {
 }
 
 export const APIV1Color = {
-  encode(message: APIV1Color, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Color,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.red !== 0) {
       writer.uint32(9).double(message.red);
     }
@@ -2676,7 +3404,8 @@ export const APIV1Color = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Color {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Color();
     while (reader.pos < end) {
@@ -2741,7 +3470,9 @@ export const APIV1Color = {
     return APIV1Color.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Color>, I>>(object: I): APIV1Color {
+  fromPartial<I extends Exact<DeepPartial<APIV1Color>, I>>(
+    object: I,
+  ): APIV1Color {
     const message = createBaseAPIV1Color();
     message.red = object.red ?? 0;
     message.green = object.green ?? 0;
@@ -2756,7 +3487,10 @@ function createBaseAPIV1Look(): APIV1Look {
 }
 
 export const APIV1Look = {
-  encode(message: APIV1Look, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Look,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -2767,7 +3501,8 @@ export const APIV1Look = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Look {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Look();
     while (reader.pos < end) {
@@ -2799,15 +3534,20 @@ export const APIV1Look = {
   fromJSON(object: any): APIV1Look {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      screens: Array.isArray(object?.screens) ? object.screens.map((e: any) => APIV1Screen.fromJSON(e)) : [],
+      screens: Array.isArray(object?.screens)
+        ? object.screens.map((e: any) => APIV1Screen.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: APIV1Look): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     if (message.screens) {
-      obj.screens = message.screens.map((e) => e ? APIV1Screen.toJSON(e) : undefined);
+      obj.screens = message.screens.map((e) =>
+        e ? APIV1Screen.toJSON(e) : undefined,
+      );
     } else {
       obj.screens = [];
     }
@@ -2818,10 +3558,16 @@ export const APIV1Look = {
     return APIV1Look.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Look>, I>>(object: I): APIV1Look {
+  fromPartial<I extends Exact<DeepPartial<APIV1Look>, I>>(
+    object: I,
+  ): APIV1Look {
     const message = createBaseAPIV1Look();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.screens = object.screens?.map((e) => APIV1Screen.fromPartial(e)) || [];
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.screens =
+      object.screens?.map((e) => APIV1Screen.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2834,13 +3580,16 @@ function createBaseAPIV1Screen(): APIV1Screen {
     announcements: false,
     props: false,
     messages: false,
-    presentation: "",
-    mask: "",
+    presentation: '',
+    mask: '',
   };
 }
 
 export const APIV1Screen = {
-  encode(message: APIV1Screen, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Screen,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.videoInput === true) {
       writer.uint32(8).bool(message.videoInput);
     }
@@ -2859,17 +3608,18 @@ export const APIV1Screen = {
     if (message.messages === true) {
       writer.uint32(48).bool(message.messages);
     }
-    if (message.presentation !== "") {
+    if (message.presentation !== '') {
       writer.uint32(58).string(message.presentation);
     }
-    if (message.mask !== "") {
+    if (message.mask !== '') {
       writer.uint32(66).string(message.mask);
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Screen {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Screen();
     while (reader.pos < end) {
@@ -2945,11 +3695,15 @@ export const APIV1Screen = {
       videoInput: isSet(object.videoInput) ? Boolean(object.videoInput) : false,
       media: isSet(object.media) ? Boolean(object.media) : false,
       slide: isSet(object.slide) ? Boolean(object.slide) : false,
-      announcements: isSet(object.announcements) ? Boolean(object.announcements) : false,
+      announcements: isSet(object.announcements)
+        ? Boolean(object.announcements)
+        : false,
       props: isSet(object.props) ? Boolean(object.props) : false,
       messages: isSet(object.messages) ? Boolean(object.messages) : false,
-      presentation: isSet(object.presentation) ? String(object.presentation) : "",
-      mask: isSet(object.mask) ? String(object.mask) : "",
+      presentation: isSet(object.presentation)
+        ? String(object.presentation)
+        : '',
+      mask: isSet(object.mask) ? String(object.mask) : '',
     };
   },
 
@@ -2958,10 +3712,12 @@ export const APIV1Screen = {
     message.videoInput !== undefined && (obj.videoInput = message.videoInput);
     message.media !== undefined && (obj.media = message.media);
     message.slide !== undefined && (obj.slide = message.slide);
-    message.announcements !== undefined && (obj.announcements = message.announcements);
+    message.announcements !== undefined &&
+      (obj.announcements = message.announcements);
     message.props !== undefined && (obj.props = message.props);
     message.messages !== undefined && (obj.messages = message.messages);
-    message.presentation !== undefined && (obj.presentation = message.presentation);
+    message.presentation !== undefined &&
+      (obj.presentation = message.presentation);
     message.mask !== undefined && (obj.mask = message.mask);
     return obj;
   },
@@ -2970,7 +3726,9 @@ export const APIV1Screen = {
     return APIV1Screen.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Screen>, I>>(object: I): APIV1Screen {
+  fromPartial<I extends Exact<DeepPartial<APIV1Screen>, I>>(
+    object: I,
+  ): APIV1Screen {
     const message = createBaseAPIV1Screen();
     message.videoInput = object.videoInput ?? false;
     message.media = object.media ?? false;
@@ -2978,8 +3736,8 @@ export const APIV1Screen = {
     message.announcements = object.announcements ?? false;
     message.props = object.props ?? false;
     message.messages = object.messages ?? false;
-    message.presentation = object.presentation ?? "";
-    message.mask = object.mask ?? "";
+    message.presentation = object.presentation ?? '';
+    message.mask = object.mask ?? '';
     return message;
   },
 };
@@ -2989,7 +3747,10 @@ function createBaseAPIV1Macro(): APIV1Macro {
 }
 
 export const APIV1Macro = {
-  encode(message: APIV1Macro, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Macro,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -3000,7 +3761,8 @@ export const APIV1Macro = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Macro {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Macro();
     while (reader.pos < end) {
@@ -3032,14 +3794,20 @@ export const APIV1Macro = {
   fromJSON(object: any): APIV1Macro {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      color: isSet(object.color) ? APIV1Color.fromJSON(object.color) : undefined,
+      color: isSet(object.color)
+        ? APIV1Color.fromJSON(object.color)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1Macro): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.color !== undefined && (obj.color = message.color ? APIV1Color.toJSON(message.color) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color
+        ? APIV1Color.toJSON(message.color)
+        : undefined);
     return obj;
   },
 
@@ -3047,23 +3815,32 @@ export const APIV1Macro = {
     return APIV1Macro.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Macro>, I>>(object: I): APIV1Macro {
+  fromPartial<I extends Exact<DeepPartial<APIV1Macro>, I>>(
+    object: I,
+  ): APIV1Macro {
     const message = createBaseAPIV1Macro();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.color = (object.color !== undefined && object.color !== null)
-      ? APIV1Color.fromPartial(object.color)
-      : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? APIV1Color.fromPartial(object.color)
+        : undefined;
     return message;
   },
 };
 
 function createBaseAPIV1GroupMember(): APIV1GroupMember {
-  return { ip: "", port: 0 };
+  return { ip: '', port: 0 };
 }
 
 export const APIV1GroupMember = {
-  encode(message: APIV1GroupMember, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ip !== "") {
+  encode(
+    message: APIV1GroupMember,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ip !== '') {
       writer.uint32(10).string(message.ip);
     }
     if (message.port !== 0) {
@@ -3073,7 +3850,8 @@ export const APIV1GroupMember = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1GroupMember {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1GroupMember();
     while (reader.pos < end) {
@@ -3103,7 +3881,10 @@ export const APIV1GroupMember = {
   },
 
   fromJSON(object: any): APIV1GroupMember {
-    return { ip: isSet(object.ip) ? String(object.ip) : "", port: isSet(object.port) ? Number(object.port) : 0 };
+    return {
+      ip: isSet(object.ip) ? String(object.ip) : '',
+      port: isSet(object.port) ? Number(object.port) : 0,
+    };
   },
 
   toJSON(message: APIV1GroupMember): unknown {
@@ -3113,13 +3894,17 @@ export const APIV1GroupMember = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1GroupMember>, I>>(base?: I): APIV1GroupMember {
+  create<I extends Exact<DeepPartial<APIV1GroupMember>, I>>(
+    base?: I,
+  ): APIV1GroupMember {
     return APIV1GroupMember.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1GroupMember>, I>>(object: I): APIV1GroupMember {
+  fromPartial<I extends Exact<DeepPartial<APIV1GroupMember>, I>>(
+    object: I,
+  ): APIV1GroupMember {
     const message = createBaseAPIV1GroupMember();
-    message.ip = object.ip ?? "";
+    message.ip = object.ip ?? '';
     message.port = object.port ?? 0;
     return message;
   },
@@ -3127,38 +3912,41 @@ export const APIV1GroupMember = {
 
 function createBaseAPIV1GroupMemberStatus(): APIV1GroupMemberStatus {
   return {
-    ip: "",
+    ip: '',
     port: 0,
-    name: "",
+    name: '',
     platform: 0,
-    osVersion: "",
-    hostDescription: "",
-    apiVersion: "",
+    osVersion: '',
+    hostDescription: '',
+    apiVersion: '',
     connectionStatus: 0,
   };
 }
 
 export const APIV1GroupMemberStatus = {
-  encode(message: APIV1GroupMemberStatus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ip !== "") {
+  encode(
+    message: APIV1GroupMemberStatus,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ip !== '') {
       writer.uint32(10).string(message.ip);
     }
     if (message.port !== 0) {
       writer.uint32(16).uint32(message.port);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(26).string(message.name);
     }
     if (message.platform !== 0) {
       writer.uint32(32).int32(message.platform);
     }
-    if (message.osVersion !== "") {
+    if (message.osVersion !== '') {
       writer.uint32(42).string(message.osVersion);
     }
-    if (message.hostDescription !== "") {
+    if (message.hostDescription !== '') {
       writer.uint32(50).string(message.hostDescription);
     }
-    if (message.apiVersion !== "") {
+    if (message.apiVersion !== '') {
       writer.uint32(58).string(message.apiVersion);
     }
     if (message.connectionStatus !== 0) {
@@ -3167,8 +3955,12 @@ export const APIV1GroupMemberStatus = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1GroupMemberStatus {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1GroupMemberStatus {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1GroupMemberStatus();
     while (reader.pos < end) {
@@ -3241,17 +4033,23 @@ export const APIV1GroupMemberStatus = {
 
   fromJSON(object: any): APIV1GroupMemberStatus {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : "",
+      ip: isSet(object.ip) ? String(object.ip) : '',
       port: isSet(object.port) ? Number(object.port) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       platform: isSet(object.platform)
-        ? aPIV1GroupMemberStatus_APIV1GroupMemberStatusPlatformFromJSON(object.platform)
+        ? aPIV1GroupMemberStatus_APIV1GroupMemberStatusPlatformFromJSON(
+            object.platform,
+          )
         : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : "",
-      hostDescription: isSet(object.hostDescription) ? String(object.hostDescription) : "",
-      apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : "",
+      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
+      hostDescription: isSet(object.hostDescription)
+        ? String(object.hostDescription)
+        : '',
+      apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : '',
       connectionStatus: isSet(object.connectionStatus)
-        ? aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusFromJSON(object.connectionStatus)
+        ? aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusFromJSON(
+            object.connectionStatus,
+          )
         : 0,
     };
   },
@@ -3262,48 +4060,66 @@ export const APIV1GroupMemberStatus = {
     message.port !== undefined && (obj.port = Math.round(message.port));
     message.name !== undefined && (obj.name = message.name);
     message.platform !== undefined &&
-      (obj.platform = aPIV1GroupMemberStatus_APIV1GroupMemberStatusPlatformToJSON(message.platform));
+      (obj.platform =
+        aPIV1GroupMemberStatus_APIV1GroupMemberStatusPlatformToJSON(
+          message.platform,
+        ));
     message.osVersion !== undefined && (obj.osVersion = message.osVersion);
-    message.hostDescription !== undefined && (obj.hostDescription = message.hostDescription);
+    message.hostDescription !== undefined &&
+      (obj.hostDescription = message.hostDescription);
     message.apiVersion !== undefined && (obj.apiVersion = message.apiVersion);
     message.connectionStatus !== undefined &&
-      (obj.connectionStatus = aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusToJSON(
-        message.connectionStatus,
-      ));
+      (obj.connectionStatus =
+        aPIV1GroupMemberStatus_APIV1GroupMemberStatusConnectionStatusToJSON(
+          message.connectionStatus,
+        ));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1GroupMemberStatus>, I>>(base?: I): APIV1GroupMemberStatus {
+  create<I extends Exact<DeepPartial<APIV1GroupMemberStatus>, I>>(
+    base?: I,
+  ): APIV1GroupMemberStatus {
     return APIV1GroupMemberStatus.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1GroupMemberStatus>, I>>(object: I): APIV1GroupMemberStatus {
+  fromPartial<I extends Exact<DeepPartial<APIV1GroupMemberStatus>, I>>(
+    object: I,
+  ): APIV1GroupMemberStatus {
     const message = createBaseAPIV1GroupMemberStatus();
-    message.ip = object.ip ?? "";
+    message.ip = object.ip ?? '';
     message.port = object.port ?? 0;
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     message.platform = object.platform ?? 0;
-    message.osVersion = object.osVersion ?? "";
-    message.hostDescription = object.hostDescription ?? "";
-    message.apiVersion = object.apiVersion ?? "";
+    message.osVersion = object.osVersion ?? '';
+    message.hostDescription = object.hostDescription ?? '';
+    message.apiVersion = object.apiVersion ?? '';
     message.connectionStatus = object.connectionStatus ?? 0;
     return message;
   },
 };
 
 function createBaseAPIV1GroupDefinition(): APIV1GroupDefinition {
-  return { timestamp: undefined, secret: "", name: "", members: [], groupIdentifier: undefined };
+  return {
+    timestamp: undefined,
+    secret: '',
+    name: '',
+    members: [],
+    groupIdentifier: undefined,
+  };
 }
 
 export const APIV1GroupDefinition = {
-  encode(message: APIV1GroupDefinition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1GroupDefinition,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.timestamp !== undefined) {
       Timestamp.encode(message.timestamp, writer.uint32(10).fork()).ldelim();
     }
-    if (message.secret !== "") {
+    if (message.secret !== '') {
       writer.uint32(18).string(message.secret);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(26).string(message.name);
     }
     for (const v of message.members) {
@@ -3315,8 +4131,12 @@ export const APIV1GroupDefinition = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1GroupDefinition {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1GroupDefinition {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1GroupDefinition();
     while (reader.pos < end) {
@@ -3348,7 +4168,9 @@ export const APIV1GroupDefinition = {
             break;
           }
 
-          message.members.push(APIV1GroupMember.decode(reader, reader.uint32()));
+          message.members.push(
+            APIV1GroupMember.decode(reader, reader.uint32()),
+          );
           continue;
         case 5:
           if (tag != 42) {
@@ -3368,45 +4190,64 @@ export const APIV1GroupDefinition = {
 
   fromJSON(object: any): APIV1GroupDefinition {
     return {
-      timestamp: isSet(object.timestamp) ? Timestamp.fromJSON(object.timestamp) : undefined,
-      secret: isSet(object.secret) ? String(object.secret) : "",
-      name: isSet(object.name) ? String(object.name) : "",
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => APIV1GroupMember.fromJSON(e)) : [],
-      groupIdentifier: isSet(object.groupIdentifier) ? UUID.fromJSON(object.groupIdentifier) : undefined,
+      timestamp: isSet(object.timestamp)
+        ? Timestamp.fromJSON(object.timestamp)
+        : undefined,
+      secret: isSet(object.secret) ? String(object.secret) : '',
+      name: isSet(object.name) ? String(object.name) : '',
+      members: Array.isArray(object?.members)
+        ? object.members.map((e: any) => APIV1GroupMember.fromJSON(e))
+        : [],
+      groupIdentifier: isSet(object.groupIdentifier)
+        ? UUID.fromJSON(object.groupIdentifier)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1GroupDefinition): unknown {
     const obj: any = {};
     message.timestamp !== undefined &&
-      (obj.timestamp = message.timestamp ? Timestamp.toJSON(message.timestamp) : undefined);
+      (obj.timestamp = message.timestamp
+        ? Timestamp.toJSON(message.timestamp)
+        : undefined);
     message.secret !== undefined && (obj.secret = message.secret);
     message.name !== undefined && (obj.name = message.name);
     if (message.members) {
-      obj.members = message.members.map((e) => e ? APIV1GroupMember.toJSON(e) : undefined);
+      obj.members = message.members.map((e) =>
+        e ? APIV1GroupMember.toJSON(e) : undefined,
+      );
     } else {
       obj.members = [];
     }
     message.groupIdentifier !== undefined &&
-      (obj.groupIdentifier = message.groupIdentifier ? UUID.toJSON(message.groupIdentifier) : undefined);
+      (obj.groupIdentifier = message.groupIdentifier
+        ? UUID.toJSON(message.groupIdentifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1GroupDefinition>, I>>(base?: I): APIV1GroupDefinition {
+  create<I extends Exact<DeepPartial<APIV1GroupDefinition>, I>>(
+    base?: I,
+  ): APIV1GroupDefinition {
     return APIV1GroupDefinition.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1GroupDefinition>, I>>(object: I): APIV1GroupDefinition {
+  fromPartial<I extends Exact<DeepPartial<APIV1GroupDefinition>, I>>(
+    object: I,
+  ): APIV1GroupDefinition {
     const message = createBaseAPIV1GroupDefinition();
-    message.timestamp = (object.timestamp !== undefined && object.timestamp !== null)
-      ? Timestamp.fromPartial(object.timestamp)
-      : undefined;
-    message.secret = object.secret ?? "";
-    message.name = object.name ?? "";
-    message.members = object.members?.map((e) => APIV1GroupMember.fromPartial(e)) || [];
-    message.groupIdentifier = (object.groupIdentifier !== undefined && object.groupIdentifier !== null)
-      ? UUID.fromPartial(object.groupIdentifier)
-      : undefined;
+    message.timestamp =
+      object.timestamp !== undefined && object.timestamp !== null
+        ? Timestamp.fromPartial(object.timestamp)
+        : undefined;
+    message.secret = object.secret ?? '';
+    message.name = object.name ?? '';
+    message.members =
+      object.members?.map((e) => APIV1GroupMember.fromPartial(e)) || [];
+    message.groupIdentifier =
+      object.groupIdentifier !== undefined && object.groupIdentifier !== null
+        ? UUID.fromPartial(object.groupIdentifier)
+        : undefined;
     return message;
   },
 };
@@ -3416,7 +4257,10 @@ function createBaseAPIV1ErrorResponse(): APIV1ErrorResponse {
 }
 
 export const APIV1ErrorResponse = {
-  encode(message: APIV1ErrorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1ErrorResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.error !== 0) {
       writer.uint32(8).int32(message.error);
     }
@@ -3424,7 +4268,8 @@ export const APIV1ErrorResponse = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1ErrorResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1ErrorResponse();
     while (reader.pos < end) {
@@ -3447,20 +4292,29 @@ export const APIV1ErrorResponse = {
   },
 
   fromJSON(object: any): APIV1ErrorResponse {
-    return { error: isSet(object.error) ? aPIV1ErrorResponse_APIV1ErrorTypeFromJSON(object.error) : 0 };
+    return {
+      error: isSet(object.error)
+        ? aPIV1ErrorResponse_APIV1ErrorTypeFromJSON(object.error)
+        : 0,
+    };
   },
 
   toJSON(message: APIV1ErrorResponse): unknown {
     const obj: any = {};
-    message.error !== undefined && (obj.error = aPIV1ErrorResponse_APIV1ErrorTypeToJSON(message.error));
+    message.error !== undefined &&
+      (obj.error = aPIV1ErrorResponse_APIV1ErrorTypeToJSON(message.error));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1ErrorResponse>, I>>(base?: I): APIV1ErrorResponse {
+  create<I extends Exact<DeepPartial<APIV1ErrorResponse>, I>>(
+    base?: I,
+  ): APIV1ErrorResponse {
     return APIV1ErrorResponse.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1ErrorResponse>, I>>(object: I): APIV1ErrorResponse {
+  fromPartial<I extends Exact<DeepPartial<APIV1ErrorResponse>, I>>(
+    object: I,
+  ): APIV1ErrorResponse {
     const message = createBaseAPIV1ErrorResponse();
     message.error = object.error ?? 0;
     return message;
@@ -3468,11 +4322,20 @@ export const APIV1ErrorResponse = {
 };
 
 function createBaseAPIV1CaptureSettings(): APIV1CaptureSettings {
-  return { source: undefined, audioRouting: [], disk: undefined, rtmp: undefined, resi: undefined };
+  return {
+    source: undefined,
+    audioRouting: [],
+    disk: undefined,
+    rtmp: undefined,
+    resi: undefined,
+  };
 }
 
 export const APIV1CaptureSettings = {
-  encode(message: APIV1CaptureSettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1CaptureSettings,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.source !== undefined) {
       UUID.encode(message.source, writer.uint32(10).fork()).ldelim();
     }
@@ -3491,8 +4354,12 @@ export const APIV1CaptureSettings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1CaptureSettings {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1CaptureSettings {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1CaptureSettings();
     while (reader.pos < end) {
@@ -3510,7 +4377,9 @@ export const APIV1CaptureSettings = {
             break;
           }
 
-          message.audioRouting.push(APIV1AudioRouting.decode(reader, reader.uint32()));
+          message.audioRouting.push(
+            APIV1AudioRouting.decode(reader, reader.uint32()),
+          );
           continue;
         case 3:
           if (tag != 26) {
@@ -3548,45 +4417,72 @@ export const APIV1CaptureSettings = {
       audioRouting: Array.isArray(object?.audioRouting)
         ? object.audioRouting.map((e: any) => APIV1AudioRouting.fromJSON(e))
         : [],
-      disk: isSet(object.disk) ? APIV1DiskCapture.fromJSON(object.disk) : undefined,
-      rtmp: isSet(object.rtmp) ? APIV1RTMPCapture.fromJSON(object.rtmp) : undefined,
-      resi: isSet(object.resi) ? APIV1ResiCapture.fromJSON(object.resi) : undefined,
+      disk: isSet(object.disk)
+        ? APIV1DiskCapture.fromJSON(object.disk)
+        : undefined,
+      rtmp: isSet(object.rtmp)
+        ? APIV1RTMPCapture.fromJSON(object.rtmp)
+        : undefined,
+      resi: isSet(object.resi)
+        ? APIV1ResiCapture.fromJSON(object.resi)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1CaptureSettings): unknown {
     const obj: any = {};
-    message.source !== undefined && (obj.source = message.source ? UUID.toJSON(message.source) : undefined);
+    message.source !== undefined &&
+      (obj.source = message.source ? UUID.toJSON(message.source) : undefined);
     if (message.audioRouting) {
-      obj.audioRouting = message.audioRouting.map((e) => e ? APIV1AudioRouting.toJSON(e) : undefined);
+      obj.audioRouting = message.audioRouting.map((e) =>
+        e ? APIV1AudioRouting.toJSON(e) : undefined,
+      );
     } else {
       obj.audioRouting = [];
     }
-    message.disk !== undefined && (obj.disk = message.disk ? APIV1DiskCapture.toJSON(message.disk) : undefined);
-    message.rtmp !== undefined && (obj.rtmp = message.rtmp ? APIV1RTMPCapture.toJSON(message.rtmp) : undefined);
-    message.resi !== undefined && (obj.resi = message.resi ? APIV1ResiCapture.toJSON(message.resi) : undefined);
+    message.disk !== undefined &&
+      (obj.disk = message.disk
+        ? APIV1DiskCapture.toJSON(message.disk)
+        : undefined);
+    message.rtmp !== undefined &&
+      (obj.rtmp = message.rtmp
+        ? APIV1RTMPCapture.toJSON(message.rtmp)
+        : undefined);
+    message.resi !== undefined &&
+      (obj.resi = message.resi
+        ? APIV1ResiCapture.toJSON(message.resi)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1CaptureSettings>, I>>(base?: I): APIV1CaptureSettings {
+  create<I extends Exact<DeepPartial<APIV1CaptureSettings>, I>>(
+    base?: I,
+  ): APIV1CaptureSettings {
     return APIV1CaptureSettings.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1CaptureSettings>, I>>(object: I): APIV1CaptureSettings {
+  fromPartial<I extends Exact<DeepPartial<APIV1CaptureSettings>, I>>(
+    object: I,
+  ): APIV1CaptureSettings {
     const message = createBaseAPIV1CaptureSettings();
-    message.source = (object.source !== undefined && object.source !== null)
-      ? UUID.fromPartial(object.source)
-      : undefined;
-    message.audioRouting = object.audioRouting?.map((e) => APIV1AudioRouting.fromPartial(e)) || [];
-    message.disk = (object.disk !== undefined && object.disk !== null)
-      ? APIV1DiskCapture.fromPartial(object.disk)
-      : undefined;
-    message.rtmp = (object.rtmp !== undefined && object.rtmp !== null)
-      ? APIV1RTMPCapture.fromPartial(object.rtmp)
-      : undefined;
-    message.resi = (object.resi !== undefined && object.resi !== null)
-      ? APIV1ResiCapture.fromPartial(object.resi)
-      : undefined;
+    message.source =
+      object.source !== undefined && object.source !== null
+        ? UUID.fromPartial(object.source)
+        : undefined;
+    message.audioRouting =
+      object.audioRouting?.map((e) => APIV1AudioRouting.fromPartial(e)) || [];
+    message.disk =
+      object.disk !== undefined && object.disk !== null
+        ? APIV1DiskCapture.fromPartial(object.disk)
+        : undefined;
+    message.rtmp =
+      object.rtmp !== undefined && object.rtmp !== null
+        ? APIV1RTMPCapture.fromPartial(object.rtmp)
+        : undefined;
+    message.resi =
+      object.resi !== undefined && object.resi !== null
+        ? APIV1ResiCapture.fromPartial(object.resi)
+        : undefined;
     return message;
   },
 };
@@ -3596,7 +4492,10 @@ function createBaseAPIV1Size(): APIV1Size {
 }
 
 export const APIV1Size = {
-  encode(message: APIV1Size, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Size,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.width !== 0) {
       writer.uint32(8).uint32(message.width);
     }
@@ -3607,7 +4506,8 @@ export const APIV1Size = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Size {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Size();
     while (reader.pos < end) {
@@ -3654,7 +4554,9 @@ export const APIV1Size = {
     return APIV1Size.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Size>, I>>(object: I): APIV1Size {
+  fromPartial<I extends Exact<DeepPartial<APIV1Size>, I>>(
+    object: I,
+  ): APIV1Size {
     const message = createBaseAPIV1Size();
     message.width = object.width ?? 0;
     message.height = object.height ?? 0;
@@ -3667,7 +4569,10 @@ function createBaseAPIV1AudioRouting(): APIV1AudioRouting {
 }
 
 export const APIV1AudioRouting = {
-  encode(message: APIV1AudioRouting, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1AudioRouting,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.map) {
       writer.uint32(v);
@@ -3677,7 +4582,8 @@ export const APIV1AudioRouting = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1AudioRouting {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1AudioRouting();
     while (reader.pos < end) {
@@ -3709,7 +4615,11 @@ export const APIV1AudioRouting = {
   },
 
   fromJSON(object: any): APIV1AudioRouting {
-    return { map: Array.isArray(object?.map) ? object.map.map((e: any) => Number(e)) : [] };
+    return {
+      map: Array.isArray(object?.map)
+        ? object.map.map((e: any) => Number(e))
+        : [],
+    };
   },
 
   toJSON(message: APIV1AudioRouting): unknown {
@@ -3722,11 +4632,15 @@ export const APIV1AudioRouting = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1AudioRouting>, I>>(base?: I): APIV1AudioRouting {
+  create<I extends Exact<DeepPartial<APIV1AudioRouting>, I>>(
+    base?: I,
+  ): APIV1AudioRouting {
     return APIV1AudioRouting.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1AudioRouting>, I>>(object: I): APIV1AudioRouting {
+  fromPartial<I extends Exact<DeepPartial<APIV1AudioRouting>, I>>(
+    object: I,
+  ): APIV1AudioRouting {
     const message = createBaseAPIV1AudioRouting();
     message.map = object.map?.map((e) => e) || [];
     return message;
@@ -3734,15 +4648,18 @@ export const APIV1AudioRouting = {
 };
 
 function createBaseAPIV1DiskCapture(): APIV1DiskCapture {
-  return { fileLocation: "", codec: "", resolution: undefined, frameRate: 0 };
+  return { fileLocation: '', codec: '', resolution: undefined, frameRate: 0 };
 }
 
 export const APIV1DiskCapture = {
-  encode(message: APIV1DiskCapture, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.fileLocation !== "") {
+  encode(
+    message: APIV1DiskCapture,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.fileLocation !== '') {
       writer.uint32(10).string(message.fileLocation);
     }
-    if (message.codec !== "") {
+    if (message.codec !== '') {
       writer.uint32(18).string(message.codec);
     }
     if (message.resolution !== undefined) {
@@ -3755,7 +4672,8 @@ export const APIV1DiskCapture = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1DiskCapture {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1DiskCapture();
     while (reader.pos < end) {
@@ -3800,65 +4718,87 @@ export const APIV1DiskCapture = {
 
   fromJSON(object: any): APIV1DiskCapture {
     return {
-      fileLocation: isSet(object.fileLocation) ? String(object.fileLocation) : "",
-      codec: isSet(object.codec) ? String(object.codec) : "",
-      resolution: isSet(object.resolution) ? APIV1Size.fromJSON(object.resolution) : undefined,
+      fileLocation: isSet(object.fileLocation)
+        ? String(object.fileLocation)
+        : '',
+      codec: isSet(object.codec) ? String(object.codec) : '',
+      resolution: isSet(object.resolution)
+        ? APIV1Size.fromJSON(object.resolution)
+        : undefined,
       frameRate: isSet(object.frameRate) ? Number(object.frameRate) : 0,
     };
   },
 
   toJSON(message: APIV1DiskCapture): unknown {
     const obj: any = {};
-    message.fileLocation !== undefined && (obj.fileLocation = message.fileLocation);
+    message.fileLocation !== undefined &&
+      (obj.fileLocation = message.fileLocation);
     message.codec !== undefined && (obj.codec = message.codec);
     message.resolution !== undefined &&
-      (obj.resolution = message.resolution ? APIV1Size.toJSON(message.resolution) : undefined);
+      (obj.resolution = message.resolution
+        ? APIV1Size.toJSON(message.resolution)
+        : undefined);
     message.frameRate !== undefined && (obj.frameRate = message.frameRate);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1DiskCapture>, I>>(base?: I): APIV1DiskCapture {
+  create<I extends Exact<DeepPartial<APIV1DiskCapture>, I>>(
+    base?: I,
+  ): APIV1DiskCapture {
     return APIV1DiskCapture.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1DiskCapture>, I>>(object: I): APIV1DiskCapture {
+  fromPartial<I extends Exact<DeepPartial<APIV1DiskCapture>, I>>(
+    object: I,
+  ): APIV1DiskCapture {
     const message = createBaseAPIV1DiskCapture();
-    message.fileLocation = object.fileLocation ?? "";
-    message.codec = object.codec ?? "";
-    message.resolution = (object.resolution !== undefined && object.resolution !== null)
-      ? APIV1Size.fromPartial(object.resolution)
-      : undefined;
+    message.fileLocation = object.fileLocation ?? '';
+    message.codec = object.codec ?? '';
+    message.resolution =
+      object.resolution !== undefined && object.resolution !== null
+        ? APIV1Size.fromPartial(object.resolution)
+        : undefined;
     message.frameRate = object.frameRate ?? 0;
     return message;
   },
 };
 
 function createBaseAPIV1RTMPCapture(): APIV1RTMPCapture {
-  return { server: "", key: "", encoding: "", saveLocal: false, fileLocation: "" };
+  return {
+    server: '',
+    key: '',
+    encoding: '',
+    saveLocal: false,
+    fileLocation: '',
+  };
 }
 
 export const APIV1RTMPCapture = {
-  encode(message: APIV1RTMPCapture, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.server !== "") {
+  encode(
+    message: APIV1RTMPCapture,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.server !== '') {
       writer.uint32(10).string(message.server);
     }
-    if (message.key !== "") {
+    if (message.key !== '') {
       writer.uint32(18).string(message.key);
     }
-    if (message.encoding !== "") {
+    if (message.encoding !== '') {
       writer.uint32(26).string(message.encoding);
     }
     if (message.saveLocal === true) {
       writer.uint32(32).bool(message.saveLocal);
     }
-    if (message.fileLocation !== "") {
+    if (message.fileLocation !== '') {
       writer.uint32(42).string(message.fileLocation);
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1RTMPCapture {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1RTMPCapture();
     while (reader.pos < end) {
@@ -3910,11 +4850,13 @@ export const APIV1RTMPCapture = {
 
   fromJSON(object: any): APIV1RTMPCapture {
     return {
-      server: isSet(object.server) ? String(object.server) : "",
-      key: isSet(object.key) ? String(object.key) : "",
-      encoding: isSet(object.encoding) ? String(object.encoding) : "",
+      server: isSet(object.server) ? String(object.server) : '',
+      key: isSet(object.key) ? String(object.key) : '',
+      encoding: isSet(object.encoding) ? String(object.encoding) : '',
       saveLocal: isSet(object.saveLocal) ? Boolean(object.saveLocal) : false,
-      fileLocation: isSet(object.fileLocation) ? String(object.fileLocation) : "",
+      fileLocation: isSet(object.fileLocation)
+        ? String(object.fileLocation)
+        : '',
     };
   },
 
@@ -3924,48 +4866,62 @@ export const APIV1RTMPCapture = {
     message.key !== undefined && (obj.key = message.key);
     message.encoding !== undefined && (obj.encoding = message.encoding);
     message.saveLocal !== undefined && (obj.saveLocal = message.saveLocal);
-    message.fileLocation !== undefined && (obj.fileLocation = message.fileLocation);
+    message.fileLocation !== undefined &&
+      (obj.fileLocation = message.fileLocation);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1RTMPCapture>, I>>(base?: I): APIV1RTMPCapture {
+  create<I extends Exact<DeepPartial<APIV1RTMPCapture>, I>>(
+    base?: I,
+  ): APIV1RTMPCapture {
     return APIV1RTMPCapture.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1RTMPCapture>, I>>(object: I): APIV1RTMPCapture {
+  fromPartial<I extends Exact<DeepPartial<APIV1RTMPCapture>, I>>(
+    object: I,
+  ): APIV1RTMPCapture {
     const message = createBaseAPIV1RTMPCapture();
-    message.server = object.server ?? "";
-    message.key = object.key ?? "";
-    message.encoding = object.encoding ?? "";
+    message.server = object.server ?? '';
+    message.key = object.key ?? '';
+    message.encoding = object.encoding ?? '';
     message.saveLocal = object.saveLocal ?? false;
-    message.fileLocation = object.fileLocation ?? "";
+    message.fileLocation = object.fileLocation ?? '';
     return message;
   },
 };
 
 function createBaseAPIV1ResiCapture(): APIV1ResiCapture {
-  return { eventName: "", eventDescription: "", destinationGroup: "", encoding: "" };
+  return {
+    eventName: '',
+    eventDescription: '',
+    destinationGroup: '',
+    encoding: '',
+  };
 }
 
 export const APIV1ResiCapture = {
-  encode(message: APIV1ResiCapture, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.eventName !== "") {
+  encode(
+    message: APIV1ResiCapture,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.eventName !== '') {
       writer.uint32(10).string(message.eventName);
     }
-    if (message.eventDescription !== "") {
+    if (message.eventDescription !== '') {
       writer.uint32(18).string(message.eventDescription);
     }
-    if (message.destinationGroup !== "") {
+    if (message.destinationGroup !== '') {
       writer.uint32(26).string(message.destinationGroup);
     }
-    if (message.encoding !== "") {
+    if (message.encoding !== '') {
       writer.uint32(34).string(message.encoding);
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1ResiCapture {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1ResiCapture();
     while (reader.pos < end) {
@@ -4010,52 +4966,74 @@ export const APIV1ResiCapture = {
 
   fromJSON(object: any): APIV1ResiCapture {
     return {
-      eventName: isSet(object.eventName) ? String(object.eventName) : "",
-      eventDescription: isSet(object.eventDescription) ? String(object.eventDescription) : "",
-      destinationGroup: isSet(object.destinationGroup) ? String(object.destinationGroup) : "",
-      encoding: isSet(object.encoding) ? String(object.encoding) : "",
+      eventName: isSet(object.eventName) ? String(object.eventName) : '',
+      eventDescription: isSet(object.eventDescription)
+        ? String(object.eventDescription)
+        : '',
+      destinationGroup: isSet(object.destinationGroup)
+        ? String(object.destinationGroup)
+        : '',
+      encoding: isSet(object.encoding) ? String(object.encoding) : '',
     };
   },
 
   toJSON(message: APIV1ResiCapture): unknown {
     const obj: any = {};
     message.eventName !== undefined && (obj.eventName = message.eventName);
-    message.eventDescription !== undefined && (obj.eventDescription = message.eventDescription);
-    message.destinationGroup !== undefined && (obj.destinationGroup = message.destinationGroup);
+    message.eventDescription !== undefined &&
+      (obj.eventDescription = message.eventDescription);
+    message.destinationGroup !== undefined &&
+      (obj.destinationGroup = message.destinationGroup);
     message.encoding !== undefined && (obj.encoding = message.encoding);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1ResiCapture>, I>>(base?: I): APIV1ResiCapture {
+  create<I extends Exact<DeepPartial<APIV1ResiCapture>, I>>(
+    base?: I,
+  ): APIV1ResiCapture {
     return APIV1ResiCapture.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1ResiCapture>, I>>(object: I): APIV1ResiCapture {
+  fromPartial<I extends Exact<DeepPartial<APIV1ResiCapture>, I>>(
+    object: I,
+  ): APIV1ResiCapture {
     const message = createBaseAPIV1ResiCapture();
-    message.eventName = object.eventName ?? "";
-    message.eventDescription = object.eventDescription ?? "";
-    message.destinationGroup = object.destinationGroup ?? "";
-    message.encoding = object.encoding ?? "";
+    message.eventName = object.eventName ?? '';
+    message.eventDescription = object.eventDescription ?? '';
+    message.destinationGroup = object.destinationGroup ?? '';
+    message.encoding = object.encoding ?? '';
     return message;
   },
 };
 
 function createBaseAPIV1Presentation(): APIV1Presentation {
-  return { id: undefined, groups: [], hasTimeline: false, presentationPath: "", destination: 0 };
+  return {
+    id: undefined,
+    groups: [],
+    hasTimeline: false,
+    presentationPath: '',
+    destination: 0,
+  };
 }
 
 export const APIV1Presentation = {
-  encode(message: APIV1Presentation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Presentation,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.groups) {
-      APIV1Presentation_SlideGroup.encode(v!, writer.uint32(18).fork()).ldelim();
+      APIV1Presentation_SlideGroup.encode(
+        v!,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.hasTimeline === true) {
       writer.uint32(24).bool(message.hasTimeline);
     }
-    if (message.presentationPath !== "") {
+    if (message.presentationPath !== '') {
       writer.uint32(34).string(message.presentationPath);
     }
     if (message.destination !== 0) {
@@ -4065,7 +5043,8 @@ export const APIV1Presentation = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Presentation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Presentation();
     while (reader.pos < end) {
@@ -4083,7 +5062,9 @@ export const APIV1Presentation = {
             break;
           }
 
-          message.groups.push(APIV1Presentation_SlideGroup.decode(reader, reader.uint32()));
+          message.groups.push(
+            APIV1Presentation_SlideGroup.decode(reader, reader.uint32()),
+          );
           continue;
         case 3:
           if (tag != 24) {
@@ -4119,63 +5100,98 @@ export const APIV1Presentation = {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
       groups: Array.isArray(object?.groups)
-        ? object.groups.map((e: any) => APIV1Presentation_SlideGroup.fromJSON(e))
+        ? object.groups.map((e: any) =>
+            APIV1Presentation_SlideGroup.fromJSON(e),
+          )
         : [],
-      hasTimeline: isSet(object.hasTimeline) ? Boolean(object.hasTimeline) : false,
-      presentationPath: isSet(object.presentationPath) ? String(object.presentationPath) : "",
-      destination: isSet(object.destination) ? aPIV1Presentation_DestinationFromJSON(object.destination) : 0,
+      hasTimeline: isSet(object.hasTimeline)
+        ? Boolean(object.hasTimeline)
+        : false,
+      presentationPath: isSet(object.presentationPath)
+        ? String(object.presentationPath)
+        : '',
+      destination: isSet(object.destination)
+        ? aPIV1Presentation_DestinationFromJSON(object.destination)
+        : 0,
     };
   },
 
   toJSON(message: APIV1Presentation): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     if (message.groups) {
-      obj.groups = message.groups.map((e) => e ? APIV1Presentation_SlideGroup.toJSON(e) : undefined);
+      obj.groups = message.groups.map((e) =>
+        e ? APIV1Presentation_SlideGroup.toJSON(e) : undefined,
+      );
     } else {
       obj.groups = [];
     }
-    message.hasTimeline !== undefined && (obj.hasTimeline = message.hasTimeline);
-    message.presentationPath !== undefined && (obj.presentationPath = message.presentationPath);
-    message.destination !== undefined && (obj.destination = aPIV1Presentation_DestinationToJSON(message.destination));
+    message.hasTimeline !== undefined &&
+      (obj.hasTimeline = message.hasTimeline);
+    message.presentationPath !== undefined &&
+      (obj.presentationPath = message.presentationPath);
+    message.destination !== undefined &&
+      (obj.destination = aPIV1Presentation_DestinationToJSON(
+        message.destination,
+      ));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Presentation>, I>>(base?: I): APIV1Presentation {
+  create<I extends Exact<DeepPartial<APIV1Presentation>, I>>(
+    base?: I,
+  ): APIV1Presentation {
     return APIV1Presentation.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Presentation>, I>>(object: I): APIV1Presentation {
+  fromPartial<I extends Exact<DeepPartial<APIV1Presentation>, I>>(
+    object: I,
+  ): APIV1Presentation {
     const message = createBaseAPIV1Presentation();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.groups = object.groups?.map((e) => APIV1Presentation_SlideGroup.fromPartial(e)) || [];
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.groups =
+      object.groups?.map((e) => APIV1Presentation_SlideGroup.fromPartial(e)) ||
+      [];
     message.hasTimeline = object.hasTimeline ?? false;
-    message.presentationPath = object.presentationPath ?? "";
+    message.presentationPath = object.presentationPath ?? '';
     message.destination = object.destination ?? 0;
     return message;
   },
 };
 
 function createBaseAPIV1Presentation_SlideGroup(): APIV1Presentation_SlideGroup {
-  return { name: "", color: undefined, slides: [] };
+  return { name: '', color: undefined, slides: [] };
 }
 
 export const APIV1Presentation_SlideGroup = {
-  encode(message: APIV1Presentation_SlideGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: APIV1Presentation_SlideGroup,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     if (message.color !== undefined) {
       APIV1Color.encode(message.color, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.slides) {
-      APIV1Presentation_SlideGroup_Slide.encode(v!, writer.uint32(26).fork()).ldelim();
+      APIV1Presentation_SlideGroup_Slide.encode(
+        v!,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Presentation_SlideGroup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Presentation_SlideGroup {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Presentation_SlideGroup();
     while (reader.pos < end) {
@@ -4200,7 +5216,9 @@ export const APIV1Presentation_SlideGroup = {
             break;
           }
 
-          message.slides.push(APIV1Presentation_SlideGroup_Slide.decode(reader, reader.uint32()));
+          message.slides.push(
+            APIV1Presentation_SlideGroup_Slide.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -4213,10 +5231,14 @@ export const APIV1Presentation_SlideGroup = {
 
   fromJSON(object: any): APIV1Presentation_SlideGroup {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      color: isSet(object.color) ? APIV1Color.fromJSON(object.color) : undefined,
+      name: isSet(object.name) ? String(object.name) : '',
+      color: isSet(object.color)
+        ? APIV1Color.fromJSON(object.color)
+        : undefined,
       slides: Array.isArray(object?.slides)
-        ? object.slides.map((e: any) => APIV1Presentation_SlideGroup_Slide.fromJSON(e))
+        ? object.slides.map((e: any) =>
+            APIV1Presentation_SlideGroup_Slide.fromJSON(e),
+          )
         : [],
     };
   },
@@ -4224,46 +5246,62 @@ export const APIV1Presentation_SlideGroup = {
   toJSON(message: APIV1Presentation_SlideGroup): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.color !== undefined && (obj.color = message.color ? APIV1Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color
+        ? APIV1Color.toJSON(message.color)
+        : undefined);
     if (message.slides) {
-      obj.slides = message.slides.map((e) => e ? APIV1Presentation_SlideGroup_Slide.toJSON(e) : undefined);
+      obj.slides = message.slides.map((e) =>
+        e ? APIV1Presentation_SlideGroup_Slide.toJSON(e) : undefined,
+      );
     } else {
       obj.slides = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1Presentation_SlideGroup>, I>>(base?: I): APIV1Presentation_SlideGroup {
+  create<I extends Exact<DeepPartial<APIV1Presentation_SlideGroup>, I>>(
+    base?: I,
+  ): APIV1Presentation_SlideGroup {
     return APIV1Presentation_SlideGroup.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Presentation_SlideGroup>, I>>(object: I): APIV1Presentation_SlideGroup {
+  fromPartial<I extends Exact<DeepPartial<APIV1Presentation_SlideGroup>, I>>(
+    object: I,
+  ): APIV1Presentation_SlideGroup {
     const message = createBaseAPIV1Presentation_SlideGroup();
-    message.name = object.name ?? "";
-    message.color = (object.color !== undefined && object.color !== null)
-      ? APIV1Color.fromPartial(object.color)
-      : undefined;
-    message.slides = object.slides?.map((e) => APIV1Presentation_SlideGroup_Slide.fromPartial(e)) || [];
+    message.name = object.name ?? '';
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? APIV1Color.fromPartial(object.color)
+        : undefined;
+    message.slides =
+      object.slides?.map((e) =>
+        APIV1Presentation_SlideGroup_Slide.fromPartial(e),
+      ) || [];
     return message;
   },
 };
 
 function createBaseAPIV1Presentation_SlideGroup_Slide(): APIV1Presentation_SlideGroup_Slide {
-  return { enabled: false, notes: "", text: "", label: "", size: undefined };
+  return { enabled: false, notes: '', text: '', label: '', size: undefined };
 }
 
 export const APIV1Presentation_SlideGroup_Slide = {
-  encode(message: APIV1Presentation_SlideGroup_Slide, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Presentation_SlideGroup_Slide,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
-    if (message.notes !== "") {
+    if (message.notes !== '') {
       writer.uint32(18).string(message.notes);
     }
-    if (message.text !== "") {
+    if (message.text !== '') {
       writer.uint32(26).string(message.text);
     }
-    if (message.label !== "") {
+    if (message.label !== '') {
       writer.uint32(42).string(message.label);
     }
     if (message.size !== undefined) {
@@ -4272,8 +5310,12 @@ export const APIV1Presentation_SlideGroup_Slide = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Presentation_SlideGroup_Slide {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1Presentation_SlideGroup_Slide {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Presentation_SlideGroup_Slide();
     while (reader.pos < end) {
@@ -4326,9 +5368,9 @@ export const APIV1Presentation_SlideGroup_Slide = {
   fromJSON(object: any): APIV1Presentation_SlideGroup_Slide {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      notes: isSet(object.notes) ? String(object.notes) : "",
-      text: isSet(object.text) ? String(object.text) : "",
-      label: isSet(object.label) ? String(object.label) : "",
+      notes: isSet(object.notes) ? String(object.notes) : '',
+      text: isSet(object.text) ? String(object.text) : '',
+      label: isSet(object.label) ? String(object.label) : '',
       size: isSet(object.size) ? APIV1Size.fromJSON(object.size) : undefined,
     };
   },
@@ -4339,7 +5381,8 @@ export const APIV1Presentation_SlideGroup_Slide = {
     message.notes !== undefined && (obj.notes = message.notes);
     message.text !== undefined && (obj.text = message.text);
     message.label !== undefined && (obj.label = message.label);
-    message.size !== undefined && (obj.size = message.size ? APIV1Size.toJSON(message.size) : undefined);
+    message.size !== undefined &&
+      (obj.size = message.size ? APIV1Size.toJSON(message.size) : undefined);
     return obj;
   },
 
@@ -4349,15 +5392,18 @@ export const APIV1Presentation_SlideGroup_Slide = {
     return APIV1Presentation_SlideGroup_Slide.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Presentation_SlideGroup_Slide>, I>>(
-    object: I,
-  ): APIV1Presentation_SlideGroup_Slide {
+  fromPartial<
+    I extends Exact<DeepPartial<APIV1Presentation_SlideGroup_Slide>, I>,
+  >(object: I): APIV1Presentation_SlideGroup_Slide {
     const message = createBaseAPIV1Presentation_SlideGroup_Slide();
     message.enabled = object.enabled ?? false;
-    message.notes = object.notes ?? "";
-    message.text = object.text ?? "";
-    message.label = object.label ?? "";
-    message.size = (object.size !== undefined && object.size !== null) ? APIV1Size.fromPartial(object.size) : undefined;
+    message.notes = object.notes ?? '';
+    message.text = object.text ?? '';
+    message.label = object.label ?? '';
+    message.size =
+      object.size !== undefined && object.size !== null
+        ? APIV1Size.fromPartial(object.size)
+        : undefined;
     return message;
   },
 };
@@ -4367,7 +5413,10 @@ function createBaseAPIV1StageLayoutMap(): APIV1StageLayoutMap {
 }
 
 export const APIV1StageLayoutMap = {
-  encode(message: APIV1StageLayoutMap, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1StageLayoutMap,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.entries) {
       APIV1StageLayoutMap_Entry.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -4375,7 +5424,8 @@ export const APIV1StageLayoutMap = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1StageLayoutMap {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1StageLayoutMap();
     while (reader.pos < end) {
@@ -4386,7 +5436,9 @@ export const APIV1StageLayoutMap = {
             break;
           }
 
-          message.entries.push(APIV1StageLayoutMap_Entry.decode(reader, reader.uint32()));
+          message.entries.push(
+            APIV1StageLayoutMap_Entry.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -4408,20 +5460,28 @@ export const APIV1StageLayoutMap = {
   toJSON(message: APIV1StageLayoutMap): unknown {
     const obj: any = {};
     if (message.entries) {
-      obj.entries = message.entries.map((e) => e ? APIV1StageLayoutMap_Entry.toJSON(e) : undefined);
+      obj.entries = message.entries.map((e) =>
+        e ? APIV1StageLayoutMap_Entry.toJSON(e) : undefined,
+      );
     } else {
       obj.entries = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1StageLayoutMap>, I>>(base?: I): APIV1StageLayoutMap {
+  create<I extends Exact<DeepPartial<APIV1StageLayoutMap>, I>>(
+    base?: I,
+  ): APIV1StageLayoutMap {
     return APIV1StageLayoutMap.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1StageLayoutMap>, I>>(object: I): APIV1StageLayoutMap {
+  fromPartial<I extends Exact<DeepPartial<APIV1StageLayoutMap>, I>>(
+    object: I,
+  ): APIV1StageLayoutMap {
     const message = createBaseAPIV1StageLayoutMap();
-    message.entries = object.entries?.map((e) => APIV1StageLayoutMap_Entry.fromPartial(e)) || [];
+    message.entries =
+      object.entries?.map((e) => APIV1StageLayoutMap_Entry.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -4431,7 +5491,10 @@ function createBaseAPIV1StageLayoutMap_Entry(): APIV1StageLayoutMap_Entry {
 }
 
 export const APIV1StageLayoutMap_Entry = {
-  encode(message: APIV1StageLayoutMap_Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1StageLayoutMap_Entry,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.screen !== undefined) {
       APIV1Identifier.encode(message.screen, writer.uint32(10).fork()).ldelim();
     }
@@ -4441,8 +5504,12 @@ export const APIV1StageLayoutMap_Entry = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1StageLayoutMap_Entry {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1StageLayoutMap_Entry {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1StageLayoutMap_Entry();
     while (reader.pos < end) {
@@ -4473,30 +5540,46 @@ export const APIV1StageLayoutMap_Entry = {
 
   fromJSON(object: any): APIV1StageLayoutMap_Entry {
     return {
-      screen: isSet(object.screen) ? APIV1Identifier.fromJSON(object.screen) : undefined,
-      layout: isSet(object.layout) ? APIV1Identifier.fromJSON(object.layout) : undefined,
+      screen: isSet(object.screen)
+        ? APIV1Identifier.fromJSON(object.screen)
+        : undefined,
+      layout: isSet(object.layout)
+        ? APIV1Identifier.fromJSON(object.layout)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1StageLayoutMap_Entry): unknown {
     const obj: any = {};
-    message.screen !== undefined && (obj.screen = message.screen ? APIV1Identifier.toJSON(message.screen) : undefined);
-    message.layout !== undefined && (obj.layout = message.layout ? APIV1Identifier.toJSON(message.layout) : undefined);
+    message.screen !== undefined &&
+      (obj.screen = message.screen
+        ? APIV1Identifier.toJSON(message.screen)
+        : undefined);
+    message.layout !== undefined &&
+      (obj.layout = message.layout
+        ? APIV1Identifier.toJSON(message.layout)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1StageLayoutMap_Entry>, I>>(base?: I): APIV1StageLayoutMap_Entry {
+  create<I extends Exact<DeepPartial<APIV1StageLayoutMap_Entry>, I>>(
+    base?: I,
+  ): APIV1StageLayoutMap_Entry {
     return APIV1StageLayoutMap_Entry.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1StageLayoutMap_Entry>, I>>(object: I): APIV1StageLayoutMap_Entry {
+  fromPartial<I extends Exact<DeepPartial<APIV1StageLayoutMap_Entry>, I>>(
+    object: I,
+  ): APIV1StageLayoutMap_Entry {
     const message = createBaseAPIV1StageLayoutMap_Entry();
-    message.screen = (object.screen !== undefined && object.screen !== null)
-      ? APIV1Identifier.fromPartial(object.screen)
-      : undefined;
-    message.layout = (object.layout !== undefined && object.layout !== null)
-      ? APIV1Identifier.fromPartial(object.layout)
-      : undefined;
+    message.screen =
+      object.screen !== undefined && object.screen !== null
+        ? APIV1Identifier.fromPartial(object.screen)
+        : undefined;
+    message.layout =
+      object.layout !== undefined && object.layout !== null
+        ? APIV1Identifier.fromPartial(object.layout)
+        : undefined;
     return message;
   },
 };
@@ -4506,7 +5589,10 @@ function createBaseAPIV1ThemeGroup(): APIV1ThemeGroup {
 }
 
 export const APIV1ThemeGroup = {
-  encode(message: APIV1ThemeGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1ThemeGroup,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -4520,7 +5606,8 @@ export const APIV1ThemeGroup = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1ThemeGroup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1ThemeGroup();
     while (reader.pos < end) {
@@ -4559,35 +5646,52 @@ export const APIV1ThemeGroup = {
   fromJSON(object: any): APIV1ThemeGroup {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => APIV1ThemeGroup.fromJSON(e)) : [],
-      themes: Array.isArray(object?.themes) ? object.themes.map((e: any) => APIV1Theme.fromJSON(e)) : [],
+      groups: Array.isArray(object?.groups)
+        ? object.groups.map((e: any) => APIV1ThemeGroup.fromJSON(e))
+        : [],
+      themes: Array.isArray(object?.themes)
+        ? object.themes.map((e: any) => APIV1Theme.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: APIV1ThemeGroup): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     if (message.groups) {
-      obj.groups = message.groups.map((e) => e ? APIV1ThemeGroup.toJSON(e) : undefined);
+      obj.groups = message.groups.map((e) =>
+        e ? APIV1ThemeGroup.toJSON(e) : undefined,
+      );
     } else {
       obj.groups = [];
     }
     if (message.themes) {
-      obj.themes = message.themes.map((e) => e ? APIV1Theme.toJSON(e) : undefined);
+      obj.themes = message.themes.map((e) =>
+        e ? APIV1Theme.toJSON(e) : undefined,
+      );
     } else {
       obj.themes = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1ThemeGroup>, I>>(base?: I): APIV1ThemeGroup {
+  create<I extends Exact<DeepPartial<APIV1ThemeGroup>, I>>(
+    base?: I,
+  ): APIV1ThemeGroup {
     return APIV1ThemeGroup.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1ThemeGroup>, I>>(object: I): APIV1ThemeGroup {
+  fromPartial<I extends Exact<DeepPartial<APIV1ThemeGroup>, I>>(
+    object: I,
+  ): APIV1ThemeGroup {
     const message = createBaseAPIV1ThemeGroup();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.groups = object.groups?.map((e) => APIV1ThemeGroup.fromPartial(e)) || [];
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.groups =
+      object.groups?.map((e) => APIV1ThemeGroup.fromPartial(e)) || [];
     message.themes = object.themes?.map((e) => APIV1Theme.fromPartial(e)) || [];
     return message;
   },
@@ -4598,7 +5702,10 @@ function createBaseAPIV1Theme(): APIV1Theme {
 }
 
 export const APIV1Theme = {
-  encode(message: APIV1Theme, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1Theme,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -4609,7 +5716,8 @@ export const APIV1Theme = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1Theme {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1Theme();
     while (reader.pos < end) {
@@ -4641,15 +5749,20 @@ export const APIV1Theme = {
   fromJSON(object: any): APIV1Theme {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
-      slides: Array.isArray(object?.slides) ? object.slides.map((e: any) => APIV1ThemeSlide.fromJSON(e)) : [],
+      slides: Array.isArray(object?.slides)
+        ? object.slides.map((e: any) => APIV1ThemeSlide.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: APIV1Theme): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     if (message.slides) {
-      obj.slides = message.slides.map((e) => e ? APIV1ThemeSlide.toJSON(e) : undefined);
+      obj.slides = message.slides.map((e) =>
+        e ? APIV1ThemeSlide.toJSON(e) : undefined,
+      );
     } else {
       obj.slides = [];
     }
@@ -4660,10 +5773,16 @@ export const APIV1Theme = {
     return APIV1Theme.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1Theme>, I>>(object: I): APIV1Theme {
+  fromPartial<I extends Exact<DeepPartial<APIV1Theme>, I>>(
+    object: I,
+  ): APIV1Theme {
     const message = createBaseAPIV1Theme();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.slides = object.slides?.map((e) => APIV1ThemeSlide.fromPartial(e)) || [];
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.slides =
+      object.slides?.map((e) => APIV1ThemeSlide.fromPartial(e)) || [];
     return message;
   },
 };
@@ -4673,7 +5792,10 @@ function createBaseAPIV1ThemeSlide(): APIV1ThemeSlide {
 }
 
 export const APIV1ThemeSlide = {
-  encode(message: APIV1ThemeSlide, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1ThemeSlide,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -4687,7 +5809,8 @@ export const APIV1ThemeSlide = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1ThemeSlide {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1ThemeSlide();
     while (reader.pos < end) {
@@ -4727,54 +5850,78 @@ export const APIV1ThemeSlide = {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
       size: isSet(object.size) ? APIV1Size.fromJSON(object.size) : undefined,
-      background: isSet(object.background) ? APIV1Color.fromJSON(object.background) : undefined,
+      background: isSet(object.background)
+        ? APIV1Color.fromJSON(object.background)
+        : undefined,
     };
   },
 
   toJSON(message: APIV1ThemeSlide): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.size !== undefined && (obj.size = message.size ? APIV1Size.toJSON(message.size) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.size !== undefined &&
+      (obj.size = message.size ? APIV1Size.toJSON(message.size) : undefined);
     message.background !== undefined &&
-      (obj.background = message.background ? APIV1Color.toJSON(message.background) : undefined);
+      (obj.background = message.background
+        ? APIV1Color.toJSON(message.background)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1ThemeSlide>, I>>(base?: I): APIV1ThemeSlide {
+  create<I extends Exact<DeepPartial<APIV1ThemeSlide>, I>>(
+    base?: I,
+  ): APIV1ThemeSlide {
     return APIV1ThemeSlide.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1ThemeSlide>, I>>(object: I): APIV1ThemeSlide {
+  fromPartial<I extends Exact<DeepPartial<APIV1ThemeSlide>, I>>(
+    object: I,
+  ): APIV1ThemeSlide {
     const message = createBaseAPIV1ThemeSlide();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.size = (object.size !== undefined && object.size !== null) ? APIV1Size.fromPartial(object.size) : undefined;
-    message.background = (object.background !== undefined && object.background !== null)
-      ? APIV1Color.fromPartial(object.background)
-      : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.size =
+      object.size !== undefined && object.size !== null
+        ? APIV1Size.fromPartial(object.size)
+        : undefined;
+    message.background =
+      object.background !== undefined && object.background !== null
+        ? APIV1Color.fromPartial(object.background)
+        : undefined;
     return message;
   },
 };
 
 function createBaseAPIV1SlideDisplayDetails(): APIV1SlideDisplayDetails {
-  return { text: "", notes: "", uuid: "" };
+  return { text: '', notes: '', uuid: '' };
 }
 
 export const APIV1SlideDisplayDetails = {
-  encode(message: APIV1SlideDisplayDetails, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.text !== "") {
+  encode(
+    message: APIV1SlideDisplayDetails,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.text !== '') {
       writer.uint32(10).string(message.text);
     }
-    if (message.notes !== "") {
+    if (message.notes !== '') {
       writer.uint32(18).string(message.notes);
     }
-    if (message.uuid !== "") {
+    if (message.uuid !== '') {
       writer.uint32(26).string(message.uuid);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIV1SlideDisplayDetails {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIV1SlideDisplayDetails {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1SlideDisplayDetails();
     while (reader.pos < end) {
@@ -4812,9 +5959,9 @@ export const APIV1SlideDisplayDetails = {
 
   fromJSON(object: any): APIV1SlideDisplayDetails {
     return {
-      text: isSet(object.text) ? String(object.text) : "",
-      notes: isSet(object.notes) ? String(object.notes) : "",
-      uuid: isSet(object.uuid) ? String(object.uuid) : "",
+      text: isSet(object.text) ? String(object.text) : '',
+      notes: isSet(object.notes) ? String(object.notes) : '',
+      uuid: isSet(object.uuid) ? String(object.uuid) : '',
     };
   },
 
@@ -4826,15 +5973,19 @@ export const APIV1SlideDisplayDetails = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1SlideDisplayDetails>, I>>(base?: I): APIV1SlideDisplayDetails {
+  create<I extends Exact<DeepPartial<APIV1SlideDisplayDetails>, I>>(
+    base?: I,
+  ): APIV1SlideDisplayDetails {
     return APIV1SlideDisplayDetails.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1SlideDisplayDetails>, I>>(object: I): APIV1SlideDisplayDetails {
+  fromPartial<I extends Exact<DeepPartial<APIV1SlideDisplayDetails>, I>>(
+    object: I,
+  ): APIV1SlideDisplayDetails {
     const message = createBaseAPIV1SlideDisplayDetails();
-    message.text = object.text ?? "";
-    message.notes = object.notes ?? "";
-    message.uuid = object.uuid ?? "";
+    message.text = object.text ?? '';
+    message.notes = object.notes ?? '';
+    message.uuid = object.uuid ?? '';
     return message;
   },
 };
@@ -4844,7 +5995,10 @@ function createBaseAPIV1ScreenConfig(): APIV1ScreenConfig {
 }
 
 export const APIV1ScreenConfig = {
-  encode(message: APIV1ScreenConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1ScreenConfig,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -4858,7 +6012,8 @@ export const APIV1ScreenConfig = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1ScreenConfig {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1ScreenConfig();
     while (reader.pos < end) {
@@ -4898,26 +6053,41 @@ export const APIV1ScreenConfig = {
     return {
       id: isSet(object.id) ? APIV1Identifier.fromJSON(object.id) : undefined,
       size: isSet(object.size) ? APIV1Size.fromJSON(object.size) : undefined,
-      screenType: isSet(object.screenType) ? aPIV1ScreenConfig_APIV1ScreenTypeFromJSON(object.screenType) : 0,
+      screenType: isSet(object.screenType)
+        ? aPIV1ScreenTypeFromJSON(object.screenType)
+        : 0,
     };
   },
 
   toJSON(message: APIV1ScreenConfig): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
-    message.size !== undefined && (obj.size = message.size ? APIV1Size.toJSON(message.size) : undefined);
-    message.screenType !== undefined && (obj.screenType = aPIV1ScreenConfig_APIV1ScreenTypeToJSON(message.screenType));
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.size !== undefined &&
+      (obj.size = message.size ? APIV1Size.toJSON(message.size) : undefined);
+    message.screenType !== undefined &&
+      (obj.screenType = aPIV1ScreenTypeToJSON(message.screenType));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1ScreenConfig>, I>>(base?: I): APIV1ScreenConfig {
+  create<I extends Exact<DeepPartial<APIV1ScreenConfig>, I>>(
+    base?: I,
+  ): APIV1ScreenConfig {
     return APIV1ScreenConfig.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1ScreenConfig>, I>>(object: I): APIV1ScreenConfig {
+  fromPartial<I extends Exact<DeepPartial<APIV1ScreenConfig>, I>>(
+    object: I,
+  ): APIV1ScreenConfig {
     const message = createBaseAPIV1ScreenConfig();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
-    message.size = (object.size !== undefined && object.size !== null) ? APIV1Size.fromPartial(object.size) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
+    message.size =
+      object.size !== undefined && object.size !== null
+        ? APIV1Size.fromPartial(object.size)
+        : undefined;
     message.screenType = object.screenType ?? 0;
     return message;
   },
@@ -4928,7 +6098,10 @@ function createBaseAPIV1PropData(): APIV1PropData {
 }
 
 export const APIV1PropData = {
-  encode(message: APIV1PropData, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIV1PropData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
@@ -4939,7 +6112,8 @@ export const APIV1PropData = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIV1PropData {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIV1PropData();
     while (reader.pos < end) {
@@ -4977,33 +6151,56 @@ export const APIV1PropData = {
 
   toJSON(message: APIV1PropData): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
+    message.id !== undefined &&
+      (obj.id = message.id ? APIV1Identifier.toJSON(message.id) : undefined);
     message.isActive !== undefined && (obj.isActive = message.isActive);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIV1PropData>, I>>(base?: I): APIV1PropData {
+  create<I extends Exact<DeepPartial<APIV1PropData>, I>>(
+    base?: I,
+  ): APIV1PropData {
     return APIV1PropData.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<APIV1PropData>, I>>(object: I): APIV1PropData {
+  fromPartial<I extends Exact<DeepPartial<APIV1PropData>, I>>(
+    object: I,
+  ): APIV1PropData {
     const message = createBaseAPIV1PropData();
-    message.id = (object.id !== undefined && object.id !== null) ? APIV1Identifier.fromPartial(object.id) : undefined;
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? APIV1Identifier.fromPartial(object.id)
+        : undefined;
     message.isActive = object.isActive ?? false;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

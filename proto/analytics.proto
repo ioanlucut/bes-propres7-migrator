@@ -1,0 +1,1778 @@
+syntax = "proto3";
+
+package rv.data;
+
+option cc_enable_arenas = true;
+option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
+option swift_prefix = "RVData_";
+
+import "proApiV1Analytics.proto";
+
+message Analytics {
+  message Event {
+    oneof Interaction {
+      .rv.data.Analytics.UI ui = 1;
+      .rv.data.Analytics.Startup startup = 2;
+      .rv.data.Analytics.Trigger trigger = 3;
+      .rv.data.Analytics.Create create = 4;
+      .rv.data.Analytics.Import import = 5;
+      .rv.data.Analytics.Timeline timeline = 6;
+      .rv.data.Analytics.Sync sync = 7;
+      .rv.data.APIAnalytics api = 8;
+      .rv.data.Analytics.Timecode timecode = 9;
+      .rv.data.Analytics.PlaybackMarker playback_marker = 10;
+      .rv.data.Analytics.Update update = 11;
+      .rv.data.Analytics.WHMStore whm_store = 12;
+      .rv.data.Analytics.ProContent proContent = 13;
+    }
+  }
+
+  message Timeline {
+    message TriggerCue {
+      enum TriggerType {
+        TRIGGER_TYPE_SLIDE = 0;
+        TRIGGER_TYPE_MEDIA = 1;
+        TRIGGER_TYPE_AUDIO = 2;
+        TRIGGER_TYPE_ACTION = 3;
+      }
+
+      enum TimingSource {
+        TIMING_SOURCE_INTERNAL = 0;
+        TIMING_SOURCE_SMPTE = 1;
+      }
+
+      .rv.data.Analytics.Timeline.TriggerCue.TriggerType trigger_type = 1;
+      .rv.data.Analytics.Timeline.TriggerCue.TimingSource timing_source = 2;
+    }
+
+    message Action {
+      enum ActionType {
+        ACTION_TYPE_PLAY = 0;
+        ACTION_TYPE_STOP = 1;
+        ACTION_TYPE_RESET = 2;
+      }
+
+      .rv.data.Analytics.Timeline.Action.ActionType action_type = 1;
+    }
+
+    message RecordCue {
+    }
+
+    oneof Event {
+      .rv.data.Analytics.Timeline.TriggerCue trigger_cue = 1;
+      .rv.data.Analytics.Timeline.Action action = 2;
+      .rv.data.Analytics.Timeline.RecordCue record_cue = 3;
+    }
+  }
+
+  message Timecode {
+    message Startup {
+      bool is_input_configured = 1;
+      bool is_enabled = 2;
+      bool is_playlist_selected = 3;
+    }
+
+    message Activate {
+      int32 playlist_item_count = 1;
+      int32 cue_count = 2;
+      bool is_startup = 3;
+    }
+
+    oneof Event {
+      .rv.data.Analytics.Timecode.Startup startup = 1;
+      .rv.data.Analytics.Timecode.Activate activate = 2;
+    }
+  }
+
+  message Sync {
+    message Local {
+      enum SyncType {
+        SYNC_TYPE_UP = 0;
+        SYNC_TYPE_DOWN = 1;
+      }
+
+      .rv.data.Analytics.Sync.Local.SyncType sync_type = 1;
+      bool include_library = 2;
+      bool include_media = 3;
+      bool include_playlists = 4;
+      bool include_themes = 5;
+      bool include_support_files = 6;
+      bool replace_files = 7;
+    }
+
+    oneof SyncType {
+      .rv.data.Analytics.Sync.Local local = 1;
+    }
+  }
+
+  message MultiTracks {
+    message Account {
+      enum Status {
+        STATUS_DISABLED = 0;
+        STATUS_CANCELLED = 1;
+        STATUS_ACTIVE = 2;
+      }
+
+      .rv.data.Analytics.MultiTracks.Account.Status chart_pro = 1;
+      .rv.data.Analytics.MultiTracks.Account.Status propresenter_addon = 2;
+    }
+
+    message Startup {
+      .rv.data.Analytics.MultiTracks.Account account = 1;
+    }
+
+    message Import {
+      .rv.data.Analytics.MultiTracks.Account account = 1;
+      bool charts_automation = 2;
+      int32 lines = 3;
+    }
+
+  }
+
+  message TriggerMediaInformation {
+    message Video {
+      enum DurationRange {
+        DURATION_UNDER_10S = 0;
+        DURATION_10S_TO_30S = 1;
+        DURATION_30S_TO_60S = 2;
+        DURATION_1M_TO_5M = 3;
+        DURATION_5M_TO_10M = 4;
+        DURATION_10M_TO_30M = 5;
+        DURATION_30M_TO_60M = 6;
+        DURATION_1H_TO_2H = 7;
+        DURATION_OVER_2H = 8;
+      }
+
+      enum PlaybackBehavior {
+        PLAYBACK_BEHAVIOR_STOP = 0;
+        PLAYBACK_BEHAVIOR_LOOP = 1;
+        PLAYBACK_BEHAVIOR_LOOP_FOR_PLAY_COUNT = 2;
+        PLAYBACK_BEHAVIOR_LOOP_FOR_TIME = 3;
+        PLAYBACK_BEHAVIOR_SOFT_LOOP = 4;
+      }
+
+      enum ScaleMode {
+        SCALE_MODE_FIT = 0;
+        SCALE_MODE_FILL = 1;
+        SCALE_MODE_STRETCH = 2;
+      }
+
+      .rv.data.Analytics.TriggerMediaInformation.Video.DurationRange source_duration_range = 1;
+      int32 playback_marker_count = 2;
+      .rv.data.Analytics.TriggerMediaInformation.Video.PlaybackBehavior playback_behavior = 3;
+      .rv.data.Analytics.TriggerMediaInformation.Video.ScaleMode scale_mode = 4;
+      bool has_in_point = 5;
+      bool has_out_point = 6;
+      bool has_effects = 7;
+      bool has_transition = 8;
+      bool has_audio = 9;
+    }
+
+    message Audio {
+    }
+
+    message Image {
+    }
+
+    message LiveVideo {
+    }
+
+    enum SourceType {
+      SOURCE_TYPE_LOCAL = 0;
+      SOURCE_TYPE_PROCONTENT = 1;
+    }
+
+    .rv.data.Analytics.TriggerMediaInformation.SourceType source_type = 1;
+    oneof MediaType {
+      .rv.data.Analytics.TriggerMediaInformation.Video video = 2;
+      .rv.data.Analytics.TriggerMediaInformation.Image image = 3;
+      .rv.data.Analytics.TriggerMediaInformation.Audio audio = 4;
+      .rv.data.Analytics.TriggerMediaInformation.LiveVideo live_video = 5;
+    }
+  }
+
+  message PlaybackMarker {
+    message CreateMarker {
+      enum Location {
+        LOCATION_INSPECTOR = 0;
+        LOCATION_SIDEBAR = 1;
+      }
+
+      .rv.data.Analytics.PlaybackMarker.CreateMarker.Location location = 1;
+    }
+
+    oneof Event {
+      .rv.data.Analytics.PlaybackMarker.CreateMarker create = 1;
+    }
+  }
+
+  message UI {
+    message QuickSearch {
+      message Shown {
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_APPLICATION_MENU = 1;
+          SOURCE_TOOLBAR = 2;
+          SOURCE_UNLINKED_HEADER = 3;
+        }
+
+        .rv.data.Analytics.UI.QuickSearch.Shown.Source source = 1;
+      }
+
+      message Search {
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_LIBRARY = 1;
+          SOURCE_SONG_SELECT = 2;
+          SOURCE_MULTI_TRACKS = 3;
+        }
+
+        .rv.data.Analytics.UI.QuickSearch.Search.Source source = 1;
+      }
+
+      message OpenItems {
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_LIBRARY = 1;
+          SOURCE_SONG_SELECT = 2;
+          SOURCE_MULTI_TRACKS = 3;
+        }
+
+        enum Style {
+          STYLE_UNKNOWN = 0;
+          STYLE_RETURN_KEY = 1;
+          STYLE_COMMAND_RETURN_KEY = 2;
+          STYLE_DRAG_DROP = 3;
+        }
+
+        .rv.data.Analytics.UI.QuickSearch.OpenItems.Source source = 1;
+        .rv.data.Analytics.UI.QuickSearch.OpenItems.Style style = 2;
+        int32 count = 3;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.QuickSearch.Shown shown = 1;
+        .rv.data.Analytics.UI.QuickSearch.Search search = 2;
+        .rv.data.Analytics.UI.QuickSearch.OpenItems open_items = 3;
+      }
+    }
+
+    message Toolbar {
+      message TextStyle {
+        message Shown {
+        }
+
+        message Change {
+          enum Property {
+            PROPERTY_UNKNOWN = 0;
+            PROPERTY_FONT_TYPEFACE = 1;
+            PROPERTY_FONT_WEIGHT = 2;
+            PROPERTY_FONT_CAPITALIZATION = 3;
+            PROPERTY_FONT_SIZE = 4;
+            PROPERTY_FONT_COLOR = 5;
+            PROPERTY_HORIZONTAL_ALIGNMENT = 6;
+            PROPERTY_VERTICAL_ALIGNMENT = 7;
+            PROPERTY_STROKE_ENABLE = 8;
+            PROPERTY_STROKE_WIDTH = 9;
+            PROPERTY_STROKE_COLOR = 10;
+            PROPERTY_SHADOW_ENABLE = 11;
+            PROPERTY_SHADOW_BLUR = 12;
+            PROPERTY_SHADOW_OPACITY = 13;
+            PROPERTY_SHADOW_COLOR = 14;
+            PROPERTY_SHADOW_ANGLE = 15;
+            PROPERTY_SHADOW_OFFSET = 16;
+          }
+
+          enum Target {
+            TARGET_UNKNOWN = 0;
+            TARGET_SLIDE_SELECTION = 1;
+            TARGET_PRESENTATION_SELECTION = 2;
+          }
+
+          .rv.data.Analytics.UI.Toolbar.TextStyle.Change.Property property = 1;
+          .rv.data.Analytics.UI.Toolbar.TextStyle.Change.Target target = 2;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.Toolbar.TextStyle.Shown shown = 1;
+          .rv.data.Analytics.UI.Toolbar.TextStyle.Change change = 2;
+        }
+      }
+
+      message Theme {
+        message Shown {
+        }
+
+        message Applied {
+          enum Target {
+            TARGET_UNKNOWN = 0;
+            TARGET_SLIDE_SELECTION = 1;
+            TARGET_PRESENTATION_SELECTION = 2;
+          }
+
+          .rv.data.Analytics.UI.Toolbar.Theme.Applied.Target target = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.Toolbar.Theme.Shown shown = 1;
+          .rv.data.Analytics.UI.Toolbar.Theme.Applied applied = 2;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.Toolbar.TextStyle text_style = 1;
+        .rv.data.Analytics.UI.Toolbar.Theme theme = 2;
+      }
+    }
+
+    message MainView {
+      message Show {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_APPLICATION_MENU = 2;
+          }
+
+          .rv.data.Analytics.UI.MainView.Show.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.Show.Shown shown = 1;
+        }
+      }
+
+      message PresentationEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_APPLICATION_MENU = 2;
+            SOURCE_CONTEXT_MENU = 3;
+          }
+
+          .rv.data.Analytics.UI.MainView.PresentationEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.PresentationEditor.Shown shown = 1;
+        }
+      }
+
+      message ReflowEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_APPLICATION_MENU = 2;
+            SOURCE_LIBRARY_CONTEXT_MENU = 3;
+          }
+
+          .rv.data.Analytics.UI.MainView.ReflowEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.ReflowEditor.Shown shown = 1;
+        }
+      }
+
+      message Bible {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_APPLICATION_MENU = 2;
+          }
+
+          .rv.data.Analytics.UI.MainView.Bible.Shown.Source source = 1;
+        }
+
+        message Trigger {
+          .rv.data.Analytics.UI.MainView.Bible.Location location = 1;
+        }
+
+        message GenerateSlides {
+          enum TextBoxLocation {
+            TEXT_BOX_LOCATION_UNKNOWN = 0;
+            TEXT_BOX_LOCATION_NONE = 1;
+            TEXT_BOX_LOCATION_TEXT_BOX = 2;
+            TEXT_BOX_LOCATION_WITH_VERSE = 3;
+          }
+
+          enum ReferenceType {
+            REFERENCE_TYPE_UNKNOWN = 0;
+            REFERENCE_TYPE_PASSAGE_NONE = 1;
+            REFERENCE_TYPE_PASSAGE_EACH = 2;
+            REFERENCE_TYPE_PASSAGE_LAST = 3;
+            REFERENCE_TYPE_VERSE = 4;
+          }
+
+          int32 translation_count = 1;
+          int32 slide_count = 2;
+          .rv.data.Analytics.UI.MainView.Bible.GenerateSlides.TextBoxLocation verse_location = 3;
+          .rv.data.Analytics.UI.MainView.Bible.GenerateSlides.TextBoxLocation reference_location = 4;
+          bool show_verse_numbers = 5;
+          bool break_new_verse = 6;
+          bool display_translation = 7;
+          bool preserve_font_color = 8;
+          .rv.data.Analytics.UI.MainView.Bible.GenerateSlides.ReferenceType reference_style = 9;
+        }
+
+        message GenerateNext {
+          .rv.data.Analytics.UI.MainView.Bible.Location location = 1;
+        }
+
+        message GeneratePrevious {
+          .rv.data.Analytics.UI.MainView.Bible.Location location = 2;
+        }
+
+        message SaveSlides {
+          enum SlideDestination {
+            SLIDE_DESTINATION_UNKNOWN = 0;
+            SLIDE_DESTINATION_SAVE_TO_LIBRARY = 1;
+            SLIDE_DESTINATION_SAVE_TO_PLAYLIST = 2;
+            SLIDE_DESTINATION_COPY_TO_PRESENTATION = 3;
+          }
+
+          .rv.data.Analytics.UI.MainView.Bible.SaveSlides.SlideDestination destination = 1;
+        }
+
+        message Lookup {
+          enum LookupLocation {
+            LOOKUP_LOCATION_UNKNOWN = 0;
+            LOOKUP_LOCATION_TEXT_REFERENCE = 1;
+            LOOKUP_LOCATION_MENU_BOOK = 2;
+            LOOKUP_LOCATION_MENU_CHAPTER = 3;
+            LOOKUP_LOCATION_MENU_VERSE = 4;
+            LOOKUP_LOCATION_TEXT_SEARCH_CHAPTER = 5;
+            LOOKUP_LOCATION_TEXT_SEARCH_VERSE = 6;
+          }
+
+          .rv.data.Analytics.UI.MainView.Bible.Lookup.LookupLocation location = 1;
+        }
+
+        message BibleCount {
+          int32 free_installed_count = 1;
+          int32 purchased_installed_count = 2;
+        }
+
+        enum Location {
+          LOCATION_UNKNOWN = 0;
+          LOCATION_PRESENTATION = 1;
+          LOCATION_BIBLE_MODULE = 2;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.Bible.Shown shown = 1;
+          .rv.data.Analytics.UI.MainView.Bible.Trigger trigger = 2;
+          .rv.data.Analytics.UI.MainView.Bible.GenerateSlides generate_slides = 3;
+          .rv.data.Analytics.UI.MainView.Bible.GenerateNext generate_next = 4;
+          .rv.data.Analytics.UI.MainView.Bible.GeneratePrevious generate_previous = 5;
+          .rv.data.Analytics.UI.MainView.Bible.SaveSlides save_slides = 6;
+          .rv.data.Analytics.UI.MainView.Bible.Lookup lookup = 7;
+          .rv.data.Analytics.UI.MainView.Bible.BibleCount install = 8;
+          .rv.data.Analytics.UI.MainView.Bible.BibleCount remove = 9;
+          .rv.data.Analytics.UI.MainView.Bible.BibleCount startup = 10;
+        }
+      }
+
+      message StageEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_APPLICATION_MENU = 2;
+            SOURCE_LOWER_RIGHT = 3;
+          }
+
+          .rv.data.Analytics.UI.MainView.StageEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.StageEditor.Shown shown = 1;
+        }
+      }
+
+      message ThemeEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_THEME_CONTEXT_MENU = 2;
+          }
+
+          .rv.data.Analytics.UI.MainView.ThemeEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.ThemeEditor.Shown shown = 1;
+        }
+      }
+
+      message CopyrightEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_PREFERENCE = 2;
+          }
+
+          .rv.data.Analytics.UI.MainView.CopyrightEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.CopyrightEditor.Shown shown = 1;
+        }
+      }
+
+      message PropsEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_LOWER_RIGHT = 2;
+          }
+
+          .rv.data.Analytics.UI.MainView.PropsEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.PropsEditor.Shown shown = 1;
+        }
+      }
+
+      message MaskEditor {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_TOOLBAR = 1;
+            SOURCE_LOOKS_WINDOW = 2;
+          }
+
+          .rv.data.Analytics.UI.MainView.MaskEditor.Shown.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.MainView.MaskEditor.Shown shown = 1;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.MainView.Show show = 1;
+        .rv.data.Analytics.UI.MainView.PresentationEditor presentation_editor = 2;
+        .rv.data.Analytics.UI.MainView.ReflowEditor reflow_editor = 3;
+        .rv.data.Analytics.UI.MainView.Bible bible = 4;
+        .rv.data.Analytics.UI.MainView.StageEditor stage_editor = 5;
+        .rv.data.Analytics.UI.MainView.ThemeEditor theme_editor = 6;
+        .rv.data.Analytics.UI.MainView.CopyrightEditor copyright_editor = 7;
+        .rv.data.Analytics.UI.MainView.PropsEditor props_editor = 8;
+        .rv.data.Analytics.UI.MainView.MaskEditor mask_editor = 9;
+      }
+    }
+
+    message Looks {
+      message Shown {
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_APPLICATION_MENU = 1;
+          SOURCE_PRESENTATION_VIEW = 2;
+        }
+
+        .rv.data.Analytics.UI.Looks.Shown.Source source = 1;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.Looks.Shown shown = 1;
+      }
+    }
+
+    message ScreenConfiguration {
+      message Shown {
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_APPLICATION_MENU = 1;
+          SOURCE_STAGE = 2;
+        }
+
+        .rv.data.Analytics.UI.ScreenConfiguration.Shown.Source source = 1;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.ScreenConfiguration.Shown shown = 1;
+      }
+    }
+
+    message LowerRight {
+      message Timers {
+        message Shown {
+        }
+
+        message Collapse {
+          enum State {
+            STATE_UNKNOWN = 0;
+            STATE_COLLAPSED = 1;
+            STATE_EXPANDED = 2;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Timers.Collapse.State state = 1;
+        }
+
+        message Edit {
+          enum Field {
+            FIELD_UNKNOWN = 0;
+            FIELD_TYPE = 1;
+            FIELD_VALUE = 2;
+            FIELD_OVERRUN = 3;
+            FIELD_NAME = 4;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Timers.Edit.Field field = 1;
+        }
+
+        message State {
+          enum State {
+            STATE_UNKNOWN = 0;
+            STATE_START = 1;
+            STATE_STOP = 2;
+            STATE_RESET = 3;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Timers.State.State state = 1;
+        }
+
+        message Create {
+        }
+
+        message Delete {
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.LowerRight.Timers.Shown shown = 1;
+          .rv.data.Analytics.UI.LowerRight.Timers.Collapse collapse = 2;
+          .rv.data.Analytics.UI.LowerRight.Timers.Edit edit = 3;
+          .rv.data.Analytics.UI.LowerRight.Timers.State state = 4;
+          .rv.data.Analytics.UI.LowerRight.Timers.Create create = 5;
+          .rv.data.Analytics.UI.LowerRight.Timers.Delete delete = 6;
+        }
+      }
+
+      message Messages {
+        message Shown {
+        }
+
+        message Edit {
+          enum Action {
+            ACTION_UNKNOWN = 0;
+            ACTION_ADD_TEXT_TOKEN = 1;
+            ACTION_ADD_TIMER_TOKEN = 2;
+            ACTION_ADD_CUSTOM_TOKEN = 3;
+            ACTION_SET_THEME = 4;
+            ACTION_SET_TEXT = 5;
+            ACTION_SET_WEB_NOTIFICATION = 6;
+            ACTION_SET_DISMISS_BEHAVIOR = 7;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Messages.Edit.Action action = 1;
+        }
+
+        message State {
+          enum State {
+            STATE_UNKNOWN = 0;
+            STATE_SHOW = 1;
+            STATE_CLEAR = 2;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Messages.State.State state = 1;
+        }
+
+        message Create {
+        }
+
+        message Delete {
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.LowerRight.Messages.Shown shown = 1;
+          .rv.data.Analytics.UI.LowerRight.Messages.Edit edit = 2;
+          .rv.data.Analytics.UI.LowerRight.Messages.State state = 3;
+          .rv.data.Analytics.UI.LowerRight.Messages.Create create = 4;
+          .rv.data.Analytics.UI.LowerRight.Messages.Delete delete = 5;
+        }
+      }
+
+      message Props {
+        message Shown {
+        }
+
+        message Transition {
+        }
+
+        message State {
+          enum State {
+            STATE_UNKNOWN = 0;
+            STATE_SHOW = 1;
+            STATE_CLEAR = 2;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Props.State.State state = 1;
+        }
+
+        message Create {
+        }
+
+        message Delete {
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.LowerRight.Props.Shown shown = 1;
+          .rv.data.Analytics.UI.LowerRight.Props.Transition transition = 2;
+          .rv.data.Analytics.UI.LowerRight.Props.State state = 3;
+          .rv.data.Analytics.UI.LowerRight.Props.Create create = 4;
+          .rv.data.Analytics.UI.LowerRight.Props.Delete delete = 5;
+        }
+      }
+
+      message Stage {
+        message Shown {
+        }
+
+        message ChangeLayout {
+        }
+
+        message MessageState {
+          enum State {
+            STATE_UNKNOWN = 0;
+            STATE_SHOW = 1;
+            STATE_CLEAR = 2;
+          }
+
+          .rv.data.Analytics.UI.LowerRight.Stage.MessageState.State state = 1;
+        }
+
+        message ConfigureScreens {
+        }
+
+        message EditLayouts {
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.LowerRight.Stage.Shown shown = 1;
+          .rv.data.Analytics.UI.LowerRight.Stage.ChangeLayout change_layout = 2;
+          .rv.data.Analytics.UI.LowerRight.Stage.MessageState message_state = 3;
+          .rv.data.Analytics.UI.LowerRight.Stage.ConfigureScreens configure_screens = 4;
+          .rv.data.Analytics.UI.LowerRight.Stage.EditLayouts edit_layouts = 5;
+        }
+      }
+
+      message AudioBin {
+      }
+
+      message Macros {
+        message Shown {
+        }
+
+        message Trigger {
+        }
+
+        message Create {
+        }
+
+        message Delete {
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.LowerRight.Macros.Shown shown = 1;
+          .rv.data.Analytics.UI.LowerRight.Macros.Trigger trigger = 2;
+          .rv.data.Analytics.UI.LowerRight.Macros.Create create = 3;
+          .rv.data.Analytics.UI.LowerRight.Macros.Delete delete = 4;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.LowerRight.Timers timers = 1;
+        .rv.data.Analytics.UI.LowerRight.Messages messages = 2;
+        .rv.data.Analytics.UI.LowerRight.Props props = 3;
+        .rv.data.Analytics.UI.LowerRight.Stage stage = 4;
+        .rv.data.Analytics.UI.LowerRight.AudioBin audio_bin = 5;
+        .rv.data.Analytics.UI.LowerRight.Macros macros = 6;
+      }
+    }
+
+    message TextInspector {
+      message Shown {
+      }
+
+      message Foreground {
+        enum FillType {
+          FILL_TYPE_UNKNOWN = 0;
+          FILL_TYPE_SOLID = 1;
+          FILL_TYPE_GRADIENT = 2;
+        }
+
+        .rv.data.Analytics.UI.TextInspector.Foreground.FillType fill_type = 1;
+        .rv.data.Analytics.UI.TextInspector.SelectionMode selection_mode = 2;
+      }
+
+      message UnderlineColor {
+        bool is_enabled = 1;
+        .rv.data.Analytics.UI.TextInspector.SelectionMode selection_mode = 2;
+      }
+
+      message BackgroundColor {
+        enum ColorType {
+          COLOR_TYPE_UNKNOWN = 0;
+          COLOR_TYPE_CLEAR = 1;
+          COLOR_TYPE_OTHER = 2;
+        }
+
+        .rv.data.Analytics.UI.TextInspector.BackgroundColor.ColorType color_type = 1;
+        .rv.data.Analytics.UI.TextInspector.SelectionMode selection_mode = 2;
+      }
+
+      message ScrollingText {
+        message Enable {
+          bool enabled = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.TextInspector.ScrollingText.Enable enable = 1;
+        }
+      }
+
+      message LineTransform {
+        enum TransformType {
+          TRANSFORM_TYPE_UNKNOWN = 0;
+          TRANSFORM_TYPE_NONE = 1;
+          TRANSFORM_TYPE_REMOVE_LINE_RETURNS = 2;
+          TRANSFORM_TYPE_REPLACE_LINE_RETURNS = 3;
+          TRANSFORM_TYPE_ONE_WORD_PER_LINE = 4;
+          TRANSFORM_TYPE_ONE_CHARACTER_PER_LINE = 5;
+        }
+
+        .rv.data.Analytics.UI.TextInspector.LineTransform.TransformType transform_type = 1;
+      }
+
+      enum SelectionMode {
+        SELECTION_MODE_UNKNOWN = 0;
+        SELECTION_MODE_OBJECT = 1;
+        SELECTION_MODE_RANGE = 2;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.TextInspector.Shown shown = 1;
+        .rv.data.Analytics.UI.TextInspector.Foreground foreground = 2;
+        .rv.data.Analytics.UI.TextInspector.UnderlineColor underline_color = 3;
+        .rv.data.Analytics.UI.TextInspector.BackgroundColor background_color = 4;
+        .rv.data.Analytics.UI.TextInspector.ScrollingText scrolling_text = 5;
+        .rv.data.Analytics.UI.TextInspector.LineTransform line_transform = 6;
+      }
+    }
+
+    message Show {
+      message SlideLabel {
+        message Shown {
+        }
+
+        message Change {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_CONTEXT_MENU = 1;
+            SOURCE_POPOVER = 2;
+          }
+
+          int32 number_of_slides = 1;
+          .rv.data.Analytics.UI.Show.SlideLabel.Change.Source source = 2;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.Show.SlideLabel.Shown shown = 1;
+          .rv.data.Analytics.UI.Show.SlideLabel.Change change = 2;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.Show.SlideLabel slide_label = 1;
+      }
+    }
+
+    message InAppStore {
+      message Trial {
+        message Shown {
+        }
+
+        message Complete {
+          enum Result {
+            RESULT_UNKNOWN = 0;
+            RESULT_SUCCESS = 1;
+            RESULT_EARLY_EXIT = 2;
+          }
+
+          .rv.data.Analytics.UI.InAppStore.Trial.Complete.Result result = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.InAppStore.Trial.Shown shown = 1;
+          .rv.data.Analytics.UI.InAppStore.Trial.Complete complete = 2;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.InAppStore.Trial trial = 1;
+      }
+    }
+
+    message Editor {
+      message Overlay {
+        message Shown {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_DOUBLE_CLICK = 1;
+            SOURCE_CONTEXTUAL_MENU = 2;
+            SOURCE_PLUS_BUTTON_MENU = 3;
+          }
+
+          .rv.data.Analytics.UI.Editor.Overlay.Shown.Source source = 1;
+        }
+
+        message Closed {
+          enum Source {
+            SOURCE_UNKNOWN = 0;
+            SOURCE_CLICK_OFF_ELEMENT = 1;
+            SOURCE_ESCAPE_KEY = 2;
+            SOURCE_CLOSE_BUTTON = 3;
+          }
+
+          .rv.data.Analytics.UI.Editor.Overlay.Closed.Source source = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.Editor.Overlay.Shown shown = 1;
+          .rv.data.Analytics.UI.Editor.Overlay.Closed closed = 2;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.Editor.Overlay overlay = 1;
+      }
+    }
+
+    message WhatsNew {
+      message Viewed {
+        string version = 1;
+        string resource_name = 2;
+        int32 view_time = 3;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.WhatsNew.Viewed viewed = 1;
+      }
+    }
+
+    message ClearGroups {
+      message Shown {
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_APPLICATION_MENU = 1;
+          SOURCE_PREVIEW_MENU = 2;
+          SOURCE_ACTION_MENU = 3;
+        }
+
+        .rv.data.Analytics.UI.ClearGroups.Shown.Source source = 1;
+      }
+
+      message Create {
+      }
+
+      message Delete {
+      }
+
+      message Group {
+        message ChangeVisibility {
+          enum Visibility {
+            VISIBILITY_UNKNOWN = 0;
+            VISIBILITY_SHOWN = 1;
+            VISIBILITY_HIDDEN = 2;
+          }
+
+          .rv.data.Analytics.UI.ClearGroups.Group.ChangeVisibility.Visibility visibility = 1;
+        }
+
+        message ChangeIcon {
+          enum IconType {
+            ICON_TYPE_UNKNOWN = 0;
+            ICON_TYPE_DEFAULT = 1;
+            ICON_TYPE_CUSTOM = 2;
+          }
+
+          .rv.data.Analytics.UI.ClearGroups.Group.ChangeIcon.IconType icon_type = 1;
+          bool is_tinted = 2;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.ClearGroups.Group.ChangeVisibility change_visibility = 1;
+          .rv.data.Analytics.UI.ClearGroups.Group.ChangeIcon change_icon = 2;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.ClearGroups.Shown shown = 1;
+        .rv.data.Analytics.UI.ClearGroups.Create create = 2;
+        .rv.data.Analytics.UI.ClearGroups.Delete delete = 3;
+        .rv.data.Analytics.UI.ClearGroups.Group group = 4;
+      }
+    }
+
+    message PreviewArea {
+      message ClearGroups {
+        message Trigger {
+        }
+
+        message Changed {
+          int32 count = 1;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.PreviewArea.ClearGroups.Trigger trigger = 1;
+          .rv.data.Analytics.UI.PreviewArea.ClearGroups.Changed changed = 2;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.PreviewArea.ClearGroups clear_groups = 1;
+      }
+    }
+
+    message Placeholder {
+      message Link {
+        enum Type {
+          TYPE_UNKNOWN = 0;
+          TYPE_PRESENTATION = 1;
+          TYPE_MEDIA = 2;
+          TYPE_EXTERNAL_PRESENTATION = 3;
+        }
+
+        enum Source {
+          SOURCE_UNKNOWN = 0;
+          SOURCE_QUICK_SEARCH = 1;
+          SOURCE_IMPORT_BUTTON = 2;
+          SOURCE_CREATE_BUTTON = 3;
+          SOURCE_DRAG_DROP = 4;
+          SOURCE_AUTOMATIC = 5;
+        }
+
+        .rv.data.Analytics.UI.Placeholder.Link.Type link_type = 1;
+        .rv.data.Analytics.UI.Placeholder.Link.Source link_source = 2;
+      }
+
+      message Unlink {
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.Placeholder.Link link = 1;
+        .rv.data.Analytics.UI.Placeholder.Unlink unlink = 2;
+      }
+    }
+
+    message PlanningCenterLive {
+      message Shown {
+        enum WindowType {
+          WINDOW_TYPE_UNKNOWN = 0;
+          WINDOW_TYPE_DOCKED = 1;
+          WINDOW_TYPE_FLOATING = 2;
+        }
+
+        .rv.data.Analytics.UI.PlanningCenterLive.Shown.WindowType window_type = 1;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.PlanningCenterLive.Shown shown = 1;
+      }
+    }
+
+    message NetworkGroup {
+      message Create {
+      }
+
+      message Add {
+      }
+
+      message Join {
+      }
+
+      message Invite {
+        bool did_accept = 1;
+      }
+
+      message Leave {
+      }
+
+      message Remove {
+      }
+
+      oneof Component {
+        .rv.data.Analytics.UI.NetworkGroup.Create create = 1;
+        .rv.data.Analytics.UI.NetworkGroup.Add add = 2;
+        .rv.data.Analytics.UI.NetworkGroup.Join join = 3;
+        .rv.data.Analytics.UI.NetworkGroup.Invite invite = 4;
+        .rv.data.Analytics.UI.NetworkGroup.Leave leave = 5;
+        .rv.data.Analytics.UI.NetworkGroup.Remove remove = 6;
+      }
+    }
+
+    message CCLI {
+      message Report {
+        message Shown {
+        }
+
+        message Reset {
+        }
+
+        message Export {
+        }
+
+        oneof Component {
+          .rv.data.Analytics.UI.CCLI.Report.Shown shown = 1;
+          .rv.data.Analytics.UI.CCLI.Report.Reset reset = 2;
+          .rv.data.Analytics.UI.CCLI.Report.Export export = 3;
+        }
+      }
+
+      .rv.data.Analytics.UI.CCLI.Report report = 1;
+    }
+
+    oneof Component {
+      .rv.data.Analytics.UI.QuickSearch quick_search = 1;
+      .rv.data.Analytics.UI.Toolbar toolbar = 2;
+      .rv.data.Analytics.UI.MainView main_view = 3;
+      .rv.data.Analytics.UI.Looks looks = 4;
+      .rv.data.Analytics.UI.ScreenConfiguration screen_configuration = 5;
+      .rv.data.Analytics.UI.LowerRight lower_right = 6;
+      .rv.data.Analytics.UI.TextInspector text_inspector = 7;
+      .rv.data.Analytics.UI.Show show = 8;
+      .rv.data.Analytics.UI.InAppStore in_app_store = 9;
+      .rv.data.Analytics.UI.Editor editor = 10;
+      .rv.data.Analytics.UI.WhatsNew whats_new = 11;
+      .rv.data.Analytics.UI.ClearGroups clear_groups = 12;
+      .rv.data.Analytics.UI.PreviewArea preview_area = 13;
+      .rv.data.Analytics.UI.Placeholder placeholder = 14;
+      .rv.data.Analytics.UI.PlanningCenterLive planning_center_live = 15;
+      .rv.data.Analytics.UI.NetworkGroup network_group = 16;
+      .rv.data.Analytics.UI.CCLI ccli = 17;
+    }
+  }
+
+  message Startup {
+    message Looks {
+      int32 number_presets = 1;
+    }
+
+    message ScreenConfiguration {
+      message Summary {
+        int32 total_screens = 1;
+        int32 audience_screen_count = 2;
+        int32 stage_screen_count = 3;
+      }
+
+      message Output {
+        enum ProScreenType {
+          PRO_SCREEN_TYPE_UNKNOWN = 0;
+          PRO_SCREEN_TYPE_SINGLE = 1;
+          PRO_SCREEN_TYPE_MIRRORED = 2;
+          PRO_SCREEN_TYPE_EDGE_BLEND = 3;
+          PRO_SCREEN_TYPE_GROUPED = 4;
+        }
+
+        enum OutputType {
+          OUTPUT_TYPE_UNKNOWN = 0;
+          OUTPUT_TYPE_SDI = 1;
+          OUTPUT_TYPE_NDI = 2;
+          OUTPUT_TYPE_SYPHON = 3;
+          OUTPUT_TYPE_SYSTEM = 4;
+          OUTPUT_TYPE_PLACEHOLDER = 5;
+          OUTPUT_TYPE_DVI = 6;
+        }
+
+        enum AlphaKeyState {
+          ALPHA_KEY_STATE_UNKNOWN = 0;
+          ALPHA_KEY_STATE_NOT_AVAILABLE = 1;
+          ALPHA_KEY_STATE_ENABLED = 2;
+          ALPHA_KEY_STATE_DISABLED = 3;
+        }
+
+        enum Alignment {
+          ALIGNMENT_UNKNOWN = 0;
+          ALIGNMENT_FULL = 1;
+          ALIGNMENT_2X1 = 2;
+          ALIGNMENT_3X1 = 3;
+          ALIGNMENT_2X2 = 4;
+          ALIGNMENT_CUSTOM = 5;
+        }
+
+        .rv.data.Analytics.Startup.ScreenConfiguration.Output.ProScreenType proscreen_type = 1;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Output.OutputType output_type = 2;
+        bool color_correction_enabled = 3;
+        bool corner_pin_enabled = 4;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Output.AlphaKeyState alpha_key_enabled = 5;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Output.Alignment alignment = 6;
+        int32 width = 7;
+        int32 height = 8;
+      }
+
+      message Single {
+        .rv.data.Analytics.Startup.ScreenConfiguration.ScreenType screen_type = 1;
+        bool screen_color_enabled = 2;
+      }
+
+      message Mirrored {
+        .rv.data.Analytics.Startup.ScreenConfiguration.ScreenType screen_type = 1;
+        bool screen_color_enabled = 2;
+        int32 count = 3;
+      }
+
+      message EdgeBlend {
+        .rv.data.Analytics.Startup.ScreenConfiguration.ScreenType screen_type = 1;
+        bool screen_color_enabled = 2;
+        int32 count = 3;
+      }
+
+      message Grouped {
+        .rv.data.Analytics.Startup.ScreenConfiguration.ScreenType screen_type = 1;
+        bool screen_color_enabled = 2;
+        int32 columns = 3;
+        int32 rows = 4;
+      }
+
+      enum ScreenType {
+        SCREEN_TYPE_UNKNOWN = 0;
+        SCREEN_TYPE_AUDIENCE = 1;
+        SCREEN_TYPE_STAGE = 2;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.Startup.ScreenConfiguration.Summary summary = 1;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Output output = 2;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Single single = 3;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Mirrored mirrored = 4;
+        .rv.data.Analytics.Startup.ScreenConfiguration.EdgeBlend edge_blend = 5;
+        .rv.data.Analytics.Startup.ScreenConfiguration.Grouped grouped = 6;
+      }
+    }
+
+    message Preferences {
+      enum CopyrightStyle {
+        COPYRIGHT_STYLE_UNKNOWN = 0;
+        COPYRIGHT_STYLE_FIRST = 1;
+        COPYRIGHT_STYLE_LAST = 2;
+        COPYRIGHT_STYLE_FIRST_AND_LAST = 3;
+        COPYRIGHT_STYLE_ALL_SLIDES = 4;
+      }
+
+      enum RenderMode {
+        RENDER_MODE_UNKNOWN = 0;
+        RENDER_MODE_OPENGL = 1;
+        RENDER_MODE_METAL = 2;
+      }
+
+      enum UpdateChannel {
+        UPDATE_CHANNEL_UNKNOWN = 0;
+        UPDATE_CHANNEL_RELEASE = 1;
+        UPDATE_CHANNEL_BETA = 2;
+      }
+
+      bool house_of_worship = 1;
+      bool has_custom_logo = 2;
+      bool copyright_enabled = 3;
+      .rv.data.Analytics.Startup.Preferences.CopyrightStyle copyright_style = 4;
+      bool copyright_has_license = 5;
+      .rv.data.Analytics.Startup.Preferences.RenderMode render_mode = 6;
+      bool suppress_auto_start = 7;
+      bool manage_media_automatically = 8;
+      bool search_paths_relink = 9;
+      .rv.data.Analytics.Startup.Preferences.UpdateChannel update_channel = 10;
+    }
+
+    message Screens {
+      bool show_screens_launch = 1;
+      bool show_performance_on_screen = 2;
+      bool ignore_background_colors = 3;
+      bool show_keynote_ppt_screens = 4;
+    }
+
+    message PlanningCenter {
+      bool logged_in = 1;
+      bool auto_update = 2;
+      bool match_songs = 3;
+      bool show_history = 4;
+      bool make_arrangements = 5;
+      bool auto_upload = 6;
+      bool auto_download = 7;
+    }
+
+    message SongSelect {
+      bool logged_in = 1;
+    }
+
+    message Audio {
+      enum AudioDevice {
+        AUDIO_DEVICE_UNKNOWN = 0;
+        AUDIO_DEVICE_MAIN = 1;
+        AUDIO_DEVICE_SYSTEM = 2;
+        AUDIO_DEVICE_OTHER = 3;
+        AUDIO_DEVICE_NONE = 4;
+      }
+
+      enum InspectorRouting {
+        INSPECTOR_ROUTING_UNKNOWN = 0;
+        INSPECTOR_ROUTING_DEFAULT = 1;
+        INSPECTOR_ROUTING_CUSTOM = 2;
+      }
+
+      enum AudioRouting {
+        AUDIO_ROUTING_UNKNOWN = 0;
+        AUDIO_ROUTING_DEFAULT = 1;
+        AUDIO_ROUTING_CUSTOM = 2;
+      }
+
+      int32 bus_count = 1;
+      .rv.data.Analytics.Startup.Audio.AudioDevice inspector_device = 2;
+      .rv.data.Analytics.Startup.Audio.InspectorRouting inspector_routing = 3;
+      .rv.data.Analytics.Startup.Audio.AudioDevice main_device = 4;
+      .rv.data.Analytics.Startup.Audio.AudioRouting main_routing = 5;
+      int32 main_delay = 6;
+      bool sdi_ndi = 7;
+      .rv.data.Analytics.Startup.Audio.AudioRouting sdi_ndi_routing = 8;
+      int32 sdi_ndi_delay = 9;
+    }
+
+    message Communications {
+      int32 total_device_count = 1;
+    }
+
+    message Resi {
+      bool logged_in = 1;
+    }
+
+    message Interface {
+      enum SplitViewState {
+        SPLIT_VIEW_STATE_UNKNOWN = 0;
+        SPLIT_VIEW_STATE_COLLAPSED = 1;
+        SPLIT_VIEW_STATE_EXPANDED = 2;
+      }
+
+      enum PresentationViewStyle {
+        PRESENTATION_VIEW_STYLE_UNKNOWN = 0;
+        PRESENTATION_VIEW_STYLE_GRID = 1;
+        PRESENTATION_VIEW_STYLE_EASY = 2;
+        PRESENTATION_VIEW_STYLE_TABLE = 3;
+      }
+
+      enum MediaBinViewStyle {
+        MEDIA_BIN_VIEW_STYLE_UNKNOWN = 0;
+        MEDIA_BIN_VIEW_STYLE_GRID = 1;
+        MEDIA_BIN_VIEW_STYLE_TABLE = 2;
+      }
+
+      .rv.data.Analytics.Startup.Interface.SplitViewState library_outline = 1;
+      .rv.data.Analytics.Startup.Interface.SplitViewState media_outline = 2;
+      .rv.data.Analytics.Startup.Interface.SplitViewState audio_outline = 3;
+      bool continuous_playlist = 4;
+      .rv.data.Analytics.Startup.Interface.SplitViewState media_bin = 5;
+      .rv.data.Analytics.Startup.Interface.PresentationViewStyle presentation_view_style = 6;
+      int32 presentation_grid_column_count = 7;
+      int32 presentation_table_column_count = 8;
+      .rv.data.Analytics.Startup.Interface.MediaBinViewStyle media_bin_view_style = 9;
+      int32 media_bin_grid_column_count = 10;
+      int32 media_bin_table_column_count = 11;
+      string presentation_transition = 12;
+      string media_transition = 13;
+      bool audio_shuffle = 14;
+    }
+
+    message Content {
+      int32 library_count = 1;
+      int32 library_playlist_count = 2;
+      int32 library_playlist_folder_count = 3;
+      int32 library_playlist_max_depth = 4;
+      int32 media_bin_total_playlist_count = 5;
+      int32 media_bin_playlist_folder_count = 6;
+      int32 media_bin_playlist_max_depth = 7;
+      int32 media_bin_normal_playlist_count = 8;
+      int32 media_bin_smart_playlist_count = 9;
+      int32 media_bin_video_input_count = 10;
+      int32 audio_bin_playlist_count = 11;
+      int32 audio_bin_playlist_folder_count = 12;
+      int32 audio_bin_playlist_max_depth = 13;
+      int32 timer_count = 14;
+      int32 messages_count = 15;
+      int32 props_count = 16;
+      int32 stage_layout_count = 17;
+      int32 macros_count = 18;
+    }
+
+    message Themes {
+      int32 theme_count = 1;
+      int32 theme_folder_count = 2;
+      int32 theme_folder_max_depth = 3;
+      int32 theme_slides_count = 4;
+    }
+
+    message Macro {
+      int32 trigger_on_startup_count = 1;
+    }
+
+    message ClearGroup {
+      int32 clear_group_count = 1;
+      int32 hidden_clear_group_count = 2;
+      int32 default_icon_count = 3;
+      int32 custom_icon_count = 4;
+      int32 icon_tint_count = 5;
+    }
+
+    message KeyMapping {
+      int32 total_mapped = 1;
+      int32 clear_groups = 2;
+      int32 groups = 3;
+      int32 macros = 4;
+      int32 props = 5;
+      int32 menus = 6;
+    }
+
+    message NetworkLink {
+      bool enabled = 1;
+      uint32 member_count = 2;
+    }
+
+    oneof Component {
+      .rv.data.Analytics.Startup.Looks looks = 1;
+      .rv.data.Analytics.Startup.ScreenConfiguration screen_configuration = 2;
+      .rv.data.Analytics.Startup.Preferences preferences = 3;
+      .rv.data.Analytics.Startup.Screens screens = 4;
+      .rv.data.Analytics.Startup.PlanningCenter planning_center = 5;
+      .rv.data.Analytics.Startup.SongSelect song_select = 6;
+      .rv.data.Analytics.Startup.Audio audio = 7;
+      .rv.data.Analytics.Startup.Communications communications = 8;
+      .rv.data.Analytics.Startup.Resi resi = 9;
+      .rv.data.Analytics.Startup.Interface interface = 10;
+      .rv.data.Analytics.Startup.Content content = 11;
+      .rv.data.Analytics.Startup.Themes themes = 12;
+      .rv.data.Analytics.Startup.Macro macro = 13;
+      .rv.data.Analytics.Startup.ClearGroup clear_group = 14;
+      .rv.data.Analytics.Startup.KeyMapping key_mapping = 15;
+      .rv.data.Analytics.MultiTracks.Startup multitracks = 16;
+      .rv.data.Analytics.Startup.NetworkLink network_link = 17;
+    }
+  }
+
+  message Trigger {
+    message Cue {
+      message Slide {
+        message Trigger {
+          int32 object_count = 1;
+          int32 scrolling_object_count = 2;
+          int32 background_fx_object_count = 3;
+          int32 action_count = 4;
+          bool has_text_fx = 5;
+          int32 media_text_fill_object_count = 6;
+          int32 cut_out_text_fill_object_count = 7;
+          int32 background_blur_text_fill_object_count = 8;
+          int32 background_invert_text_fill_object_count = 9;
+        }
+
+        message ScrollingTextElement {
+          enum Direction {
+            DIRECTION_UNKNOWN = 0;
+            DIRECTION_LEFT = 1;
+            DIRECTION_RIGHT = 2;
+            DIRECTION_UP = 3;
+            DIRECTION_DOWN = 4;
+          }
+
+          enum StartPosition {
+            START_POSITION_UNKNOWN = 0;
+            START_POSITION_AUTOMATIC = 1;
+            START_POSITION_OFF_SCREEN = 2;
+          }
+
+          enum Speed {
+            SPEED_UNKNOWN = 0;
+            SPEED_VERY_SLOW = 1;
+            SPEED_SLOW = 2;
+            SPEED_MEDIUM = 3;
+            SPEED_FAST = 4;
+            SPEED_VERY_FAST = 5;
+          }
+
+          .rv.data.Analytics.Trigger.Cue.Slide.ScrollingTextElement.Direction direction = 1;
+          .rv.data.Analytics.Trigger.Cue.Slide.ScrollingTextElement.StartPosition start_position = 2;
+          bool is_repeat_enabled = 3;
+          .rv.data.Analytics.Trigger.Cue.Slide.ScrollingTextElement.Speed speed = 4;
+          .rv.data.Analytics.Trigger.Cue.Slide.DestinationLayer destination_layer = 5;
+        }
+
+        message RSSFeedElement {
+          enum Content {
+            CONTENT_UNKNOWN = 0;
+            CONTENT_TITLE = 1;
+            CONTENT_TITLE_AND_DESCRIPTION = 2;
+          }
+
+          .rv.data.Analytics.Trigger.Cue.Slide.RSSFeedElement.Content content = 1;
+          bool is_delimiter_enabled = 2;
+          .rv.data.Analytics.Trigger.Cue.Slide.DestinationLayer destination_layer = 3;
+        }
+
+        message FileFeedElement {
+          .rv.data.Analytics.Trigger.Cue.Slide.DestinationLayer destination_layer = 1;
+        }
+
+        enum DestinationLayer {
+          DESTINATION_LAYER_UNKNOWN = 0;
+          DESTINATION_LAYER_ANNOUNCEMENT = 1;
+          DESTINATION_LAYER_PRESENTATION = 2;
+          DESTINATION_LAYER_STAGE = 3;
+          DESTINATION_LAYER_PROPS = 4;
+          DESTINATION_LAYER_MESSAGES = 5;
+          DESTINATION_LAYER_MASK = 6;
+        }
+
+        oneof Component {
+          .rv.data.Analytics.Trigger.Cue.Slide.Trigger trigger = 1;
+          .rv.data.Analytics.Trigger.Cue.Slide.ScrollingTextElement scrolling_text_element = 2;
+          .rv.data.Analytics.Trigger.Cue.Slide.RSSFeedElement rss_feed_element = 3;
+          .rv.data.Analytics.Trigger.Cue.Slide.FileFeedElement file_feed_element = 4;
+        }
+      }
+
+      oneof Component {
+        .rv.data.Analytics.Trigger.Cue.Slide slide = 1;
+      }
+    }
+
+    message Action {
+      message ClearLayer {
+      }
+
+      message MediaBinPlaylist {
+      }
+
+      message AudioBinPlaylist {
+      }
+
+      message Stage {
+        int32 layout_change_count = 1;
+        int32 total_stage_screens = 2;
+      }
+
+      message SlideDestination {
+        enum ChangeSlideDestination {
+          CHANGE_SLIDE_DESTINATION_UNKNOWN = 0;
+          CHANGE_SLIDE_DESTINATION_NO_CHANGE = 1;
+          CHANGE_SLIDE_DESTINATION_STAGE_ONLY = 2;
+          CHANGE_SLIDE_DESTINATION_STAGE_AUDIENCE = 3;
+        }
+
+        .rv.data.Analytics.Trigger.Action.SlideDestination.ChangeSlideDestination change_slide_destination = 1;
+      }
+
+      message Timer {
+        enum Type {
+          TYPE_UNKNOWN = 0;
+          TYPE_START_SET_CONFIGURATION = 1;
+          TYPE_START = 2;
+          TYPE_STOP = 3;
+          TYPE_RESET = 4;
+          TYPE_STOP_SET_CONFIGURATION = 5;
+          TYPE_INCREMENT = 6;
+        }
+
+        .rv.data.Analytics.Trigger.Action.Timer.Type type = 1;
+      }
+
+      message Prop {
+        string transition = 1;
+      }
+
+      message Look {
+      }
+
+      message Message {
+        int32 token_count = 1;
+        int32 text_token_count = 2;
+        int32 timer_token_count = 3;
+        int32 clock_token_count = 4;
+        int32 showing_count = 5;
+      }
+
+      message Communications {
+      }
+
+      message Macro {
+        int32 action_count = 1;
+        int32 cue_action_count = 2;
+        int32 total_action_count = 3;
+      }
+
+      message ClearGroup {
+        bool layer_audio = 1;
+        bool layer_messages = 2;
+        bool layer_props = 3;
+        bool layer_announcement = 4;
+        bool layer_slide = 5;
+        bool layer_media = 6;
+        bool layer_video_input = 7;
+      }
+
+      oneof Component {
+        .rv.data.Analytics.Trigger.Action.ClearLayer clear = 1;
+        .rv.data.Analytics.TriggerMediaInformation media = 2;
+        .rv.data.Analytics.Trigger.Action.MediaBinPlaylist media_bin_playlist = 3;
+        .rv.data.Analytics.Trigger.Action.AudioBinPlaylist audio_bin_playlist = 4;
+        .rv.data.Analytics.Trigger.Action.Stage stage = 5;
+        .rv.data.Analytics.Trigger.Action.Timer timer = 6;
+        .rv.data.Analytics.Trigger.Action.Prop prop = 7;
+        .rv.data.Analytics.Trigger.Action.Look look = 8;
+        .rv.data.Analytics.Trigger.Action.Message message = 9;
+        .rv.data.Analytics.Trigger.Action.Communications communications = 10;
+        .rv.data.Analytics.Trigger.Action.SlideDestination slide_destination = 11;
+        .rv.data.Analytics.Trigger.Action.Macro macro = 12;
+        .rv.data.Analytics.Trigger.Action.ClearGroup clear_group = 13;
+      }
+    }
+
+    message MediaBin {
+    }
+
+    message AudioBin {
+    }
+
+    oneof Component {
+      .rv.data.Analytics.Trigger.Cue cue = 1;
+      .rv.data.Analytics.Trigger.Action action = 2;
+      .rv.data.Analytics.Trigger.MediaBin media_bin = 3;
+      .rv.data.Analytics.Trigger.AudioBin audio_bin = 4;
+    }
+  }
+
+  message Create {
+    message Library {
+      enum Source {
+        SOURCE_UNKNOWN = 0;
+        SOURCE_APPLICATION_MENU = 1;
+        SOURCE_LIBRARY_OUTLINE_ADD_BUTTON = 2;
+      }
+
+      .rv.data.Analytics.Create.Library.Source source = 1;
+    }
+
+    message Playlist {
+      enum Source {
+        SOURCE_UNKNOWN = 0;
+        SOURCE_APPLICATION_MENU = 1;
+        SOURCE_LIBRARY_OUTLINE_ADD_BUTTON = 2;
+      }
+
+      enum Type {
+        TYPE_UNKNOWN = 0;
+        TYPE_PRESENTATION = 1;
+        TYPE_PLANNING_CENTER = 2;
+        TYPE_FOLDER = 3;
+        TYPE_TEMPLATE_PLAYLIST = 4;
+      }
+
+      .rv.data.Analytics.Create.Playlist.Source source = 1;
+      .rv.data.Analytics.Create.Playlist.Type type = 2;
+    }
+
+    message Presentation {
+      enum Source {
+        SOURCE_UNKNOWN = 0;
+        SOURCE_APPLICATION_MENU = 1;
+        SOURCE_LIBRARY_OUTLINE_ADD_BUTTON = 2;
+        SOURCE_DETAIL_ADD_BUTTON = 3;
+        SOURCE_UNLINKED_HEADER = 4;
+      }
+
+      .rv.data.Analytics.Create.Presentation.Source source = 1;
+    }
+
+    message TemplatePlaylist {
+      int32 total_item_count = 1;
+      int32 header_count = 2;
+      int32 placeholder_count = 3;
+      int32 presentation_count = 4;
+      int32 media_count = 5;
+    }
+
+    oneof Component {
+      .rv.data.Analytics.Create.Library library = 1;
+      .rv.data.Analytics.Create.Playlist playlist = 2;
+      .rv.data.Analytics.Create.Presentation presentation = 3;
+      .rv.data.Analytics.Create.TemplatePlaylist template_playlist = 4;
+    }
+  }
+
+  message Import {
+    message SongSelect {
+      enum LineDelimiter {
+        LINE_DELIMITER_UNKNOWN = 0;
+        LINE_DELIMITER_LINE_BREAK = 1;
+        LINE_DELIMITER_PARAGRAPH_BREAK = 2;
+      }
+
+      int32 template_slide_text_element_count = 1;
+      bool import_into_playlist = 2;
+      .rv.data.Analytics.Import.SongSelect.LineDelimiter line_delimiter = 3;
+      int32 line_delimiter_count = 4;
+      bool did_open_edit_view = 5;
+    }
+
+    oneof Component {
+      .rv.data.Analytics.Import.SongSelect song_select = 1;
+      .rv.data.Analytics.MultiTracks.Import multitracks = 2;
+    }
+  }
+
+  message Update {
+    message Downgrade {
+      enum FromVersionType {
+        FROM_VERSION_TYPE_UNKNOWN = 0;
+        FROM_VERSION_TYPE_BETA = 1;
+        FROM_VERSION_TYPE_RELEASE = 2;
+      }
+
+      .rv.data.Analytics.Update.Downgrade.FromVersionType from_version_type = 1;
+    }
+
+    oneof Action {
+      .rv.data.Analytics.Update.Downgrade downgrade = 1;
+    }
+  }
+
+  message WHMStore {
+    message ViewStore {
+    }
+
+    message Download {
+    }
+
+    oneof Event {
+      .rv.data.Analytics.WHMStore.ViewStore view_store = 1;
+      .rv.data.Analytics.WHMStore.Download download = 2;
+    }
+  }
+
+  message ProContent {
+    message ViewMediaBin {
+    }
+
+    message Download {
+    }
+
+    oneof Event {
+      .rv.data.Analytics.ProContent.ViewMediaBin media_bin = 1;
+      .rv.data.Analytics.ProContent.Download download = 2;
+    }
+  }
+
+}
+

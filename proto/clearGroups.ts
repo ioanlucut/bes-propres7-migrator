@@ -1,9 +1,14 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Action_ClearType } from "./action";
-import { ApplicationInfo, Color, UUID } from "./basicTypes";
+import _m0 from 'protobufjs/minimal';
+import {
+  Action_ClearType,
+  Action_ContentDestination,
+  action_ContentDestinationFromJSON,
+  action_ContentDestinationToJSON,
+} from './action';
+import { ApplicationInfo, Color, UUID } from './basicTypes';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface ClearGroupsDocument {
   applicationInfo: ApplicationInfo | undefined;
@@ -19,7 +24,7 @@ export interface ClearGroupsDocument_ClearGroup {
   imageType: ClearGroupsDocument_ClearGroup_ImageType;
   isIconTinted: boolean;
   iconTintColor: Color | undefined;
-  timelineTargets: ClearGroupsDocument_ClearGroup_ContentDestination[];
+  timelineTargets: Action_ContentDestination[];
   clearPresentationNextSlide: boolean;
 }
 
@@ -65,106 +70,106 @@ export function clearGroupsDocument_ClearGroup_ImageTypeFromJSON(
 ): ClearGroupsDocument_ClearGroup_ImageType {
   switch (object) {
     case 0:
-    case "ImageTypeCustom":
+    case 'ImageTypeCustom':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeCustom;
     case 1:
-    case "ImageTypeOne":
+    case 'ImageTypeOne':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeOne;
     case 2:
-    case "ImageTypeTwo":
+    case 'ImageTypeTwo':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeTwo;
     case 3:
-    case "ImageTypeThree":
+    case 'ImageTypeThree':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeThree;
     case 4:
-    case "ImageTypeFour":
+    case 'ImageTypeFour':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFour;
     case 5:
-    case "ImageTypeFive":
+    case 'ImageTypeFive':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFive;
     case 6:
-    case "ImageTypeSix":
+    case 'ImageTypeSix':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSix;
     case 7:
-    case "ImageTypeSeven":
+    case 'ImageTypeSeven':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSeven;
     case 8:
-    case "ImageTypeEight":
+    case 'ImageTypeEight':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeEight;
     case 9:
-    case "ImageTypeNine":
+    case 'ImageTypeNine':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeNine;
     case 10:
-    case "ImageTypeZero":
+    case 'ImageTypeZero':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeZero;
     case 11:
-    case "ImageTypeAll":
+    case 'ImageTypeAll':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeAll;
     case 12:
-    case "ImageTypeMegahorn":
+    case 'ImageTypeMegahorn':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeMegahorn;
     case 13:
-    case "ImageTypePlay":
+    case 'ImageTypePlay':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypePlay;
     case 14:
-    case "ImageTypeBulb":
+    case 'ImageTypeBulb':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeBulb;
     case 15:
-    case "ImageTypeSunglasses":
+    case 'ImageTypeSunglasses':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSunglasses;
     case 16:
-    case "ImageTypeArrow":
+    case 'ImageTypeArrow':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeArrow;
     case 17:
-    case "ImageTypeTarget":
+    case 'ImageTypeTarget':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeTarget;
     case 18:
-    case "ImageTypeStar":
+    case 'ImageTypeStar':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeStar;
     case 19:
-    case "ImageTypeSun":
+    case 'ImageTypeSun':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSun;
     case 20:
-    case "ImageTypeBell":
+    case 'ImageTypeBell':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeBell;
     case 21:
-    case "ImageTypePaperclip":
+    case 'ImageTypePaperclip':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypePaperclip;
     case 22:
-    case "ImageTypeFlask":
+    case 'ImageTypeFlask':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFlask;
     case 23:
-    case "ImageTypeEyeglasses":
+    case 'ImageTypeEyeglasses':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeEyeglasses;
     case 24:
-    case "ImageTypeCupcake":
+    case 'ImageTypeCupcake':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeCupcake;
     case 25:
-    case "ImageTypeSlide":
+    case 'ImageTypeSlide':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSlide;
     case 26:
-    case "ImageTypeHat":
+    case 'ImageTypeHat':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeHat;
     case 27:
-    case "ImageTypeFlower":
+    case 'ImageTypeFlower':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFlower;
     case 28:
-    case "ImageTypeHeart":
+    case 'ImageTypeHeart':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeHeart;
     case 29:
-    case "ImageTypeMessage":
+    case 'ImageTypeMessage':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeMessage;
     case 30:
-    case "ImageTypeAudio":
+    case 'ImageTypeAudio':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeAudio;
     case 31:
-    case "ImageTypeCloud":
+    case 'ImageTypeCloud':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeCloud;
     case 32:
-    case "ImageTypeExclamation":
+    case 'ImageTypeExclamation':
       return ClearGroupsDocument_ClearGroup_ImageType.ImageTypeExclamation;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return ClearGroupsDocument_ClearGroup_ImageType.UNRECOGNIZED;
   }
@@ -175,111 +180,74 @@ export function clearGroupsDocument_ClearGroup_ImageTypeToJSON(
 ): string {
   switch (object) {
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeCustom:
-      return "ImageTypeCustom";
+      return 'ImageTypeCustom';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeOne:
-      return "ImageTypeOne";
+      return 'ImageTypeOne';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeTwo:
-      return "ImageTypeTwo";
+      return 'ImageTypeTwo';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeThree:
-      return "ImageTypeThree";
+      return 'ImageTypeThree';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFour:
-      return "ImageTypeFour";
+      return 'ImageTypeFour';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFive:
-      return "ImageTypeFive";
+      return 'ImageTypeFive';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSix:
-      return "ImageTypeSix";
+      return 'ImageTypeSix';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSeven:
-      return "ImageTypeSeven";
+      return 'ImageTypeSeven';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeEight:
-      return "ImageTypeEight";
+      return 'ImageTypeEight';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeNine:
-      return "ImageTypeNine";
+      return 'ImageTypeNine';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeZero:
-      return "ImageTypeZero";
+      return 'ImageTypeZero';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeAll:
-      return "ImageTypeAll";
+      return 'ImageTypeAll';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeMegahorn:
-      return "ImageTypeMegahorn";
+      return 'ImageTypeMegahorn';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypePlay:
-      return "ImageTypePlay";
+      return 'ImageTypePlay';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeBulb:
-      return "ImageTypeBulb";
+      return 'ImageTypeBulb';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSunglasses:
-      return "ImageTypeSunglasses";
+      return 'ImageTypeSunglasses';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeArrow:
-      return "ImageTypeArrow";
+      return 'ImageTypeArrow';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeTarget:
-      return "ImageTypeTarget";
+      return 'ImageTypeTarget';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeStar:
-      return "ImageTypeStar";
+      return 'ImageTypeStar';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSun:
-      return "ImageTypeSun";
+      return 'ImageTypeSun';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeBell:
-      return "ImageTypeBell";
+      return 'ImageTypeBell';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypePaperclip:
-      return "ImageTypePaperclip";
+      return 'ImageTypePaperclip';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFlask:
-      return "ImageTypeFlask";
+      return 'ImageTypeFlask';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeEyeglasses:
-      return "ImageTypeEyeglasses";
+      return 'ImageTypeEyeglasses';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeCupcake:
-      return "ImageTypeCupcake";
+      return 'ImageTypeCupcake';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeSlide:
-      return "ImageTypeSlide";
+      return 'ImageTypeSlide';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeHat:
-      return "ImageTypeHat";
+      return 'ImageTypeHat';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeFlower:
-      return "ImageTypeFlower";
+      return 'ImageTypeFlower';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeHeart:
-      return "ImageTypeHeart";
+      return 'ImageTypeHeart';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeMessage:
-      return "ImageTypeMessage";
+      return 'ImageTypeMessage';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeAudio:
-      return "ImageTypeAudio";
+      return 'ImageTypeAudio';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeCloud:
-      return "ImageTypeCloud";
+      return 'ImageTypeCloud';
     case ClearGroupsDocument_ClearGroup_ImageType.ImageTypeExclamation:
-      return "ImageTypeExclamation";
+      return 'ImageTypeExclamation';
     case ClearGroupsDocument_ClearGroup_ImageType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum ClearGroupsDocument_ClearGroup_ContentDestination {
-  CONTENT_DESTINATION_GLOBAL = 0,
-  CONTENT_DESTINATION_ANNOUNCEMENTS = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function clearGroupsDocument_ClearGroup_ContentDestinationFromJSON(
-  object: any,
-): ClearGroupsDocument_ClearGroup_ContentDestination {
-  switch (object) {
-    case 0:
-    case "CONTENT_DESTINATION_GLOBAL":
-      return ClearGroupsDocument_ClearGroup_ContentDestination.CONTENT_DESTINATION_GLOBAL;
-    case 1:
-    case "CONTENT_DESTINATION_ANNOUNCEMENTS":
-      return ClearGroupsDocument_ClearGroup_ContentDestination.CONTENT_DESTINATION_ANNOUNCEMENTS;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ClearGroupsDocument_ClearGroup_ContentDestination.UNRECOGNIZED;
-  }
-}
-
-export function clearGroupsDocument_ClearGroup_ContentDestinationToJSON(
-  object: ClearGroupsDocument_ClearGroup_ContentDestination,
-): string {
-  switch (object) {
-    case ClearGroupsDocument_ClearGroup_ContentDestination.CONTENT_DESTINATION_GLOBAL:
-      return "CONTENT_DESTINATION_GLOBAL";
-    case ClearGroupsDocument_ClearGroup_ContentDestination.CONTENT_DESTINATION_ANNOUNCEMENTS:
-      return "CONTENT_DESTINATION_ANNOUNCEMENTS";
-    case ClearGroupsDocument_ClearGroup_ContentDestination.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -288,18 +256,28 @@ function createBaseClearGroupsDocument(): ClearGroupsDocument {
 }
 
 export const ClearGroupsDocument = {
-  encode(message: ClearGroupsDocument, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ClearGroupsDocument,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.applicationInfo !== undefined) {
-      ApplicationInfo.encode(message.applicationInfo, writer.uint32(10).fork()).ldelim();
+      ApplicationInfo.encode(
+        message.applicationInfo,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     for (const v of message.groups) {
-      ClearGroupsDocument_ClearGroup.encode(v!, writer.uint32(18).fork()).ldelim();
+      ClearGroupsDocument_ClearGroup.encode(
+        v!,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ClearGroupsDocument {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClearGroupsDocument();
     while (reader.pos < end) {
@@ -310,14 +288,19 @@ export const ClearGroupsDocument = {
             break;
           }
 
-          message.applicationInfo = ApplicationInfo.decode(reader, reader.uint32());
+          message.applicationInfo = ApplicationInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.groups.push(ClearGroupsDocument_ClearGroup.decode(reader, reader.uint32()));
+          message.groups.push(
+            ClearGroupsDocument_ClearGroup.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -330,9 +313,13 @@ export const ClearGroupsDocument = {
 
   fromJSON(object: any): ClearGroupsDocument {
     return {
-      applicationInfo: isSet(object.applicationInfo) ? ApplicationInfo.fromJSON(object.applicationInfo) : undefined,
+      applicationInfo: isSet(object.applicationInfo)
+        ? ApplicationInfo.fromJSON(object.applicationInfo)
+        : undefined,
       groups: Array.isArray(object?.groups)
-        ? object.groups.map((e: any) => ClearGroupsDocument_ClearGroup.fromJSON(e))
+        ? object.groups.map((e: any) =>
+            ClearGroupsDocument_ClearGroup.fromJSON(e),
+          )
         : [],
     };
   },
@@ -340,25 +327,37 @@ export const ClearGroupsDocument = {
   toJSON(message: ClearGroupsDocument): unknown {
     const obj: any = {};
     message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo ? ApplicationInfo.toJSON(message.applicationInfo) : undefined);
+      (obj.applicationInfo = message.applicationInfo
+        ? ApplicationInfo.toJSON(message.applicationInfo)
+        : undefined);
     if (message.groups) {
-      obj.groups = message.groups.map((e) => e ? ClearGroupsDocument_ClearGroup.toJSON(e) : undefined);
+      obj.groups = message.groups.map((e) =>
+        e ? ClearGroupsDocument_ClearGroup.toJSON(e) : undefined,
+      );
     } else {
       obj.groups = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ClearGroupsDocument>, I>>(base?: I): ClearGroupsDocument {
+  create<I extends Exact<DeepPartial<ClearGroupsDocument>, I>>(
+    base?: I,
+  ): ClearGroupsDocument {
     return ClearGroupsDocument.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ClearGroupsDocument>, I>>(object: I): ClearGroupsDocument {
+  fromPartial<I extends Exact<DeepPartial<ClearGroupsDocument>, I>>(
+    object: I,
+  ): ClearGroupsDocument {
     const message = createBaseClearGroupsDocument();
-    message.applicationInfo = (object.applicationInfo !== undefined && object.applicationInfo !== null)
-      ? ApplicationInfo.fromPartial(object.applicationInfo)
-      : undefined;
-    message.groups = object.groups?.map((e) => ClearGroupsDocument_ClearGroup.fromPartial(e)) || [];
+    message.applicationInfo =
+      object.applicationInfo !== undefined && object.applicationInfo !== null
+        ? ApplicationInfo.fromPartial(object.applicationInfo)
+        : undefined;
+    message.groups =
+      object.groups?.map((e) =>
+        ClearGroupsDocument_ClearGroup.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -366,7 +365,7 @@ export const ClearGroupsDocument = {
 function createBaseClearGroupsDocument_ClearGroup(): ClearGroupsDocument_ClearGroup {
   return {
     uuid: undefined,
-    name: "",
+    name: '',
     layerTargets: [],
     isHiddenInPreview: false,
     imageData: new Uint8Array(),
@@ -379,11 +378,14 @@ function createBaseClearGroupsDocument_ClearGroup(): ClearGroupsDocument_ClearGr
 }
 
 export const ClearGroupsDocument_ClearGroup = {
-  encode(message: ClearGroupsDocument_ClearGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ClearGroupsDocument_ClearGroup,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     for (const v of message.layerTargets) {
@@ -415,8 +417,12 @@ export const ClearGroupsDocument_ClearGroup = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClearGroupsDocument_ClearGroup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ClearGroupsDocument_ClearGroup {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClearGroupsDocument_ClearGroup();
     while (reader.pos < end) {
@@ -441,7 +447,9 @@ export const ClearGroupsDocument_ClearGroup = {
             break;
           }
 
-          message.layerTargets.push(Action_ClearType.decode(reader, reader.uint32()));
+          message.layerTargets.push(
+            Action_ClearType.decode(reader, reader.uint32()),
+          );
           continue;
         case 4:
           if (tag != 32) {
@@ -513,17 +521,29 @@ export const ClearGroupsDocument_ClearGroup = {
   fromJSON(object: any): ClearGroupsDocument_ClearGroup {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       layerTargets: Array.isArray(object?.layerTargets)
         ? object.layerTargets.map((e: any) => Action_ClearType.fromJSON(e))
         : [],
-      isHiddenInPreview: isSet(object.isHiddenInPreview) ? Boolean(object.isHiddenInPreview) : false,
-      imageData: isSet(object.imageData) ? bytesFromBase64(object.imageData) : new Uint8Array(),
-      imageType: isSet(object.imageType) ? clearGroupsDocument_ClearGroup_ImageTypeFromJSON(object.imageType) : 0,
-      isIconTinted: isSet(object.isIconTinted) ? Boolean(object.isIconTinted) : false,
-      iconTintColor: isSet(object.iconTintColor) ? Color.fromJSON(object.iconTintColor) : undefined,
+      isHiddenInPreview: isSet(object.isHiddenInPreview)
+        ? Boolean(object.isHiddenInPreview)
+        : false,
+      imageData: isSet(object.imageData)
+        ? bytesFromBase64(object.imageData)
+        : new Uint8Array(),
+      imageType: isSet(object.imageType)
+        ? clearGroupsDocument_ClearGroup_ImageTypeFromJSON(object.imageType)
+        : 0,
+      isIconTinted: isSet(object.isIconTinted)
+        ? Boolean(object.isIconTinted)
+        : false,
+      iconTintColor: isSet(object.iconTintColor)
+        ? Color.fromJSON(object.iconTintColor)
+        : undefined,
       timelineTargets: Array.isArray(object?.timelineTargets)
-        ? object.timelineTargets.map((e: any) => clearGroupsDocument_ClearGroup_ContentDestinationFromJSON(e))
+        ? object.timelineTargets.map((e: any) =>
+            action_ContentDestinationFromJSON(e),
+          )
         : [],
       clearPresentationNextSlide: isSet(object.clearPresentationNextSlide)
         ? Boolean(object.clearPresentationNextSlide)
@@ -533,24 +553,35 @@ export const ClearGroupsDocument_ClearGroup = {
 
   toJSON(message: ClearGroupsDocument_ClearGroup): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.name !== undefined && (obj.name = message.name);
     if (message.layerTargets) {
-      obj.layerTargets = message.layerTargets.map((e) => e ? Action_ClearType.toJSON(e) : undefined);
+      obj.layerTargets = message.layerTargets.map((e) =>
+        e ? Action_ClearType.toJSON(e) : undefined,
+      );
     } else {
       obj.layerTargets = [];
     }
-    message.isHiddenInPreview !== undefined && (obj.isHiddenInPreview = message.isHiddenInPreview);
+    message.isHiddenInPreview !== undefined &&
+      (obj.isHiddenInPreview = message.isHiddenInPreview);
     message.imageData !== undefined &&
-      (obj.imageData = base64FromBytes(message.imageData !== undefined ? message.imageData : new Uint8Array()));
+      (obj.imageData = base64FromBytes(
+        message.imageData !== undefined ? message.imageData : new Uint8Array(),
+      ));
     message.imageType !== undefined &&
-      (obj.imageType = clearGroupsDocument_ClearGroup_ImageTypeToJSON(message.imageType));
-    message.isIconTinted !== undefined && (obj.isIconTinted = message.isIconTinted);
+      (obj.imageType = clearGroupsDocument_ClearGroup_ImageTypeToJSON(
+        message.imageType,
+      ));
+    message.isIconTinted !== undefined &&
+      (obj.isIconTinted = message.isIconTinted);
     message.iconTintColor !== undefined &&
-      (obj.iconTintColor = message.iconTintColor ? Color.toJSON(message.iconTintColor) : undefined);
+      (obj.iconTintColor = message.iconTintColor
+        ? Color.toJSON(message.iconTintColor)
+        : undefined);
     if (message.timelineTargets) {
       obj.timelineTargets = message.timelineTargets.map((e) =>
-        clearGroupsDocument_ClearGroup_ContentDestinationToJSON(e)
+        action_ContentDestinationToJSON(e),
       );
     } else {
       obj.timelineTargets = [];
@@ -560,7 +591,9 @@ export const ClearGroupsDocument_ClearGroup = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ClearGroupsDocument_ClearGroup>, I>>(base?: I): ClearGroupsDocument_ClearGroup {
+  create<I extends Exact<DeepPartial<ClearGroupsDocument_ClearGroup>, I>>(
+    base?: I,
+  ): ClearGroupsDocument_ClearGroup {
     return ClearGroupsDocument_ClearGroup.fromPartial(base ?? {});
   },
 
@@ -568,18 +601,24 @@ export const ClearGroupsDocument_ClearGroup = {
     object: I,
   ): ClearGroupsDocument_ClearGroup {
     const message = createBaseClearGroupsDocument_ClearGroup();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.name = object.name ?? "";
-    message.layerTargets = object.layerTargets?.map((e) => Action_ClearType.fromPartial(e)) || [];
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.name = object.name ?? '';
+    message.layerTargets =
+      object.layerTargets?.map((e) => Action_ClearType.fromPartial(e)) || [];
     message.isHiddenInPreview = object.isHiddenInPreview ?? false;
     message.imageData = object.imageData ?? new Uint8Array();
     message.imageType = object.imageType ?? 0;
     message.isIconTinted = object.isIconTinted ?? false;
-    message.iconTintColor = (object.iconTintColor !== undefined && object.iconTintColor !== null)
-      ? Color.fromPartial(object.iconTintColor)
-      : undefined;
+    message.iconTintColor =
+      object.iconTintColor !== undefined && object.iconTintColor !== null
+        ? Color.fromPartial(object.iconTintColor)
+        : undefined;
     message.timelineTargets = object.timelineTargets?.map((e) => e) || [];
-    message.clearPresentationNextSlide = object.clearPresentationNextSlide ?? false;
+    message.clearPresentationNextSlide =
+      object.clearPresentationNextSlide ?? false;
     return message;
   },
 };
@@ -588,24 +627,24 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
+  if (typeof globalThis !== 'undefined') {
     return globalThis;
   }
-  if (typeof self !== "undefined") {
+  if (typeof self !== 'undefined') {
     return self;
   }
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     return window;
   }
-  if (typeof global !== "undefined") {
+  if (typeof global !== 'undefined') {
     return global;
   }
-  throw "Unable to locate global object";
+  throw 'Unable to locate global object';
 })();
 
 function bytesFromBase64(b64: string): Uint8Array {
   if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = tsProtoGlobalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -618,26 +657,41 @@ function bytesFromBase64(b64: string): Uint8Array {
 
 function base64FromBytes(arr: Uint8Array): string {
   if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    return tsProtoGlobalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
       bin.push(String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return tsProtoGlobalThis.btoa(bin.join(''));
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

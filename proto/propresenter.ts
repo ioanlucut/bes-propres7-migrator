@@ -1,10 +1,10 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Action_Label } from "./action";
-import { ApplicationInfo } from "./basicTypes";
-import { Playlist, Playlist_Tag } from "./playlist";
+import _m0 from 'protobufjs/minimal';
+import { Action_Label } from './action';
+import { ApplicationInfo } from './basicTypes';
+import { Playlist, Playlist_Tag } from './playlist';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface PlaylistDocument {
   applicationInfo: ApplicationInfo | undefined;
@@ -23,40 +23,44 @@ export enum PlaylistDocument_Type {
   UNRECOGNIZED = -1,
 }
 
-export function playlistDocument_TypeFromJSON(object: any): PlaylistDocument_Type {
+export function playlistDocument_TypeFromJSON(
+  object: any,
+): PlaylistDocument_Type {
   switch (object) {
     case 0:
-    case "TYPE_UNKNOWN":
+    case 'TYPE_UNKNOWN':
       return PlaylistDocument_Type.TYPE_UNKNOWN;
     case 1:
-    case "TYPE_PRESENTATION":
+    case 'TYPE_PRESENTATION':
       return PlaylistDocument_Type.TYPE_PRESENTATION;
     case 2:
-    case "TYPE_MEDIA":
+    case 'TYPE_MEDIA':
       return PlaylistDocument_Type.TYPE_MEDIA;
     case 3:
-    case "TYPE_AUDIO":
+    case 'TYPE_AUDIO':
       return PlaylistDocument_Type.TYPE_AUDIO;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return PlaylistDocument_Type.UNRECOGNIZED;
   }
 }
 
-export function playlistDocument_TypeToJSON(object: PlaylistDocument_Type): string {
+export function playlistDocument_TypeToJSON(
+  object: PlaylistDocument_Type,
+): string {
   switch (object) {
     case PlaylistDocument_Type.TYPE_UNKNOWN:
-      return "TYPE_UNKNOWN";
+      return 'TYPE_UNKNOWN';
     case PlaylistDocument_Type.TYPE_PRESENTATION:
-      return "TYPE_PRESENTATION";
+      return 'TYPE_PRESENTATION';
     case PlaylistDocument_Type.TYPE_MEDIA:
-      return "TYPE_MEDIA";
+      return 'TYPE_MEDIA';
     case PlaylistDocument_Type.TYPE_AUDIO:
-      return "TYPE_AUDIO";
+      return 'TYPE_AUDIO';
     case PlaylistDocument_Type.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -76,9 +80,15 @@ function createBasePlaylistDocument(): PlaylistDocument {
 }
 
 export const PlaylistDocument = {
-  encode(message: PlaylistDocument, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlaylistDocument,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.applicationInfo !== undefined) {
-      ApplicationInfo.encode(message.applicationInfo, writer.uint32(10).fork()).ldelim();
+      ApplicationInfo.encode(
+        message.applicationInfo,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
@@ -90,16 +100,23 @@ export const PlaylistDocument = {
       Playlist_Tag.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     if (message.liveVideoPlaylist !== undefined) {
-      Playlist.encode(message.liveVideoPlaylist, writer.uint32(42).fork()).ldelim();
+      Playlist.encode(
+        message.liveVideoPlaylist,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.downloadsPlaylist !== undefined) {
-      Playlist.encode(message.downloadsPlaylist, writer.uint32(50).fork()).ldelim();
+      Playlist.encode(
+        message.downloadsPlaylist,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PlaylistDocument {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaylistDocument();
     while (reader.pos < end) {
@@ -110,7 +127,10 @@ export const PlaylistDocument = {
             break;
           }
 
-          message.applicationInfo = ApplicationInfo.decode(reader, reader.uint32());
+          message.applicationInfo = ApplicationInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 16) {
@@ -158,53 +178,85 @@ export const PlaylistDocument = {
 
   fromJSON(object: any): PlaylistDocument {
     return {
-      applicationInfo: isSet(object.applicationInfo) ? ApplicationInfo.fromJSON(object.applicationInfo) : undefined,
+      applicationInfo: isSet(object.applicationInfo)
+        ? ApplicationInfo.fromJSON(object.applicationInfo)
+        : undefined,
       type: isSet(object.type) ? playlistDocument_TypeFromJSON(object.type) : 0,
-      rootNode: isSet(object.rootNode) ? Playlist.fromJSON(object.rootNode) : undefined,
-      tags: Array.isArray(object?.tags) ? object.tags.map((e: any) => Playlist_Tag.fromJSON(e)) : [],
-      liveVideoPlaylist: isSet(object.liveVideoPlaylist) ? Playlist.fromJSON(object.liveVideoPlaylist) : undefined,
-      downloadsPlaylist: isSet(object.downloadsPlaylist) ? Playlist.fromJSON(object.downloadsPlaylist) : undefined,
+      rootNode: isSet(object.rootNode)
+        ? Playlist.fromJSON(object.rootNode)
+        : undefined,
+      tags: Array.isArray(object?.tags)
+        ? object.tags.map((e: any) => Playlist_Tag.fromJSON(e))
+        : [],
+      liveVideoPlaylist: isSet(object.liveVideoPlaylist)
+        ? Playlist.fromJSON(object.liveVideoPlaylist)
+        : undefined,
+      downloadsPlaylist: isSet(object.downloadsPlaylist)
+        ? Playlist.fromJSON(object.downloadsPlaylist)
+        : undefined,
     };
   },
 
   toJSON(message: PlaylistDocument): unknown {
     const obj: any = {};
     message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo ? ApplicationInfo.toJSON(message.applicationInfo) : undefined);
-    message.type !== undefined && (obj.type = playlistDocument_TypeToJSON(message.type));
-    message.rootNode !== undefined && (obj.rootNode = message.rootNode ? Playlist.toJSON(message.rootNode) : undefined);
+      (obj.applicationInfo = message.applicationInfo
+        ? ApplicationInfo.toJSON(message.applicationInfo)
+        : undefined);
+    message.type !== undefined &&
+      (obj.type = playlistDocument_TypeToJSON(message.type));
+    message.rootNode !== undefined &&
+      (obj.rootNode = message.rootNode
+        ? Playlist.toJSON(message.rootNode)
+        : undefined);
     if (message.tags) {
-      obj.tags = message.tags.map((e) => e ? Playlist_Tag.toJSON(e) : undefined);
+      obj.tags = message.tags.map((e) =>
+        e ? Playlist_Tag.toJSON(e) : undefined,
+      );
     } else {
       obj.tags = [];
     }
     message.liveVideoPlaylist !== undefined &&
-      (obj.liveVideoPlaylist = message.liveVideoPlaylist ? Playlist.toJSON(message.liveVideoPlaylist) : undefined);
+      (obj.liveVideoPlaylist = message.liveVideoPlaylist
+        ? Playlist.toJSON(message.liveVideoPlaylist)
+        : undefined);
     message.downloadsPlaylist !== undefined &&
-      (obj.downloadsPlaylist = message.downloadsPlaylist ? Playlist.toJSON(message.downloadsPlaylist) : undefined);
+      (obj.downloadsPlaylist = message.downloadsPlaylist
+        ? Playlist.toJSON(message.downloadsPlaylist)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PlaylistDocument>, I>>(base?: I): PlaylistDocument {
+  create<I extends Exact<DeepPartial<PlaylistDocument>, I>>(
+    base?: I,
+  ): PlaylistDocument {
     return PlaylistDocument.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<PlaylistDocument>, I>>(object: I): PlaylistDocument {
+  fromPartial<I extends Exact<DeepPartial<PlaylistDocument>, I>>(
+    object: I,
+  ): PlaylistDocument {
     const message = createBasePlaylistDocument();
-    message.applicationInfo = (object.applicationInfo !== undefined && object.applicationInfo !== null)
-      ? ApplicationInfo.fromPartial(object.applicationInfo)
-      : undefined;
+    message.applicationInfo =
+      object.applicationInfo !== undefined && object.applicationInfo !== null
+        ? ApplicationInfo.fromPartial(object.applicationInfo)
+        : undefined;
     message.type = object.type ?? 0;
-    message.rootNode = (object.rootNode !== undefined && object.rootNode !== null)
-      ? Playlist.fromPartial(object.rootNode)
-      : undefined;
+    message.rootNode =
+      object.rootNode !== undefined && object.rootNode !== null
+        ? Playlist.fromPartial(object.rootNode)
+        : undefined;
     message.tags = object.tags?.map((e) => Playlist_Tag.fromPartial(e)) || [];
-    message.liveVideoPlaylist = (object.liveVideoPlaylist !== undefined && object.liveVideoPlaylist !== null)
-      ? Playlist.fromPartial(object.liveVideoPlaylist)
-      : undefined;
-    message.downloadsPlaylist = (object.downloadsPlaylist !== undefined && object.downloadsPlaylist !== null)
-      ? Playlist.fromPartial(object.downloadsPlaylist)
-      : undefined;
+    message.liveVideoPlaylist =
+      object.liveVideoPlaylist !== undefined &&
+      object.liveVideoPlaylist !== null
+        ? Playlist.fromPartial(object.liveVideoPlaylist)
+        : undefined;
+    message.downloadsPlaylist =
+      object.downloadsPlaylist !== undefined &&
+      object.downloadsPlaylist !== null
+        ? Playlist.fromPartial(object.downloadsPlaylist)
+        : undefined;
     return message;
   },
 };
@@ -214,7 +266,10 @@ function createBaseSettingsDocument(): SettingsDocument {
 }
 
 export const SettingsDocument = {
-  encode(message: SettingsDocument, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: SettingsDocument,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.labels) {
       Action_Label.encode(v!, writer.uint32(18).fork()).ldelim();
     }
@@ -222,7 +277,8 @@ export const SettingsDocument = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): SettingsDocument {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSettingsDocument();
     while (reader.pos < end) {
@@ -245,40 +301,66 @@ export const SettingsDocument = {
   },
 
   fromJSON(object: any): SettingsDocument {
-    return { labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => Action_Label.fromJSON(e)) : [] };
+    return {
+      labels: Array.isArray(object?.labels)
+        ? object.labels.map((e: any) => Action_Label.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: SettingsDocument): unknown {
     const obj: any = {};
     if (message.labels) {
-      obj.labels = message.labels.map((e) => e ? Action_Label.toJSON(e) : undefined);
+      obj.labels = message.labels.map((e) =>
+        e ? Action_Label.toJSON(e) : undefined,
+      );
     } else {
       obj.labels = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<SettingsDocument>, I>>(base?: I): SettingsDocument {
+  create<I extends Exact<DeepPartial<SettingsDocument>, I>>(
+    base?: I,
+  ): SettingsDocument {
     return SettingsDocument.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<SettingsDocument>, I>>(object: I): SettingsDocument {
+  fromPartial<I extends Exact<DeepPartial<SettingsDocument>, I>>(
+    object: I,
+  ): SettingsDocument {
     const message = createBaseSettingsDocument();
-    message.labels = object.labels?.map((e) => Action_Label.fromPartial(e)) || [];
+    message.labels =
+      object.labels?.map((e) => Action_Label.fromPartial(e)) || [];
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

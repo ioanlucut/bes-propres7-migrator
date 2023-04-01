@@ -1,8 +1,8 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Action_Label } from "./action";
+import _m0 from 'protobufjs/minimal';
+import { Action_Label } from './action';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface ProLabelsDocument {
   labels: Action_Label[];
@@ -13,7 +13,10 @@ function createBaseProLabelsDocument(): ProLabelsDocument {
 }
 
 export const ProLabelsDocument = {
-  encode(message: ProLabelsDocument, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLabelsDocument,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.labels) {
       Action_Label.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -21,7 +24,8 @@ export const ProLabelsDocument = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProLabelsDocument {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLabelsDocument();
     while (reader.pos < end) {
@@ -44,37 +48,63 @@ export const ProLabelsDocument = {
   },
 
   fromJSON(object: any): ProLabelsDocument {
-    return { labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => Action_Label.fromJSON(e)) : [] };
+    return {
+      labels: Array.isArray(object?.labels)
+        ? object.labels.map((e: any) => Action_Label.fromJSON(e))
+        : [],
+    };
   },
 
   toJSON(message: ProLabelsDocument): unknown {
     const obj: any = {};
     if (message.labels) {
-      obj.labels = message.labels.map((e) => e ? Action_Label.toJSON(e) : undefined);
+      obj.labels = message.labels.map((e) =>
+        e ? Action_Label.toJSON(e) : undefined,
+      );
     } else {
       obj.labels = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLabelsDocument>, I>>(base?: I): ProLabelsDocument {
+  create<I extends Exact<DeepPartial<ProLabelsDocument>, I>>(
+    base?: I,
+  ): ProLabelsDocument {
     return ProLabelsDocument.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLabelsDocument>, I>>(object: I): ProLabelsDocument {
+  fromPartial<I extends Exact<DeepPartial<ProLabelsDocument>, I>>(
+    object: I,
+  ): ProLabelsDocument {
     const message = createBaseProLabelsDocument();
-    message.labels = object.labels?.map((e) => Action_Label.fromPartial(e)) || [];
+    message.labels =
+      object.labels?.map((e) => Action_Label.fromPartial(e)) || [];
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };

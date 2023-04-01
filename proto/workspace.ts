@@ -1,19 +1,19 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { AlignmentGuide } from "./alignmentGuide";
-import { URL, UUID } from "./basicTypes";
-import { Calendar } from "./calendar";
-import { Effect, Transition } from "./effects";
-import { Graphics_Rect } from "./graphicsData";
-import { HotKey } from "./hotKey";
-import { Layer } from "./layers";
-import { LiveVideoPlaylist } from "./liveVideoPlaylist";
-import { Mask } from "./masks";
-import { Playlist } from "./playlist";
-import { EdgeBlend, OutputDisplay, Screen } from "./screens";
-import { TargetSet } from "./targets";
+import _m0 from 'protobufjs/minimal';
+import { AlignmentGuide } from './alignmentGuide';
+import { URL, UUID } from './basicTypes';
+import { Calendar } from './calendar';
+import { Effect, Transition } from './effects';
+import { Graphics_Rect } from './graphicsData';
+import { HotKey } from './hotKey';
+import { Layer } from './layers';
+import { LiveVideoPlaylist } from './liveVideoPlaylist';
+import { Mask } from './masks';
+import { Playlist } from './playlist';
+import { EdgeBlend, OutputDisplay, Screen } from './screens';
+import { TargetSet } from './targets';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface Workspace {
   uuid: UUID | undefined;
@@ -62,50 +62,54 @@ export enum Workspace_UnitScaling_UnitType {
   UNRECOGNIZED = -1,
 }
 
-export function workspace_UnitScaling_UnitTypeFromJSON(object: any): Workspace_UnitScaling_UnitType {
+export function workspace_UnitScaling_UnitTypeFromJSON(
+  object: any,
+): Workspace_UnitScaling_UnitType {
   switch (object) {
     case 0:
-    case "UNIT_TYPE_POINTS":
+    case 'UNIT_TYPE_POINTS':
       return Workspace_UnitScaling_UnitType.UNIT_TYPE_POINTS;
     case 1:
-    case "UNIT_TYPE_MILLIMETERS":
+    case 'UNIT_TYPE_MILLIMETERS':
       return Workspace_UnitScaling_UnitType.UNIT_TYPE_MILLIMETERS;
     case 2:
-    case "UNIT_TYPE_CENTIMETERS":
+    case 'UNIT_TYPE_CENTIMETERS':
       return Workspace_UnitScaling_UnitType.UNIT_TYPE_CENTIMETERS;
     case 3:
-    case "UNIT_TYPE_METERS":
+    case 'UNIT_TYPE_METERS':
       return Workspace_UnitScaling_UnitType.UNIT_TYPE_METERS;
     case 4:
-    case "UNIT_TYPE_INCHES":
+    case 'UNIT_TYPE_INCHES':
       return Workspace_UnitScaling_UnitType.UNIT_TYPE_INCHES;
     case 5:
-    case "UNIT_TYPE_FEET":
+    case 'UNIT_TYPE_FEET':
       return Workspace_UnitScaling_UnitType.UNIT_TYPE_FEET;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Workspace_UnitScaling_UnitType.UNRECOGNIZED;
   }
 }
 
-export function workspace_UnitScaling_UnitTypeToJSON(object: Workspace_UnitScaling_UnitType): string {
+export function workspace_UnitScaling_UnitTypeToJSON(
+  object: Workspace_UnitScaling_UnitType,
+): string {
   switch (object) {
     case Workspace_UnitScaling_UnitType.UNIT_TYPE_POINTS:
-      return "UNIT_TYPE_POINTS";
+      return 'UNIT_TYPE_POINTS';
     case Workspace_UnitScaling_UnitType.UNIT_TYPE_MILLIMETERS:
-      return "UNIT_TYPE_MILLIMETERS";
+      return 'UNIT_TYPE_MILLIMETERS';
     case Workspace_UnitScaling_UnitType.UNIT_TYPE_CENTIMETERS:
-      return "UNIT_TYPE_CENTIMETERS";
+      return 'UNIT_TYPE_CENTIMETERS';
     case Workspace_UnitScaling_UnitType.UNIT_TYPE_METERS:
-      return "UNIT_TYPE_METERS";
+      return 'UNIT_TYPE_METERS';
     case Workspace_UnitScaling_UnitType.UNIT_TYPE_INCHES:
-      return "UNIT_TYPE_INCHES";
+      return 'UNIT_TYPE_INCHES';
     case Workspace_UnitScaling_UnitType.UNIT_TYPE_FEET:
-      return "UNIT_TYPE_FEET";
+      return 'UNIT_TYPE_FEET';
     case Workspace_UnitScaling_UnitType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -136,7 +140,10 @@ function createBaseWorkspace(): Workspace {
 }
 
 export const Workspace = {
-  encode(message: Workspace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Workspace,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
@@ -147,7 +154,10 @@ export const Workspace = {
       writer.uint32(24).bool(message.hidden);
     }
     if (message.editorBackground !== undefined) {
-      Workspace_EditorBackground.encode(message.editorBackground, writer.uint32(34).fork()).ldelim();
+      Workspace_EditorBackground.encode(
+        message.editorBackground,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.effectPresetUuid !== undefined) {
       UUID.encode(message.effectPresetUuid, writer.uint32(42).fork()).ldelim();
@@ -165,7 +175,10 @@ export const Workspace = {
       Playlist.encode(message.playlist, writer.uint32(74).fork()).ldelim();
     }
     if (message.unitScaling !== undefined) {
-      Workspace_UnitScaling.encode(message.unitScaling, writer.uint32(82).fork()).ldelim();
+      Workspace_UnitScaling.encode(
+        message.unitScaling,
+        writer.uint32(82).fork(),
+      ).ldelim();
     }
     for (const v of message.effects) {
       Effect.encode(v!, writer.uint32(130).fork()).ldelim();
@@ -195,16 +208,23 @@ export const Workspace = {
       AlignmentGuide.encode(v!, writer.uint32(194).fork()).ldelim();
     }
     if (message.liveVideoPlaylist !== undefined) {
-      LiveVideoPlaylist.encode(message.liveVideoPlaylist, writer.uint32(202).fork()).ldelim();
+      LiveVideoPlaylist.encode(
+        message.liveVideoPlaylist,
+        writer.uint32(202).fork(),
+      ).ldelim();
     }
     if (message.outputPreviewDisplay !== undefined) {
-      OutputDisplay.encode(message.outputPreviewDisplay, writer.uint32(210).fork()).ldelim();
+      OutputDisplay.encode(
+        message.outputPreviewDisplay,
+        writer.uint32(210).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Workspace {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWorkspace();
     while (reader.pos < end) {
@@ -236,7 +256,10 @@ export const Workspace = {
             break;
           }
 
-          message.editorBackground = Workspace_EditorBackground.decode(reader, reader.uint32());
+          message.editorBackground = Workspace_EditorBackground.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
@@ -278,7 +301,10 @@ export const Workspace = {
             break;
           }
 
-          message.unitScaling = Workspace_UnitScaling.decode(reader, reader.uint32());
+          message.unitScaling = Workspace_UnitScaling.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 16:
           if (tag != 130) {
@@ -341,21 +367,29 @@ export const Workspace = {
             break;
           }
 
-          message.alignmentGuides.push(AlignmentGuide.decode(reader, reader.uint32()));
+          message.alignmentGuides.push(
+            AlignmentGuide.decode(reader, reader.uint32()),
+          );
           continue;
         case 25:
           if (tag != 202) {
             break;
           }
 
-          message.liveVideoPlaylist = LiveVideoPlaylist.decode(reader, reader.uint32());
+          message.liveVideoPlaylist = LiveVideoPlaylist.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 26:
           if (tag != 210) {
             break;
           }
 
-          message.outputPreviewDisplay = OutputDisplay.decode(reader, reader.uint32());
+          message.outputPreviewDisplay = OutputDisplay.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -374,20 +408,48 @@ export const Workspace = {
       editorBackground: isSet(object.editorBackground)
         ? Workspace_EditorBackground.fromJSON(object.editorBackground)
         : undefined,
-      effectPresetUuid: isSet(object.effectPresetUuid) ? UUID.fromJSON(object.effectPresetUuid) : undefined,
-      effectBuildDuration: isSet(object.effectBuildDuration) ? Number(object.effectBuildDuration) : 0,
-      transition: isSet(object.transition) ? Transition.fromJSON(object.transition) : undefined,
-      activeMaskUuid: isSet(object.activeMaskUuid) ? UUID.fromJSON(object.activeMaskUuid) : undefined,
-      playlist: isSet(object.playlist) ? Playlist.fromJSON(object.playlist) : undefined,
-      unitScaling: isSet(object.unitScaling) ? Workspace_UnitScaling.fromJSON(object.unitScaling) : undefined,
-      effects: Array.isArray(object?.effects) ? object.effects.map((e: any) => Effect.fromJSON(e)) : [],
-      masks: Array.isArray(object?.masks) ? object.masks.map((e: any) => Mask.fromJSON(e)) : [],
-      screens: Array.isArray(object?.screens) ? object.screens.map((e: any) => Screen.fromJSON(e)) : [],
-      edgeBlends: Array.isArray(object?.edgeBlends) ? object.edgeBlends.map((e: any) => EdgeBlend.fromJSON(e)) : [],
-      layers: Array.isArray(object?.layers) ? object.layers.map((e: any) => Layer.fromJSON(e)) : [],
-      targetSets: Array.isArray(object?.targetSets) ? object.targetSets.map((e: any) => TargetSet.fromJSON(e)) : [],
-      hotKeys: Array.isArray(object?.hotKeys) ? object.hotKeys.map((e: any) => HotKey.fromJSON(e)) : [],
-      calendar: isSet(object.calendar) ? Calendar.fromJSON(object.calendar) : undefined,
+      effectPresetUuid: isSet(object.effectPresetUuid)
+        ? UUID.fromJSON(object.effectPresetUuid)
+        : undefined,
+      effectBuildDuration: isSet(object.effectBuildDuration)
+        ? Number(object.effectBuildDuration)
+        : 0,
+      transition: isSet(object.transition)
+        ? Transition.fromJSON(object.transition)
+        : undefined,
+      activeMaskUuid: isSet(object.activeMaskUuid)
+        ? UUID.fromJSON(object.activeMaskUuid)
+        : undefined,
+      playlist: isSet(object.playlist)
+        ? Playlist.fromJSON(object.playlist)
+        : undefined,
+      unitScaling: isSet(object.unitScaling)
+        ? Workspace_UnitScaling.fromJSON(object.unitScaling)
+        : undefined,
+      effects: Array.isArray(object?.effects)
+        ? object.effects.map((e: any) => Effect.fromJSON(e))
+        : [],
+      masks: Array.isArray(object?.masks)
+        ? object.masks.map((e: any) => Mask.fromJSON(e))
+        : [],
+      screens: Array.isArray(object?.screens)
+        ? object.screens.map((e: any) => Screen.fromJSON(e))
+        : [],
+      edgeBlends: Array.isArray(object?.edgeBlends)
+        ? object.edgeBlends.map((e: any) => EdgeBlend.fromJSON(e))
+        : [],
+      layers: Array.isArray(object?.layers)
+        ? object.layers.map((e: any) => Layer.fromJSON(e))
+        : [],
+      targetSets: Array.isArray(object?.targetSets)
+        ? object.targetSets.map((e: any) => TargetSet.fromJSON(e))
+        : [],
+      hotKeys: Array.isArray(object?.hotKeys)
+        ? object.hotKeys.map((e: any) => HotKey.fromJSON(e))
+        : [],
+      calendar: isSet(object.calendar)
+        ? Calendar.fromJSON(object.calendar)
+        : undefined,
       alignmentGuides: Array.isArray(object?.alignmentGuides)
         ? object.alignmentGuides.map((e: any) => AlignmentGuide.fromJSON(e))
         : [],
@@ -402,69 +464,100 @@ export const Workspace = {
 
   toJSON(message: Workspace): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.muted !== undefined && (obj.muted = message.muted);
     message.hidden !== undefined && (obj.hidden = message.hidden);
-    message.editorBackground !== undefined && (obj.editorBackground = message.editorBackground
-      ? Workspace_EditorBackground.toJSON(message.editorBackground)
-      : undefined);
+    message.editorBackground !== undefined &&
+      (obj.editorBackground = message.editorBackground
+        ? Workspace_EditorBackground.toJSON(message.editorBackground)
+        : undefined);
     message.effectPresetUuid !== undefined &&
-      (obj.effectPresetUuid = message.effectPresetUuid ? UUID.toJSON(message.effectPresetUuid) : undefined);
-    message.effectBuildDuration !== undefined && (obj.effectBuildDuration = message.effectBuildDuration);
+      (obj.effectPresetUuid = message.effectPresetUuid
+        ? UUID.toJSON(message.effectPresetUuid)
+        : undefined);
+    message.effectBuildDuration !== undefined &&
+      (obj.effectBuildDuration = message.effectBuildDuration);
     message.transition !== undefined &&
-      (obj.transition = message.transition ? Transition.toJSON(message.transition) : undefined);
+      (obj.transition = message.transition
+        ? Transition.toJSON(message.transition)
+        : undefined);
     message.activeMaskUuid !== undefined &&
-      (obj.activeMaskUuid = message.activeMaskUuid ? UUID.toJSON(message.activeMaskUuid) : undefined);
-    message.playlist !== undefined && (obj.playlist = message.playlist ? Playlist.toJSON(message.playlist) : undefined);
+      (obj.activeMaskUuid = message.activeMaskUuid
+        ? UUID.toJSON(message.activeMaskUuid)
+        : undefined);
+    message.playlist !== undefined &&
+      (obj.playlist = message.playlist
+        ? Playlist.toJSON(message.playlist)
+        : undefined);
     message.unitScaling !== undefined &&
-      (obj.unitScaling = message.unitScaling ? Workspace_UnitScaling.toJSON(message.unitScaling) : undefined);
+      (obj.unitScaling = message.unitScaling
+        ? Workspace_UnitScaling.toJSON(message.unitScaling)
+        : undefined);
     if (message.effects) {
-      obj.effects = message.effects.map((e) => e ? Effect.toJSON(e) : undefined);
+      obj.effects = message.effects.map((e) =>
+        e ? Effect.toJSON(e) : undefined,
+      );
     } else {
       obj.effects = [];
     }
     if (message.masks) {
-      obj.masks = message.masks.map((e) => e ? Mask.toJSON(e) : undefined);
+      obj.masks = message.masks.map((e) => (e ? Mask.toJSON(e) : undefined));
     } else {
       obj.masks = [];
     }
     if (message.screens) {
-      obj.screens = message.screens.map((e) => e ? Screen.toJSON(e) : undefined);
+      obj.screens = message.screens.map((e) =>
+        e ? Screen.toJSON(e) : undefined,
+      );
     } else {
       obj.screens = [];
     }
     if (message.edgeBlends) {
-      obj.edgeBlends = message.edgeBlends.map((e) => e ? EdgeBlend.toJSON(e) : undefined);
+      obj.edgeBlends = message.edgeBlends.map((e) =>
+        e ? EdgeBlend.toJSON(e) : undefined,
+      );
     } else {
       obj.edgeBlends = [];
     }
     if (message.layers) {
-      obj.layers = message.layers.map((e) => e ? Layer.toJSON(e) : undefined);
+      obj.layers = message.layers.map((e) => (e ? Layer.toJSON(e) : undefined));
     } else {
       obj.layers = [];
     }
     if (message.targetSets) {
-      obj.targetSets = message.targetSets.map((e) => e ? TargetSet.toJSON(e) : undefined);
+      obj.targetSets = message.targetSets.map((e) =>
+        e ? TargetSet.toJSON(e) : undefined,
+      );
     } else {
       obj.targetSets = [];
     }
     if (message.hotKeys) {
-      obj.hotKeys = message.hotKeys.map((e) => e ? HotKey.toJSON(e) : undefined);
+      obj.hotKeys = message.hotKeys.map((e) =>
+        e ? HotKey.toJSON(e) : undefined,
+      );
     } else {
       obj.hotKeys = [];
     }
-    message.calendar !== undefined && (obj.calendar = message.calendar ? Calendar.toJSON(message.calendar) : undefined);
+    message.calendar !== undefined &&
+      (obj.calendar = message.calendar
+        ? Calendar.toJSON(message.calendar)
+        : undefined);
     if (message.alignmentGuides) {
-      obj.alignmentGuides = message.alignmentGuides.map((e) => e ? AlignmentGuide.toJSON(e) : undefined);
+      obj.alignmentGuides = message.alignmentGuides.map((e) =>
+        e ? AlignmentGuide.toJSON(e) : undefined,
+      );
     } else {
       obj.alignmentGuides = [];
     }
-    message.liveVideoPlaylist !== undefined && (obj.liveVideoPlaylist = message.liveVideoPlaylist
-      ? LiveVideoPlaylist.toJSON(message.liveVideoPlaylist)
-      : undefined);
-    message.outputPreviewDisplay !== undefined && (obj.outputPreviewDisplay = message.outputPreviewDisplay
-      ? OutputDisplay.toJSON(message.outputPreviewDisplay)
-      : undefined);
+    message.liveVideoPlaylist !== undefined &&
+      (obj.liveVideoPlaylist = message.liveVideoPlaylist
+        ? LiveVideoPlaylist.toJSON(message.liveVideoPlaylist)
+        : undefined);
+    message.outputPreviewDisplay !== undefined &&
+      (obj.outputPreviewDisplay = message.outputPreviewDisplay
+        ? OutputDisplay.toJSON(message.outputPreviewDisplay)
+        : undefined);
     return obj;
   },
 
@@ -472,47 +565,66 @@ export const Workspace = {
     return Workspace.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Workspace>, I>>(object: I): Workspace {
+  fromPartial<I extends Exact<DeepPartial<Workspace>, I>>(
+    object: I,
+  ): Workspace {
     const message = createBaseWorkspace();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
     message.muted = object.muted ?? false;
     message.hidden = object.hidden ?? false;
-    message.editorBackground = (object.editorBackground !== undefined && object.editorBackground !== null)
-      ? Workspace_EditorBackground.fromPartial(object.editorBackground)
-      : undefined;
-    message.effectPresetUuid = (object.effectPresetUuid !== undefined && object.effectPresetUuid !== null)
-      ? UUID.fromPartial(object.effectPresetUuid)
-      : undefined;
+    message.editorBackground =
+      object.editorBackground !== undefined && object.editorBackground !== null
+        ? Workspace_EditorBackground.fromPartial(object.editorBackground)
+        : undefined;
+    message.effectPresetUuid =
+      object.effectPresetUuid !== undefined && object.effectPresetUuid !== null
+        ? UUID.fromPartial(object.effectPresetUuid)
+        : undefined;
     message.effectBuildDuration = object.effectBuildDuration ?? 0;
-    message.transition = (object.transition !== undefined && object.transition !== null)
-      ? Transition.fromPartial(object.transition)
-      : undefined;
-    message.activeMaskUuid = (object.activeMaskUuid !== undefined && object.activeMaskUuid !== null)
-      ? UUID.fromPartial(object.activeMaskUuid)
-      : undefined;
-    message.playlist = (object.playlist !== undefined && object.playlist !== null)
-      ? Playlist.fromPartial(object.playlist)
-      : undefined;
-    message.unitScaling = (object.unitScaling !== undefined && object.unitScaling !== null)
-      ? Workspace_UnitScaling.fromPartial(object.unitScaling)
-      : undefined;
+    message.transition =
+      object.transition !== undefined && object.transition !== null
+        ? Transition.fromPartial(object.transition)
+        : undefined;
+    message.activeMaskUuid =
+      object.activeMaskUuid !== undefined && object.activeMaskUuid !== null
+        ? UUID.fromPartial(object.activeMaskUuid)
+        : undefined;
+    message.playlist =
+      object.playlist !== undefined && object.playlist !== null
+        ? Playlist.fromPartial(object.playlist)
+        : undefined;
+    message.unitScaling =
+      object.unitScaling !== undefined && object.unitScaling !== null
+        ? Workspace_UnitScaling.fromPartial(object.unitScaling)
+        : undefined;
     message.effects = object.effects?.map((e) => Effect.fromPartial(e)) || [];
     message.masks = object.masks?.map((e) => Mask.fromPartial(e)) || [];
     message.screens = object.screens?.map((e) => Screen.fromPartial(e)) || [];
-    message.edgeBlends = object.edgeBlends?.map((e) => EdgeBlend.fromPartial(e)) || [];
+    message.edgeBlends =
+      object.edgeBlends?.map((e) => EdgeBlend.fromPartial(e)) || [];
     message.layers = object.layers?.map((e) => Layer.fromPartial(e)) || [];
-    message.targetSets = object.targetSets?.map((e) => TargetSet.fromPartial(e)) || [];
+    message.targetSets =
+      object.targetSets?.map((e) => TargetSet.fromPartial(e)) || [];
     message.hotKeys = object.hotKeys?.map((e) => HotKey.fromPartial(e)) || [];
-    message.calendar = (object.calendar !== undefined && object.calendar !== null)
-      ? Calendar.fromPartial(object.calendar)
-      : undefined;
-    message.alignmentGuides = object.alignmentGuides?.map((e) => AlignmentGuide.fromPartial(e)) || [];
-    message.liveVideoPlaylist = (object.liveVideoPlaylist !== undefined && object.liveVideoPlaylist !== null)
-      ? LiveVideoPlaylist.fromPartial(object.liveVideoPlaylist)
-      : undefined;
-    message.outputPreviewDisplay = (object.outputPreviewDisplay !== undefined && object.outputPreviewDisplay !== null)
-      ? OutputDisplay.fromPartial(object.outputPreviewDisplay)
-      : undefined;
+    message.calendar =
+      object.calendar !== undefined && object.calendar !== null
+        ? Calendar.fromPartial(object.calendar)
+        : undefined;
+    message.alignmentGuides =
+      object.alignmentGuides?.map((e) => AlignmentGuide.fromPartial(e)) || [];
+    message.liveVideoPlaylist =
+      object.liveVideoPlaylist !== undefined &&
+      object.liveVideoPlaylist !== null
+        ? LiveVideoPlaylist.fromPartial(object.liveVideoPlaylist)
+        : undefined;
+    message.outputPreviewDisplay =
+      object.outputPreviewDisplay !== undefined &&
+      object.outputPreviewDisplay !== null
+        ? OutputDisplay.fromPartial(object.outputPreviewDisplay)
+        : undefined;
     return message;
   },
 };
@@ -522,7 +634,10 @@ function createBaseWorkspace_EditorBackground(): Workspace_EditorBackground {
 }
 
 export const Workspace_EditorBackground = {
-  encode(message: Workspace_EditorBackground, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Workspace_EditorBackground,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
@@ -538,8 +653,12 @@ export const Workspace_EditorBackground = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Workspace_EditorBackground {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Workspace_EditorBackground {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWorkspace_EditorBackground();
     while (reader.pos < end) {
@@ -585,7 +704,9 @@ export const Workspace_EditorBackground = {
   fromJSON(object: any): Workspace_EditorBackground {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      frame: isSet(object.frame) ? Graphics_Rect.fromJSON(object.frame) : undefined,
+      frame: isSet(object.frame)
+        ? Graphics_Rect.fromJSON(object.frame)
+        : undefined,
       url: isSet(object.url) ? URL.fromJSON(object.url) : undefined,
       opacity: isSet(object.opacity) ? Number(object.opacity) : 0,
     };
@@ -594,23 +715,35 @@ export const Workspace_EditorBackground = {
   toJSON(message: Workspace_EditorBackground): unknown {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.frame !== undefined && (obj.frame = message.frame ? Graphics_Rect.toJSON(message.frame) : undefined);
-    message.url !== undefined && (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    message.frame !== undefined &&
+      (obj.frame = message.frame
+        ? Graphics_Rect.toJSON(message.frame)
+        : undefined);
+    message.url !== undefined &&
+      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
     message.opacity !== undefined && (obj.opacity = message.opacity);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Workspace_EditorBackground>, I>>(base?: I): Workspace_EditorBackground {
+  create<I extends Exact<DeepPartial<Workspace_EditorBackground>, I>>(
+    base?: I,
+  ): Workspace_EditorBackground {
     return Workspace_EditorBackground.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Workspace_EditorBackground>, I>>(object: I): Workspace_EditorBackground {
+  fromPartial<I extends Exact<DeepPartial<Workspace_EditorBackground>, I>>(
+    object: I,
+  ): Workspace_EditorBackground {
     const message = createBaseWorkspace_EditorBackground();
     message.enabled = object.enabled ?? false;
-    message.frame = (object.frame !== undefined && object.frame !== null)
-      ? Graphics_Rect.fromPartial(object.frame)
-      : undefined;
-    message.url = (object.url !== undefined && object.url !== null) ? URL.fromPartial(object.url) : undefined;
+    message.frame =
+      object.frame !== undefined && object.frame !== null
+        ? Graphics_Rect.fromPartial(object.frame)
+        : undefined;
+    message.url =
+      object.url !== undefined && object.url !== null
+        ? URL.fromPartial(object.url)
+        : undefined;
     message.opacity = object.opacity ?? 0;
     return message;
   },
@@ -621,7 +754,10 @@ function createBaseWorkspace_UnitScaling(): Workspace_UnitScaling {
 }
 
 export const Workspace_UnitScaling = {
-  encode(message: Workspace_UnitScaling, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Workspace_UnitScaling,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.length !== 0) {
       writer.uint32(9).double(message.length);
     }
@@ -634,8 +770,12 @@ export const Workspace_UnitScaling = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Workspace_UnitScaling {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Workspace_UnitScaling {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseWorkspace_UnitScaling();
     while (reader.pos < end) {
@@ -674,7 +814,9 @@ export const Workspace_UnitScaling = {
   fromJSON(object: any): Workspace_UnitScaling {
     return {
       length: isSet(object.length) ? Number(object.length) : 0,
-      unit: isSet(object.unit) ? workspace_UnitScaling_UnitTypeFromJSON(object.unit) : 0,
+      unit: isSet(object.unit)
+        ? workspace_UnitScaling_UnitTypeFromJSON(object.unit)
+        : 0,
       points: isSet(object.points) ? Number(object.points) : 0,
     };
   },
@@ -682,16 +824,21 @@ export const Workspace_UnitScaling = {
   toJSON(message: Workspace_UnitScaling): unknown {
     const obj: any = {};
     message.length !== undefined && (obj.length = message.length);
-    message.unit !== undefined && (obj.unit = workspace_UnitScaling_UnitTypeToJSON(message.unit));
+    message.unit !== undefined &&
+      (obj.unit = workspace_UnitScaling_UnitTypeToJSON(message.unit));
     message.points !== undefined && (obj.points = message.points);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Workspace_UnitScaling>, I>>(base?: I): Workspace_UnitScaling {
+  create<I extends Exact<DeepPartial<Workspace_UnitScaling>, I>>(
+    base?: I,
+  ): Workspace_UnitScaling {
     return Workspace_UnitScaling.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Workspace_UnitScaling>, I>>(object: I): Workspace_UnitScaling {
+  fromPartial<I extends Exact<DeepPartial<Workspace_UnitScaling>, I>>(
+    object: I,
+  ): Workspace_UnitScaling {
     const message = createBaseWorkspace_UnitScaling();
     message.length = object.length ?? 0;
     message.unit = object.unit ?? 0;
@@ -700,16 +847,31 @@ export const Workspace_UnitScaling = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

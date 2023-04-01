@@ -1,10 +1,10 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { ApplicationInfo, UUID } from "./basicTypes";
-import { TemplateIdentification } from "./templateIdentification";
-import { Clock_Format, Timer_Configuration, Timer_Format } from "./timers";
+import _m0 from 'protobufjs/minimal';
+import { ApplicationInfo, UUID } from './basicTypes';
+import { TemplateIdentification } from './templateIdentification';
+import { Clock_Format, Timer_Configuration, Timer_Format } from './timers';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface Message {
   uuid: UUID | undefined;
@@ -28,16 +28,16 @@ export enum Message_ClearType {
 export function message_ClearTypeFromJSON(object: any): Message_ClearType {
   switch (object) {
     case 0:
-    case "CLEAR_TYPE_MANUAL":
+    case 'CLEAR_TYPE_MANUAL':
       return Message_ClearType.CLEAR_TYPE_MANUAL;
     case 1:
-    case "CLEAR_TYPE_AFTER_TIME":
+    case 'CLEAR_TYPE_AFTER_TIME':
       return Message_ClearType.CLEAR_TYPE_AFTER_TIME;
     case 2:
-    case "CLEAR_TYPE_AFTER_TIMERS":
+    case 'CLEAR_TYPE_AFTER_TIMERS':
       return Message_ClearType.CLEAR_TYPE_AFTER_TIMERS;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Message_ClearType.UNRECOGNIZED;
   }
@@ -46,14 +46,14 @@ export function message_ClearTypeFromJSON(object: any): Message_ClearType {
 export function message_ClearTypeToJSON(object: Message_ClearType): string {
   switch (object) {
     case Message_ClearType.CLEAR_TYPE_MANUAL:
-      return "CLEAR_TYPE_MANUAL";
+      return 'CLEAR_TYPE_MANUAL';
     case Message_ClearType.CLEAR_TYPE_AFTER_TIME:
-      return "CLEAR_TYPE_AFTER_TIME";
+      return 'CLEAR_TYPE_AFTER_TIME';
     case Message_ClearType.CLEAR_TYPE_AFTER_TIMERS:
-      return "CLEAR_TYPE_AFTER_TIMERS";
+      return 'CLEAR_TYPE_AFTER_TIMERS';
     case Message_ClearType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -73,8 +73,7 @@ export interface Message_Token_TokenTypeTimer {
   timerUuid: UUID | undefined;
 }
 
-export interface Message_Token_TokenTypeClock {
-}
+export interface Message_Token_TokenTypeClock {}
 
 export interface Message_TokenValue {
   tokenId: UUID | undefined;
@@ -105,23 +104,26 @@ export interface MessageDocument {
 function createBaseMessage(): Message {
   return {
     uuid: undefined,
-    title: "",
+    title: '',
     timeToRemove: 0,
     visibleOnNetwork: false,
     template: undefined,
     clearType: 0,
-    messageText: "",
+    messageText: '',
     tokens: [],
     tokenValues: [],
   };
 }
 
 export const Message = {
-  encode(message: Message, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Message,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.title !== "") {
+    if (message.title !== '') {
       writer.uint32(18).string(message.title);
     }
     if (message.timeToRemove !== 0) {
@@ -131,12 +133,15 @@ export const Message = {
       writer.uint32(32).bool(message.visibleOnNetwork);
     }
     if (message.template !== undefined) {
-      TemplateIdentification.encode(message.template, writer.uint32(50).fork()).ldelim();
+      TemplateIdentification.encode(
+        message.template,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.clearType !== 0) {
       writer.uint32(72).int32(message.clearType);
     }
-    if (message.messageText !== "") {
+    if (message.messageText !== '') {
       writer.uint32(82).string(message.messageText);
     }
     for (const v of message.tokens) {
@@ -149,7 +154,8 @@ export const Message = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Message {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage();
     while (reader.pos < end) {
@@ -188,7 +194,10 @@ export const Message = {
             break;
           }
 
-          message.template = TemplateIdentification.decode(reader, reader.uint32());
+          message.template = TemplateIdentification.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 72) {
@@ -216,7 +225,9 @@ export const Message = {
             break;
           }
 
-          message.tokenValues.push(Message_TokenValue.decode(reader, reader.uint32()));
+          message.tokenValues.push(
+            Message_TokenValue.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -230,13 +241,23 @@ export const Message = {
   fromJSON(object: any): Message {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      title: isSet(object.title) ? String(object.title) : "",
-      timeToRemove: isSet(object.timeToRemove) ? Number(object.timeToRemove) : 0,
-      visibleOnNetwork: isSet(object.visibleOnNetwork) ? Boolean(object.visibleOnNetwork) : false,
-      template: isSet(object.template) ? TemplateIdentification.fromJSON(object.template) : undefined,
-      clearType: isSet(object.clearType) ? message_ClearTypeFromJSON(object.clearType) : 0,
-      messageText: isSet(object.messageText) ? String(object.messageText) : "",
-      tokens: Array.isArray(object?.tokens) ? object.tokens.map((e: any) => Message_Token.fromJSON(e)) : [],
+      title: isSet(object.title) ? String(object.title) : '',
+      timeToRemove: isSet(object.timeToRemove)
+        ? Number(object.timeToRemove)
+        : 0,
+      visibleOnNetwork: isSet(object.visibleOnNetwork)
+        ? Boolean(object.visibleOnNetwork)
+        : false,
+      template: isSet(object.template)
+        ? TemplateIdentification.fromJSON(object.template)
+        : undefined,
+      clearType: isSet(object.clearType)
+        ? message_ClearTypeFromJSON(object.clearType)
+        : 0,
+      messageText: isSet(object.messageText) ? String(object.messageText) : '',
+      tokens: Array.isArray(object?.tokens)
+        ? object.tokens.map((e: any) => Message_Token.fromJSON(e))
+        : [],
       tokenValues: Array.isArray(object?.tokenValues)
         ? object.tokenValues.map((e: any) => Message_TokenValue.fromJSON(e))
         : [],
@@ -245,21 +266,32 @@ export const Message = {
 
   toJSON(message: Message): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.title !== undefined && (obj.title = message.title);
-    message.timeToRemove !== undefined && (obj.timeToRemove = message.timeToRemove);
-    message.visibleOnNetwork !== undefined && (obj.visibleOnNetwork = message.visibleOnNetwork);
+    message.timeToRemove !== undefined &&
+      (obj.timeToRemove = message.timeToRemove);
+    message.visibleOnNetwork !== undefined &&
+      (obj.visibleOnNetwork = message.visibleOnNetwork);
     message.template !== undefined &&
-      (obj.template = message.template ? TemplateIdentification.toJSON(message.template) : undefined);
-    message.clearType !== undefined && (obj.clearType = message_ClearTypeToJSON(message.clearType));
-    message.messageText !== undefined && (obj.messageText = message.messageText);
+      (obj.template = message.template
+        ? TemplateIdentification.toJSON(message.template)
+        : undefined);
+    message.clearType !== undefined &&
+      (obj.clearType = message_ClearTypeToJSON(message.clearType));
+    message.messageText !== undefined &&
+      (obj.messageText = message.messageText);
     if (message.tokens) {
-      obj.tokens = message.tokens.map((e) => e ? Message_Token.toJSON(e) : undefined);
+      obj.tokens = message.tokens.map((e) =>
+        e ? Message_Token.toJSON(e) : undefined,
+      );
     } else {
       obj.tokens = [];
     }
     if (message.tokenValues) {
-      obj.tokenValues = message.tokenValues.map((e) => e ? Message_TokenValue.toJSON(e) : undefined);
+      obj.tokenValues = message.tokenValues.map((e) =>
+        e ? Message_TokenValue.toJSON(e) : undefined,
+      );
     } else {
       obj.tokenValues = [];
     }
@@ -272,44 +304,68 @@ export const Message = {
 
   fromPartial<I extends Exact<DeepPartial<Message>, I>>(object: I): Message {
     const message = createBaseMessage();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.title = object.title ?? "";
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.title = object.title ?? '';
     message.timeToRemove = object.timeToRemove ?? 0;
     message.visibleOnNetwork = object.visibleOnNetwork ?? false;
-    message.template = (object.template !== undefined && object.template !== null)
-      ? TemplateIdentification.fromPartial(object.template)
-      : undefined;
+    message.template =
+      object.template !== undefined && object.template !== null
+        ? TemplateIdentification.fromPartial(object.template)
+        : undefined;
     message.clearType = object.clearType ?? 0;
-    message.messageText = object.messageText ?? "";
-    message.tokens = object.tokens?.map((e) => Message_Token.fromPartial(e)) || [];
-    message.tokenValues = object.tokenValues?.map((e) => Message_TokenValue.fromPartial(e)) || [];
+    message.messageText = object.messageText ?? '';
+    message.tokens =
+      object.tokens?.map((e) => Message_Token.fromPartial(e)) || [];
+    message.tokenValues =
+      object.tokenValues?.map((e) => Message_TokenValue.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseMessage_Token(): Message_Token {
-  return { uuid: undefined, text: undefined, timer: undefined, clock: undefined };
+  return {
+    uuid: undefined,
+    text: undefined,
+    timer: undefined,
+    clock: undefined,
+  };
 }
 
 export const Message_Token = {
-  encode(message: Message_Token, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Message_Token,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
     if (message.text !== undefined) {
-      Message_Token_TokenTypeText.encode(message.text, writer.uint32(18).fork()).ldelim();
+      Message_Token_TokenTypeText.encode(
+        message.text,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.timer !== undefined) {
-      Message_Token_TokenTypeTimer.encode(message.timer, writer.uint32(26).fork()).ldelim();
+      Message_Token_TokenTypeTimer.encode(
+        message.timer,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.clock !== undefined) {
-      Message_Token_TokenTypeClock.encode(message.clock, writer.uint32(34).fork()).ldelim();
+      Message_Token_TokenTypeClock.encode(
+        message.clock,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Message_Token {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_Token();
     while (reader.pos < end) {
@@ -327,21 +383,30 @@ export const Message_Token = {
             break;
           }
 
-          message.text = Message_Token_TokenTypeText.decode(reader, reader.uint32());
+          message.text = Message_Token_TokenTypeText.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.timer = Message_Token_TokenTypeTimer.decode(reader, reader.uint32());
+          message.timer = Message_Token_TokenTypeTimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.clock = Message_Token_TokenTypeClock.decode(reader, reader.uint32());
+          message.clock = Message_Token_TokenTypeClock.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -355,58 +420,88 @@ export const Message_Token = {
   fromJSON(object: any): Message_Token {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      text: isSet(object.text) ? Message_Token_TokenTypeText.fromJSON(object.text) : undefined,
-      timer: isSet(object.timer) ? Message_Token_TokenTypeTimer.fromJSON(object.timer) : undefined,
-      clock: isSet(object.clock) ? Message_Token_TokenTypeClock.fromJSON(object.clock) : undefined,
+      text: isSet(object.text)
+        ? Message_Token_TokenTypeText.fromJSON(object.text)
+        : undefined,
+      timer: isSet(object.timer)
+        ? Message_Token_TokenTypeTimer.fromJSON(object.timer)
+        : undefined,
+      clock: isSet(object.clock)
+        ? Message_Token_TokenTypeClock.fromJSON(object.clock)
+        : undefined,
     };
   },
 
   toJSON(message: Message_Token): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.text !== undefined &&
-      (obj.text = message.text ? Message_Token_TokenTypeText.toJSON(message.text) : undefined);
+      (obj.text = message.text
+        ? Message_Token_TokenTypeText.toJSON(message.text)
+        : undefined);
     message.timer !== undefined &&
-      (obj.timer = message.timer ? Message_Token_TokenTypeTimer.toJSON(message.timer) : undefined);
+      (obj.timer = message.timer
+        ? Message_Token_TokenTypeTimer.toJSON(message.timer)
+        : undefined);
     message.clock !== undefined &&
-      (obj.clock = message.clock ? Message_Token_TokenTypeClock.toJSON(message.clock) : undefined);
+      (obj.clock = message.clock
+        ? Message_Token_TokenTypeClock.toJSON(message.clock)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Message_Token>, I>>(base?: I): Message_Token {
+  create<I extends Exact<DeepPartial<Message_Token>, I>>(
+    base?: I,
+  ): Message_Token {
     return Message_Token.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_Token>, I>>(object: I): Message_Token {
+  fromPartial<I extends Exact<DeepPartial<Message_Token>, I>>(
+    object: I,
+  ): Message_Token {
     const message = createBaseMessage_Token();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.text = (object.text !== undefined && object.text !== null)
-      ? Message_Token_TokenTypeText.fromPartial(object.text)
-      : undefined;
-    message.timer = (object.timer !== undefined && object.timer !== null)
-      ? Message_Token_TokenTypeTimer.fromPartial(object.timer)
-      : undefined;
-    message.clock = (object.clock !== undefined && object.clock !== null)
-      ? Message_Token_TokenTypeClock.fromPartial(object.clock)
-      : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.text =
+      object.text !== undefined && object.text !== null
+        ? Message_Token_TokenTypeText.fromPartial(object.text)
+        : undefined;
+    message.timer =
+      object.timer !== undefined && object.timer !== null
+        ? Message_Token_TokenTypeTimer.fromPartial(object.timer)
+        : undefined;
+    message.clock =
+      object.clock !== undefined && object.clock !== null
+        ? Message_Token_TokenTypeClock.fromPartial(object.clock)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMessage_Token_TokenTypeText(): Message_Token_TokenTypeText {
-  return { name: "" };
+  return { name: '' };
 }
 
 export const Message_Token_TokenTypeText = {
-  encode(message: Message_Token_TokenTypeText, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: Message_Token_TokenTypeText,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Message_Token_TokenTypeText {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Message_Token_TokenTypeText {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_Token_TokenTypeText();
     while (reader.pos < end) {
@@ -429,7 +524,7 @@ export const Message_Token_TokenTypeText = {
   },
 
   fromJSON(object: any): Message_Token_TokenTypeText {
-    return { name: isSet(object.name) ? String(object.name) : "" };
+    return { name: isSet(object.name) ? String(object.name) : '' };
   },
 
   toJSON(message: Message_Token_TokenTypeText): unknown {
@@ -438,24 +533,31 @@ export const Message_Token_TokenTypeText = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Message_Token_TokenTypeText>, I>>(base?: I): Message_Token_TokenTypeText {
+  create<I extends Exact<DeepPartial<Message_Token_TokenTypeText>, I>>(
+    base?: I,
+  ): Message_Token_TokenTypeText {
     return Message_Token_TokenTypeText.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_Token_TokenTypeText>, I>>(object: I): Message_Token_TokenTypeText {
+  fromPartial<I extends Exact<DeepPartial<Message_Token_TokenTypeText>, I>>(
+    object: I,
+  ): Message_Token_TokenTypeText {
     const message = createBaseMessage_Token_TokenTypeText();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     return message;
   },
 };
 
 function createBaseMessage_Token_TokenTypeTimer(): Message_Token_TokenTypeTimer {
-  return { name: "", timerUuid: undefined };
+  return { name: '', timerUuid: undefined };
 }
 
 export const Message_Token_TokenTypeTimer = {
-  encode(message: Message_Token_TokenTypeTimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: Message_Token_TokenTypeTimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     if (message.timerUuid !== undefined) {
@@ -464,8 +566,12 @@ export const Message_Token_TokenTypeTimer = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Message_Token_TokenTypeTimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Message_Token_TokenTypeTimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_Token_TokenTypeTimer();
     while (reader.pos < end) {
@@ -496,28 +602,38 @@ export const Message_Token_TokenTypeTimer = {
 
   fromJSON(object: any): Message_Token_TokenTypeTimer {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      timerUuid: isSet(object.timerUuid) ? UUID.fromJSON(object.timerUuid) : undefined,
+      name: isSet(object.name) ? String(object.name) : '',
+      timerUuid: isSet(object.timerUuid)
+        ? UUID.fromJSON(object.timerUuid)
+        : undefined,
     };
   },
 
   toJSON(message: Message_Token_TokenTypeTimer): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.timerUuid !== undefined && (obj.timerUuid = message.timerUuid ? UUID.toJSON(message.timerUuid) : undefined);
+    message.timerUuid !== undefined &&
+      (obj.timerUuid = message.timerUuid
+        ? UUID.toJSON(message.timerUuid)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Message_Token_TokenTypeTimer>, I>>(base?: I): Message_Token_TokenTypeTimer {
+  create<I extends Exact<DeepPartial<Message_Token_TokenTypeTimer>, I>>(
+    base?: I,
+  ): Message_Token_TokenTypeTimer {
     return Message_Token_TokenTypeTimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_Token_TokenTypeTimer>, I>>(object: I): Message_Token_TokenTypeTimer {
+  fromPartial<I extends Exact<DeepPartial<Message_Token_TokenTypeTimer>, I>>(
+    object: I,
+  ): Message_Token_TokenTypeTimer {
     const message = createBaseMessage_Token_TokenTypeTimer();
-    message.name = object.name ?? "";
-    message.timerUuid = (object.timerUuid !== undefined && object.timerUuid !== null)
-      ? UUID.fromPartial(object.timerUuid)
-      : undefined;
+    message.name = object.name ?? '';
+    message.timerUuid =
+      object.timerUuid !== undefined && object.timerUuid !== null
+        ? UUID.fromPartial(object.timerUuid)
+        : undefined;
     return message;
   },
 };
@@ -527,12 +643,19 @@ function createBaseMessage_Token_TokenTypeClock(): Message_Token_TokenTypeClock 
 }
 
 export const Message_Token_TokenTypeClock = {
-  encode(_: Message_Token_TokenTypeClock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: Message_Token_TokenTypeClock,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Message_Token_TokenTypeClock {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Message_Token_TokenTypeClock {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_Token_TokenTypeClock();
     while (reader.pos < end) {
@@ -556,42 +679,65 @@ export const Message_Token_TokenTypeClock = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Message_Token_TokenTypeClock>, I>>(base?: I): Message_Token_TokenTypeClock {
+  create<I extends Exact<DeepPartial<Message_Token_TokenTypeClock>, I>>(
+    base?: I,
+  ): Message_Token_TokenTypeClock {
     return Message_Token_TokenTypeClock.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_Token_TokenTypeClock>, I>>(_: I): Message_Token_TokenTypeClock {
+  fromPartial<I extends Exact<DeepPartial<Message_Token_TokenTypeClock>, I>>(
+    _: I,
+  ): Message_Token_TokenTypeClock {
     const message = createBaseMessage_Token_TokenTypeClock();
     return message;
   },
 };
 
 function createBaseMessage_TokenValue(): Message_TokenValue {
-  return { tokenId: undefined, tokenName: "", text: undefined, timer: undefined, clock: undefined };
+  return {
+    tokenId: undefined,
+    tokenName: '',
+    text: undefined,
+    timer: undefined,
+    clock: undefined,
+  };
 }
 
 export const Message_TokenValue = {
-  encode(message: Message_TokenValue, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Message_TokenValue,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.tokenId !== undefined) {
       UUID.encode(message.tokenId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.tokenName !== "") {
+    if (message.tokenName !== '') {
       writer.uint32(42).string(message.tokenName);
     }
     if (message.text !== undefined) {
-      Message_TokenValue_TokenValueText.encode(message.text, writer.uint32(18).fork()).ldelim();
+      Message_TokenValue_TokenValueText.encode(
+        message.text,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.timer !== undefined) {
-      Message_TokenValue_TokenValueTimer.encode(message.timer, writer.uint32(26).fork()).ldelim();
+      Message_TokenValue_TokenValueTimer.encode(
+        message.timer,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.clock !== undefined) {
-      Message_TokenValue_TokenValueClock.encode(message.clock, writer.uint32(34).fork()).ldelim();
+      Message_TokenValue_TokenValueClock.encode(
+        message.clock,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Message_TokenValue {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_TokenValue();
     while (reader.pos < end) {
@@ -616,21 +762,30 @@ export const Message_TokenValue = {
             break;
           }
 
-          message.text = Message_TokenValue_TokenValueText.decode(reader, reader.uint32());
+          message.text = Message_TokenValue_TokenValueText.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.timer = Message_TokenValue_TokenValueTimer.decode(reader, reader.uint32());
+          message.timer = Message_TokenValue_TokenValueTimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.clock = Message_TokenValue_TokenValueClock.decode(reader, reader.uint32());
+          message.clock = Message_TokenValue_TokenValueClock.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -643,64 +798,96 @@ export const Message_TokenValue = {
 
   fromJSON(object: any): Message_TokenValue {
     return {
-      tokenId: isSet(object.tokenId) ? UUID.fromJSON(object.tokenId) : undefined,
-      tokenName: isSet(object.tokenName) ? String(object.tokenName) : "",
-      text: isSet(object.text) ? Message_TokenValue_TokenValueText.fromJSON(object.text) : undefined,
-      timer: isSet(object.timer) ? Message_TokenValue_TokenValueTimer.fromJSON(object.timer) : undefined,
-      clock: isSet(object.clock) ? Message_TokenValue_TokenValueClock.fromJSON(object.clock) : undefined,
+      tokenId: isSet(object.tokenId)
+        ? UUID.fromJSON(object.tokenId)
+        : undefined,
+      tokenName: isSet(object.tokenName) ? String(object.tokenName) : '',
+      text: isSet(object.text)
+        ? Message_TokenValue_TokenValueText.fromJSON(object.text)
+        : undefined,
+      timer: isSet(object.timer)
+        ? Message_TokenValue_TokenValueTimer.fromJSON(object.timer)
+        : undefined,
+      clock: isSet(object.clock)
+        ? Message_TokenValue_TokenValueClock.fromJSON(object.clock)
+        : undefined,
     };
   },
 
   toJSON(message: Message_TokenValue): unknown {
     const obj: any = {};
-    message.tokenId !== undefined && (obj.tokenId = message.tokenId ? UUID.toJSON(message.tokenId) : undefined);
+    message.tokenId !== undefined &&
+      (obj.tokenId = message.tokenId
+        ? UUID.toJSON(message.tokenId)
+        : undefined);
     message.tokenName !== undefined && (obj.tokenName = message.tokenName);
     message.text !== undefined &&
-      (obj.text = message.text ? Message_TokenValue_TokenValueText.toJSON(message.text) : undefined);
+      (obj.text = message.text
+        ? Message_TokenValue_TokenValueText.toJSON(message.text)
+        : undefined);
     message.timer !== undefined &&
-      (obj.timer = message.timer ? Message_TokenValue_TokenValueTimer.toJSON(message.timer) : undefined);
+      (obj.timer = message.timer
+        ? Message_TokenValue_TokenValueTimer.toJSON(message.timer)
+        : undefined);
     message.clock !== undefined &&
-      (obj.clock = message.clock ? Message_TokenValue_TokenValueClock.toJSON(message.clock) : undefined);
+      (obj.clock = message.clock
+        ? Message_TokenValue_TokenValueClock.toJSON(message.clock)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Message_TokenValue>, I>>(base?: I): Message_TokenValue {
+  create<I extends Exact<DeepPartial<Message_TokenValue>, I>>(
+    base?: I,
+  ): Message_TokenValue {
     return Message_TokenValue.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_TokenValue>, I>>(object: I): Message_TokenValue {
+  fromPartial<I extends Exact<DeepPartial<Message_TokenValue>, I>>(
+    object: I,
+  ): Message_TokenValue {
     const message = createBaseMessage_TokenValue();
-    message.tokenId = (object.tokenId !== undefined && object.tokenId !== null)
-      ? UUID.fromPartial(object.tokenId)
-      : undefined;
-    message.tokenName = object.tokenName ?? "";
-    message.text = (object.text !== undefined && object.text !== null)
-      ? Message_TokenValue_TokenValueText.fromPartial(object.text)
-      : undefined;
-    message.timer = (object.timer !== undefined && object.timer !== null)
-      ? Message_TokenValue_TokenValueTimer.fromPartial(object.timer)
-      : undefined;
-    message.clock = (object.clock !== undefined && object.clock !== null)
-      ? Message_TokenValue_TokenValueClock.fromPartial(object.clock)
-      : undefined;
+    message.tokenId =
+      object.tokenId !== undefined && object.tokenId !== null
+        ? UUID.fromPartial(object.tokenId)
+        : undefined;
+    message.tokenName = object.tokenName ?? '';
+    message.text =
+      object.text !== undefined && object.text !== null
+        ? Message_TokenValue_TokenValueText.fromPartial(object.text)
+        : undefined;
+    message.timer =
+      object.timer !== undefined && object.timer !== null
+        ? Message_TokenValue_TokenValueTimer.fromPartial(object.timer)
+        : undefined;
+    message.clock =
+      object.clock !== undefined && object.clock !== null
+        ? Message_TokenValue_TokenValueClock.fromPartial(object.clock)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMessage_TokenValue_TokenValueText(): Message_TokenValue_TokenValueText {
-  return { value: "" };
+  return { value: '' };
 }
 
 export const Message_TokenValue_TokenValueText = {
-  encode(message: Message_TokenValue_TokenValueText, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.value !== "") {
+  encode(
+    message: Message_TokenValue_TokenValueText,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.value !== '') {
       writer.uint32(10).string(message.value);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Message_TokenValue_TokenValueText {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Message_TokenValue_TokenValueText {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_TokenValue_TokenValueText();
     while (reader.pos < end) {
@@ -723,7 +910,7 @@ export const Message_TokenValue_TokenValueText = {
   },
 
   fromJSON(object: any): Message_TokenValue_TokenValueText {
-    return { value: isSet(object.value) ? String(object.value) : "" };
+    return { value: isSet(object.value) ? String(object.value) : '' };
   },
 
   toJSON(message: Message_TokenValue_TokenValueText): unknown {
@@ -738,11 +925,11 @@ export const Message_TokenValue_TokenValueText = {
     return Message_TokenValue_TokenValueText.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_TokenValue_TokenValueText>, I>>(
-    object: I,
-  ): Message_TokenValue_TokenValueText {
+  fromPartial<
+    I extends Exact<DeepPartial<Message_TokenValue_TokenValueText>, I>,
+  >(object: I): Message_TokenValue_TokenValueText {
     const message = createBaseMessage_TokenValue_TokenValueText();
-    message.value = object.value ?? "";
+    message.value = object.value ?? '';
     return message;
   },
 };
@@ -752,9 +939,15 @@ function createBaseMessage_TokenValue_TokenValueTimer(): Message_TokenValue_Toke
 }
 
 export const Message_TokenValue_TokenValueTimer = {
-  encode(message: Message_TokenValue_TokenValueTimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Message_TokenValue_TokenValueTimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.configuration !== undefined) {
-      Timer_Configuration.encode(message.configuration, writer.uint32(10).fork()).ldelim();
+      Timer_Configuration.encode(
+        message.configuration,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.format !== undefined) {
       Timer_Format.encode(message.format, writer.uint32(18).fork()).ldelim();
@@ -762,8 +955,12 @@ export const Message_TokenValue_TokenValueTimer = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Message_TokenValue_TokenValueTimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Message_TokenValue_TokenValueTimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_TokenValue_TokenValueTimer();
     while (reader.pos < end) {
@@ -774,7 +971,10 @@ export const Message_TokenValue_TokenValueTimer = {
             break;
           }
 
-          message.configuration = Timer_Configuration.decode(reader, reader.uint32());
+          message.configuration = Timer_Configuration.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -794,16 +994,25 @@ export const Message_TokenValue_TokenValueTimer = {
 
   fromJSON(object: any): Message_TokenValue_TokenValueTimer {
     return {
-      configuration: isSet(object.configuration) ? Timer_Configuration.fromJSON(object.configuration) : undefined,
-      format: isSet(object.format) ? Timer_Format.fromJSON(object.format) : undefined,
+      configuration: isSet(object.configuration)
+        ? Timer_Configuration.fromJSON(object.configuration)
+        : undefined,
+      format: isSet(object.format)
+        ? Timer_Format.fromJSON(object.format)
+        : undefined,
     };
   },
 
   toJSON(message: Message_TokenValue_TokenValueTimer): unknown {
     const obj: any = {};
     message.configuration !== undefined &&
-      (obj.configuration = message.configuration ? Timer_Configuration.toJSON(message.configuration) : undefined);
-    message.format !== undefined && (obj.format = message.format ? Timer_Format.toJSON(message.format) : undefined);
+      (obj.configuration = message.configuration
+        ? Timer_Configuration.toJSON(message.configuration)
+        : undefined);
+    message.format !== undefined &&
+      (obj.format = message.format
+        ? Timer_Format.toJSON(message.format)
+        : undefined);
     return obj;
   },
 
@@ -813,16 +1022,18 @@ export const Message_TokenValue_TokenValueTimer = {
     return Message_TokenValue_TokenValueTimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_TokenValue_TokenValueTimer>, I>>(
-    object: I,
-  ): Message_TokenValue_TokenValueTimer {
+  fromPartial<
+    I extends Exact<DeepPartial<Message_TokenValue_TokenValueTimer>, I>,
+  >(object: I): Message_TokenValue_TokenValueTimer {
     const message = createBaseMessage_TokenValue_TokenValueTimer();
-    message.configuration = (object.configuration !== undefined && object.configuration !== null)
-      ? Timer_Configuration.fromPartial(object.configuration)
-      : undefined;
-    message.format = (object.format !== undefined && object.format !== null)
-      ? Timer_Format.fromPartial(object.format)
-      : undefined;
+    message.configuration =
+      object.configuration !== undefined && object.configuration !== null
+        ? Timer_Configuration.fromPartial(object.configuration)
+        : undefined;
+    message.format =
+      object.format !== undefined && object.format !== null
+        ? Timer_Format.fromPartial(object.format)
+        : undefined;
     return message;
   },
 };
@@ -832,15 +1043,22 @@ function createBaseMessage_TokenValue_TokenValueClock(): Message_TokenValue_Toke
 }
 
 export const Message_TokenValue_TokenValueClock = {
-  encode(message: Message_TokenValue_TokenValueClock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Message_TokenValue_TokenValueClock,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.format !== undefined) {
       Clock_Format.encode(message.format, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Message_TokenValue_TokenValueClock {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Message_TokenValue_TokenValueClock {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessage_TokenValue_TokenValueClock();
     while (reader.pos < end) {
@@ -863,12 +1081,19 @@ export const Message_TokenValue_TokenValueClock = {
   },
 
   fromJSON(object: any): Message_TokenValue_TokenValueClock {
-    return { format: isSet(object.format) ? Clock_Format.fromJSON(object.format) : undefined };
+    return {
+      format: isSet(object.format)
+        ? Clock_Format.fromJSON(object.format)
+        : undefined,
+    };
   },
 
   toJSON(message: Message_TokenValue_TokenValueClock): unknown {
     const obj: any = {};
-    message.format !== undefined && (obj.format = message.format ? Clock_Format.toJSON(message.format) : undefined);
+    message.format !== undefined &&
+      (obj.format = message.format
+        ? Clock_Format.toJSON(message.format)
+        : undefined);
     return obj;
   },
 
@@ -878,13 +1103,14 @@ export const Message_TokenValue_TokenValueClock = {
     return Message_TokenValue_TokenValueClock.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Message_TokenValue_TokenValueClock>, I>>(
-    object: I,
-  ): Message_TokenValue_TokenValueClock {
+  fromPartial<
+    I extends Exact<DeepPartial<Message_TokenValue_TokenValueClock>, I>,
+  >(object: I): Message_TokenValue_TokenValueClock {
     const message = createBaseMessage_TokenValue_TokenValueClock();
-    message.format = (object.format !== undefined && object.format !== null)
-      ? Clock_Format.fromPartial(object.format)
-      : undefined;
+    message.format =
+      object.format !== undefined && object.format !== null
+        ? Clock_Format.fromPartial(object.format)
+        : undefined;
     return message;
   },
 };
@@ -894,9 +1120,15 @@ function createBaseMessageDocument(): MessageDocument {
 }
 
 export const MessageDocument = {
-  encode(message: MessageDocument, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: MessageDocument,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.applicationInfo !== undefined) {
-      ApplicationInfo.encode(message.applicationInfo, writer.uint32(10).fork()).ldelim();
+      ApplicationInfo.encode(
+        message.applicationInfo,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     for (const v of message.messages) {
       Message.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -905,7 +1137,8 @@ export const MessageDocument = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): MessageDocument {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessageDocument();
     while (reader.pos < end) {
@@ -916,7 +1149,10 @@ export const MessageDocument = {
             break;
           }
 
-          message.applicationInfo = ApplicationInfo.decode(reader, reader.uint32());
+          message.applicationInfo = ApplicationInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -936,47 +1172,76 @@ export const MessageDocument = {
 
   fromJSON(object: any): MessageDocument {
     return {
-      applicationInfo: isSet(object.applicationInfo) ? ApplicationInfo.fromJSON(object.applicationInfo) : undefined,
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Message.fromJSON(e)) : [],
+      applicationInfo: isSet(object.applicationInfo)
+        ? ApplicationInfo.fromJSON(object.applicationInfo)
+        : undefined,
+      messages: Array.isArray(object?.messages)
+        ? object.messages.map((e: any) => Message.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: MessageDocument): unknown {
     const obj: any = {};
     message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo ? ApplicationInfo.toJSON(message.applicationInfo) : undefined);
+      (obj.applicationInfo = message.applicationInfo
+        ? ApplicationInfo.toJSON(message.applicationInfo)
+        : undefined);
     if (message.messages) {
-      obj.messages = message.messages.map((e) => e ? Message.toJSON(e) : undefined);
+      obj.messages = message.messages.map((e) =>
+        e ? Message.toJSON(e) : undefined,
+      );
     } else {
       obj.messages = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<MessageDocument>, I>>(base?: I): MessageDocument {
+  create<I extends Exact<DeepPartial<MessageDocument>, I>>(
+    base?: I,
+  ): MessageDocument {
     return MessageDocument.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<MessageDocument>, I>>(object: I): MessageDocument {
+  fromPartial<I extends Exact<DeepPartial<MessageDocument>, I>>(
+    object: I,
+  ): MessageDocument {
     const message = createBaseMessageDocument();
-    message.applicationInfo = (object.applicationInfo !== undefined && object.applicationInfo !== null)
-      ? ApplicationInfo.fromPartial(object.applicationInfo)
-      : undefined;
-    message.messages = object.messages?.map((e) => Message.fromPartial(e)) || [];
+    message.applicationInfo =
+      object.applicationInfo !== undefined && object.applicationInfo !== null
+        ? ApplicationInfo.fromPartial(object.applicationInfo)
+        : undefined;
+    message.messages =
+      object.messages?.map((e) => Message.fromPartial(e)) || [];
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

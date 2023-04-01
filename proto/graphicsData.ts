@@ -1,13 +1,13 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Color, IntRange, URL, UUID } from "./basicTypes";
-import { DigitalAudio_Device_Routing } from "./digitalAudio";
-import { Effect } from "./effects";
+import _m0 from 'protobufjs/minimal';
+import { Color, IntRange, URL, UUID } from './basicTypes';
+import { DigitalAudio_Device_Routing } from './digitalAudio';
+import { Effect } from './effects';
+import { FileProperties } from './fileProperties';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
-export interface Graphics {
-}
+export interface Graphics {}
 
 export interface Graphics_Element {
   uuid: UUID | undefined;
@@ -36,40 +36,44 @@ export enum Graphics_Element_FlipMode {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Element_FlipModeFromJSON(object: any): Graphics_Element_FlipMode {
+export function graphics_Element_FlipModeFromJSON(
+  object: any,
+): Graphics_Element_FlipMode {
   switch (object) {
     case 0:
-    case "FLIP_MODE_NONE":
+    case 'FLIP_MODE_NONE':
       return Graphics_Element_FlipMode.FLIP_MODE_NONE;
     case 1:
-    case "FLIP_MODE_VERTICAL":
+    case 'FLIP_MODE_VERTICAL':
       return Graphics_Element_FlipMode.FLIP_MODE_VERTICAL;
     case 2:
-    case "FLIP_MODE_HORIZONTAL":
+    case 'FLIP_MODE_HORIZONTAL':
       return Graphics_Element_FlipMode.FLIP_MODE_HORIZONTAL;
     case 3:
-    case "FLIP_MODE_BOTH":
+    case 'FLIP_MODE_BOTH':
       return Graphics_Element_FlipMode.FLIP_MODE_BOTH;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Element_FlipMode.UNRECOGNIZED;
   }
 }
 
-export function graphics_Element_FlipModeToJSON(object: Graphics_Element_FlipMode): string {
+export function graphics_Element_FlipModeToJSON(
+  object: Graphics_Element_FlipMode,
+): string {
   switch (object) {
     case Graphics_Element_FlipMode.FLIP_MODE_NONE:
-      return "FLIP_MODE_NONE";
+      return 'FLIP_MODE_NONE';
     case Graphics_Element_FlipMode.FLIP_MODE_VERTICAL:
-      return "FLIP_MODE_VERTICAL";
+      return 'FLIP_MODE_VERTICAL';
     case Graphics_Element_FlipMode.FLIP_MODE_HORIZONTAL:
-      return "FLIP_MODE_HORIZONTAL";
+      return 'FLIP_MODE_HORIZONTAL';
     case Graphics_Element_FlipMode.FLIP_MODE_BOTH:
-      return "FLIP_MODE_BOTH";
+      return 'FLIP_MODE_BOTH';
     case Graphics_Element_FlipMode.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -132,80 +136,84 @@ export enum Graphics_Path_Shape_Type {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Path_Shape_TypeFromJSON(object: any): Graphics_Path_Shape_Type {
+export function graphics_Path_Shape_TypeFromJSON(
+  object: any,
+): Graphics_Path_Shape_Type {
   switch (object) {
     case 0:
-    case "TYPE_UNKNOWN":
+    case 'TYPE_UNKNOWN':
       return Graphics_Path_Shape_Type.TYPE_UNKNOWN;
     case 1:
-    case "TYPE_RECTANGLE":
+    case 'TYPE_RECTANGLE':
       return Graphics_Path_Shape_Type.TYPE_RECTANGLE;
     case 2:
-    case "TYPE_ELLIPSE":
+    case 'TYPE_ELLIPSE':
       return Graphics_Path_Shape_Type.TYPE_ELLIPSE;
     case 3:
-    case "TYPE_ISOSCELES_TRIANGLE":
+    case 'TYPE_ISOSCELES_TRIANGLE':
       return Graphics_Path_Shape_Type.TYPE_ISOSCELES_TRIANGLE;
     case 4:
-    case "TYPE_RIGHT_TRIANGLE":
+    case 'TYPE_RIGHT_TRIANGLE':
       return Graphics_Path_Shape_Type.TYPE_RIGHT_TRIANGLE;
     case 5:
-    case "TYPE_RHOMBUS":
+    case 'TYPE_RHOMBUS':
       return Graphics_Path_Shape_Type.TYPE_RHOMBUS;
     case 6:
-    case "TYPE_STAR":
+    case 'TYPE_STAR':
       return Graphics_Path_Shape_Type.TYPE_STAR;
     case 7:
-    case "TYPE_POLYGON":
+    case 'TYPE_POLYGON':
       return Graphics_Path_Shape_Type.TYPE_POLYGON;
     case 8:
-    case "TYPE_CUSTOM":
+    case 'TYPE_CUSTOM':
       return Graphics_Path_Shape_Type.TYPE_CUSTOM;
     case 9:
-    case "TYPE_RIGHT_ARROW":
+    case 'TYPE_RIGHT_ARROW':
       return Graphics_Path_Shape_Type.TYPE_RIGHT_ARROW;
     case 10:
-    case "TYPE_DOUBLE_ARROW":
+    case 'TYPE_DOUBLE_ARROW':
       return Graphics_Path_Shape_Type.TYPE_DOUBLE_ARROW;
     case 11:
-    case "TYPE_ROUNDED_RECTANGLE":
+    case 'TYPE_ROUNDED_RECTANGLE':
       return Graphics_Path_Shape_Type.TYPE_ROUNDED_RECTANGLE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Path_Shape_Type.UNRECOGNIZED;
   }
 }
 
-export function graphics_Path_Shape_TypeToJSON(object: Graphics_Path_Shape_Type): string {
+export function graphics_Path_Shape_TypeToJSON(
+  object: Graphics_Path_Shape_Type,
+): string {
   switch (object) {
     case Graphics_Path_Shape_Type.TYPE_UNKNOWN:
-      return "TYPE_UNKNOWN";
+      return 'TYPE_UNKNOWN';
     case Graphics_Path_Shape_Type.TYPE_RECTANGLE:
-      return "TYPE_RECTANGLE";
+      return 'TYPE_RECTANGLE';
     case Graphics_Path_Shape_Type.TYPE_ELLIPSE:
-      return "TYPE_ELLIPSE";
+      return 'TYPE_ELLIPSE';
     case Graphics_Path_Shape_Type.TYPE_ISOSCELES_TRIANGLE:
-      return "TYPE_ISOSCELES_TRIANGLE";
+      return 'TYPE_ISOSCELES_TRIANGLE';
     case Graphics_Path_Shape_Type.TYPE_RIGHT_TRIANGLE:
-      return "TYPE_RIGHT_TRIANGLE";
+      return 'TYPE_RIGHT_TRIANGLE';
     case Graphics_Path_Shape_Type.TYPE_RHOMBUS:
-      return "TYPE_RHOMBUS";
+      return 'TYPE_RHOMBUS';
     case Graphics_Path_Shape_Type.TYPE_STAR:
-      return "TYPE_STAR";
+      return 'TYPE_STAR';
     case Graphics_Path_Shape_Type.TYPE_POLYGON:
-      return "TYPE_POLYGON";
+      return 'TYPE_POLYGON';
     case Graphics_Path_Shape_Type.TYPE_CUSTOM:
-      return "TYPE_CUSTOM";
+      return 'TYPE_CUSTOM';
     case Graphics_Path_Shape_Type.TYPE_RIGHT_ARROW:
-      return "TYPE_RIGHT_ARROW";
+      return 'TYPE_RIGHT_ARROW';
     case Graphics_Path_Shape_Type.TYPE_DOUBLE_ARROW:
-      return "TYPE_DOUBLE_ARROW";
+      return 'TYPE_DOUBLE_ARROW';
     case Graphics_Path_Shape_Type.TYPE_ROUNDED_RECTANGLE:
-      return "TYPE_ROUNDED_RECTANGLE";
+      return 'TYPE_ROUNDED_RECTANGLE';
     case Graphics_Path_Shape_Type.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -236,7 +244,9 @@ export interface Graphics_Fill {
 
 export interface Graphics_BackgroundEffect {
   backgroundBlur?: Graphics_BackgroundEffect_BackgroundEffectBlur | undefined;
-  backgroundInvert?: Graphics_BackgroundEffect_BackgroundEffectInvert | undefined;
+  backgroundInvert?:
+    | Graphics_BackgroundEffect_BackgroundEffectInvert
+    | undefined;
 }
 
 export interface Graphics_BackgroundEffect_BackgroundEffectBlur {
@@ -244,8 +254,7 @@ export interface Graphics_BackgroundEffect_BackgroundEffectBlur {
   blurAmount: number;
 }
 
-export interface Graphics_BackgroundEffect_BackgroundEffectInvert {
-}
+export interface Graphics_BackgroundEffect_BackgroundEffectInvert {}
 
 export interface Graphics_Gradient {
   type: Graphics_Gradient_Type;
@@ -261,35 +270,39 @@ export enum Graphics_Gradient_Type {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Gradient_TypeFromJSON(object: any): Graphics_Gradient_Type {
+export function graphics_Gradient_TypeFromJSON(
+  object: any,
+): Graphics_Gradient_Type {
   switch (object) {
     case 0:
-    case "TYPE_LINEAR":
+    case 'TYPE_LINEAR':
       return Graphics_Gradient_Type.TYPE_LINEAR;
     case 1:
-    case "TYPE_RADIAL":
+    case 'TYPE_RADIAL':
       return Graphics_Gradient_Type.TYPE_RADIAL;
     case 2:
-    case "TYPE_ANGLE":
+    case 'TYPE_ANGLE':
       return Graphics_Gradient_Type.TYPE_ANGLE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Gradient_Type.UNRECOGNIZED;
   }
 }
 
-export function graphics_Gradient_TypeToJSON(object: Graphics_Gradient_Type): string {
+export function graphics_Gradient_TypeToJSON(
+  object: Graphics_Gradient_Type,
+): string {
   switch (object) {
     case Graphics_Gradient_Type.TYPE_LINEAR:
-      return "TYPE_LINEAR";
+      return 'TYPE_LINEAR';
     case Graphics_Gradient_Type.TYPE_RADIAL:
-      return "TYPE_RADIAL";
+      return 'TYPE_RADIAL';
     case Graphics_Gradient_Type.TYPE_ANGLE:
-      return "TYPE_ANGLE";
+      return 'TYPE_ANGLE';
     case Graphics_Gradient_Type.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -314,25 +327,29 @@ export enum Graphics_Shadow_Style {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Shadow_StyleFromJSON(object: any): Graphics_Shadow_Style {
+export function graphics_Shadow_StyleFromJSON(
+  object: any,
+): Graphics_Shadow_Style {
   switch (object) {
     case 0:
-    case "STYLE_DROP":
+    case 'STYLE_DROP':
       return Graphics_Shadow_Style.STYLE_DROP;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Shadow_Style.UNRECOGNIZED;
   }
 }
 
-export function graphics_Shadow_StyleToJSON(object: Graphics_Shadow_Style): string {
+export function graphics_Shadow_StyleToJSON(
+  object: Graphics_Shadow_Style,
+): string {
   switch (object) {
     case Graphics_Shadow_Style.STYLE_DROP:
-      return "STYLE_DROP";
+      return 'STYLE_DROP';
     case Graphics_Shadow_Style.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -352,40 +369,44 @@ export enum Graphics_Stroke_Style {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Stroke_StyleFromJSON(object: any): Graphics_Stroke_Style {
+export function graphics_Stroke_StyleFromJSON(
+  object: any,
+): Graphics_Stroke_Style {
   switch (object) {
     case 0:
-    case "STYLE_SOLID_LINE":
+    case 'STYLE_SOLID_LINE':
       return Graphics_Stroke_Style.STYLE_SOLID_LINE;
     case 1:
-    case "STYLE_SQUARE_DASH":
+    case 'STYLE_SQUARE_DASH':
       return Graphics_Stroke_Style.STYLE_SQUARE_DASH;
     case 2:
-    case "STYLE_SHORT_DASH":
+    case 'STYLE_SHORT_DASH':
       return Graphics_Stroke_Style.STYLE_SHORT_DASH;
     case 3:
-    case "STYLE_LONG_DASH":
+    case 'STYLE_LONG_DASH':
       return Graphics_Stroke_Style.STYLE_LONG_DASH;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Stroke_Style.UNRECOGNIZED;
   }
 }
 
-export function graphics_Stroke_StyleToJSON(object: Graphics_Stroke_Style): string {
+export function graphics_Stroke_StyleToJSON(
+  object: Graphics_Stroke_Style,
+): string {
   switch (object) {
     case Graphics_Stroke_Style.STYLE_SOLID_LINE:
-      return "STYLE_SOLID_LINE";
+      return 'STYLE_SOLID_LINE';
     case Graphics_Stroke_Style.STYLE_SQUARE_DASH:
-      return "STYLE_SQUARE_DASH";
+      return 'STYLE_SQUARE_DASH';
     case Graphics_Stroke_Style.STYLE_SHORT_DASH:
-      return "STYLE_SHORT_DASH";
+      return 'STYLE_SHORT_DASH';
     case Graphics_Stroke_Style.STYLE_LONG_DASH:
-      return "STYLE_LONG_DASH";
+      return 'STYLE_LONG_DASH';
     case Graphics_Stroke_Style.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -402,35 +423,39 @@ export enum Graphics_Feather_Style {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Feather_StyleFromJSON(object: any): Graphics_Feather_Style {
+export function graphics_Feather_StyleFromJSON(
+  object: any,
+): Graphics_Feather_Style {
   switch (object) {
     case 0:
-    case "STYLE_INSIDE":
+    case 'STYLE_INSIDE':
       return Graphics_Feather_Style.STYLE_INSIDE;
     case 1:
-    case "STYLE_CENTER":
+    case 'STYLE_CENTER':
       return Graphics_Feather_Style.STYLE_CENTER;
     case 2:
-    case "STYLE_OUTSIDE":
+    case 'STYLE_OUTSIDE':
       return Graphics_Feather_Style.STYLE_OUTSIDE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Feather_Style.UNRECOGNIZED;
   }
 }
 
-export function graphics_Feather_StyleToJSON(object: Graphics_Feather_Style): string {
+export function graphics_Feather_StyleToJSON(
+  object: Graphics_Feather_Style,
+): string {
   switch (object) {
     case Graphics_Feather_Style.STYLE_INSIDE:
-      return "STYLE_INSIDE";
+      return 'STYLE_INSIDE';
     case Graphics_Feather_Style.STYLE_CENTER:
-      return "STYLE_CENTER";
+      return 'STYLE_CENTER';
     case Graphics_Feather_Style.STYLE_OUTSIDE:
-      return "STYLE_OUTSIDE";
+      return 'STYLE_OUTSIDE';
     case Graphics_Feather_Style.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -454,35 +479,39 @@ export enum Graphics_Text_VerticalAlignment {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Text_VerticalAlignmentFromJSON(object: any): Graphics_Text_VerticalAlignment {
+export function graphics_Text_VerticalAlignmentFromJSON(
+  object: any,
+): Graphics_Text_VerticalAlignment {
   switch (object) {
     case 0:
-    case "VERTICAL_ALIGNMENT_TOP":
+    case 'VERTICAL_ALIGNMENT_TOP':
       return Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_TOP;
     case 1:
-    case "VERTICAL_ALIGNMENT_MIDDLE":
+    case 'VERTICAL_ALIGNMENT_MIDDLE':
       return Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_MIDDLE;
     case 2:
-    case "VERTICAL_ALIGNMENT_BOTTOM":
+    case 'VERTICAL_ALIGNMENT_BOTTOM':
       return Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_BOTTOM;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_VerticalAlignment.UNRECOGNIZED;
   }
 }
 
-export function graphics_Text_VerticalAlignmentToJSON(object: Graphics_Text_VerticalAlignment): string {
+export function graphics_Text_VerticalAlignmentToJSON(
+  object: Graphics_Text_VerticalAlignment,
+): string {
   switch (object) {
     case Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_TOP:
-      return "VERTICAL_ALIGNMENT_TOP";
+      return 'VERTICAL_ALIGNMENT_TOP';
     case Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_MIDDLE:
-      return "VERTICAL_ALIGNMENT_MIDDLE";
+      return 'VERTICAL_ALIGNMENT_MIDDLE';
     case Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_BOTTOM:
-      return "VERTICAL_ALIGNMENT_BOTTOM";
+      return 'VERTICAL_ALIGNMENT_BOTTOM';
     case Graphics_Text_VerticalAlignment.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -495,45 +524,49 @@ export enum Graphics_Text_ScaleBehavior {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Text_ScaleBehaviorFromJSON(object: any): Graphics_Text_ScaleBehavior {
+export function graphics_Text_ScaleBehaviorFromJSON(
+  object: any,
+): Graphics_Text_ScaleBehavior {
   switch (object) {
     case 0:
-    case "SCALE_BEHAVIOR_NONE":
+    case 'SCALE_BEHAVIOR_NONE':
       return Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_NONE;
     case 1:
-    case "SCALE_BEHAVIOR_ADJUST_CONTAINER_HEIGHT":
+    case 'SCALE_BEHAVIOR_ADJUST_CONTAINER_HEIGHT':
       return Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_ADJUST_CONTAINER_HEIGHT;
     case 2:
-    case "SCALE_BEHAVIOR_SCALE_FONT_DOWN":
+    case 'SCALE_BEHAVIOR_SCALE_FONT_DOWN':
       return Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_DOWN;
     case 3:
-    case "SCALE_BEHAVIOR_SCALE_FONT_UP":
+    case 'SCALE_BEHAVIOR_SCALE_FONT_UP':
       return Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_UP;
     case 4:
-    case "SCALE_BEHAVIOR_SCALE_FONT_UP_DOWN":
+    case 'SCALE_BEHAVIOR_SCALE_FONT_UP_DOWN':
       return Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_UP_DOWN;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_ScaleBehavior.UNRECOGNIZED;
   }
 }
 
-export function graphics_Text_ScaleBehaviorToJSON(object: Graphics_Text_ScaleBehavior): string {
+export function graphics_Text_ScaleBehaviorToJSON(
+  object: Graphics_Text_ScaleBehavior,
+): string {
   switch (object) {
     case Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_NONE:
-      return "SCALE_BEHAVIOR_NONE";
+      return 'SCALE_BEHAVIOR_NONE';
     case Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_ADJUST_CONTAINER_HEIGHT:
-      return "SCALE_BEHAVIOR_ADJUST_CONTAINER_HEIGHT";
+      return 'SCALE_BEHAVIOR_ADJUST_CONTAINER_HEIGHT';
     case Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_DOWN:
-      return "SCALE_BEHAVIOR_SCALE_FONT_DOWN";
+      return 'SCALE_BEHAVIOR_SCALE_FONT_DOWN';
     case Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_UP:
-      return "SCALE_BEHAVIOR_SCALE_FONT_UP";
+      return 'SCALE_BEHAVIOR_SCALE_FONT_UP';
     case Graphics_Text_ScaleBehavior.SCALE_BEHAVIOR_SCALE_FONT_UP_DOWN:
-      return "SCALE_BEHAVIOR_SCALE_FONT_UP_DOWN";
+      return 'SCALE_BEHAVIOR_SCALE_FONT_UP_DOWN';
     case Graphics_Text_ScaleBehavior.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -546,45 +579,49 @@ export enum Graphics_Text_Transform {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Text_TransformFromJSON(object: any): Graphics_Text_Transform {
+export function graphics_Text_TransformFromJSON(
+  object: any,
+): Graphics_Text_Transform {
   switch (object) {
     case 0:
-    case "TRANSFORM_NONE":
+    case 'TRANSFORM_NONE':
       return Graphics_Text_Transform.TRANSFORM_NONE;
     case 1:
-    case "TRANSFORM_SINGLE_LINE":
+    case 'TRANSFORM_SINGLE_LINE':
       return Graphics_Text_Transform.TRANSFORM_SINGLE_LINE;
     case 2:
-    case "TRANSFORM_ONE_WORD_PER_LINE":
+    case 'TRANSFORM_ONE_WORD_PER_LINE':
       return Graphics_Text_Transform.TRANSFORM_ONE_WORD_PER_LINE;
     case 3:
-    case "TRANSFORM_ONE_CHARACTER_PER_LINE":
+    case 'TRANSFORM_ONE_CHARACTER_PER_LINE':
       return Graphics_Text_Transform.TRANSFORM_ONE_CHARACTER_PER_LINE;
     case 4:
-    case "TRANSFORM_REPLACE_LINE_RETURNS":
+    case 'TRANSFORM_REPLACE_LINE_RETURNS':
       return Graphics_Text_Transform.TRANSFORM_REPLACE_LINE_RETURNS;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_Transform.UNRECOGNIZED;
   }
 }
 
-export function graphics_Text_TransformToJSON(object: Graphics_Text_Transform): string {
+export function graphics_Text_TransformToJSON(
+  object: Graphics_Text_Transform,
+): string {
   switch (object) {
     case Graphics_Text_Transform.TRANSFORM_NONE:
-      return "TRANSFORM_NONE";
+      return 'TRANSFORM_NONE';
     case Graphics_Text_Transform.TRANSFORM_SINGLE_LINE:
-      return "TRANSFORM_SINGLE_LINE";
+      return 'TRANSFORM_SINGLE_LINE';
     case Graphics_Text_Transform.TRANSFORM_ONE_WORD_PER_LINE:
-      return "TRANSFORM_ONE_WORD_PER_LINE";
+      return 'TRANSFORM_ONE_WORD_PER_LINE';
     case Graphics_Text_Transform.TRANSFORM_ONE_CHARACTER_PER_LINE:
-      return "TRANSFORM_ONE_CHARACTER_PER_LINE";
+      return 'TRANSFORM_ONE_CHARACTER_PER_LINE';
     case Graphics_Text_Transform.TRANSFORM_REPLACE_LINE_RETURNS:
-      return "TRANSFORM_REPLACE_LINE_RETURNS";
+      return 'TRANSFORM_REPLACE_LINE_RETURNS';
     case Graphics_Text_Transform.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -609,16 +646,16 @@ export function graphics_Text_LineFillMask_LineMaskStyleFromJSON(
 ): Graphics_Text_LineFillMask_LineMaskStyle {
   switch (object) {
     case 0:
-    case "LINE_MASK_STYLE_FULL_WIDTH":
+    case 'LINE_MASK_STYLE_FULL_WIDTH':
       return Graphics_Text_LineFillMask_LineMaskStyle.LINE_MASK_STYLE_FULL_WIDTH;
     case 1:
-    case "LINE_MASK_STYLE_LINE_WIDTH":
+    case 'LINE_MASK_STYLE_LINE_WIDTH':
       return Graphics_Text_LineFillMask_LineMaskStyle.LINE_MASK_STYLE_LINE_WIDTH;
     case 2:
-    case "LINE_MASK_STYLE_MAX_LINE_WIDTH":
+    case 'LINE_MASK_STYLE_MAX_LINE_WIDTH':
       return Graphics_Text_LineFillMask_LineMaskStyle.LINE_MASK_STYLE_MAX_LINE_WIDTH;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_LineFillMask_LineMaskStyle.UNRECOGNIZED;
   }
@@ -629,14 +666,14 @@ export function graphics_Text_LineFillMask_LineMaskStyleToJSON(
 ): string {
   switch (object) {
     case Graphics_Text_LineFillMask_LineMaskStyle.LINE_MASK_STYLE_FULL_WIDTH:
-      return "LINE_MASK_STYLE_FULL_WIDTH";
+      return 'LINE_MASK_STYLE_FULL_WIDTH';
     case Graphics_Text_LineFillMask_LineMaskStyle.LINE_MASK_STYLE_LINE_WIDTH:
-      return "LINE_MASK_STYLE_LINE_WIDTH";
+      return 'LINE_MASK_STYLE_LINE_WIDTH';
     case Graphics_Text_LineFillMask_LineMaskStyle.LINE_MASK_STYLE_MAX_LINE_WIDTH:
-      return "LINE_MASK_STYLE_MAX_LINE_WIDTH";
+      return 'LINE_MASK_STYLE_MAX_LINE_WIDTH';
     case Graphics_Text_LineFillMask_LineMaskStyle.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -645,12 +682,10 @@ export interface Graphics_Text_GradientFill {
   stretchToDocumentBounds: boolean;
 }
 
-export interface Graphics_Text_CutOutFill {
-}
+export interface Graphics_Text_CutOutFill {}
 
 export interface Graphics_Text_MediaFill {
   media: Media | undefined;
-  useObjectBounds: boolean;
 }
 
 export interface Graphics_Text_ChordPro {
@@ -667,40 +702,44 @@ export enum Graphics_Text_ChordPro_Notation {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Text_ChordPro_NotationFromJSON(object: any): Graphics_Text_ChordPro_Notation {
+export function graphics_Text_ChordPro_NotationFromJSON(
+  object: any,
+): Graphics_Text_ChordPro_Notation {
   switch (object) {
     case 0:
-    case "NOTATION_CHORDS":
+    case 'NOTATION_CHORDS':
       return Graphics_Text_ChordPro_Notation.NOTATION_CHORDS;
     case 1:
-    case "NOTATION_NUMBERS":
+    case 'NOTATION_NUMBERS':
       return Graphics_Text_ChordPro_Notation.NOTATION_NUMBERS;
     case 2:
-    case "NOTATION_NUMERALS":
+    case 'NOTATION_NUMERALS':
       return Graphics_Text_ChordPro_Notation.NOTATION_NUMERALS;
     case 3:
-    case "NOTATION_DO_RE_MI":
+    case 'NOTATION_DO_RE_MI':
       return Graphics_Text_ChordPro_Notation.NOTATION_DO_RE_MI;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_ChordPro_Notation.UNRECOGNIZED;
   }
 }
 
-export function graphics_Text_ChordPro_NotationToJSON(object: Graphics_Text_ChordPro_Notation): string {
+export function graphics_Text_ChordPro_NotationToJSON(
+  object: Graphics_Text_ChordPro_Notation,
+): string {
   switch (object) {
     case Graphics_Text_ChordPro_Notation.NOTATION_CHORDS:
-      return "NOTATION_CHORDS";
+      return 'NOTATION_CHORDS';
     case Graphics_Text_ChordPro_Notation.NOTATION_NUMBERS:
-      return "NOTATION_NUMBERS";
+      return 'NOTATION_NUMBERS';
     case Graphics_Text_ChordPro_Notation.NOTATION_NUMERALS:
-      return "NOTATION_NUMERALS";
+      return 'NOTATION_NUMERALS';
     case Graphics_Text_ChordPro_Notation.NOTATION_DO_RE_MI:
-      return "NOTATION_DO_RE_MI";
+      return 'NOTATION_DO_RE_MI';
     case Graphics_Text_ChordPro_Notation.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -734,45 +773,104 @@ export enum Graphics_Text_Attributes_Capitalization {
   UNRECOGNIZED = -1,
 }
 
-export function graphics_Text_Attributes_CapitalizationFromJSON(object: any): Graphics_Text_Attributes_Capitalization {
+export function graphics_Text_Attributes_CapitalizationFromJSON(
+  object: any,
+): Graphics_Text_Attributes_Capitalization {
   switch (object) {
     case 0:
-    case "CAPITALIZATION_NONE":
+    case 'CAPITALIZATION_NONE':
       return Graphics_Text_Attributes_Capitalization.CAPITALIZATION_NONE;
     case 1:
-    case "CAPITALIZATION_ALL_CAPS":
+    case 'CAPITALIZATION_ALL_CAPS':
       return Graphics_Text_Attributes_Capitalization.CAPITALIZATION_ALL_CAPS;
     case 2:
-    case "CAPITALIZATION_SMALL_CAPS":
+    case 'CAPITALIZATION_SMALL_CAPS':
       return Graphics_Text_Attributes_Capitalization.CAPITALIZATION_SMALL_CAPS;
     case 3:
-    case "CAPITALIZATION_TITLE_CASE":
+    case 'CAPITALIZATION_TITLE_CASE':
       return Graphics_Text_Attributes_Capitalization.CAPITALIZATION_TITLE_CASE;
     case 4:
-    case "CAPITALIZATION_START_CASE":
+    case 'CAPITALIZATION_START_CASE':
       return Graphics_Text_Attributes_Capitalization.CAPITALIZATION_START_CASE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_Attributes_Capitalization.UNRECOGNIZED;
   }
 }
 
-export function graphics_Text_Attributes_CapitalizationToJSON(object: Graphics_Text_Attributes_Capitalization): string {
+export function graphics_Text_Attributes_CapitalizationToJSON(
+  object: Graphics_Text_Attributes_Capitalization,
+): string {
   switch (object) {
     case Graphics_Text_Attributes_Capitalization.CAPITALIZATION_NONE:
-      return "CAPITALIZATION_NONE";
+      return 'CAPITALIZATION_NONE';
     case Graphics_Text_Attributes_Capitalization.CAPITALIZATION_ALL_CAPS:
-      return "CAPITALIZATION_ALL_CAPS";
+      return 'CAPITALIZATION_ALL_CAPS';
     case Graphics_Text_Attributes_Capitalization.CAPITALIZATION_SMALL_CAPS:
-      return "CAPITALIZATION_SMALL_CAPS";
+      return 'CAPITALIZATION_SMALL_CAPS';
     case Graphics_Text_Attributes_Capitalization.CAPITALIZATION_TITLE_CASE:
-      return "CAPITALIZATION_TITLE_CASE";
+      return 'CAPITALIZATION_TITLE_CASE';
     case Graphics_Text_Attributes_Capitalization.CAPITALIZATION_START_CASE:
-      return "CAPITALIZATION_START_CASE";
+      return 'CAPITALIZATION_START_CASE';
     case Graphics_Text_Attributes_Capitalization.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Graphics_Text_Attributes_Alignment {
+  ALIGNMENT_LEFT = 0,
+  ALIGNMENT_RIGHT = 1,
+  ALIGNMENT_CENTER = 2,
+  ALIGNMENT_JUSTIFIED = 3,
+  ALIGNMENT_NATURAL = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function graphics_Text_Attributes_AlignmentFromJSON(
+  object: any,
+): Graphics_Text_Attributes_Alignment {
+  switch (object) {
+    case 0:
+    case 'ALIGNMENT_LEFT':
+      return Graphics_Text_Attributes_Alignment.ALIGNMENT_LEFT;
+    case 1:
+    case 'ALIGNMENT_RIGHT':
+      return Graphics_Text_Attributes_Alignment.ALIGNMENT_RIGHT;
+    case 2:
+    case 'ALIGNMENT_CENTER':
+      return Graphics_Text_Attributes_Alignment.ALIGNMENT_CENTER;
+    case 3:
+    case 'ALIGNMENT_JUSTIFIED':
+      return Graphics_Text_Attributes_Alignment.ALIGNMENT_JUSTIFIED;
+    case 4:
+    case 'ALIGNMENT_NATURAL':
+      return Graphics_Text_Attributes_Alignment.ALIGNMENT_NATURAL;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Graphics_Text_Attributes_Alignment.UNRECOGNIZED;
+  }
+}
+
+export function graphics_Text_Attributes_AlignmentToJSON(
+  object: Graphics_Text_Attributes_Alignment,
+): string {
+  switch (object) {
+    case Graphics_Text_Attributes_Alignment.ALIGNMENT_LEFT:
+      return 'ALIGNMENT_LEFT';
+    case Graphics_Text_Attributes_Alignment.ALIGNMENT_RIGHT:
+      return 'ALIGNMENT_RIGHT';
+    case Graphics_Text_Attributes_Alignment.ALIGNMENT_CENTER:
+      return 'ALIGNMENT_CENTER';
+    case Graphics_Text_Attributes_Alignment.ALIGNMENT_JUSTIFIED:
+      return 'ALIGNMENT_JUSTIFIED';
+    case Graphics_Text_Attributes_Alignment.ALIGNMENT_NATURAL:
+      return 'ALIGNMENT_NATURAL';
+    case Graphics_Text_Attributes_Alignment.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -804,19 +902,19 @@ export function graphics_Text_Attributes_Underline_StyleFromJSON(
 ): Graphics_Text_Attributes_Underline_Style {
   switch (object) {
     case 0:
-    case "STYLE_NONE":
+    case 'STYLE_NONE':
       return Graphics_Text_Attributes_Underline_Style.STYLE_NONE;
     case 1:
-    case "STYLE_SINGLE":
+    case 'STYLE_SINGLE':
       return Graphics_Text_Attributes_Underline_Style.STYLE_SINGLE;
     case 2:
-    case "STYLE_THICK":
+    case 'STYLE_THICK':
       return Graphics_Text_Attributes_Underline_Style.STYLE_THICK;
     case 3:
-    case "STYLE_DOUBLE":
+    case 'STYLE_DOUBLE':
       return Graphics_Text_Attributes_Underline_Style.STYLE_DOUBLE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_Attributes_Underline_Style.UNRECOGNIZED;
   }
@@ -827,16 +925,16 @@ export function graphics_Text_Attributes_Underline_StyleToJSON(
 ): string {
   switch (object) {
     case Graphics_Text_Attributes_Underline_Style.STYLE_NONE:
-      return "STYLE_NONE";
+      return 'STYLE_NONE';
     case Graphics_Text_Attributes_Underline_Style.STYLE_SINGLE:
-      return "STYLE_SINGLE";
+      return 'STYLE_SINGLE';
     case Graphics_Text_Attributes_Underline_Style.STYLE_THICK:
-      return "STYLE_THICK";
+      return 'STYLE_THICK';
     case Graphics_Text_Attributes_Underline_Style.STYLE_DOUBLE:
-      return "STYLE_DOUBLE";
+      return 'STYLE_DOUBLE';
     case Graphics_Text_Attributes_Underline_Style.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -854,22 +952,22 @@ export function graphics_Text_Attributes_Underline_PatternFromJSON(
 ): Graphics_Text_Attributes_Underline_Pattern {
   switch (object) {
     case 0:
-    case "PATTERN_SOLID":
+    case 'PATTERN_SOLID':
       return Graphics_Text_Attributes_Underline_Pattern.PATTERN_SOLID;
     case 1:
-    case "PATTERN_DOT":
+    case 'PATTERN_DOT':
       return Graphics_Text_Attributes_Underline_Pattern.PATTERN_DOT;
     case 2:
-    case "PATTERN_DASH":
+    case 'PATTERN_DASH':
       return Graphics_Text_Attributes_Underline_Pattern.PATTERN_DASH;
     case 3:
-    case "PATTERN_DASH_DOT":
+    case 'PATTERN_DASH_DOT':
       return Graphics_Text_Attributes_Underline_Pattern.PATTERN_DASH_DOT;
     case 4:
-    case "PATTERN_DASH_DOT_DOT":
+    case 'PATTERN_DASH_DOT_DOT':
       return Graphics_Text_Attributes_Underline_Pattern.PATTERN_DASH_DOT_DOT;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_Attributes_Underline_Pattern.UNRECOGNIZED;
   }
@@ -880,23 +978,23 @@ export function graphics_Text_Attributes_Underline_PatternToJSON(
 ): string {
   switch (object) {
     case Graphics_Text_Attributes_Underline_Pattern.PATTERN_SOLID:
-      return "PATTERN_SOLID";
+      return 'PATTERN_SOLID';
     case Graphics_Text_Attributes_Underline_Pattern.PATTERN_DOT:
-      return "PATTERN_DOT";
+      return 'PATTERN_DOT';
     case Graphics_Text_Attributes_Underline_Pattern.PATTERN_DASH:
-      return "PATTERN_DASH";
+      return 'PATTERN_DASH';
     case Graphics_Text_Attributes_Underline_Pattern.PATTERN_DASH_DOT:
-      return "PATTERN_DASH_DOT";
+      return 'PATTERN_DASH_DOT';
     case Graphics_Text_Attributes_Underline_Pattern.PATTERN_DASH_DOT_DOT:
-      return "PATTERN_DASH_DOT_DOT";
+      return 'PATTERN_DASH_DOT_DOT';
     case Graphics_Text_Attributes_Underline_Pattern.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 export interface Graphics_Text_Attributes_Paragraph {
-  alignment: Graphics_Text_Attributes_Paragraph_Alignment;
+  alignment: Graphics_Text_Attributes_Alignment;
   firstLineHeadIndent: number;
   headIndent: number;
   tailIndent: number;
@@ -912,119 +1010,9 @@ export interface Graphics_Text_Attributes_Paragraph {
   textLists: Graphics_Text_Attributes_Paragraph_TextList[];
 }
 
-export enum Graphics_Text_Attributes_Paragraph_Alignment {
-  ALIGNMENT_LEFT = 0,
-  ALIGNMENT_RIGHT = 1,
-  ALIGNMENT_CENTER = 2,
-  ALIGNMENT_JUSTIFIED = 3,
-  ALIGNMENT_NATURAL = 4,
-  UNRECOGNIZED = -1,
-}
-
-export function graphics_Text_Attributes_Paragraph_AlignmentFromJSON(
-  object: any,
-): Graphics_Text_Attributes_Paragraph_Alignment {
-  switch (object) {
-    case 0:
-    case "ALIGNMENT_LEFT":
-      return Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_LEFT;
-    case 1:
-    case "ALIGNMENT_RIGHT":
-      return Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_RIGHT;
-    case 2:
-    case "ALIGNMENT_CENTER":
-      return Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_CENTER;
-    case 3:
-    case "ALIGNMENT_JUSTIFIED":
-      return Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_JUSTIFIED;
-    case 4:
-    case "ALIGNMENT_NATURAL":
-      return Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_NATURAL;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Graphics_Text_Attributes_Paragraph_Alignment.UNRECOGNIZED;
-  }
-}
-
-export function graphics_Text_Attributes_Paragraph_AlignmentToJSON(
-  object: Graphics_Text_Attributes_Paragraph_Alignment,
-): string {
-  switch (object) {
-    case Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_LEFT:
-      return "ALIGNMENT_LEFT";
-    case Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_RIGHT:
-      return "ALIGNMENT_RIGHT";
-    case Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_CENTER:
-      return "ALIGNMENT_CENTER";
-    case Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_JUSTIFIED:
-      return "ALIGNMENT_JUSTIFIED";
-    case Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_NATURAL:
-      return "ALIGNMENT_NATURAL";
-    case Graphics_Text_Attributes_Paragraph_Alignment.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
 export interface Graphics_Text_Attributes_Paragraph_TabStop {
   location: number;
-  alignment: Graphics_Text_Attributes_Paragraph_TabStop_Alignment;
-}
-
-export enum Graphics_Text_Attributes_Paragraph_TabStop_Alignment {
-  ALIGNMENT_LEFT = 0,
-  ALIGNMENT_RIGHT = 1,
-  ALIGNMENT_CENTER = 2,
-  ALIGNMENT_JUSTIFIED = 3,
-  ALIGNMENT_NATURAL = 4,
-  UNRECOGNIZED = -1,
-}
-
-export function graphics_Text_Attributes_Paragraph_TabStop_AlignmentFromJSON(
-  object: any,
-): Graphics_Text_Attributes_Paragraph_TabStop_Alignment {
-  switch (object) {
-    case 0:
-    case "ALIGNMENT_LEFT":
-      return Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_LEFT;
-    case 1:
-    case "ALIGNMENT_RIGHT":
-      return Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_RIGHT;
-    case 2:
-    case "ALIGNMENT_CENTER":
-      return Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_CENTER;
-    case 3:
-    case "ALIGNMENT_JUSTIFIED":
-      return Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_JUSTIFIED;
-    case 4:
-    case "ALIGNMENT_NATURAL":
-      return Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_NATURAL;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Graphics_Text_Attributes_Paragraph_TabStop_Alignment.UNRECOGNIZED;
-  }
-}
-
-export function graphics_Text_Attributes_Paragraph_TabStop_AlignmentToJSON(
-  object: Graphics_Text_Attributes_Paragraph_TabStop_Alignment,
-): string {
-  switch (object) {
-    case Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_LEFT:
-      return "ALIGNMENT_LEFT";
-    case Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_RIGHT:
-      return "ALIGNMENT_RIGHT";
-    case Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_CENTER:
-      return "ALIGNMENT_CENTER";
-    case Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_JUSTIFIED:
-      return "ALIGNMENT_JUSTIFIED";
-    case Graphics_Text_Attributes_Paragraph_TabStop_Alignment.ALIGNMENT_NATURAL:
-      return "ALIGNMENT_NATURAL";
-    case Graphics_Text_Attributes_Paragraph_TabStop_Alignment.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
+  alignment: Graphics_Text_Attributes_Alignment;
 }
 
 export interface Graphics_Text_Attributes_Paragraph_TextList {
@@ -1056,43 +1044,43 @@ export function graphics_Text_Attributes_Paragraph_TextList_NumberTypeFromJSON(
 ): Graphics_Text_Attributes_Paragraph_TextList_NumberType {
   switch (object) {
     case 0:
-    case "NUMBER_TYPE_BOX":
+    case 'NUMBER_TYPE_BOX':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_BOX;
     case 1:
-    case "NUMBER_TYPE_CHECK":
+    case 'NUMBER_TYPE_CHECK':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_CHECK;
     case 2:
-    case "NUMBER_TYPE_CIRCLE":
+    case 'NUMBER_TYPE_CIRCLE':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_CIRCLE;
     case 3:
-    case "NUMBER_TYPE_DIAMOND":
+    case 'NUMBER_TYPE_DIAMOND':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_DIAMOND;
     case 4:
-    case "NUMBER_TYPE_DISC":
+    case 'NUMBER_TYPE_DISC':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_DISC;
     case 5:
-    case "NUMBER_TYPE_HYPHEN":
+    case 'NUMBER_TYPE_HYPHEN':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_HYPHEN;
     case 6:
-    case "NUMBER_TYPE_SQUARE":
+    case 'NUMBER_TYPE_SQUARE':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_SQUARE;
     case 7:
-    case "NUMBER_TYPE_DECIMAL":
+    case 'NUMBER_TYPE_DECIMAL':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_DECIMAL;
     case 8:
-    case "NUMBER_TYPE_LOWERCASE_ALPHA":
+    case 'NUMBER_TYPE_LOWERCASE_ALPHA':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_LOWERCASE_ALPHA;
     case 9:
-    case "NUMBER_TYPE_UPPERCASE_ALPHA":
+    case 'NUMBER_TYPE_UPPERCASE_ALPHA':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_UPPERCASE_ALPHA;
     case 10:
-    case "NUMBER_TYPE_LOWERCASE_ROMAN":
+    case 'NUMBER_TYPE_LOWERCASE_ROMAN':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_LOWERCASE_ROMAN;
     case 11:
-    case "NUMBER_TYPE_UPPERCASE_ROMAN":
+    case 'NUMBER_TYPE_UPPERCASE_ROMAN':
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_UPPERCASE_ROMAN;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Graphics_Text_Attributes_Paragraph_TextList_NumberType.UNRECOGNIZED;
   }
@@ -1103,38 +1091,38 @@ export function graphics_Text_Attributes_Paragraph_TextList_NumberTypeToJSON(
 ): string {
   switch (object) {
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_BOX:
-      return "NUMBER_TYPE_BOX";
+      return 'NUMBER_TYPE_BOX';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_CHECK:
-      return "NUMBER_TYPE_CHECK";
+      return 'NUMBER_TYPE_CHECK';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_CIRCLE:
-      return "NUMBER_TYPE_CIRCLE";
+      return 'NUMBER_TYPE_CIRCLE';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_DIAMOND:
-      return "NUMBER_TYPE_DIAMOND";
+      return 'NUMBER_TYPE_DIAMOND';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_DISC:
-      return "NUMBER_TYPE_DISC";
+      return 'NUMBER_TYPE_DISC';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_HYPHEN:
-      return "NUMBER_TYPE_HYPHEN";
+      return 'NUMBER_TYPE_HYPHEN';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_SQUARE:
-      return "NUMBER_TYPE_SQUARE";
+      return 'NUMBER_TYPE_SQUARE';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_DECIMAL:
-      return "NUMBER_TYPE_DECIMAL";
+      return 'NUMBER_TYPE_DECIMAL';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_LOWERCASE_ALPHA:
-      return "NUMBER_TYPE_LOWERCASE_ALPHA";
+      return 'NUMBER_TYPE_LOWERCASE_ALPHA';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_UPPERCASE_ALPHA:
-      return "NUMBER_TYPE_UPPERCASE_ALPHA";
+      return 'NUMBER_TYPE_UPPERCASE_ALPHA';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_LOWERCASE_ROMAN:
-      return "NUMBER_TYPE_LOWERCASE_ROMAN";
+      return 'NUMBER_TYPE_LOWERCASE_ROMAN';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.NUMBER_TYPE_UPPERCASE_ROMAN:
-      return "NUMBER_TYPE_UPPERCASE_ROMAN";
+      return 'NUMBER_TYPE_UPPERCASE_ROMAN';
     case Graphics_Text_Attributes_Paragraph_TextList_NumberType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 export interface Graphics_Text_Attributes_CustomAttribute {
   range: IntRange | undefined;
-  capitalization?: Graphics_Text_Attributes_CustomAttribute_Capitalization | undefined;
+  capitalization?: Graphics_Text_Attributes_Capitalization | undefined;
   originalFontSize?: number | undefined;
   fontScaleFactor?: number | undefined;
   textGradientFill?: Graphics_Text_GradientFill | undefined;
@@ -1143,61 +1131,6 @@ export interface Graphics_Text_Attributes_CustomAttribute {
   cutOutFill?: Graphics_Text_CutOutFill | undefined;
   mediaFill?: Graphics_Text_MediaFill | undefined;
   backgroundEffect?: Graphics_BackgroundEffect | undefined;
-}
-
-export enum Graphics_Text_Attributes_CustomAttribute_Capitalization {
-  CAPITALIZATION_NONE = 0,
-  CAPITALIZATION_ALL_CAPS = 1,
-  CAPITALIZATION_SMALL_CAPS = 2,
-  CAPITALIZATION_TITLE_CASE = 3,
-  CAPITALIZATION_START_CASE = 4,
-  UNRECOGNIZED = -1,
-}
-
-export function graphics_Text_Attributes_CustomAttribute_CapitalizationFromJSON(
-  object: any,
-): Graphics_Text_Attributes_CustomAttribute_Capitalization {
-  switch (object) {
-    case 0:
-    case "CAPITALIZATION_NONE":
-      return Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_NONE;
-    case 1:
-    case "CAPITALIZATION_ALL_CAPS":
-      return Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_ALL_CAPS;
-    case 2:
-    case "CAPITALIZATION_SMALL_CAPS":
-      return Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_SMALL_CAPS;
-    case 3:
-    case "CAPITALIZATION_TITLE_CASE":
-      return Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_TITLE_CASE;
-    case 4:
-    case "CAPITALIZATION_START_CASE":
-      return Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_START_CASE;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Graphics_Text_Attributes_CustomAttribute_Capitalization.UNRECOGNIZED;
-  }
-}
-
-export function graphics_Text_Attributes_CustomAttribute_CapitalizationToJSON(
-  object: Graphics_Text_Attributes_CustomAttribute_Capitalization,
-): string {
-  switch (object) {
-    case Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_NONE:
-      return "CAPITALIZATION_NONE";
-    case Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_ALL_CAPS:
-      return "CAPITALIZATION_ALL_CAPS";
-    case Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_SMALL_CAPS:
-      return "CAPITALIZATION_SMALL_CAPS";
-    case Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_TITLE_CASE:
-      return "CAPITALIZATION_TITLE_CASE";
-    case Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_START_CASE:
-      return "CAPITALIZATION_START_CASE";
-    case Graphics_Text_Attributes_CustomAttribute_Capitalization.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
 }
 
 export interface Media {
@@ -1209,6 +1142,130 @@ export interface Media {
   video?: Media_VideoTypeProperties | undefined;
   liveVideo?: Media_LiveVideoTypeProperties | undefined;
   webContent?: Media_WebContentTypeProperties | undefined;
+}
+
+export enum Media_ScaleBehavior {
+  SCALE_BEHAVIOR_FIT = 0,
+  SCALE_BEHAVIOR_FILL = 1,
+  SCALE_BEHAVIOR_STRETCH = 2,
+  SCALE_BEHAVIOR_CUSTOM = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function media_ScaleBehaviorFromJSON(object: any): Media_ScaleBehavior {
+  switch (object) {
+    case 0:
+    case 'SCALE_BEHAVIOR_FIT':
+      return Media_ScaleBehavior.SCALE_BEHAVIOR_FIT;
+    case 1:
+    case 'SCALE_BEHAVIOR_FILL':
+      return Media_ScaleBehavior.SCALE_BEHAVIOR_FILL;
+    case 2:
+    case 'SCALE_BEHAVIOR_STRETCH':
+      return Media_ScaleBehavior.SCALE_BEHAVIOR_STRETCH;
+    case 3:
+    case 'SCALE_BEHAVIOR_CUSTOM':
+      return Media_ScaleBehavior.SCALE_BEHAVIOR_CUSTOM;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Media_ScaleBehavior.UNRECOGNIZED;
+  }
+}
+
+export function media_ScaleBehaviorToJSON(object: Media_ScaleBehavior): string {
+  switch (object) {
+    case Media_ScaleBehavior.SCALE_BEHAVIOR_FIT:
+      return 'SCALE_BEHAVIOR_FIT';
+    case Media_ScaleBehavior.SCALE_BEHAVIOR_FILL:
+      return 'SCALE_BEHAVIOR_FILL';
+    case Media_ScaleBehavior.SCALE_BEHAVIOR_STRETCH:
+      return 'SCALE_BEHAVIOR_STRETCH';
+    case Media_ScaleBehavior.SCALE_BEHAVIOR_CUSTOM:
+      return 'SCALE_BEHAVIOR_CUSTOM';
+    case Media_ScaleBehavior.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Media_ScaleAlignment {
+  SCALE_ALIGNMENT_MIDDLE_CENTER = 0,
+  SCALE_ALIGNMENT_TOP_LEFT = 1,
+  SCALE_ALIGNMENT_TOP_CENTER = 2,
+  SCALE_ALIGNMENT_TOP_RIGHT = 3,
+  SCALE_ALIGNMENT_MIDDLE_RIGHT = 4,
+  SCALE_ALIGNMENT_BOTTOM_RIGHT = 5,
+  SCALE_ALIGNMENT_BOTTOM_CENTER = 6,
+  SCALE_ALIGNMENT_BOTTOM_LEFT = 7,
+  SCALE_ALIGNMENT_MIDDLE_LEFT = 8,
+  UNRECOGNIZED = -1,
+}
+
+export function media_ScaleAlignmentFromJSON(
+  object: any,
+): Media_ScaleAlignment {
+  switch (object) {
+    case 0:
+    case 'SCALE_ALIGNMENT_MIDDLE_CENTER':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_CENTER;
+    case 1:
+    case 'SCALE_ALIGNMENT_TOP_LEFT':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_TOP_LEFT;
+    case 2:
+    case 'SCALE_ALIGNMENT_TOP_CENTER':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_TOP_CENTER;
+    case 3:
+    case 'SCALE_ALIGNMENT_TOP_RIGHT':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_TOP_RIGHT;
+    case 4:
+    case 'SCALE_ALIGNMENT_MIDDLE_RIGHT':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_RIGHT;
+    case 5:
+    case 'SCALE_ALIGNMENT_BOTTOM_RIGHT':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_RIGHT;
+    case 6:
+    case 'SCALE_ALIGNMENT_BOTTOM_CENTER':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_CENTER;
+    case 7:
+    case 'SCALE_ALIGNMENT_BOTTOM_LEFT':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_LEFT;
+    case 8:
+    case 'SCALE_ALIGNMENT_MIDDLE_LEFT':
+      return Media_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_LEFT;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Media_ScaleAlignment.UNRECOGNIZED;
+  }
+}
+
+export function media_ScaleAlignmentToJSON(
+  object: Media_ScaleAlignment,
+): string {
+  switch (object) {
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_CENTER:
+      return 'SCALE_ALIGNMENT_MIDDLE_CENTER';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_TOP_LEFT:
+      return 'SCALE_ALIGNMENT_TOP_LEFT';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_TOP_CENTER:
+      return 'SCALE_ALIGNMENT_TOP_CENTER';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_TOP_RIGHT:
+      return 'SCALE_ALIGNMENT_TOP_RIGHT';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_RIGHT:
+      return 'SCALE_ALIGNMENT_MIDDLE_RIGHT';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_RIGHT:
+      return 'SCALE_ALIGNMENT_BOTTOM_RIGHT';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_CENTER:
+      return 'SCALE_ALIGNMENT_BOTTOM_CENTER';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_LEFT:
+      return 'SCALE_ALIGNMENT_BOTTOM_LEFT';
+    case Media_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_LEFT:
+      return 'SCALE_ALIGNMENT_MIDDLE_LEFT';
+    case Media_ScaleAlignment.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
 }
 
 export interface Media_Metadata {
@@ -1240,60 +1297,64 @@ export enum Media_VideoDevice_Type {
   UNRECOGNIZED = -1,
 }
 
-export function media_VideoDevice_TypeFromJSON(object: any): Media_VideoDevice_Type {
+export function media_VideoDevice_TypeFromJSON(
+  object: any,
+): Media_VideoDevice_Type {
   switch (object) {
     case 0:
-    case "TYPE_GENERIC":
+    case 'TYPE_GENERIC':
       return Media_VideoDevice_Type.TYPE_GENERIC;
     case 1:
-    case "TYPE_DIRECTSHOW":
+    case 'TYPE_DIRECTSHOW':
       return Media_VideoDevice_Type.TYPE_DIRECTSHOW;
     case 2:
-    case "TYPE_BLACKMAGIC":
+    case 'TYPE_BLACKMAGIC':
       return Media_VideoDevice_Type.TYPE_BLACKMAGIC;
     case 3:
-    case "TYPE_AJA":
+    case 'TYPE_AJA':
       return Media_VideoDevice_Type.TYPE_AJA;
     case 4:
-    case "TYPE_AV":
+    case 'TYPE_AV':
       return Media_VideoDevice_Type.TYPE_AV;
     case 5:
-    case "TYPE_SYPHON":
+    case 'TYPE_SYPHON':
       return Media_VideoDevice_Type.TYPE_SYPHON;
     case 6:
-    case "TYPE_NDI":
+    case 'TYPE_NDI':
       return Media_VideoDevice_Type.TYPE_NDI;
     case 7:
-    case "TYPE_BLUEFISH":
+    case 'TYPE_BLUEFISH':
       return Media_VideoDevice_Type.TYPE_BLUEFISH;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Media_VideoDevice_Type.UNRECOGNIZED;
   }
 }
 
-export function media_VideoDevice_TypeToJSON(object: Media_VideoDevice_Type): string {
+export function media_VideoDevice_TypeToJSON(
+  object: Media_VideoDevice_Type,
+): string {
   switch (object) {
     case Media_VideoDevice_Type.TYPE_GENERIC:
-      return "TYPE_GENERIC";
+      return 'TYPE_GENERIC';
     case Media_VideoDevice_Type.TYPE_DIRECTSHOW:
-      return "TYPE_DIRECTSHOW";
+      return 'TYPE_DIRECTSHOW';
     case Media_VideoDevice_Type.TYPE_BLACKMAGIC:
-      return "TYPE_BLACKMAGIC";
+      return 'TYPE_BLACKMAGIC';
     case Media_VideoDevice_Type.TYPE_AJA:
-      return "TYPE_AJA";
+      return 'TYPE_AJA';
     case Media_VideoDevice_Type.TYPE_AV:
-      return "TYPE_AV";
+      return 'TYPE_AV';
     case Media_VideoDevice_Type.TYPE_SYPHON:
-      return "TYPE_SYPHON";
+      return 'TYPE_SYPHON';
     case Media_VideoDevice_Type.TYPE_NDI:
-      return "TYPE_NDI";
+      return 'TYPE_NDI';
     case Media_VideoDevice_Type.TYPE_BLUEFISH:
-      return "TYPE_BLUEFISH";
+      return 'TYPE_BLUEFISH';
     case Media_VideoDevice_Type.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -1304,8 +1365,7 @@ export interface Media_AudioDevice {
   channelCount: number;
 }
 
-export interface Media_Audio {
-}
+export interface Media_Audio {}
 
 export interface Media_Audio_Channel {
   index: number;
@@ -1352,19 +1412,19 @@ export function media_TransportProperties_PlaybackBehaviorFromJSON(
 ): Media_TransportProperties_PlaybackBehavior {
   switch (object) {
     case 0:
-    case "PLAYBACK_BEHAVIOR_STOP":
+    case 'PLAYBACK_BEHAVIOR_STOP':
       return Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_STOP;
     case 1:
-    case "PLAYBACK_BEHAVIOR_LOOP":
+    case 'PLAYBACK_BEHAVIOR_LOOP':
       return Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_LOOP;
     case 2:
-    case "PLAYBACK_BEHAVIOR_LOOP_FOR_COUNT":
+    case 'PLAYBACK_BEHAVIOR_LOOP_FOR_COUNT':
       return Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_LOOP_FOR_COUNT;
     case 3:
-    case "PLAYBACK_BEHAVIOR_LOOP_FOR_TIME":
+    case 'PLAYBACK_BEHAVIOR_LOOP_FOR_TIME':
       return Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_LOOP_FOR_TIME;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Media_TransportProperties_PlaybackBehavior.UNRECOGNIZED;
   }
@@ -1375,22 +1435,22 @@ export function media_TransportProperties_PlaybackBehaviorToJSON(
 ): string {
   switch (object) {
     case Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_STOP:
-      return "PLAYBACK_BEHAVIOR_STOP";
+      return 'PLAYBACK_BEHAVIOR_STOP';
     case Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_LOOP:
-      return "PLAYBACK_BEHAVIOR_LOOP";
+      return 'PLAYBACK_BEHAVIOR_LOOP';
     case Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_LOOP_FOR_COUNT:
-      return "PLAYBACK_BEHAVIOR_LOOP_FOR_COUNT";
+      return 'PLAYBACK_BEHAVIOR_LOOP_FOR_COUNT';
     case Media_TransportProperties_PlaybackBehavior.PLAYBACK_BEHAVIOR_LOOP_FOR_TIME:
-      return "PLAYBACK_BEHAVIOR_LOOP_FOR_TIME";
+      return 'PLAYBACK_BEHAVIOR_LOOP_FOR_TIME';
     case Media_TransportProperties_PlaybackBehavior.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 export interface Media_DrawingProperties {
-  scaleBehavior: Media_DrawingProperties_ScaleBehavior;
-  scaleAlignment: Media_DrawingProperties_ScaleAlignment;
+  scaleBehavior: Media_ScaleBehavior;
+  scaleAlignment: Media_ScaleAlignment;
   flippedHorizontally: boolean;
   flippedVertically: boolean;
   naturalSize: Graphics_Size | undefined;
@@ -1403,126 +1463,6 @@ export interface Media_DrawingProperties {
   effects: Effect[];
   cropEnable: boolean;
   cropInsets: Graphics_EdgeInsets | undefined;
-}
-
-export enum Media_DrawingProperties_ScaleBehavior {
-  SCALE_BEHAVIOR_FIT = 0,
-  SCALE_BEHAVIOR_FILL = 1,
-  SCALE_BEHAVIOR_STRETCH = 2,
-  SCALE_BEHAVIOR_CUSTOM = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function media_DrawingProperties_ScaleBehaviorFromJSON(object: any): Media_DrawingProperties_ScaleBehavior {
-  switch (object) {
-    case 0:
-    case "SCALE_BEHAVIOR_FIT":
-      return Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_FIT;
-    case 1:
-    case "SCALE_BEHAVIOR_FILL":
-      return Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_FILL;
-    case 2:
-    case "SCALE_BEHAVIOR_STRETCH":
-      return Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_STRETCH;
-    case 3:
-    case "SCALE_BEHAVIOR_CUSTOM":
-      return Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_CUSTOM;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Media_DrawingProperties_ScaleBehavior.UNRECOGNIZED;
-  }
-}
-
-export function media_DrawingProperties_ScaleBehaviorToJSON(object: Media_DrawingProperties_ScaleBehavior): string {
-  switch (object) {
-    case Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_FIT:
-      return "SCALE_BEHAVIOR_FIT";
-    case Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_FILL:
-      return "SCALE_BEHAVIOR_FILL";
-    case Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_STRETCH:
-      return "SCALE_BEHAVIOR_STRETCH";
-    case Media_DrawingProperties_ScaleBehavior.SCALE_BEHAVIOR_CUSTOM:
-      return "SCALE_BEHAVIOR_CUSTOM";
-    case Media_DrawingProperties_ScaleBehavior.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum Media_DrawingProperties_ScaleAlignment {
-  SCALE_ALIGNMENT_MIDDLE_CENTER = 0,
-  SCALE_ALIGNMENT_TOP_LEFT = 1,
-  SCALE_ALIGNMENT_TOP_CENTER = 2,
-  SCALE_ALIGNMENT_TOP_RIGHT = 3,
-  SCALE_ALIGNMENT_MIDDLE_RIGHT = 4,
-  SCALE_ALIGNMENT_BOTTOM_RIGHT = 5,
-  SCALE_ALIGNMENT_BOTTOM_CENTER = 6,
-  SCALE_ALIGNMENT_BOTTOM_LEFT = 7,
-  SCALE_ALIGNMENT_MIDDLE_LEFT = 8,
-  UNRECOGNIZED = -1,
-}
-
-export function media_DrawingProperties_ScaleAlignmentFromJSON(object: any): Media_DrawingProperties_ScaleAlignment {
-  switch (object) {
-    case 0:
-    case "SCALE_ALIGNMENT_MIDDLE_CENTER":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_CENTER;
-    case 1:
-    case "SCALE_ALIGNMENT_TOP_LEFT":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_TOP_LEFT;
-    case 2:
-    case "SCALE_ALIGNMENT_TOP_CENTER":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_TOP_CENTER;
-    case 3:
-    case "SCALE_ALIGNMENT_TOP_RIGHT":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_TOP_RIGHT;
-    case 4:
-    case "SCALE_ALIGNMENT_MIDDLE_RIGHT":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_RIGHT;
-    case 5:
-    case "SCALE_ALIGNMENT_BOTTOM_RIGHT":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_RIGHT;
-    case 6:
-    case "SCALE_ALIGNMENT_BOTTOM_CENTER":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_CENTER;
-    case 7:
-    case "SCALE_ALIGNMENT_BOTTOM_LEFT":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_LEFT;
-    case 8:
-    case "SCALE_ALIGNMENT_MIDDLE_LEFT":
-      return Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_LEFT;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Media_DrawingProperties_ScaleAlignment.UNRECOGNIZED;
-  }
-}
-
-export function media_DrawingProperties_ScaleAlignmentToJSON(object: Media_DrawingProperties_ScaleAlignment): string {
-  switch (object) {
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_CENTER:
-      return "SCALE_ALIGNMENT_MIDDLE_CENTER";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_TOP_LEFT:
-      return "SCALE_ALIGNMENT_TOP_LEFT";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_TOP_CENTER:
-      return "SCALE_ALIGNMENT_TOP_CENTER";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_TOP_RIGHT:
-      return "SCALE_ALIGNMENT_TOP_RIGHT";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_RIGHT:
-      return "SCALE_ALIGNMENT_MIDDLE_RIGHT";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_RIGHT:
-      return "SCALE_ALIGNMENT_BOTTOM_RIGHT";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_CENTER:
-      return "SCALE_ALIGNMENT_BOTTOM_CENTER";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_BOTTOM_LEFT:
-      return "SCALE_ALIGNMENT_BOTTOM_LEFT";
-    case Media_DrawingProperties_ScaleAlignment.SCALE_ALIGNMENT_MIDDLE_LEFT:
-      return "SCALE_ALIGNMENT_MIDDLE_LEFT";
-    case Media_DrawingProperties_ScaleAlignment.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
 }
 
 export enum Media_DrawingProperties_NativeRotationType {
@@ -1538,19 +1478,19 @@ export function media_DrawingProperties_NativeRotationTypeFromJSON(
 ): Media_DrawingProperties_NativeRotationType {
   switch (object) {
     case 0:
-    case "NATIVE_ROTATION_TYPE_ROTATE_STANDARD":
+    case 'NATIVE_ROTATION_TYPE_ROTATE_STANDARD':
       return Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_STANDARD;
     case 90:
-    case "NATIVE_ROTATION_TYPE_ROTATE_90":
+    case 'NATIVE_ROTATION_TYPE_ROTATE_90':
       return Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_90;
     case 180:
-    case "NATIVE_ROTATION_TYPE_ROTATE_180":
+    case 'NATIVE_ROTATION_TYPE_ROTATE_180':
       return Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_180;
     case 270:
-    case "NATIVE_ROTATION_TYPE_ROTATE_270":
+    case 'NATIVE_ROTATION_TYPE_ROTATE_270':
       return Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_270;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Media_DrawingProperties_NativeRotationType.UNRECOGNIZED;
   }
@@ -1561,16 +1501,16 @@ export function media_DrawingProperties_NativeRotationTypeToJSON(
 ): string {
   switch (object) {
     case Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_STANDARD:
-      return "NATIVE_ROTATION_TYPE_ROTATE_STANDARD";
+      return 'NATIVE_ROTATION_TYPE_ROTATE_STANDARD';
     case Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_90:
-      return "NATIVE_ROTATION_TYPE_ROTATE_90";
+      return 'NATIVE_ROTATION_TYPE_ROTATE_90';
     case Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_180:
-      return "NATIVE_ROTATION_TYPE_ROTATE_180";
+      return 'NATIVE_ROTATION_TYPE_ROTATE_180';
     case Media_DrawingProperties_NativeRotationType.NATIVE_ROTATION_TYPE_ROTATE_270:
-      return "NATIVE_ROTATION_TYPE_ROTATE_270";
+      return 'NATIVE_ROTATION_TYPE_ROTATE_270';
     case Media_DrawingProperties_NativeRotationType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -1583,51 +1523,6 @@ export interface Media_VideoProperties {
   softLoopDuration: number;
 }
 
-export enum Media_VideoProperties_FieldType {
-  FIELD_TYPE_UNKNOWN = 0,
-  FIELD_TYPE_PROGRESSIVE = 1,
-  FIELD_TYPE_INTERLACED_UPPER_FIRST = 2,
-  FIELD_TYPE_INTERLACED_LOWER_FIRST = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function media_VideoProperties_FieldTypeFromJSON(object: any): Media_VideoProperties_FieldType {
-  switch (object) {
-    case 0:
-    case "FIELD_TYPE_UNKNOWN":
-      return Media_VideoProperties_FieldType.FIELD_TYPE_UNKNOWN;
-    case 1:
-    case "FIELD_TYPE_PROGRESSIVE":
-      return Media_VideoProperties_FieldType.FIELD_TYPE_PROGRESSIVE;
-    case 2:
-    case "FIELD_TYPE_INTERLACED_UPPER_FIRST":
-      return Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_UPPER_FIRST;
-    case 3:
-    case "FIELD_TYPE_INTERLACED_LOWER_FIRST":
-      return Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_LOWER_FIRST;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return Media_VideoProperties_FieldType.UNRECOGNIZED;
-  }
-}
-
-export function media_VideoProperties_FieldTypeToJSON(object: Media_VideoProperties_FieldType): string {
-  switch (object) {
-    case Media_VideoProperties_FieldType.FIELD_TYPE_UNKNOWN:
-      return "FIELD_TYPE_UNKNOWN";
-    case Media_VideoProperties_FieldType.FIELD_TYPE_PROGRESSIVE:
-      return "FIELD_TYPE_PROGRESSIVE";
-    case Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_UPPER_FIRST:
-      return "FIELD_TYPE_INTERLACED_UPPER_FIRST";
-    case Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_LOWER_FIRST:
-      return "FIELD_TYPE_INTERLACED_LOWER_FIRST";
-    case Media_VideoProperties_FieldType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
 export enum Media_VideoProperties_EndBehavior {
   END_BEHAVIOR_STOP = 0,
   END_BEHAVIOR_STOP_ON_BLACK = 1,
@@ -1637,45 +1532,98 @@ export enum Media_VideoProperties_EndBehavior {
   UNRECOGNIZED = -1,
 }
 
-export function media_VideoProperties_EndBehaviorFromJSON(object: any): Media_VideoProperties_EndBehavior {
+export function media_VideoProperties_EndBehaviorFromJSON(
+  object: any,
+): Media_VideoProperties_EndBehavior {
   switch (object) {
     case 0:
-    case "END_BEHAVIOR_STOP":
+    case 'END_BEHAVIOR_STOP':
       return Media_VideoProperties_EndBehavior.END_BEHAVIOR_STOP;
     case 1:
-    case "END_BEHAVIOR_STOP_ON_BLACK":
+    case 'END_BEHAVIOR_STOP_ON_BLACK':
       return Media_VideoProperties_EndBehavior.END_BEHAVIOR_STOP_ON_BLACK;
     case 2:
-    case "END_BEHAVIOR_STOP_ON_CLEAR":
+    case 'END_BEHAVIOR_STOP_ON_CLEAR':
       return Media_VideoProperties_EndBehavior.END_BEHAVIOR_STOP_ON_CLEAR;
     case 3:
-    case "END_BEHAVIOR_FADE_TO_BLACK":
+    case 'END_BEHAVIOR_FADE_TO_BLACK':
       return Media_VideoProperties_EndBehavior.END_BEHAVIOR_FADE_TO_BLACK;
     case 4:
-    case "END_BEHAVIOR_FADE_TO_CLEAR":
+    case 'END_BEHAVIOR_FADE_TO_CLEAR':
       return Media_VideoProperties_EndBehavior.END_BEHAVIOR_FADE_TO_CLEAR;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Media_VideoProperties_EndBehavior.UNRECOGNIZED;
   }
 }
 
-export function media_VideoProperties_EndBehaviorToJSON(object: Media_VideoProperties_EndBehavior): string {
+export function media_VideoProperties_EndBehaviorToJSON(
+  object: Media_VideoProperties_EndBehavior,
+): string {
   switch (object) {
     case Media_VideoProperties_EndBehavior.END_BEHAVIOR_STOP:
-      return "END_BEHAVIOR_STOP";
+      return 'END_BEHAVIOR_STOP';
     case Media_VideoProperties_EndBehavior.END_BEHAVIOR_STOP_ON_BLACK:
-      return "END_BEHAVIOR_STOP_ON_BLACK";
+      return 'END_BEHAVIOR_STOP_ON_BLACK';
     case Media_VideoProperties_EndBehavior.END_BEHAVIOR_STOP_ON_CLEAR:
-      return "END_BEHAVIOR_STOP_ON_CLEAR";
+      return 'END_BEHAVIOR_STOP_ON_CLEAR';
     case Media_VideoProperties_EndBehavior.END_BEHAVIOR_FADE_TO_BLACK:
-      return "END_BEHAVIOR_FADE_TO_BLACK";
+      return 'END_BEHAVIOR_FADE_TO_BLACK';
     case Media_VideoProperties_EndBehavior.END_BEHAVIOR_FADE_TO_CLEAR:
-      return "END_BEHAVIOR_FADE_TO_CLEAR";
+      return 'END_BEHAVIOR_FADE_TO_CLEAR';
     case Media_VideoProperties_EndBehavior.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Media_VideoProperties_FieldType {
+  FIELD_TYPE_UNKNOWN = 0,
+  FIELD_TYPE_PROGRESSIVE = 1,
+  FIELD_TYPE_INTERLACED_UPPER_FIRST = 2,
+  FIELD_TYPE_INTERLACED_LOWER_FIRST = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function media_VideoProperties_FieldTypeFromJSON(
+  object: any,
+): Media_VideoProperties_FieldType {
+  switch (object) {
+    case 0:
+    case 'FIELD_TYPE_UNKNOWN':
+      return Media_VideoProperties_FieldType.FIELD_TYPE_UNKNOWN;
+    case 1:
+    case 'FIELD_TYPE_PROGRESSIVE':
+      return Media_VideoProperties_FieldType.FIELD_TYPE_PROGRESSIVE;
+    case 2:
+    case 'FIELD_TYPE_INTERLACED_UPPER_FIRST':
+      return Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_UPPER_FIRST;
+    case 3:
+    case 'FIELD_TYPE_INTERLACED_LOWER_FIRST':
+      return Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_LOWER_FIRST;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Media_VideoProperties_FieldType.UNRECOGNIZED;
+  }
+}
+
+export function media_VideoProperties_FieldTypeToJSON(
+  object: Media_VideoProperties_FieldType,
+): string {
+  switch (object) {
+    case Media_VideoProperties_FieldType.FIELD_TYPE_UNKNOWN:
+      return 'FIELD_TYPE_UNKNOWN';
+    case Media_VideoProperties_FieldType.FIELD_TYPE_PROGRESSIVE:
+      return 'FIELD_TYPE_PROGRESSIVE';
+    case Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_UPPER_FIRST:
+      return 'FIELD_TYPE_INTERLACED_UPPER_FIRST';
+    case Media_VideoProperties_FieldType.FIELD_TYPE_INTERLACED_LOWER_FIRST:
+      return 'FIELD_TYPE_INTERLACED_LOWER_FIRST';
+    case Media_VideoProperties_FieldType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -1688,10 +1636,12 @@ export interface Media_LiveVideoProperties {
 export interface Media_AudioTypeProperties {
   audio: Media_AudioProperties | undefined;
   transport: Media_TransportProperties | undefined;
+  file: FileProperties | undefined;
 }
 
 export interface Media_ImageTypeProperties {
   drawing: Media_DrawingProperties | undefined;
+  file: FileProperties | undefined;
 }
 
 export interface Media_VideoTypeProperties {
@@ -1699,6 +1649,7 @@ export interface Media_VideoTypeProperties {
   audio: Media_AudioProperties | undefined;
   transport: Media_TransportProperties | undefined;
   video: Media_VideoProperties | undefined;
+  file: FileProperties | undefined;
 }
 
 export interface Media_LiveVideoTypeProperties {
@@ -1722,7 +1673,8 @@ export const Graphics = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics();
     while (reader.pos < end) {
@@ -1759,7 +1711,7 @@ export const Graphics = {
 function createBaseGraphics_Element(): Graphics_Element {
   return {
     uuid: undefined,
-    name: "",
+    name: '',
     bounds: undefined,
     rotation: 0,
     opacity: 0,
@@ -1778,11 +1730,14 @@ function createBaseGraphics_Element(): Graphics_Element {
 }
 
 export const Graphics_Element = {
-  encode(message: Graphics_Element, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Element,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     if (message.bounds !== undefined) {
@@ -1813,7 +1768,10 @@ export const Graphics_Element = {
       Graphics_Shadow.encode(message.shadow, writer.uint32(90).fork()).ldelim();
     }
     if (message.feather !== undefined) {
-      Graphics_Feather.encode(message.feather, writer.uint32(98).fork()).ldelim();
+      Graphics_Feather.encode(
+        message.feather,
+        writer.uint32(98).fork(),
+      ).ldelim();
     }
     if (message.text !== undefined) {
       Graphics_Text.encode(message.text, writer.uint32(106).fork()).ldelim();
@@ -1825,13 +1783,17 @@ export const Graphics_Element = {
       writer.uint32(128).bool(message.hidden);
     }
     if (message.textLineMask !== undefined) {
-      Graphics_Text_LineFillMask.encode(message.textLineMask, writer.uint32(114).fork()).ldelim();
+      Graphics_Text_LineFillMask.encode(
+        message.textLineMask,
+        writer.uint32(114).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Element {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Element();
     while (reader.pos < end) {
@@ -1947,7 +1909,10 @@ export const Graphics_Element = {
             break;
           }
 
-          message.textLineMask = Graphics_Text_LineFillMask.decode(reader, reader.uint32());
+          message.textLineMask = Graphics_Text_LineFillMask.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1961,85 +1926,145 @@ export const Graphics_Element = {
   fromJSON(object: any): Graphics_Element {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
-      bounds: isSet(object.bounds) ? Graphics_Rect.fromJSON(object.bounds) : undefined,
+      name: isSet(object.name) ? String(object.name) : '',
+      bounds: isSet(object.bounds)
+        ? Graphics_Rect.fromJSON(object.bounds)
+        : undefined,
       rotation: isSet(object.rotation) ? Number(object.rotation) : 0,
       opacity: isSet(object.opacity) ? Number(object.opacity) : 0,
       locked: isSet(object.locked) ? Boolean(object.locked) : false,
-      aspectRatioLocked: isSet(object.aspectRatioLocked) ? Boolean(object.aspectRatioLocked) : false,
-      path: isSet(object.path) ? Graphics_Path.fromJSON(object.path) : undefined,
-      fill: isSet(object.fill) ? Graphics_Fill.fromJSON(object.fill) : undefined,
-      stroke: isSet(object.stroke) ? Graphics_Stroke.fromJSON(object.stroke) : undefined,
-      shadow: isSet(object.shadow) ? Graphics_Shadow.fromJSON(object.shadow) : undefined,
-      feather: isSet(object.feather) ? Graphics_Feather.fromJSON(object.feather) : undefined,
-      text: isSet(object.text) ? Graphics_Text.fromJSON(object.text) : undefined,
-      flipMode: isSet(object.flipMode) ? graphics_Element_FlipModeFromJSON(object.flipMode) : 0,
+      aspectRatioLocked: isSet(object.aspectRatioLocked)
+        ? Boolean(object.aspectRatioLocked)
+        : false,
+      path: isSet(object.path)
+        ? Graphics_Path.fromJSON(object.path)
+        : undefined,
+      fill: isSet(object.fill)
+        ? Graphics_Fill.fromJSON(object.fill)
+        : undefined,
+      stroke: isSet(object.stroke)
+        ? Graphics_Stroke.fromJSON(object.stroke)
+        : undefined,
+      shadow: isSet(object.shadow)
+        ? Graphics_Shadow.fromJSON(object.shadow)
+        : undefined,
+      feather: isSet(object.feather)
+        ? Graphics_Feather.fromJSON(object.feather)
+        : undefined,
+      text: isSet(object.text)
+        ? Graphics_Text.fromJSON(object.text)
+        : undefined,
+      flipMode: isSet(object.flipMode)
+        ? graphics_Element_FlipModeFromJSON(object.flipMode)
+        : 0,
       hidden: isSet(object.hidden) ? Boolean(object.hidden) : false,
-      textLineMask: isSet(object.textLineMask) ? Graphics_Text_LineFillMask.fromJSON(object.textLineMask) : undefined,
+      textLineMask: isSet(object.textLineMask)
+        ? Graphics_Text_LineFillMask.fromJSON(object.textLineMask)
+        : undefined,
     };
   },
 
   toJSON(message: Graphics_Element): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.name !== undefined && (obj.name = message.name);
-    message.bounds !== undefined && (obj.bounds = message.bounds ? Graphics_Rect.toJSON(message.bounds) : undefined);
+    message.bounds !== undefined &&
+      (obj.bounds = message.bounds
+        ? Graphics_Rect.toJSON(message.bounds)
+        : undefined);
     message.rotation !== undefined && (obj.rotation = message.rotation);
     message.opacity !== undefined && (obj.opacity = message.opacity);
     message.locked !== undefined && (obj.locked = message.locked);
-    message.aspectRatioLocked !== undefined && (obj.aspectRatioLocked = message.aspectRatioLocked);
-    message.path !== undefined && (obj.path = message.path ? Graphics_Path.toJSON(message.path) : undefined);
-    message.fill !== undefined && (obj.fill = message.fill ? Graphics_Fill.toJSON(message.fill) : undefined);
-    message.stroke !== undefined && (obj.stroke = message.stroke ? Graphics_Stroke.toJSON(message.stroke) : undefined);
-    message.shadow !== undefined && (obj.shadow = message.shadow ? Graphics_Shadow.toJSON(message.shadow) : undefined);
+    message.aspectRatioLocked !== undefined &&
+      (obj.aspectRatioLocked = message.aspectRatioLocked);
+    message.path !== undefined &&
+      (obj.path = message.path
+        ? Graphics_Path.toJSON(message.path)
+        : undefined);
+    message.fill !== undefined &&
+      (obj.fill = message.fill
+        ? Graphics_Fill.toJSON(message.fill)
+        : undefined);
+    message.stroke !== undefined &&
+      (obj.stroke = message.stroke
+        ? Graphics_Stroke.toJSON(message.stroke)
+        : undefined);
+    message.shadow !== undefined &&
+      (obj.shadow = message.shadow
+        ? Graphics_Shadow.toJSON(message.shadow)
+        : undefined);
     message.feather !== undefined &&
-      (obj.feather = message.feather ? Graphics_Feather.toJSON(message.feather) : undefined);
-    message.text !== undefined && (obj.text = message.text ? Graphics_Text.toJSON(message.text) : undefined);
-    message.flipMode !== undefined && (obj.flipMode = graphics_Element_FlipModeToJSON(message.flipMode));
+      (obj.feather = message.feather
+        ? Graphics_Feather.toJSON(message.feather)
+        : undefined);
+    message.text !== undefined &&
+      (obj.text = message.text
+        ? Graphics_Text.toJSON(message.text)
+        : undefined);
+    message.flipMode !== undefined &&
+      (obj.flipMode = graphics_Element_FlipModeToJSON(message.flipMode));
     message.hidden !== undefined && (obj.hidden = message.hidden);
     message.textLineMask !== undefined &&
-      (obj.textLineMask = message.textLineMask ? Graphics_Text_LineFillMask.toJSON(message.textLineMask) : undefined);
+      (obj.textLineMask = message.textLineMask
+        ? Graphics_Text_LineFillMask.toJSON(message.textLineMask)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Element>, I>>(base?: I): Graphics_Element {
+  create<I extends Exact<DeepPartial<Graphics_Element>, I>>(
+    base?: I,
+  ): Graphics_Element {
     return Graphics_Element.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Element>, I>>(object: I): Graphics_Element {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Element>, I>>(
+    object: I,
+  ): Graphics_Element {
     const message = createBaseGraphics_Element();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.name = object.name ?? "";
-    message.bounds = (object.bounds !== undefined && object.bounds !== null)
-      ? Graphics_Rect.fromPartial(object.bounds)
-      : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.name = object.name ?? '';
+    message.bounds =
+      object.bounds !== undefined && object.bounds !== null
+        ? Graphics_Rect.fromPartial(object.bounds)
+        : undefined;
     message.rotation = object.rotation ?? 0;
     message.opacity = object.opacity ?? 0;
     message.locked = object.locked ?? false;
     message.aspectRatioLocked = object.aspectRatioLocked ?? false;
-    message.path = (object.path !== undefined && object.path !== null)
-      ? Graphics_Path.fromPartial(object.path)
-      : undefined;
-    message.fill = (object.fill !== undefined && object.fill !== null)
-      ? Graphics_Fill.fromPartial(object.fill)
-      : undefined;
-    message.stroke = (object.stroke !== undefined && object.stroke !== null)
-      ? Graphics_Stroke.fromPartial(object.stroke)
-      : undefined;
-    message.shadow = (object.shadow !== undefined && object.shadow !== null)
-      ? Graphics_Shadow.fromPartial(object.shadow)
-      : undefined;
-    message.feather = (object.feather !== undefined && object.feather !== null)
-      ? Graphics_Feather.fromPartial(object.feather)
-      : undefined;
-    message.text = (object.text !== undefined && object.text !== null)
-      ? Graphics_Text.fromPartial(object.text)
-      : undefined;
+    message.path =
+      object.path !== undefined && object.path !== null
+        ? Graphics_Path.fromPartial(object.path)
+        : undefined;
+    message.fill =
+      object.fill !== undefined && object.fill !== null
+        ? Graphics_Fill.fromPartial(object.fill)
+        : undefined;
+    message.stroke =
+      object.stroke !== undefined && object.stroke !== null
+        ? Graphics_Stroke.fromPartial(object.stroke)
+        : undefined;
+    message.shadow =
+      object.shadow !== undefined && object.shadow !== null
+        ? Graphics_Shadow.fromPartial(object.shadow)
+        : undefined;
+    message.feather =
+      object.feather !== undefined && object.feather !== null
+        ? Graphics_Feather.fromPartial(object.feather)
+        : undefined;
+    message.text =
+      object.text !== undefined && object.text !== null
+        ? Graphics_Text.fromPartial(object.text)
+        : undefined;
     message.flipMode = object.flipMode ?? 0;
     message.hidden = object.hidden ?? false;
-    message.textLineMask = (object.textLineMask !== undefined && object.textLineMask !== null)
-      ? Graphics_Text_LineFillMask.fromPartial(object.textLineMask)
-      : undefined;
+    message.textLineMask =
+      object.textLineMask !== undefined && object.textLineMask !== null
+        ? Graphics_Text_LineFillMask.fromPartial(object.textLineMask)
+        : undefined;
     return message;
   },
 };
@@ -2049,7 +2074,10 @@ function createBaseGraphics_Rect(): Graphics_Rect {
 }
 
 export const Graphics_Rect = {
-  encode(message: Graphics_Rect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Rect,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.origin !== undefined) {
       Graphics_Point.encode(message.origin, writer.uint32(10).fork()).ldelim();
     }
@@ -2060,7 +2088,8 @@ export const Graphics_Rect = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Rect {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Rect();
     while (reader.pos < end) {
@@ -2091,30 +2120,46 @@ export const Graphics_Rect = {
 
   fromJSON(object: any): Graphics_Rect {
     return {
-      origin: isSet(object.origin) ? Graphics_Point.fromJSON(object.origin) : undefined,
-      size: isSet(object.size) ? Graphics_Size.fromJSON(object.size) : undefined,
+      origin: isSet(object.origin)
+        ? Graphics_Point.fromJSON(object.origin)
+        : undefined,
+      size: isSet(object.size)
+        ? Graphics_Size.fromJSON(object.size)
+        : undefined,
     };
   },
 
   toJSON(message: Graphics_Rect): unknown {
     const obj: any = {};
-    message.origin !== undefined && (obj.origin = message.origin ? Graphics_Point.toJSON(message.origin) : undefined);
-    message.size !== undefined && (obj.size = message.size ? Graphics_Size.toJSON(message.size) : undefined);
+    message.origin !== undefined &&
+      (obj.origin = message.origin
+        ? Graphics_Point.toJSON(message.origin)
+        : undefined);
+    message.size !== undefined &&
+      (obj.size = message.size
+        ? Graphics_Size.toJSON(message.size)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Rect>, I>>(base?: I): Graphics_Rect {
+  create<I extends Exact<DeepPartial<Graphics_Rect>, I>>(
+    base?: I,
+  ): Graphics_Rect {
     return Graphics_Rect.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Rect>, I>>(object: I): Graphics_Rect {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Rect>, I>>(
+    object: I,
+  ): Graphics_Rect {
     const message = createBaseGraphics_Rect();
-    message.origin = (object.origin !== undefined && object.origin !== null)
-      ? Graphics_Point.fromPartial(object.origin)
-      : undefined;
-    message.size = (object.size !== undefined && object.size !== null)
-      ? Graphics_Size.fromPartial(object.size)
-      : undefined;
+    message.origin =
+      object.origin !== undefined && object.origin !== null
+        ? Graphics_Point.fromPartial(object.origin)
+        : undefined;
+    message.size =
+      object.size !== undefined && object.size !== null
+        ? Graphics_Size.fromPartial(object.size)
+        : undefined;
     return message;
   },
 };
@@ -2124,7 +2169,10 @@ function createBaseGraphics_Point(): Graphics_Point {
 }
 
 export const Graphics_Point = {
-  encode(message: Graphics_Point, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Point,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.x !== 0) {
       writer.uint32(9).double(message.x);
     }
@@ -2135,7 +2183,8 @@ export const Graphics_Point = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Point {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Point();
     while (reader.pos < end) {
@@ -2165,7 +2214,10 @@ export const Graphics_Point = {
   },
 
   fromJSON(object: any): Graphics_Point {
-    return { x: isSet(object.x) ? Number(object.x) : 0, y: isSet(object.y) ? Number(object.y) : 0 };
+    return {
+      x: isSet(object.x) ? Number(object.x) : 0,
+      y: isSet(object.y) ? Number(object.y) : 0,
+    };
   },
 
   toJSON(message: Graphics_Point): unknown {
@@ -2175,11 +2227,15 @@ export const Graphics_Point = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Point>, I>>(base?: I): Graphics_Point {
+  create<I extends Exact<DeepPartial<Graphics_Point>, I>>(
+    base?: I,
+  ): Graphics_Point {
     return Graphics_Point.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Point>, I>>(object: I): Graphics_Point {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Point>, I>>(
+    object: I,
+  ): Graphics_Point {
     const message = createBaseGraphics_Point();
     message.x = object.x ?? 0;
     message.y = object.y ?? 0;
@@ -2192,7 +2248,10 @@ function createBaseGraphics_Size(): Graphics_Size {
 }
 
 export const Graphics_Size = {
-  encode(message: Graphics_Size, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Size,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.width !== 0) {
       writer.uint32(9).double(message.width);
     }
@@ -2203,7 +2262,8 @@ export const Graphics_Size = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Size {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Size();
     while (reader.pos < end) {
@@ -2246,11 +2306,15 @@ export const Graphics_Size = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Size>, I>>(base?: I): Graphics_Size {
+  create<I extends Exact<DeepPartial<Graphics_Size>, I>>(
+    base?: I,
+  ): Graphics_Size {
     return Graphics_Size.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Size>, I>>(object: I): Graphics_Size {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Size>, I>>(
+    object: I,
+  ): Graphics_Size {
     const message = createBaseGraphics_Size();
     message.width = object.width ?? 0;
     message.height = object.height ?? 0;
@@ -2263,7 +2327,10 @@ function createBaseGraphics_EdgeInsets(): Graphics_EdgeInsets {
 }
 
 export const Graphics_EdgeInsets = {
-  encode(message: Graphics_EdgeInsets, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_EdgeInsets,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.left !== 0) {
       writer.uint32(9).double(message.left);
     }
@@ -2280,7 +2347,8 @@ export const Graphics_EdgeInsets = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_EdgeInsets {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_EdgeInsets();
     while (reader.pos < end) {
@@ -2341,11 +2409,15 @@ export const Graphics_EdgeInsets = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_EdgeInsets>, I>>(base?: I): Graphics_EdgeInsets {
+  create<I extends Exact<DeepPartial<Graphics_EdgeInsets>, I>>(
+    base?: I,
+  ): Graphics_EdgeInsets {
     return Graphics_EdgeInsets.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_EdgeInsets>, I>>(object: I): Graphics_EdgeInsets {
+  fromPartial<I extends Exact<DeepPartial<Graphics_EdgeInsets>, I>>(
+    object: I,
+  ): Graphics_EdgeInsets {
     const message = createBaseGraphics_EdgeInsets();
     message.left = object.left ?? 0;
     message.right = object.right ?? 0;
@@ -2360,7 +2432,10 @@ function createBaseGraphics_Path(): Graphics_Path {
 }
 
 export const Graphics_Path = {
-  encode(message: Graphics_Path, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.closed === true) {
       writer.uint32(8).bool(message.closed);
     }
@@ -2368,13 +2443,17 @@ export const Graphics_Path = {
       Graphics_Path_BezierPoint.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     if (message.shape !== undefined) {
-      Graphics_Path_Shape.encode(message.shape, writer.uint32(26).fork()).ldelim();
+      Graphics_Path_Shape.encode(
+        message.shape,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path();
     while (reader.pos < end) {
@@ -2392,7 +2471,9 @@ export const Graphics_Path = {
             break;
           }
 
-          message.points.push(Graphics_Path_BezierPoint.decode(reader, reader.uint32()));
+          message.points.push(
+            Graphics_Path_BezierPoint.decode(reader, reader.uint32()),
+          );
           continue;
         case 3:
           if (tag != 26) {
@@ -2413,8 +2494,12 @@ export const Graphics_Path = {
   fromJSON(object: any): Graphics_Path {
     return {
       closed: isSet(object.closed) ? Boolean(object.closed) : false,
-      points: Array.isArray(object?.points) ? object.points.map((e: any) => Graphics_Path_BezierPoint.fromJSON(e)) : [],
-      shape: isSet(object.shape) ? Graphics_Path_Shape.fromJSON(object.shape) : undefined,
+      points: Array.isArray(object?.points)
+        ? object.points.map((e: any) => Graphics_Path_BezierPoint.fromJSON(e))
+        : [],
+      shape: isSet(object.shape)
+        ? Graphics_Path_Shape.fromJSON(object.shape)
+        : undefined,
     };
   },
 
@@ -2422,25 +2507,36 @@ export const Graphics_Path = {
     const obj: any = {};
     message.closed !== undefined && (obj.closed = message.closed);
     if (message.points) {
-      obj.points = message.points.map((e) => e ? Graphics_Path_BezierPoint.toJSON(e) : undefined);
+      obj.points = message.points.map((e) =>
+        e ? Graphics_Path_BezierPoint.toJSON(e) : undefined,
+      );
     } else {
       obj.points = [];
     }
-    message.shape !== undefined && (obj.shape = message.shape ? Graphics_Path_Shape.toJSON(message.shape) : undefined);
+    message.shape !== undefined &&
+      (obj.shape = message.shape
+        ? Graphics_Path_Shape.toJSON(message.shape)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Path>, I>>(base?: I): Graphics_Path {
+  create<I extends Exact<DeepPartial<Graphics_Path>, I>>(
+    base?: I,
+  ): Graphics_Path {
     return Graphics_Path.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path>, I>>(object: I): Graphics_Path {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Path>, I>>(
+    object: I,
+  ): Graphics_Path {
     const message = createBaseGraphics_Path();
     message.closed = object.closed ?? false;
-    message.points = object.points?.map((e) => Graphics_Path_BezierPoint.fromPartial(e)) || [];
-    message.shape = (object.shape !== undefined && object.shape !== null)
-      ? Graphics_Path_Shape.fromPartial(object.shape)
-      : undefined;
+    message.points =
+      object.points?.map((e) => Graphics_Path_BezierPoint.fromPartial(e)) || [];
+    message.shape =
+      object.shape !== undefined && object.shape !== null
+        ? Graphics_Path_Shape.fromPartial(object.shape)
+        : undefined;
     return message;
   },
 };
@@ -2450,7 +2546,10 @@ function createBaseGraphics_Path_BezierPoint(): Graphics_Path_BezierPoint {
 }
 
 export const Graphics_Path_BezierPoint = {
-  encode(message: Graphics_Path_BezierPoint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path_BezierPoint,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.point !== undefined) {
       Graphics_Point.encode(message.point, writer.uint32(10).fork()).ldelim();
     }
@@ -2466,8 +2565,12 @@ export const Graphics_Path_BezierPoint = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path_BezierPoint {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Path_BezierPoint {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path_BezierPoint();
     while (reader.pos < end) {
@@ -2512,7 +2615,9 @@ export const Graphics_Path_BezierPoint = {
 
   fromJSON(object: any): Graphics_Path_BezierPoint {
     return {
-      point: isSet(object.point) ? Graphics_Point.fromJSON(object.point) : undefined,
+      point: isSet(object.point)
+        ? Graphics_Point.fromJSON(object.point)
+        : undefined,
       q0: isSet(object.q0) ? Graphics_Point.fromJSON(object.q0) : undefined,
       q1: isSet(object.q1) ? Graphics_Point.fromJSON(object.q1) : undefined,
       curved: isSet(object.curved) ? Boolean(object.curved) : false,
@@ -2521,55 +2626,93 @@ export const Graphics_Path_BezierPoint = {
 
   toJSON(message: Graphics_Path_BezierPoint): unknown {
     const obj: any = {};
-    message.point !== undefined && (obj.point = message.point ? Graphics_Point.toJSON(message.point) : undefined);
-    message.q0 !== undefined && (obj.q0 = message.q0 ? Graphics_Point.toJSON(message.q0) : undefined);
-    message.q1 !== undefined && (obj.q1 = message.q1 ? Graphics_Point.toJSON(message.q1) : undefined);
+    message.point !== undefined &&
+      (obj.point = message.point
+        ? Graphics_Point.toJSON(message.point)
+        : undefined);
+    message.q0 !== undefined &&
+      (obj.q0 = message.q0 ? Graphics_Point.toJSON(message.q0) : undefined);
+    message.q1 !== undefined &&
+      (obj.q1 = message.q1 ? Graphics_Point.toJSON(message.q1) : undefined);
     message.curved !== undefined && (obj.curved = message.curved);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Path_BezierPoint>, I>>(base?: I): Graphics_Path_BezierPoint {
+  create<I extends Exact<DeepPartial<Graphics_Path_BezierPoint>, I>>(
+    base?: I,
+  ): Graphics_Path_BezierPoint {
     return Graphics_Path_BezierPoint.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path_BezierPoint>, I>>(object: I): Graphics_Path_BezierPoint {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Path_BezierPoint>, I>>(
+    object: I,
+  ): Graphics_Path_BezierPoint {
     const message = createBaseGraphics_Path_BezierPoint();
-    message.point = (object.point !== undefined && object.point !== null)
-      ? Graphics_Point.fromPartial(object.point)
-      : undefined;
-    message.q0 = (object.q0 !== undefined && object.q0 !== null) ? Graphics_Point.fromPartial(object.q0) : undefined;
-    message.q1 = (object.q1 !== undefined && object.q1 !== null) ? Graphics_Point.fromPartial(object.q1) : undefined;
+    message.point =
+      object.point !== undefined && object.point !== null
+        ? Graphics_Point.fromPartial(object.point)
+        : undefined;
+    message.q0 =
+      object.q0 !== undefined && object.q0 !== null
+        ? Graphics_Point.fromPartial(object.q0)
+        : undefined;
+    message.q1 =
+      object.q1 !== undefined && object.q1 !== null
+        ? Graphics_Point.fromPartial(object.q1)
+        : undefined;
     message.curved = object.curved ?? false;
     return message;
   },
 };
 
 function createBaseGraphics_Path_Shape(): Graphics_Path_Shape {
-  return { type: 0, roundedRectangle: undefined, polygon: undefined, star: undefined, arrow: undefined };
+  return {
+    type: 0,
+    roundedRectangle: undefined,
+    polygon: undefined,
+    star: undefined,
+    arrow: undefined,
+  };
 }
 
 export const Graphics_Path_Shape = {
-  encode(message: Graphics_Path_Shape, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path_Shape,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
     if (message.roundedRectangle !== undefined) {
-      Graphics_Path_Shape_RoundedRectangle.encode(message.roundedRectangle, writer.uint32(18).fork()).ldelim();
+      Graphics_Path_Shape_RoundedRectangle.encode(
+        message.roundedRectangle,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.polygon !== undefined) {
-      Graphics_Path_Shape_Polygon.encode(message.polygon, writer.uint32(26).fork()).ldelim();
+      Graphics_Path_Shape_Polygon.encode(
+        message.polygon,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.star !== undefined) {
-      Graphics_Path_Shape_Star.encode(message.star, writer.uint32(34).fork()).ldelim();
+      Graphics_Path_Shape_Star.encode(
+        message.star,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.arrow !== undefined) {
-      Graphics_Path_Shape_Arrow.encode(message.arrow, writer.uint32(42).fork()).ldelim();
+      Graphics_Path_Shape_Arrow.encode(
+        message.arrow,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path_Shape {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path_Shape();
     while (reader.pos < end) {
@@ -2587,28 +2730,41 @@ export const Graphics_Path_Shape = {
             break;
           }
 
-          message.roundedRectangle = Graphics_Path_Shape_RoundedRectangle.decode(reader, reader.uint32());
+          message.roundedRectangle =
+            Graphics_Path_Shape_RoundedRectangle.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.polygon = Graphics_Path_Shape_Polygon.decode(reader, reader.uint32());
+          message.polygon = Graphics_Path_Shape_Polygon.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.star = Graphics_Path_Shape_Star.decode(reader, reader.uint32());
+          message.star = Graphics_Path_Shape_Star.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.arrow = Graphics_Path_Shape_Arrow.decode(reader, reader.uint32());
+          message.arrow = Graphics_Path_Shape_Arrow.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2621,49 +2777,76 @@ export const Graphics_Path_Shape = {
 
   fromJSON(object: any): Graphics_Path_Shape {
     return {
-      type: isSet(object.type) ? graphics_Path_Shape_TypeFromJSON(object.type) : 0,
+      type: isSet(object.type)
+        ? graphics_Path_Shape_TypeFromJSON(object.type)
+        : 0,
       roundedRectangle: isSet(object.roundedRectangle)
         ? Graphics_Path_Shape_RoundedRectangle.fromJSON(object.roundedRectangle)
         : undefined,
-      polygon: isSet(object.polygon) ? Graphics_Path_Shape_Polygon.fromJSON(object.polygon) : undefined,
-      star: isSet(object.star) ? Graphics_Path_Shape_Star.fromJSON(object.star) : undefined,
-      arrow: isSet(object.arrow) ? Graphics_Path_Shape_Arrow.fromJSON(object.arrow) : undefined,
+      polygon: isSet(object.polygon)
+        ? Graphics_Path_Shape_Polygon.fromJSON(object.polygon)
+        : undefined,
+      star: isSet(object.star)
+        ? Graphics_Path_Shape_Star.fromJSON(object.star)
+        : undefined,
+      arrow: isSet(object.arrow)
+        ? Graphics_Path_Shape_Arrow.fromJSON(object.arrow)
+        : undefined,
     };
   },
 
   toJSON(message: Graphics_Path_Shape): unknown {
     const obj: any = {};
-    message.type !== undefined && (obj.type = graphics_Path_Shape_TypeToJSON(message.type));
-    message.roundedRectangle !== undefined && (obj.roundedRectangle = message.roundedRectangle
-      ? Graphics_Path_Shape_RoundedRectangle.toJSON(message.roundedRectangle)
-      : undefined);
+    message.type !== undefined &&
+      (obj.type = graphics_Path_Shape_TypeToJSON(message.type));
+    message.roundedRectangle !== undefined &&
+      (obj.roundedRectangle = message.roundedRectangle
+        ? Graphics_Path_Shape_RoundedRectangle.toJSON(message.roundedRectangle)
+        : undefined);
     message.polygon !== undefined &&
-      (obj.polygon = message.polygon ? Graphics_Path_Shape_Polygon.toJSON(message.polygon) : undefined);
-    message.star !== undefined && (obj.star = message.star ? Graphics_Path_Shape_Star.toJSON(message.star) : undefined);
+      (obj.polygon = message.polygon
+        ? Graphics_Path_Shape_Polygon.toJSON(message.polygon)
+        : undefined);
+    message.star !== undefined &&
+      (obj.star = message.star
+        ? Graphics_Path_Shape_Star.toJSON(message.star)
+        : undefined);
     message.arrow !== undefined &&
-      (obj.arrow = message.arrow ? Graphics_Path_Shape_Arrow.toJSON(message.arrow) : undefined);
+      (obj.arrow = message.arrow
+        ? Graphics_Path_Shape_Arrow.toJSON(message.arrow)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Path_Shape>, I>>(base?: I): Graphics_Path_Shape {
+  create<I extends Exact<DeepPartial<Graphics_Path_Shape>, I>>(
+    base?: I,
+  ): Graphics_Path_Shape {
     return Graphics_Path_Shape.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape>, I>>(object: I): Graphics_Path_Shape {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape>, I>>(
+    object: I,
+  ): Graphics_Path_Shape {
     const message = createBaseGraphics_Path_Shape();
     message.type = object.type ?? 0;
-    message.roundedRectangle = (object.roundedRectangle !== undefined && object.roundedRectangle !== null)
-      ? Graphics_Path_Shape_RoundedRectangle.fromPartial(object.roundedRectangle)
-      : undefined;
-    message.polygon = (object.polygon !== undefined && object.polygon !== null)
-      ? Graphics_Path_Shape_Polygon.fromPartial(object.polygon)
-      : undefined;
-    message.star = (object.star !== undefined && object.star !== null)
-      ? Graphics_Path_Shape_Star.fromPartial(object.star)
-      : undefined;
-    message.arrow = (object.arrow !== undefined && object.arrow !== null)
-      ? Graphics_Path_Shape_Arrow.fromPartial(object.arrow)
-      : undefined;
+    message.roundedRectangle =
+      object.roundedRectangle !== undefined && object.roundedRectangle !== null
+        ? Graphics_Path_Shape_RoundedRectangle.fromPartial(
+            object.roundedRectangle,
+          )
+        : undefined;
+    message.polygon =
+      object.polygon !== undefined && object.polygon !== null
+        ? Graphics_Path_Shape_Polygon.fromPartial(object.polygon)
+        : undefined;
+    message.star =
+      object.star !== undefined && object.star !== null
+        ? Graphics_Path_Shape_Star.fromPartial(object.star)
+        : undefined;
+    message.arrow =
+      object.arrow !== undefined && object.arrow !== null
+        ? Graphics_Path_Shape_Arrow.fromPartial(object.arrow)
+        : undefined;
     return message;
   },
 };
@@ -2673,15 +2856,22 @@ function createBaseGraphics_Path_Shape_RoundedRectangle(): Graphics_Path_Shape_R
 }
 
 export const Graphics_Path_Shape_RoundedRectangle = {
-  encode(message: Graphics_Path_Shape_RoundedRectangle, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path_Shape_RoundedRectangle,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.roundness !== 0) {
       writer.uint32(9).double(message.roundness);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path_Shape_RoundedRectangle {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Path_Shape_RoundedRectangle {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path_Shape_RoundedRectangle();
     while (reader.pos < end) {
@@ -2704,7 +2894,9 @@ export const Graphics_Path_Shape_RoundedRectangle = {
   },
 
   fromJSON(object: any): Graphics_Path_Shape_RoundedRectangle {
-    return { roundness: isSet(object.roundness) ? Number(object.roundness) : 0 };
+    return {
+      roundness: isSet(object.roundness) ? Number(object.roundness) : 0,
+    };
   },
 
   toJSON(message: Graphics_Path_Shape_RoundedRectangle): unknown {
@@ -2719,9 +2911,9 @@ export const Graphics_Path_Shape_RoundedRectangle = {
     return Graphics_Path_Shape_RoundedRectangle.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_RoundedRectangle>, I>>(
-    object: I,
-  ): Graphics_Path_Shape_RoundedRectangle {
+  fromPartial<
+    I extends Exact<DeepPartial<Graphics_Path_Shape_RoundedRectangle>, I>,
+  >(object: I): Graphics_Path_Shape_RoundedRectangle {
     const message = createBaseGraphics_Path_Shape_RoundedRectangle();
     message.roundness = object.roundness ?? 0;
     return message;
@@ -2733,15 +2925,22 @@ function createBaseGraphics_Path_Shape_Arrow(): Graphics_Path_Shape_Arrow {
 }
 
 export const Graphics_Path_Shape_Arrow = {
-  encode(message: Graphics_Path_Shape_Arrow, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path_Shape_Arrow,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.corner !== undefined) {
       Graphics_Point.encode(message.corner, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path_Shape_Arrow {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Path_Shape_Arrow {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path_Shape_Arrow();
     while (reader.pos < end) {
@@ -2764,24 +2963,36 @@ export const Graphics_Path_Shape_Arrow = {
   },
 
   fromJSON(object: any): Graphics_Path_Shape_Arrow {
-    return { corner: isSet(object.corner) ? Graphics_Point.fromJSON(object.corner) : undefined };
+    return {
+      corner: isSet(object.corner)
+        ? Graphics_Point.fromJSON(object.corner)
+        : undefined,
+    };
   },
 
   toJSON(message: Graphics_Path_Shape_Arrow): unknown {
     const obj: any = {};
-    message.corner !== undefined && (obj.corner = message.corner ? Graphics_Point.toJSON(message.corner) : undefined);
+    message.corner !== undefined &&
+      (obj.corner = message.corner
+        ? Graphics_Point.toJSON(message.corner)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Path_Shape_Arrow>, I>>(base?: I): Graphics_Path_Shape_Arrow {
+  create<I extends Exact<DeepPartial<Graphics_Path_Shape_Arrow>, I>>(
+    base?: I,
+  ): Graphics_Path_Shape_Arrow {
     return Graphics_Path_Shape_Arrow.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Arrow>, I>>(object: I): Graphics_Path_Shape_Arrow {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Arrow>, I>>(
+    object: I,
+  ): Graphics_Path_Shape_Arrow {
     const message = createBaseGraphics_Path_Shape_Arrow();
-    message.corner = (object.corner !== undefined && object.corner !== null)
-      ? Graphics_Point.fromPartial(object.corner)
-      : undefined;
+    message.corner =
+      object.corner !== undefined && object.corner !== null
+        ? Graphics_Point.fromPartial(object.corner)
+        : undefined;
     return message;
   },
 };
@@ -2791,15 +3002,22 @@ function createBaseGraphics_Path_Shape_Polygon(): Graphics_Path_Shape_Polygon {
 }
 
 export const Graphics_Path_Shape_Polygon = {
-  encode(message: Graphics_Path_Shape_Polygon, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path_Shape_Polygon,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.numberSides !== 0) {
       writer.uint32(8).uint32(message.numberSides);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path_Shape_Polygon {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Path_Shape_Polygon {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path_Shape_Polygon();
     while (reader.pos < end) {
@@ -2822,20 +3040,27 @@ export const Graphics_Path_Shape_Polygon = {
   },
 
   fromJSON(object: any): Graphics_Path_Shape_Polygon {
-    return { numberSides: isSet(object.numberSides) ? Number(object.numberSides) : 0 };
+    return {
+      numberSides: isSet(object.numberSides) ? Number(object.numberSides) : 0,
+    };
   },
 
   toJSON(message: Graphics_Path_Shape_Polygon): unknown {
     const obj: any = {};
-    message.numberSides !== undefined && (obj.numberSides = Math.round(message.numberSides));
+    message.numberSides !== undefined &&
+      (obj.numberSides = Math.round(message.numberSides));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Path_Shape_Polygon>, I>>(base?: I): Graphics_Path_Shape_Polygon {
+  create<I extends Exact<DeepPartial<Graphics_Path_Shape_Polygon>, I>>(
+    base?: I,
+  ): Graphics_Path_Shape_Polygon {
     return Graphics_Path_Shape_Polygon.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Polygon>, I>>(object: I): Graphics_Path_Shape_Polygon {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Polygon>, I>>(
+    object: I,
+  ): Graphics_Path_Shape_Polygon {
     const message = createBaseGraphics_Path_Shape_Polygon();
     message.numberSides = object.numberSides ?? 0;
     return message;
@@ -2847,7 +3072,10 @@ function createBaseGraphics_Path_Shape_Star(): Graphics_Path_Shape_Star {
 }
 
 export const Graphics_Path_Shape_Star = {
-  encode(message: Graphics_Path_Shape_Star, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Path_Shape_Star,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.innerRadius !== 0) {
       writer.uint32(9).double(message.innerRadius);
     }
@@ -2857,8 +3085,12 @@ export const Graphics_Path_Shape_Star = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Path_Shape_Star {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Path_Shape_Star {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Path_Shape_Star();
     while (reader.pos < end) {
@@ -2890,22 +3122,30 @@ export const Graphics_Path_Shape_Star = {
   fromJSON(object: any): Graphics_Path_Shape_Star {
     return {
       innerRadius: isSet(object.innerRadius) ? Number(object.innerRadius) : 0,
-      numberPoints: isSet(object.numberPoints) ? Number(object.numberPoints) : 0,
+      numberPoints: isSet(object.numberPoints)
+        ? Number(object.numberPoints)
+        : 0,
     };
   },
 
   toJSON(message: Graphics_Path_Shape_Star): unknown {
     const obj: any = {};
-    message.innerRadius !== undefined && (obj.innerRadius = message.innerRadius);
-    message.numberPoints !== undefined && (obj.numberPoints = Math.round(message.numberPoints));
+    message.innerRadius !== undefined &&
+      (obj.innerRadius = message.innerRadius);
+    message.numberPoints !== undefined &&
+      (obj.numberPoints = Math.round(message.numberPoints));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Path_Shape_Star>, I>>(base?: I): Graphics_Path_Shape_Star {
+  create<I extends Exact<DeepPartial<Graphics_Path_Shape_Star>, I>>(
+    base?: I,
+  ): Graphics_Path_Shape_Star {
     return Graphics_Path_Shape_Star.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Star>, I>>(object: I): Graphics_Path_Shape_Star {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Star>, I>>(
+    object: I,
+  ): Graphics_Path_Shape_Star {
     const message = createBaseGraphics_Path_Shape_Star();
     message.innerRadius = object.innerRadius ?? 0;
     message.numberPoints = object.numberPoints ?? 0;
@@ -2914,11 +3154,20 @@ export const Graphics_Path_Shape_Star = {
 };
 
 function createBaseGraphics_Fill(): Graphics_Fill {
-  return { enable: false, color: undefined, gradient: undefined, media: undefined, backgroundEffect: undefined };
+  return {
+    enable: false,
+    color: undefined,
+    gradient: undefined,
+    media: undefined,
+    backgroundEffect: undefined,
+  };
 }
 
 export const Graphics_Fill = {
-  encode(message: Graphics_Fill, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Fill,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enable === true) {
       writer.uint32(32).bool(message.enable);
     }
@@ -2926,19 +3175,26 @@ export const Graphics_Fill = {
       Color.encode(message.color, writer.uint32(10).fork()).ldelim();
     }
     if (message.gradient !== undefined) {
-      Graphics_Gradient.encode(message.gradient, writer.uint32(18).fork()).ldelim();
+      Graphics_Gradient.encode(
+        message.gradient,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.media !== undefined) {
       Media.encode(message.media, writer.uint32(26).fork()).ldelim();
     }
     if (message.backgroundEffect !== undefined) {
-      Graphics_BackgroundEffect.encode(message.backgroundEffect, writer.uint32(42).fork()).ldelim();
+      Graphics_BackgroundEffect.encode(
+        message.backgroundEffect,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Fill {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Fill();
     while (reader.pos < end) {
@@ -2977,7 +3233,10 @@ export const Graphics_Fill = {
             break;
           }
 
-          message.backgroundEffect = Graphics_BackgroundEffect.decode(reader, reader.uint32());
+          message.backgroundEffect = Graphics_BackgroundEffect.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2992,7 +3251,9 @@ export const Graphics_Fill = {
     return {
       enable: isSet(object.enable) ? Boolean(object.enable) : false,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      gradient: isSet(object.gradient) ? Graphics_Gradient.fromJSON(object.gradient) : undefined,
+      gradient: isSet(object.gradient)
+        ? Graphics_Gradient.fromJSON(object.gradient)
+        : undefined,
       media: isSet(object.media) ? Media.fromJSON(object.media) : undefined,
       backgroundEffect: isSet(object.backgroundEffect)
         ? Graphics_BackgroundEffect.fromJSON(object.backgroundEffect)
@@ -3003,31 +3264,48 @@ export const Graphics_Fill = {
   toJSON(message: Graphics_Fill): unknown {
     const obj: any = {};
     message.enable !== undefined && (obj.enable = message.enable);
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     message.gradient !== undefined &&
-      (obj.gradient = message.gradient ? Graphics_Gradient.toJSON(message.gradient) : undefined);
-    message.media !== undefined && (obj.media = message.media ? Media.toJSON(message.media) : undefined);
-    message.backgroundEffect !== undefined && (obj.backgroundEffect = message.backgroundEffect
-      ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
-      : undefined);
+      (obj.gradient = message.gradient
+        ? Graphics_Gradient.toJSON(message.gradient)
+        : undefined);
+    message.media !== undefined &&
+      (obj.media = message.media ? Media.toJSON(message.media) : undefined);
+    message.backgroundEffect !== undefined &&
+      (obj.backgroundEffect = message.backgroundEffect
+        ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Fill>, I>>(base?: I): Graphics_Fill {
+  create<I extends Exact<DeepPartial<Graphics_Fill>, I>>(
+    base?: I,
+  ): Graphics_Fill {
     return Graphics_Fill.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Fill>, I>>(object: I): Graphics_Fill {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Fill>, I>>(
+    object: I,
+  ): Graphics_Fill {
     const message = createBaseGraphics_Fill();
     message.enable = object.enable ?? false;
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
-    message.gradient = (object.gradient !== undefined && object.gradient !== null)
-      ? Graphics_Gradient.fromPartial(object.gradient)
-      : undefined;
-    message.media = (object.media !== undefined && object.media !== null) ? Media.fromPartial(object.media) : undefined;
-    message.backgroundEffect = (object.backgroundEffect !== undefined && object.backgroundEffect !== null)
-      ? Graphics_BackgroundEffect.fromPartial(object.backgroundEffect)
-      : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
+    message.gradient =
+      object.gradient !== undefined && object.gradient !== null
+        ? Graphics_Gradient.fromPartial(object.gradient)
+        : undefined;
+    message.media =
+      object.media !== undefined && object.media !== null
+        ? Media.fromPartial(object.media)
+        : undefined;
+    message.backgroundEffect =
+      object.backgroundEffect !== undefined && object.backgroundEffect !== null
+        ? Graphics_BackgroundEffect.fromPartial(object.backgroundEffect)
+        : undefined;
     return message;
   },
 };
@@ -3037,19 +3315,31 @@ function createBaseGraphics_BackgroundEffect(): Graphics_BackgroundEffect {
 }
 
 export const Graphics_BackgroundEffect = {
-  encode(message: Graphics_BackgroundEffect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_BackgroundEffect,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.backgroundBlur !== undefined) {
-      Graphics_BackgroundEffect_BackgroundEffectBlur.encode(message.backgroundBlur, writer.uint32(18).fork()).ldelim();
+      Graphics_BackgroundEffect_BackgroundEffectBlur.encode(
+        message.backgroundBlur,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.backgroundInvert !== undefined) {
-      Graphics_BackgroundEffect_BackgroundEffectInvert.encode(message.backgroundInvert, writer.uint32(26).fork())
-        .ldelim();
+      Graphics_BackgroundEffect_BackgroundEffectInvert.encode(
+        message.backgroundInvert,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_BackgroundEffect {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_BackgroundEffect {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_BackgroundEffect();
     while (reader.pos < end) {
@@ -3060,14 +3350,22 @@ export const Graphics_BackgroundEffect = {
             break;
           }
 
-          message.backgroundBlur = Graphics_BackgroundEffect_BackgroundEffectBlur.decode(reader, reader.uint32());
+          message.backgroundBlur =
+            Graphics_BackgroundEffect_BackgroundEffectBlur.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.backgroundInvert = Graphics_BackgroundEffect_BackgroundEffectInvert.decode(reader, reader.uint32());
+          message.backgroundInvert =
+            Graphics_BackgroundEffect_BackgroundEffectInvert.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3081,37 +3379,57 @@ export const Graphics_BackgroundEffect = {
   fromJSON(object: any): Graphics_BackgroundEffect {
     return {
       backgroundBlur: isSet(object.backgroundBlur)
-        ? Graphics_BackgroundEffect_BackgroundEffectBlur.fromJSON(object.backgroundBlur)
+        ? Graphics_BackgroundEffect_BackgroundEffectBlur.fromJSON(
+            object.backgroundBlur,
+          )
         : undefined,
       backgroundInvert: isSet(object.backgroundInvert)
-        ? Graphics_BackgroundEffect_BackgroundEffectInvert.fromJSON(object.backgroundInvert)
+        ? Graphics_BackgroundEffect_BackgroundEffectInvert.fromJSON(
+            object.backgroundInvert,
+          )
         : undefined,
     };
   },
 
   toJSON(message: Graphics_BackgroundEffect): unknown {
     const obj: any = {};
-    message.backgroundBlur !== undefined && (obj.backgroundBlur = message.backgroundBlur
-      ? Graphics_BackgroundEffect_BackgroundEffectBlur.toJSON(message.backgroundBlur)
-      : undefined);
-    message.backgroundInvert !== undefined && (obj.backgroundInvert = message.backgroundInvert
-      ? Graphics_BackgroundEffect_BackgroundEffectInvert.toJSON(message.backgroundInvert)
-      : undefined);
+    message.backgroundBlur !== undefined &&
+      (obj.backgroundBlur = message.backgroundBlur
+        ? Graphics_BackgroundEffect_BackgroundEffectBlur.toJSON(
+            message.backgroundBlur,
+          )
+        : undefined);
+    message.backgroundInvert !== undefined &&
+      (obj.backgroundInvert = message.backgroundInvert
+        ? Graphics_BackgroundEffect_BackgroundEffectInvert.toJSON(
+            message.backgroundInvert,
+          )
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_BackgroundEffect>, I>>(base?: I): Graphics_BackgroundEffect {
+  create<I extends Exact<DeepPartial<Graphics_BackgroundEffect>, I>>(
+    base?: I,
+  ): Graphics_BackgroundEffect {
     return Graphics_BackgroundEffect.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_BackgroundEffect>, I>>(object: I): Graphics_BackgroundEffect {
+  fromPartial<I extends Exact<DeepPartial<Graphics_BackgroundEffect>, I>>(
+    object: I,
+  ): Graphics_BackgroundEffect {
     const message = createBaseGraphics_BackgroundEffect();
-    message.backgroundBlur = (object.backgroundBlur !== undefined && object.backgroundBlur !== null)
-      ? Graphics_BackgroundEffect_BackgroundEffectBlur.fromPartial(object.backgroundBlur)
-      : undefined;
-    message.backgroundInvert = (object.backgroundInvert !== undefined && object.backgroundInvert !== null)
-      ? Graphics_BackgroundEffect_BackgroundEffectInvert.fromPartial(object.backgroundInvert)
-      : undefined;
+    message.backgroundBlur =
+      object.backgroundBlur !== undefined && object.backgroundBlur !== null
+        ? Graphics_BackgroundEffect_BackgroundEffectBlur.fromPartial(
+            object.backgroundBlur,
+          )
+        : undefined;
+    message.backgroundInvert =
+      object.backgroundInvert !== undefined && object.backgroundInvert !== null
+        ? Graphics_BackgroundEffect_BackgroundEffectInvert.fromPartial(
+            object.backgroundInvert,
+          )
+        : undefined;
     return message;
   },
 };
@@ -3134,8 +3452,12 @@ export const Graphics_BackgroundEffect_BackgroundEffectBlur = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_BackgroundEffect_BackgroundEffectBlur {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_BackgroundEffect_BackgroundEffectBlur {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_BackgroundEffect_BackgroundEffectBlur();
     while (reader.pos < end) {
@@ -3178,15 +3500,23 @@ export const Graphics_BackgroundEffect_BackgroundEffectBlur = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_BackgroundEffect_BackgroundEffectBlur>, I>>(
-    base?: I,
-  ): Graphics_BackgroundEffect_BackgroundEffectBlur {
-    return Graphics_BackgroundEffect_BackgroundEffectBlur.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<Graphics_BackgroundEffect_BackgroundEffectBlur>,
+      I
+    >,
+  >(base?: I): Graphics_BackgroundEffect_BackgroundEffectBlur {
+    return Graphics_BackgroundEffect_BackgroundEffectBlur.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_BackgroundEffect_BackgroundEffectBlur>, I>>(
-    object: I,
-  ): Graphics_BackgroundEffect_BackgroundEffectBlur {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<Graphics_BackgroundEffect_BackgroundEffectBlur>,
+      I
+    >,
+  >(object: I): Graphics_BackgroundEffect_BackgroundEffectBlur {
     const message = createBaseGraphics_BackgroundEffect_BackgroundEffectBlur();
     message.saturation = object.saturation ?? 0;
     message.blurAmount = object.blurAmount ?? 0;
@@ -3199,14 +3529,22 @@ function createBaseGraphics_BackgroundEffect_BackgroundEffectInvert(): Graphics_
 }
 
 export const Graphics_BackgroundEffect_BackgroundEffectInvert = {
-  encode(_: Graphics_BackgroundEffect_BackgroundEffectInvert, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: Graphics_BackgroundEffect_BackgroundEffectInvert,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_BackgroundEffect_BackgroundEffectInvert {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_BackgroundEffect_BackgroundEffectInvert {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGraphics_BackgroundEffect_BackgroundEffectInvert();
+    const message =
+      createBaseGraphics_BackgroundEffect_BackgroundEffectInvert();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3228,16 +3566,25 @@ export const Graphics_BackgroundEffect_BackgroundEffectInvert = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_BackgroundEffect_BackgroundEffectInvert>, I>>(
-    base?: I,
-  ): Graphics_BackgroundEffect_BackgroundEffectInvert {
-    return Graphics_BackgroundEffect_BackgroundEffectInvert.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<Graphics_BackgroundEffect_BackgroundEffectInvert>,
+      I
+    >,
+  >(base?: I): Graphics_BackgroundEffect_BackgroundEffectInvert {
+    return Graphics_BackgroundEffect_BackgroundEffectInvert.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_BackgroundEffect_BackgroundEffectInvert>, I>>(
-    _: I,
-  ): Graphics_BackgroundEffect_BackgroundEffectInvert {
-    const message = createBaseGraphics_BackgroundEffect_BackgroundEffectInvert();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<Graphics_BackgroundEffect_BackgroundEffectInvert>,
+      I
+    >,
+  >(_: I): Graphics_BackgroundEffect_BackgroundEffectInvert {
+    const message =
+      createBaseGraphics_BackgroundEffect_BackgroundEffectInvert();
     return message;
   },
 };
@@ -3247,7 +3594,10 @@ function createBaseGraphics_Gradient(): Graphics_Gradient {
 }
 
 export const Graphics_Gradient = {
-  encode(message: Graphics_Gradient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Gradient,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
@@ -3264,7 +3614,8 @@ export const Graphics_Gradient = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Gradient {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Gradient();
     while (reader.pos < end) {
@@ -3296,7 +3647,9 @@ export const Graphics_Gradient = {
             break;
           }
 
-          message.stops.push(Graphics_Gradient_ColorStop.decode(reader, reader.uint32()));
+          message.stops.push(
+            Graphics_Gradient_ColorStop.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3309,36 +3662,49 @@ export const Graphics_Gradient = {
 
   fromJSON(object: any): Graphics_Gradient {
     return {
-      type: isSet(object.type) ? graphics_Gradient_TypeFromJSON(object.type) : 0,
+      type: isSet(object.type)
+        ? graphics_Gradient_TypeFromJSON(object.type)
+        : 0,
       angle: isSet(object.angle) ? Number(object.angle) : 0,
       length: isSet(object.length) ? Number(object.length) : 0,
-      stops: Array.isArray(object?.stops) ? object.stops.map((e: any) => Graphics_Gradient_ColorStop.fromJSON(e)) : [],
+      stops: Array.isArray(object?.stops)
+        ? object.stops.map((e: any) => Graphics_Gradient_ColorStop.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: Graphics_Gradient): unknown {
     const obj: any = {};
-    message.type !== undefined && (obj.type = graphics_Gradient_TypeToJSON(message.type));
+    message.type !== undefined &&
+      (obj.type = graphics_Gradient_TypeToJSON(message.type));
     message.angle !== undefined && (obj.angle = message.angle);
     message.length !== undefined && (obj.length = message.length);
     if (message.stops) {
-      obj.stops = message.stops.map((e) => e ? Graphics_Gradient_ColorStop.toJSON(e) : undefined);
+      obj.stops = message.stops.map((e) =>
+        e ? Graphics_Gradient_ColorStop.toJSON(e) : undefined,
+      );
     } else {
       obj.stops = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Gradient>, I>>(base?: I): Graphics_Gradient {
+  create<I extends Exact<DeepPartial<Graphics_Gradient>, I>>(
+    base?: I,
+  ): Graphics_Gradient {
     return Graphics_Gradient.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Gradient>, I>>(object: I): Graphics_Gradient {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Gradient>, I>>(
+    object: I,
+  ): Graphics_Gradient {
     const message = createBaseGraphics_Gradient();
     message.type = object.type ?? 0;
     message.angle = object.angle ?? 0;
     message.length = object.length ?? 0;
-    message.stops = object.stops?.map((e) => Graphics_Gradient_ColorStop.fromPartial(e)) || [];
+    message.stops =
+      object.stops?.map((e) => Graphics_Gradient_ColorStop.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -3348,7 +3714,10 @@ function createBaseGraphics_Gradient_ColorStop(): Graphics_Gradient_ColorStop {
 }
 
 export const Graphics_Gradient_ColorStop = {
-  encode(message: Graphics_Gradient_ColorStop, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Gradient_ColorStop,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.color !== undefined) {
       Color.encode(message.color, writer.uint32(10).fork()).ldelim();
     }
@@ -3361,8 +3730,12 @@ export const Graphics_Gradient_ColorStop = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Gradient_ColorStop {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Gradient_ColorStop {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Gradient_ColorStop();
     while (reader.pos < end) {
@@ -3408,19 +3781,27 @@ export const Graphics_Gradient_ColorStop = {
 
   toJSON(message: Graphics_Gradient_ColorStop): unknown {
     const obj: any = {};
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     message.position !== undefined && (obj.position = message.position);
     message.blendPoint !== undefined && (obj.blendPoint = message.blendPoint);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Gradient_ColorStop>, I>>(base?: I): Graphics_Gradient_ColorStop {
+  create<I extends Exact<DeepPartial<Graphics_Gradient_ColorStop>, I>>(
+    base?: I,
+  ): Graphics_Gradient_ColorStop {
     return Graphics_Gradient_ColorStop.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Gradient_ColorStop>, I>>(object: I): Graphics_Gradient_ColorStop {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Gradient_ColorStop>, I>>(
+    object: I,
+  ): Graphics_Gradient_ColorStop {
     const message = createBaseGraphics_Gradient_ColorStop();
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
     message.position = object.position ?? 0;
     message.blendPoint = object.blendPoint ?? 0;
     return message;
@@ -3428,11 +3809,22 @@ export const Graphics_Gradient_ColorStop = {
 };
 
 function createBaseGraphics_Shadow(): Graphics_Shadow {
-  return { style: 0, angle: 0, offset: 0, radius: 0, color: undefined, opacity: 0, enable: false };
+  return {
+    style: 0,
+    angle: 0,
+    offset: 0,
+    radius: 0,
+    color: undefined,
+    opacity: 0,
+    enable: false,
+  };
 }
 
 export const Graphics_Shadow = {
-  encode(message: Graphics_Shadow, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Shadow,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.style !== 0) {
       writer.uint32(8).int32(message.style);
     }
@@ -3458,7 +3850,8 @@ export const Graphics_Shadow = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Shadow {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Shadow();
     while (reader.pos < end) {
@@ -3524,7 +3917,9 @@ export const Graphics_Shadow = {
 
   fromJSON(object: any): Graphics_Shadow {
     return {
-      style: isSet(object.style) ? graphics_Shadow_StyleFromJSON(object.style) : 0,
+      style: isSet(object.style)
+        ? graphics_Shadow_StyleFromJSON(object.style)
+        : 0,
       angle: isSet(object.angle) ? Number(object.angle) : 0,
       offset: isSet(object.offset) ? Number(object.offset) : 0,
       radius: isSet(object.radius) ? Number(object.radius) : 0,
@@ -3536,27 +3931,36 @@ export const Graphics_Shadow = {
 
   toJSON(message: Graphics_Shadow): unknown {
     const obj: any = {};
-    message.style !== undefined && (obj.style = graphics_Shadow_StyleToJSON(message.style));
+    message.style !== undefined &&
+      (obj.style = graphics_Shadow_StyleToJSON(message.style));
     message.angle !== undefined && (obj.angle = message.angle);
     message.offset !== undefined && (obj.offset = message.offset);
     message.radius !== undefined && (obj.radius = message.radius);
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     message.opacity !== undefined && (obj.opacity = message.opacity);
     message.enable !== undefined && (obj.enable = message.enable);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Shadow>, I>>(base?: I): Graphics_Shadow {
+  create<I extends Exact<DeepPartial<Graphics_Shadow>, I>>(
+    base?: I,
+  ): Graphics_Shadow {
     return Graphics_Shadow.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Shadow>, I>>(object: I): Graphics_Shadow {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Shadow>, I>>(
+    object: I,
+  ): Graphics_Shadow {
     const message = createBaseGraphics_Shadow();
     message.style = object.style ?? 0;
     message.angle = object.angle ?? 0;
     message.offset = object.offset ?? 0;
     message.radius = object.radius ?? 0;
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
     message.opacity = object.opacity ?? 0;
     message.enable = object.enable ?? false;
     return message;
@@ -3568,7 +3972,10 @@ function createBaseGraphics_Stroke(): Graphics_Stroke {
 }
 
 export const Graphics_Stroke = {
-  encode(message: Graphics_Stroke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Stroke,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.style !== 0) {
       writer.uint32(8).int32(message.style);
     }
@@ -3590,7 +3997,8 @@ export const Graphics_Stroke = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Stroke {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Stroke();
     while (reader.pos < end) {
@@ -3651,19 +4059,25 @@ export const Graphics_Stroke = {
 
   fromJSON(object: any): Graphics_Stroke {
     return {
-      style: isSet(object.style) ? graphics_Stroke_StyleFromJSON(object.style) : 0,
+      style: isSet(object.style)
+        ? graphics_Stroke_StyleFromJSON(object.style)
+        : 0,
       width: isSet(object.width) ? Number(object.width) : 0,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => Number(e)) : [],
+      pattern: Array.isArray(object?.pattern)
+        ? object.pattern.map((e: any) => Number(e))
+        : [],
       enable: isSet(object.enable) ? Boolean(object.enable) : false,
     };
   },
 
   toJSON(message: Graphics_Stroke): unknown {
     const obj: any = {};
-    message.style !== undefined && (obj.style = graphics_Stroke_StyleToJSON(message.style));
+    message.style !== undefined &&
+      (obj.style = graphics_Stroke_StyleToJSON(message.style));
     message.width !== undefined && (obj.width = message.width);
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     if (message.pattern) {
       obj.pattern = message.pattern.map((e) => e);
     } else {
@@ -3673,15 +4087,22 @@ export const Graphics_Stroke = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Stroke>, I>>(base?: I): Graphics_Stroke {
+  create<I extends Exact<DeepPartial<Graphics_Stroke>, I>>(
+    base?: I,
+  ): Graphics_Stroke {
     return Graphics_Stroke.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Stroke>, I>>(object: I): Graphics_Stroke {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Stroke>, I>>(
+    object: I,
+  ): Graphics_Stroke {
     const message = createBaseGraphics_Stroke();
     message.style = object.style ?? 0;
     message.width = object.width ?? 0;
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
     message.pattern = object.pattern?.map((e) => e) || [];
     message.enable = object.enable ?? false;
     return message;
@@ -3693,7 +4114,10 @@ function createBaseGraphics_Feather(): Graphics_Feather {
 }
 
 export const Graphics_Feather = {
-  encode(message: Graphics_Feather, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Feather,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.style !== 0) {
       writer.uint32(8).int32(message.style);
     }
@@ -3707,7 +4131,8 @@ export const Graphics_Feather = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Feather {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Feather();
     while (reader.pos < end) {
@@ -3745,7 +4170,9 @@ export const Graphics_Feather = {
 
   fromJSON(object: any): Graphics_Feather {
     return {
-      style: isSet(object.style) ? graphics_Feather_StyleFromJSON(object.style) : 0,
+      style: isSet(object.style)
+        ? graphics_Feather_StyleFromJSON(object.style)
+        : 0,
       radius: isSet(object.radius) ? Number(object.radius) : 0,
       enable: isSet(object.enable) ? Boolean(object.enable) : false,
     };
@@ -3753,17 +4180,22 @@ export const Graphics_Feather = {
 
   toJSON(message: Graphics_Feather): unknown {
     const obj: any = {};
-    message.style !== undefined && (obj.style = graphics_Feather_StyleToJSON(message.style));
+    message.style !== undefined &&
+      (obj.style = graphics_Feather_StyleToJSON(message.style));
     message.radius !== undefined && (obj.radius = message.radius);
     message.enable !== undefined && (obj.enable = message.enable);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Feather>, I>>(base?: I): Graphics_Feather {
+  create<I extends Exact<DeepPartial<Graphics_Feather>, I>>(
+    base?: I,
+  ): Graphics_Feather {
     return Graphics_Feather.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Feather>, I>>(object: I): Graphics_Feather {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Feather>, I>>(
+    object: I,
+  ): Graphics_Feather {
     const message = createBaseGraphics_Feather();
     message.style = object.style ?? 0;
     message.radius = object.radius ?? 0;
@@ -3782,15 +4214,21 @@ function createBaseGraphics_Text(): Graphics_Text {
     margins: undefined,
     isSuperscriptStandardized: false,
     transform: 0,
-    transformDelimiter: "",
+    transformDelimiter: '',
     chordPro: undefined,
   };
 }
 
 export const Graphics_Text = {
-  encode(message: Graphics_Text, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.attributes !== undefined) {
-      Graphics_Text_Attributes.encode(message.attributes, writer.uint32(26).fork()).ldelim();
+      Graphics_Text_Attributes.encode(
+        message.attributes,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.shadow !== undefined) {
       Graphics_Shadow.encode(message.shadow, writer.uint32(34).fork()).ldelim();
@@ -3805,7 +4243,10 @@ export const Graphics_Text = {
       writer.uint32(56).int32(message.scaleBehavior);
     }
     if (message.margins !== undefined) {
-      Graphics_EdgeInsets.encode(message.margins, writer.uint32(66).fork()).ldelim();
+      Graphics_EdgeInsets.encode(
+        message.margins,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.isSuperscriptStandardized === true) {
       writer.uint32(72).bool(message.isSuperscriptStandardized);
@@ -3813,17 +4254,21 @@ export const Graphics_Text = {
     if (message.transform !== 0) {
       writer.uint32(80).int32(message.transform);
     }
-    if (message.transformDelimiter !== "") {
+    if (message.transformDelimiter !== '') {
       writer.uint32(90).string(message.transformDelimiter);
     }
     if (message.chordPro !== undefined) {
-      Graphics_Text_ChordPro.encode(message.chordPro, writer.uint32(98).fork()).ldelim();
+      Graphics_Text_ChordPro.encode(
+        message.chordPro,
+        writer.uint32(98).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text();
     while (reader.pos < end) {
@@ -3834,7 +4279,10 @@ export const Graphics_Text = {
             break;
           }
 
-          message.attributes = Graphics_Text_Attributes.decode(reader, reader.uint32());
+          message.attributes = Graphics_Text_Attributes.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
@@ -3897,7 +4345,10 @@ export const Graphics_Text = {
             break;
           }
 
-          message.chordPro = Graphics_Text_ChordPro.decode(reader, reader.uint32());
+          message.chordPro = Graphics_Text_ChordPro.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3910,79 +4361,131 @@ export const Graphics_Text = {
 
   fromJSON(object: any): Graphics_Text {
     return {
-      attributes: isSet(object.attributes) ? Graphics_Text_Attributes.fromJSON(object.attributes) : undefined,
-      shadow: isSet(object.shadow) ? Graphics_Shadow.fromJSON(object.shadow) : undefined,
-      rtfData: isSet(object.rtfData) ? bytesFromBase64(object.rtfData) : new Uint8Array(),
+      attributes: isSet(object.attributes)
+        ? Graphics_Text_Attributes.fromJSON(object.attributes)
+        : undefined,
+      shadow: isSet(object.shadow)
+        ? Graphics_Shadow.fromJSON(object.shadow)
+        : undefined,
+      rtfData: isSet(object.rtfData)
+        ? bytesFromBase64(object.rtfData)
+        : new Uint8Array(),
       verticalAlignment: isSet(object.verticalAlignment)
         ? graphics_Text_VerticalAlignmentFromJSON(object.verticalAlignment)
         : 0,
-      scaleBehavior: isSet(object.scaleBehavior) ? graphics_Text_ScaleBehaviorFromJSON(object.scaleBehavior) : 0,
-      margins: isSet(object.margins) ? Graphics_EdgeInsets.fromJSON(object.margins) : undefined,
+      scaleBehavior: isSet(object.scaleBehavior)
+        ? graphics_Text_ScaleBehaviorFromJSON(object.scaleBehavior)
+        : 0,
+      margins: isSet(object.margins)
+        ? Graphics_EdgeInsets.fromJSON(object.margins)
+        : undefined,
       isSuperscriptStandardized: isSet(object.isSuperscriptStandardized)
         ? Boolean(object.isSuperscriptStandardized)
         : false,
-      transform: isSet(object.transform) ? graphics_Text_TransformFromJSON(object.transform) : 0,
-      transformDelimiter: isSet(object.transformDelimiter) ? String(object.transformDelimiter) : "",
-      chordPro: isSet(object.chordPro) ? Graphics_Text_ChordPro.fromJSON(object.chordPro) : undefined,
+      transform: isSet(object.transform)
+        ? graphics_Text_TransformFromJSON(object.transform)
+        : 0,
+      transformDelimiter: isSet(object.transformDelimiter)
+        ? String(object.transformDelimiter)
+        : '',
+      chordPro: isSet(object.chordPro)
+        ? Graphics_Text_ChordPro.fromJSON(object.chordPro)
+        : undefined,
     };
   },
 
   toJSON(message: Graphics_Text): unknown {
     const obj: any = {};
     message.attributes !== undefined &&
-      (obj.attributes = message.attributes ? Graphics_Text_Attributes.toJSON(message.attributes) : undefined);
-    message.shadow !== undefined && (obj.shadow = message.shadow ? Graphics_Shadow.toJSON(message.shadow) : undefined);
+      (obj.attributes = message.attributes
+        ? Graphics_Text_Attributes.toJSON(message.attributes)
+        : undefined);
+    message.shadow !== undefined &&
+      (obj.shadow = message.shadow
+        ? Graphics_Shadow.toJSON(message.shadow)
+        : undefined);
     message.rtfData !== undefined &&
-      (obj.rtfData = base64FromBytes(message.rtfData !== undefined ? message.rtfData : new Uint8Array()));
+      (obj.rtfData = base64FromBytes(
+        message.rtfData !== undefined ? message.rtfData : new Uint8Array(),
+      ));
     message.verticalAlignment !== undefined &&
-      (obj.verticalAlignment = graphics_Text_VerticalAlignmentToJSON(message.verticalAlignment));
+      (obj.verticalAlignment = graphics_Text_VerticalAlignmentToJSON(
+        message.verticalAlignment,
+      ));
     message.scaleBehavior !== undefined &&
-      (obj.scaleBehavior = graphics_Text_ScaleBehaviorToJSON(message.scaleBehavior));
+      (obj.scaleBehavior = graphics_Text_ScaleBehaviorToJSON(
+        message.scaleBehavior,
+      ));
     message.margins !== undefined &&
-      (obj.margins = message.margins ? Graphics_EdgeInsets.toJSON(message.margins) : undefined);
+      (obj.margins = message.margins
+        ? Graphics_EdgeInsets.toJSON(message.margins)
+        : undefined);
     message.isSuperscriptStandardized !== undefined &&
       (obj.isSuperscriptStandardized = message.isSuperscriptStandardized);
-    message.transform !== undefined && (obj.transform = graphics_Text_TransformToJSON(message.transform));
-    message.transformDelimiter !== undefined && (obj.transformDelimiter = message.transformDelimiter);
+    message.transform !== undefined &&
+      (obj.transform = graphics_Text_TransformToJSON(message.transform));
+    message.transformDelimiter !== undefined &&
+      (obj.transformDelimiter = message.transformDelimiter);
     message.chordPro !== undefined &&
-      (obj.chordPro = message.chordPro ? Graphics_Text_ChordPro.toJSON(message.chordPro) : undefined);
+      (obj.chordPro = message.chordPro
+        ? Graphics_Text_ChordPro.toJSON(message.chordPro)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text>, I>>(base?: I): Graphics_Text {
+  create<I extends Exact<DeepPartial<Graphics_Text>, I>>(
+    base?: I,
+  ): Graphics_Text {
     return Graphics_Text.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text>, I>>(object: I): Graphics_Text {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text>, I>>(
+    object: I,
+  ): Graphics_Text {
     const message = createBaseGraphics_Text();
-    message.attributes = (object.attributes !== undefined && object.attributes !== null)
-      ? Graphics_Text_Attributes.fromPartial(object.attributes)
-      : undefined;
-    message.shadow = (object.shadow !== undefined && object.shadow !== null)
-      ? Graphics_Shadow.fromPartial(object.shadow)
-      : undefined;
+    message.attributes =
+      object.attributes !== undefined && object.attributes !== null
+        ? Graphics_Text_Attributes.fromPartial(object.attributes)
+        : undefined;
+    message.shadow =
+      object.shadow !== undefined && object.shadow !== null
+        ? Graphics_Shadow.fromPartial(object.shadow)
+        : undefined;
     message.rtfData = object.rtfData ?? new Uint8Array();
     message.verticalAlignment = object.verticalAlignment ?? 0;
     message.scaleBehavior = object.scaleBehavior ?? 0;
-    message.margins = (object.margins !== undefined && object.margins !== null)
-      ? Graphics_EdgeInsets.fromPartial(object.margins)
-      : undefined;
-    message.isSuperscriptStandardized = object.isSuperscriptStandardized ?? false;
+    message.margins =
+      object.margins !== undefined && object.margins !== null
+        ? Graphics_EdgeInsets.fromPartial(object.margins)
+        : undefined;
+    message.isSuperscriptStandardized =
+      object.isSuperscriptStandardized ?? false;
     message.transform = object.transform ?? 0;
-    message.transformDelimiter = object.transformDelimiter ?? "";
-    message.chordPro = (object.chordPro !== undefined && object.chordPro !== null)
-      ? Graphics_Text_ChordPro.fromPartial(object.chordPro)
-      : undefined;
+    message.transformDelimiter = object.transformDelimiter ?? '';
+    message.chordPro =
+      object.chordPro !== undefined && object.chordPro !== null
+        ? Graphics_Text_ChordPro.fromPartial(object.chordPro)
+        : undefined;
     return message;
   },
 };
 
 function createBaseGraphics_Text_LineFillMask(): Graphics_Text_LineFillMask {
-  return { enabled: false, heightOffset: 0, verticalOffset: 0, maskStyle: 0, widthOffset: 0, horizontalOffset: 0 };
+  return {
+    enabled: false,
+    heightOffset: 0,
+    verticalOffset: 0,
+    maskStyle: 0,
+    widthOffset: 0,
+    horizontalOffset: 0,
+  };
 }
 
 export const Graphics_Text_LineFillMask = {
-  encode(message: Graphics_Text_LineFillMask, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_LineFillMask,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
@@ -4004,8 +4507,12 @@ export const Graphics_Text_LineFillMask = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_LineFillMask {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_LineFillMask {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_LineFillMask();
     while (reader.pos < end) {
@@ -4065,31 +4572,49 @@ export const Graphics_Text_LineFillMask = {
   fromJSON(object: any): Graphics_Text_LineFillMask {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      heightOffset: isSet(object.heightOffset) ? Number(object.heightOffset) : 0,
-      verticalOffset: isSet(object.verticalOffset) ? Number(object.verticalOffset) : 0,
-      maskStyle: isSet(object.maskStyle) ? graphics_Text_LineFillMask_LineMaskStyleFromJSON(object.maskStyle) : 0,
+      heightOffset: isSet(object.heightOffset)
+        ? Number(object.heightOffset)
+        : 0,
+      verticalOffset: isSet(object.verticalOffset)
+        ? Number(object.verticalOffset)
+        : 0,
+      maskStyle: isSet(object.maskStyle)
+        ? graphics_Text_LineFillMask_LineMaskStyleFromJSON(object.maskStyle)
+        : 0,
       widthOffset: isSet(object.widthOffset) ? Number(object.widthOffset) : 0,
-      horizontalOffset: isSet(object.horizontalOffset) ? Number(object.horizontalOffset) : 0,
+      horizontalOffset: isSet(object.horizontalOffset)
+        ? Number(object.horizontalOffset)
+        : 0,
     };
   },
 
   toJSON(message: Graphics_Text_LineFillMask): unknown {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.heightOffset !== undefined && (obj.heightOffset = message.heightOffset);
-    message.verticalOffset !== undefined && (obj.verticalOffset = message.verticalOffset);
+    message.heightOffset !== undefined &&
+      (obj.heightOffset = message.heightOffset);
+    message.verticalOffset !== undefined &&
+      (obj.verticalOffset = message.verticalOffset);
     message.maskStyle !== undefined &&
-      (obj.maskStyle = graphics_Text_LineFillMask_LineMaskStyleToJSON(message.maskStyle));
-    message.widthOffset !== undefined && (obj.widthOffset = message.widthOffset);
-    message.horizontalOffset !== undefined && (obj.horizontalOffset = message.horizontalOffset);
+      (obj.maskStyle = graphics_Text_LineFillMask_LineMaskStyleToJSON(
+        message.maskStyle,
+      ));
+    message.widthOffset !== undefined &&
+      (obj.widthOffset = message.widthOffset);
+    message.horizontalOffset !== undefined &&
+      (obj.horizontalOffset = message.horizontalOffset);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_LineFillMask>, I>>(base?: I): Graphics_Text_LineFillMask {
+  create<I extends Exact<DeepPartial<Graphics_Text_LineFillMask>, I>>(
+    base?: I,
+  ): Graphics_Text_LineFillMask {
     return Graphics_Text_LineFillMask.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_LineFillMask>, I>>(object: I): Graphics_Text_LineFillMask {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text_LineFillMask>, I>>(
+    object: I,
+  ): Graphics_Text_LineFillMask {
     const message = createBaseGraphics_Text_LineFillMask();
     message.enabled = object.enabled ?? false;
     message.heightOffset = object.heightOffset ?? 0;
@@ -4106,9 +4631,15 @@ function createBaseGraphics_Text_GradientFill(): Graphics_Text_GradientFill {
 }
 
 export const Graphics_Text_GradientFill = {
-  encode(message: Graphics_Text_GradientFill, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_GradientFill,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.gradient !== undefined) {
-      Graphics_Gradient.encode(message.gradient, writer.uint32(10).fork()).ldelim();
+      Graphics_Gradient.encode(
+        message.gradient,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.stretchToDocumentBounds === true) {
       writer.uint32(16).bool(message.stretchToDocumentBounds);
@@ -4116,8 +4647,12 @@ export const Graphics_Text_GradientFill = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_GradientFill {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_GradientFill {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_GradientFill();
     while (reader.pos < end) {
@@ -4148,28 +4683,40 @@ export const Graphics_Text_GradientFill = {
 
   fromJSON(object: any): Graphics_Text_GradientFill {
     return {
-      gradient: isSet(object.gradient) ? Graphics_Gradient.fromJSON(object.gradient) : undefined,
-      stretchToDocumentBounds: isSet(object.stretchToDocumentBounds) ? Boolean(object.stretchToDocumentBounds) : false,
+      gradient: isSet(object.gradient)
+        ? Graphics_Gradient.fromJSON(object.gradient)
+        : undefined,
+      stretchToDocumentBounds: isSet(object.stretchToDocumentBounds)
+        ? Boolean(object.stretchToDocumentBounds)
+        : false,
     };
   },
 
   toJSON(message: Graphics_Text_GradientFill): unknown {
     const obj: any = {};
     message.gradient !== undefined &&
-      (obj.gradient = message.gradient ? Graphics_Gradient.toJSON(message.gradient) : undefined);
-    message.stretchToDocumentBounds !== undefined && (obj.stretchToDocumentBounds = message.stretchToDocumentBounds);
+      (obj.gradient = message.gradient
+        ? Graphics_Gradient.toJSON(message.gradient)
+        : undefined);
+    message.stretchToDocumentBounds !== undefined &&
+      (obj.stretchToDocumentBounds = message.stretchToDocumentBounds);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_GradientFill>, I>>(base?: I): Graphics_Text_GradientFill {
+  create<I extends Exact<DeepPartial<Graphics_Text_GradientFill>, I>>(
+    base?: I,
+  ): Graphics_Text_GradientFill {
     return Graphics_Text_GradientFill.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_GradientFill>, I>>(object: I): Graphics_Text_GradientFill {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text_GradientFill>, I>>(
+    object: I,
+  ): Graphics_Text_GradientFill {
     const message = createBaseGraphics_Text_GradientFill();
-    message.gradient = (object.gradient !== undefined && object.gradient !== null)
-      ? Graphics_Gradient.fromPartial(object.gradient)
-      : undefined;
+    message.gradient =
+      object.gradient !== undefined && object.gradient !== null
+        ? Graphics_Gradient.fromPartial(object.gradient)
+        : undefined;
     message.stretchToDocumentBounds = object.stretchToDocumentBounds ?? false;
     return message;
   },
@@ -4180,12 +4727,19 @@ function createBaseGraphics_Text_CutOutFill(): Graphics_Text_CutOutFill {
 }
 
 export const Graphics_Text_CutOutFill = {
-  encode(_: Graphics_Text_CutOutFill, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: Graphics_Text_CutOutFill,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_CutOutFill {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_CutOutFill {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_CutOutFill();
     while (reader.pos < end) {
@@ -4209,33 +4763,41 @@ export const Graphics_Text_CutOutFill = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_CutOutFill>, I>>(base?: I): Graphics_Text_CutOutFill {
+  create<I extends Exact<DeepPartial<Graphics_Text_CutOutFill>, I>>(
+    base?: I,
+  ): Graphics_Text_CutOutFill {
     return Graphics_Text_CutOutFill.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_CutOutFill>, I>>(_: I): Graphics_Text_CutOutFill {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text_CutOutFill>, I>>(
+    _: I,
+  ): Graphics_Text_CutOutFill {
     const message = createBaseGraphics_Text_CutOutFill();
     return message;
   },
 };
 
 function createBaseGraphics_Text_MediaFill(): Graphics_Text_MediaFill {
-  return { media: undefined, useObjectBounds: false };
+  return { media: undefined };
 }
 
 export const Graphics_Text_MediaFill = {
-  encode(message: Graphics_Text_MediaFill, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_MediaFill,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.media !== undefined) {
       Media.encode(message.media, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.useObjectBounds === true) {
-      writer.uint32(16).bool(message.useObjectBounds);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_MediaFill {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_MediaFill {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_MediaFill();
     while (reader.pos < end) {
@@ -4247,13 +4809,6 @@ export const Graphics_Text_MediaFill = {
           }
 
           message.media = Media.decode(reader, reader.uint32());
-          continue;
-        case 2:
-          if (tag != 16) {
-            break;
-          }
-
-          message.useObjectBounds = reader.bool();
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -4267,25 +4822,30 @@ export const Graphics_Text_MediaFill = {
   fromJSON(object: any): Graphics_Text_MediaFill {
     return {
       media: isSet(object.media) ? Media.fromJSON(object.media) : undefined,
-      useObjectBounds: isSet(object.useObjectBounds) ? Boolean(object.useObjectBounds) : false,
     };
   },
 
   toJSON(message: Graphics_Text_MediaFill): unknown {
     const obj: any = {};
-    message.media !== undefined && (obj.media = message.media ? Media.toJSON(message.media) : undefined);
-    message.useObjectBounds !== undefined && (obj.useObjectBounds = message.useObjectBounds);
+    message.media !== undefined &&
+      (obj.media = message.media ? Media.toJSON(message.media) : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_MediaFill>, I>>(base?: I): Graphics_Text_MediaFill {
+  create<I extends Exact<DeepPartial<Graphics_Text_MediaFill>, I>>(
+    base?: I,
+  ): Graphics_Text_MediaFill {
     return Graphics_Text_MediaFill.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_MediaFill>, I>>(object: I): Graphics_Text_MediaFill {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text_MediaFill>, I>>(
+    object: I,
+  ): Graphics_Text_MediaFill {
     const message = createBaseGraphics_Text_MediaFill();
-    message.media = (object.media !== undefined && object.media !== null) ? Media.fromPartial(object.media) : undefined;
-    message.useObjectBounds = object.useObjectBounds ?? false;
+    message.media =
+      object.media !== undefined && object.media !== null
+        ? Media.fromPartial(object.media)
+        : undefined;
     return message;
   },
 };
@@ -4295,7 +4855,10 @@ function createBaseGraphics_Text_ChordPro(): Graphics_Text_ChordPro {
 }
 
 export const Graphics_Text_ChordPro = {
-  encode(message: Graphics_Text_ChordPro, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_ChordPro,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
@@ -4308,8 +4871,12 @@ export const Graphics_Text_ChordPro = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_ChordPro {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_ChordPro {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_ChordPro();
     while (reader.pos < end) {
@@ -4348,7 +4915,9 @@ export const Graphics_Text_ChordPro = {
   fromJSON(object: any): Graphics_Text_ChordPro {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      notation: isSet(object.notation) ? graphics_Text_ChordPro_NotationFromJSON(object.notation) : 0,
+      notation: isSet(object.notation)
+        ? graphics_Text_ChordPro_NotationFromJSON(object.notation)
+        : 0,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
     };
   },
@@ -4356,20 +4925,29 @@ export const Graphics_Text_ChordPro = {
   toJSON(message: Graphics_Text_ChordPro): unknown {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.notation !== undefined && (obj.notation = graphics_Text_ChordPro_NotationToJSON(message.notation));
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.notation !== undefined &&
+      (obj.notation = graphics_Text_ChordPro_NotationToJSON(message.notation));
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_ChordPro>, I>>(base?: I): Graphics_Text_ChordPro {
+  create<I extends Exact<DeepPartial<Graphics_Text_ChordPro>, I>>(
+    base?: I,
+  ): Graphics_Text_ChordPro {
     return Graphics_Text_ChordPro.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_ChordPro>, I>>(object: I): Graphics_Text_ChordPro {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text_ChordPro>, I>>(
+    object: I,
+  ): Graphics_Text_ChordPro {
     const message = createBaseGraphics_Text_ChordPro();
     message.enabled = object.enabled ?? false;
     message.notation = object.notation ?? 0;
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
     return message;
   },
 };
@@ -4398,21 +4976,33 @@ function createBaseGraphics_Text_Attributes(): Graphics_Text_Attributes {
 }
 
 export const Graphics_Text_Attributes = {
-  encode(message: Graphics_Text_Attributes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_Attributes,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.font !== undefined) {
-      Graphics_Text_Attributes_Font.encode(message.font, writer.uint32(10).fork()).ldelim();
+      Graphics_Text_Attributes_Font.encode(
+        message.font,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.capitalization !== 0) {
       writer.uint32(16).int32(message.capitalization);
     }
     if (message.underlineStyle !== undefined) {
-      Graphics_Text_Attributes_Underline.encode(message.underlineStyle, writer.uint32(34).fork()).ldelim();
+      Graphics_Text_Attributes_Underline.encode(
+        message.underlineStyle,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.underlineColor !== undefined) {
       Color.encode(message.underlineColor, writer.uint32(42).fork()).ldelim();
     }
     if (message.paragraphStyle !== undefined) {
-      Graphics_Text_Attributes_Paragraph.encode(message.paragraphStyle, writer.uint32(50).fork()).ldelim();
+      Graphics_Text_Attributes_Paragraph.encode(
+        message.paragraphStyle,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.kerning !== 0) {
       writer.uint32(57).double(message.kerning);
@@ -4421,10 +5011,16 @@ export const Graphics_Text_Attributes = {
       writer.uint32(64).int32(message.superscript);
     }
     if (message.strikethroughStyle !== undefined) {
-      Graphics_Text_Attributes_Underline.encode(message.strikethroughStyle, writer.uint32(74).fork()).ldelim();
+      Graphics_Text_Attributes_Underline.encode(
+        message.strikethroughStyle,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     if (message.strikethroughColor !== undefined) {
-      Color.encode(message.strikethroughColor, writer.uint32(82).fork()).ldelim();
+      Color.encode(
+        message.strikethroughColor,
+        writer.uint32(82).fork(),
+      ).ldelim();
     }
     if (message.strokeWidth !== 0) {
       writer.uint32(89).double(message.strokeWidth);
@@ -4433,7 +5029,10 @@ export const Graphics_Text_Attributes = {
       Color.encode(message.strokeColor, writer.uint32(98).fork()).ldelim();
     }
     for (const v of message.customAttributes) {
-      Graphics_Text_Attributes_CustomAttribute.encode(v!, writer.uint32(106).fork()).ldelim();
+      Graphics_Text_Attributes_CustomAttribute.encode(
+        v!,
+        writer.uint32(106).fork(),
+      ).ldelim();
     }
     if (message.backgroundColor !== undefined) {
       Color.encode(message.backgroundColor, writer.uint32(122).fork()).ldelim();
@@ -4442,22 +5041,38 @@ export const Graphics_Text_Attributes = {
       Color.encode(message.textSolidFill, writer.uint32(26).fork()).ldelim();
     }
     if (message.textGradientFill !== undefined) {
-      Graphics_Text_GradientFill.encode(message.textGradientFill, writer.uint32(114).fork()).ldelim();
+      Graphics_Text_GradientFill.encode(
+        message.textGradientFill,
+        writer.uint32(114).fork(),
+      ).ldelim();
     }
     if (message.cutOutFill !== undefined) {
-      Graphics_Text_CutOutFill.encode(message.cutOutFill, writer.uint32(130).fork()).ldelim();
+      Graphics_Text_CutOutFill.encode(
+        message.cutOutFill,
+        writer.uint32(130).fork(),
+      ).ldelim();
     }
     if (message.mediaFill !== undefined) {
-      Graphics_Text_MediaFill.encode(message.mediaFill, writer.uint32(138).fork()).ldelim();
+      Graphics_Text_MediaFill.encode(
+        message.mediaFill,
+        writer.uint32(138).fork(),
+      ).ldelim();
     }
     if (message.backgroundEffect !== undefined) {
-      Graphics_BackgroundEffect.encode(message.backgroundEffect, writer.uint32(146).fork()).ldelim();
+      Graphics_BackgroundEffect.encode(
+        message.backgroundEffect,
+        writer.uint32(146).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes();
     while (reader.pos < end) {
@@ -4468,7 +5083,10 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.font = Graphics_Text_Attributes_Font.decode(reader, reader.uint32());
+          message.font = Graphics_Text_Attributes_Font.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 16) {
@@ -4482,7 +5100,10 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.underlineStyle = Graphics_Text_Attributes_Underline.decode(reader, reader.uint32());
+          message.underlineStyle = Graphics_Text_Attributes_Underline.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
@@ -4496,7 +5117,10 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.paragraphStyle = Graphics_Text_Attributes_Paragraph.decode(reader, reader.uint32());
+          message.paragraphStyle = Graphics_Text_Attributes_Paragraph.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 57) {
@@ -4517,7 +5141,8 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.strikethroughStyle = Graphics_Text_Attributes_Underline.decode(reader, reader.uint32());
+          message.strikethroughStyle =
+            Graphics_Text_Attributes_Underline.decode(reader, reader.uint32());
           continue;
         case 10:
           if (tag != 82) {
@@ -4545,7 +5170,12 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.customAttributes.push(Graphics_Text_Attributes_CustomAttribute.decode(reader, reader.uint32()));
+          message.customAttributes.push(
+            Graphics_Text_Attributes_CustomAttribute.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
         case 15:
           if (tag != 122) {
@@ -4566,28 +5196,40 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.textGradientFill = Graphics_Text_GradientFill.decode(reader, reader.uint32());
+          message.textGradientFill = Graphics_Text_GradientFill.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 16:
           if (tag != 130) {
             break;
           }
 
-          message.cutOutFill = Graphics_Text_CutOutFill.decode(reader, reader.uint32());
+          message.cutOutFill = Graphics_Text_CutOutFill.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 17:
           if (tag != 138) {
             break;
           }
 
-          message.mediaFill = Graphics_Text_MediaFill.decode(reader, reader.uint32());
+          message.mediaFill = Graphics_Text_MediaFill.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 18:
           if (tag != 146) {
             break;
           }
 
-          message.backgroundEffect = Graphics_BackgroundEffect.decode(reader, reader.uint32());
+          message.backgroundEffect = Graphics_BackgroundEffect.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -4600,14 +5242,18 @@ export const Graphics_Text_Attributes = {
 
   fromJSON(object: any): Graphics_Text_Attributes {
     return {
-      font: isSet(object.font) ? Graphics_Text_Attributes_Font.fromJSON(object.font) : undefined,
+      font: isSet(object.font)
+        ? Graphics_Text_Attributes_Font.fromJSON(object.font)
+        : undefined,
       capitalization: isSet(object.capitalization)
         ? graphics_Text_Attributes_CapitalizationFromJSON(object.capitalization)
         : 0,
       underlineStyle: isSet(object.underlineStyle)
         ? Graphics_Text_Attributes_Underline.fromJSON(object.underlineStyle)
         : undefined,
-      underlineColor: isSet(object.underlineColor) ? Color.fromJSON(object.underlineColor) : undefined,
+      underlineColor: isSet(object.underlineColor)
+        ? Color.fromJSON(object.underlineColor)
+        : undefined,
       paragraphStyle: isSet(object.paragraphStyle)
         ? Graphics_Text_Attributes_Paragraph.fromJSON(object.paragraphStyle)
         : undefined,
@@ -4616,19 +5262,33 @@ export const Graphics_Text_Attributes = {
       strikethroughStyle: isSet(object.strikethroughStyle)
         ? Graphics_Text_Attributes_Underline.fromJSON(object.strikethroughStyle)
         : undefined,
-      strikethroughColor: isSet(object.strikethroughColor) ? Color.fromJSON(object.strikethroughColor) : undefined,
+      strikethroughColor: isSet(object.strikethroughColor)
+        ? Color.fromJSON(object.strikethroughColor)
+        : undefined,
       strokeWidth: isSet(object.strokeWidth) ? Number(object.strokeWidth) : 0,
-      strokeColor: isSet(object.strokeColor) ? Color.fromJSON(object.strokeColor) : undefined,
+      strokeColor: isSet(object.strokeColor)
+        ? Color.fromJSON(object.strokeColor)
+        : undefined,
       customAttributes: Array.isArray(object?.customAttributes)
-        ? object.customAttributes.map((e: any) => Graphics_Text_Attributes_CustomAttribute.fromJSON(e))
+        ? object.customAttributes.map((e: any) =>
+            Graphics_Text_Attributes_CustomAttribute.fromJSON(e),
+          )
         : [],
-      backgroundColor: isSet(object.backgroundColor) ? Color.fromJSON(object.backgroundColor) : undefined,
-      textSolidFill: isSet(object.textSolidFill) ? Color.fromJSON(object.textSolidFill) : undefined,
+      backgroundColor: isSet(object.backgroundColor)
+        ? Color.fromJSON(object.backgroundColor)
+        : undefined,
+      textSolidFill: isSet(object.textSolidFill)
+        ? Color.fromJSON(object.textSolidFill)
+        : undefined,
       textGradientFill: isSet(object.textGradientFill)
         ? Graphics_Text_GradientFill.fromJSON(object.textGradientFill)
         : undefined,
-      cutOutFill: isSet(object.cutOutFill) ? Graphics_Text_CutOutFill.fromJSON(object.cutOutFill) : undefined,
-      mediaFill: isSet(object.mediaFill) ? Graphics_Text_MediaFill.fromJSON(object.mediaFill) : undefined,
+      cutOutFill: isSet(object.cutOutFill)
+        ? Graphics_Text_CutOutFill.fromJSON(object.cutOutFill)
+        : undefined,
+      mediaFill: isSet(object.mediaFill)
+        ? Graphics_Text_MediaFill.fromJSON(object.mediaFill)
+        : undefined,
       backgroundEffect: isSet(object.backgroundEffect)
         ? Graphics_BackgroundEffect.fromJSON(object.backgroundEffect)
         : undefined,
@@ -4638,113 +5298,171 @@ export const Graphics_Text_Attributes = {
   toJSON(message: Graphics_Text_Attributes): unknown {
     const obj: any = {};
     message.font !== undefined &&
-      (obj.font = message.font ? Graphics_Text_Attributes_Font.toJSON(message.font) : undefined);
+      (obj.font = message.font
+        ? Graphics_Text_Attributes_Font.toJSON(message.font)
+        : undefined);
     message.capitalization !== undefined &&
-      (obj.capitalization = graphics_Text_Attributes_CapitalizationToJSON(message.capitalization));
-    message.underlineStyle !== undefined && (obj.underlineStyle = message.underlineStyle
-      ? Graphics_Text_Attributes_Underline.toJSON(message.underlineStyle)
-      : undefined);
+      (obj.capitalization = graphics_Text_Attributes_CapitalizationToJSON(
+        message.capitalization,
+      ));
+    message.underlineStyle !== undefined &&
+      (obj.underlineStyle = message.underlineStyle
+        ? Graphics_Text_Attributes_Underline.toJSON(message.underlineStyle)
+        : undefined);
     message.underlineColor !== undefined &&
-      (obj.underlineColor = message.underlineColor ? Color.toJSON(message.underlineColor) : undefined);
-    message.paragraphStyle !== undefined && (obj.paragraphStyle = message.paragraphStyle
-      ? Graphics_Text_Attributes_Paragraph.toJSON(message.paragraphStyle)
-      : undefined);
+      (obj.underlineColor = message.underlineColor
+        ? Color.toJSON(message.underlineColor)
+        : undefined);
+    message.paragraphStyle !== undefined &&
+      (obj.paragraphStyle = message.paragraphStyle
+        ? Graphics_Text_Attributes_Paragraph.toJSON(message.paragraphStyle)
+        : undefined);
     message.kerning !== undefined && (obj.kerning = message.kerning);
-    message.superscript !== undefined && (obj.superscript = Math.round(message.superscript));
-    message.strikethroughStyle !== undefined && (obj.strikethroughStyle = message.strikethroughStyle
-      ? Graphics_Text_Attributes_Underline.toJSON(message.strikethroughStyle)
-      : undefined);
+    message.superscript !== undefined &&
+      (obj.superscript = Math.round(message.superscript));
+    message.strikethroughStyle !== undefined &&
+      (obj.strikethroughStyle = message.strikethroughStyle
+        ? Graphics_Text_Attributes_Underline.toJSON(message.strikethroughStyle)
+        : undefined);
     message.strikethroughColor !== undefined &&
-      (obj.strikethroughColor = message.strikethroughColor ? Color.toJSON(message.strikethroughColor) : undefined);
-    message.strokeWidth !== undefined && (obj.strokeWidth = message.strokeWidth);
+      (obj.strikethroughColor = message.strikethroughColor
+        ? Color.toJSON(message.strikethroughColor)
+        : undefined);
+    message.strokeWidth !== undefined &&
+      (obj.strokeWidth = message.strokeWidth);
     message.strokeColor !== undefined &&
-      (obj.strokeColor = message.strokeColor ? Color.toJSON(message.strokeColor) : undefined);
+      (obj.strokeColor = message.strokeColor
+        ? Color.toJSON(message.strokeColor)
+        : undefined);
     if (message.customAttributes) {
       obj.customAttributes = message.customAttributes.map((e) =>
-        e ? Graphics_Text_Attributes_CustomAttribute.toJSON(e) : undefined
+        e ? Graphics_Text_Attributes_CustomAttribute.toJSON(e) : undefined,
       );
     } else {
       obj.customAttributes = [];
     }
     message.backgroundColor !== undefined &&
-      (obj.backgroundColor = message.backgroundColor ? Color.toJSON(message.backgroundColor) : undefined);
+      (obj.backgroundColor = message.backgroundColor
+        ? Color.toJSON(message.backgroundColor)
+        : undefined);
     message.textSolidFill !== undefined &&
-      (obj.textSolidFill = message.textSolidFill ? Color.toJSON(message.textSolidFill) : undefined);
-    message.textGradientFill !== undefined && (obj.textGradientFill = message.textGradientFill
-      ? Graphics_Text_GradientFill.toJSON(message.textGradientFill)
-      : undefined);
+      (obj.textSolidFill = message.textSolidFill
+        ? Color.toJSON(message.textSolidFill)
+        : undefined);
+    message.textGradientFill !== undefined &&
+      (obj.textGradientFill = message.textGradientFill
+        ? Graphics_Text_GradientFill.toJSON(message.textGradientFill)
+        : undefined);
     message.cutOutFill !== undefined &&
-      (obj.cutOutFill = message.cutOutFill ? Graphics_Text_CutOutFill.toJSON(message.cutOutFill) : undefined);
+      (obj.cutOutFill = message.cutOutFill
+        ? Graphics_Text_CutOutFill.toJSON(message.cutOutFill)
+        : undefined);
     message.mediaFill !== undefined &&
-      (obj.mediaFill = message.mediaFill ? Graphics_Text_MediaFill.toJSON(message.mediaFill) : undefined);
-    message.backgroundEffect !== undefined && (obj.backgroundEffect = message.backgroundEffect
-      ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
-      : undefined);
+      (obj.mediaFill = message.mediaFill
+        ? Graphics_Text_MediaFill.toJSON(message.mediaFill)
+        : undefined);
+    message.backgroundEffect !== undefined &&
+      (obj.backgroundEffect = message.backgroundEffect
+        ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_Attributes>, I>>(base?: I): Graphics_Text_Attributes {
+  create<I extends Exact<DeepPartial<Graphics_Text_Attributes>, I>>(
+    base?: I,
+  ): Graphics_Text_Attributes {
     return Graphics_Text_Attributes.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes>, I>>(object: I): Graphics_Text_Attributes {
+  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes>, I>>(
+    object: I,
+  ): Graphics_Text_Attributes {
     const message = createBaseGraphics_Text_Attributes();
-    message.font = (object.font !== undefined && object.font !== null)
-      ? Graphics_Text_Attributes_Font.fromPartial(object.font)
-      : undefined;
+    message.font =
+      object.font !== undefined && object.font !== null
+        ? Graphics_Text_Attributes_Font.fromPartial(object.font)
+        : undefined;
     message.capitalization = object.capitalization ?? 0;
-    message.underlineStyle = (object.underlineStyle !== undefined && object.underlineStyle !== null)
-      ? Graphics_Text_Attributes_Underline.fromPartial(object.underlineStyle)
-      : undefined;
-    message.underlineColor = (object.underlineColor !== undefined && object.underlineColor !== null)
-      ? Color.fromPartial(object.underlineColor)
-      : undefined;
-    message.paragraphStyle = (object.paragraphStyle !== undefined && object.paragraphStyle !== null)
-      ? Graphics_Text_Attributes_Paragraph.fromPartial(object.paragraphStyle)
-      : undefined;
+    message.underlineStyle =
+      object.underlineStyle !== undefined && object.underlineStyle !== null
+        ? Graphics_Text_Attributes_Underline.fromPartial(object.underlineStyle)
+        : undefined;
+    message.underlineColor =
+      object.underlineColor !== undefined && object.underlineColor !== null
+        ? Color.fromPartial(object.underlineColor)
+        : undefined;
+    message.paragraphStyle =
+      object.paragraphStyle !== undefined && object.paragraphStyle !== null
+        ? Graphics_Text_Attributes_Paragraph.fromPartial(object.paragraphStyle)
+        : undefined;
     message.kerning = object.kerning ?? 0;
     message.superscript = object.superscript ?? 0;
-    message.strikethroughStyle = (object.strikethroughStyle !== undefined && object.strikethroughStyle !== null)
-      ? Graphics_Text_Attributes_Underline.fromPartial(object.strikethroughStyle)
-      : undefined;
-    message.strikethroughColor = (object.strikethroughColor !== undefined && object.strikethroughColor !== null)
-      ? Color.fromPartial(object.strikethroughColor)
-      : undefined;
+    message.strikethroughStyle =
+      object.strikethroughStyle !== undefined &&
+      object.strikethroughStyle !== null
+        ? Graphics_Text_Attributes_Underline.fromPartial(
+            object.strikethroughStyle,
+          )
+        : undefined;
+    message.strikethroughColor =
+      object.strikethroughColor !== undefined &&
+      object.strikethroughColor !== null
+        ? Color.fromPartial(object.strikethroughColor)
+        : undefined;
     message.strokeWidth = object.strokeWidth ?? 0;
-    message.strokeColor = (object.strokeColor !== undefined && object.strokeColor !== null)
-      ? Color.fromPartial(object.strokeColor)
-      : undefined;
+    message.strokeColor =
+      object.strokeColor !== undefined && object.strokeColor !== null
+        ? Color.fromPartial(object.strokeColor)
+        : undefined;
     message.customAttributes =
-      object.customAttributes?.map((e) => Graphics_Text_Attributes_CustomAttribute.fromPartial(e)) || [];
-    message.backgroundColor = (object.backgroundColor !== undefined && object.backgroundColor !== null)
-      ? Color.fromPartial(object.backgroundColor)
-      : undefined;
-    message.textSolidFill = (object.textSolidFill !== undefined && object.textSolidFill !== null)
-      ? Color.fromPartial(object.textSolidFill)
-      : undefined;
-    message.textGradientFill = (object.textGradientFill !== undefined && object.textGradientFill !== null)
-      ? Graphics_Text_GradientFill.fromPartial(object.textGradientFill)
-      : undefined;
-    message.cutOutFill = (object.cutOutFill !== undefined && object.cutOutFill !== null)
-      ? Graphics_Text_CutOutFill.fromPartial(object.cutOutFill)
-      : undefined;
-    message.mediaFill = (object.mediaFill !== undefined && object.mediaFill !== null)
-      ? Graphics_Text_MediaFill.fromPartial(object.mediaFill)
-      : undefined;
-    message.backgroundEffect = (object.backgroundEffect !== undefined && object.backgroundEffect !== null)
-      ? Graphics_BackgroundEffect.fromPartial(object.backgroundEffect)
-      : undefined;
+      object.customAttributes?.map((e) =>
+        Graphics_Text_Attributes_CustomAttribute.fromPartial(e),
+      ) || [];
+    message.backgroundColor =
+      object.backgroundColor !== undefined && object.backgroundColor !== null
+        ? Color.fromPartial(object.backgroundColor)
+        : undefined;
+    message.textSolidFill =
+      object.textSolidFill !== undefined && object.textSolidFill !== null
+        ? Color.fromPartial(object.textSolidFill)
+        : undefined;
+    message.textGradientFill =
+      object.textGradientFill !== undefined && object.textGradientFill !== null
+        ? Graphics_Text_GradientFill.fromPartial(object.textGradientFill)
+        : undefined;
+    message.cutOutFill =
+      object.cutOutFill !== undefined && object.cutOutFill !== null
+        ? Graphics_Text_CutOutFill.fromPartial(object.cutOutFill)
+        : undefined;
+    message.mediaFill =
+      object.mediaFill !== undefined && object.mediaFill !== null
+        ? Graphics_Text_MediaFill.fromPartial(object.mediaFill)
+        : undefined;
+    message.backgroundEffect =
+      object.backgroundEffect !== undefined && object.backgroundEffect !== null
+        ? Graphics_BackgroundEffect.fromPartial(object.backgroundEffect)
+        : undefined;
     return message;
   },
 };
 
 function createBaseGraphics_Text_Attributes_Font(): Graphics_Text_Attributes_Font {
-  return { name: "", size: 0, italic: false, bold: false, family: "", face: "" };
+  return {
+    name: '',
+    size: 0,
+    italic: false,
+    bold: false,
+    family: '',
+    face: '',
+  };
 }
 
 export const Graphics_Text_Attributes_Font = {
-  encode(message: Graphics_Text_Attributes_Font, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: Graphics_Text_Attributes_Font,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     if (message.size !== 0) {
@@ -4756,17 +5474,21 @@ export const Graphics_Text_Attributes_Font = {
     if (message.bold === true) {
       writer.uint32(64).bool(message.bold);
     }
-    if (message.family !== "") {
+    if (message.family !== '') {
       writer.uint32(74).string(message.family);
     }
-    if (message.face !== "") {
+    if (message.face !== '') {
       writer.uint32(82).string(message.face);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes_Font {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes_Font {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes_Font();
     while (reader.pos < end) {
@@ -4825,12 +5547,12 @@ export const Graphics_Text_Attributes_Font = {
 
   fromJSON(object: any): Graphics_Text_Attributes_Font {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       size: isSet(object.size) ? Number(object.size) : 0,
       italic: isSet(object.italic) ? Boolean(object.italic) : false,
       bold: isSet(object.bold) ? Boolean(object.bold) : false,
-      family: isSet(object.family) ? String(object.family) : "",
-      face: isSet(object.face) ? String(object.face) : "",
+      family: isSet(object.family) ? String(object.family) : '',
+      face: isSet(object.face) ? String(object.face) : '',
     };
   },
 
@@ -4845,7 +5567,9 @@ export const Graphics_Text_Attributes_Font = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Font>, I>>(base?: I): Graphics_Text_Attributes_Font {
+  create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Font>, I>>(
+    base?: I,
+  ): Graphics_Text_Attributes_Font {
     return Graphics_Text_Attributes_Font.fromPartial(base ?? {});
   },
 
@@ -4853,12 +5577,12 @@ export const Graphics_Text_Attributes_Font = {
     object: I,
   ): Graphics_Text_Attributes_Font {
     const message = createBaseGraphics_Text_Attributes_Font();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     message.size = object.size ?? 0;
     message.italic = object.italic ?? false;
     message.bold = object.bold ?? false;
-    message.family = object.family ?? "";
-    message.face = object.face ?? "";
+    message.family = object.family ?? '';
+    message.face = object.face ?? '';
     return message;
   },
 };
@@ -4868,7 +5592,10 @@ function createBaseGraphics_Text_Attributes_Underline(): Graphics_Text_Attribute
 }
 
 export const Graphics_Text_Attributes_Underline = {
-  encode(message: Graphics_Text_Attributes_Underline, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_Attributes_Underline,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.style !== 0) {
       writer.uint32(8).int32(message.style);
     }
@@ -4881,8 +5608,12 @@ export const Graphics_Text_Attributes_Underline = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes_Underline {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes_Underline {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes_Underline();
     while (reader.pos < end) {
@@ -4920,16 +5651,26 @@ export const Graphics_Text_Attributes_Underline = {
 
   fromJSON(object: any): Graphics_Text_Attributes_Underline {
     return {
-      style: isSet(object.style) ? graphics_Text_Attributes_Underline_StyleFromJSON(object.style) : 0,
-      pattern: isSet(object.pattern) ? graphics_Text_Attributes_Underline_PatternFromJSON(object.pattern) : 0,
+      style: isSet(object.style)
+        ? graphics_Text_Attributes_Underline_StyleFromJSON(object.style)
+        : 0,
+      pattern: isSet(object.pattern)
+        ? graphics_Text_Attributes_Underline_PatternFromJSON(object.pattern)
+        : 0,
       byWord: isSet(object.byWord) ? Boolean(object.byWord) : false,
     };
   },
 
   toJSON(message: Graphics_Text_Attributes_Underline): unknown {
     const obj: any = {};
-    message.style !== undefined && (obj.style = graphics_Text_Attributes_Underline_StyleToJSON(message.style));
-    message.pattern !== undefined && (obj.pattern = graphics_Text_Attributes_Underline_PatternToJSON(message.pattern));
+    message.style !== undefined &&
+      (obj.style = graphics_Text_Attributes_Underline_StyleToJSON(
+        message.style,
+      ));
+    message.pattern !== undefined &&
+      (obj.pattern = graphics_Text_Attributes_Underline_PatternToJSON(
+        message.pattern,
+      ));
     message.byWord !== undefined && (obj.byWord = message.byWord);
     return obj;
   },
@@ -4940,9 +5681,9 @@ export const Graphics_Text_Attributes_Underline = {
     return Graphics_Text_Attributes_Underline.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_Underline>, I>>(
-    object: I,
-  ): Graphics_Text_Attributes_Underline {
+  fromPartial<
+    I extends Exact<DeepPartial<Graphics_Text_Attributes_Underline>, I>,
+  >(object: I): Graphics_Text_Attributes_Underline {
     const message = createBaseGraphics_Text_Attributes_Underline();
     message.style = object.style ?? 0;
     message.pattern = object.pattern ?? 0;
@@ -4971,7 +5712,10 @@ function createBaseGraphics_Text_Attributes_Paragraph(): Graphics_Text_Attribute
 }
 
 export const Graphics_Text_Attributes_Paragraph = {
-  encode(message: Graphics_Text_Attributes_Paragraph, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_Attributes_Paragraph,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.alignment !== 0) {
       writer.uint32(8).int32(message.alignment);
     }
@@ -5003,22 +5747,35 @@ export const Graphics_Text_Attributes_Paragraph = {
       writer.uint32(81).double(message.paragraphSpacingBefore);
     }
     for (const v of message.tabStops) {
-      Graphics_Text_Attributes_Paragraph_TabStop.encode(v!, writer.uint32(90).fork()).ldelim();
+      Graphics_Text_Attributes_Paragraph_TabStop.encode(
+        v!,
+        writer.uint32(90).fork(),
+      ).ldelim();
     }
     if (message.defaultTabInterval !== 0) {
       writer.uint32(97).double(message.defaultTabInterval);
     }
     if (message.textList !== undefined) {
-      Graphics_Text_Attributes_Paragraph_TextList.encode(message.textList, writer.uint32(106).fork()).ldelim();
+      Graphics_Text_Attributes_Paragraph_TextList.encode(
+        message.textList,
+        writer.uint32(106).fork(),
+      ).ldelim();
     }
     for (const v of message.textLists) {
-      Graphics_Text_Attributes_Paragraph_TextList.encode(v!, writer.uint32(114).fork()).ldelim();
+      Graphics_Text_Attributes_Paragraph_TextList.encode(
+        v!,
+        writer.uint32(114).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes_Paragraph {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes_Paragraph {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes_Paragraph();
     while (reader.pos < end) {
@@ -5099,7 +5856,12 @@ export const Graphics_Text_Attributes_Paragraph = {
             break;
           }
 
-          message.tabStops.push(Graphics_Text_Attributes_Paragraph_TabStop.decode(reader, reader.uint32()));
+          message.tabStops.push(
+            Graphics_Text_Attributes_Paragraph_TabStop.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
         case 12:
           if (tag != 97) {
@@ -5113,14 +5875,22 @@ export const Graphics_Text_Attributes_Paragraph = {
             break;
           }
 
-          message.textList = Graphics_Text_Attributes_Paragraph_TextList.decode(reader, reader.uint32());
+          message.textList = Graphics_Text_Attributes_Paragraph_TextList.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 14:
           if (tag != 114) {
             break;
           }
 
-          message.textLists.push(Graphics_Text_Attributes_Paragraph_TextList.decode(reader, reader.uint32()));
+          message.textLists.push(
+            Graphics_Text_Attributes_Paragraph_TextList.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5133,25 +5903,45 @@ export const Graphics_Text_Attributes_Paragraph = {
 
   fromJSON(object: any): Graphics_Text_Attributes_Paragraph {
     return {
-      alignment: isSet(object.alignment) ? graphics_Text_Attributes_Paragraph_AlignmentFromJSON(object.alignment) : 0,
-      firstLineHeadIndent: isSet(object.firstLineHeadIndent) ? Number(object.firstLineHeadIndent) : 0,
+      alignment: isSet(object.alignment)
+        ? graphics_Text_Attributes_AlignmentFromJSON(object.alignment)
+        : 0,
+      firstLineHeadIndent: isSet(object.firstLineHeadIndent)
+        ? Number(object.firstLineHeadIndent)
+        : 0,
       headIndent: isSet(object.headIndent) ? Number(object.headIndent) : 0,
       tailIndent: isSet(object.tailIndent) ? Number(object.tailIndent) : 0,
-      lineHeightMultiple: isSet(object.lineHeightMultiple) ? Number(object.lineHeightMultiple) : 0,
-      maximumLineHeight: isSet(object.maximumLineHeight) ? Number(object.maximumLineHeight) : 0,
-      minimumLineHeight: isSet(object.minimumLineHeight) ? Number(object.minimumLineHeight) : 0,
+      lineHeightMultiple: isSet(object.lineHeightMultiple)
+        ? Number(object.lineHeightMultiple)
+        : 0,
+      maximumLineHeight: isSet(object.maximumLineHeight)
+        ? Number(object.maximumLineHeight)
+        : 0,
+      minimumLineHeight: isSet(object.minimumLineHeight)
+        ? Number(object.minimumLineHeight)
+        : 0,
       lineSpacing: isSet(object.lineSpacing) ? Number(object.lineSpacing) : 0,
-      paragraphSpacing: isSet(object.paragraphSpacing) ? Number(object.paragraphSpacing) : 0,
-      paragraphSpacingBefore: isSet(object.paragraphSpacingBefore) ? Number(object.paragraphSpacingBefore) : 0,
+      paragraphSpacing: isSet(object.paragraphSpacing)
+        ? Number(object.paragraphSpacing)
+        : 0,
+      paragraphSpacingBefore: isSet(object.paragraphSpacingBefore)
+        ? Number(object.paragraphSpacingBefore)
+        : 0,
       tabStops: Array.isArray(object?.tabStops)
-        ? object.tabStops.map((e: any) => Graphics_Text_Attributes_Paragraph_TabStop.fromJSON(e))
+        ? object.tabStops.map((e: any) =>
+            Graphics_Text_Attributes_Paragraph_TabStop.fromJSON(e),
+          )
         : [],
-      defaultTabInterval: isSet(object.defaultTabInterval) ? Number(object.defaultTabInterval) : 0,
+      defaultTabInterval: isSet(object.defaultTabInterval)
+        ? Number(object.defaultTabInterval)
+        : 0,
       textList: isSet(object.textList)
         ? Graphics_Text_Attributes_Paragraph_TextList.fromJSON(object.textList)
         : undefined,
       textLists: Array.isArray(object?.textLists)
-        ? object.textLists.map((e: any) => Graphics_Text_Attributes_Paragraph_TextList.fromJSON(e))
+        ? object.textLists.map((e: any) =>
+            Graphics_Text_Attributes_Paragraph_TextList.fromJSON(e),
+          )
         : [],
     };
   },
@@ -5159,28 +5949,41 @@ export const Graphics_Text_Attributes_Paragraph = {
   toJSON(message: Graphics_Text_Attributes_Paragraph): unknown {
     const obj: any = {};
     message.alignment !== undefined &&
-      (obj.alignment = graphics_Text_Attributes_Paragraph_AlignmentToJSON(message.alignment));
-    message.firstLineHeadIndent !== undefined && (obj.firstLineHeadIndent = message.firstLineHeadIndent);
+      (obj.alignment = graphics_Text_Attributes_AlignmentToJSON(
+        message.alignment,
+      ));
+    message.firstLineHeadIndent !== undefined &&
+      (obj.firstLineHeadIndent = message.firstLineHeadIndent);
     message.headIndent !== undefined && (obj.headIndent = message.headIndent);
     message.tailIndent !== undefined && (obj.tailIndent = message.tailIndent);
-    message.lineHeightMultiple !== undefined && (obj.lineHeightMultiple = message.lineHeightMultiple);
-    message.maximumLineHeight !== undefined && (obj.maximumLineHeight = message.maximumLineHeight);
-    message.minimumLineHeight !== undefined && (obj.minimumLineHeight = message.minimumLineHeight);
-    message.lineSpacing !== undefined && (obj.lineSpacing = message.lineSpacing);
-    message.paragraphSpacing !== undefined && (obj.paragraphSpacing = message.paragraphSpacing);
-    message.paragraphSpacingBefore !== undefined && (obj.paragraphSpacingBefore = message.paragraphSpacingBefore);
+    message.lineHeightMultiple !== undefined &&
+      (obj.lineHeightMultiple = message.lineHeightMultiple);
+    message.maximumLineHeight !== undefined &&
+      (obj.maximumLineHeight = message.maximumLineHeight);
+    message.minimumLineHeight !== undefined &&
+      (obj.minimumLineHeight = message.minimumLineHeight);
+    message.lineSpacing !== undefined &&
+      (obj.lineSpacing = message.lineSpacing);
+    message.paragraphSpacing !== undefined &&
+      (obj.paragraphSpacing = message.paragraphSpacing);
+    message.paragraphSpacingBefore !== undefined &&
+      (obj.paragraphSpacingBefore = message.paragraphSpacingBefore);
     if (message.tabStops) {
-      obj.tabStops = message.tabStops.map((e) => e ? Graphics_Text_Attributes_Paragraph_TabStop.toJSON(e) : undefined);
+      obj.tabStops = message.tabStops.map((e) =>
+        e ? Graphics_Text_Attributes_Paragraph_TabStop.toJSON(e) : undefined,
+      );
     } else {
       obj.tabStops = [];
     }
-    message.defaultTabInterval !== undefined && (obj.defaultTabInterval = message.defaultTabInterval);
-    message.textList !== undefined && (obj.textList = message.textList
-      ? Graphics_Text_Attributes_Paragraph_TextList.toJSON(message.textList)
-      : undefined);
+    message.defaultTabInterval !== undefined &&
+      (obj.defaultTabInterval = message.defaultTabInterval);
+    message.textList !== undefined &&
+      (obj.textList = message.textList
+        ? Graphics_Text_Attributes_Paragraph_TextList.toJSON(message.textList)
+        : undefined);
     if (message.textLists) {
       obj.textLists = message.textLists.map((e) =>
-        e ? Graphics_Text_Attributes_Paragraph_TextList.toJSON(e) : undefined
+        e ? Graphics_Text_Attributes_Paragraph_TextList.toJSON(e) : undefined,
       );
     } else {
       obj.textLists = [];
@@ -5194,9 +5997,9 @@ export const Graphics_Text_Attributes_Paragraph = {
     return Graphics_Text_Attributes_Paragraph.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph>, I>>(
-    object: I,
-  ): Graphics_Text_Attributes_Paragraph {
+  fromPartial<
+    I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph>, I>,
+  >(object: I): Graphics_Text_Attributes_Paragraph {
     const message = createBaseGraphics_Text_Attributes_Paragraph();
     message.alignment = object.alignment ?? 0;
     message.firstLineHeadIndent = object.firstLineHeadIndent ?? 0;
@@ -5208,12 +6011,21 @@ export const Graphics_Text_Attributes_Paragraph = {
     message.lineSpacing = object.lineSpacing ?? 0;
     message.paragraphSpacing = object.paragraphSpacing ?? 0;
     message.paragraphSpacingBefore = object.paragraphSpacingBefore ?? 0;
-    message.tabStops = object.tabStops?.map((e) => Graphics_Text_Attributes_Paragraph_TabStop.fromPartial(e)) || [];
+    message.tabStops =
+      object.tabStops?.map((e) =>
+        Graphics_Text_Attributes_Paragraph_TabStop.fromPartial(e),
+      ) || [];
     message.defaultTabInterval = object.defaultTabInterval ?? 0;
-    message.textList = (object.textList !== undefined && object.textList !== null)
-      ? Graphics_Text_Attributes_Paragraph_TextList.fromPartial(object.textList)
-      : undefined;
-    message.textLists = object.textLists?.map((e) => Graphics_Text_Attributes_Paragraph_TextList.fromPartial(e)) || [];
+    message.textList =
+      object.textList !== undefined && object.textList !== null
+        ? Graphics_Text_Attributes_Paragraph_TextList.fromPartial(
+            object.textList,
+          )
+        : undefined;
+    message.textLists =
+      object.textLists?.map((e) =>
+        Graphics_Text_Attributes_Paragraph_TextList.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -5223,7 +6035,10 @@ function createBaseGraphics_Text_Attributes_Paragraph_TabStop(): Graphics_Text_A
 }
 
 export const Graphics_Text_Attributes_Paragraph_TabStop = {
-  encode(message: Graphics_Text_Attributes_Paragraph_TabStop, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_Attributes_Paragraph_TabStop,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.location !== 0) {
       writer.uint32(9).double(message.location);
     }
@@ -5233,8 +6048,12 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes_Paragraph_TabStop {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes_Paragraph_TabStop {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes_Paragraph_TabStop();
     while (reader.pos < end) {
@@ -5267,7 +6086,7 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
     return {
       location: isSet(object.location) ? Number(object.location) : 0,
       alignment: isSet(object.alignment)
-        ? graphics_Text_Attributes_Paragraph_TabStop_AlignmentFromJSON(object.alignment)
+        ? graphics_Text_Attributes_AlignmentFromJSON(object.alignment)
         : 0,
     };
   },
@@ -5276,19 +6095,21 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     message.alignment !== undefined &&
-      (obj.alignment = graphics_Text_Attributes_Paragraph_TabStop_AlignmentToJSON(message.alignment));
+      (obj.alignment = graphics_Text_Attributes_AlignmentToJSON(
+        message.alignment,
+      ));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TabStop>, I>>(
-    base?: I,
-  ): Graphics_Text_Attributes_Paragraph_TabStop {
+  create<
+    I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TabStop>, I>,
+  >(base?: I): Graphics_Text_Attributes_Paragraph_TabStop {
     return Graphics_Text_Attributes_Paragraph_TabStop.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TabStop>, I>>(
-    object: I,
-  ): Graphics_Text_Attributes_Paragraph_TabStop {
+  fromPartial<
+    I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TabStop>, I>,
+  >(object: I): Graphics_Text_Attributes_Paragraph_TabStop {
     const message = createBaseGraphics_Text_Attributes_Paragraph_TabStop();
     message.location = object.location ?? 0;
     message.alignment = object.alignment ?? 0;
@@ -5297,21 +6118,30 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
 };
 
 function createBaseGraphics_Text_Attributes_Paragraph_TextList(): Graphics_Text_Attributes_Paragraph_TextList {
-  return { isEnabled: false, numberType: 0, prefix: "", postfix: "", startingNumber: 0 };
+  return {
+    isEnabled: false,
+    numberType: 0,
+    prefix: '',
+    postfix: '',
+    startingNumber: 0,
+  };
 }
 
 export const Graphics_Text_Attributes_Paragraph_TextList = {
-  encode(message: Graphics_Text_Attributes_Paragraph_TextList, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_Attributes_Paragraph_TextList,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.isEnabled === true) {
       writer.uint32(8).bool(message.isEnabled);
     }
     if (message.numberType !== 0) {
       writer.uint32(16).int32(message.numberType);
     }
-    if (message.prefix !== "") {
+    if (message.prefix !== '') {
       writer.uint32(26).string(message.prefix);
     }
-    if (message.postfix !== "") {
+    if (message.postfix !== '') {
       writer.uint32(34).string(message.postfix);
     }
     if (message.startingNumber !== 0) {
@@ -5320,8 +6150,12 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes_Paragraph_TextList {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes_Paragraph_TextList {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes_Paragraph_TextList();
     while (reader.pos < end) {
@@ -5375,11 +6209,15 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
     return {
       isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
       numberType: isSet(object.numberType)
-        ? graphics_Text_Attributes_Paragraph_TextList_NumberTypeFromJSON(object.numberType)
+        ? graphics_Text_Attributes_Paragraph_TextList_NumberTypeFromJSON(
+            object.numberType,
+          )
         : 0,
-      prefix: isSet(object.prefix) ? String(object.prefix) : "",
-      postfix: isSet(object.postfix) ? String(object.postfix) : "",
-      startingNumber: isSet(object.startingNumber) ? Number(object.startingNumber) : 0,
+      prefix: isSet(object.prefix) ? String(object.prefix) : '',
+      postfix: isSet(object.postfix) ? String(object.postfix) : '',
+      startingNumber: isSet(object.startingNumber)
+        ? Number(object.startingNumber)
+        : 0,
     };
   },
 
@@ -5387,27 +6225,37 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
     const obj: any = {};
     message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
     message.numberType !== undefined &&
-      (obj.numberType = graphics_Text_Attributes_Paragraph_TextList_NumberTypeToJSON(message.numberType));
+      (obj.numberType =
+        graphics_Text_Attributes_Paragraph_TextList_NumberTypeToJSON(
+          message.numberType,
+        ));
     message.prefix !== undefined && (obj.prefix = message.prefix);
     message.postfix !== undefined && (obj.postfix = message.postfix);
-    message.startingNumber !== undefined && (obj.startingNumber = Math.round(message.startingNumber));
+    message.startingNumber !== undefined &&
+      (obj.startingNumber = Math.round(message.startingNumber));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TextList>, I>>(
-    base?: I,
-  ): Graphics_Text_Attributes_Paragraph_TextList {
+  create<
+    I extends Exact<
+      DeepPartial<Graphics_Text_Attributes_Paragraph_TextList>,
+      I
+    >,
+  >(base?: I): Graphics_Text_Attributes_Paragraph_TextList {
     return Graphics_Text_Attributes_Paragraph_TextList.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TextList>, I>>(
-    object: I,
-  ): Graphics_Text_Attributes_Paragraph_TextList {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<Graphics_Text_Attributes_Paragraph_TextList>,
+      I
+    >,
+  >(object: I): Graphics_Text_Attributes_Paragraph_TextList {
     const message = createBaseGraphics_Text_Attributes_Paragraph_TextList();
     message.isEnabled = object.isEnabled ?? false;
     message.numberType = object.numberType ?? 0;
-    message.prefix = object.prefix ?? "";
-    message.postfix = object.postfix ?? "";
+    message.prefix = object.prefix ?? '';
+    message.postfix = object.postfix ?? '';
     message.startingNumber = object.startingNumber ?? 0;
     return message;
   },
@@ -5429,7 +6277,10 @@ function createBaseGraphics_Text_Attributes_CustomAttribute(): Graphics_Text_Att
 }
 
 export const Graphics_Text_Attributes_CustomAttribute = {
-  encode(message: Graphics_Text_Attributes_CustomAttribute, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Graphics_Text_Attributes_CustomAttribute,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.range !== undefined) {
       IntRange.encode(message.range, writer.uint32(10).fork()).ldelim();
     }
@@ -5443,7 +6294,10 @@ export const Graphics_Text_Attributes_CustomAttribute = {
       writer.uint32(33).double(message.fontScaleFactor);
     }
     if (message.textGradientFill !== undefined) {
-      Graphics_Text_GradientFill.encode(message.textGradientFill, writer.uint32(42).fork()).ldelim();
+      Graphics_Text_GradientFill.encode(
+        message.textGradientFill,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.shouldPreserveForegroundColor !== undefined) {
       writer.uint32(48).bool(message.shouldPreserveForegroundColor);
@@ -5452,19 +6306,32 @@ export const Graphics_Text_Attributes_CustomAttribute = {
       writer.uint32(58).string(message.chord);
     }
     if (message.cutOutFill !== undefined) {
-      Graphics_Text_CutOutFill.encode(message.cutOutFill, writer.uint32(66).fork()).ldelim();
+      Graphics_Text_CutOutFill.encode(
+        message.cutOutFill,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.mediaFill !== undefined) {
-      Graphics_Text_MediaFill.encode(message.mediaFill, writer.uint32(74).fork()).ldelim();
+      Graphics_Text_MediaFill.encode(
+        message.mediaFill,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     if (message.backgroundEffect !== undefined) {
-      Graphics_BackgroundEffect.encode(message.backgroundEffect, writer.uint32(82).fork()).ldelim();
+      Graphics_BackgroundEffect.encode(
+        message.backgroundEffect,
+        writer.uint32(82).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Graphics_Text_Attributes_CustomAttribute {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Graphics_Text_Attributes_CustomAttribute {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGraphics_Text_Attributes_CustomAttribute();
     while (reader.pos < end) {
@@ -5503,7 +6370,10 @@ export const Graphics_Text_Attributes_CustomAttribute = {
             break;
           }
 
-          message.textGradientFill = Graphics_Text_GradientFill.decode(reader, reader.uint32());
+          message.textGradientFill = Graphics_Text_GradientFill.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 48) {
@@ -5524,21 +6394,30 @@ export const Graphics_Text_Attributes_CustomAttribute = {
             break;
           }
 
-          message.cutOutFill = Graphics_Text_CutOutFill.decode(reader, reader.uint32());
+          message.cutOutFill = Graphics_Text_CutOutFill.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 74) {
             break;
           }
 
-          message.mediaFill = Graphics_Text_MediaFill.decode(reader, reader.uint32());
+          message.mediaFill = Graphics_Text_MediaFill.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 10:
           if (tag != 82) {
             break;
           }
 
-          message.backgroundEffect = Graphics_BackgroundEffect.decode(reader, reader.uint32());
+          message.backgroundEffect = Graphics_BackgroundEffect.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5553,10 +6432,14 @@ export const Graphics_Text_Attributes_CustomAttribute = {
     return {
       range: isSet(object.range) ? IntRange.fromJSON(object.range) : undefined,
       capitalization: isSet(object.capitalization)
-        ? graphics_Text_Attributes_CustomAttribute_CapitalizationFromJSON(object.capitalization)
+        ? graphics_Text_Attributes_CapitalizationFromJSON(object.capitalization)
         : undefined,
-      originalFontSize: isSet(object.originalFontSize) ? Number(object.originalFontSize) : undefined,
-      fontScaleFactor: isSet(object.fontScaleFactor) ? Number(object.fontScaleFactor) : undefined,
+      originalFontSize: isSet(object.originalFontSize)
+        ? Number(object.originalFontSize)
+        : undefined,
+      fontScaleFactor: isSet(object.fontScaleFactor)
+        ? Number(object.fontScaleFactor)
+        : undefined,
       textGradientFill: isSet(object.textGradientFill)
         ? Graphics_Text_GradientFill.fromJSON(object.textGradientFill)
         : undefined,
@@ -5564,8 +6447,12 @@ export const Graphics_Text_Attributes_CustomAttribute = {
         ? Boolean(object.shouldPreserveForegroundColor)
         : undefined,
       chord: isSet(object.chord) ? String(object.chord) : undefined,
-      cutOutFill: isSet(object.cutOutFill) ? Graphics_Text_CutOutFill.fromJSON(object.cutOutFill) : undefined,
-      mediaFill: isSet(object.mediaFill) ? Graphics_Text_MediaFill.fromJSON(object.mediaFill) : undefined,
+      cutOutFill: isSet(object.cutOutFill)
+        ? Graphics_Text_CutOutFill.fromJSON(object.cutOutFill)
+        : undefined,
+      mediaFill: isSet(object.mediaFill)
+        ? Graphics_Text_MediaFill.fromJSON(object.mediaFill)
+        : undefined,
       backgroundEffect: isSet(object.backgroundEffect)
         ? Graphics_BackgroundEffect.fromJSON(object.backgroundEffect)
         : undefined,
@@ -5574,58 +6461,78 @@ export const Graphics_Text_Attributes_CustomAttribute = {
 
   toJSON(message: Graphics_Text_Attributes_CustomAttribute): unknown {
     const obj: any = {};
-    message.range !== undefined && (obj.range = message.range ? IntRange.toJSON(message.range) : undefined);
-    message.capitalization !== undefined && (obj.capitalization = message.capitalization !== undefined
-      ? graphics_Text_Attributes_CustomAttribute_CapitalizationToJSON(message.capitalization)
-      : undefined);
-    message.originalFontSize !== undefined && (obj.originalFontSize = message.originalFontSize);
-    message.fontScaleFactor !== undefined && (obj.fontScaleFactor = message.fontScaleFactor);
-    message.textGradientFill !== undefined && (obj.textGradientFill = message.textGradientFill
-      ? Graphics_Text_GradientFill.toJSON(message.textGradientFill)
-      : undefined);
+    message.range !== undefined &&
+      (obj.range = message.range ? IntRange.toJSON(message.range) : undefined);
+    message.capitalization !== undefined &&
+      (obj.capitalization =
+        message.capitalization !== undefined
+          ? graphics_Text_Attributes_CapitalizationToJSON(
+              message.capitalization,
+            )
+          : undefined);
+    message.originalFontSize !== undefined &&
+      (obj.originalFontSize = message.originalFontSize);
+    message.fontScaleFactor !== undefined &&
+      (obj.fontScaleFactor = message.fontScaleFactor);
+    message.textGradientFill !== undefined &&
+      (obj.textGradientFill = message.textGradientFill
+        ? Graphics_Text_GradientFill.toJSON(message.textGradientFill)
+        : undefined);
     message.shouldPreserveForegroundColor !== undefined &&
-      (obj.shouldPreserveForegroundColor = message.shouldPreserveForegroundColor);
+      (obj.shouldPreserveForegroundColor =
+        message.shouldPreserveForegroundColor);
     message.chord !== undefined && (obj.chord = message.chord);
     message.cutOutFill !== undefined &&
-      (obj.cutOutFill = message.cutOutFill ? Graphics_Text_CutOutFill.toJSON(message.cutOutFill) : undefined);
+      (obj.cutOutFill = message.cutOutFill
+        ? Graphics_Text_CutOutFill.toJSON(message.cutOutFill)
+        : undefined);
     message.mediaFill !== undefined &&
-      (obj.mediaFill = message.mediaFill ? Graphics_Text_MediaFill.toJSON(message.mediaFill) : undefined);
-    message.backgroundEffect !== undefined && (obj.backgroundEffect = message.backgroundEffect
-      ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
-      : undefined);
+      (obj.mediaFill = message.mediaFill
+        ? Graphics_Text_MediaFill.toJSON(message.mediaFill)
+        : undefined);
+    message.backgroundEffect !== undefined &&
+      (obj.backgroundEffect = message.backgroundEffect
+        ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Graphics_Text_Attributes_CustomAttribute>, I>>(
-    base?: I,
-  ): Graphics_Text_Attributes_CustomAttribute {
+  create<
+    I extends Exact<DeepPartial<Graphics_Text_Attributes_CustomAttribute>, I>,
+  >(base?: I): Graphics_Text_Attributes_CustomAttribute {
     return Graphics_Text_Attributes_CustomAttribute.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_CustomAttribute>, I>>(
-    object: I,
-  ): Graphics_Text_Attributes_CustomAttribute {
+  fromPartial<
+    I extends Exact<DeepPartial<Graphics_Text_Attributes_CustomAttribute>, I>,
+  >(object: I): Graphics_Text_Attributes_CustomAttribute {
     const message = createBaseGraphics_Text_Attributes_CustomAttribute();
-    message.range = (object.range !== undefined && object.range !== null)
-      ? IntRange.fromPartial(object.range)
-      : undefined;
+    message.range =
+      object.range !== undefined && object.range !== null
+        ? IntRange.fromPartial(object.range)
+        : undefined;
     message.capitalization = object.capitalization ?? undefined;
     message.originalFontSize = object.originalFontSize ?? undefined;
     message.fontScaleFactor = object.fontScaleFactor ?? undefined;
-    message.textGradientFill = (object.textGradientFill !== undefined && object.textGradientFill !== null)
-      ? Graphics_Text_GradientFill.fromPartial(object.textGradientFill)
-      : undefined;
-    message.shouldPreserveForegroundColor = object.shouldPreserveForegroundColor ?? undefined;
+    message.textGradientFill =
+      object.textGradientFill !== undefined && object.textGradientFill !== null
+        ? Graphics_Text_GradientFill.fromPartial(object.textGradientFill)
+        : undefined;
+    message.shouldPreserveForegroundColor =
+      object.shouldPreserveForegroundColor ?? undefined;
     message.chord = object.chord ?? undefined;
-    message.cutOutFill = (object.cutOutFill !== undefined && object.cutOutFill !== null)
-      ? Graphics_Text_CutOutFill.fromPartial(object.cutOutFill)
-      : undefined;
-    message.mediaFill = (object.mediaFill !== undefined && object.mediaFill !== null)
-      ? Graphics_Text_MediaFill.fromPartial(object.mediaFill)
-      : undefined;
-    message.backgroundEffect = (object.backgroundEffect !== undefined && object.backgroundEffect !== null)
-      ? Graphics_BackgroundEffect.fromPartial(object.backgroundEffect)
-      : undefined;
+    message.cutOutFill =
+      object.cutOutFill !== undefined && object.cutOutFill !== null
+        ? Graphics_Text_CutOutFill.fromPartial(object.cutOutFill)
+        : undefined;
+    message.mediaFill =
+      object.mediaFill !== undefined && object.mediaFill !== null
+        ? Graphics_Text_MediaFill.fromPartial(object.mediaFill)
+        : undefined;
+    message.backgroundEffect =
+      object.backgroundEffect !== undefined && object.backgroundEffect !== null
+        ? Graphics_BackgroundEffect.fromPartial(object.backgroundEffect)
+        : undefined;
     return message;
   },
 };
@@ -5652,28 +6559,47 @@ export const Media = {
       URL.encode(message.url, writer.uint32(18).fork()).ldelim();
     }
     if (message.metadata !== undefined) {
-      Media_Metadata.encode(message.metadata, writer.uint32(26).fork()).ldelim();
+      Media_Metadata.encode(
+        message.metadata,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.audio !== undefined) {
-      Media_AudioTypeProperties.encode(message.audio, writer.uint32(34).fork()).ldelim();
+      Media_AudioTypeProperties.encode(
+        message.audio,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.image !== undefined) {
-      Media_ImageTypeProperties.encode(message.image, writer.uint32(42).fork()).ldelim();
+      Media_ImageTypeProperties.encode(
+        message.image,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.video !== undefined) {
-      Media_VideoTypeProperties.encode(message.video, writer.uint32(50).fork()).ldelim();
+      Media_VideoTypeProperties.encode(
+        message.video,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.liveVideo !== undefined) {
-      Media_LiveVideoTypeProperties.encode(message.liveVideo, writer.uint32(58).fork()).ldelim();
+      Media_LiveVideoTypeProperties.encode(
+        message.liveVideo,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     if (message.webContent !== undefined) {
-      Media_WebContentTypeProperties.encode(message.webContent, writer.uint32(66).fork()).ldelim();
+      Media_WebContentTypeProperties.encode(
+        message.webContent,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Media {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia();
     while (reader.pos < end) {
@@ -5705,35 +6631,50 @@ export const Media = {
             break;
           }
 
-          message.audio = Media_AudioTypeProperties.decode(reader, reader.uint32());
+          message.audio = Media_AudioTypeProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.image = Media_ImageTypeProperties.decode(reader, reader.uint32());
+          message.image = Media_ImageTypeProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.video = Media_VideoTypeProperties.decode(reader, reader.uint32());
+          message.video = Media_VideoTypeProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 58) {
             break;
           }
 
-          message.liveVideo = Media_LiveVideoTypeProperties.decode(reader, reader.uint32());
+          message.liveVideo = Media_LiveVideoTypeProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 8:
           if (tag != 66) {
             break;
           }
 
-          message.webContent = Media_WebContentTypeProperties.decode(reader, reader.uint32());
+          message.webContent = Media_WebContentTypeProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5748,31 +6689,57 @@ export const Media = {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       url: isSet(object.url) ? URL.fromJSON(object.url) : undefined,
-      metadata: isSet(object.metadata) ? Media_Metadata.fromJSON(object.metadata) : undefined,
-      audio: isSet(object.audio) ? Media_AudioTypeProperties.fromJSON(object.audio) : undefined,
-      image: isSet(object.image) ? Media_ImageTypeProperties.fromJSON(object.image) : undefined,
-      video: isSet(object.video) ? Media_VideoTypeProperties.fromJSON(object.video) : undefined,
-      liveVideo: isSet(object.liveVideo) ? Media_LiveVideoTypeProperties.fromJSON(object.liveVideo) : undefined,
-      webContent: isSet(object.webContent) ? Media_WebContentTypeProperties.fromJSON(object.webContent) : undefined,
+      metadata: isSet(object.metadata)
+        ? Media_Metadata.fromJSON(object.metadata)
+        : undefined,
+      audio: isSet(object.audio)
+        ? Media_AudioTypeProperties.fromJSON(object.audio)
+        : undefined,
+      image: isSet(object.image)
+        ? Media_ImageTypeProperties.fromJSON(object.image)
+        : undefined,
+      video: isSet(object.video)
+        ? Media_VideoTypeProperties.fromJSON(object.video)
+        : undefined,
+      liveVideo: isSet(object.liveVideo)
+        ? Media_LiveVideoTypeProperties.fromJSON(object.liveVideo)
+        : undefined,
+      webContent: isSet(object.webContent)
+        ? Media_WebContentTypeProperties.fromJSON(object.webContent)
+        : undefined,
     };
   },
 
   toJSON(message: Media): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.url !== undefined && (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.url !== undefined &&
+      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
     message.metadata !== undefined &&
-      (obj.metadata = message.metadata ? Media_Metadata.toJSON(message.metadata) : undefined);
+      (obj.metadata = message.metadata
+        ? Media_Metadata.toJSON(message.metadata)
+        : undefined);
     message.audio !== undefined &&
-      (obj.audio = message.audio ? Media_AudioTypeProperties.toJSON(message.audio) : undefined);
+      (obj.audio = message.audio
+        ? Media_AudioTypeProperties.toJSON(message.audio)
+        : undefined);
     message.image !== undefined &&
-      (obj.image = message.image ? Media_ImageTypeProperties.toJSON(message.image) : undefined);
+      (obj.image = message.image
+        ? Media_ImageTypeProperties.toJSON(message.image)
+        : undefined);
     message.video !== undefined &&
-      (obj.video = message.video ? Media_VideoTypeProperties.toJSON(message.video) : undefined);
+      (obj.video = message.video
+        ? Media_VideoTypeProperties.toJSON(message.video)
+        : undefined);
     message.liveVideo !== undefined &&
-      (obj.liveVideo = message.liveVideo ? Media_LiveVideoTypeProperties.toJSON(message.liveVideo) : undefined);
+      (obj.liveVideo = message.liveVideo
+        ? Media_LiveVideoTypeProperties.toJSON(message.liveVideo)
+        : undefined);
     message.webContent !== undefined &&
-      (obj.webContent = message.webContent ? Media_WebContentTypeProperties.toJSON(message.webContent) : undefined);
+      (obj.webContent = message.webContent
+        ? Media_WebContentTypeProperties.toJSON(message.webContent)
+        : undefined);
     return obj;
   },
 
@@ -5782,56 +6749,78 @@ export const Media = {
 
   fromPartial<I extends Exact<DeepPartial<Media>, I>>(object: I): Media {
     const message = createBaseMedia();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.url = (object.url !== undefined && object.url !== null) ? URL.fromPartial(object.url) : undefined;
-    message.metadata = (object.metadata !== undefined && object.metadata !== null)
-      ? Media_Metadata.fromPartial(object.metadata)
-      : undefined;
-    message.audio = (object.audio !== undefined && object.audio !== null)
-      ? Media_AudioTypeProperties.fromPartial(object.audio)
-      : undefined;
-    message.image = (object.image !== undefined && object.image !== null)
-      ? Media_ImageTypeProperties.fromPartial(object.image)
-      : undefined;
-    message.video = (object.video !== undefined && object.video !== null)
-      ? Media_VideoTypeProperties.fromPartial(object.video)
-      : undefined;
-    message.liveVideo = (object.liveVideo !== undefined && object.liveVideo !== null)
-      ? Media_LiveVideoTypeProperties.fromPartial(object.liveVideo)
-      : undefined;
-    message.webContent = (object.webContent !== undefined && object.webContent !== null)
-      ? Media_WebContentTypeProperties.fromPartial(object.webContent)
-      : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.url =
+      object.url !== undefined && object.url !== null
+        ? URL.fromPartial(object.url)
+        : undefined;
+    message.metadata =
+      object.metadata !== undefined && object.metadata !== null
+        ? Media_Metadata.fromPartial(object.metadata)
+        : undefined;
+    message.audio =
+      object.audio !== undefined && object.audio !== null
+        ? Media_AudioTypeProperties.fromPartial(object.audio)
+        : undefined;
+    message.image =
+      object.image !== undefined && object.image !== null
+        ? Media_ImageTypeProperties.fromPartial(object.image)
+        : undefined;
+    message.video =
+      object.video !== undefined && object.video !== null
+        ? Media_VideoTypeProperties.fromPartial(object.video)
+        : undefined;
+    message.liveVideo =
+      object.liveVideo !== undefined && object.liveVideo !== null
+        ? Media_LiveVideoTypeProperties.fromPartial(object.liveVideo)
+        : undefined;
+    message.webContent =
+      object.webContent !== undefined && object.webContent !== null
+        ? Media_WebContentTypeProperties.fromPartial(object.webContent)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMedia_Metadata(): Media_Metadata {
-  return { manufactureName: "", manufactureUrl: undefined, information: "", artist: "", format: "" };
+  return {
+    manufactureName: '',
+    manufactureUrl: undefined,
+    information: '',
+    artist: '',
+    format: '',
+  };
 }
 
 export const Media_Metadata = {
-  encode(message: Media_Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.manufactureName !== "") {
+  encode(
+    message: Media_Metadata,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.manufactureName !== '') {
       writer.uint32(10).string(message.manufactureName);
     }
     if (message.manufactureUrl !== undefined) {
       URL.encode(message.manufactureUrl, writer.uint32(18).fork()).ldelim();
     }
-    if (message.information !== "") {
+    if (message.information !== '') {
       writer.uint32(26).string(message.information);
     }
-    if (message.artist !== "") {
+    if (message.artist !== '') {
       writer.uint32(34).string(message.artist);
     }
-    if (message.format !== "") {
+    if (message.format !== '') {
       writer.uint32(42).string(message.format);
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Media_Metadata {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_Metadata();
     while (reader.pos < end) {
@@ -5883,71 +6872,98 @@ export const Media_Metadata = {
 
   fromJSON(object: any): Media_Metadata {
     return {
-      manufactureName: isSet(object.manufactureName) ? String(object.manufactureName) : "",
-      manufactureUrl: isSet(object.manufactureUrl) ? URL.fromJSON(object.manufactureUrl) : undefined,
-      information: isSet(object.information) ? String(object.information) : "",
-      artist: isSet(object.artist) ? String(object.artist) : "",
-      format: isSet(object.format) ? String(object.format) : "",
+      manufactureName: isSet(object.manufactureName)
+        ? String(object.manufactureName)
+        : '',
+      manufactureUrl: isSet(object.manufactureUrl)
+        ? URL.fromJSON(object.manufactureUrl)
+        : undefined,
+      information: isSet(object.information) ? String(object.information) : '',
+      artist: isSet(object.artist) ? String(object.artist) : '',
+      format: isSet(object.format) ? String(object.format) : '',
     };
   },
 
   toJSON(message: Media_Metadata): unknown {
     const obj: any = {};
-    message.manufactureName !== undefined && (obj.manufactureName = message.manufactureName);
+    message.manufactureName !== undefined &&
+      (obj.manufactureName = message.manufactureName);
     message.manufactureUrl !== undefined &&
-      (obj.manufactureUrl = message.manufactureUrl ? URL.toJSON(message.manufactureUrl) : undefined);
-    message.information !== undefined && (obj.information = message.information);
+      (obj.manufactureUrl = message.manufactureUrl
+        ? URL.toJSON(message.manufactureUrl)
+        : undefined);
+    message.information !== undefined &&
+      (obj.information = message.information);
     message.artist !== undefined && (obj.artist = message.artist);
     message.format !== undefined && (obj.format = message.format);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_Metadata>, I>>(base?: I): Media_Metadata {
+  create<I extends Exact<DeepPartial<Media_Metadata>, I>>(
+    base?: I,
+  ): Media_Metadata {
     return Media_Metadata.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_Metadata>, I>>(object: I): Media_Metadata {
+  fromPartial<I extends Exact<DeepPartial<Media_Metadata>, I>>(
+    object: I,
+  ): Media_Metadata {
     const message = createBaseMedia_Metadata();
-    message.manufactureName = object.manufactureName ?? "";
-    message.manufactureUrl = (object.manufactureUrl !== undefined && object.manufactureUrl !== null)
-      ? URL.fromPartial(object.manufactureUrl)
-      : undefined;
-    message.information = object.information ?? "";
-    message.artist = object.artist ?? "";
-    message.format = object.format ?? "";
+    message.manufactureName = object.manufactureName ?? '';
+    message.manufactureUrl =
+      object.manufactureUrl !== undefined && object.manufactureUrl !== null
+        ? URL.fromPartial(object.manufactureUrl)
+        : undefined;
+    message.information = object.information ?? '';
+    message.artist = object.artist ?? '';
+    message.format = object.format ?? '';
     return message;
   },
 };
 
 function createBaseMedia_VideoDevice(): Media_VideoDevice {
-  return { type: 0, name: "", uniqueId: "", modelId: "", formatIndex: 0, audioRouting: undefined };
+  return {
+    type: 0,
+    name: '',
+    uniqueId: '',
+    modelId: '',
+    formatIndex: 0,
+    audioRouting: undefined,
+  };
 }
 
 export const Media_VideoDevice = {
-  encode(message: Media_VideoDevice, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_VideoDevice,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.type !== 0) {
       writer.uint32(8).int32(message.type);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
-    if (message.uniqueId !== "") {
+    if (message.uniqueId !== '') {
       writer.uint32(26).string(message.uniqueId);
     }
-    if (message.modelId !== "") {
+    if (message.modelId !== '') {
       writer.uint32(34).string(message.modelId);
     }
     if (message.formatIndex !== 0) {
       writer.uint32(40).uint32(message.formatIndex);
     }
     if (message.audioRouting !== undefined) {
-      DigitalAudio_Device_Routing.encode(message.audioRouting, writer.uint32(50).fork()).ldelim();
+      DigitalAudio_Device_Routing.encode(
+        message.audioRouting,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Media_VideoDevice {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_VideoDevice();
     while (reader.pos < end) {
@@ -5993,7 +7009,10 @@ export const Media_VideoDevice = {
             break;
           }
 
-          message.audioRouting = DigitalAudio_Device_Routing.decode(reader, reader.uint32());
+          message.audioRouting = DigitalAudio_Device_Routing.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6006,58 +7025,74 @@ export const Media_VideoDevice = {
 
   fromJSON(object: any): Media_VideoDevice {
     return {
-      type: isSet(object.type) ? media_VideoDevice_TypeFromJSON(object.type) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : "",
-      modelId: isSet(object.modelId) ? String(object.modelId) : "",
+      type: isSet(object.type)
+        ? media_VideoDevice_TypeFromJSON(object.type)
+        : 0,
+      name: isSet(object.name) ? String(object.name) : '',
+      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : '',
+      modelId: isSet(object.modelId) ? String(object.modelId) : '',
       formatIndex: isSet(object.formatIndex) ? Number(object.formatIndex) : 0,
-      audioRouting: isSet(object.audioRouting) ? DigitalAudio_Device_Routing.fromJSON(object.audioRouting) : undefined,
+      audioRouting: isSet(object.audioRouting)
+        ? DigitalAudio_Device_Routing.fromJSON(object.audioRouting)
+        : undefined,
     };
   },
 
   toJSON(message: Media_VideoDevice): unknown {
     const obj: any = {};
-    message.type !== undefined && (obj.type = media_VideoDevice_TypeToJSON(message.type));
+    message.type !== undefined &&
+      (obj.type = media_VideoDevice_TypeToJSON(message.type));
     message.name !== undefined && (obj.name = message.name);
     message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);
     message.modelId !== undefined && (obj.modelId = message.modelId);
-    message.formatIndex !== undefined && (obj.formatIndex = Math.round(message.formatIndex));
+    message.formatIndex !== undefined &&
+      (obj.formatIndex = Math.round(message.formatIndex));
     message.audioRouting !== undefined &&
-      (obj.audioRouting = message.audioRouting ? DigitalAudio_Device_Routing.toJSON(message.audioRouting) : undefined);
+      (obj.audioRouting = message.audioRouting
+        ? DigitalAudio_Device_Routing.toJSON(message.audioRouting)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_VideoDevice>, I>>(base?: I): Media_VideoDevice {
+  create<I extends Exact<DeepPartial<Media_VideoDevice>, I>>(
+    base?: I,
+  ): Media_VideoDevice {
     return Media_VideoDevice.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_VideoDevice>, I>>(object: I): Media_VideoDevice {
+  fromPartial<I extends Exact<DeepPartial<Media_VideoDevice>, I>>(
+    object: I,
+  ): Media_VideoDevice {
     const message = createBaseMedia_VideoDevice();
     message.type = object.type ?? 0;
-    message.name = object.name ?? "";
-    message.uniqueId = object.uniqueId ?? "";
-    message.modelId = object.modelId ?? "";
+    message.name = object.name ?? '';
+    message.uniqueId = object.uniqueId ?? '';
+    message.modelId = object.modelId ?? '';
     message.formatIndex = object.formatIndex ?? 0;
-    message.audioRouting = (object.audioRouting !== undefined && object.audioRouting !== null)
-      ? DigitalAudio_Device_Routing.fromPartial(object.audioRouting)
-      : undefined;
+    message.audioRouting =
+      object.audioRouting !== undefined && object.audioRouting !== null
+        ? DigitalAudio_Device_Routing.fromPartial(object.audioRouting)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMedia_AudioDevice(): Media_AudioDevice {
-  return { name: "", uniqueId: "", modelId: "", channelCount: 0 };
+  return { name: '', uniqueId: '', modelId: '', channelCount: 0 };
 }
 
 export const Media_AudioDevice = {
-  encode(message: Media_AudioDevice, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: Media_AudioDevice,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
-    if (message.uniqueId !== "") {
+    if (message.uniqueId !== '') {
       writer.uint32(18).string(message.uniqueId);
     }
-    if (message.modelId !== "") {
+    if (message.modelId !== '') {
       writer.uint32(26).string(message.modelId);
     }
     if (message.channelCount !== 0) {
@@ -6067,7 +7102,8 @@ export const Media_AudioDevice = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Media_AudioDevice {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_AudioDevice();
     while (reader.pos < end) {
@@ -6112,10 +7148,12 @@ export const Media_AudioDevice = {
 
   fromJSON(object: any): Media_AudioDevice {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : "",
-      modelId: isSet(object.modelId) ? String(object.modelId) : "",
-      channelCount: isSet(object.channelCount) ? Number(object.channelCount) : 0,
+      name: isSet(object.name) ? String(object.name) : '',
+      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : '',
+      modelId: isSet(object.modelId) ? String(object.modelId) : '',
+      channelCount: isSet(object.channelCount)
+        ? Number(object.channelCount)
+        : 0,
     };
   },
 
@@ -6124,19 +7162,24 @@ export const Media_AudioDevice = {
     message.name !== undefined && (obj.name = message.name);
     message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);
     message.modelId !== undefined && (obj.modelId = message.modelId);
-    message.channelCount !== undefined && (obj.channelCount = Math.round(message.channelCount));
+    message.channelCount !== undefined &&
+      (obj.channelCount = Math.round(message.channelCount));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_AudioDevice>, I>>(base?: I): Media_AudioDevice {
+  create<I extends Exact<DeepPartial<Media_AudioDevice>, I>>(
+    base?: I,
+  ): Media_AudioDevice {
     return Media_AudioDevice.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_AudioDevice>, I>>(object: I): Media_AudioDevice {
+  fromPartial<I extends Exact<DeepPartial<Media_AudioDevice>, I>>(
+    object: I,
+  ): Media_AudioDevice {
     const message = createBaseMedia_AudioDevice();
-    message.name = object.name ?? "";
-    message.uniqueId = object.uniqueId ?? "";
-    message.modelId = object.modelId ?? "";
+    message.name = object.name ?? '';
+    message.uniqueId = object.uniqueId ?? '';
+    message.modelId = object.modelId ?? '';
     message.channelCount = object.channelCount ?? 0;
     return message;
   },
@@ -6152,7 +7195,8 @@ export const Media_Audio = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Media_Audio {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_Audio();
     while (reader.pos < end) {
@@ -6187,11 +7231,20 @@ export const Media_Audio = {
 };
 
 function createBaseMedia_Audio_Channel(): Media_Audio_Channel {
-  return { index: 0, muted: false, volume: 0, compressLimit: false, outputs: [] };
+  return {
+    index: 0,
+    muted: false,
+    volume: 0,
+    compressLimit: false,
+    outputs: [],
+  };
 }
 
 export const Media_Audio_Channel = {
-  encode(message: Media_Audio_Channel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_Audio_Channel,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
@@ -6211,7 +7264,8 @@ export const Media_Audio_Channel = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Media_Audio_Channel {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_Audio_Channel();
     while (reader.pos < end) {
@@ -6250,7 +7304,9 @@ export const Media_Audio_Channel = {
             break;
           }
 
-          message.outputs.push(Media_Audio_Channel_Output.decode(reader, reader.uint32()));
+          message.outputs.push(
+            Media_Audio_Channel_Output.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6266,7 +7322,9 @@ export const Media_Audio_Channel = {
       index: isSet(object.index) ? Number(object.index) : 0,
       muted: isSet(object.muted) ? Boolean(object.muted) : false,
       volume: isSet(object.volume) ? Number(object.volume) : 0,
-      compressLimit: isSet(object.compressLimit) ? Boolean(object.compressLimit) : false,
+      compressLimit: isSet(object.compressLimit)
+        ? Boolean(object.compressLimit)
+        : false,
       outputs: Array.isArray(object?.outputs)
         ? object.outputs.map((e: any) => Media_Audio_Channel_Output.fromJSON(e))
         : [],
@@ -6278,26 +7336,35 @@ export const Media_Audio_Channel = {
     message.index !== undefined && (obj.index = Math.round(message.index));
     message.muted !== undefined && (obj.muted = message.muted);
     message.volume !== undefined && (obj.volume = message.volume);
-    message.compressLimit !== undefined && (obj.compressLimit = message.compressLimit);
+    message.compressLimit !== undefined &&
+      (obj.compressLimit = message.compressLimit);
     if (message.outputs) {
-      obj.outputs = message.outputs.map((e) => e ? Media_Audio_Channel_Output.toJSON(e) : undefined);
+      obj.outputs = message.outputs.map((e) =>
+        e ? Media_Audio_Channel_Output.toJSON(e) : undefined,
+      );
     } else {
       obj.outputs = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_Audio_Channel>, I>>(base?: I): Media_Audio_Channel {
+  create<I extends Exact<DeepPartial<Media_Audio_Channel>, I>>(
+    base?: I,
+  ): Media_Audio_Channel {
     return Media_Audio_Channel.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_Audio_Channel>, I>>(object: I): Media_Audio_Channel {
+  fromPartial<I extends Exact<DeepPartial<Media_Audio_Channel>, I>>(
+    object: I,
+  ): Media_Audio_Channel {
     const message = createBaseMedia_Audio_Channel();
     message.index = object.index ?? 0;
     message.muted = object.muted ?? false;
     message.volume = object.volume ?? 0;
     message.compressLimit = object.compressLimit ?? false;
-    message.outputs = object.outputs?.map((e) => Media_Audio_Channel_Output.fromPartial(e)) || [];
+    message.outputs =
+      object.outputs?.map((e) => Media_Audio_Channel_Output.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -6307,15 +7374,22 @@ function createBaseMedia_Audio_Channel_Output(): Media_Audio_Channel_Output {
 }
 
 export const Media_Audio_Channel_Output = {
-  encode(message: Media_Audio_Channel_Output, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_Audio_Channel_Output,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.channelIndex !== 0) {
       writer.uint32(16).int32(message.channelIndex);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_Audio_Channel_Output {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_Audio_Channel_Output {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_Audio_Channel_Output();
     while (reader.pos < end) {
@@ -6338,20 +7412,29 @@ export const Media_Audio_Channel_Output = {
   },
 
   fromJSON(object: any): Media_Audio_Channel_Output {
-    return { channelIndex: isSet(object.channelIndex) ? Number(object.channelIndex) : 0 };
+    return {
+      channelIndex: isSet(object.channelIndex)
+        ? Number(object.channelIndex)
+        : 0,
+    };
   },
 
   toJSON(message: Media_Audio_Channel_Output): unknown {
     const obj: any = {};
-    message.channelIndex !== undefined && (obj.channelIndex = Math.round(message.channelIndex));
+    message.channelIndex !== undefined &&
+      (obj.channelIndex = Math.round(message.channelIndex));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_Audio_Channel_Output>, I>>(base?: I): Media_Audio_Channel_Output {
+  create<I extends Exact<DeepPartial<Media_Audio_Channel_Output>, I>>(
+    base?: I,
+  ): Media_Audio_Channel_Output {
     return Media_Audio_Channel_Output.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_Audio_Channel_Output>, I>>(object: I): Media_Audio_Channel_Output {
+  fromPartial<I extends Exact<DeepPartial<Media_Audio_Channel_Output>, I>>(
+    object: I,
+  ): Media_Audio_Channel_Output {
     const message = createBaseMedia_Audio_Channel_Output();
     message.channelIndex = object.channelIndex ?? 0;
     return message;
@@ -6363,7 +7446,10 @@ function createBaseMedia_AudioProperties(): Media_AudioProperties {
 }
 
 export const Media_AudioProperties = {
-  encode(message: Media_AudioProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_AudioProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.volume !== 0) {
       writer.uint32(9).double(message.volume);
     }
@@ -6376,8 +7462,12 @@ export const Media_AudioProperties = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_AudioProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_AudioProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_AudioProperties();
     while (reader.pos < end) {
@@ -6395,7 +7485,9 @@ export const Media_AudioProperties = {
             break;
           }
 
-          message.audioChannels.push(Media_Audio_Channel.decode(reader, reader.uint32()));
+          message.audioChannels.push(
+            Media_Audio_Channel.decode(reader, reader.uint32()),
+          );
           continue;
         case 3:
           if (tag != 24) {
@@ -6419,7 +7511,9 @@ export const Media_AudioProperties = {
       audioChannels: Array.isArray(object?.audioChannels)
         ? object.audioChannels.map((e: any) => Media_Audio_Channel.fromJSON(e))
         : [],
-      isCustomMapping: isSet(object.isCustomMapping) ? Boolean(object.isCustomMapping) : false,
+      isCustomMapping: isSet(object.isCustomMapping)
+        ? Boolean(object.isCustomMapping)
+        : false,
     };
   },
 
@@ -6427,22 +7521,31 @@ export const Media_AudioProperties = {
     const obj: any = {};
     message.volume !== undefined && (obj.volume = message.volume);
     if (message.audioChannels) {
-      obj.audioChannels = message.audioChannels.map((e) => e ? Media_Audio_Channel.toJSON(e) : undefined);
+      obj.audioChannels = message.audioChannels.map((e) =>
+        e ? Media_Audio_Channel.toJSON(e) : undefined,
+      );
     } else {
       obj.audioChannels = [];
     }
-    message.isCustomMapping !== undefined && (obj.isCustomMapping = message.isCustomMapping);
+    message.isCustomMapping !== undefined &&
+      (obj.isCustomMapping = message.isCustomMapping);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_AudioProperties>, I>>(base?: I): Media_AudioProperties {
+  create<I extends Exact<DeepPartial<Media_AudioProperties>, I>>(
+    base?: I,
+  ): Media_AudioProperties {
     return Media_AudioProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_AudioProperties>, I>>(object: I): Media_AudioProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_AudioProperties>, I>>(
+    object: I,
+  ): Media_AudioProperties {
     const message = createBaseMedia_AudioProperties();
     message.volume = object.volume ?? 0;
-    message.audioChannels = object.audioChannels?.map((e) => Media_Audio_Channel.fromPartial(e)) || [];
+    message.audioChannels =
+      object.audioChannels?.map((e) => Media_Audio_Channel.fromPartial(e)) ||
+      [];
     message.isCustomMapping = object.isCustomMapping ?? false;
     return message;
   },
@@ -6465,7 +7568,10 @@ function createBaseMedia_TransportProperties(): Media_TransportProperties {
 }
 
 export const Media_TransportProperties = {
-  encode(message: Media_TransportProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_TransportProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.playRate !== 0) {
       writer.uint32(9).double(message.playRate);
     }
@@ -6502,8 +7608,12 @@ export const Media_TransportProperties = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_TransportProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_TransportProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_TransportProperties();
     while (reader.pos < end) {
@@ -6600,13 +7710,23 @@ export const Media_TransportProperties = {
       playRate: isSet(object.playRate) ? Number(object.playRate) : 0,
       inPoint: isSet(object.inPoint) ? Number(object.inPoint) : 0,
       outPoint: isSet(object.outPoint) ? Number(object.outPoint) : 0,
-      fadeInDuration: isSet(object.fadeInDuration) ? Number(object.fadeInDuration) : 0,
-      fadeOutDuration: isSet(object.fadeOutDuration) ? Number(object.fadeOutDuration) : 0,
-      shouldFadeIn: isSet(object.shouldFadeIn) ? Boolean(object.shouldFadeIn) : false,
-      shouldFadeOut: isSet(object.shouldFadeOut) ? Boolean(object.shouldFadeOut) : false,
+      fadeInDuration: isSet(object.fadeInDuration)
+        ? Number(object.fadeInDuration)
+        : 0,
+      fadeOutDuration: isSet(object.fadeOutDuration)
+        ? Number(object.fadeOutDuration)
+        : 0,
+      shouldFadeIn: isSet(object.shouldFadeIn)
+        ? Boolean(object.shouldFadeIn)
+        : false,
+      shouldFadeOut: isSet(object.shouldFadeOut)
+        ? Boolean(object.shouldFadeOut)
+        : false,
       endPoint: isSet(object.endPoint) ? Number(object.endPoint) : 0,
       playbackBehavior: isSet(object.playbackBehavior)
-        ? media_TransportProperties_PlaybackBehaviorFromJSON(object.playbackBehavior)
+        ? media_TransportProperties_PlaybackBehaviorFromJSON(
+            object.playbackBehavior,
+          )
         : 0,
       loopTime: isSet(object.loopTime) ? Number(object.loopTime) : 0,
       timesToLoop: isSet(object.timesToLoop) ? Number(object.timesToLoop) : 0,
@@ -6618,23 +7738,34 @@ export const Media_TransportProperties = {
     message.playRate !== undefined && (obj.playRate = message.playRate);
     message.inPoint !== undefined && (obj.inPoint = message.inPoint);
     message.outPoint !== undefined && (obj.outPoint = message.outPoint);
-    message.fadeInDuration !== undefined && (obj.fadeInDuration = message.fadeInDuration);
-    message.fadeOutDuration !== undefined && (obj.fadeOutDuration = message.fadeOutDuration);
-    message.shouldFadeIn !== undefined && (obj.shouldFadeIn = message.shouldFadeIn);
-    message.shouldFadeOut !== undefined && (obj.shouldFadeOut = message.shouldFadeOut);
+    message.fadeInDuration !== undefined &&
+      (obj.fadeInDuration = message.fadeInDuration);
+    message.fadeOutDuration !== undefined &&
+      (obj.fadeOutDuration = message.fadeOutDuration);
+    message.shouldFadeIn !== undefined &&
+      (obj.shouldFadeIn = message.shouldFadeIn);
+    message.shouldFadeOut !== undefined &&
+      (obj.shouldFadeOut = message.shouldFadeOut);
     message.endPoint !== undefined && (obj.endPoint = message.endPoint);
     message.playbackBehavior !== undefined &&
-      (obj.playbackBehavior = media_TransportProperties_PlaybackBehaviorToJSON(message.playbackBehavior));
+      (obj.playbackBehavior = media_TransportProperties_PlaybackBehaviorToJSON(
+        message.playbackBehavior,
+      ));
     message.loopTime !== undefined && (obj.loopTime = message.loopTime);
-    message.timesToLoop !== undefined && (obj.timesToLoop = Math.round(message.timesToLoop));
+    message.timesToLoop !== undefined &&
+      (obj.timesToLoop = Math.round(message.timesToLoop));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_TransportProperties>, I>>(base?: I): Media_TransportProperties {
+  create<I extends Exact<DeepPartial<Media_TransportProperties>, I>>(
+    base?: I,
+  ): Media_TransportProperties {
     return Media_TransportProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_TransportProperties>, I>>(object: I): Media_TransportProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_TransportProperties>, I>>(
+    object: I,
+  ): Media_TransportProperties {
     const message = createBaseMedia_TransportProperties();
     message.playRate = object.playRate ?? 0;
     message.inPoint = object.inPoint ?? 0;
@@ -6671,7 +7802,10 @@ function createBaseMedia_DrawingProperties(): Media_DrawingProperties {
 }
 
 export const Media_DrawingProperties = {
-  encode(message: Media_DrawingProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_DrawingProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.scaleBehavior !== 0) {
       writer.uint32(8).int32(message.scaleBehavior);
     }
@@ -6685,13 +7819,19 @@ export const Media_DrawingProperties = {
       writer.uint32(32).bool(message.flippedVertically);
     }
     if (message.naturalSize !== undefined) {
-      Graphics_Size.encode(message.naturalSize, writer.uint32(42).fork()).ldelim();
+      Graphics_Size.encode(
+        message.naturalSize,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.customImageRotation !== 0) {
       writer.uint32(49).double(message.customImageRotation);
     }
     if (message.customImageBounds !== undefined) {
-      Graphics_Rect.encode(message.customImageBounds, writer.uint32(58).fork()).ldelim();
+      Graphics_Rect.encode(
+        message.customImageBounds,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     if (message.customImageAspectLocked === true) {
       writer.uint32(64).bool(message.customImageAspectLocked);
@@ -6703,7 +7843,10 @@ export const Media_DrawingProperties = {
       writer.uint32(80).int32(message.nativeRotation);
     }
     if (message.selectedEffectPresetUuid !== undefined) {
-      UUID.encode(message.selectedEffectPresetUuid, writer.uint32(90).fork()).ldelim();
+      UUID.encode(
+        message.selectedEffectPresetUuid,
+        writer.uint32(90).fork(),
+      ).ldelim();
     }
     for (const v of message.effects) {
       Effect.encode(v!, writer.uint32(98).fork()).ldelim();
@@ -6712,13 +7855,20 @@ export const Media_DrawingProperties = {
       writer.uint32(104).bool(message.cropEnable);
     }
     if (message.cropInsets !== undefined) {
-      Graphics_EdgeInsets.encode(message.cropInsets, writer.uint32(114).fork()).ldelim();
+      Graphics_EdgeInsets.encode(
+        message.cropInsets,
+        writer.uint32(114).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_DrawingProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_DrawingProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_DrawingProperties();
     while (reader.pos < end) {
@@ -6771,7 +7921,10 @@ export const Media_DrawingProperties = {
             break;
           }
 
-          message.customImageBounds = Graphics_Rect.decode(reader, reader.uint32());
+          message.customImageBounds = Graphics_Rect.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 8:
           if (tag != 64) {
@@ -6799,7 +7952,10 @@ export const Media_DrawingProperties = {
             break;
           }
 
-          message.selectedEffectPresetUuid = UUID.decode(reader, reader.uint32());
+          message.selectedEffectPresetUuid = UUID.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 12:
           if (tag != 98) {
@@ -6820,7 +7976,10 @@ export const Media_DrawingProperties = {
             break;
           }
 
-          message.cropInsets = Graphics_EdgeInsets.decode(reader, reader.uint32());
+          message.cropInsets = Graphics_EdgeInsets.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6834,20 +7993,36 @@ export const Media_DrawingProperties = {
   fromJSON(object: any): Media_DrawingProperties {
     return {
       scaleBehavior: isSet(object.scaleBehavior)
-        ? media_DrawingProperties_ScaleBehaviorFromJSON(object.scaleBehavior)
+        ? media_ScaleBehaviorFromJSON(object.scaleBehavior)
         : 0,
       scaleAlignment: isSet(object.scaleAlignment)
-        ? media_DrawingProperties_ScaleAlignmentFromJSON(object.scaleAlignment)
+        ? media_ScaleAlignmentFromJSON(object.scaleAlignment)
         : 0,
-      flippedHorizontally: isSet(object.flippedHorizontally) ? Boolean(object.flippedHorizontally) : false,
-      flippedVertically: isSet(object.flippedVertically) ? Boolean(object.flippedVertically) : false,
-      naturalSize: isSet(object.naturalSize) ? Graphics_Size.fromJSON(object.naturalSize) : undefined,
-      customImageRotation: isSet(object.customImageRotation) ? Number(object.customImageRotation) : 0,
-      customImageBounds: isSet(object.customImageBounds) ? Graphics_Rect.fromJSON(object.customImageBounds) : undefined,
-      customImageAspectLocked: isSet(object.customImageAspectLocked) ? Boolean(object.customImageAspectLocked) : false,
-      alphaInverted: isSet(object.alphaInverted) ? Boolean(object.alphaInverted) : false,
+      flippedHorizontally: isSet(object.flippedHorizontally)
+        ? Boolean(object.flippedHorizontally)
+        : false,
+      flippedVertically: isSet(object.flippedVertically)
+        ? Boolean(object.flippedVertically)
+        : false,
+      naturalSize: isSet(object.naturalSize)
+        ? Graphics_Size.fromJSON(object.naturalSize)
+        : undefined,
+      customImageRotation: isSet(object.customImageRotation)
+        ? Number(object.customImageRotation)
+        : 0,
+      customImageBounds: isSet(object.customImageBounds)
+        ? Graphics_Rect.fromJSON(object.customImageBounds)
+        : undefined,
+      customImageAspectLocked: isSet(object.customImageAspectLocked)
+        ? Boolean(object.customImageAspectLocked)
+        : false,
+      alphaInverted: isSet(object.alphaInverted)
+        ? Boolean(object.alphaInverted)
+        : false,
       nativeRotation: isSet(object.nativeRotation)
-        ? media_DrawingProperties_NativeRotationTypeFromJSON(object.nativeRotation)
+        ? media_DrawingProperties_NativeRotationTypeFromJSON(
+            object.nativeRotation,
+          )
         : 0,
       selectedEffectPresetUuid: isSet(object.selectedEffectPresetUuid)
         ? UUID.fromJSON(object.selectedEffectPresetUuid)
@@ -6856,80 +8031,117 @@ export const Media_DrawingProperties = {
         ? object.effects.map((e: any) => Effect.fromJSON(e))
         : [],
       cropEnable: isSet(object.cropEnable) ? Boolean(object.cropEnable) : false,
-      cropInsets: isSet(object.cropInsets) ? Graphics_EdgeInsets.fromJSON(object.cropInsets) : undefined,
+      cropInsets: isSet(object.cropInsets)
+        ? Graphics_EdgeInsets.fromJSON(object.cropInsets)
+        : undefined,
     };
   },
 
   toJSON(message: Media_DrawingProperties): unknown {
     const obj: any = {};
     message.scaleBehavior !== undefined &&
-      (obj.scaleBehavior = media_DrawingProperties_ScaleBehaviorToJSON(message.scaleBehavior));
+      (obj.scaleBehavior = media_ScaleBehaviorToJSON(message.scaleBehavior));
     message.scaleAlignment !== undefined &&
-      (obj.scaleAlignment = media_DrawingProperties_ScaleAlignmentToJSON(message.scaleAlignment));
-    message.flippedHorizontally !== undefined && (obj.flippedHorizontally = message.flippedHorizontally);
-    message.flippedVertically !== undefined && (obj.flippedVertically = message.flippedVertically);
+      (obj.scaleAlignment = media_ScaleAlignmentToJSON(message.scaleAlignment));
+    message.flippedHorizontally !== undefined &&
+      (obj.flippedHorizontally = message.flippedHorizontally);
+    message.flippedVertically !== undefined &&
+      (obj.flippedVertically = message.flippedVertically);
     message.naturalSize !== undefined &&
-      (obj.naturalSize = message.naturalSize ? Graphics_Size.toJSON(message.naturalSize) : undefined);
-    message.customImageRotation !== undefined && (obj.customImageRotation = message.customImageRotation);
+      (obj.naturalSize = message.naturalSize
+        ? Graphics_Size.toJSON(message.naturalSize)
+        : undefined);
+    message.customImageRotation !== undefined &&
+      (obj.customImageRotation = message.customImageRotation);
     message.customImageBounds !== undefined &&
-      (obj.customImageBounds = message.customImageBounds ? Graphics_Rect.toJSON(message.customImageBounds) : undefined);
-    message.customImageAspectLocked !== undefined && (obj.customImageAspectLocked = message.customImageAspectLocked);
-    message.alphaInverted !== undefined && (obj.alphaInverted = message.alphaInverted);
+      (obj.customImageBounds = message.customImageBounds
+        ? Graphics_Rect.toJSON(message.customImageBounds)
+        : undefined);
+    message.customImageAspectLocked !== undefined &&
+      (obj.customImageAspectLocked = message.customImageAspectLocked);
+    message.alphaInverted !== undefined &&
+      (obj.alphaInverted = message.alphaInverted);
     message.nativeRotation !== undefined &&
-      (obj.nativeRotation = media_DrawingProperties_NativeRotationTypeToJSON(message.nativeRotation));
-    message.selectedEffectPresetUuid !== undefined && (obj.selectedEffectPresetUuid = message.selectedEffectPresetUuid
-      ? UUID.toJSON(message.selectedEffectPresetUuid)
-      : undefined);
+      (obj.nativeRotation = media_DrawingProperties_NativeRotationTypeToJSON(
+        message.nativeRotation,
+      ));
+    message.selectedEffectPresetUuid !== undefined &&
+      (obj.selectedEffectPresetUuid = message.selectedEffectPresetUuid
+        ? UUID.toJSON(message.selectedEffectPresetUuid)
+        : undefined);
     if (message.effects) {
-      obj.effects = message.effects.map((e) => e ? Effect.toJSON(e) : undefined);
+      obj.effects = message.effects.map((e) =>
+        e ? Effect.toJSON(e) : undefined,
+      );
     } else {
       obj.effects = [];
     }
     message.cropEnable !== undefined && (obj.cropEnable = message.cropEnable);
     message.cropInsets !== undefined &&
-      (obj.cropInsets = message.cropInsets ? Graphics_EdgeInsets.toJSON(message.cropInsets) : undefined);
+      (obj.cropInsets = message.cropInsets
+        ? Graphics_EdgeInsets.toJSON(message.cropInsets)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_DrawingProperties>, I>>(base?: I): Media_DrawingProperties {
+  create<I extends Exact<DeepPartial<Media_DrawingProperties>, I>>(
+    base?: I,
+  ): Media_DrawingProperties {
     return Media_DrawingProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_DrawingProperties>, I>>(object: I): Media_DrawingProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_DrawingProperties>, I>>(
+    object: I,
+  ): Media_DrawingProperties {
     const message = createBaseMedia_DrawingProperties();
     message.scaleBehavior = object.scaleBehavior ?? 0;
     message.scaleAlignment = object.scaleAlignment ?? 0;
     message.flippedHorizontally = object.flippedHorizontally ?? false;
     message.flippedVertically = object.flippedVertically ?? false;
-    message.naturalSize = (object.naturalSize !== undefined && object.naturalSize !== null)
-      ? Graphics_Size.fromPartial(object.naturalSize)
-      : undefined;
+    message.naturalSize =
+      object.naturalSize !== undefined && object.naturalSize !== null
+        ? Graphics_Size.fromPartial(object.naturalSize)
+        : undefined;
     message.customImageRotation = object.customImageRotation ?? 0;
-    message.customImageBounds = (object.customImageBounds !== undefined && object.customImageBounds !== null)
-      ? Graphics_Rect.fromPartial(object.customImageBounds)
-      : undefined;
+    message.customImageBounds =
+      object.customImageBounds !== undefined &&
+      object.customImageBounds !== null
+        ? Graphics_Rect.fromPartial(object.customImageBounds)
+        : undefined;
     message.customImageAspectLocked = object.customImageAspectLocked ?? false;
     message.alphaInverted = object.alphaInverted ?? false;
     message.nativeRotation = object.nativeRotation ?? 0;
     message.selectedEffectPresetUuid =
-      (object.selectedEffectPresetUuid !== undefined && object.selectedEffectPresetUuid !== null)
+      object.selectedEffectPresetUuid !== undefined &&
+      object.selectedEffectPresetUuid !== null
         ? UUID.fromPartial(object.selectedEffectPresetUuid)
         : undefined;
     message.effects = object.effects?.map((e) => Effect.fromPartial(e)) || [];
     message.cropEnable = object.cropEnable ?? false;
-    message.cropInsets = (object.cropInsets !== undefined && object.cropInsets !== null)
-      ? Graphics_EdgeInsets.fromPartial(object.cropInsets)
-      : undefined;
+    message.cropInsets =
+      object.cropInsets !== undefined && object.cropInsets !== null
+        ? Graphics_EdgeInsets.fromPartial(object.cropInsets)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMedia_VideoProperties(): Media_VideoProperties {
-  return { frameRate: 0, fieldType: 0, thumbnailPosition: 0, endBehavior: 0, softLoop: false, softLoopDuration: 0 };
+  return {
+    frameRate: 0,
+    fieldType: 0,
+    thumbnailPosition: 0,
+    endBehavior: 0,
+    softLoop: false,
+    softLoopDuration: 0,
+  };
 }
 
 export const Media_VideoProperties = {
-  encode(message: Media_VideoProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_VideoProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.frameRate !== 0) {
       writer.uint32(9).double(message.frameRate);
     }
@@ -6951,8 +8163,12 @@ export const Media_VideoProperties = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_VideoProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_VideoProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_VideoProperties();
     while (reader.pos < end) {
@@ -7012,31 +8228,50 @@ export const Media_VideoProperties = {
   fromJSON(object: any): Media_VideoProperties {
     return {
       frameRate: isSet(object.frameRate) ? Number(object.frameRate) : 0,
-      fieldType: isSet(object.fieldType) ? media_VideoProperties_FieldTypeFromJSON(object.fieldType) : 0,
-      thumbnailPosition: isSet(object.thumbnailPosition) ? Number(object.thumbnailPosition) : 0,
-      endBehavior: isSet(object.endBehavior) ? media_VideoProperties_EndBehaviorFromJSON(object.endBehavior) : 0,
+      fieldType: isSet(object.fieldType)
+        ? media_VideoProperties_FieldTypeFromJSON(object.fieldType)
+        : 0,
+      thumbnailPosition: isSet(object.thumbnailPosition)
+        ? Number(object.thumbnailPosition)
+        : 0,
+      endBehavior: isSet(object.endBehavior)
+        ? media_VideoProperties_EndBehaviorFromJSON(object.endBehavior)
+        : 0,
       softLoop: isSet(object.softLoop) ? Boolean(object.softLoop) : false,
-      softLoopDuration: isSet(object.softLoopDuration) ? Number(object.softLoopDuration) : 0,
+      softLoopDuration: isSet(object.softLoopDuration)
+        ? Number(object.softLoopDuration)
+        : 0,
     };
   },
 
   toJSON(message: Media_VideoProperties): unknown {
     const obj: any = {};
     message.frameRate !== undefined && (obj.frameRate = message.frameRate);
-    message.fieldType !== undefined && (obj.fieldType = media_VideoProperties_FieldTypeToJSON(message.fieldType));
-    message.thumbnailPosition !== undefined && (obj.thumbnailPosition = message.thumbnailPosition);
+    message.fieldType !== undefined &&
+      (obj.fieldType = media_VideoProperties_FieldTypeToJSON(
+        message.fieldType,
+      ));
+    message.thumbnailPosition !== undefined &&
+      (obj.thumbnailPosition = message.thumbnailPosition);
     message.endBehavior !== undefined &&
-      (obj.endBehavior = media_VideoProperties_EndBehaviorToJSON(message.endBehavior));
+      (obj.endBehavior = media_VideoProperties_EndBehaviorToJSON(
+        message.endBehavior,
+      ));
     message.softLoop !== undefined && (obj.softLoop = message.softLoop);
-    message.softLoopDuration !== undefined && (obj.softLoopDuration = message.softLoopDuration);
+    message.softLoopDuration !== undefined &&
+      (obj.softLoopDuration = message.softLoopDuration);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_VideoProperties>, I>>(base?: I): Media_VideoProperties {
+  create<I extends Exact<DeepPartial<Media_VideoProperties>, I>>(
+    base?: I,
+  ): Media_VideoProperties {
     return Media_VideoProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_VideoProperties>, I>>(object: I): Media_VideoProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_VideoProperties>, I>>(
+    object: I,
+  ): Media_VideoProperties {
     const message = createBaseMedia_VideoProperties();
     message.frameRate = object.frameRate ?? 0;
     message.fieldType = object.fieldType ?? 0;
@@ -7053,12 +8288,21 @@ function createBaseMedia_LiveVideoProperties(): Media_LiveVideoProperties {
 }
 
 export const Media_LiveVideoProperties = {
-  encode(message: Media_LiveVideoProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_LiveVideoProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.videoDevice !== undefined) {
-      Media_VideoDevice.encode(message.videoDevice, writer.uint32(10).fork()).ldelim();
+      Media_VideoDevice.encode(
+        message.videoDevice,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.audioDevice !== undefined) {
-      Media_AudioDevice.encode(message.audioDevice, writer.uint32(18).fork()).ldelim();
+      Media_AudioDevice.encode(
+        message.audioDevice,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.liveVideoIndex !== 0) {
       writer.uint32(24).int32(message.liveVideoIndex);
@@ -7066,8 +8310,12 @@ export const Media_LiveVideoProperties = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_LiveVideoProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_LiveVideoProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_LiveVideoProperties();
     while (reader.pos < end) {
@@ -7078,14 +8326,20 @@ export const Media_LiveVideoProperties = {
             break;
           }
 
-          message.videoDevice = Media_VideoDevice.decode(reader, reader.uint32());
+          message.videoDevice = Media_VideoDevice.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.audioDevice = Media_AudioDevice.decode(reader, reader.uint32());
+          message.audioDevice = Media_AudioDevice.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 24) {
@@ -7105,56 +8359,89 @@ export const Media_LiveVideoProperties = {
 
   fromJSON(object: any): Media_LiveVideoProperties {
     return {
-      videoDevice: isSet(object.videoDevice) ? Media_VideoDevice.fromJSON(object.videoDevice) : undefined,
-      audioDevice: isSet(object.audioDevice) ? Media_AudioDevice.fromJSON(object.audioDevice) : undefined,
-      liveVideoIndex: isSet(object.liveVideoIndex) ? Number(object.liveVideoIndex) : 0,
+      videoDevice: isSet(object.videoDevice)
+        ? Media_VideoDevice.fromJSON(object.videoDevice)
+        : undefined,
+      audioDevice: isSet(object.audioDevice)
+        ? Media_AudioDevice.fromJSON(object.audioDevice)
+        : undefined,
+      liveVideoIndex: isSet(object.liveVideoIndex)
+        ? Number(object.liveVideoIndex)
+        : 0,
     };
   },
 
   toJSON(message: Media_LiveVideoProperties): unknown {
     const obj: any = {};
     message.videoDevice !== undefined &&
-      (obj.videoDevice = message.videoDevice ? Media_VideoDevice.toJSON(message.videoDevice) : undefined);
+      (obj.videoDevice = message.videoDevice
+        ? Media_VideoDevice.toJSON(message.videoDevice)
+        : undefined);
     message.audioDevice !== undefined &&
-      (obj.audioDevice = message.audioDevice ? Media_AudioDevice.toJSON(message.audioDevice) : undefined);
-    message.liveVideoIndex !== undefined && (obj.liveVideoIndex = Math.round(message.liveVideoIndex));
+      (obj.audioDevice = message.audioDevice
+        ? Media_AudioDevice.toJSON(message.audioDevice)
+        : undefined);
+    message.liveVideoIndex !== undefined &&
+      (obj.liveVideoIndex = Math.round(message.liveVideoIndex));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_LiveVideoProperties>, I>>(base?: I): Media_LiveVideoProperties {
+  create<I extends Exact<DeepPartial<Media_LiveVideoProperties>, I>>(
+    base?: I,
+  ): Media_LiveVideoProperties {
     return Media_LiveVideoProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_LiveVideoProperties>, I>>(object: I): Media_LiveVideoProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_LiveVideoProperties>, I>>(
+    object: I,
+  ): Media_LiveVideoProperties {
     const message = createBaseMedia_LiveVideoProperties();
-    message.videoDevice = (object.videoDevice !== undefined && object.videoDevice !== null)
-      ? Media_VideoDevice.fromPartial(object.videoDevice)
-      : undefined;
-    message.audioDevice = (object.audioDevice !== undefined && object.audioDevice !== null)
-      ? Media_AudioDevice.fromPartial(object.audioDevice)
-      : undefined;
+    message.videoDevice =
+      object.videoDevice !== undefined && object.videoDevice !== null
+        ? Media_VideoDevice.fromPartial(object.videoDevice)
+        : undefined;
+    message.audioDevice =
+      object.audioDevice !== undefined && object.audioDevice !== null
+        ? Media_AudioDevice.fromPartial(object.audioDevice)
+        : undefined;
     message.liveVideoIndex = object.liveVideoIndex ?? 0;
     return message;
   },
 };
 
 function createBaseMedia_AudioTypeProperties(): Media_AudioTypeProperties {
-  return { audio: undefined, transport: undefined };
+  return { audio: undefined, transport: undefined, file: undefined };
 }
 
 export const Media_AudioTypeProperties = {
-  encode(message: Media_AudioTypeProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_AudioTypeProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.audio !== undefined) {
-      Media_AudioProperties.encode(message.audio, writer.uint32(10).fork()).ldelim();
+      Media_AudioProperties.encode(
+        message.audio,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.transport !== undefined) {
-      Media_TransportProperties.encode(message.transport, writer.uint32(18).fork()).ldelim();
+      Media_TransportProperties.encode(
+        message.transport,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    if (message.file !== undefined) {
+      FileProperties.encode(message.file, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_AudioTypeProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_AudioTypeProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_AudioTypeProperties();
     while (reader.pos < end) {
@@ -7172,7 +8459,17 @@ export const Media_AudioTypeProperties = {
             break;
           }
 
-          message.transport = Media_TransportProperties.decode(reader, reader.uint32());
+          message.transport = Media_TransportProperties.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 3:
+          if (tag != 26) {
+            break;
+          }
+
+          message.file = FileProperties.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7185,50 +8482,88 @@ export const Media_AudioTypeProperties = {
 
   fromJSON(object: any): Media_AudioTypeProperties {
     return {
-      audio: isSet(object.audio) ? Media_AudioProperties.fromJSON(object.audio) : undefined,
-      transport: isSet(object.transport) ? Media_TransportProperties.fromJSON(object.transport) : undefined,
+      audio: isSet(object.audio)
+        ? Media_AudioProperties.fromJSON(object.audio)
+        : undefined,
+      transport: isSet(object.transport)
+        ? Media_TransportProperties.fromJSON(object.transport)
+        : undefined,
+      file: isSet(object.file)
+        ? FileProperties.fromJSON(object.file)
+        : undefined,
     };
   },
 
   toJSON(message: Media_AudioTypeProperties): unknown {
     const obj: any = {};
     message.audio !== undefined &&
-      (obj.audio = message.audio ? Media_AudioProperties.toJSON(message.audio) : undefined);
+      (obj.audio = message.audio
+        ? Media_AudioProperties.toJSON(message.audio)
+        : undefined);
     message.transport !== undefined &&
-      (obj.transport = message.transport ? Media_TransportProperties.toJSON(message.transport) : undefined);
+      (obj.transport = message.transport
+        ? Media_TransportProperties.toJSON(message.transport)
+        : undefined);
+    message.file !== undefined &&
+      (obj.file = message.file
+        ? FileProperties.toJSON(message.file)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_AudioTypeProperties>, I>>(base?: I): Media_AudioTypeProperties {
+  create<I extends Exact<DeepPartial<Media_AudioTypeProperties>, I>>(
+    base?: I,
+  ): Media_AudioTypeProperties {
     return Media_AudioTypeProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_AudioTypeProperties>, I>>(object: I): Media_AudioTypeProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_AudioTypeProperties>, I>>(
+    object: I,
+  ): Media_AudioTypeProperties {
     const message = createBaseMedia_AudioTypeProperties();
-    message.audio = (object.audio !== undefined && object.audio !== null)
-      ? Media_AudioProperties.fromPartial(object.audio)
-      : undefined;
-    message.transport = (object.transport !== undefined && object.transport !== null)
-      ? Media_TransportProperties.fromPartial(object.transport)
-      : undefined;
+    message.audio =
+      object.audio !== undefined && object.audio !== null
+        ? Media_AudioProperties.fromPartial(object.audio)
+        : undefined;
+    message.transport =
+      object.transport !== undefined && object.transport !== null
+        ? Media_TransportProperties.fromPartial(object.transport)
+        : undefined;
+    message.file =
+      object.file !== undefined && object.file !== null
+        ? FileProperties.fromPartial(object.file)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMedia_ImageTypeProperties(): Media_ImageTypeProperties {
-  return { drawing: undefined };
+  return { drawing: undefined, file: undefined };
 }
 
 export const Media_ImageTypeProperties = {
-  encode(message: Media_ImageTypeProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_ImageTypeProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.drawing !== undefined) {
-      Media_DrawingProperties.encode(message.drawing, writer.uint32(10).fork()).ldelim();
+      Media_DrawingProperties.encode(
+        message.drawing,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    if (message.file !== undefined) {
+      FileProperties.encode(message.file, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_ImageTypeProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_ImageTypeProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_ImageTypeProperties();
     while (reader.pos < end) {
@@ -7239,7 +8574,17 @@ export const Media_ImageTypeProperties = {
             break;
           }
 
-          message.drawing = Media_DrawingProperties.decode(reader, reader.uint32());
+          message.drawing = Media_DrawingProperties.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 2:
+          if (tag != 18) {
+            break;
+          }
+
+          message.file = FileProperties.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7251,52 +8596,102 @@ export const Media_ImageTypeProperties = {
   },
 
   fromJSON(object: any): Media_ImageTypeProperties {
-    return { drawing: isSet(object.drawing) ? Media_DrawingProperties.fromJSON(object.drawing) : undefined };
+    return {
+      drawing: isSet(object.drawing)
+        ? Media_DrawingProperties.fromJSON(object.drawing)
+        : undefined,
+      file: isSet(object.file)
+        ? FileProperties.fromJSON(object.file)
+        : undefined,
+    };
   },
 
   toJSON(message: Media_ImageTypeProperties): unknown {
     const obj: any = {};
     message.drawing !== undefined &&
-      (obj.drawing = message.drawing ? Media_DrawingProperties.toJSON(message.drawing) : undefined);
+      (obj.drawing = message.drawing
+        ? Media_DrawingProperties.toJSON(message.drawing)
+        : undefined);
+    message.file !== undefined &&
+      (obj.file = message.file
+        ? FileProperties.toJSON(message.file)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_ImageTypeProperties>, I>>(base?: I): Media_ImageTypeProperties {
+  create<I extends Exact<DeepPartial<Media_ImageTypeProperties>, I>>(
+    base?: I,
+  ): Media_ImageTypeProperties {
     return Media_ImageTypeProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_ImageTypeProperties>, I>>(object: I): Media_ImageTypeProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_ImageTypeProperties>, I>>(
+    object: I,
+  ): Media_ImageTypeProperties {
     const message = createBaseMedia_ImageTypeProperties();
-    message.drawing = (object.drawing !== undefined && object.drawing !== null)
-      ? Media_DrawingProperties.fromPartial(object.drawing)
-      : undefined;
+    message.drawing =
+      object.drawing !== undefined && object.drawing !== null
+        ? Media_DrawingProperties.fromPartial(object.drawing)
+        : undefined;
+    message.file =
+      object.file !== undefined && object.file !== null
+        ? FileProperties.fromPartial(object.file)
+        : undefined;
     return message;
   },
 };
 
 function createBaseMedia_VideoTypeProperties(): Media_VideoTypeProperties {
-  return { drawing: undefined, audio: undefined, transport: undefined, video: undefined };
+  return {
+    drawing: undefined,
+    audio: undefined,
+    transport: undefined,
+    video: undefined,
+    file: undefined,
+  };
 }
 
 export const Media_VideoTypeProperties = {
-  encode(message: Media_VideoTypeProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_VideoTypeProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.drawing !== undefined) {
-      Media_DrawingProperties.encode(message.drawing, writer.uint32(10).fork()).ldelim();
+      Media_DrawingProperties.encode(
+        message.drawing,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.audio !== undefined) {
-      Media_AudioProperties.encode(message.audio, writer.uint32(18).fork()).ldelim();
+      Media_AudioProperties.encode(
+        message.audio,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.transport !== undefined) {
-      Media_TransportProperties.encode(message.transport, writer.uint32(26).fork()).ldelim();
+      Media_TransportProperties.encode(
+        message.transport,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.video !== undefined) {
-      Media_VideoProperties.encode(message.video, writer.uint32(34).fork()).ldelim();
+      Media_VideoProperties.encode(
+        message.video,
+        writer.uint32(34).fork(),
+      ).ldelim();
+    }
+    if (message.file !== undefined) {
+      FileProperties.encode(message.file, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_VideoTypeProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_VideoTypeProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_VideoTypeProperties();
     while (reader.pos < end) {
@@ -7307,7 +8702,10 @@ export const Media_VideoTypeProperties = {
             break;
           }
 
-          message.drawing = Media_DrawingProperties.decode(reader, reader.uint32());
+          message.drawing = Media_DrawingProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -7321,7 +8719,10 @@ export const Media_VideoTypeProperties = {
             break;
           }
 
-          message.transport = Media_TransportProperties.decode(reader, reader.uint32());
+          message.transport = Media_TransportProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
@@ -7329,6 +8730,13 @@ export const Media_VideoTypeProperties = {
           }
 
           message.video = Media_VideoProperties.decode(reader, reader.uint32());
+          continue;
+        case 5:
+          if (tag != 42) {
+            break;
+          }
+
+          message.file = FileProperties.decode(reader, reader.uint32());
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7341,44 +8749,79 @@ export const Media_VideoTypeProperties = {
 
   fromJSON(object: any): Media_VideoTypeProperties {
     return {
-      drawing: isSet(object.drawing) ? Media_DrawingProperties.fromJSON(object.drawing) : undefined,
-      audio: isSet(object.audio) ? Media_AudioProperties.fromJSON(object.audio) : undefined,
-      transport: isSet(object.transport) ? Media_TransportProperties.fromJSON(object.transport) : undefined,
-      video: isSet(object.video) ? Media_VideoProperties.fromJSON(object.video) : undefined,
+      drawing: isSet(object.drawing)
+        ? Media_DrawingProperties.fromJSON(object.drawing)
+        : undefined,
+      audio: isSet(object.audio)
+        ? Media_AudioProperties.fromJSON(object.audio)
+        : undefined,
+      transport: isSet(object.transport)
+        ? Media_TransportProperties.fromJSON(object.transport)
+        : undefined,
+      video: isSet(object.video)
+        ? Media_VideoProperties.fromJSON(object.video)
+        : undefined,
+      file: isSet(object.file)
+        ? FileProperties.fromJSON(object.file)
+        : undefined,
     };
   },
 
   toJSON(message: Media_VideoTypeProperties): unknown {
     const obj: any = {};
     message.drawing !== undefined &&
-      (obj.drawing = message.drawing ? Media_DrawingProperties.toJSON(message.drawing) : undefined);
+      (obj.drawing = message.drawing
+        ? Media_DrawingProperties.toJSON(message.drawing)
+        : undefined);
     message.audio !== undefined &&
-      (obj.audio = message.audio ? Media_AudioProperties.toJSON(message.audio) : undefined);
+      (obj.audio = message.audio
+        ? Media_AudioProperties.toJSON(message.audio)
+        : undefined);
     message.transport !== undefined &&
-      (obj.transport = message.transport ? Media_TransportProperties.toJSON(message.transport) : undefined);
+      (obj.transport = message.transport
+        ? Media_TransportProperties.toJSON(message.transport)
+        : undefined);
     message.video !== undefined &&
-      (obj.video = message.video ? Media_VideoProperties.toJSON(message.video) : undefined);
+      (obj.video = message.video
+        ? Media_VideoProperties.toJSON(message.video)
+        : undefined);
+    message.file !== undefined &&
+      (obj.file = message.file
+        ? FileProperties.toJSON(message.file)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_VideoTypeProperties>, I>>(base?: I): Media_VideoTypeProperties {
+  create<I extends Exact<DeepPartial<Media_VideoTypeProperties>, I>>(
+    base?: I,
+  ): Media_VideoTypeProperties {
     return Media_VideoTypeProperties.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Media_VideoTypeProperties>, I>>(object: I): Media_VideoTypeProperties {
+  fromPartial<I extends Exact<DeepPartial<Media_VideoTypeProperties>, I>>(
+    object: I,
+  ): Media_VideoTypeProperties {
     const message = createBaseMedia_VideoTypeProperties();
-    message.drawing = (object.drawing !== undefined && object.drawing !== null)
-      ? Media_DrawingProperties.fromPartial(object.drawing)
-      : undefined;
-    message.audio = (object.audio !== undefined && object.audio !== null)
-      ? Media_AudioProperties.fromPartial(object.audio)
-      : undefined;
-    message.transport = (object.transport !== undefined && object.transport !== null)
-      ? Media_TransportProperties.fromPartial(object.transport)
-      : undefined;
-    message.video = (object.video !== undefined && object.video !== null)
-      ? Media_VideoProperties.fromPartial(object.video)
-      : undefined;
+    message.drawing =
+      object.drawing !== undefined && object.drawing !== null
+        ? Media_DrawingProperties.fromPartial(object.drawing)
+        : undefined;
+    message.audio =
+      object.audio !== undefined && object.audio !== null
+        ? Media_AudioProperties.fromPartial(object.audio)
+        : undefined;
+    message.transport =
+      object.transport !== undefined && object.transport !== null
+        ? Media_TransportProperties.fromPartial(object.transport)
+        : undefined;
+    message.video =
+      object.video !== undefined && object.video !== null
+        ? Media_VideoProperties.fromPartial(object.video)
+        : undefined;
+    message.file =
+      object.file !== undefined && object.file !== null
+        ? FileProperties.fromPartial(object.file)
+        : undefined;
     return message;
   },
 };
@@ -7388,21 +8831,37 @@ function createBaseMedia_LiveVideoTypeProperties(): Media_LiveVideoTypePropertie
 }
 
 export const Media_LiveVideoTypeProperties = {
-  encode(message: Media_LiveVideoTypeProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_LiveVideoTypeProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.drawing !== undefined) {
-      Media_DrawingProperties.encode(message.drawing, writer.uint32(10).fork()).ldelim();
+      Media_DrawingProperties.encode(
+        message.drawing,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.audio !== undefined) {
-      Media_AudioProperties.encode(message.audio, writer.uint32(18).fork()).ldelim();
+      Media_AudioProperties.encode(
+        message.audio,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.liveVideo !== undefined) {
-      Media_LiveVideoProperties.encode(message.liveVideo, writer.uint32(26).fork()).ldelim();
+      Media_LiveVideoProperties.encode(
+        message.liveVideo,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_LiveVideoTypeProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_LiveVideoTypeProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_LiveVideoTypeProperties();
     while (reader.pos < end) {
@@ -7413,7 +8872,10 @@ export const Media_LiveVideoTypeProperties = {
             break;
           }
 
-          message.drawing = Media_DrawingProperties.decode(reader, reader.uint32());
+          message.drawing = Media_DrawingProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -7427,7 +8889,10 @@ export const Media_LiveVideoTypeProperties = {
             break;
           }
 
-          message.liveVideo = Media_LiveVideoProperties.decode(reader, reader.uint32());
+          message.liveVideo = Media_LiveVideoProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7440,24 +8905,38 @@ export const Media_LiveVideoTypeProperties = {
 
   fromJSON(object: any): Media_LiveVideoTypeProperties {
     return {
-      drawing: isSet(object.drawing) ? Media_DrawingProperties.fromJSON(object.drawing) : undefined,
-      audio: isSet(object.audio) ? Media_AudioProperties.fromJSON(object.audio) : undefined,
-      liveVideo: isSet(object.liveVideo) ? Media_LiveVideoProperties.fromJSON(object.liveVideo) : undefined,
+      drawing: isSet(object.drawing)
+        ? Media_DrawingProperties.fromJSON(object.drawing)
+        : undefined,
+      audio: isSet(object.audio)
+        ? Media_AudioProperties.fromJSON(object.audio)
+        : undefined,
+      liveVideo: isSet(object.liveVideo)
+        ? Media_LiveVideoProperties.fromJSON(object.liveVideo)
+        : undefined,
     };
   },
 
   toJSON(message: Media_LiveVideoTypeProperties): unknown {
     const obj: any = {};
     message.drawing !== undefined &&
-      (obj.drawing = message.drawing ? Media_DrawingProperties.toJSON(message.drawing) : undefined);
+      (obj.drawing = message.drawing
+        ? Media_DrawingProperties.toJSON(message.drawing)
+        : undefined);
     message.audio !== undefined &&
-      (obj.audio = message.audio ? Media_AudioProperties.toJSON(message.audio) : undefined);
+      (obj.audio = message.audio
+        ? Media_AudioProperties.toJSON(message.audio)
+        : undefined);
     message.liveVideo !== undefined &&
-      (obj.liveVideo = message.liveVideo ? Media_LiveVideoProperties.toJSON(message.liveVideo) : undefined);
+      (obj.liveVideo = message.liveVideo
+        ? Media_LiveVideoProperties.toJSON(message.liveVideo)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_LiveVideoTypeProperties>, I>>(base?: I): Media_LiveVideoTypeProperties {
+  create<I extends Exact<DeepPartial<Media_LiveVideoTypeProperties>, I>>(
+    base?: I,
+  ): Media_LiveVideoTypeProperties {
     return Media_LiveVideoTypeProperties.fromPartial(base ?? {});
   },
 
@@ -7465,15 +8944,18 @@ export const Media_LiveVideoTypeProperties = {
     object: I,
   ): Media_LiveVideoTypeProperties {
     const message = createBaseMedia_LiveVideoTypeProperties();
-    message.drawing = (object.drawing !== undefined && object.drawing !== null)
-      ? Media_DrawingProperties.fromPartial(object.drawing)
-      : undefined;
-    message.audio = (object.audio !== undefined && object.audio !== null)
-      ? Media_AudioProperties.fromPartial(object.audio)
-      : undefined;
-    message.liveVideo = (object.liveVideo !== undefined && object.liveVideo !== null)
-      ? Media_LiveVideoProperties.fromPartial(object.liveVideo)
-      : undefined;
+    message.drawing =
+      object.drawing !== undefined && object.drawing !== null
+        ? Media_DrawingProperties.fromPartial(object.drawing)
+        : undefined;
+    message.audio =
+      object.audio !== undefined && object.audio !== null
+        ? Media_AudioProperties.fromPartial(object.audio)
+        : undefined;
+    message.liveVideo =
+      object.liveVideo !== undefined && object.liveVideo !== null
+        ? Media_LiveVideoProperties.fromPartial(object.liveVideo)
+        : undefined;
     return message;
   },
 };
@@ -7483,9 +8965,15 @@ function createBaseMedia_WebContentTypeProperties(): Media_WebContentTypePropert
 }
 
 export const Media_WebContentTypeProperties = {
-  encode(message: Media_WebContentTypeProperties, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Media_WebContentTypeProperties,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.drawing !== undefined) {
-      Media_DrawingProperties.encode(message.drawing, writer.uint32(10).fork()).ldelim();
+      Media_DrawingProperties.encode(
+        message.drawing,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.url !== undefined) {
       URL.encode(message.url, writer.uint32(18).fork()).ldelim();
@@ -7493,8 +8981,12 @@ export const Media_WebContentTypeProperties = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Media_WebContentTypeProperties {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Media_WebContentTypeProperties {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMedia_WebContentTypeProperties();
     while (reader.pos < end) {
@@ -7505,7 +8997,10 @@ export const Media_WebContentTypeProperties = {
             break;
           }
 
-          message.drawing = Media_DrawingProperties.decode(reader, reader.uint32());
+          message.drawing = Media_DrawingProperties.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -7525,7 +9020,9 @@ export const Media_WebContentTypeProperties = {
 
   fromJSON(object: any): Media_WebContentTypeProperties {
     return {
-      drawing: isSet(object.drawing) ? Media_DrawingProperties.fromJSON(object.drawing) : undefined,
+      drawing: isSet(object.drawing)
+        ? Media_DrawingProperties.fromJSON(object.drawing)
+        : undefined,
       url: isSet(object.url) ? URL.fromJSON(object.url) : undefined,
     };
   },
@@ -7533,12 +9030,17 @@ export const Media_WebContentTypeProperties = {
   toJSON(message: Media_WebContentTypeProperties): unknown {
     const obj: any = {};
     message.drawing !== undefined &&
-      (obj.drawing = message.drawing ? Media_DrawingProperties.toJSON(message.drawing) : undefined);
-    message.url !== undefined && (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+      (obj.drawing = message.drawing
+        ? Media_DrawingProperties.toJSON(message.drawing)
+        : undefined);
+    message.url !== undefined &&
+      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Media_WebContentTypeProperties>, I>>(base?: I): Media_WebContentTypeProperties {
+  create<I extends Exact<DeepPartial<Media_WebContentTypeProperties>, I>>(
+    base?: I,
+  ): Media_WebContentTypeProperties {
     return Media_WebContentTypeProperties.fromPartial(base ?? {});
   },
 
@@ -7546,10 +9048,14 @@ export const Media_WebContentTypeProperties = {
     object: I,
   ): Media_WebContentTypeProperties {
     const message = createBaseMedia_WebContentTypeProperties();
-    message.drawing = (object.drawing !== undefined && object.drawing !== null)
-      ? Media_DrawingProperties.fromPartial(object.drawing)
-      : undefined;
-    message.url = (object.url !== undefined && object.url !== null) ? URL.fromPartial(object.url) : undefined;
+    message.drawing =
+      object.drawing !== undefined && object.drawing !== null
+        ? Media_DrawingProperties.fromPartial(object.drawing)
+        : undefined;
+    message.url =
+      object.url !== undefined && object.url !== null
+        ? URL.fromPartial(object.url)
+        : undefined;
     return message;
   },
 };
@@ -7558,24 +9064,24 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
+  if (typeof globalThis !== 'undefined') {
     return globalThis;
   }
-  if (typeof self !== "undefined") {
+  if (typeof self !== 'undefined') {
     return self;
   }
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     return window;
   }
-  if (typeof global !== "undefined") {
+  if (typeof global !== 'undefined') {
     return global;
   }
-  throw "Unable to locate global object";
+  throw 'Unable to locate global object';
 })();
 
 function bytesFromBase64(b64: string): Uint8Array {
   if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = tsProtoGlobalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -7588,26 +9094,41 @@ function bytesFromBase64(b64: string): Uint8Array {
 
 function base64FromBytes(arr: Uint8Array): string {
   if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+    return tsProtoGlobalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
       bin.push(String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(""));
+    return tsProtoGlobalThis.btoa(bin.join(''));
   }
 }
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

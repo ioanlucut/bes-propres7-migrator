@@ -11,7 +11,6 @@ import {
   Presentation,
   Presentation_Arrangement,
   Presentation_CCLI,
-  Presentation_ContentDestination,
   Presentation_CueGroup,
 } from '../proto/presentation';
 import { Cue } from '../proto/cue';
@@ -20,7 +19,7 @@ import {
   Action_ActionType,
   Action_ClearType,
   Action_ClearType_ClearTargetLayer,
-  Action_ClearType_ContentDestination,
+  Action_ContentDestination,
   Action_Label,
   Action_SlideType,
   Action_StageLayoutType,
@@ -41,12 +40,11 @@ import {
   Graphics_Size,
   Graphics_Text,
   Graphics_Text_Attributes,
+  Graphics_Text_Attributes_Alignment,
   Graphics_Text_Attributes_Capitalization,
   Graphics_Text_Attributes_CustomAttribute,
-  Graphics_Text_Attributes_CustomAttribute_Capitalization,
   Graphics_Text_Attributes_Font,
   Graphics_Text_Attributes_Paragraph,
-  Graphics_Text_Attributes_Paragraph_Alignment,
   Graphics_Text_ScaleBehavior,
   Graphics_Text_Transform,
   Graphics_Text_VerticalAlignment,
@@ -183,7 +181,7 @@ const createTextFromSection = (verse: string) =>
         Graphics_Text_Attributes_CustomAttribute.create({
           originalFontSize: FONT_SIZE,
           capitalization:
-            Graphics_Text_Attributes_CustomAttribute_Capitalization.CAPITALIZATION_ALL_CAPS,
+            Graphics_Text_Attributes_Capitalization.CAPITALIZATION_ALL_CAPS,
         }),
       ],
       capitalization:
@@ -191,8 +189,7 @@ const createTextFromSection = (verse: string) =>
       textSolidFill: Color.create(TEXT_FILL_CONFIG),
       kerning: 1,
       paragraphStyle: Graphics_Text_Attributes_Paragraph.create({
-        alignment:
-          Graphics_Text_Attributes_Paragraph_Alignment.ALIGNMENT_CENTER,
+        alignment: Graphics_Text_Attributes_Alignment.ALIGNMENT_CENTER,
         lineHeightMultiple: 1,
         lineSpacing: 1.2,
         paragraphSpacing: 4.2,
@@ -271,8 +268,7 @@ const createEmptySmartIntroCue = () => {
     clear: Action_ClearType.create({
       targetLayer:
         Action_ClearType_ClearTargetLayer.CLEAR_TARGET_LAYER_BACKGROUND,
-      contentDestination:
-        Action_ClearType_ContentDestination.CONTENT_DESTINATION_GLOBAL,
+      contentDestination: Action_ContentDestination.CONTENT_DESTINATION_GLOBAL,
     }),
     label: Action_Label.create({
       text: 'Clear media',
@@ -467,8 +463,7 @@ export const convertSongToProPresenter7 = (song: Song): Presentation => {
 
   return Presentation.create({
     category: PRESENTATION_CATEGORY,
-    contentDestination:
-      Presentation_ContentDestination.CONTENT_DESTINATION_GLOBAL,
+    contentDestination: Action_ContentDestination.CONTENT_DESTINATION_GLOBAL,
     ccli: CCLI,
     applicationInfo: APPLICATION_INFO,
     uuid: presentationUUId,

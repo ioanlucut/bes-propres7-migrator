@@ -1,8 +1,8 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Color, UUID } from "./basicTypes";
+import _m0 from 'protobufjs/minimal';
+import { Color, UUID } from './basicTypes';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface Effect {
   uuid: UUID | undefined;
@@ -75,37 +75,37 @@ export function effect_EffectVariable_EffectDirection_EffectDirectionFromJSON(
 ): Effect_EffectVariable_EffectDirection_EffectDirection {
   switch (object) {
     case 0:
-    case "EFFECT_DIRECTION_NONE":
+    case 'EFFECT_DIRECTION_NONE':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_NONE;
     case 1:
-    case "EFFECT_DIRECTION_TOP_LEFT":
+    case 'EFFECT_DIRECTION_TOP_LEFT':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_TOP_LEFT;
     case 2:
-    case "EFFECT_DIRECTION_TOP":
+    case 'EFFECT_DIRECTION_TOP':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_TOP;
     case 4:
-    case "EFFECT_DIRECTION_TOP_RIGHT":
+    case 'EFFECT_DIRECTION_TOP_RIGHT':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_TOP_RIGHT;
     case 8:
-    case "EFFECT_DIRECTION_LEFT":
+    case 'EFFECT_DIRECTION_LEFT':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_LEFT;
     case 16:
-    case "EFFECT_DIRECTION_CENTER":
+    case 'EFFECT_DIRECTION_CENTER':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_CENTER;
     case 32:
-    case "EFFECT_DIRECTION_RIGHT":
+    case 'EFFECT_DIRECTION_RIGHT':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_RIGHT;
     case 64:
-    case "EFFECT_DIRECTION_BOTTOM_LEFT":
+    case 'EFFECT_DIRECTION_BOTTOM_LEFT':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_BOTTOM_LEFT;
     case 128:
-    case "EFFECT_DIRECTION_BOTTOM":
+    case 'EFFECT_DIRECTION_BOTTOM':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_BOTTOM;
     case 256:
-    case "EFFECT_DIRECTION_BOTTOM_RIGHT":
+    case 'EFFECT_DIRECTION_BOTTOM_RIGHT':
       return Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_BOTTOM_RIGHT;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Effect_EffectVariable_EffectDirection_EffectDirection.UNRECOGNIZED;
   }
@@ -116,28 +116,28 @@ export function effect_EffectVariable_EffectDirection_EffectDirectionToJSON(
 ): string {
   switch (object) {
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_NONE:
-      return "EFFECT_DIRECTION_NONE";
+      return 'EFFECT_DIRECTION_NONE';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_TOP_LEFT:
-      return "EFFECT_DIRECTION_TOP_LEFT";
+      return 'EFFECT_DIRECTION_TOP_LEFT';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_TOP:
-      return "EFFECT_DIRECTION_TOP";
+      return 'EFFECT_DIRECTION_TOP';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_TOP_RIGHT:
-      return "EFFECT_DIRECTION_TOP_RIGHT";
+      return 'EFFECT_DIRECTION_TOP_RIGHT';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_LEFT:
-      return "EFFECT_DIRECTION_LEFT";
+      return 'EFFECT_DIRECTION_LEFT';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_CENTER:
-      return "EFFECT_DIRECTION_CENTER";
+      return 'EFFECT_DIRECTION_CENTER';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_RIGHT:
-      return "EFFECT_DIRECTION_RIGHT";
+      return 'EFFECT_DIRECTION_RIGHT';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_BOTTOM_LEFT:
-      return "EFFECT_DIRECTION_BOTTOM_LEFT";
+      return 'EFFECT_DIRECTION_BOTTOM_LEFT';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_BOTTOM:
-      return "EFFECT_DIRECTION_BOTTOM";
+      return 'EFFECT_DIRECTION_BOTTOM';
     case Effect_EffectVariable_EffectDirection_EffectDirection.EFFECT_DIRECTION_BOTTOM_RIGHT:
-      return "EFFECT_DIRECTION_BOTTOM_RIGHT";
+      return 'EFFECT_DIRECTION_BOTTOM_RIGHT';
     case Effect_EffectVariable_EffectDirection_EffectDirection.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -163,32 +163,35 @@ function createBaseEffect(): Effect {
   return {
     uuid: undefined,
     enabled: false,
-    name: "",
-    renderId: "",
-    behaviorDescription: "",
-    category: "",
+    name: '',
+    renderId: '',
+    behaviorDescription: '',
+    category: '',
     variables: [],
   };
 }
 
 export const Effect = {
-  encode(message: Effect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
     if (message.enabled === true) {
       writer.uint32(16).bool(message.enabled);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(26).string(message.name);
     }
-    if (message.renderId !== "") {
+    if (message.renderId !== '') {
       writer.uint32(34).string(message.renderId);
     }
-    if (message.behaviorDescription !== "") {
+    if (message.behaviorDescription !== '') {
       writer.uint32(42).string(message.behaviorDescription);
     }
-    if (message.category !== "") {
+    if (message.category !== '') {
       writer.uint32(50).string(message.category);
     }
     for (const v of message.variables) {
@@ -198,7 +201,8 @@ export const Effect = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Effect {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect();
     while (reader.pos < end) {
@@ -251,7 +255,9 @@ export const Effect = {
             break;
           }
 
-          message.variables.push(Effect_EffectVariable.decode(reader, reader.uint32()));
+          message.variables.push(
+            Effect_EffectVariable.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -266,10 +272,12 @@ export const Effect = {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      name: isSet(object.name) ? String(object.name) : "",
-      renderId: isSet(object.renderId) ? String(object.renderId) : "",
-      behaviorDescription: isSet(object.behaviorDescription) ? String(object.behaviorDescription) : "",
-      category: isSet(object.category) ? String(object.category) : "",
+      name: isSet(object.name) ? String(object.name) : '',
+      renderId: isSet(object.renderId) ? String(object.renderId) : '',
+      behaviorDescription: isSet(object.behaviorDescription)
+        ? String(object.behaviorDescription)
+        : '',
+      category: isSet(object.category) ? String(object.category) : '',
       variables: Array.isArray(object?.variables)
         ? object.variables.map((e: any) => Effect_EffectVariable.fromJSON(e))
         : [],
@@ -278,14 +286,18 @@ export const Effect = {
 
   toJSON(message: Effect): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.enabled !== undefined && (obj.enabled = message.enabled);
     message.name !== undefined && (obj.name = message.name);
     message.renderId !== undefined && (obj.renderId = message.renderId);
-    message.behaviorDescription !== undefined && (obj.behaviorDescription = message.behaviorDescription);
+    message.behaviorDescription !== undefined &&
+      (obj.behaviorDescription = message.behaviorDescription);
     message.category !== undefined && (obj.category = message.category);
     if (message.variables) {
-      obj.variables = message.variables.map((e) => e ? Effect_EffectVariable.toJSON(e) : undefined);
+      obj.variables = message.variables.map((e) =>
+        e ? Effect_EffectVariable.toJSON(e) : undefined,
+      );
     } else {
       obj.variables = [];
     }
@@ -298,21 +310,25 @@ export const Effect = {
 
   fromPartial<I extends Exact<DeepPartial<Effect>, I>>(object: I): Effect {
     const message = createBaseEffect();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
     message.enabled = object.enabled ?? false;
-    message.name = object.name ?? "";
-    message.renderId = object.renderId ?? "";
-    message.behaviorDescription = object.behaviorDescription ?? "";
-    message.category = object.category ?? "";
-    message.variables = object.variables?.map((e) => Effect_EffectVariable.fromPartial(e)) || [];
+    message.name = object.name ?? '';
+    message.renderId = object.renderId ?? '';
+    message.behaviorDescription = object.behaviorDescription ?? '';
+    message.category = object.category ?? '';
+    message.variables =
+      object.variables?.map((e) => Effect_EffectVariable.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseEffect_EffectVariable(): Effect_EffectVariable {
   return {
-    name: "",
-    description: "",
+    name: '',
+    description: '',
     int: undefined,
     float: undefined,
     color: undefined,
@@ -322,33 +338,55 @@ function createBaseEffect_EffectVariable(): Effect_EffectVariable {
 }
 
 export const Effect_EffectVariable = {
-  encode(message: Effect_EffectVariable, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: Effect_EffectVariable,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== '') {
       writer.uint32(18).string(message.description);
     }
     if (message.int !== undefined) {
-      Effect_EffectVariable_EffectInt.encode(message.int, writer.uint32(26).fork()).ldelim();
+      Effect_EffectVariable_EffectInt.encode(
+        message.int,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.float !== undefined) {
-      Effect_EffectVariable_EffectFloat.encode(message.float, writer.uint32(34).fork()).ldelim();
+      Effect_EffectVariable_EffectFloat.encode(
+        message.float,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.color !== undefined) {
-      Effect_EffectVariable_EffectColor.encode(message.color, writer.uint32(42).fork()).ldelim();
+      Effect_EffectVariable_EffectColor.encode(
+        message.color,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.direction !== undefined) {
-      Effect_EffectVariable_EffectDirection.encode(message.direction, writer.uint32(50).fork()).ldelim();
+      Effect_EffectVariable_EffectDirection.encode(
+        message.direction,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.double !== undefined) {
-      Effect_EffectVariable_EffectDouble.encode(message.double, writer.uint32(58).fork()).ldelim();
+      Effect_EffectVariable_EffectDouble.encode(
+        message.double,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Effect_EffectVariable {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Effect_EffectVariable {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_EffectVariable();
     while (reader.pos < end) {
@@ -373,35 +411,50 @@ export const Effect_EffectVariable = {
             break;
           }
 
-          message.int = Effect_EffectVariable_EffectInt.decode(reader, reader.uint32());
+          message.int = Effect_EffectVariable_EffectInt.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.float = Effect_EffectVariable_EffectFloat.decode(reader, reader.uint32());
+          message.float = Effect_EffectVariable_EffectFloat.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.color = Effect_EffectVariable_EffectColor.decode(reader, reader.uint32());
+          message.color = Effect_EffectVariable_EffectColor.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.direction = Effect_EffectVariable_EffectDirection.decode(reader, reader.uint32());
+          message.direction = Effect_EffectVariable_EffectDirection.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 58) {
             break;
           }
 
-          message.double = Effect_EffectVariable_EffectDouble.decode(reader, reader.uint32());
+          message.double = Effect_EffectVariable_EffectDouble.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -414,56 +467,86 @@ export const Effect_EffectVariable = {
 
   fromJSON(object: any): Effect_EffectVariable {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      int: isSet(object.int) ? Effect_EffectVariable_EffectInt.fromJSON(object.int) : undefined,
-      float: isSet(object.float) ? Effect_EffectVariable_EffectFloat.fromJSON(object.float) : undefined,
-      color: isSet(object.color) ? Effect_EffectVariable_EffectColor.fromJSON(object.color) : undefined,
-      direction: isSet(object.direction) ? Effect_EffectVariable_EffectDirection.fromJSON(object.direction) : undefined,
-      double: isSet(object.double) ? Effect_EffectVariable_EffectDouble.fromJSON(object.double) : undefined,
+      name: isSet(object.name) ? String(object.name) : '',
+      description: isSet(object.description) ? String(object.description) : '',
+      int: isSet(object.int)
+        ? Effect_EffectVariable_EffectInt.fromJSON(object.int)
+        : undefined,
+      float: isSet(object.float)
+        ? Effect_EffectVariable_EffectFloat.fromJSON(object.float)
+        : undefined,
+      color: isSet(object.color)
+        ? Effect_EffectVariable_EffectColor.fromJSON(object.color)
+        : undefined,
+      direction: isSet(object.direction)
+        ? Effect_EffectVariable_EffectDirection.fromJSON(object.direction)
+        : undefined,
+      double: isSet(object.double)
+        ? Effect_EffectVariable_EffectDouble.fromJSON(object.double)
+        : undefined,
     };
   },
 
   toJSON(message: Effect_EffectVariable): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.int !== undefined &&
-      (obj.int = message.int ? Effect_EffectVariable_EffectInt.toJSON(message.int) : undefined);
+      (obj.int = message.int
+        ? Effect_EffectVariable_EffectInt.toJSON(message.int)
+        : undefined);
     message.float !== undefined &&
-      (obj.float = message.float ? Effect_EffectVariable_EffectFloat.toJSON(message.float) : undefined);
+      (obj.float = message.float
+        ? Effect_EffectVariable_EffectFloat.toJSON(message.float)
+        : undefined);
     message.color !== undefined &&
-      (obj.color = message.color ? Effect_EffectVariable_EffectColor.toJSON(message.color) : undefined);
+      (obj.color = message.color
+        ? Effect_EffectVariable_EffectColor.toJSON(message.color)
+        : undefined);
     message.direction !== undefined &&
-      (obj.direction = message.direction ? Effect_EffectVariable_EffectDirection.toJSON(message.direction) : undefined);
+      (obj.direction = message.direction
+        ? Effect_EffectVariable_EffectDirection.toJSON(message.direction)
+        : undefined);
     message.double !== undefined &&
-      (obj.double = message.double ? Effect_EffectVariable_EffectDouble.toJSON(message.double) : undefined);
+      (obj.double = message.double
+        ? Effect_EffectVariable_EffectDouble.toJSON(message.double)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Effect_EffectVariable>, I>>(base?: I): Effect_EffectVariable {
+  create<I extends Exact<DeepPartial<Effect_EffectVariable>, I>>(
+    base?: I,
+  ): Effect_EffectVariable {
     return Effect_EffectVariable.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable>, I>>(object: I): Effect_EffectVariable {
+  fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable>, I>>(
+    object: I,
+  ): Effect_EffectVariable {
     const message = createBaseEffect_EffectVariable();
-    message.name = object.name ?? "";
-    message.description = object.description ?? "";
-    message.int = (object.int !== undefined && object.int !== null)
-      ? Effect_EffectVariable_EffectInt.fromPartial(object.int)
-      : undefined;
-    message.float = (object.float !== undefined && object.float !== null)
-      ? Effect_EffectVariable_EffectFloat.fromPartial(object.float)
-      : undefined;
-    message.color = (object.color !== undefined && object.color !== null)
-      ? Effect_EffectVariable_EffectColor.fromPartial(object.color)
-      : undefined;
-    message.direction = (object.direction !== undefined && object.direction !== null)
-      ? Effect_EffectVariable_EffectDirection.fromPartial(object.direction)
-      : undefined;
-    message.double = (object.double !== undefined && object.double !== null)
-      ? Effect_EffectVariable_EffectDouble.fromPartial(object.double)
-      : undefined;
+    message.name = object.name ?? '';
+    message.description = object.description ?? '';
+    message.int =
+      object.int !== undefined && object.int !== null
+        ? Effect_EffectVariable_EffectInt.fromPartial(object.int)
+        : undefined;
+    message.float =
+      object.float !== undefined && object.float !== null
+        ? Effect_EffectVariable_EffectFloat.fromPartial(object.float)
+        : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Effect_EffectVariable_EffectColor.fromPartial(object.color)
+        : undefined;
+    message.direction =
+      object.direction !== undefined && object.direction !== null
+        ? Effect_EffectVariable_EffectDirection.fromPartial(object.direction)
+        : undefined;
+    message.double =
+      object.double !== undefined && object.double !== null
+        ? Effect_EffectVariable_EffectDouble.fromPartial(object.double)
+        : undefined;
     return message;
   },
 };
@@ -473,7 +556,10 @@ function createBaseEffect_EffectVariable_EffectInt(): Effect_EffectVariable_Effe
 }
 
 export const Effect_EffectVariable_EffectInt = {
-  encode(message: Effect_EffectVariable_EffectInt, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect_EffectVariable_EffectInt,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(8).int32(message.value);
     }
@@ -489,8 +575,12 @@ export const Effect_EffectVariable_EffectInt = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Effect_EffectVariable_EffectInt {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Effect_EffectVariable_EffectInt {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_EffectVariable_EffectInt();
     while (reader.pos < end) {
@@ -536,7 +626,9 @@ export const Effect_EffectVariable_EffectInt = {
   fromJSON(object: any): Effect_EffectVariable_EffectInt {
     return {
       value: isSet(object.value) ? Number(object.value) : 0,
-      defaultValue: isSet(object.defaultValue) ? Number(object.defaultValue) : 0,
+      defaultValue: isSet(object.defaultValue)
+        ? Number(object.defaultValue)
+        : 0,
       min: isSet(object.min) ? Number(object.min) : 0,
       max: isSet(object.max) ? Number(object.max) : 0,
     };
@@ -545,13 +637,16 @@ export const Effect_EffectVariable_EffectInt = {
   toJSON(message: Effect_EffectVariable_EffectInt): unknown {
     const obj: any = {};
     message.value !== undefined && (obj.value = Math.round(message.value));
-    message.defaultValue !== undefined && (obj.defaultValue = Math.round(message.defaultValue));
+    message.defaultValue !== undefined &&
+      (obj.defaultValue = Math.round(message.defaultValue));
     message.min !== undefined && (obj.min = Math.round(message.min));
     message.max !== undefined && (obj.max = Math.round(message.max));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectInt>, I>>(base?: I): Effect_EffectVariable_EffectInt {
+  create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectInt>, I>>(
+    base?: I,
+  ): Effect_EffectVariable_EffectInt {
     return Effect_EffectVariable_EffectInt.fromPartial(base ?? {});
   },
 
@@ -572,7 +667,10 @@ function createBaseEffect_EffectVariable_EffectFloat(): Effect_EffectVariable_Ef
 }
 
 export const Effect_EffectVariable_EffectFloat = {
-  encode(message: Effect_EffectVariable_EffectFloat, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect_EffectVariable_EffectFloat,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(13).float(message.value);
     }
@@ -588,8 +686,12 @@ export const Effect_EffectVariable_EffectFloat = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Effect_EffectVariable_EffectFloat {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Effect_EffectVariable_EffectFloat {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_EffectVariable_EffectFloat();
     while (reader.pos < end) {
@@ -635,7 +737,9 @@ export const Effect_EffectVariable_EffectFloat = {
   fromJSON(object: any): Effect_EffectVariable_EffectFloat {
     return {
       value: isSet(object.value) ? Number(object.value) : 0,
-      defaultValue: isSet(object.defaultValue) ? Number(object.defaultValue) : 0,
+      defaultValue: isSet(object.defaultValue)
+        ? Number(object.defaultValue)
+        : 0,
       min: isSet(object.min) ? Number(object.min) : 0,
       max: isSet(object.max) ? Number(object.max) : 0,
     };
@@ -644,7 +748,8 @@ export const Effect_EffectVariable_EffectFloat = {
   toJSON(message: Effect_EffectVariable_EffectFloat): unknown {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
-    message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
+    message.defaultValue !== undefined &&
+      (obj.defaultValue = message.defaultValue);
     message.min !== undefined && (obj.min = message.min);
     message.max !== undefined && (obj.max = message.max);
     return obj;
@@ -656,9 +761,9 @@ export const Effect_EffectVariable_EffectFloat = {
     return Effect_EffectVariable_EffectFloat.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable_EffectFloat>, I>>(
-    object: I,
-  ): Effect_EffectVariable_EffectFloat {
+  fromPartial<
+    I extends Exact<DeepPartial<Effect_EffectVariable_EffectFloat>, I>,
+  >(object: I): Effect_EffectVariable_EffectFloat {
     const message = createBaseEffect_EffectVariable_EffectFloat();
     message.value = object.value ?? 0;
     message.defaultValue = object.defaultValue ?? 0;
@@ -673,7 +778,10 @@ function createBaseEffect_EffectVariable_EffectDouble(): Effect_EffectVariable_E
 }
 
 export const Effect_EffectVariable_EffectDouble = {
-  encode(message: Effect_EffectVariable_EffectDouble, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect_EffectVariable_EffectDouble,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.value !== 0) {
       writer.uint32(9).double(message.value);
     }
@@ -689,8 +797,12 @@ export const Effect_EffectVariable_EffectDouble = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Effect_EffectVariable_EffectDouble {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Effect_EffectVariable_EffectDouble {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_EffectVariable_EffectDouble();
     while (reader.pos < end) {
@@ -736,7 +848,9 @@ export const Effect_EffectVariable_EffectDouble = {
   fromJSON(object: any): Effect_EffectVariable_EffectDouble {
     return {
       value: isSet(object.value) ? Number(object.value) : 0,
-      defaultValue: isSet(object.defaultValue) ? Number(object.defaultValue) : 0,
+      defaultValue: isSet(object.defaultValue)
+        ? Number(object.defaultValue)
+        : 0,
       min: isSet(object.min) ? Number(object.min) : 0,
       max: isSet(object.max) ? Number(object.max) : 0,
     };
@@ -745,7 +859,8 @@ export const Effect_EffectVariable_EffectDouble = {
   toJSON(message: Effect_EffectVariable_EffectDouble): unknown {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
-    message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
+    message.defaultValue !== undefined &&
+      (obj.defaultValue = message.defaultValue);
     message.min !== undefined && (obj.min = message.min);
     message.max !== undefined && (obj.max = message.max);
     return obj;
@@ -757,9 +872,9 @@ export const Effect_EffectVariable_EffectDouble = {
     return Effect_EffectVariable_EffectDouble.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable_EffectDouble>, I>>(
-    object: I,
-  ): Effect_EffectVariable_EffectDouble {
+  fromPartial<
+    I extends Exact<DeepPartial<Effect_EffectVariable_EffectDouble>, I>,
+  >(object: I): Effect_EffectVariable_EffectDouble {
     const message = createBaseEffect_EffectVariable_EffectDouble();
     message.value = object.value ?? 0;
     message.defaultValue = object.defaultValue ?? 0;
@@ -774,7 +889,10 @@ function createBaseEffect_EffectVariable_EffectColor(): Effect_EffectVariable_Ef
 }
 
 export const Effect_EffectVariable_EffectColor = {
-  encode(message: Effect_EffectVariable_EffectColor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect_EffectVariable_EffectColor,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.color !== undefined) {
       Color.encode(message.color, writer.uint32(10).fork()).ldelim();
     }
@@ -784,8 +902,12 @@ export const Effect_EffectVariable_EffectColor = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Effect_EffectVariable_EffectColor {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Effect_EffectVariable_EffectColor {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_EffectVariable_EffectColor();
     while (reader.pos < end) {
@@ -817,15 +939,20 @@ export const Effect_EffectVariable_EffectColor = {
   fromJSON(object: any): Effect_EffectVariable_EffectColor {
     return {
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      defaultColor: isSet(object.defaultColor) ? Color.fromJSON(object.defaultColor) : undefined,
+      defaultColor: isSet(object.defaultColor)
+        ? Color.fromJSON(object.defaultColor)
+        : undefined,
     };
   },
 
   toJSON(message: Effect_EffectVariable_EffectColor): unknown {
     const obj: any = {};
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     message.defaultColor !== undefined &&
-      (obj.defaultColor = message.defaultColor ? Color.toJSON(message.defaultColor) : undefined);
+      (obj.defaultColor = message.defaultColor
+        ? Color.toJSON(message.defaultColor)
+        : undefined);
     return obj;
   },
 
@@ -835,14 +962,18 @@ export const Effect_EffectVariable_EffectColor = {
     return Effect_EffectVariable_EffectColor.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable_EffectColor>, I>>(
-    object: I,
-  ): Effect_EffectVariable_EffectColor {
+  fromPartial<
+    I extends Exact<DeepPartial<Effect_EffectVariable_EffectColor>, I>,
+  >(object: I): Effect_EffectVariable_EffectColor {
     const message = createBaseEffect_EffectVariable_EffectColor();
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
-    message.defaultColor = (object.defaultColor !== undefined && object.defaultColor !== null)
-      ? Color.fromPartial(object.defaultColor)
-      : undefined;
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
+    message.defaultColor =
+      object.defaultColor !== undefined && object.defaultColor !== null
+        ? Color.fromPartial(object.defaultColor)
+        : undefined;
     return message;
   },
 };
@@ -852,7 +983,10 @@ function createBaseEffect_EffectVariable_EffectDirection(): Effect_EffectVariabl
 }
 
 export const Effect_EffectVariable_EffectDirection = {
-  encode(message: Effect_EffectVariable_EffectDirection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect_EffectVariable_EffectDirection,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.direction !== 0) {
       writer.uint32(8).int32(message.direction);
     }
@@ -865,8 +999,12 @@ export const Effect_EffectVariable_EffectDirection = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Effect_EffectVariable_EffectDirection {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Effect_EffectVariable_EffectDirection {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_EffectVariable_EffectDirection();
     while (reader.pos < end) {
@@ -905,34 +1043,47 @@ export const Effect_EffectVariable_EffectDirection = {
   fromJSON(object: any): Effect_EffectVariable_EffectDirection {
     return {
       direction: isSet(object.direction)
-        ? effect_EffectVariable_EffectDirection_EffectDirectionFromJSON(object.direction)
+        ? effect_EffectVariable_EffectDirection_EffectDirectionFromJSON(
+            object.direction,
+          )
         : 0,
       defaultDirection: isSet(object.defaultDirection)
-        ? effect_EffectVariable_EffectDirection_EffectDirectionFromJSON(object.defaultDirection)
+        ? effect_EffectVariable_EffectDirection_EffectDirectionFromJSON(
+            object.defaultDirection,
+          )
         : 0,
-      availableDirections: isSet(object.availableDirections) ? Number(object.availableDirections) : 0,
+      availableDirections: isSet(object.availableDirections)
+        ? Number(object.availableDirections)
+        : 0,
     };
   },
 
   toJSON(message: Effect_EffectVariable_EffectDirection): unknown {
     const obj: any = {};
     message.direction !== undefined &&
-      (obj.direction = effect_EffectVariable_EffectDirection_EffectDirectionToJSON(message.direction));
+      (obj.direction =
+        effect_EffectVariable_EffectDirection_EffectDirectionToJSON(
+          message.direction,
+        ));
     message.defaultDirection !== undefined &&
-      (obj.defaultDirection = effect_EffectVariable_EffectDirection_EffectDirectionToJSON(message.defaultDirection));
-    message.availableDirections !== undefined && (obj.availableDirections = Math.round(message.availableDirections));
+      (obj.defaultDirection =
+        effect_EffectVariable_EffectDirection_EffectDirectionToJSON(
+          message.defaultDirection,
+        ));
+    message.availableDirections !== undefined &&
+      (obj.availableDirections = Math.round(message.availableDirections));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectDirection>, I>>(
-    base?: I,
-  ): Effect_EffectVariable_EffectDirection {
+  create<
+    I extends Exact<DeepPartial<Effect_EffectVariable_EffectDirection>, I>,
+  >(base?: I): Effect_EffectVariable_EffectDirection {
     return Effect_EffectVariable_EffectDirection.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable_EffectDirection>, I>>(
-    object: I,
-  ): Effect_EffectVariable_EffectDirection {
+  fromPartial<
+    I extends Exact<DeepPartial<Effect_EffectVariable_EffectDirection>, I>,
+  >(object: I): Effect_EffectVariable_EffectDirection {
     const message = createBaseEffect_EffectVariable_EffectDirection();
     message.direction = object.direction ?? 0;
     message.defaultDirection = object.defaultDirection ?? 0;
@@ -942,15 +1093,18 @@ export const Effect_EffectVariable_EffectDirection = {
 };
 
 function createBaseEffect_Preset(): Effect_Preset {
-  return { uuid: undefined, name: "", effects: [] };
+  return { uuid: undefined, name: '', effects: [] };
 }
 
 export const Effect_Preset = {
-  encode(message: Effect_Preset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Effect_Preset,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     for (const v of message.effects) {
@@ -960,7 +1114,8 @@ export const Effect_Preset = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Effect_Preset {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEffect_Preset();
     while (reader.pos < end) {
@@ -999,31 +1154,43 @@ export const Effect_Preset = {
   fromJSON(object: any): Effect_Preset {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
-      effects: Array.isArray(object?.effects) ? object.effects.map((e: any) => Effect.fromJSON(e)) : [],
+      name: isSet(object.name) ? String(object.name) : '',
+      effects: Array.isArray(object?.effects)
+        ? object.effects.map((e: any) => Effect.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: Effect_Preset): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.name !== undefined && (obj.name = message.name);
     if (message.effects) {
-      obj.effects = message.effects.map((e) => e ? Effect.toJSON(e) : undefined);
+      obj.effects = message.effects.map((e) =>
+        e ? Effect.toJSON(e) : undefined,
+      );
     } else {
       obj.effects = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Effect_Preset>, I>>(base?: I): Effect_Preset {
+  create<I extends Exact<DeepPartial<Effect_Preset>, I>>(
+    base?: I,
+  ): Effect_Preset {
     return Effect_Preset.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Effect_Preset>, I>>(object: I): Effect_Preset {
+  fromPartial<I extends Exact<DeepPartial<Effect_Preset>, I>>(
+    object: I,
+  ): Effect_Preset {
     const message = createBaseEffect_Preset();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.name = object.name ?? "";
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.name = object.name ?? '';
     message.effects = object.effects?.map((e) => Effect.fromPartial(e)) || [];
     return message;
   },
@@ -1034,7 +1201,10 @@ function createBaseTransition(): Transition {
 }
 
 export const Transition = {
-  encode(message: Transition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Transition,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.duration !== 0) {
       writer.uint32(9).double(message.duration);
     }
@@ -1048,7 +1218,8 @@ export const Transition = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Transition {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTransition();
     while (reader.pos < end) {
@@ -1087,7 +1258,9 @@ export const Transition = {
   fromJSON(object: any): Transition {
     return {
       duration: isSet(object.duration) ? Number(object.duration) : 0,
-      favoriteUuid: isSet(object.favoriteUuid) ? UUID.fromJSON(object.favoriteUuid) : undefined,
+      favoriteUuid: isSet(object.favoriteUuid)
+        ? UUID.fromJSON(object.favoriteUuid)
+        : undefined,
       effect: isSet(object.effect) ? Effect.fromJSON(object.effect) : undefined,
     };
   },
@@ -1096,8 +1269,11 @@ export const Transition = {
     const obj: any = {};
     message.duration !== undefined && (obj.duration = message.duration);
     message.favoriteUuid !== undefined &&
-      (obj.favoriteUuid = message.favoriteUuid ? UUID.toJSON(message.favoriteUuid) : undefined);
-    message.effect !== undefined && (obj.effect = message.effect ? Effect.toJSON(message.effect) : undefined);
+      (obj.favoriteUuid = message.favoriteUuid
+        ? UUID.toJSON(message.favoriteUuid)
+        : undefined);
+    message.effect !== undefined &&
+      (obj.effect = message.effect ? Effect.toJSON(message.effect) : undefined);
     return obj;
   },
 
@@ -1105,29 +1281,36 @@ export const Transition = {
     return Transition.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Transition>, I>>(object: I): Transition {
+  fromPartial<I extends Exact<DeepPartial<Transition>, I>>(
+    object: I,
+  ): Transition {
     const message = createBaseTransition();
     message.duration = object.duration ?? 0;
-    message.favoriteUuid = (object.favoriteUuid !== undefined && object.favoriteUuid !== null)
-      ? UUID.fromPartial(object.favoriteUuid)
-      : undefined;
-    message.effect = (object.effect !== undefined && object.effect !== null)
-      ? Effect.fromPartial(object.effect)
-      : undefined;
+    message.favoriteUuid =
+      object.favoriteUuid !== undefined && object.favoriteUuid !== null
+        ? UUID.fromPartial(object.favoriteUuid)
+        : undefined;
+    message.effect =
+      object.effect !== undefined && object.effect !== null
+        ? Effect.fromPartial(object.effect)
+        : undefined;
     return message;
   },
 };
 
 function createBaseTransition_Preset(): Transition_Preset {
-  return { uuid: undefined, name: "", transition: undefined };
+  return { uuid: undefined, name: '', transition: undefined };
 }
 
 export const Transition_Preset = {
-  encode(message: Transition_Preset, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Transition_Preset,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     if (message.transition !== undefined) {
@@ -1137,7 +1320,8 @@ export const Transition_Preset = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Transition_Preset {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTransition_Preset();
     while (reader.pos < end) {
@@ -1176,45 +1360,73 @@ export const Transition_Preset = {
   fromJSON(object: any): Transition_Preset {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
-      transition: isSet(object.transition) ? Transition.fromJSON(object.transition) : undefined,
+      name: isSet(object.name) ? String(object.name) : '',
+      transition: isSet(object.transition)
+        ? Transition.fromJSON(object.transition)
+        : undefined,
     };
   },
 
   toJSON(message: Transition_Preset): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.name !== undefined && (obj.name = message.name);
     message.transition !== undefined &&
-      (obj.transition = message.transition ? Transition.toJSON(message.transition) : undefined);
+      (obj.transition = message.transition
+        ? Transition.toJSON(message.transition)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Transition_Preset>, I>>(base?: I): Transition_Preset {
+  create<I extends Exact<DeepPartial<Transition_Preset>, I>>(
+    base?: I,
+  ): Transition_Preset {
     return Transition_Preset.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Transition_Preset>, I>>(object: I): Transition_Preset {
+  fromPartial<I extends Exact<DeepPartial<Transition_Preset>, I>>(
+    object: I,
+  ): Transition_Preset {
     const message = createBaseTransition_Preset();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.name = object.name ?? "";
-    message.transition = (object.transition !== undefined && object.transition !== null)
-      ? Transition.fromPartial(object.transition)
-      : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.name = object.name ?? '';
+    message.transition =
+      object.transition !== undefined && object.transition !== null
+        ? Transition.fromPartial(object.transition)
+        : undefined;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

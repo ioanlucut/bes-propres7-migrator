@@ -1,10 +1,9 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import _m0 from 'protobufjs/minimal';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
-export interface DigitalAudio {
-}
+export interface DigitalAudio {}
 
 export interface DigitalAudio_Setup {
   buses: DigitalAudio_Bus[];
@@ -43,30 +42,34 @@ export enum DigitalAudio_Device_Format_Type {
   UNRECOGNIZED = -1,
 }
 
-export function digitalAudio_Device_Format_TypeFromJSON(object: any): DigitalAudio_Device_Format_Type {
+export function digitalAudio_Device_Format_TypeFromJSON(
+  object: any,
+): DigitalAudio_Device_Format_Type {
   switch (object) {
     case 0:
-    case "TYPE_INT":
+    case 'TYPE_INT':
       return DigitalAudio_Device_Format_Type.TYPE_INT;
     case 1:
-    case "TYPE_FLOAT":
+    case 'TYPE_FLOAT':
       return DigitalAudio_Device_Format_Type.TYPE_FLOAT;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return DigitalAudio_Device_Format_Type.UNRECOGNIZED;
   }
 }
 
-export function digitalAudio_Device_Format_TypeToJSON(object: DigitalAudio_Device_Format_Type): string {
+export function digitalAudio_Device_Format_TypeToJSON(
+  object: DigitalAudio_Device_Format_Type,
+): string {
   switch (object) {
     case DigitalAudio_Device_Format_Type.TYPE_INT:
-      return "TYPE_INT";
+      return 'TYPE_INT';
     case DigitalAudio_Device_Format_Type.TYPE_FLOAT:
-      return "TYPE_FLOAT";
+      return 'TYPE_FLOAT';
     case DigitalAudio_Device_Format_Type.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -95,12 +98,16 @@ function createBaseDigitalAudio(): DigitalAudio {
 }
 
 export const DigitalAudio = {
-  encode(_: DigitalAudio, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: DigitalAudio,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio();
     while (reader.pos < end) {
@@ -124,11 +131,15 @@ export const DigitalAudio = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio>, I>>(base?: I): DigitalAudio {
+  create<I extends Exact<DeepPartial<DigitalAudio>, I>>(
+    base?: I,
+  ): DigitalAudio {
     return DigitalAudio.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio>, I>>(_: I): DigitalAudio {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio>, I>>(
+    _: I,
+  ): DigitalAudio {
     const message = createBaseDigitalAudio();
     return message;
   },
@@ -147,21 +158,33 @@ function createBaseDigitalAudio_Setup(): DigitalAudio_Setup {
 }
 
 export const DigitalAudio_Setup = {
-  encode(message: DigitalAudio_Setup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DigitalAudio_Setup,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.buses) {
       DigitalAudio_Bus.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.monitorDevice !== undefined) {
-      DigitalAudio_Device.encode(message.monitorDevice, writer.uint32(18).fork()).ldelim();
+      DigitalAudio_Device.encode(
+        message.monitorDevice,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.mainOutputDevice !== undefined) {
-      DigitalAudio_Device.encode(message.mainOutputDevice, writer.uint32(26).fork()).ldelim();
+      DigitalAudio_Device.encode(
+        message.mainOutputDevice,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.enableSdiNdiDevice === true) {
       writer.uint32(32).bool(message.enableSdiNdiDevice);
     }
     if (message.sdiNdiDevice !== undefined) {
-      DigitalAudio_Device.encode(message.sdiNdiDevice, writer.uint32(42).fork()).ldelim();
+      DigitalAudio_Device.encode(
+        message.sdiNdiDevice,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.monitorOnMains === true) {
       writer.uint32(48).bool(message.monitorOnMains);
@@ -173,7 +196,8 @@ export const DigitalAudio_Setup = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Setup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Setup();
     while (reader.pos < end) {
@@ -191,14 +215,20 @@ export const DigitalAudio_Setup = {
             break;
           }
 
-          message.monitorDevice = DigitalAudio_Device.decode(reader, reader.uint32());
+          message.monitorDevice = DigitalAudio_Device.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.mainOutputDevice = DigitalAudio_Device.decode(reader, reader.uint32());
+          message.mainOutputDevice = DigitalAudio_Device.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 32) {
@@ -212,7 +242,10 @@ export const DigitalAudio_Setup = {
             break;
           }
 
-          message.sdiNdiDevice = DigitalAudio_Device.decode(reader, reader.uint32());
+          message.sdiNdiDevice = DigitalAudio_Device.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 48) {
@@ -239,55 +272,85 @@ export const DigitalAudio_Setup = {
 
   fromJSON(object: any): DigitalAudio_Setup {
     return {
-      buses: Array.isArray(object?.buses) ? object.buses.map((e: any) => DigitalAudio_Bus.fromJSON(e)) : [],
-      monitorDevice: isSet(object.monitorDevice) ? DigitalAudio_Device.fromJSON(object.monitorDevice) : undefined,
+      buses: Array.isArray(object?.buses)
+        ? object.buses.map((e: any) => DigitalAudio_Bus.fromJSON(e))
+        : [],
+      monitorDevice: isSet(object.monitorDevice)
+        ? DigitalAudio_Device.fromJSON(object.monitorDevice)
+        : undefined,
       mainOutputDevice: isSet(object.mainOutputDevice)
         ? DigitalAudio_Device.fromJSON(object.mainOutputDevice)
         : undefined,
-      enableSdiNdiDevice: isSet(object.enableSdiNdiDevice) ? Boolean(object.enableSdiNdiDevice) : false,
-      sdiNdiDevice: isSet(object.sdiNdiDevice) ? DigitalAudio_Device.fromJSON(object.sdiNdiDevice) : undefined,
-      monitorOnMains: isSet(object.monitorOnMains) ? Boolean(object.monitorOnMains) : false,
-      disableMainOutputDevice: isSet(object.disableMainOutputDevice) ? Boolean(object.disableMainOutputDevice) : false,
+      enableSdiNdiDevice: isSet(object.enableSdiNdiDevice)
+        ? Boolean(object.enableSdiNdiDevice)
+        : false,
+      sdiNdiDevice: isSet(object.sdiNdiDevice)
+        ? DigitalAudio_Device.fromJSON(object.sdiNdiDevice)
+        : undefined,
+      monitorOnMains: isSet(object.monitorOnMains)
+        ? Boolean(object.monitorOnMains)
+        : false,
+      disableMainOutputDevice: isSet(object.disableMainOutputDevice)
+        ? Boolean(object.disableMainOutputDevice)
+        : false,
     };
   },
 
   toJSON(message: DigitalAudio_Setup): unknown {
     const obj: any = {};
     if (message.buses) {
-      obj.buses = message.buses.map((e) => e ? DigitalAudio_Bus.toJSON(e) : undefined);
+      obj.buses = message.buses.map((e) =>
+        e ? DigitalAudio_Bus.toJSON(e) : undefined,
+      );
     } else {
       obj.buses = [];
     }
     message.monitorDevice !== undefined &&
-      (obj.monitorDevice = message.monitorDevice ? DigitalAudio_Device.toJSON(message.monitorDevice) : undefined);
-    message.mainOutputDevice !== undefined && (obj.mainOutputDevice = message.mainOutputDevice
-      ? DigitalAudio_Device.toJSON(message.mainOutputDevice)
-      : undefined);
-    message.enableSdiNdiDevice !== undefined && (obj.enableSdiNdiDevice = message.enableSdiNdiDevice);
+      (obj.monitorDevice = message.monitorDevice
+        ? DigitalAudio_Device.toJSON(message.monitorDevice)
+        : undefined);
+    message.mainOutputDevice !== undefined &&
+      (obj.mainOutputDevice = message.mainOutputDevice
+        ? DigitalAudio_Device.toJSON(message.mainOutputDevice)
+        : undefined);
+    message.enableSdiNdiDevice !== undefined &&
+      (obj.enableSdiNdiDevice = message.enableSdiNdiDevice);
     message.sdiNdiDevice !== undefined &&
-      (obj.sdiNdiDevice = message.sdiNdiDevice ? DigitalAudio_Device.toJSON(message.sdiNdiDevice) : undefined);
-    message.monitorOnMains !== undefined && (obj.monitorOnMains = message.monitorOnMains);
-    message.disableMainOutputDevice !== undefined && (obj.disableMainOutputDevice = message.disableMainOutputDevice);
+      (obj.sdiNdiDevice = message.sdiNdiDevice
+        ? DigitalAudio_Device.toJSON(message.sdiNdiDevice)
+        : undefined);
+    message.monitorOnMains !== undefined &&
+      (obj.monitorOnMains = message.monitorOnMains);
+    message.disableMainOutputDevice !== undefined &&
+      (obj.disableMainOutputDevice = message.disableMainOutputDevice);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Setup>, I>>(base?: I): DigitalAudio_Setup {
+  create<I extends Exact<DeepPartial<DigitalAudio_Setup>, I>>(
+    base?: I,
+  ): DigitalAudio_Setup {
     return DigitalAudio_Setup.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Setup>, I>>(object: I): DigitalAudio_Setup {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Setup>, I>>(
+    object: I,
+  ): DigitalAudio_Setup {
     const message = createBaseDigitalAudio_Setup();
-    message.buses = object.buses?.map((e) => DigitalAudio_Bus.fromPartial(e)) || [];
-    message.monitorDevice = (object.monitorDevice !== undefined && object.monitorDevice !== null)
-      ? DigitalAudio_Device.fromPartial(object.monitorDevice)
-      : undefined;
-    message.mainOutputDevice = (object.mainOutputDevice !== undefined && object.mainOutputDevice !== null)
-      ? DigitalAudio_Device.fromPartial(object.mainOutputDevice)
-      : undefined;
+    message.buses =
+      object.buses?.map((e) => DigitalAudio_Bus.fromPartial(e)) || [];
+    message.monitorDevice =
+      object.monitorDevice !== undefined && object.monitorDevice !== null
+        ? DigitalAudio_Device.fromPartial(object.monitorDevice)
+        : undefined;
+    message.mainOutputDevice =
+      object.mainOutputDevice !== undefined && object.mainOutputDevice !== null
+        ? DigitalAudio_Device.fromPartial(object.mainOutputDevice)
+        : undefined;
     message.enableSdiNdiDevice = object.enableSdiNdiDevice ?? false;
-    message.sdiNdiDevice = (object.sdiNdiDevice !== undefined && object.sdiNdiDevice !== null)
-      ? DigitalAudio_Device.fromPartial(object.sdiNdiDevice)
-      : undefined;
+    message.sdiNdiDevice =
+      object.sdiNdiDevice !== undefined && object.sdiNdiDevice !== null
+        ? DigitalAudio_Device.fromPartial(object.sdiNdiDevice)
+        : undefined;
     message.monitorOnMains = object.monitorOnMains ?? false;
     message.disableMainOutputDevice = object.disableMainOutputDevice ?? false;
     return message;
@@ -295,12 +358,21 @@ export const DigitalAudio_Setup = {
 };
 
 function createBaseDigitalAudio_Bus(): DigitalAudio_Bus {
-  return { name: "", muted: false, solo: false, testTone: false, masterLevel: 0 };
+  return {
+    name: '',
+    muted: false,
+    solo: false,
+    testTone: false,
+    masterLevel: 0,
+  };
 }
 
 export const DigitalAudio_Bus = {
-  encode(message: DigitalAudio_Bus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: DigitalAudio_Bus,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     if (message.muted === true) {
@@ -319,7 +391,8 @@ export const DigitalAudio_Bus = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Bus {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Bus();
     while (reader.pos < end) {
@@ -371,7 +444,7 @@ export const DigitalAudio_Bus = {
 
   fromJSON(object: any): DigitalAudio_Bus {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       muted: isSet(object.muted) ? Boolean(object.muted) : false,
       solo: isSet(object.solo) ? Boolean(object.solo) : false,
       testTone: isSet(object.testTone) ? Boolean(object.testTone) : false,
@@ -385,17 +458,22 @@ export const DigitalAudio_Bus = {
     message.muted !== undefined && (obj.muted = message.muted);
     message.solo !== undefined && (obj.solo = message.solo);
     message.testTone !== undefined && (obj.testTone = message.testTone);
-    message.masterLevel !== undefined && (obj.masterLevel = message.masterLevel);
+    message.masterLevel !== undefined &&
+      (obj.masterLevel = message.masterLevel);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Bus>, I>>(base?: I): DigitalAudio_Bus {
+  create<I extends Exact<DeepPartial<DigitalAudio_Bus>, I>>(
+    base?: I,
+  ): DigitalAudio_Bus {
     return DigitalAudio_Bus.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Bus>, I>>(object: I): DigitalAudio_Bus {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Bus>, I>>(
+    object: I,
+  ): DigitalAudio_Bus {
     const message = createBaseDigitalAudio_Bus();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     message.muted = object.muted ?? false;
     message.solo = object.solo ?? false;
     message.testTone = object.testTone ?? false;
@@ -405,28 +483,35 @@ export const DigitalAudio_Bus = {
 };
 
 function createBaseDigitalAudio_Device(): DigitalAudio_Device {
-  return { name: "", renderID: "", formats: [], routing: undefined };
+  return { name: '', renderID: '', formats: [], routing: undefined };
 }
 
 export const DigitalAudio_Device = {
-  encode(message: DigitalAudio_Device, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: DigitalAudio_Device,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
-    if (message.renderID !== "") {
+    if (message.renderID !== '') {
       writer.uint32(18).string(message.renderID);
     }
     for (const v of message.formats) {
       DigitalAudio_Device_Format.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.routing !== undefined) {
-      DigitalAudio_Device_Routing.encode(message.routing, writer.uint32(34).fork()).ldelim();
+      DigitalAudio_Device_Routing.encode(
+        message.routing,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Device {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Device();
     while (reader.pos < end) {
@@ -451,14 +536,19 @@ export const DigitalAudio_Device = {
             break;
           }
 
-          message.formats.push(DigitalAudio_Device_Format.decode(reader, reader.uint32()));
+          message.formats.push(
+            DigitalAudio_Device_Format.decode(reader, reader.uint32()),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.routing = DigitalAudio_Device_Routing.decode(reader, reader.uint32());
+          message.routing = DigitalAudio_Device_Routing.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -471,12 +561,14 @@ export const DigitalAudio_Device = {
 
   fromJSON(object: any): DigitalAudio_Device {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      renderID: isSet(object.renderID) ? String(object.renderID) : "",
+      name: isSet(object.name) ? String(object.name) : '',
+      renderID: isSet(object.renderID) ? String(object.renderID) : '',
       formats: Array.isArray(object?.formats)
         ? object.formats.map((e: any) => DigitalAudio_Device_Format.fromJSON(e))
         : [],
-      routing: isSet(object.routing) ? DigitalAudio_Device_Routing.fromJSON(object.routing) : undefined,
+      routing: isSet(object.routing)
+        ? DigitalAudio_Device_Routing.fromJSON(object.routing)
+        : undefined,
     };
   },
 
@@ -485,27 +577,38 @@ export const DigitalAudio_Device = {
     message.name !== undefined && (obj.name = message.name);
     message.renderID !== undefined && (obj.renderID = message.renderID);
     if (message.formats) {
-      obj.formats = message.formats.map((e) => e ? DigitalAudio_Device_Format.toJSON(e) : undefined);
+      obj.formats = message.formats.map((e) =>
+        e ? DigitalAudio_Device_Format.toJSON(e) : undefined,
+      );
     } else {
       obj.formats = [];
     }
     message.routing !== undefined &&
-      (obj.routing = message.routing ? DigitalAudio_Device_Routing.toJSON(message.routing) : undefined);
+      (obj.routing = message.routing
+        ? DigitalAudio_Device_Routing.toJSON(message.routing)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Device>, I>>(base?: I): DigitalAudio_Device {
+  create<I extends Exact<DeepPartial<DigitalAudio_Device>, I>>(
+    base?: I,
+  ): DigitalAudio_Device {
     return DigitalAudio_Device.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device>, I>>(object: I): DigitalAudio_Device {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device>, I>>(
+    object: I,
+  ): DigitalAudio_Device {
     const message = createBaseDigitalAudio_Device();
-    message.name = object.name ?? "";
-    message.renderID = object.renderID ?? "";
-    message.formats = object.formats?.map((e) => DigitalAudio_Device_Format.fromPartial(e)) || [];
-    message.routing = (object.routing !== undefined && object.routing !== null)
-      ? DigitalAudio_Device_Routing.fromPartial(object.routing)
-      : undefined;
+    message.name = object.name ?? '';
+    message.renderID = object.renderID ?? '';
+    message.formats =
+      object.formats?.map((e) => DigitalAudio_Device_Format.fromPartial(e)) ||
+      [];
+    message.routing =
+      object.routing !== undefined && object.routing !== null
+        ? DigitalAudio_Device_Routing.fromPartial(object.routing)
+        : undefined;
     return message;
   },
 };
@@ -515,7 +618,10 @@ function createBaseDigitalAudio_Device_Format(): DigitalAudio_Device_Format {
 }
 
 export const DigitalAudio_Device_Format = {
-  encode(message: DigitalAudio_Device_Format, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DigitalAudio_Device_Format,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.sampleRate !== 0) {
       writer.uint32(8).uint32(message.sampleRate);
     }
@@ -528,8 +634,12 @@ export const DigitalAudio_Device_Format = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Device_Format {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DigitalAudio_Device_Format {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Device_Format();
     while (reader.pos < end) {
@@ -569,23 +679,32 @@ export const DigitalAudio_Device_Format = {
     return {
       sampleRate: isSet(object.sampleRate) ? Number(object.sampleRate) : 0,
       bitDepth: isSet(object.bitDepth) ? Number(object.bitDepth) : 0,
-      type: isSet(object.type) ? digitalAudio_Device_Format_TypeFromJSON(object.type) : 0,
+      type: isSet(object.type)
+        ? digitalAudio_Device_Format_TypeFromJSON(object.type)
+        : 0,
     };
   },
 
   toJSON(message: DigitalAudio_Device_Format): unknown {
     const obj: any = {};
-    message.sampleRate !== undefined && (obj.sampleRate = Math.round(message.sampleRate));
-    message.bitDepth !== undefined && (obj.bitDepth = Math.round(message.bitDepth));
-    message.type !== undefined && (obj.type = digitalAudio_Device_Format_TypeToJSON(message.type));
+    message.sampleRate !== undefined &&
+      (obj.sampleRate = Math.round(message.sampleRate));
+    message.bitDepth !== undefined &&
+      (obj.bitDepth = Math.round(message.bitDepth));
+    message.type !== undefined &&
+      (obj.type = digitalAudio_Device_Format_TypeToJSON(message.type));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Device_Format>, I>>(base?: I): DigitalAudio_Device_Format {
+  create<I extends Exact<DeepPartial<DigitalAudio_Device_Format>, I>>(
+    base?: I,
+  ): DigitalAudio_Device_Format {
     return DigitalAudio_Device_Format.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Format>, I>>(object: I): DigitalAudio_Device_Format {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Format>, I>>(
+    object: I,
+  ): DigitalAudio_Device_Format {
     const message = createBaseDigitalAudio_Device_Format();
     message.sampleRate = object.sampleRate ?? 0;
     message.bitDepth = object.bitDepth ?? 0;
@@ -599,7 +718,10 @@ function createBaseDigitalAudio_Device_Map(): DigitalAudio_Device_Map {
 }
 
 export const DigitalAudio_Device_Map = {
-  encode(message: DigitalAudio_Device_Map, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DigitalAudio_Device_Map,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.channelIndex !== 0) {
       writer.uint32(8).uint32(message.channelIndex);
     }
@@ -611,8 +733,12 @@ export const DigitalAudio_Device_Map = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Device_Map {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DigitalAudio_Device_Map {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Device_Map();
     while (reader.pos < end) {
@@ -652,14 +778,19 @@ export const DigitalAudio_Device_Map = {
 
   fromJSON(object: any): DigitalAudio_Device_Map {
     return {
-      channelIndex: isSet(object.channelIndex) ? Number(object.channelIndex) : 0,
-      mappedIndices: Array.isArray(object?.mappedIndices) ? object.mappedIndices.map((e: any) => Number(e)) : [],
+      channelIndex: isSet(object.channelIndex)
+        ? Number(object.channelIndex)
+        : 0,
+      mappedIndices: Array.isArray(object?.mappedIndices)
+        ? object.mappedIndices.map((e: any) => Number(e))
+        : [],
     };
   },
 
   toJSON(message: DigitalAudio_Device_Map): unknown {
     const obj: any = {};
-    message.channelIndex !== undefined && (obj.channelIndex = Math.round(message.channelIndex));
+    message.channelIndex !== undefined &&
+      (obj.channelIndex = Math.round(message.channelIndex));
     if (message.mappedIndices) {
       obj.mappedIndices = message.mappedIndices.map((e) => Math.round(e));
     } else {
@@ -668,11 +799,15 @@ export const DigitalAudio_Device_Map = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Device_Map>, I>>(base?: I): DigitalAudio_Device_Map {
+  create<I extends Exact<DeepPartial<DigitalAudio_Device_Map>, I>>(
+    base?: I,
+  ): DigitalAudio_Device_Map {
     return DigitalAudio_Device_Map.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Map>, I>>(object: I): DigitalAudio_Device_Map {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Map>, I>>(
+    object: I,
+  ): DigitalAudio_Device_Map {
     const message = createBaseDigitalAudio_Device_Map();
     message.channelIndex = object.channelIndex ?? 0;
     message.mappedIndices = object.mappedIndices?.map((e) => e) || [];
@@ -681,11 +816,20 @@ export const DigitalAudio_Device_Map = {
 };
 
 function createBaseDigitalAudio_Device_Channel(): DigitalAudio_Device_Channel {
-  return { muteEnable: false, soloEnable: false, toneEnable: false, audioDelay: 0, level: 0 };
+  return {
+    muteEnable: false,
+    soloEnable: false,
+    toneEnable: false,
+    audioDelay: 0,
+    level: 0,
+  };
 }
 
 export const DigitalAudio_Device_Channel = {
-  encode(message: DigitalAudio_Device_Channel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DigitalAudio_Device_Channel,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.muteEnable === true) {
       writer.uint32(8).bool(message.muteEnable);
     }
@@ -704,8 +848,12 @@ export const DigitalAudio_Device_Channel = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Device_Channel {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DigitalAudio_Device_Channel {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Device_Channel();
     while (reader.pos < end) {
@@ -775,11 +923,15 @@ export const DigitalAudio_Device_Channel = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Device_Channel>, I>>(base?: I): DigitalAudio_Device_Channel {
+  create<I extends Exact<DeepPartial<DigitalAudio_Device_Channel>, I>>(
+    base?: I,
+  ): DigitalAudio_Device_Channel {
     return DigitalAudio_Device_Channel.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Channel>, I>>(object: I): DigitalAudio_Device_Channel {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Channel>, I>>(
+    object: I,
+  ): DigitalAudio_Device_Channel {
     const message = createBaseDigitalAudio_Device_Channel();
     message.muteEnable = object.muteEnable ?? false;
     message.soloEnable = object.soloEnable ?? false;
@@ -791,11 +943,19 @@ export const DigitalAudio_Device_Channel = {
 };
 
 function createBaseDigitalAudio_Device_Routing(): DigitalAudio_Device_Routing {
-  return { channels: [], map: [], isCustomMap: false, masterChannel: undefined };
+  return {
+    channels: [],
+    map: [],
+    isCustomMap: false,
+    masterChannel: undefined,
+  };
 }
 
 export const DigitalAudio_Device_Routing = {
-  encode(message: DigitalAudio_Device_Routing, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DigitalAudio_Device_Routing,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.channels) {
       DigitalAudio_Device_Channel.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -806,13 +966,20 @@ export const DigitalAudio_Device_Routing = {
       writer.uint32(24).bool(message.isCustomMap);
     }
     if (message.masterChannel !== undefined) {
-      DigitalAudio_Device_Channel.encode(message.masterChannel, writer.uint32(34).fork()).ldelim();
+      DigitalAudio_Device_Channel.encode(
+        message.masterChannel,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DigitalAudio_Device_Routing {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DigitalAudio_Device_Routing {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDigitalAudio_Device_Routing();
     while (reader.pos < end) {
@@ -823,14 +990,18 @@ export const DigitalAudio_Device_Routing = {
             break;
           }
 
-          message.channels.push(DigitalAudio_Device_Channel.decode(reader, reader.uint32()));
+          message.channels.push(
+            DigitalAudio_Device_Channel.decode(reader, reader.uint32()),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.map.push(DigitalAudio_Device_Map.decode(reader, reader.uint32()));
+          message.map.push(
+            DigitalAudio_Device_Map.decode(reader, reader.uint32()),
+          );
           continue;
         case 3:
           if (tag != 24) {
@@ -844,7 +1015,10 @@ export const DigitalAudio_Device_Routing = {
             break;
           }
 
-          message.masterChannel = DigitalAudio_Device_Channel.decode(reader, reader.uint32());
+          message.masterChannel = DigitalAudio_Device_Channel.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -858,10 +1032,16 @@ export const DigitalAudio_Device_Routing = {
   fromJSON(object: any): DigitalAudio_Device_Routing {
     return {
       channels: Array.isArray(object?.channels)
-        ? object.channels.map((e: any) => DigitalAudio_Device_Channel.fromJSON(e))
+        ? object.channels.map((e: any) =>
+            DigitalAudio_Device_Channel.fromJSON(e),
+          )
         : [],
-      map: Array.isArray(object?.map) ? object.map.map((e: any) => DigitalAudio_Device_Map.fromJSON(e)) : [],
-      isCustomMap: isSet(object.isCustomMap) ? Boolean(object.isCustomMap) : false,
+      map: Array.isArray(object?.map)
+        ? object.map.map((e: any) => DigitalAudio_Device_Map.fromJSON(e))
+        : [],
+      isCustomMap: isSet(object.isCustomMap)
+        ? Boolean(object.isCustomMap)
+        : false,
       masterChannel: isSet(object.masterChannel)
         ? DigitalAudio_Device_Channel.fromJSON(object.masterChannel)
         : undefined,
@@ -871,16 +1051,21 @@ export const DigitalAudio_Device_Routing = {
   toJSON(message: DigitalAudio_Device_Routing): unknown {
     const obj: any = {};
     if (message.channels) {
-      obj.channels = message.channels.map((e) => e ? DigitalAudio_Device_Channel.toJSON(e) : undefined);
+      obj.channels = message.channels.map((e) =>
+        e ? DigitalAudio_Device_Channel.toJSON(e) : undefined,
+      );
     } else {
       obj.channels = [];
     }
     if (message.map) {
-      obj.map = message.map.map((e) => e ? DigitalAudio_Device_Map.toJSON(e) : undefined);
+      obj.map = message.map.map((e) =>
+        e ? DigitalAudio_Device_Map.toJSON(e) : undefined,
+      );
     } else {
       obj.map = [];
     }
-    message.isCustomMap !== undefined && (obj.isCustomMap = message.isCustomMap);
+    message.isCustomMap !== undefined &&
+      (obj.isCustomMap = message.isCustomMap);
     message.masterChannel !== undefined &&
       (obj.masterChannel = message.masterChannel
         ? DigitalAudio_Device_Channel.toJSON(message.masterChannel)
@@ -888,32 +1073,55 @@ export const DigitalAudio_Device_Routing = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DigitalAudio_Device_Routing>, I>>(base?: I): DigitalAudio_Device_Routing {
+  create<I extends Exact<DeepPartial<DigitalAudio_Device_Routing>, I>>(
+    base?: I,
+  ): DigitalAudio_Device_Routing {
     return DigitalAudio_Device_Routing.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Routing>, I>>(object: I): DigitalAudio_Device_Routing {
+  fromPartial<I extends Exact<DeepPartial<DigitalAudio_Device_Routing>, I>>(
+    object: I,
+  ): DigitalAudio_Device_Routing {
     const message = createBaseDigitalAudio_Device_Routing();
-    message.channels = object.channels?.map((e) => DigitalAudio_Device_Channel.fromPartial(e)) || [];
-    message.map = object.map?.map((e) => DigitalAudio_Device_Map.fromPartial(e)) || [];
+    message.channels =
+      object.channels?.map((e) => DigitalAudio_Device_Channel.fromPartial(e)) ||
+      [];
+    message.map =
+      object.map?.map((e) => DigitalAudio_Device_Map.fromPartial(e)) || [];
     message.isCustomMap = object.isCustomMap ?? false;
-    message.masterChannel = (object.masterChannel !== undefined && object.masterChannel !== null)
-      ? DigitalAudio_Device_Channel.fromPartial(object.masterChannel)
-      : undefined;
+    message.masterChannel =
+      object.masterChannel !== undefined && object.masterChannel !== null
+        ? DigitalAudio_Device_Channel.fromPartial(object.masterChannel)
+        : undefined;
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

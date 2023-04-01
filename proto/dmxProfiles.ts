@@ -1,7 +1,7 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import _m0 from 'protobufjs/minimal';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface DMXProfiles {
   workspaceProfile: DMXProfiles_DMXProfile | undefined;
@@ -15,60 +15,87 @@ export interface DMXProfiles_DMXProfile {
   customMappings: DMXProfiles_DMXProfile_ChannelMapping[];
 }
 
-export interface DMXProfiles_DMXProfile_Profile {
-  profileType: DMXProfiles_DMXProfile_Profile_ProfileType;
-  startingChannel?: number | undefined;
-}
-
-export enum DMXProfiles_DMXProfile_Profile_ProfileType {
+export enum DMXProfiles_DMXProfile_ProfileType {
   BASIC = 0,
   ADVANCED = 1,
   CUSTOM = 2,
   UNRECOGNIZED = -1,
 }
 
-export function dMXProfiles_DMXProfile_Profile_ProfileTypeFromJSON(
+export function dMXProfiles_DMXProfile_ProfileTypeFromJSON(
   object: any,
-): DMXProfiles_DMXProfile_Profile_ProfileType {
+): DMXProfiles_DMXProfile_ProfileType {
   switch (object) {
     case 0:
-    case "BASIC":
-      return DMXProfiles_DMXProfile_Profile_ProfileType.BASIC;
+    case 'BASIC':
+      return DMXProfiles_DMXProfile_ProfileType.BASIC;
     case 1:
-    case "ADVANCED":
-      return DMXProfiles_DMXProfile_Profile_ProfileType.ADVANCED;
+    case 'ADVANCED':
+      return DMXProfiles_DMXProfile_ProfileType.ADVANCED;
     case 2:
-    case "CUSTOM":
-      return DMXProfiles_DMXProfile_Profile_ProfileType.CUSTOM;
+    case 'CUSTOM':
+      return DMXProfiles_DMXProfile_ProfileType.CUSTOM;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
-      return DMXProfiles_DMXProfile_Profile_ProfileType.UNRECOGNIZED;
+      return DMXProfiles_DMXProfile_ProfileType.UNRECOGNIZED;
   }
 }
 
-export function dMXProfiles_DMXProfile_Profile_ProfileTypeToJSON(
-  object: DMXProfiles_DMXProfile_Profile_ProfileType,
+export function dMXProfiles_DMXProfile_ProfileTypeToJSON(
+  object: DMXProfiles_DMXProfile_ProfileType,
 ): string {
   switch (object) {
-    case DMXProfiles_DMXProfile_Profile_ProfileType.BASIC:
-      return "BASIC";
-    case DMXProfiles_DMXProfile_Profile_ProfileType.ADVANCED:
-      return "ADVANCED";
-    case DMXProfiles_DMXProfile_Profile_ProfileType.CUSTOM:
-      return "CUSTOM";
-    case DMXProfiles_DMXProfile_Profile_ProfileType.UNRECOGNIZED:
+    case DMXProfiles_DMXProfile_ProfileType.BASIC:
+      return 'BASIC';
+    case DMXProfiles_DMXProfile_ProfileType.ADVANCED:
+      return 'ADVANCED';
+    case DMXProfiles_DMXProfile_ProfileType.CUSTOM:
+      return 'CUSTOM';
+    case DMXProfiles_DMXProfile_ProfileType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
-export interface DMXProfiles_DMXProfile_ChannelMapping {
-  channelIndex: number;
-  command: DMXProfiles_DMXProfile_ChannelMapping_CommandType;
+export enum DMXProfiles_DMXProfile_FixtureType {
+  WORKSPACE = 0,
+  LAYER = 1,
+  UNRECOGNIZED = -1,
 }
 
-export enum DMXProfiles_DMXProfile_ChannelMapping_CommandType {
+export function dMXProfiles_DMXProfile_FixtureTypeFromJSON(
+  object: any,
+): DMXProfiles_DMXProfile_FixtureType {
+  switch (object) {
+    case 0:
+    case 'WORKSPACE':
+      return DMXProfiles_DMXProfile_FixtureType.WORKSPACE;
+    case 1:
+    case 'LAYER':
+      return DMXProfiles_DMXProfile_FixtureType.LAYER;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return DMXProfiles_DMXProfile_FixtureType.UNRECOGNIZED;
+  }
+}
+
+export function dMXProfiles_DMXProfile_FixtureTypeToJSON(
+  object: DMXProfiles_DMXProfile_FixtureType,
+): string {
+  switch (object) {
+    case DMXProfiles_DMXProfile_FixtureType.WORKSPACE:
+      return 'WORKSPACE';
+    case DMXProfiles_DMXProfile_FixtureType.LAYER:
+      return 'LAYER';
+    case DMXProfiles_DMXProfile_FixtureType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum DMXProfiles_DMXProfile_CommandType {
   OPACITY = 0,
   BLEND_MODE = 1,
   SELECT_CUE = 2,
@@ -80,107 +107,80 @@ export enum DMXProfiles_DMXProfile_ChannelMapping_CommandType {
   UNRECOGNIZED = -1,
 }
 
-export function dMXProfiles_DMXProfile_ChannelMapping_CommandTypeFromJSON(
+export function dMXProfiles_DMXProfile_CommandTypeFromJSON(
   object: any,
-): DMXProfiles_DMXProfile_ChannelMapping_CommandType {
+): DMXProfiles_DMXProfile_CommandType {
   switch (object) {
     case 0:
-    case "OPACITY":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.OPACITY;
+    case 'OPACITY':
+      return DMXProfiles_DMXProfile_CommandType.OPACITY;
     case 1:
-    case "BLEND_MODE":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.BLEND_MODE;
+    case 'BLEND_MODE':
+      return DMXProfiles_DMXProfile_CommandType.BLEND_MODE;
     case 2:
-    case "SELECT_CUE":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.SELECT_CUE;
+    case 'SELECT_CUE':
+      return DMXProfiles_DMXProfile_CommandType.SELECT_CUE;
     case 3:
-    case "CONTROL_TYPE":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.CONTROL_TYPE;
+    case 'CONTROL_TYPE':
+      return DMXProfiles_DMXProfile_CommandType.CONTROL_TYPE;
     case 4:
-    case "CONTROL_VALUE":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.CONTROL_VALUE;
+    case 'CONTROL_VALUE':
+      return DMXProfiles_DMXProfile_CommandType.CONTROL_VALUE;
     case 5:
-    case "TRANSITION_DURATION":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.TRANSITION_DURATION;
+    case 'TRANSITION_DURATION':
+      return DMXProfiles_DMXProfile_CommandType.TRANSITION_DURATION;
     case 6:
-    case "SELECT_PLAYLIST":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.SELECT_PLAYLIST;
+    case 'SELECT_PLAYLIST':
+      return DMXProfiles_DMXProfile_CommandType.SELECT_PLAYLIST;
     case 7:
-    case "TARGETED_LAYER":
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.TARGETED_LAYER;
+    case 'TARGETED_LAYER':
+      return DMXProfiles_DMXProfile_CommandType.TARGETED_LAYER;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
-      return DMXProfiles_DMXProfile_ChannelMapping_CommandType.UNRECOGNIZED;
+      return DMXProfiles_DMXProfile_CommandType.UNRECOGNIZED;
   }
 }
 
-export function dMXProfiles_DMXProfile_ChannelMapping_CommandTypeToJSON(
-  object: DMXProfiles_DMXProfile_ChannelMapping_CommandType,
+export function dMXProfiles_DMXProfile_CommandTypeToJSON(
+  object: DMXProfiles_DMXProfile_CommandType,
 ): string {
   switch (object) {
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.OPACITY:
-      return "OPACITY";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.BLEND_MODE:
-      return "BLEND_MODE";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.SELECT_CUE:
-      return "SELECT_CUE";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.CONTROL_TYPE:
-      return "CONTROL_TYPE";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.CONTROL_VALUE:
-      return "CONTROL_VALUE";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.TRANSITION_DURATION:
-      return "TRANSITION_DURATION";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.SELECT_PLAYLIST:
-      return "SELECT_PLAYLIST";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.TARGETED_LAYER:
-      return "TARGETED_LAYER";
-    case DMXProfiles_DMXProfile_ChannelMapping_CommandType.UNRECOGNIZED:
+    case DMXProfiles_DMXProfile_CommandType.OPACITY:
+      return 'OPACITY';
+    case DMXProfiles_DMXProfile_CommandType.BLEND_MODE:
+      return 'BLEND_MODE';
+    case DMXProfiles_DMXProfile_CommandType.SELECT_CUE:
+      return 'SELECT_CUE';
+    case DMXProfiles_DMXProfile_CommandType.CONTROL_TYPE:
+      return 'CONTROL_TYPE';
+    case DMXProfiles_DMXProfile_CommandType.CONTROL_VALUE:
+      return 'CONTROL_VALUE';
+    case DMXProfiles_DMXProfile_CommandType.TRANSITION_DURATION:
+      return 'TRANSITION_DURATION';
+    case DMXProfiles_DMXProfile_CommandType.SELECT_PLAYLIST:
+      return 'SELECT_PLAYLIST';
+    case DMXProfiles_DMXProfile_CommandType.TARGETED_LAYER:
+      return 'TARGETED_LAYER';
+    case DMXProfiles_DMXProfile_CommandType.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
+}
+
+export interface DMXProfiles_DMXProfile_Profile {
+  profileType: DMXProfiles_DMXProfile_ProfileType;
+  startingChannel?: number | undefined;
+}
+
+export interface DMXProfiles_DMXProfile_ChannelMapping {
+  channelIndex: number;
+  command: DMXProfiles_DMXProfile_CommandType;
 }
 
 export interface DMXProfiles_DMXProfile_Fixture {
-  fixtureType: DMXProfiles_DMXProfile_Fixture_FixtureType;
+  fixtureType: DMXProfiles_DMXProfile_FixtureType;
   layerIndex?: number | undefined;
-}
-
-export enum DMXProfiles_DMXProfile_Fixture_FixtureType {
-  WORKSPACE = 0,
-  LAYER = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function dMXProfiles_DMXProfile_Fixture_FixtureTypeFromJSON(
-  object: any,
-): DMXProfiles_DMXProfile_Fixture_FixtureType {
-  switch (object) {
-    case 0:
-    case "WORKSPACE":
-      return DMXProfiles_DMXProfile_Fixture_FixtureType.WORKSPACE;
-    case 1:
-    case "LAYER":
-      return DMXProfiles_DMXProfile_Fixture_FixtureType.LAYER;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return DMXProfiles_DMXProfile_Fixture_FixtureType.UNRECOGNIZED;
-  }
-}
-
-export function dMXProfiles_DMXProfile_Fixture_FixtureTypeToJSON(
-  object: DMXProfiles_DMXProfile_Fixture_FixtureType,
-): string {
-  switch (object) {
-    case DMXProfiles_DMXProfile_Fixture_FixtureType.WORKSPACE:
-      return "WORKSPACE";
-    case DMXProfiles_DMXProfile_Fixture_FixtureType.LAYER:
-      return "LAYER";
-    case DMXProfiles_DMXProfile_Fixture_FixtureType.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
 }
 
 function createBaseDMXProfiles(): DMXProfiles {
@@ -188,9 +188,15 @@ function createBaseDMXProfiles(): DMXProfiles {
 }
 
 export const DMXProfiles = {
-  encode(message: DMXProfiles, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DMXProfiles,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.workspaceProfile !== undefined) {
-      DMXProfiles_DMXProfile.encode(message.workspaceProfile, writer.uint32(10).fork()).ldelim();
+      DMXProfiles_DMXProfile.encode(
+        message.workspaceProfile,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     for (const v of message.layerProfiles) {
       DMXProfiles_DMXProfile.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -199,7 +205,8 @@ export const DMXProfiles = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DMXProfiles {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDMXProfiles();
     while (reader.pos < end) {
@@ -210,14 +217,19 @@ export const DMXProfiles = {
             break;
           }
 
-          message.workspaceProfile = DMXProfiles_DMXProfile.decode(reader, reader.uint32());
+          message.workspaceProfile = DMXProfiles_DMXProfile.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.layerProfiles.push(DMXProfiles_DMXProfile.decode(reader, reader.uint32()));
+          message.layerProfiles.push(
+            DMXProfiles_DMXProfile.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -234,18 +246,23 @@ export const DMXProfiles = {
         ? DMXProfiles_DMXProfile.fromJSON(object.workspaceProfile)
         : undefined,
       layerProfiles: Array.isArray(object?.layerProfiles)
-        ? object.layerProfiles.map((e: any) => DMXProfiles_DMXProfile.fromJSON(e))
+        ? object.layerProfiles.map((e: any) =>
+            DMXProfiles_DMXProfile.fromJSON(e),
+          )
         : [],
     };
   },
 
   toJSON(message: DMXProfiles): unknown {
     const obj: any = {};
-    message.workspaceProfile !== undefined && (obj.workspaceProfile = message.workspaceProfile
-      ? DMXProfiles_DMXProfile.toJSON(message.workspaceProfile)
-      : undefined);
+    message.workspaceProfile !== undefined &&
+      (obj.workspaceProfile = message.workspaceProfile
+        ? DMXProfiles_DMXProfile.toJSON(message.workspaceProfile)
+        : undefined);
     if (message.layerProfiles) {
-      obj.layerProfiles = message.layerProfiles.map((e) => e ? DMXProfiles_DMXProfile.toJSON(e) : undefined);
+      obj.layerProfiles = message.layerProfiles.map((e) =>
+        e ? DMXProfiles_DMXProfile.toJSON(e) : undefined,
+      );
     } else {
       obj.layerProfiles = [];
     }
@@ -256,39 +273,65 @@ export const DMXProfiles = {
     return DMXProfiles.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DMXProfiles>, I>>(object: I): DMXProfiles {
+  fromPartial<I extends Exact<DeepPartial<DMXProfiles>, I>>(
+    object: I,
+  ): DMXProfiles {
     const message = createBaseDMXProfiles();
-    message.workspaceProfile = (object.workspaceProfile !== undefined && object.workspaceProfile !== null)
-      ? DMXProfiles_DMXProfile.fromPartial(object.workspaceProfile)
-      : undefined;
-    message.layerProfiles = object.layerProfiles?.map((e) => DMXProfiles_DMXProfile.fromPartial(e)) || [];
+    message.workspaceProfile =
+      object.workspaceProfile !== undefined && object.workspaceProfile !== null
+        ? DMXProfiles_DMXProfile.fromPartial(object.workspaceProfile)
+        : undefined;
+    message.layerProfiles =
+      object.layerProfiles?.map((e) => DMXProfiles_DMXProfile.fromPartial(e)) ||
+      [];
     return message;
   },
 };
 
 function createBaseDMXProfiles_DMXProfile(): DMXProfiles_DMXProfile {
-  return { profile: undefined, fixture: undefined, isEnabled: false, customMappings: [] };
+  return {
+    profile: undefined,
+    fixture: undefined,
+    isEnabled: false,
+    customMappings: [],
+  };
 }
 
 export const DMXProfiles_DMXProfile = {
-  encode(message: DMXProfiles_DMXProfile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DMXProfiles_DMXProfile,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.profile !== undefined) {
-      DMXProfiles_DMXProfile_Profile.encode(message.profile, writer.uint32(10).fork()).ldelim();
+      DMXProfiles_DMXProfile_Profile.encode(
+        message.profile,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.fixture !== undefined) {
-      DMXProfiles_DMXProfile_Fixture.encode(message.fixture, writer.uint32(18).fork()).ldelim();
+      DMXProfiles_DMXProfile_Fixture.encode(
+        message.fixture,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.isEnabled === true) {
       writer.uint32(24).bool(message.isEnabled);
     }
     for (const v of message.customMappings) {
-      DMXProfiles_DMXProfile_ChannelMapping.encode(v!, writer.uint32(34).fork()).ldelim();
+      DMXProfiles_DMXProfile_ChannelMapping.encode(
+        v!,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DMXProfiles_DMXProfile {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DMXProfiles_DMXProfile {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDMXProfiles_DMXProfile();
     while (reader.pos < end) {
@@ -299,14 +342,20 @@ export const DMXProfiles_DMXProfile = {
             break;
           }
 
-          message.profile = DMXProfiles_DMXProfile_Profile.decode(reader, reader.uint32());
+          message.profile = DMXProfiles_DMXProfile_Profile.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.fixture = DMXProfiles_DMXProfile_Fixture.decode(reader, reader.uint32());
+          message.fixture = DMXProfiles_DMXProfile_Fixture.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 24) {
@@ -320,7 +369,12 @@ export const DMXProfiles_DMXProfile = {
             break;
           }
 
-          message.customMappings.push(DMXProfiles_DMXProfile_ChannelMapping.decode(reader, reader.uint32()));
+          message.customMappings.push(
+            DMXProfiles_DMXProfile_ChannelMapping.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -333,11 +387,17 @@ export const DMXProfiles_DMXProfile = {
 
   fromJSON(object: any): DMXProfiles_DMXProfile {
     return {
-      profile: isSet(object.profile) ? DMXProfiles_DMXProfile_Profile.fromJSON(object.profile) : undefined,
-      fixture: isSet(object.fixture) ? DMXProfiles_DMXProfile_Fixture.fromJSON(object.fixture) : undefined,
+      profile: isSet(object.profile)
+        ? DMXProfiles_DMXProfile_Profile.fromJSON(object.profile)
+        : undefined,
+      fixture: isSet(object.fixture)
+        ? DMXProfiles_DMXProfile_Fixture.fromJSON(object.fixture)
+        : undefined,
       isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
       customMappings: Array.isArray(object?.customMappings)
-        ? object.customMappings.map((e: any) => DMXProfiles_DMXProfile_ChannelMapping.fromJSON(e))
+        ? object.customMappings.map((e: any) =>
+            DMXProfiles_DMXProfile_ChannelMapping.fromJSON(e),
+          )
         : [],
     };
   },
@@ -345,13 +405,17 @@ export const DMXProfiles_DMXProfile = {
   toJSON(message: DMXProfiles_DMXProfile): unknown {
     const obj: any = {};
     message.profile !== undefined &&
-      (obj.profile = message.profile ? DMXProfiles_DMXProfile_Profile.toJSON(message.profile) : undefined);
+      (obj.profile = message.profile
+        ? DMXProfiles_DMXProfile_Profile.toJSON(message.profile)
+        : undefined);
     message.fixture !== undefined &&
-      (obj.fixture = message.fixture ? DMXProfiles_DMXProfile_Fixture.toJSON(message.fixture) : undefined);
+      (obj.fixture = message.fixture
+        ? DMXProfiles_DMXProfile_Fixture.toJSON(message.fixture)
+        : undefined);
     message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
     if (message.customMappings) {
       obj.customMappings = message.customMappings.map((e) =>
-        e ? DMXProfiles_DMXProfile_ChannelMapping.toJSON(e) : undefined
+        e ? DMXProfiles_DMXProfile_ChannelMapping.toJSON(e) : undefined,
       );
     } else {
       obj.customMappings = [];
@@ -359,21 +423,29 @@ export const DMXProfiles_DMXProfile = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile>, I>>(base?: I): DMXProfiles_DMXProfile {
+  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile>, I>>(
+    base?: I,
+  ): DMXProfiles_DMXProfile {
     return DMXProfiles_DMXProfile.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DMXProfiles_DMXProfile>, I>>(object: I): DMXProfiles_DMXProfile {
+  fromPartial<I extends Exact<DeepPartial<DMXProfiles_DMXProfile>, I>>(
+    object: I,
+  ): DMXProfiles_DMXProfile {
     const message = createBaseDMXProfiles_DMXProfile();
-    message.profile = (object.profile !== undefined && object.profile !== null)
-      ? DMXProfiles_DMXProfile_Profile.fromPartial(object.profile)
-      : undefined;
-    message.fixture = (object.fixture !== undefined && object.fixture !== null)
-      ? DMXProfiles_DMXProfile_Fixture.fromPartial(object.fixture)
-      : undefined;
+    message.profile =
+      object.profile !== undefined && object.profile !== null
+        ? DMXProfiles_DMXProfile_Profile.fromPartial(object.profile)
+        : undefined;
+    message.fixture =
+      object.fixture !== undefined && object.fixture !== null
+        ? DMXProfiles_DMXProfile_Fixture.fromPartial(object.fixture)
+        : undefined;
     message.isEnabled = object.isEnabled ?? false;
-    message.customMappings = object.customMappings?.map((e) => DMXProfiles_DMXProfile_ChannelMapping.fromPartial(e)) ||
-      [];
+    message.customMappings =
+      object.customMappings?.map((e) =>
+        DMXProfiles_DMXProfile_ChannelMapping.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -383,7 +455,10 @@ function createBaseDMXProfiles_DMXProfile_Profile(): DMXProfiles_DMXProfile_Prof
 }
 
 export const DMXProfiles_DMXProfile_Profile = {
-  encode(message: DMXProfiles_DMXProfile_Profile, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DMXProfiles_DMXProfile_Profile,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.profileType !== 0) {
       writer.uint32(8).int32(message.profileType);
     }
@@ -393,8 +468,12 @@ export const DMXProfiles_DMXProfile_Profile = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DMXProfiles_DMXProfile_Profile {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DMXProfiles_DMXProfile_Profile {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDMXProfiles_DMXProfile_Profile();
     while (reader.pos < end) {
@@ -426,21 +505,28 @@ export const DMXProfiles_DMXProfile_Profile = {
   fromJSON(object: any): DMXProfiles_DMXProfile_Profile {
     return {
       profileType: isSet(object.profileType)
-        ? dMXProfiles_DMXProfile_Profile_ProfileTypeFromJSON(object.profileType)
+        ? dMXProfiles_DMXProfile_ProfileTypeFromJSON(object.profileType)
         : 0,
-      startingChannel: isSet(object.startingChannel) ? Number(object.startingChannel) : undefined,
+      startingChannel: isSet(object.startingChannel)
+        ? Number(object.startingChannel)
+        : undefined,
     };
   },
 
   toJSON(message: DMXProfiles_DMXProfile_Profile): unknown {
     const obj: any = {};
     message.profileType !== undefined &&
-      (obj.profileType = dMXProfiles_DMXProfile_Profile_ProfileTypeToJSON(message.profileType));
-    message.startingChannel !== undefined && (obj.startingChannel = Math.round(message.startingChannel));
+      (obj.profileType = dMXProfiles_DMXProfile_ProfileTypeToJSON(
+        message.profileType,
+      ));
+    message.startingChannel !== undefined &&
+      (obj.startingChannel = Math.round(message.startingChannel));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Profile>, I>>(base?: I): DMXProfiles_DMXProfile_Profile {
+  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Profile>, I>>(
+    base?: I,
+  ): DMXProfiles_DMXProfile_Profile {
     return DMXProfiles_DMXProfile_Profile.fromPartial(base ?? {});
   },
 
@@ -459,7 +545,10 @@ function createBaseDMXProfiles_DMXProfile_ChannelMapping(): DMXProfiles_DMXProfi
 }
 
 export const DMXProfiles_DMXProfile_ChannelMapping = {
-  encode(message: DMXProfiles_DMXProfile_ChannelMapping, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DMXProfiles_DMXProfile_ChannelMapping,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.channelIndex !== 0) {
       writer.uint32(8).uint32(message.channelIndex);
     }
@@ -469,8 +558,12 @@ export const DMXProfiles_DMXProfile_ChannelMapping = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DMXProfiles_DMXProfile_ChannelMapping {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DMXProfiles_DMXProfile_ChannelMapping {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDMXProfiles_DMXProfile_ChannelMapping();
     while (reader.pos < end) {
@@ -501,28 +594,33 @@ export const DMXProfiles_DMXProfile_ChannelMapping = {
 
   fromJSON(object: any): DMXProfiles_DMXProfile_ChannelMapping {
     return {
-      channelIndex: isSet(object.channelIndex) ? Number(object.channelIndex) : 0,
-      command: isSet(object.command) ? dMXProfiles_DMXProfile_ChannelMapping_CommandTypeFromJSON(object.command) : 0,
+      channelIndex: isSet(object.channelIndex)
+        ? Number(object.channelIndex)
+        : 0,
+      command: isSet(object.command)
+        ? dMXProfiles_DMXProfile_CommandTypeFromJSON(object.command)
+        : 0,
     };
   },
 
   toJSON(message: DMXProfiles_DMXProfile_ChannelMapping): unknown {
     const obj: any = {};
-    message.channelIndex !== undefined && (obj.channelIndex = Math.round(message.channelIndex));
+    message.channelIndex !== undefined &&
+      (obj.channelIndex = Math.round(message.channelIndex));
     message.command !== undefined &&
-      (obj.command = dMXProfiles_DMXProfile_ChannelMapping_CommandTypeToJSON(message.command));
+      (obj.command = dMXProfiles_DMXProfile_CommandTypeToJSON(message.command));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_ChannelMapping>, I>>(
-    base?: I,
-  ): DMXProfiles_DMXProfile_ChannelMapping {
+  create<
+    I extends Exact<DeepPartial<DMXProfiles_DMXProfile_ChannelMapping>, I>,
+  >(base?: I): DMXProfiles_DMXProfile_ChannelMapping {
     return DMXProfiles_DMXProfile_ChannelMapping.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_ChannelMapping>, I>>(
-    object: I,
-  ): DMXProfiles_DMXProfile_ChannelMapping {
+  fromPartial<
+    I extends Exact<DeepPartial<DMXProfiles_DMXProfile_ChannelMapping>, I>,
+  >(object: I): DMXProfiles_DMXProfile_ChannelMapping {
     const message = createBaseDMXProfiles_DMXProfile_ChannelMapping();
     message.channelIndex = object.channelIndex ?? 0;
     message.command = object.command ?? 0;
@@ -535,7 +633,10 @@ function createBaseDMXProfiles_DMXProfile_Fixture(): DMXProfiles_DMXProfile_Fixt
 }
 
 export const DMXProfiles_DMXProfile_Fixture = {
-  encode(message: DMXProfiles_DMXProfile_Fixture, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: DMXProfiles_DMXProfile_Fixture,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.fixtureType !== 0) {
       writer.uint32(8).int32(message.fixtureType);
     }
@@ -545,8 +646,12 @@ export const DMXProfiles_DMXProfile_Fixture = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): DMXProfiles_DMXProfile_Fixture {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): DMXProfiles_DMXProfile_Fixture {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDMXProfiles_DMXProfile_Fixture();
     while (reader.pos < end) {
@@ -578,21 +683,28 @@ export const DMXProfiles_DMXProfile_Fixture = {
   fromJSON(object: any): DMXProfiles_DMXProfile_Fixture {
     return {
       fixtureType: isSet(object.fixtureType)
-        ? dMXProfiles_DMXProfile_Fixture_FixtureTypeFromJSON(object.fixtureType)
+        ? dMXProfiles_DMXProfile_FixtureTypeFromJSON(object.fixtureType)
         : 0,
-      layerIndex: isSet(object.layerIndex) ? Number(object.layerIndex) : undefined,
+      layerIndex: isSet(object.layerIndex)
+        ? Number(object.layerIndex)
+        : undefined,
     };
   },
 
   toJSON(message: DMXProfiles_DMXProfile_Fixture): unknown {
     const obj: any = {};
     message.fixtureType !== undefined &&
-      (obj.fixtureType = dMXProfiles_DMXProfile_Fixture_FixtureTypeToJSON(message.fixtureType));
-    message.layerIndex !== undefined && (obj.layerIndex = Math.round(message.layerIndex));
+      (obj.fixtureType = dMXProfiles_DMXProfile_FixtureTypeToJSON(
+        message.fixtureType,
+      ));
+    message.layerIndex !== undefined &&
+      (obj.layerIndex = Math.round(message.layerIndex));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Fixture>, I>>(base?: I): DMXProfiles_DMXProfile_Fixture {
+  create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Fixture>, I>>(
+    base?: I,
+  ): DMXProfiles_DMXProfile_Fixture {
     return DMXProfiles_DMXProfile_Fixture.fromPartial(base ?? {});
   },
 
@@ -606,16 +718,31 @@ export const DMXProfiles_DMXProfile_Fixture = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

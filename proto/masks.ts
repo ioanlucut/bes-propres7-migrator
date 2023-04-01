@@ -1,9 +1,9 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Color, UUID } from "./basicTypes";
-import { Graphics_Element } from "./graphicsData";
+import _m0 from 'protobufjs/minimal';
+import { Color, UUID } from './basicTypes';
+import { Graphics_Element } from './graphicsData';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface Mask {
   uuid: UUID | undefined;
@@ -22,13 +22,13 @@ export enum Mask_Mode {
 export function mask_ModeFromJSON(object: any): Mask_Mode {
   switch (object) {
     case 0:
-    case "MODE_OVERLAY":
+    case 'MODE_OVERLAY':
       return Mask_Mode.MODE_OVERLAY;
     case 1:
-    case "MODE_KEYHOLE":
+    case 'MODE_KEYHOLE':
       return Mask_Mode.MODE_KEYHOLE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return Mask_Mode.UNRECOGNIZED;
   }
@@ -37,17 +37,17 @@ export function mask_ModeFromJSON(object: any): Mask_Mode {
 export function mask_ModeToJSON(object: Mask_Mode): string {
   switch (object) {
     case Mask_Mode.MODE_OVERLAY:
-      return "MODE_OVERLAY";
+      return 'MODE_OVERLAY';
     case Mask_Mode.MODE_KEYHOLE:
-      return "MODE_KEYHOLE";
+      return 'MODE_KEYHOLE';
     case Mask_Mode.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 function createBaseMask(): Mask {
-  return { uuid: undefined, name: "", color: undefined, mode: 0, shapes: [] };
+  return { uuid: undefined, name: '', color: undefined, mode: 0, shapes: [] };
 }
 
 export const Mask = {
@@ -55,7 +55,7 @@ export const Mask = {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     if (message.color !== undefined) {
@@ -71,7 +71,8 @@ export const Mask = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Mask {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMask();
     while (reader.pos < end) {
@@ -124,21 +125,27 @@ export const Mask = {
   fromJSON(object: any): Mask {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
       mode: isSet(object.mode) ? mask_ModeFromJSON(object.mode) : 0,
-      shapes: Array.isArray(object?.shapes) ? object.shapes.map((e: any) => Graphics_Element.fromJSON(e)) : [],
+      shapes: Array.isArray(object?.shapes)
+        ? object.shapes.map((e: any) => Graphics_Element.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: Mask): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.name !== undefined && (obj.name = message.name);
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
     message.mode !== undefined && (obj.mode = mask_ModeToJSON(message.mode));
     if (message.shapes) {
-      obj.shapes = message.shapes.map((e) => e ? Graphics_Element.toJSON(e) : undefined);
+      obj.shapes = message.shapes.map((e) =>
+        e ? Graphics_Element.toJSON(e) : undefined,
+      );
     } else {
       obj.shapes = [];
     }
@@ -151,25 +158,47 @@ export const Mask = {
 
   fromPartial<I extends Exact<DeepPartial<Mask>, I>>(object: I): Mask {
     const message = createBaseMask();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.name = object.name ?? "";
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.name = object.name ?? '';
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
     message.mode = object.mode ?? 0;
-    message.shapes = object.shapes?.map((e) => Graphics_Element.fromPartial(e)) || [];
+    message.shapes =
+      object.shapes?.map((e) => Graphics_Element.fromPartial(e)) || [];
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

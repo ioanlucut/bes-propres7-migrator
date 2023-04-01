@@ -73,6 +73,51 @@ export function slide_Element_TextRevealTypeToJSON(
   }
 }
 
+export enum Slide_Element_Info {
+  INFO_NONE = 0,
+  INFO_IS_TEMPLATE_ELEMENT = 1,
+  INFO_IS_TEXT_ELEMENT = 2,
+  INFO_IS_TEXT_TICKER = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function slide_Element_InfoFromJSON(object: any): Slide_Element_Info {
+  switch (object) {
+    case 0:
+    case 'INFO_NONE':
+      return Slide_Element_Info.INFO_NONE;
+    case 1:
+    case 'INFO_IS_TEMPLATE_ELEMENT':
+      return Slide_Element_Info.INFO_IS_TEMPLATE_ELEMENT;
+    case 2:
+    case 'INFO_IS_TEXT_ELEMENT':
+      return Slide_Element_Info.INFO_IS_TEXT_ELEMENT;
+    case 4:
+    case 'INFO_IS_TEXT_TICKER':
+      return Slide_Element_Info.INFO_IS_TEXT_TICKER;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Slide_Element_Info.UNRECOGNIZED;
+  }
+}
+
+export function slide_Element_InfoToJSON(object: Slide_Element_Info): string {
+  switch (object) {
+    case Slide_Element_Info.INFO_NONE:
+      return 'INFO_NONE';
+    case Slide_Element_Info.INFO_IS_TEMPLATE_ELEMENT:
+      return 'INFO_IS_TEMPLATE_ELEMENT';
+    case Slide_Element_Info.INFO_IS_TEXT_ELEMENT:
+      return 'INFO_IS_TEXT_ELEMENT';
+    case Slide_Element_Info.INFO_IS_TEXT_TICKER:
+      return 'INFO_IS_TEXT_TICKER';
+    case Slide_Element_Info.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
 export interface Slide_Element_Build {
   uuid: UUID | undefined;
   elementUUID: UUID | undefined;
@@ -132,58 +177,9 @@ export function slide_Element_Build_StartToJSON(
 
 export interface Slide_Element_ChildBuild {
   uuid: UUID | undefined;
-  start: Slide_Element_ChildBuild_Start;
+  start: Slide_Element_Build_Start;
   delayTime: number;
   index: number;
-}
-
-export enum Slide_Element_ChildBuild_Start {
-  START_ON_CLICK = 0,
-  START_WITH_PREVIOUS = 1,
-  START_AFTER_PREVIOUS = 2,
-  START_WITH_SLIDE = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_ChildBuild_StartFromJSON(
-  object: any,
-): Slide_Element_ChildBuild_Start {
-  switch (object) {
-    case 0:
-    case 'START_ON_CLICK':
-      return Slide_Element_ChildBuild_Start.START_ON_CLICK;
-    case 1:
-    case 'START_WITH_PREVIOUS':
-      return Slide_Element_ChildBuild_Start.START_WITH_PREVIOUS;
-    case 2:
-    case 'START_AFTER_PREVIOUS':
-      return Slide_Element_ChildBuild_Start.START_AFTER_PREVIOUS;
-    case 3:
-    case 'START_WITH_SLIDE':
-      return Slide_Element_ChildBuild_Start.START_WITH_SLIDE;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_ChildBuild_Start.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_ChildBuild_StartToJSON(
-  object: Slide_Element_ChildBuild_Start,
-): string {
-  switch (object) {
-    case Slide_Element_ChildBuild_Start.START_ON_CLICK:
-      return 'START_ON_CLICK';
-    case Slide_Element_ChildBuild_Start.START_WITH_PREVIOUS:
-      return 'START_WITH_PREVIOUS';
-    case Slide_Element_ChildBuild_Start.START_AFTER_PREVIOUS:
-      return 'START_AFTER_PREVIOUS';
-    case Slide_Element_ChildBuild_Start.START_WITH_SLIDE:
-      return 'START_WITH_SLIDE';
-    case Slide_Element_ChildBuild_Start.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
 }
 
 export interface Slide_Element_DataLink {
@@ -224,6 +220,123 @@ export interface Slide_Element_DataLink {
     | undefined;
   timecodeText?: Slide_Element_DataLink_TimecodeText | undefined;
   timecodeStatus?: Slide_Element_DataLink_TimecodeStatus | undefined;
+}
+
+export enum Slide_Element_DataLink_SlideSourceType {
+  SLIDE_SOURCE_TYPE_CURRENT_SLIDE = 0,
+  SLIDE_SOURCE_TYPE_NEXT_SLIDE = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function slide_Element_DataLink_SlideSourceTypeFromJSON(
+  object: any,
+): Slide_Element_DataLink_SlideSourceType {
+  switch (object) {
+    case 0:
+    case 'SLIDE_SOURCE_TYPE_CURRENT_SLIDE':
+      return Slide_Element_DataLink_SlideSourceType.SLIDE_SOURCE_TYPE_CURRENT_SLIDE;
+    case 1:
+    case 'SLIDE_SOURCE_TYPE_NEXT_SLIDE':
+      return Slide_Element_DataLink_SlideSourceType.SLIDE_SOURCE_TYPE_NEXT_SLIDE;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Slide_Element_DataLink_SlideSourceType.UNRECOGNIZED;
+  }
+}
+
+export function slide_Element_DataLink_SlideSourceTypeToJSON(
+  object: Slide_Element_DataLink_SlideSourceType,
+): string {
+  switch (object) {
+    case Slide_Element_DataLink_SlideSourceType.SLIDE_SOURCE_TYPE_CURRENT_SLIDE:
+      return 'SLIDE_SOURCE_TYPE_CURRENT_SLIDE';
+    case Slide_Element_DataLink_SlideSourceType.SLIDE_SOURCE_TYPE_NEXT_SLIDE:
+      return 'SLIDE_SOURCE_TYPE_NEXT_SLIDE';
+    case Slide_Element_DataLink_SlideSourceType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Slide_Element_DataLink_GroupSourceType {
+  GROUP_SOURCE_TYPE_CURRENT_SLIDE = 0,
+  GROUP_SOURCE_TYPE_NEXT_SLIDE = 1,
+  GROUP_SOURCE_TYPE_NEXT_GROUP = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function slide_Element_DataLink_GroupSourceTypeFromJSON(
+  object: any,
+): Slide_Element_DataLink_GroupSourceType {
+  switch (object) {
+    case 0:
+    case 'GROUP_SOURCE_TYPE_CURRENT_SLIDE':
+      return Slide_Element_DataLink_GroupSourceType.GROUP_SOURCE_TYPE_CURRENT_SLIDE;
+    case 1:
+    case 'GROUP_SOURCE_TYPE_NEXT_SLIDE':
+      return Slide_Element_DataLink_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_SLIDE;
+    case 2:
+    case 'GROUP_SOURCE_TYPE_NEXT_GROUP':
+      return Slide_Element_DataLink_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_GROUP;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Slide_Element_DataLink_GroupSourceType.UNRECOGNIZED;
+  }
+}
+
+export function slide_Element_DataLink_GroupSourceTypeToJSON(
+  object: Slide_Element_DataLink_GroupSourceType,
+): string {
+  switch (object) {
+    case Slide_Element_DataLink_GroupSourceType.GROUP_SOURCE_TYPE_CURRENT_SLIDE:
+      return 'GROUP_SOURCE_TYPE_CURRENT_SLIDE';
+    case Slide_Element_DataLink_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_SLIDE:
+      return 'GROUP_SOURCE_TYPE_NEXT_SLIDE';
+    case Slide_Element_DataLink_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_GROUP:
+      return 'GROUP_SOURCE_TYPE_NEXT_GROUP';
+    case Slide_Element_DataLink_GroupSourceType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Slide_Element_DataLink_SlideLabelSource {
+  SLIDE_LABEL_SOURCE_CURRENT_SLIDE = 0,
+  SLIDE_LABEL_SOURCE_NEXT_SLIDE = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function slide_Element_DataLink_SlideLabelSourceFromJSON(
+  object: any,
+): Slide_Element_DataLink_SlideLabelSource {
+  switch (object) {
+    case 0:
+    case 'SLIDE_LABEL_SOURCE_CURRENT_SLIDE':
+      return Slide_Element_DataLink_SlideLabelSource.SLIDE_LABEL_SOURCE_CURRENT_SLIDE;
+    case 1:
+    case 'SLIDE_LABEL_SOURCE_NEXT_SLIDE':
+      return Slide_Element_DataLink_SlideLabelSource.SLIDE_LABEL_SOURCE_NEXT_SLIDE;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Slide_Element_DataLink_SlideLabelSource.UNRECOGNIZED;
+  }
+}
+
+export function slide_Element_DataLink_SlideLabelSourceToJSON(
+  object: Slide_Element_DataLink_SlideLabelSource,
+): string {
+  switch (object) {
+    case Slide_Element_DataLink_SlideLabelSource.SLIDE_LABEL_SOURCE_CURRENT_SLIDE:
+      return 'SLIDE_LABEL_SOURCE_CURRENT_SLIDE';
+    case Slide_Element_DataLink_SlideLabelSource.SLIDE_LABEL_SOURCE_NEXT_SLIDE:
+      return 'SLIDE_LABEL_SOURCE_NEXT_SLIDE';
+    case Slide_Element_DataLink_SlideLabelSource.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
 }
 
 export interface Slide_Element_DataLink_RSSFeed {
@@ -887,48 +1000,11 @@ export function slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibi
 }
 
 export interface Slide_Element_DataLink_SlideText {
-  sourceSlide: Slide_Element_DataLink_SlideText_SlideSourceType;
+  sourceSlide: Slide_Element_DataLink_SlideSourceType;
   sourceOption: Slide_Element_DataLink_SlideText_TextSourceOption;
   preserveNotesFormat: boolean;
   nameToMatch: string;
-  elementTextTransform: Slide_Element_DataLink_SlideText_TextTransformOption;
-}
-
-export enum Slide_Element_DataLink_SlideText_SlideSourceType {
-  SLIDE_SOURCE_TYPE_CURRENT_SLIDE = 0,
-  SLIDE_SOURCE_TYPE_NEXT_SLIDE = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_SlideText_SlideSourceTypeFromJSON(
-  object: any,
-): Slide_Element_DataLink_SlideText_SlideSourceType {
-  switch (object) {
-    case 0:
-    case 'SLIDE_SOURCE_TYPE_CURRENT_SLIDE':
-      return Slide_Element_DataLink_SlideText_SlideSourceType.SLIDE_SOURCE_TYPE_CURRENT_SLIDE;
-    case 1:
-    case 'SLIDE_SOURCE_TYPE_NEXT_SLIDE':
-      return Slide_Element_DataLink_SlideText_SlideSourceType.SLIDE_SOURCE_TYPE_NEXT_SLIDE;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_SlideText_SlideSourceType.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_SlideText_SlideSourceTypeToJSON(
-  object: Slide_Element_DataLink_SlideText_SlideSourceType,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_SlideText_SlideSourceType.SLIDE_SOURCE_TYPE_CURRENT_SLIDE:
-      return 'SLIDE_SOURCE_TYPE_CURRENT_SLIDE';
-    case Slide_Element_DataLink_SlideText_SlideSourceType.SLIDE_SOURCE_TYPE_NEXT_SLIDE:
-      return 'SLIDE_SOURCE_TYPE_NEXT_SLIDE';
-    case Slide_Element_DataLink_SlideText_SlideSourceType.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
+  elementTextTransform: Slide_Element_DataLink_AlternateElementText_TextTransformOption;
 }
 
 export enum Slide_Element_DataLink_SlideText_TextSourceOption {
@@ -974,94 +1050,8 @@ export function slide_Element_DataLink_SlideText_TextSourceOptionToJSON(
   }
 }
 
-export enum Slide_Element_DataLink_SlideText_TextTransformOption {
-  TEXT_TRANSFORM_OPTION_NONE = 0,
-  TEXT_TRANSFORM_OPTION_REMOVE_LINE_RETURNS = 1,
-  TEXT_TRANSFORM_OPTION_ONE_WORD_PER_LINE = 2,
-  TEXT_TRANSFORM_OPTION_ONE_CHARACTER_PER_LINE = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_SlideText_TextTransformOptionFromJSON(
-  object: any,
-): Slide_Element_DataLink_SlideText_TextTransformOption {
-  switch (object) {
-    case 0:
-    case 'TEXT_TRANSFORM_OPTION_NONE':
-      return Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_NONE;
-    case 1:
-    case 'TEXT_TRANSFORM_OPTION_REMOVE_LINE_RETURNS':
-      return Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_REMOVE_LINE_RETURNS;
-    case 2:
-    case 'TEXT_TRANSFORM_OPTION_ONE_WORD_PER_LINE':
-      return Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_ONE_WORD_PER_LINE;
-    case 3:
-    case 'TEXT_TRANSFORM_OPTION_ONE_CHARACTER_PER_LINE':
-      return Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_ONE_CHARACTER_PER_LINE;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_SlideText_TextTransformOption.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_SlideText_TextTransformOptionToJSON(
-  object: Slide_Element_DataLink_SlideText_TextTransformOption,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_NONE:
-      return 'TEXT_TRANSFORM_OPTION_NONE';
-    case Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_REMOVE_LINE_RETURNS:
-      return 'TEXT_TRANSFORM_OPTION_REMOVE_LINE_RETURNS';
-    case Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_ONE_WORD_PER_LINE:
-      return 'TEXT_TRANSFORM_OPTION_ONE_WORD_PER_LINE';
-    case Slide_Element_DataLink_SlideText_TextTransformOption.TEXT_TRANSFORM_OPTION_ONE_CHARACTER_PER_LINE:
-      return 'TEXT_TRANSFORM_OPTION_ONE_CHARACTER_PER_LINE';
-    case Slide_Element_DataLink_SlideText_TextTransformOption.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
-}
-
 export interface Slide_Element_DataLink_SlideImage {
-  sourceSlide: Slide_Element_DataLink_SlideImage_SlideSourceType;
-}
-
-export enum Slide_Element_DataLink_SlideImage_SlideSourceType {
-  SLIDE_SOURCE_TYPE_CURRENT_SLIDE = 0,
-  SLIDE_SOURCE_TYPE_NEXT_SLIDE = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_SlideImage_SlideSourceTypeFromJSON(
-  object: any,
-): Slide_Element_DataLink_SlideImage_SlideSourceType {
-  switch (object) {
-    case 0:
-    case 'SLIDE_SOURCE_TYPE_CURRENT_SLIDE':
-      return Slide_Element_DataLink_SlideImage_SlideSourceType.SLIDE_SOURCE_TYPE_CURRENT_SLIDE;
-    case 1:
-    case 'SLIDE_SOURCE_TYPE_NEXT_SLIDE':
-      return Slide_Element_DataLink_SlideImage_SlideSourceType.SLIDE_SOURCE_TYPE_NEXT_SLIDE;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_SlideImage_SlideSourceType.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_SlideImage_SlideSourceTypeToJSON(
-  object: Slide_Element_DataLink_SlideImage_SlideSourceType,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_SlideImage_SlideSourceType.SLIDE_SOURCE_TYPE_CURRENT_SLIDE:
-      return 'SLIDE_SOURCE_TYPE_CURRENT_SLIDE';
-    case Slide_Element_DataLink_SlideImage_SlideSourceType.SLIDE_SOURCE_TYPE_NEXT_SLIDE:
-      return 'SLIDE_SOURCE_TYPE_NEXT_SLIDE';
-    case Slide_Element_DataLink_SlideImage_SlideSourceType.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
+  sourceSlide: Slide_Element_DataLink_SlideSourceType;
 }
 
 export interface Slide_Element_DataLink_StageMessage {
@@ -1122,179 +1112,19 @@ export interface Slide_Element_DataLink_AudioCountdown {
 }
 
 export interface Slide_Element_DataLink_GroupName {
-  groupSource: Slide_Element_DataLink_GroupName_GroupSourceType;
-}
-
-export enum Slide_Element_DataLink_GroupName_GroupSourceType {
-  GROUP_SOURCE_TYPE_CURRENT_SLIDE = 0,
-  GROUP_SOURCE_TYPE_NEXT_SLIDE = 1,
-  GROUP_SOURCE_TYPE_NEXT_GROUP = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_GroupName_GroupSourceTypeFromJSON(
-  object: any,
-): Slide_Element_DataLink_GroupName_GroupSourceType {
-  switch (object) {
-    case 0:
-    case 'GROUP_SOURCE_TYPE_CURRENT_SLIDE':
-      return Slide_Element_DataLink_GroupName_GroupSourceType.GROUP_SOURCE_TYPE_CURRENT_SLIDE;
-    case 1:
-    case 'GROUP_SOURCE_TYPE_NEXT_SLIDE':
-      return Slide_Element_DataLink_GroupName_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_SLIDE;
-    case 2:
-    case 'GROUP_SOURCE_TYPE_NEXT_GROUP':
-      return Slide_Element_DataLink_GroupName_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_GROUP;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_GroupName_GroupSourceType.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_GroupName_GroupSourceTypeToJSON(
-  object: Slide_Element_DataLink_GroupName_GroupSourceType,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_GroupName_GroupSourceType.GROUP_SOURCE_TYPE_CURRENT_SLIDE:
-      return 'GROUP_SOURCE_TYPE_CURRENT_SLIDE';
-    case Slide_Element_DataLink_GroupName_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_SLIDE:
-      return 'GROUP_SOURCE_TYPE_NEXT_SLIDE';
-    case Slide_Element_DataLink_GroupName_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_GROUP:
-      return 'GROUP_SOURCE_TYPE_NEXT_GROUP';
-    case Slide_Element_DataLink_GroupName_GroupSourceType.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
+  groupSource: Slide_Element_DataLink_GroupSourceType;
 }
 
 export interface Slide_Element_DataLink_GroupColor {
-  groupSource: Slide_Element_DataLink_GroupColor_GroupSourceType;
-}
-
-export enum Slide_Element_DataLink_GroupColor_GroupSourceType {
-  GROUP_SOURCE_TYPE_CURRENT_SLIDE = 0,
-  GROUP_SOURCE_TYPE_NEXT_SLIDE = 1,
-  GROUP_SOURCE_TYPE_NEXT_GROUP = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_GroupColor_GroupSourceTypeFromJSON(
-  object: any,
-): Slide_Element_DataLink_GroupColor_GroupSourceType {
-  switch (object) {
-    case 0:
-    case 'GROUP_SOURCE_TYPE_CURRENT_SLIDE':
-      return Slide_Element_DataLink_GroupColor_GroupSourceType.GROUP_SOURCE_TYPE_CURRENT_SLIDE;
-    case 1:
-    case 'GROUP_SOURCE_TYPE_NEXT_SLIDE':
-      return Slide_Element_DataLink_GroupColor_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_SLIDE;
-    case 2:
-    case 'GROUP_SOURCE_TYPE_NEXT_GROUP':
-      return Slide_Element_DataLink_GroupColor_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_GROUP;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_GroupColor_GroupSourceType.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_GroupColor_GroupSourceTypeToJSON(
-  object: Slide_Element_DataLink_GroupColor_GroupSourceType,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_GroupColor_GroupSourceType.GROUP_SOURCE_TYPE_CURRENT_SLIDE:
-      return 'GROUP_SOURCE_TYPE_CURRENT_SLIDE';
-    case Slide_Element_DataLink_GroupColor_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_SLIDE:
-      return 'GROUP_SOURCE_TYPE_NEXT_SLIDE';
-    case Slide_Element_DataLink_GroupColor_GroupSourceType.GROUP_SOURCE_TYPE_NEXT_GROUP:
-      return 'GROUP_SOURCE_TYPE_NEXT_GROUP';
-    case Slide_Element_DataLink_GroupColor_GroupSourceType.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
+  groupSource: Slide_Element_DataLink_GroupSourceType;
 }
 
 export interface Slide_Element_DataLink_SlideLabelText {
-  slideLabelSource: Slide_Element_DataLink_SlideLabelText_SlideLabelSource;
-}
-
-export enum Slide_Element_DataLink_SlideLabelText_SlideLabelSource {
-  SLIDE_LABEL_SOURCE_CURRENT_SLIDE = 0,
-  SLIDE_LABEL_SOURCE_NEXT_SLIDE = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_SlideLabelText_SlideLabelSourceFromJSON(
-  object: any,
-): Slide_Element_DataLink_SlideLabelText_SlideLabelSource {
-  switch (object) {
-    case 0:
-    case 'SLIDE_LABEL_SOURCE_CURRENT_SLIDE':
-      return Slide_Element_DataLink_SlideLabelText_SlideLabelSource.SLIDE_LABEL_SOURCE_CURRENT_SLIDE;
-    case 1:
-    case 'SLIDE_LABEL_SOURCE_NEXT_SLIDE':
-      return Slide_Element_DataLink_SlideLabelText_SlideLabelSource.SLIDE_LABEL_SOURCE_NEXT_SLIDE;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_SlideLabelText_SlideLabelSource.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_SlideLabelText_SlideLabelSourceToJSON(
-  object: Slide_Element_DataLink_SlideLabelText_SlideLabelSource,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_SlideLabelText_SlideLabelSource.SLIDE_LABEL_SOURCE_CURRENT_SLIDE:
-      return 'SLIDE_LABEL_SOURCE_CURRENT_SLIDE';
-    case Slide_Element_DataLink_SlideLabelText_SlideLabelSource.SLIDE_LABEL_SOURCE_NEXT_SLIDE:
-      return 'SLIDE_LABEL_SOURCE_NEXT_SLIDE';
-    case Slide_Element_DataLink_SlideLabelText_SlideLabelSource.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
+  slideLabelSource: Slide_Element_DataLink_SlideLabelSource;
 }
 
 export interface Slide_Element_DataLink_SlideLabelColor {
-  slideLabelSource: Slide_Element_DataLink_SlideLabelColor_SlideLabelSource;
-}
-
-export enum Slide_Element_DataLink_SlideLabelColor_SlideLabelSource {
-  SLIDE_LABEL_SOURCE_CURRENT_SLIDE = 0,
-  SLIDE_LABEL_SOURCE_NEXT_SLIDE = 1,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_SlideLabelColor_SlideLabelSourceFromJSON(
-  object: any,
-): Slide_Element_DataLink_SlideLabelColor_SlideLabelSource {
-  switch (object) {
-    case 0:
-    case 'SLIDE_LABEL_SOURCE_CURRENT_SLIDE':
-      return Slide_Element_DataLink_SlideLabelColor_SlideLabelSource.SLIDE_LABEL_SOURCE_CURRENT_SLIDE;
-    case 1:
-    case 'SLIDE_LABEL_SOURCE_NEXT_SLIDE':
-      return Slide_Element_DataLink_SlideLabelColor_SlideLabelSource.SLIDE_LABEL_SOURCE_NEXT_SLIDE;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_SlideLabelColor_SlideLabelSource.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_SlideLabelColor_SlideLabelSourceToJSON(
-  object: Slide_Element_DataLink_SlideLabelColor_SlideLabelSource,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_SlideLabelColor_SlideLabelSource.SLIDE_LABEL_SOURCE_CURRENT_SLIDE:
-      return 'SLIDE_LABEL_SOURCE_CURRENT_SLIDE';
-    case Slide_Element_DataLink_SlideLabelColor_SlideLabelSource.SLIDE_LABEL_SOURCE_NEXT_SLIDE:
-      return 'SLIDE_LABEL_SOURCE_NEXT_SLIDE';
-    case Slide_Element_DataLink_SlideLabelColor_SlideLabelSource.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
+  slideLabelSource: Slide_Element_DataLink_SlideLabelSource;
 }
 
 export interface Slide_Element_DataLink_PresentationNotes {}
@@ -1510,49 +1340,6 @@ export interface Slide_Element_DataLink_PlaybackMarkerIdentifier {
   name: string;
 }
 
-export enum Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination {
-  PLAYBACK_MARKER_DESTINATION_PRESENTATION = 0,
-  PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT = 1,
-  PLAYBACK_MARKER_DESTINATION_AUDIO = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function slide_Element_DataLink_PlaybackMarkerIdentifier_DestinationFromJSON(
-  object: any,
-): Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination {
-  switch (object) {
-    case 0:
-    case 'PLAYBACK_MARKER_DESTINATION_PRESENTATION':
-      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_PRESENTATION;
-    case 1:
-    case 'PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT':
-      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT;
-    case 2:
-    case 'PLAYBACK_MARKER_DESTINATION_AUDIO':
-      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_AUDIO;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.UNRECOGNIZED;
-  }
-}
-
-export function slide_Element_DataLink_PlaybackMarkerIdentifier_DestinationToJSON(
-  object: Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination,
-): string {
-  switch (object) {
-    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_PRESENTATION:
-      return 'PLAYBACK_MARKER_DESTINATION_PRESENTATION';
-    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT:
-      return 'PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT';
-    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_AUDIO:
-      return 'PLAYBACK_MARKER_DESTINATION_AUDIO';
-    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
-}
-
 export enum Slide_Element_DataLink_PlaybackMarkerIdentifier_Type {
   PLAYBACK_MARKER_IDENTIFIER_FIRST = 0,
   PLAYBACK_MARKER_IDENTIFIER_PREVIOUS = 1,
@@ -1603,6 +1390,49 @@ export function slide_Element_DataLink_PlaybackMarkerIdentifier_TypeToJSON(
     case Slide_Element_DataLink_PlaybackMarkerIdentifier_Type.PLAYBACK_MARKER_IDENTIFIER_NAME:
       return 'PLAYBACK_MARKER_IDENTIFIER_NAME';
     case Slide_Element_DataLink_PlaybackMarkerIdentifier_Type.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination {
+  PLAYBACK_MARKER_DESTINATION_PRESENTATION = 0,
+  PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT = 1,
+  PLAYBACK_MARKER_DESTINATION_AUDIO = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function slide_Element_DataLink_PlaybackMarkerIdentifier_DestinationFromJSON(
+  object: any,
+): Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination {
+  switch (object) {
+    case 0:
+    case 'PLAYBACK_MARKER_DESTINATION_PRESENTATION':
+      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_PRESENTATION;
+    case 1:
+    case 'PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT':
+      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT;
+    case 2:
+    case 'PLAYBACK_MARKER_DESTINATION_AUDIO':
+      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_AUDIO;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.UNRECOGNIZED;
+  }
+}
+
+export function slide_Element_DataLink_PlaybackMarkerIdentifier_DestinationToJSON(
+  object: Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination,
+): string {
+  switch (object) {
+    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_PRESENTATION:
+      return 'PLAYBACK_MARKER_DESTINATION_PRESENTATION';
+    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT:
+      return 'PLAYBACK_MARKER_DESTINATION_ANNOUNCEMENT';
+    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.PLAYBACK_MARKER_DESTINATION_AUDIO:
+      return 'PLAYBACK_MARKER_DESTINATION_AUDIO';
+    case Slide_Element_DataLink_PlaybackMarkerIdentifier_Destination.UNRECOGNIZED:
     default:
       return 'UNRECOGNIZED';
   }
@@ -2368,7 +2198,7 @@ export const Slide_Element_ChildBuild = {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       start: isSet(object.start)
-        ? slide_Element_ChildBuild_StartFromJSON(object.start)
+        ? slide_Element_Build_StartFromJSON(object.start)
         : 0,
       delayTime: isSet(object.delayTime) ? Number(object.delayTime) : 0,
       index: isSet(object.index) ? Number(object.index) : 0,
@@ -2380,7 +2210,7 @@ export const Slide_Element_ChildBuild = {
     message.uuid !== undefined &&
       (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.start !== undefined &&
-      (obj.start = slide_Element_ChildBuild_StartToJSON(message.start));
+      (obj.start = slide_Element_Build_StartToJSON(message.start));
     message.delayTime !== undefined && (obj.delayTime = message.delayTime);
     message.index !== undefined && (obj.index = Math.round(message.index));
     return obj;
@@ -6104,9 +5934,7 @@ export const Slide_Element_DataLink_SlideText = {
   fromJSON(object: any): Slide_Element_DataLink_SlideText {
     return {
       sourceSlide: isSet(object.sourceSlide)
-        ? slide_Element_DataLink_SlideText_SlideSourceTypeFromJSON(
-            object.sourceSlide,
-          )
+        ? slide_Element_DataLink_SlideSourceTypeFromJSON(object.sourceSlide)
         : 0,
       sourceOption: isSet(object.sourceOption)
         ? slide_Element_DataLink_SlideText_TextSourceOptionFromJSON(
@@ -6118,7 +5946,7 @@ export const Slide_Element_DataLink_SlideText = {
         : false,
       nameToMatch: isSet(object.nameToMatch) ? String(object.nameToMatch) : '',
       elementTextTransform: isSet(object.elementTextTransform)
-        ? slide_Element_DataLink_SlideText_TextTransformOptionFromJSON(
+        ? slide_Element_DataLink_AlternateElementText_TextTransformOptionFromJSON(
             object.elementTextTransform,
           )
         : 0,
@@ -6128,7 +5956,7 @@ export const Slide_Element_DataLink_SlideText = {
   toJSON(message: Slide_Element_DataLink_SlideText): unknown {
     const obj: any = {};
     message.sourceSlide !== undefined &&
-      (obj.sourceSlide = slide_Element_DataLink_SlideText_SlideSourceTypeToJSON(
+      (obj.sourceSlide = slide_Element_DataLink_SlideSourceTypeToJSON(
         message.sourceSlide,
       ));
     message.sourceOption !== undefined &&
@@ -6142,7 +5970,7 @@ export const Slide_Element_DataLink_SlideText = {
       (obj.nameToMatch = message.nameToMatch);
     message.elementTextTransform !== undefined &&
       (obj.elementTextTransform =
-        slide_Element_DataLink_SlideText_TextTransformOptionToJSON(
+        slide_Element_DataLink_AlternateElementText_TextTransformOptionToJSON(
           message.elementTextTransform,
         ));
     return obj;
@@ -6212,9 +6040,7 @@ export const Slide_Element_DataLink_SlideImage = {
   fromJSON(object: any): Slide_Element_DataLink_SlideImage {
     return {
       sourceSlide: isSet(object.sourceSlide)
-        ? slide_Element_DataLink_SlideImage_SlideSourceTypeFromJSON(
-            object.sourceSlide,
-          )
+        ? slide_Element_DataLink_SlideSourceTypeFromJSON(object.sourceSlide)
         : 0,
     };
   },
@@ -6222,10 +6048,9 @@ export const Slide_Element_DataLink_SlideImage = {
   toJSON(message: Slide_Element_DataLink_SlideImage): unknown {
     const obj: any = {};
     message.sourceSlide !== undefined &&
-      (obj.sourceSlide =
-        slide_Element_DataLink_SlideImage_SlideSourceTypeToJSON(
-          message.sourceSlide,
-        ));
+      (obj.sourceSlide = slide_Element_DataLink_SlideSourceTypeToJSON(
+        message.sourceSlide,
+      ));
     return obj;
   },
 
@@ -6700,9 +6525,7 @@ export const Slide_Element_DataLink_GroupName = {
   fromJSON(object: any): Slide_Element_DataLink_GroupName {
     return {
       groupSource: isSet(object.groupSource)
-        ? slide_Element_DataLink_GroupName_GroupSourceTypeFromJSON(
-            object.groupSource,
-          )
+        ? slide_Element_DataLink_GroupSourceTypeFromJSON(object.groupSource)
         : 0,
     };
   },
@@ -6710,7 +6533,7 @@ export const Slide_Element_DataLink_GroupName = {
   toJSON(message: Slide_Element_DataLink_GroupName): unknown {
     const obj: any = {};
     message.groupSource !== undefined &&
-      (obj.groupSource = slide_Element_DataLink_GroupName_GroupSourceTypeToJSON(
+      (obj.groupSource = slide_Element_DataLink_GroupSourceTypeToJSON(
         message.groupSource,
       ));
     return obj;
@@ -6776,9 +6599,7 @@ export const Slide_Element_DataLink_GroupColor = {
   fromJSON(object: any): Slide_Element_DataLink_GroupColor {
     return {
       groupSource: isSet(object.groupSource)
-        ? slide_Element_DataLink_GroupColor_GroupSourceTypeFromJSON(
-            object.groupSource,
-          )
+        ? slide_Element_DataLink_GroupSourceTypeFromJSON(object.groupSource)
         : 0,
     };
   },
@@ -6786,10 +6607,9 @@ export const Slide_Element_DataLink_GroupColor = {
   toJSON(message: Slide_Element_DataLink_GroupColor): unknown {
     const obj: any = {};
     message.groupSource !== undefined &&
-      (obj.groupSource =
-        slide_Element_DataLink_GroupColor_GroupSourceTypeToJSON(
-          message.groupSource,
-        ));
+      (obj.groupSource = slide_Element_DataLink_GroupSourceTypeToJSON(
+        message.groupSource,
+      ));
     return obj;
   },
 
@@ -6853,7 +6673,7 @@ export const Slide_Element_DataLink_SlideLabelText = {
   fromJSON(object: any): Slide_Element_DataLink_SlideLabelText {
     return {
       slideLabelSource: isSet(object.slideLabelSource)
-        ? slide_Element_DataLink_SlideLabelText_SlideLabelSourceFromJSON(
+        ? slide_Element_DataLink_SlideLabelSourceFromJSON(
             object.slideLabelSource,
           )
         : 0,
@@ -6863,10 +6683,9 @@ export const Slide_Element_DataLink_SlideLabelText = {
   toJSON(message: Slide_Element_DataLink_SlideLabelText): unknown {
     const obj: any = {};
     message.slideLabelSource !== undefined &&
-      (obj.slideLabelSource =
-        slide_Element_DataLink_SlideLabelText_SlideLabelSourceToJSON(
-          message.slideLabelSource,
-        ));
+      (obj.slideLabelSource = slide_Element_DataLink_SlideLabelSourceToJSON(
+        message.slideLabelSource,
+      ));
     return obj;
   },
 
@@ -6930,7 +6749,7 @@ export const Slide_Element_DataLink_SlideLabelColor = {
   fromJSON(object: any): Slide_Element_DataLink_SlideLabelColor {
     return {
       slideLabelSource: isSet(object.slideLabelSource)
-        ? slide_Element_DataLink_SlideLabelColor_SlideLabelSourceFromJSON(
+        ? slide_Element_DataLink_SlideLabelSourceFromJSON(
             object.slideLabelSource,
           )
         : 0,
@@ -6940,10 +6759,9 @@ export const Slide_Element_DataLink_SlideLabelColor = {
   toJSON(message: Slide_Element_DataLink_SlideLabelColor): unknown {
     const obj: any = {};
     message.slideLabelSource !== undefined &&
-      (obj.slideLabelSource =
-        slide_Element_DataLink_SlideLabelColor_SlideLabelSourceToJSON(
-          message.slideLabelSource,
-        ));
+      (obj.slideLabelSource = slide_Element_DataLink_SlideLabelSourceToJSON(
+        message.slideLabelSource,
+      ));
     return obj;
   },
 

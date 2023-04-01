@@ -2,9 +2,29 @@ syntax = "proto3";
 
 package rv.data;
 
+option cc_enable_arenas = true;
+option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
+option swift_prefix = "RVData_";
+
 import "basicTypes.proto";
 
 message TestPattern {
+  message BlendGrid {
+    bool draw_grid = 1;
+    bool draw_circles = 2;
+    bool draw_lines = 3;
+    bool invert_colors = 4;
+    double grid_spacing = 5;
+  }
+
+  message CustomColor {
+    .rv.data.Color color = 1;
+  }
+
+  message IntensityColor {
+    double intensity = 1;
+  }
+
   enum Type {
     TYPE_UNKNOWN = 0;
     TYPE_BLEND_GRID = 1;
@@ -15,28 +35,12 @@ message TestPattern {
     TYPE_WHITE_COLOR = 6;
     TYPE_CUSTOM_COLOR = 7;
   }
-  Type type = 1;
+
+  .rv.data.TestPattern.Type type = 1;
   oneof PatternProperties {
-    rv.data.TestPattern.BlendGrid blend_grid = 2;
-    rv.data.TestPattern.CustomColor custom_color = 3;
-    rv.data.TestPattern.IntensityColor intensity = 4;
-  }
-
-
-  message BlendGrid {
-    bool draw_grid = 1;
-    bool draw_circles = 2;
-    bool draw_lines = 3;
-    bool invert_colors = 4;
-    double grid_spacing = 5;
-
-  }
-  message CustomColor {
-    rv.data.Color color = 1;
-
-  }
-  message IntensityColor {
-    double intensity = 1;
-
+    .rv.data.TestPattern.BlendGrid blend_grid = 2;
+    .rv.data.TestPattern.CustomColor custom_color = 3;
+    .rv.data.TestPattern.IntensityColor intensity = 4;
   }
 }
+

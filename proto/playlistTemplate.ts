@@ -1,8 +1,8 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { PlaylistItem } from "./playlist";
+import _m0 from 'protobufjs/minimal';
+import { PlaylistItem } from './playlist';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface PlaylistTemplate {
   templates: PlaylistTemplate_Template[];
@@ -18,7 +18,10 @@ function createBasePlaylistTemplate(): PlaylistTemplate {
 }
 
 export const PlaylistTemplate = {
-  encode(message: PlaylistTemplate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: PlaylistTemplate,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.templates) {
       PlaylistTemplate_Template.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -26,7 +29,8 @@ export const PlaylistTemplate = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): PlaylistTemplate {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaylistTemplate();
     while (reader.pos < end) {
@@ -37,7 +41,9 @@ export const PlaylistTemplate = {
             break;
           }
 
-          message.templates.push(PlaylistTemplate_Template.decode(reader, reader.uint32()));
+          message.templates.push(
+            PlaylistTemplate_Template.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -51,7 +57,9 @@ export const PlaylistTemplate = {
   fromJSON(object: any): PlaylistTemplate {
     return {
       templates: Array.isArray(object?.templates)
-        ? object.templates.map((e: any) => PlaylistTemplate_Template.fromJSON(e))
+        ? object.templates.map((e: any) =>
+            PlaylistTemplate_Template.fromJSON(e),
+          )
         : [],
     };
   },
@@ -59,31 +67,42 @@ export const PlaylistTemplate = {
   toJSON(message: PlaylistTemplate): unknown {
     const obj: any = {};
     if (message.templates) {
-      obj.templates = message.templates.map((e) => e ? PlaylistTemplate_Template.toJSON(e) : undefined);
+      obj.templates = message.templates.map((e) =>
+        e ? PlaylistTemplate_Template.toJSON(e) : undefined,
+      );
     } else {
       obj.templates = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PlaylistTemplate>, I>>(base?: I): PlaylistTemplate {
+  create<I extends Exact<DeepPartial<PlaylistTemplate>, I>>(
+    base?: I,
+  ): PlaylistTemplate {
     return PlaylistTemplate.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<PlaylistTemplate>, I>>(object: I): PlaylistTemplate {
+  fromPartial<I extends Exact<DeepPartial<PlaylistTemplate>, I>>(
+    object: I,
+  ): PlaylistTemplate {
     const message = createBasePlaylistTemplate();
-    message.templates = object.templates?.map((e) => PlaylistTemplate_Template.fromPartial(e)) || [];
+    message.templates =
+      object.templates?.map((e) => PlaylistTemplate_Template.fromPartial(e)) ||
+      [];
     return message;
   },
 };
 
 function createBasePlaylistTemplate_Template(): PlaylistTemplate_Template {
-  return { name: "", playlistItems: [] };
+  return { name: '', playlistItems: [] };
 }
 
 export const PlaylistTemplate_Template = {
-  encode(message: PlaylistTemplate_Template, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: PlaylistTemplate_Template,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.playlistItems) {
@@ -92,8 +111,12 @@ export const PlaylistTemplate_Template = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): PlaylistTemplate_Template {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PlaylistTemplate_Template {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlaylistTemplate_Template();
     while (reader.pos < end) {
@@ -111,7 +134,9 @@ export const PlaylistTemplate_Template = {
             break;
           }
 
-          message.playlistItems.push(PlaylistItem.decode(reader, reader.uint32()));
+          message.playlistItems.push(
+            PlaylistItem.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -124,7 +149,7 @@ export const PlaylistTemplate_Template = {
 
   fromJSON(object: any): PlaylistTemplate_Template {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       playlistItems: Array.isArray(object?.playlistItems)
         ? object.playlistItems.map((e: any) => PlaylistItem.fromJSON(e))
         : [],
@@ -135,35 +160,57 @@ export const PlaylistTemplate_Template = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.playlistItems) {
-      obj.playlistItems = message.playlistItems.map((e) => e ? PlaylistItem.toJSON(e) : undefined);
+      obj.playlistItems = message.playlistItems.map((e) =>
+        e ? PlaylistItem.toJSON(e) : undefined,
+      );
     } else {
       obj.playlistItems = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<PlaylistTemplate_Template>, I>>(base?: I): PlaylistTemplate_Template {
+  create<I extends Exact<DeepPartial<PlaylistTemplate_Template>, I>>(
+    base?: I,
+  ): PlaylistTemplate_Template {
     return PlaylistTemplate_Template.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<PlaylistTemplate_Template>, I>>(object: I): PlaylistTemplate_Template {
+  fromPartial<I extends Exact<DeepPartial<PlaylistTemplate_Template>, I>>(
+    object: I,
+  ): PlaylistTemplate_Template {
     const message = createBasePlaylistTemplate_Template();
-    message.name = object.name ?? "";
-    message.playlistItems = object.playlistItems?.map((e) => PlaylistItem.fromPartial(e)) || [];
+    message.name = object.name ?? '';
+    message.playlistItems =
+      object.playlistItems?.map((e) => PlaylistItem.fromPartial(e)) || [];
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

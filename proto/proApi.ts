@@ -1,13 +1,18 @@
 /* eslint-disable */
-import Long from "long";
-import _m0 from "protobufjs/minimal";
-import { UUID } from "./basicTypes";
-import { Message_TokenValue } from "./messages";
-import { NetworkAPIV1 } from "./proApiV1";
-import { Timestamp } from "./rvtimestamp";
-import { Timer_Configuration } from "./timers";
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
+import {
+  ApplicationInfo_Platform,
+  applicationInfo_PlatformFromJSON,
+  applicationInfo_PlatformToJSON,
+  UUID,
+} from './basicTypes';
+import { Message_TokenValue } from './messages';
+import { NetworkAPIV1 } from './proApiV1';
+import { Timestamp } from './rvtimestamp';
+import { Timer_Configuration } from './timers';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface ProApiIn {
   handlerIn?: ProLink_HandlerIn | undefined;
@@ -37,8 +42,7 @@ export interface ProApiNetworkConfiguration {
   webResourceRoot: string;
 }
 
-export interface ProLink {
-}
+export interface ProLink {}
 
 export interface ProLink_GroupDefinition {
   timestamp: Timestamp | undefined;
@@ -53,8 +57,7 @@ export interface ProLink_GroupDefinition_Member {
   port: number;
 }
 
-export interface ProLink_ZeroConfig {
-}
+export interface ProLink_ZeroConfig {}
 
 export interface ProLink_ZeroConfig_NetworkEnvironment {
   availableGroups: ProLink_GroupDefinition[];
@@ -66,11 +69,9 @@ export interface ProLink_ZeroConfig_MulticastPacket {
   device: ProLink_MemberStatus | undefined;
 }
 
-export interface ProLink_TowerMessage {
-}
+export interface ProLink_TowerMessage {}
 
-export interface ProLink_TowerMessage_TowerStatusRequest {
-}
+export interface ProLink_TowerMessage_TowerStatusRequest {}
 
 export interface ProLink_TowerMessage_TowerStatusResponse {
   memberName: string;
@@ -89,7 +90,9 @@ export interface ProLink_TowerMessage_TowerRemoveMemberRequest {
 export interface ProLink_TowerMessage_TowerAddMemberResponse {
   groupDefinition?: ProLink_GroupDefinition | undefined;
   accept?: ProLink_TowerMessage_TowerAddMemberResponse_Accept | undefined;
-  declineReason?: ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason | undefined;
+  declineReason?:
+    | ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason
+    | undefined;
 }
 
 export enum ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason {
@@ -103,13 +106,13 @@ export function proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonFromJSO
 ): ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason {
   switch (object) {
     case 0:
-    case "ALREADY_IN_GROUP":
+    case 'ALREADY_IN_GROUP':
       return ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason.ALREADY_IN_GROUP;
     case 1:
-    case "USER_DECLINED":
+    case 'USER_DECLINED':
       return ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason.USER_DECLINED;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason.UNRECOGNIZED;
   }
@@ -120,20 +123,18 @@ export function proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonToJSON(
 ): string {
   switch (object) {
     case ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason.ALREADY_IN_GROUP:
-      return "ALREADY_IN_GROUP";
+      return 'ALREADY_IN_GROUP';
     case ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason.USER_DECLINED:
-      return "USER_DECLINED";
+      return 'USER_DECLINED';
     case ProLink_TowerMessage_TowerAddMemberResponse_DeclineReason.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
-export interface ProLink_TowerMessage_TowerAddMemberResponse_Accept {
-}
+export interface ProLink_TowerMessage_TowerAddMemberResponse_Accept {}
 
-export interface ProLink_TowerMessage_TowerHeartbeatRequest {
-}
+export interface ProLink_TowerMessage_TowerHeartbeatRequest {}
 
 export interface ProLink_TowerMessage_TowerHeartbeatResponse {
   groupDefinition: ProLink_GroupDefinition | undefined;
@@ -143,50 +144,11 @@ export interface ProLink_MemberStatus {
   ip: string;
   port: number;
   name: string;
-  platform: ProLink_MemberStatus_Platform;
+  platform: ApplicationInfo_Platform;
   osVersion: string;
   hostDescription: string;
   apiVersion: string;
   connectionStatus: ProLink_MemberStatus_ConnectionStatus;
-}
-
-export enum ProLink_MemberStatus_Platform {
-  PLATFORM_UNDEFINED = 0,
-  PLATFORM_MACOS = 1,
-  PLATFORM_WINDOWS = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function proLink_MemberStatus_PlatformFromJSON(object: any): ProLink_MemberStatus_Platform {
-  switch (object) {
-    case 0:
-    case "PLATFORM_UNDEFINED":
-      return ProLink_MemberStatus_Platform.PLATFORM_UNDEFINED;
-    case 1:
-    case "PLATFORM_MACOS":
-      return ProLink_MemberStatus_Platform.PLATFORM_MACOS;
-    case 2:
-    case "PLATFORM_WINDOWS":
-      return ProLink_MemberStatus_Platform.PLATFORM_WINDOWS;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ProLink_MemberStatus_Platform.UNRECOGNIZED;
-  }
-}
-
-export function proLink_MemberStatus_PlatformToJSON(object: ProLink_MemberStatus_Platform): string {
-  switch (object) {
-    case ProLink_MemberStatus_Platform.PLATFORM_UNDEFINED:
-      return "PLATFORM_UNDEFINED";
-    case ProLink_MemberStatus_Platform.PLATFORM_MACOS:
-      return "PLATFORM_MACOS";
-    case ProLink_MemberStatus_Platform.PLATFORM_WINDOWS:
-      return "PLATFORM_WINDOWS";
-    case ProLink_MemberStatus_Platform.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
 }
 
 export enum ProLink_MemberStatus_ConnectionStatus {
@@ -196,35 +158,39 @@ export enum ProLink_MemberStatus_ConnectionStatus {
   UNRECOGNIZED = -1,
 }
 
-export function proLink_MemberStatus_ConnectionStatusFromJSON(object: any): ProLink_MemberStatus_ConnectionStatus {
+export function proLink_MemberStatus_ConnectionStatusFromJSON(
+  object: any,
+): ProLink_MemberStatus_ConnectionStatus {
   switch (object) {
     case 0:
-    case "CONNECTION_STATUS_UNKNOWN":
+    case 'CONNECTION_STATUS_UNKNOWN':
       return ProLink_MemberStatus_ConnectionStatus.CONNECTION_STATUS_UNKNOWN;
     case 1:
-    case "CONNECTION_STATUS_CONNECTED":
+    case 'CONNECTION_STATUS_CONNECTED':
       return ProLink_MemberStatus_ConnectionStatus.CONNECTION_STATUS_CONNECTED;
     case 2:
-    case "CONNECTION_STATUS_DISCONNECTED":
+    case 'CONNECTION_STATUS_DISCONNECTED':
       return ProLink_MemberStatus_ConnectionStatus.CONNECTION_STATUS_DISCONNECTED;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return ProLink_MemberStatus_ConnectionStatus.UNRECOGNIZED;
   }
 }
 
-export function proLink_MemberStatus_ConnectionStatusToJSON(object: ProLink_MemberStatus_ConnectionStatus): string {
+export function proLink_MemberStatus_ConnectionStatusToJSON(
+  object: ProLink_MemberStatus_ConnectionStatus,
+): string {
   switch (object) {
     case ProLink_MemberStatus_ConnectionStatus.CONNECTION_STATUS_UNKNOWN:
-      return "CONNECTION_STATUS_UNKNOWN";
+      return 'CONNECTION_STATUS_UNKNOWN';
     case ProLink_MemberStatus_ConnectionStatus.CONNECTION_STATUS_CONNECTED:
-      return "CONNECTION_STATUS_CONNECTED";
+      return 'CONNECTION_STATUS_CONNECTED';
     case ProLink_MemberStatus_ConnectionStatus.CONNECTION_STATUS_DISCONNECTED:
-      return "CONNECTION_STATUS_DISCONNECTED";
+      return 'CONNECTION_STATUS_DISCONNECTED';
     case ProLink_MemberStatus_ConnectionStatus.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -246,8 +212,7 @@ export interface ProLink_ClientAction_RemoveConnection {
   port: number;
 }
 
-export interface ProLink_ClientAction_CancelAction {
-}
+export interface ProLink_ClientAction_CancelAction {}
 
 export interface ProLink_ClientAction_RenderTime {
   latency: number;
@@ -265,15 +230,15 @@ export interface ProLink_HandlerIn {
   propresenterInfo?: ProLink_HandlerIn_ProPresenterInfo | undefined;
   serverState?: ProLink_HandlerIn_ServerState | undefined;
   configurationRequest?: ProLink_HandlerIn_ConfigurationRequest | undefined;
-  zeroconfigNetworkEnvironmentChange?: ProLink_ZeroConfig_NetworkEnvironment | undefined;
+  zeroconfigNetworkEnvironmentChange?:
+    | ProLink_ZeroConfig_NetworkEnvironment
+    | undefined;
   logRequest?: ProLink_HandlerIn_LogRequest | undefined;
 }
 
-export interface ProLink_HandlerIn_GroupName {
-}
+export interface ProLink_HandlerIn_GroupName {}
 
-export interface ProLink_HandlerIn_GroupDefinitionRequest {
-}
+export interface ProLink_HandlerIn_GroupDefinitionRequest {}
 
 export interface ProLink_HandlerIn_GroupJoinConfirmation {
   name: string;
@@ -293,36 +258,45 @@ export interface ProLink_HandlerIn_AddConnectionResult_Success {
 }
 
 export interface ProLink_HandlerIn_AddConnectionResult_Failure {
-  unexpected?: ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected | undefined;
+  unexpected?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected
+    | undefined;
   declined?: ProLink_HandlerIn_AddConnectionResult_Failure_Declined | undefined;
   timeout?: ProLink_HandlerIn_AddConnectionResult_Failure_Timeout | undefined;
-  linkDisabled?: ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled | undefined;
-  inOtherGroup?: ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup | undefined;
-  invalidIpAddress?: ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress | undefined;
-  alreadyInGroup?: ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup | undefined;
-  couldNotAdd?: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd | undefined;
-  couldNotJoin?: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin | undefined;
+  linkDisabled?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled
+    | undefined;
+  inOtherGroup?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup
+    | undefined;
+  invalidIpAddress?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress
+    | undefined;
+  alreadyInGroup?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup
+    | undefined;
+  couldNotAdd?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd
+    | undefined;
+  couldNotJoin?:
+    | ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin
+    | undefined;
 }
 
-export interface ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
-}
+export interface ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {}
 
-export interface ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
-}
+export interface ProLink_HandlerIn_AddConnectionResult_Failure_Declined {}
 
-export interface ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
-}
+export interface ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {}
 
-export interface ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
-}
+export interface ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {}
 
 export interface ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
   memberName: string;
   groupName: string;
 }
 
-export interface ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
-}
+export interface ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {}
 
 export interface ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
   memberName: string;
@@ -341,8 +315,7 @@ export interface ProLink_HandlerIn_MemberStatusChange {
   members: ProLink_MemberStatus[];
 }
 
-export interface ProLink_HandlerIn_ProPresenterInfo {
-}
+export interface ProLink_HandlerIn_ProPresenterInfo {}
 
 export interface ProLink_HandlerIn_ServerState {
   localIp: string;
@@ -351,8 +324,7 @@ export interface ProLink_HandlerIn_ServerState {
   success: boolean;
 }
 
-export interface ProLink_HandlerIn_ConfigurationRequest {
-}
+export interface ProLink_HandlerIn_ConfigurationRequest {}
 
 export interface ProLink_HandlerIn_LogRequest {
   severity: ProLink_HandlerIn_LogRequest_Severity;
@@ -369,50 +341,54 @@ export enum ProLink_HandlerIn_LogRequest_Severity {
   UNRECOGNIZED = -1,
 }
 
-export function proLink_HandlerIn_LogRequest_SeverityFromJSON(object: any): ProLink_HandlerIn_LogRequest_Severity {
+export function proLink_HandlerIn_LogRequest_SeverityFromJSON(
+  object: any,
+): ProLink_HandlerIn_LogRequest_Severity {
   switch (object) {
     case 0:
-    case "SEVERITY_DEBUG":
+    case 'SEVERITY_DEBUG':
       return ProLink_HandlerIn_LogRequest_Severity.SEVERITY_DEBUG;
     case 1:
-    case "SEVERITY_DEBUG_WARNING":
+    case 'SEVERITY_DEBUG_WARNING':
       return ProLink_HandlerIn_LogRequest_Severity.SEVERITY_DEBUG_WARNING;
     case 2:
-    case "SEVERITY_INFO":
+    case 'SEVERITY_INFO':
       return ProLink_HandlerIn_LogRequest_Severity.SEVERITY_INFO;
     case 3:
-    case "SEVERITY_WARNING":
+    case 'SEVERITY_WARNING':
       return ProLink_HandlerIn_LogRequest_Severity.SEVERITY_WARNING;
     case 4:
-    case "SEVERITY_ERROR":
+    case 'SEVERITY_ERROR':
       return ProLink_HandlerIn_LogRequest_Severity.SEVERITY_ERROR;
     case 5:
-    case "SEVERITY_FATAL_ERROR":
+    case 'SEVERITY_FATAL_ERROR':
       return ProLink_HandlerIn_LogRequest_Severity.SEVERITY_FATAL_ERROR;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return ProLink_HandlerIn_LogRequest_Severity.UNRECOGNIZED;
   }
 }
 
-export function proLink_HandlerIn_LogRequest_SeverityToJSON(object: ProLink_HandlerIn_LogRequest_Severity): string {
+export function proLink_HandlerIn_LogRequest_SeverityToJSON(
+  object: ProLink_HandlerIn_LogRequest_Severity,
+): string {
   switch (object) {
     case ProLink_HandlerIn_LogRequest_Severity.SEVERITY_DEBUG:
-      return "SEVERITY_DEBUG";
+      return 'SEVERITY_DEBUG';
     case ProLink_HandlerIn_LogRequest_Severity.SEVERITY_DEBUG_WARNING:
-      return "SEVERITY_DEBUG_WARNING";
+      return 'SEVERITY_DEBUG_WARNING';
     case ProLink_HandlerIn_LogRequest_Severity.SEVERITY_INFO:
-      return "SEVERITY_INFO";
+      return 'SEVERITY_INFO';
     case ProLink_HandlerIn_LogRequest_Severity.SEVERITY_WARNING:
-      return "SEVERITY_WARNING";
+      return 'SEVERITY_WARNING';
     case ProLink_HandlerIn_LogRequest_Severity.SEVERITY_ERROR:
-      return "SEVERITY_ERROR";
+      return 'SEVERITY_ERROR';
     case ProLink_HandlerIn_LogRequest_Severity.SEVERITY_FATAL_ERROR:
-      return "SEVERITY_FATAL_ERROR";
+      return 'SEVERITY_FATAL_ERROR';
     case ProLink_HandlerIn_LogRequest_Severity.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -438,52 +414,9 @@ export interface ProLink_HandlerOut_GroupJoinPassword {
 }
 
 export interface ProLink_HandlerOut_ProPresenterInfo {
-  platform: ProLink_HandlerOut_ProPresenterInfo_Platform;
+  platform: ApplicationInfo_Platform;
   osVersion: string;
   hostDescription: string;
-}
-
-export enum ProLink_HandlerOut_ProPresenterInfo_Platform {
-  PLATFORM_UNDEFINED = 0,
-  PLATFORM_MACOS = 1,
-  PLATFORM_WINDOWS = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function proLink_HandlerOut_ProPresenterInfo_PlatformFromJSON(
-  object: any,
-): ProLink_HandlerOut_ProPresenterInfo_Platform {
-  switch (object) {
-    case 0:
-    case "PLATFORM_UNDEFINED":
-      return ProLink_HandlerOut_ProPresenterInfo_Platform.PLATFORM_UNDEFINED;
-    case 1:
-    case "PLATFORM_MACOS":
-      return ProLink_HandlerOut_ProPresenterInfo_Platform.PLATFORM_MACOS;
-    case 2:
-    case "PLATFORM_WINDOWS":
-      return ProLink_HandlerOut_ProPresenterInfo_Platform.PLATFORM_WINDOWS;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return ProLink_HandlerOut_ProPresenterInfo_Platform.UNRECOGNIZED;
-  }
-}
-
-export function proLink_HandlerOut_ProPresenterInfo_PlatformToJSON(
-  object: ProLink_HandlerOut_ProPresenterInfo_Platform,
-): string {
-  switch (object) {
-    case ProLink_HandlerOut_ProPresenterInfo_Platform.PLATFORM_UNDEFINED:
-      return "PLATFORM_UNDEFINED";
-    case ProLink_HandlerOut_ProPresenterInfo_Platform.PLATFORM_MACOS:
-      return "PLATFORM_MACOS";
-    case ProLink_HandlerOut_ProPresenterInfo_Platform.PLATFORM_WINDOWS:
-      return "PLATFORM_WINDOWS";
-    case ProLink_HandlerOut_ProPresenterInfo_Platform.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
 }
 
 export interface NetworkAPI {
@@ -494,50 +427,11 @@ export interface NetworkAPI {
 }
 
 export interface NetworkAPI_LinkStatus {
-  platform: NetworkAPI_LinkStatus_Platform;
+  platform: ApplicationInfo_Platform;
   osVersion: string;
   version: string;
   description: string;
   groupInfo: NetworkAPI_Group | undefined;
-}
-
-export enum NetworkAPI_LinkStatus_Platform {
-  PLATFORM_UNDEFINED = 0,
-  PLATFORM_MACOS = 1,
-  PLATFORM_WINDOWS = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function networkAPI_LinkStatus_PlatformFromJSON(object: any): NetworkAPI_LinkStatus_Platform {
-  switch (object) {
-    case 0:
-    case "PLATFORM_UNDEFINED":
-      return NetworkAPI_LinkStatus_Platform.PLATFORM_UNDEFINED;
-    case 1:
-    case "PLATFORM_MACOS":
-      return NetworkAPI_LinkStatus_Platform.PLATFORM_MACOS;
-    case 2:
-    case "PLATFORM_WINDOWS":
-      return NetworkAPI_LinkStatus_Platform.PLATFORM_WINDOWS;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return NetworkAPI_LinkStatus_Platform.UNRECOGNIZED;
-  }
-}
-
-export function networkAPI_LinkStatus_PlatformToJSON(object: NetworkAPI_LinkStatus_Platform): string {
-  switch (object) {
-    case NetworkAPI_LinkStatus_Platform.PLATFORM_UNDEFINED:
-      return "PLATFORM_UNDEFINED";
-    case NetworkAPI_LinkStatus_Platform.PLATFORM_MACOS:
-      return "PLATFORM_MACOS";
-    case NetworkAPI_LinkStatus_Platform.PLATFORM_WINDOWS:
-      return "PLATFORM_WINDOWS";
-    case NetworkAPI_LinkStatus_Platform.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
 }
 
 export interface NetworkAPI_Group {
@@ -562,8 +456,7 @@ export interface NetworkAPI_GroupResponse {
   status?: NetworkAPI_GroupResponse_Status | undefined;
 }
 
-export interface NetworkAPI_GroupResponse_Success {
-}
+export interface NetworkAPI_GroupResponse_Success {}
 
 export interface NetworkAPI_GroupResponse_Status {
   memberName: string;
@@ -628,60 +521,64 @@ export enum NetworkAPI_Action_APIClear_Layer {
   UNRECOGNIZED = -1,
 }
 
-export function networkAPI_Action_APIClear_LayerFromJSON(object: any): NetworkAPI_Action_APIClear_Layer {
+export function networkAPI_Action_APIClear_LayerFromJSON(
+  object: any,
+): NetworkAPI_Action_APIClear_Layer {
   switch (object) {
     case 0:
-    case "LAYER_UNKNOWN":
+    case 'LAYER_UNKNOWN':
       return NetworkAPI_Action_APIClear_Layer.LAYER_UNKNOWN;
     case 1:
-    case "LAYER_VIDEO_INPUT":
+    case 'LAYER_VIDEO_INPUT':
       return NetworkAPI_Action_APIClear_Layer.LAYER_VIDEO_INPUT;
     case 2:
-    case "LAYER_MEDIA":
+    case 'LAYER_MEDIA':
       return NetworkAPI_Action_APIClear_Layer.LAYER_MEDIA;
     case 3:
-    case "LAYER_PRESENTATION":
+    case 'LAYER_PRESENTATION':
       return NetworkAPI_Action_APIClear_Layer.LAYER_PRESENTATION;
     case 4:
-    case "LAYER_ANNOUNCEMENT":
+    case 'LAYER_ANNOUNCEMENT':
       return NetworkAPI_Action_APIClear_Layer.LAYER_ANNOUNCEMENT;
     case 5:
-    case "LAYER_PROP":
+    case 'LAYER_PROP':
       return NetworkAPI_Action_APIClear_Layer.LAYER_PROP;
     case 6:
-    case "LAYER_MESSAGE":
+    case 'LAYER_MESSAGE':
       return NetworkAPI_Action_APIClear_Layer.LAYER_MESSAGE;
     case 7:
-    case "LAYER_AUDIO":
+    case 'LAYER_AUDIO':
       return NetworkAPI_Action_APIClear_Layer.LAYER_AUDIO;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return NetworkAPI_Action_APIClear_Layer.UNRECOGNIZED;
   }
 }
 
-export function networkAPI_Action_APIClear_LayerToJSON(object: NetworkAPI_Action_APIClear_Layer): string {
+export function networkAPI_Action_APIClear_LayerToJSON(
+  object: NetworkAPI_Action_APIClear_Layer,
+): string {
   switch (object) {
     case NetworkAPI_Action_APIClear_Layer.LAYER_UNKNOWN:
-      return "LAYER_UNKNOWN";
+      return 'LAYER_UNKNOWN';
     case NetworkAPI_Action_APIClear_Layer.LAYER_VIDEO_INPUT:
-      return "LAYER_VIDEO_INPUT";
+      return 'LAYER_VIDEO_INPUT';
     case NetworkAPI_Action_APIClear_Layer.LAYER_MEDIA:
-      return "LAYER_MEDIA";
+      return 'LAYER_MEDIA';
     case NetworkAPI_Action_APIClear_Layer.LAYER_PRESENTATION:
-      return "LAYER_PRESENTATION";
+      return 'LAYER_PRESENTATION';
     case NetworkAPI_Action_APIClear_Layer.LAYER_ANNOUNCEMENT:
-      return "LAYER_ANNOUNCEMENT";
+      return 'LAYER_ANNOUNCEMENT';
     case NetworkAPI_Action_APIClear_Layer.LAYER_PROP:
-      return "LAYER_PROP";
+      return 'LAYER_PROP';
     case NetworkAPI_Action_APIClear_Layer.LAYER_MESSAGE:
-      return "LAYER_MESSAGE";
+      return 'LAYER_MESSAGE';
     case NetworkAPI_Action_APIClear_Layer.LAYER_AUDIO:
-      return "LAYER_AUDIO";
+      return 'LAYER_AUDIO';
     case NetworkAPI_Action_APIClear_Layer.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -708,13 +605,13 @@ export function networkAPI_Action_APITwoStepTrigger_OperationFromJSON(
 ): NetworkAPI_Action_APITwoStepTrigger_Operation {
   switch (object) {
     case 0:
-    case "OPERATION_PREROLL":
+    case 'OPERATION_PREROLL':
       return NetworkAPI_Action_APITwoStepTrigger_Operation.OPERATION_PREROLL;
     case 1:
-    case "OPERATION_ACTIVATE":
+    case 'OPERATION_ACTIVATE':
       return NetworkAPI_Action_APITwoStepTrigger_Operation.OPERATION_ACTIVATE;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return NetworkAPI_Action_APITwoStepTrigger_Operation.UNRECOGNIZED;
   }
@@ -725,18 +622,19 @@ export function networkAPI_Action_APITwoStepTrigger_OperationToJSON(
 ): string {
   switch (object) {
     case NetworkAPI_Action_APITwoStepTrigger_Operation.OPERATION_PREROLL:
-      return "OPERATION_PREROLL";
+      return 'OPERATION_PREROLL';
     case NetworkAPI_Action_APITwoStepTrigger_Operation.OPERATION_ACTIVATE:
-      return "OPERATION_ACTIVATE";
+      return 'OPERATION_ACTIVATE';
     case NetworkAPI_Action_APITwoStepTrigger_Operation.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 export interface NetworkAPI_Action_APIPrerollComplete {
   id: number;
   failed: boolean;
+  latency: number;
 }
 
 export interface NetworkAPI_Action_APITrigger {
@@ -747,9 +645,12 @@ export interface NetworkAPI_Action_APITrigger {
 }
 
 export interface NetworkAPI_Action_APITrigger_Presentation {
-  cueIndex?: number | undefined;
-  playlistIndexPath?: NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation | undefined;
-  libraryIndexPath?: NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation | undefined;
+  playlistIndexPath?:
+    | NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation
+    | undefined;
+  libraryIndexPath?:
+    | NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation
+    | undefined;
 }
 
 export interface NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
@@ -796,19 +697,19 @@ export function networkAPI_Action_APITransport_TransportLayerFromJSON(
 ): NetworkAPI_Action_APITransport_TransportLayer {
   switch (object) {
     case 0:
-    case "TRANSPORT_LAYER_UNKNOWN":
+    case 'TRANSPORT_LAYER_UNKNOWN':
       return NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_UNKNOWN;
     case 1:
-    case "TRANSPORT_LAYER_PRESENTATION":
+    case 'TRANSPORT_LAYER_PRESENTATION':
       return NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_PRESENTATION;
     case 2:
-    case "TRANSPORT_LAYER_ANNOUNCEMENT":
+    case 'TRANSPORT_LAYER_ANNOUNCEMENT':
       return NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_ANNOUNCEMENT;
     case 3:
-    case "TRANSPORT_LAYER_AUDIO":
+    case 'TRANSPORT_LAYER_AUDIO':
       return NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_AUDIO;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return NetworkAPI_Action_APITransport_TransportLayer.UNRECOGNIZED;
   }
@@ -819,24 +720,22 @@ export function networkAPI_Action_APITransport_TransportLayerToJSON(
 ): string {
   switch (object) {
     case NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_UNKNOWN:
-      return "TRANSPORT_LAYER_UNKNOWN";
+      return 'TRANSPORT_LAYER_UNKNOWN';
     case NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_PRESENTATION:
-      return "TRANSPORT_LAYER_PRESENTATION";
+      return 'TRANSPORT_LAYER_PRESENTATION';
     case NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_ANNOUNCEMENT:
-      return "TRANSPORT_LAYER_ANNOUNCEMENT";
+      return 'TRANSPORT_LAYER_ANNOUNCEMENT';
     case NetworkAPI_Action_APITransport_TransportLayer.TRANSPORT_LAYER_AUDIO:
-      return "TRANSPORT_LAYER_AUDIO";
+      return 'TRANSPORT_LAYER_AUDIO';
     case NetworkAPI_Action_APITransport_TransportLayer.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
-export interface NetworkAPI_Action_APITransport_Play {
-}
+export interface NetworkAPI_Action_APITransport_Play {}
 
-export interface NetworkAPI_Action_APITransport_Pause {
-}
+export interface NetworkAPI_Action_APITransport_Pause {}
 
 export interface NetworkAPI_Action_APITransport_SkipBackward {
   seconds: number;
@@ -920,7 +819,9 @@ export interface NetworkAPI_Action_APIStage_StageLayouts {
 
 export interface NetworkAPI_Action_APIStage_StageMessage {
   showMessage?: NetworkAPI_Action_APIStage_StageMessage_ShowMessage | undefined;
-  clearMessage?: NetworkAPI_Action_APIStage_StageMessage_ClearMessage | undefined;
+  clearMessage?:
+    | NetworkAPI_Action_APIStage_StageMessage_ClearMessage
+    | undefined;
   hideMessage?: NetworkAPI_Action_APIStage_StageMessage_HideMessage | undefined;
 }
 
@@ -928,17 +829,13 @@ export interface NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
   message: string;
 }
 
-export interface NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
-}
+export interface NetworkAPI_Action_APIStage_StageMessage_ClearMessage {}
 
-export interface NetworkAPI_Action_APIStage_StageMessage_HideMessage {
-}
+export interface NetworkAPI_Action_APIStage_StageMessage_HideMessage {}
 
-export interface NetworkAPI_Action_StatusRequest {
-}
+export interface NetworkAPI_Action_StatusRequest {}
 
-export interface NetworkAPI_Action_APIStatus {
-}
+export interface NetworkAPI_Action_APIStatus {}
 
 export interface NetworkAPI_Action_APIStatusResponse {
   groupDefinition: ProLink_GroupDefinition | undefined;
@@ -956,25 +853,39 @@ export interface NetworkAPI_IndexOrNameIdentifierPair {
 }
 
 function createBaseProApiIn(): ProApiIn {
-  return { handlerIn: undefined, networkApi: undefined, networkApiV1: undefined };
+  return {
+    handlerIn: undefined,
+    networkApi: undefined,
+    networkApiV1: undefined,
+  };
 }
 
 export const ProApiIn = {
-  encode(message: ProApiIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProApiIn,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.handlerIn !== undefined) {
-      ProLink_HandlerIn.encode(message.handlerIn, writer.uint32(10).fork()).ldelim();
+      ProLink_HandlerIn.encode(
+        message.handlerIn,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.networkApi !== undefined) {
       NetworkAPI.encode(message.networkApi, writer.uint32(18).fork()).ldelim();
     }
     if (message.networkApiV1 !== undefined) {
-      NetworkAPIV1.encode(message.networkApiV1, writer.uint32(26).fork()).ldelim();
+      NetworkAPIV1.encode(
+        message.networkApiV1,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProApiIn {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProApiIn();
     while (reader.pos < end) {
@@ -1012,20 +923,32 @@ export const ProApiIn = {
 
   fromJSON(object: any): ProApiIn {
     return {
-      handlerIn: isSet(object.handlerIn) ? ProLink_HandlerIn.fromJSON(object.handlerIn) : undefined,
-      networkApi: isSet(object.networkApi) ? NetworkAPI.fromJSON(object.networkApi) : undefined,
-      networkApiV1: isSet(object.networkApiV1) ? NetworkAPIV1.fromJSON(object.networkApiV1) : undefined,
+      handlerIn: isSet(object.handlerIn)
+        ? ProLink_HandlerIn.fromJSON(object.handlerIn)
+        : undefined,
+      networkApi: isSet(object.networkApi)
+        ? NetworkAPI.fromJSON(object.networkApi)
+        : undefined,
+      networkApiV1: isSet(object.networkApiV1)
+        ? NetworkAPIV1.fromJSON(object.networkApiV1)
+        : undefined,
     };
   },
 
   toJSON(message: ProApiIn): unknown {
     const obj: any = {};
     message.handlerIn !== undefined &&
-      (obj.handlerIn = message.handlerIn ? ProLink_HandlerIn.toJSON(message.handlerIn) : undefined);
+      (obj.handlerIn = message.handlerIn
+        ? ProLink_HandlerIn.toJSON(message.handlerIn)
+        : undefined);
     message.networkApi !== undefined &&
-      (obj.networkApi = message.networkApi ? NetworkAPI.toJSON(message.networkApi) : undefined);
+      (obj.networkApi = message.networkApi
+        ? NetworkAPI.toJSON(message.networkApi)
+        : undefined);
     message.networkApiV1 !== undefined &&
-      (obj.networkApiV1 = message.networkApiV1 ? NetworkAPIV1.toJSON(message.networkApiV1) : undefined);
+      (obj.networkApiV1 = message.networkApiV1
+        ? NetworkAPIV1.toJSON(message.networkApiV1)
+        : undefined);
     return obj;
   },
 
@@ -1035,42 +958,63 @@ export const ProApiIn = {
 
   fromPartial<I extends Exact<DeepPartial<ProApiIn>, I>>(object: I): ProApiIn {
     const message = createBaseProApiIn();
-    message.handlerIn = (object.handlerIn !== undefined && object.handlerIn !== null)
-      ? ProLink_HandlerIn.fromPartial(object.handlerIn)
-      : undefined;
-    message.networkApi = (object.networkApi !== undefined && object.networkApi !== null)
-      ? NetworkAPI.fromPartial(object.networkApi)
-      : undefined;
-    message.networkApiV1 = (object.networkApiV1 !== undefined && object.networkApiV1 !== null)
-      ? NetworkAPIV1.fromPartial(object.networkApiV1)
-      : undefined;
+    message.handlerIn =
+      object.handlerIn !== undefined && object.handlerIn !== null
+        ? ProLink_HandlerIn.fromPartial(object.handlerIn)
+        : undefined;
+    message.networkApi =
+      object.networkApi !== undefined && object.networkApi !== null
+        ? NetworkAPI.fromPartial(object.networkApi)
+        : undefined;
+    message.networkApiV1 =
+      object.networkApiV1 !== undefined && object.networkApiV1 !== null
+        ? NetworkAPIV1.fromPartial(object.networkApiV1)
+        : undefined;
     return message;
   },
 };
 
 function createBaseProApiOut(): ProApiOut {
-  return { handlerOut: undefined, clientAction: undefined, networkApi: undefined, networkApiV1: undefined };
+  return {
+    handlerOut: undefined,
+    clientAction: undefined,
+    networkApi: undefined,
+    networkApiV1: undefined,
+  };
 }
 
 export const ProApiOut = {
-  encode(message: ProApiOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProApiOut,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.handlerOut !== undefined) {
-      ProLink_HandlerOut.encode(message.handlerOut, writer.uint32(10).fork()).ldelim();
+      ProLink_HandlerOut.encode(
+        message.handlerOut,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.clientAction !== undefined) {
-      ProLink_ClientAction.encode(message.clientAction, writer.uint32(18).fork()).ldelim();
+      ProLink_ClientAction.encode(
+        message.clientAction,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.networkApi !== undefined) {
       NetworkAPI.encode(message.networkApi, writer.uint32(26).fork()).ldelim();
     }
     if (message.networkApiV1 !== undefined) {
-      NetworkAPIV1.encode(message.networkApiV1, writer.uint32(34).fork()).ldelim();
+      NetworkAPIV1.encode(
+        message.networkApiV1,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProApiOut {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProApiOut();
     while (reader.pos < end) {
@@ -1081,14 +1025,20 @@ export const ProApiOut = {
             break;
           }
 
-          message.handlerOut = ProLink_HandlerOut.decode(reader, reader.uint32());
+          message.handlerOut = ProLink_HandlerOut.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.clientAction = ProLink_ClientAction.decode(reader, reader.uint32());
+          message.clientAction = ProLink_ClientAction.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
@@ -1115,23 +1065,39 @@ export const ProApiOut = {
 
   fromJSON(object: any): ProApiOut {
     return {
-      handlerOut: isSet(object.handlerOut) ? ProLink_HandlerOut.fromJSON(object.handlerOut) : undefined,
-      clientAction: isSet(object.clientAction) ? ProLink_ClientAction.fromJSON(object.clientAction) : undefined,
-      networkApi: isSet(object.networkApi) ? NetworkAPI.fromJSON(object.networkApi) : undefined,
-      networkApiV1: isSet(object.networkApiV1) ? NetworkAPIV1.fromJSON(object.networkApiV1) : undefined,
+      handlerOut: isSet(object.handlerOut)
+        ? ProLink_HandlerOut.fromJSON(object.handlerOut)
+        : undefined,
+      clientAction: isSet(object.clientAction)
+        ? ProLink_ClientAction.fromJSON(object.clientAction)
+        : undefined,
+      networkApi: isSet(object.networkApi)
+        ? NetworkAPI.fromJSON(object.networkApi)
+        : undefined,
+      networkApiV1: isSet(object.networkApiV1)
+        ? NetworkAPIV1.fromJSON(object.networkApiV1)
+        : undefined,
     };
   },
 
   toJSON(message: ProApiOut): unknown {
     const obj: any = {};
     message.handlerOut !== undefined &&
-      (obj.handlerOut = message.handlerOut ? ProLink_HandlerOut.toJSON(message.handlerOut) : undefined);
+      (obj.handlerOut = message.handlerOut
+        ? ProLink_HandlerOut.toJSON(message.handlerOut)
+        : undefined);
     message.clientAction !== undefined &&
-      (obj.clientAction = message.clientAction ? ProLink_ClientAction.toJSON(message.clientAction) : undefined);
+      (obj.clientAction = message.clientAction
+        ? ProLink_ClientAction.toJSON(message.clientAction)
+        : undefined);
     message.networkApi !== undefined &&
-      (obj.networkApi = message.networkApi ? NetworkAPI.toJSON(message.networkApi) : undefined);
+      (obj.networkApi = message.networkApi
+        ? NetworkAPI.toJSON(message.networkApi)
+        : undefined);
     message.networkApiV1 !== undefined &&
-      (obj.networkApiV1 = message.networkApiV1 ? NetworkAPIV1.toJSON(message.networkApiV1) : undefined);
+      (obj.networkApiV1 = message.networkApiV1
+        ? NetworkAPIV1.toJSON(message.networkApiV1)
+        : undefined);
     return obj;
   },
 
@@ -1139,20 +1105,26 @@ export const ProApiOut = {
     return ProApiOut.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProApiOut>, I>>(object: I): ProApiOut {
+  fromPartial<I extends Exact<DeepPartial<ProApiOut>, I>>(
+    object: I,
+  ): ProApiOut {
     const message = createBaseProApiOut();
-    message.handlerOut = (object.handlerOut !== undefined && object.handlerOut !== null)
-      ? ProLink_HandlerOut.fromPartial(object.handlerOut)
-      : undefined;
-    message.clientAction = (object.clientAction !== undefined && object.clientAction !== null)
-      ? ProLink_ClientAction.fromPartial(object.clientAction)
-      : undefined;
-    message.networkApi = (object.networkApi !== undefined && object.networkApi !== null)
-      ? NetworkAPI.fromPartial(object.networkApi)
-      : undefined;
-    message.networkApiV1 = (object.networkApiV1 !== undefined && object.networkApiV1 !== null)
-      ? NetworkAPIV1.fromPartial(object.networkApiV1)
-      : undefined;
+    message.handlerOut =
+      object.handlerOut !== undefined && object.handlerOut !== null
+        ? ProLink_HandlerOut.fromPartial(object.handlerOut)
+        : undefined;
+    message.clientAction =
+      object.clientAction !== undefined && object.clientAction !== null
+        ? ProLink_ClientAction.fromPartial(object.clientAction)
+        : undefined;
+    message.networkApi =
+      object.networkApi !== undefined && object.networkApi !== null
+        ? NetworkAPI.fromPartial(object.networkApi)
+        : undefined;
+    message.networkApiV1 =
+      object.networkApiV1 !== undefined && object.networkApiV1 !== null
+        ? NetworkAPIV1.fromPartial(object.networkApiV1)
+        : undefined;
     return message;
   },
 };
@@ -1161,28 +1133,31 @@ function createBaseProApiNetworkConfiguration(): ProApiNetworkConfiguration {
   return {
     enableNetwork: false,
     port: 0,
-    networkName: "",
+    networkName: '',
     remoteEnable: false,
     remoteControlEnable: false,
-    remoteControlPassword: "",
+    remoteControlPassword: '',
     remoteObserveEnable: false,
-    remoteObservePassword: "",
+    remoteObservePassword: '',
     stageEnable: false,
-    stagePassword: "",
+    stagePassword: '',
     linkEnable: false,
-    webResourceRoot: "",
+    webResourceRoot: '',
   };
 }
 
 export const ProApiNetworkConfiguration = {
-  encode(message: ProApiNetworkConfiguration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProApiNetworkConfiguration,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enableNetwork === true) {
       writer.uint32(8).bool(message.enableNetwork);
     }
     if (message.port !== 0) {
       writer.uint32(16).uint32(message.port);
     }
-    if (message.networkName !== "") {
+    if (message.networkName !== '') {
       writer.uint32(26).string(message.networkName);
     }
     if (message.remoteEnable === true) {
@@ -1191,32 +1166,36 @@ export const ProApiNetworkConfiguration = {
     if (message.remoteControlEnable === true) {
       writer.uint32(40).bool(message.remoteControlEnable);
     }
-    if (message.remoteControlPassword !== "") {
+    if (message.remoteControlPassword !== '') {
       writer.uint32(50).string(message.remoteControlPassword);
     }
     if (message.remoteObserveEnable === true) {
       writer.uint32(56).bool(message.remoteObserveEnable);
     }
-    if (message.remoteObservePassword !== "") {
+    if (message.remoteObservePassword !== '') {
       writer.uint32(66).string(message.remoteObservePassword);
     }
     if (message.stageEnable === true) {
       writer.uint32(72).bool(message.stageEnable);
     }
-    if (message.stagePassword !== "") {
+    if (message.stagePassword !== '') {
       writer.uint32(82).string(message.stagePassword);
     }
     if (message.linkEnable === true) {
       writer.uint32(88).bool(message.linkEnable);
     }
-    if (message.webResourceRoot !== "") {
+    if (message.webResourceRoot !== '') {
       writer.uint32(98).string(message.webResourceRoot);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProApiNetworkConfiguration {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProApiNetworkConfiguration {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProApiNetworkConfiguration();
     while (reader.pos < end) {
@@ -1317,56 +1296,88 @@ export const ProApiNetworkConfiguration = {
 
   fromJSON(object: any): ProApiNetworkConfiguration {
     return {
-      enableNetwork: isSet(object.enableNetwork) ? Boolean(object.enableNetwork) : false,
+      enableNetwork: isSet(object.enableNetwork)
+        ? Boolean(object.enableNetwork)
+        : false,
       port: isSet(object.port) ? Number(object.port) : 0,
-      networkName: isSet(object.networkName) ? String(object.networkName) : "",
-      remoteEnable: isSet(object.remoteEnable) ? Boolean(object.remoteEnable) : false,
-      remoteControlEnable: isSet(object.remoteControlEnable) ? Boolean(object.remoteControlEnable) : false,
-      remoteControlPassword: isSet(object.remoteControlPassword) ? String(object.remoteControlPassword) : "",
-      remoteObserveEnable: isSet(object.remoteObserveEnable) ? Boolean(object.remoteObserveEnable) : false,
-      remoteObservePassword: isSet(object.remoteObservePassword) ? String(object.remoteObservePassword) : "",
-      stageEnable: isSet(object.stageEnable) ? Boolean(object.stageEnable) : false,
-      stagePassword: isSet(object.stagePassword) ? String(object.stagePassword) : "",
+      networkName: isSet(object.networkName) ? String(object.networkName) : '',
+      remoteEnable: isSet(object.remoteEnable)
+        ? Boolean(object.remoteEnable)
+        : false,
+      remoteControlEnable: isSet(object.remoteControlEnable)
+        ? Boolean(object.remoteControlEnable)
+        : false,
+      remoteControlPassword: isSet(object.remoteControlPassword)
+        ? String(object.remoteControlPassword)
+        : '',
+      remoteObserveEnable: isSet(object.remoteObserveEnable)
+        ? Boolean(object.remoteObserveEnable)
+        : false,
+      remoteObservePassword: isSet(object.remoteObservePassword)
+        ? String(object.remoteObservePassword)
+        : '',
+      stageEnable: isSet(object.stageEnable)
+        ? Boolean(object.stageEnable)
+        : false,
+      stagePassword: isSet(object.stagePassword)
+        ? String(object.stagePassword)
+        : '',
       linkEnable: isSet(object.linkEnable) ? Boolean(object.linkEnable) : false,
-      webResourceRoot: isSet(object.webResourceRoot) ? String(object.webResourceRoot) : "",
+      webResourceRoot: isSet(object.webResourceRoot)
+        ? String(object.webResourceRoot)
+        : '',
     };
   },
 
   toJSON(message: ProApiNetworkConfiguration): unknown {
     const obj: any = {};
-    message.enableNetwork !== undefined && (obj.enableNetwork = message.enableNetwork);
+    message.enableNetwork !== undefined &&
+      (obj.enableNetwork = message.enableNetwork);
     message.port !== undefined && (obj.port = Math.round(message.port));
-    message.networkName !== undefined && (obj.networkName = message.networkName);
-    message.remoteEnable !== undefined && (obj.remoteEnable = message.remoteEnable);
-    message.remoteControlEnable !== undefined && (obj.remoteControlEnable = message.remoteControlEnable);
-    message.remoteControlPassword !== undefined && (obj.remoteControlPassword = message.remoteControlPassword);
-    message.remoteObserveEnable !== undefined && (obj.remoteObserveEnable = message.remoteObserveEnable);
-    message.remoteObservePassword !== undefined && (obj.remoteObservePassword = message.remoteObservePassword);
-    message.stageEnable !== undefined && (obj.stageEnable = message.stageEnable);
-    message.stagePassword !== undefined && (obj.stagePassword = message.stagePassword);
+    message.networkName !== undefined &&
+      (obj.networkName = message.networkName);
+    message.remoteEnable !== undefined &&
+      (obj.remoteEnable = message.remoteEnable);
+    message.remoteControlEnable !== undefined &&
+      (obj.remoteControlEnable = message.remoteControlEnable);
+    message.remoteControlPassword !== undefined &&
+      (obj.remoteControlPassword = message.remoteControlPassword);
+    message.remoteObserveEnable !== undefined &&
+      (obj.remoteObserveEnable = message.remoteObserveEnable);
+    message.remoteObservePassword !== undefined &&
+      (obj.remoteObservePassword = message.remoteObservePassword);
+    message.stageEnable !== undefined &&
+      (obj.stageEnable = message.stageEnable);
+    message.stagePassword !== undefined &&
+      (obj.stagePassword = message.stagePassword);
     message.linkEnable !== undefined && (obj.linkEnable = message.linkEnable);
-    message.webResourceRoot !== undefined && (obj.webResourceRoot = message.webResourceRoot);
+    message.webResourceRoot !== undefined &&
+      (obj.webResourceRoot = message.webResourceRoot);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProApiNetworkConfiguration>, I>>(base?: I): ProApiNetworkConfiguration {
+  create<I extends Exact<DeepPartial<ProApiNetworkConfiguration>, I>>(
+    base?: I,
+  ): ProApiNetworkConfiguration {
     return ProApiNetworkConfiguration.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProApiNetworkConfiguration>, I>>(object: I): ProApiNetworkConfiguration {
+  fromPartial<I extends Exact<DeepPartial<ProApiNetworkConfiguration>, I>>(
+    object: I,
+  ): ProApiNetworkConfiguration {
     const message = createBaseProApiNetworkConfiguration();
     message.enableNetwork = object.enableNetwork ?? false;
     message.port = object.port ?? 0;
-    message.networkName = object.networkName ?? "";
+    message.networkName = object.networkName ?? '';
     message.remoteEnable = object.remoteEnable ?? false;
     message.remoteControlEnable = object.remoteControlEnable ?? false;
-    message.remoteControlPassword = object.remoteControlPassword ?? "";
+    message.remoteControlPassword = object.remoteControlPassword ?? '';
     message.remoteObserveEnable = object.remoteObserveEnable ?? false;
-    message.remoteObservePassword = object.remoteObservePassword ?? "";
+    message.remoteObservePassword = object.remoteObservePassword ?? '';
     message.stageEnable = object.stageEnable ?? false;
-    message.stagePassword = object.stagePassword ?? "";
+    message.stagePassword = object.stagePassword ?? '';
     message.linkEnable = object.linkEnable ?? false;
-    message.webResourceRoot = object.webResourceRoot ?? "";
+    message.webResourceRoot = object.webResourceRoot ?? '';
     return message;
   },
 };
@@ -1381,7 +1392,8 @@ export const ProLink = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProLink {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink();
     while (reader.pos < end) {
@@ -1416,22 +1428,34 @@ export const ProLink = {
 };
 
 function createBaseProLink_GroupDefinition(): ProLink_GroupDefinition {
-  return { timestamp: undefined, secret: "", name: "", members: [], groupIdentifier: undefined };
+  return {
+    timestamp: undefined,
+    secret: '',
+    name: '',
+    members: [],
+    groupIdentifier: undefined,
+  };
 }
 
 export const ProLink_GroupDefinition = {
-  encode(message: ProLink_GroupDefinition, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_GroupDefinition,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.timestamp !== undefined) {
       Timestamp.encode(message.timestamp, writer.uint32(10).fork()).ldelim();
     }
-    if (message.secret !== "") {
+    if (message.secret !== '') {
       writer.uint32(18).string(message.secret);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(26).string(message.name);
     }
     for (const v of message.members) {
-      ProLink_GroupDefinition_Member.encode(v!, writer.uint32(34).fork()).ldelim();
+      ProLink_GroupDefinition_Member.encode(
+        v!,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.groupIdentifier !== undefined) {
       UUID.encode(message.groupIdentifier, writer.uint32(42).fork()).ldelim();
@@ -1439,8 +1463,12 @@ export const ProLink_GroupDefinition = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_GroupDefinition {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_GroupDefinition {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_GroupDefinition();
     while (reader.pos < end) {
@@ -1472,7 +1500,9 @@ export const ProLink_GroupDefinition = {
             break;
           }
 
-          message.members.push(ProLink_GroupDefinition_Member.decode(reader, reader.uint32()));
+          message.members.push(
+            ProLink_GroupDefinition_Member.decode(reader, reader.uint32()),
+          );
           continue;
         case 5:
           if (tag != 42) {
@@ -1492,58 +1522,82 @@ export const ProLink_GroupDefinition = {
 
   fromJSON(object: any): ProLink_GroupDefinition {
     return {
-      timestamp: isSet(object.timestamp) ? Timestamp.fromJSON(object.timestamp) : undefined,
-      secret: isSet(object.secret) ? String(object.secret) : "",
-      name: isSet(object.name) ? String(object.name) : "",
+      timestamp: isSet(object.timestamp)
+        ? Timestamp.fromJSON(object.timestamp)
+        : undefined,
+      secret: isSet(object.secret) ? String(object.secret) : '',
+      name: isSet(object.name) ? String(object.name) : '',
       members: Array.isArray(object?.members)
-        ? object.members.map((e: any) => ProLink_GroupDefinition_Member.fromJSON(e))
+        ? object.members.map((e: any) =>
+            ProLink_GroupDefinition_Member.fromJSON(e),
+          )
         : [],
-      groupIdentifier: isSet(object.groupIdentifier) ? UUID.fromJSON(object.groupIdentifier) : undefined,
+      groupIdentifier: isSet(object.groupIdentifier)
+        ? UUID.fromJSON(object.groupIdentifier)
+        : undefined,
     };
   },
 
   toJSON(message: ProLink_GroupDefinition): unknown {
     const obj: any = {};
     message.timestamp !== undefined &&
-      (obj.timestamp = message.timestamp ? Timestamp.toJSON(message.timestamp) : undefined);
+      (obj.timestamp = message.timestamp
+        ? Timestamp.toJSON(message.timestamp)
+        : undefined);
     message.secret !== undefined && (obj.secret = message.secret);
     message.name !== undefined && (obj.name = message.name);
     if (message.members) {
-      obj.members = message.members.map((e) => e ? ProLink_GroupDefinition_Member.toJSON(e) : undefined);
+      obj.members = message.members.map((e) =>
+        e ? ProLink_GroupDefinition_Member.toJSON(e) : undefined,
+      );
     } else {
       obj.members = [];
     }
     message.groupIdentifier !== undefined &&
-      (obj.groupIdentifier = message.groupIdentifier ? UUID.toJSON(message.groupIdentifier) : undefined);
+      (obj.groupIdentifier = message.groupIdentifier
+        ? UUID.toJSON(message.groupIdentifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_GroupDefinition>, I>>(base?: I): ProLink_GroupDefinition {
+  create<I extends Exact<DeepPartial<ProLink_GroupDefinition>, I>>(
+    base?: I,
+  ): ProLink_GroupDefinition {
     return ProLink_GroupDefinition.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_GroupDefinition>, I>>(object: I): ProLink_GroupDefinition {
+  fromPartial<I extends Exact<DeepPartial<ProLink_GroupDefinition>, I>>(
+    object: I,
+  ): ProLink_GroupDefinition {
     const message = createBaseProLink_GroupDefinition();
-    message.timestamp = (object.timestamp !== undefined && object.timestamp !== null)
-      ? Timestamp.fromPartial(object.timestamp)
-      : undefined;
-    message.secret = object.secret ?? "";
-    message.name = object.name ?? "";
-    message.members = object.members?.map((e) => ProLink_GroupDefinition_Member.fromPartial(e)) || [];
-    message.groupIdentifier = (object.groupIdentifier !== undefined && object.groupIdentifier !== null)
-      ? UUID.fromPartial(object.groupIdentifier)
-      : undefined;
+    message.timestamp =
+      object.timestamp !== undefined && object.timestamp !== null
+        ? Timestamp.fromPartial(object.timestamp)
+        : undefined;
+    message.secret = object.secret ?? '';
+    message.name = object.name ?? '';
+    message.members =
+      object.members?.map((e) =>
+        ProLink_GroupDefinition_Member.fromPartial(e),
+      ) || [];
+    message.groupIdentifier =
+      object.groupIdentifier !== undefined && object.groupIdentifier !== null
+        ? UUID.fromPartial(object.groupIdentifier)
+        : undefined;
     return message;
   },
 };
 
 function createBaseProLink_GroupDefinition_Member(): ProLink_GroupDefinition_Member {
-  return { ip: "", port: 0 };
+  return { ip: '', port: 0 };
 }
 
 export const ProLink_GroupDefinition_Member = {
-  encode(message: ProLink_GroupDefinition_Member, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ip !== "") {
+  encode(
+    message: ProLink_GroupDefinition_Member,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ip !== '') {
       writer.uint32(10).string(message.ip);
     }
     if (message.port !== 0) {
@@ -1552,8 +1606,12 @@ export const ProLink_GroupDefinition_Member = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_GroupDefinition_Member {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_GroupDefinition_Member {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_GroupDefinition_Member();
     while (reader.pos < end) {
@@ -1583,7 +1641,10 @@ export const ProLink_GroupDefinition_Member = {
   },
 
   fromJSON(object: any): ProLink_GroupDefinition_Member {
-    return { ip: isSet(object.ip) ? String(object.ip) : "", port: isSet(object.port) ? Number(object.port) : 0 };
+    return {
+      ip: isSet(object.ip) ? String(object.ip) : '',
+      port: isSet(object.port) ? Number(object.port) : 0,
+    };
   },
 
   toJSON(message: ProLink_GroupDefinition_Member): unknown {
@@ -1593,7 +1654,9 @@ export const ProLink_GroupDefinition_Member = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_GroupDefinition_Member>, I>>(base?: I): ProLink_GroupDefinition_Member {
+  create<I extends Exact<DeepPartial<ProLink_GroupDefinition_Member>, I>>(
+    base?: I,
+  ): ProLink_GroupDefinition_Member {
     return ProLink_GroupDefinition_Member.fromPartial(base ?? {});
   },
 
@@ -1601,7 +1664,7 @@ export const ProLink_GroupDefinition_Member = {
     object: I,
   ): ProLink_GroupDefinition_Member {
     const message = createBaseProLink_GroupDefinition_Member();
-    message.ip = object.ip ?? "";
+    message.ip = object.ip ?? '';
     message.port = object.port ?? 0;
     return message;
   },
@@ -1612,12 +1675,16 @@ function createBaseProLink_ZeroConfig(): ProLink_ZeroConfig {
 }
 
 export const ProLink_ZeroConfig = {
-  encode(_: ProLink_ZeroConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_ZeroConfig,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ZeroConfig {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ZeroConfig();
     while (reader.pos < end) {
@@ -1641,11 +1708,15 @@ export const ProLink_ZeroConfig = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_ZeroConfig>, I>>(base?: I): ProLink_ZeroConfig {
+  create<I extends Exact<DeepPartial<ProLink_ZeroConfig>, I>>(
+    base?: I,
+  ): ProLink_ZeroConfig {
     return ProLink_ZeroConfig.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ZeroConfig>, I>>(_: I): ProLink_ZeroConfig {
+  fromPartial<I extends Exact<DeepPartial<ProLink_ZeroConfig>, I>>(
+    _: I,
+  ): ProLink_ZeroConfig {
     const message = createBaseProLink_ZeroConfig();
     return message;
   },
@@ -1656,7 +1727,10 @@ function createBaseProLink_ZeroConfig_NetworkEnvironment(): ProLink_ZeroConfig_N
 }
 
 export const ProLink_ZeroConfig_NetworkEnvironment = {
-  encode(message: ProLink_ZeroConfig_NetworkEnvironment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_ZeroConfig_NetworkEnvironment,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.availableGroups) {
       ProLink_GroupDefinition.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1666,8 +1740,12 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ZeroConfig_NetworkEnvironment {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ZeroConfig_NetworkEnvironment {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ZeroConfig_NetworkEnvironment();
     while (reader.pos < end) {
@@ -1678,14 +1756,18 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
             break;
           }
 
-          message.availableGroups.push(ProLink_GroupDefinition.decode(reader, reader.uint32()));
+          message.availableGroups.push(
+            ProLink_GroupDefinition.decode(reader, reader.uint32()),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.availableDevices.push(ProLink_MemberStatus.decode(reader, reader.uint32()));
+          message.availableDevices.push(
+            ProLink_MemberStatus.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1699,10 +1781,14 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
   fromJSON(object: any): ProLink_ZeroConfig_NetworkEnvironment {
     return {
       availableGroups: Array.isArray(object?.availableGroups)
-        ? object.availableGroups.map((e: any) => ProLink_GroupDefinition.fromJSON(e))
+        ? object.availableGroups.map((e: any) =>
+            ProLink_GroupDefinition.fromJSON(e),
+          )
         : [],
       availableDevices: Array.isArray(object?.availableDevices)
-        ? object.availableDevices.map((e: any) => ProLink_MemberStatus.fromJSON(e))
+        ? object.availableDevices.map((e: any) =>
+            ProLink_MemberStatus.fromJSON(e),
+          )
         : [],
     };
   },
@@ -1710,30 +1796,40 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
   toJSON(message: ProLink_ZeroConfig_NetworkEnvironment): unknown {
     const obj: any = {};
     if (message.availableGroups) {
-      obj.availableGroups = message.availableGroups.map((e) => e ? ProLink_GroupDefinition.toJSON(e) : undefined);
+      obj.availableGroups = message.availableGroups.map((e) =>
+        e ? ProLink_GroupDefinition.toJSON(e) : undefined,
+      );
     } else {
       obj.availableGroups = [];
     }
     if (message.availableDevices) {
-      obj.availableDevices = message.availableDevices.map((e) => e ? ProLink_MemberStatus.toJSON(e) : undefined);
+      obj.availableDevices = message.availableDevices.map((e) =>
+        e ? ProLink_MemberStatus.toJSON(e) : undefined,
+      );
     } else {
       obj.availableDevices = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_ZeroConfig_NetworkEnvironment>, I>>(
-    base?: I,
-  ): ProLink_ZeroConfig_NetworkEnvironment {
+  create<
+    I extends Exact<DeepPartial<ProLink_ZeroConfig_NetworkEnvironment>, I>,
+  >(base?: I): ProLink_ZeroConfig_NetworkEnvironment {
     return ProLink_ZeroConfig_NetworkEnvironment.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ZeroConfig_NetworkEnvironment>, I>>(
-    object: I,
-  ): ProLink_ZeroConfig_NetworkEnvironment {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_ZeroConfig_NetworkEnvironment>, I>,
+  >(object: I): ProLink_ZeroConfig_NetworkEnvironment {
     const message = createBaseProLink_ZeroConfig_NetworkEnvironment();
-    message.availableGroups = object.availableGroups?.map((e) => ProLink_GroupDefinition.fromPartial(e)) || [];
-    message.availableDevices = object.availableDevices?.map((e) => ProLink_MemberStatus.fromPartial(e)) || [];
+    message.availableGroups =
+      object.availableGroups?.map((e) =>
+        ProLink_GroupDefinition.fromPartial(e),
+      ) || [];
+    message.availableDevices =
+      object.availableDevices?.map((e) =>
+        ProLink_MemberStatus.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -1743,18 +1839,31 @@ function createBaseProLink_ZeroConfig_MulticastPacket(): ProLink_ZeroConfig_Mult
 }
 
 export const ProLink_ZeroConfig_MulticastPacket = {
-  encode(message: ProLink_ZeroConfig_MulticastPacket, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_ZeroConfig_MulticastPacket,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.group !== undefined) {
-      ProLink_GroupDefinition.encode(message.group, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.group,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.device !== undefined) {
-      ProLink_MemberStatus.encode(message.device, writer.uint32(18).fork()).ldelim();
+      ProLink_MemberStatus.encode(
+        message.device,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ZeroConfig_MulticastPacket {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ZeroConfig_MulticastPacket {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ZeroConfig_MulticastPacket();
     while (reader.pos < end) {
@@ -1765,7 +1874,10 @@ export const ProLink_ZeroConfig_MulticastPacket = {
             break;
           }
 
-          message.group = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.group = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -1785,17 +1897,25 @@ export const ProLink_ZeroConfig_MulticastPacket = {
 
   fromJSON(object: any): ProLink_ZeroConfig_MulticastPacket {
     return {
-      group: isSet(object.group) ? ProLink_GroupDefinition.fromJSON(object.group) : undefined,
-      device: isSet(object.device) ? ProLink_MemberStatus.fromJSON(object.device) : undefined,
+      group: isSet(object.group)
+        ? ProLink_GroupDefinition.fromJSON(object.group)
+        : undefined,
+      device: isSet(object.device)
+        ? ProLink_MemberStatus.fromJSON(object.device)
+        : undefined,
     };
   },
 
   toJSON(message: ProLink_ZeroConfig_MulticastPacket): unknown {
     const obj: any = {};
     message.group !== undefined &&
-      (obj.group = message.group ? ProLink_GroupDefinition.toJSON(message.group) : undefined);
+      (obj.group = message.group
+        ? ProLink_GroupDefinition.toJSON(message.group)
+        : undefined);
     message.device !== undefined &&
-      (obj.device = message.device ? ProLink_MemberStatus.toJSON(message.device) : undefined);
+      (obj.device = message.device
+        ? ProLink_MemberStatus.toJSON(message.device)
+        : undefined);
     return obj;
   },
 
@@ -1805,16 +1925,18 @@ export const ProLink_ZeroConfig_MulticastPacket = {
     return ProLink_ZeroConfig_MulticastPacket.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ZeroConfig_MulticastPacket>, I>>(
-    object: I,
-  ): ProLink_ZeroConfig_MulticastPacket {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_ZeroConfig_MulticastPacket>, I>,
+  >(object: I): ProLink_ZeroConfig_MulticastPacket {
     const message = createBaseProLink_ZeroConfig_MulticastPacket();
-    message.group = (object.group !== undefined && object.group !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.group)
-      : undefined;
-    message.device = (object.device !== undefined && object.device !== null)
-      ? ProLink_MemberStatus.fromPartial(object.device)
-      : undefined;
+    message.group =
+      object.group !== undefined && object.group !== null
+        ? ProLink_GroupDefinition.fromPartial(object.group)
+        : undefined;
+    message.device =
+      object.device !== undefined && object.device !== null
+        ? ProLink_MemberStatus.fromPartial(object.device)
+        : undefined;
     return message;
   },
 };
@@ -1824,12 +1946,19 @@ function createBaseProLink_TowerMessage(): ProLink_TowerMessage {
 }
 
 export const ProLink_TowerMessage = {
-  encode(_: ProLink_TowerMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_TowerMessage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage();
     while (reader.pos < end) {
@@ -1853,11 +1982,15 @@ export const ProLink_TowerMessage = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage>, I>>(base?: I): ProLink_TowerMessage {
+  create<I extends Exact<DeepPartial<ProLink_TowerMessage>, I>>(
+    base?: I,
+  ): ProLink_TowerMessage {
     return ProLink_TowerMessage.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage>, I>>(_: I): ProLink_TowerMessage {
+  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage>, I>>(
+    _: I,
+  ): ProLink_TowerMessage {
     const message = createBaseProLink_TowerMessage();
     return message;
   },
@@ -1868,12 +2001,19 @@ function createBaseProLink_TowerMessage_TowerStatusRequest(): ProLink_TowerMessa
 }
 
 export const ProLink_TowerMessage_TowerStatusRequest = {
-  encode(_: ProLink_TowerMessage_TowerStatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_TowerMessage_TowerStatusRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerStatusRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerStatusRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerStatusRequest();
     while (reader.pos < end) {
@@ -1897,37 +2037,47 @@ export const ProLink_TowerMessage_TowerStatusRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusRequest>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerStatusRequest {
+  create<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusRequest>, I>,
+  >(base?: I): ProLink_TowerMessage_TowerStatusRequest {
     return ProLink_TowerMessage_TowerStatusRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusRequest>, I>>(
-    _: I,
-  ): ProLink_TowerMessage_TowerStatusRequest {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusRequest>, I>,
+  >(_: I): ProLink_TowerMessage_TowerStatusRequest {
     const message = createBaseProLink_TowerMessage_TowerStatusRequest();
     return message;
   },
 };
 
 function createBaseProLink_TowerMessage_TowerStatusResponse(): ProLink_TowerMessage_TowerStatusResponse {
-  return { memberName: "", groupDefinition: undefined };
+  return { memberName: '', groupDefinition: undefined };
 }
 
 export const ProLink_TowerMessage_TowerStatusResponse = {
-  encode(message: ProLink_TowerMessage_TowerStatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.memberName !== "") {
+  encode(
+    message: ProLink_TowerMessage_TowerStatusResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.memberName !== '') {
       writer.uint32(18).string(message.memberName);
     }
     if (message.groupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupDefinition, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupDefinition,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerStatusResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerStatusResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerStatusResponse();
     while (reader.pos < end) {
@@ -1945,7 +2095,10 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
             break;
           }
 
-          message.groupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1958,7 +2111,7 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
 
   fromJSON(object: any): ProLink_TowerMessage_TowerStatusResponse {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : "",
+      memberName: isSet(object.memberName) ? String(object.memberName) : '',
       groupDefinition: isSet(object.groupDefinition)
         ? ProLink_GroupDefinition.fromJSON(object.groupDefinition)
         : undefined,
@@ -1968,26 +2121,28 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
   toJSON(message: ProLink_TowerMessage_TowerStatusResponse): unknown {
     const obj: any = {};
     message.memberName !== undefined && (obj.memberName = message.memberName);
-    message.groupDefinition !== undefined && (obj.groupDefinition = message.groupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-      : undefined);
+    message.groupDefinition !== undefined &&
+      (obj.groupDefinition = message.groupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusResponse>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerStatusResponse {
+  create<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusResponse>, I>,
+  >(base?: I): ProLink_TowerMessage_TowerStatusResponse {
     return ProLink_TowerMessage_TowerStatusResponse.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusResponse>, I>>(
-    object: I,
-  ): ProLink_TowerMessage_TowerStatusResponse {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusResponse>, I>,
+  >(object: I): ProLink_TowerMessage_TowerStatusResponse {
     const message = createBaseProLink_TowerMessage_TowerStatusResponse();
-    message.memberName = object.memberName ?? "";
-    message.groupDefinition = (object.groupDefinition !== undefined && object.groupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
-      : undefined;
+    message.memberName = object.memberName ?? '';
+    message.groupDefinition =
+      object.groupDefinition !== undefined && object.groupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
+        : undefined;
     return message;
   },
 };
@@ -1997,18 +2152,31 @@ function createBaseProLink_TowerMessage_TowerAddMemberRequest(): ProLink_TowerMe
 }
 
 export const ProLink_TowerMessage_TowerAddMemberRequest = {
-  encode(message: ProLink_TowerMessage_TowerAddMemberRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_TowerMessage_TowerAddMemberRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupDefinition, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupDefinition,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.joiningMember !== undefined) {
-      ProLink_GroupDefinition_Member.encode(message.joiningMember, writer.uint32(18).fork()).ldelim();
+      ProLink_GroupDefinition_Member.encode(
+        message.joiningMember,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerAddMemberRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerAddMemberRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerAddMemberRequest();
     while (reader.pos < end) {
@@ -2019,14 +2187,20 @@ export const ProLink_TowerMessage_TowerAddMemberRequest = {
             break;
           }
 
-          message.groupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.joiningMember = ProLink_GroupDefinition_Member.decode(reader, reader.uint32());
+          message.joiningMember = ProLink_GroupDefinition_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2050,31 +2224,35 @@ export const ProLink_TowerMessage_TowerAddMemberRequest = {
 
   toJSON(message: ProLink_TowerMessage_TowerAddMemberRequest): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined && (obj.groupDefinition = message.groupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-      : undefined);
-    message.joiningMember !== undefined && (obj.joiningMember = message.joiningMember
-      ? ProLink_GroupDefinition_Member.toJSON(message.joiningMember)
-      : undefined);
+    message.groupDefinition !== undefined &&
+      (obj.groupDefinition = message.groupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
+        : undefined);
+    message.joiningMember !== undefined &&
+      (obj.joiningMember = message.joiningMember
+        ? ProLink_GroupDefinition_Member.toJSON(message.joiningMember)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberRequest>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerAddMemberRequest {
+  create<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberRequest>, I>,
+  >(base?: I): ProLink_TowerMessage_TowerAddMemberRequest {
     return ProLink_TowerMessage_TowerAddMemberRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberRequest>, I>>(
-    object: I,
-  ): ProLink_TowerMessage_TowerAddMemberRequest {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberRequest>, I>,
+  >(object: I): ProLink_TowerMessage_TowerAddMemberRequest {
     const message = createBaseProLink_TowerMessage_TowerAddMemberRequest();
-    message.groupDefinition = (object.groupDefinition !== undefined && object.groupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
-      : undefined;
-    message.joiningMember = (object.joiningMember !== undefined && object.joiningMember !== null)
-      ? ProLink_GroupDefinition_Member.fromPartial(object.joiningMember)
-      : undefined;
+    message.groupDefinition =
+      object.groupDefinition !== undefined && object.groupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
+        : undefined;
+    message.joiningMember =
+      object.joiningMember !== undefined && object.joiningMember !== null
+        ? ProLink_GroupDefinition_Member.fromPartial(object.joiningMember)
+        : undefined;
     return message;
   },
 };
@@ -2084,15 +2262,25 @@ function createBaseProLink_TowerMessage_TowerRemoveMemberRequest(): ProLink_Towe
 }
 
 export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
-  encode(message: ProLink_TowerMessage_TowerRemoveMemberRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_TowerMessage_TowerRemoveMemberRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.removingMember !== undefined) {
-      ProLink_GroupDefinition_Member.encode(message.removingMember, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition_Member.encode(
+        message.removingMember,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerRemoveMemberRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerRemoveMemberRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerRemoveMemberRequest();
     while (reader.pos < end) {
@@ -2103,7 +2291,10 @@ export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
             break;
           }
 
-          message.removingMember = ProLink_GroupDefinition_Member.decode(reader, reader.uint32());
+          message.removingMember = ProLink_GroupDefinition_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2124,40 +2315,63 @@ export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
 
   toJSON(message: ProLink_TowerMessage_TowerRemoveMemberRequest): unknown {
     const obj: any = {};
-    message.removingMember !== undefined && (obj.removingMember = message.removingMember
-      ? ProLink_GroupDefinition_Member.toJSON(message.removingMember)
-      : undefined);
+    message.removingMember !== undefined &&
+      (obj.removingMember = message.removingMember
+        ? ProLink_GroupDefinition_Member.toJSON(message.removingMember)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerRemoveMemberRequest>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerRemoveMemberRequest {
-    return ProLink_TowerMessage_TowerRemoveMemberRequest.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerRemoveMemberRequest>,
+      I
+    >,
+  >(base?: I): ProLink_TowerMessage_TowerRemoveMemberRequest {
+    return ProLink_TowerMessage_TowerRemoveMemberRequest.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerRemoveMemberRequest>, I>>(
-    object: I,
-  ): ProLink_TowerMessage_TowerRemoveMemberRequest {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerRemoveMemberRequest>,
+      I
+    >,
+  >(object: I): ProLink_TowerMessage_TowerRemoveMemberRequest {
     const message = createBaseProLink_TowerMessage_TowerRemoveMemberRequest();
-    message.removingMember = (object.removingMember !== undefined && object.removingMember !== null)
-      ? ProLink_GroupDefinition_Member.fromPartial(object.removingMember)
-      : undefined;
+    message.removingMember =
+      object.removingMember !== undefined && object.removingMember !== null
+        ? ProLink_GroupDefinition_Member.fromPartial(object.removingMember)
+        : undefined;
     return message;
   },
 };
 
 function createBaseProLink_TowerMessage_TowerAddMemberResponse(): ProLink_TowerMessage_TowerAddMemberResponse {
-  return { groupDefinition: undefined, accept: undefined, declineReason: undefined };
+  return {
+    groupDefinition: undefined,
+    accept: undefined,
+    declineReason: undefined,
+  };
 }
 
 export const ProLink_TowerMessage_TowerAddMemberResponse = {
-  encode(message: ProLink_TowerMessage_TowerAddMemberResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_TowerMessage_TowerAddMemberResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupDefinition, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupDefinition,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.accept !== undefined) {
-      ProLink_TowerMessage_TowerAddMemberResponse_Accept.encode(message.accept, writer.uint32(18).fork()).ldelim();
+      ProLink_TowerMessage_TowerAddMemberResponse_Accept.encode(
+        message.accept,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.declineReason !== undefined) {
       writer.uint32(24).int32(message.declineReason);
@@ -2165,8 +2379,12 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerAddMemberResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerAddMemberResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerAddMemberResponse();
     while (reader.pos < end) {
@@ -2177,14 +2395,21 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
             break;
           }
 
-          message.groupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.accept = ProLink_TowerMessage_TowerAddMemberResponse_Accept.decode(reader, reader.uint32());
+          message.accept =
+            ProLink_TowerMessage_TowerAddMemberResponse_Accept.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 24) {
@@ -2208,44 +2433,66 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
         ? ProLink_GroupDefinition.fromJSON(object.groupDefinition)
         : undefined,
       accept: isSet(object.accept)
-        ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromJSON(object.accept)
+        ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromJSON(
+            object.accept,
+          )
         : undefined,
       declineReason: isSet(object.declineReason)
-        ? proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonFromJSON(object.declineReason)
+        ? proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonFromJSON(
+            object.declineReason,
+          )
         : undefined,
     };
   },
 
   toJSON(message: ProLink_TowerMessage_TowerAddMemberResponse): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined && (obj.groupDefinition = message.groupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-      : undefined);
-    message.accept !== undefined && (obj.accept = message.accept
-      ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.toJSON(message.accept)
-      : undefined);
-    message.declineReason !== undefined && (obj.declineReason = message.declineReason !== undefined
-      ? proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonToJSON(message.declineReason)
-      : undefined);
+    message.groupDefinition !== undefined &&
+      (obj.groupDefinition = message.groupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
+        : undefined);
+    message.accept !== undefined &&
+      (obj.accept = message.accept
+        ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.toJSON(
+            message.accept,
+          )
+        : undefined);
+    message.declineReason !== undefined &&
+      (obj.declineReason =
+        message.declineReason !== undefined
+          ? proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonToJSON(
+              message.declineReason,
+            )
+          : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerAddMemberResponse {
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse>,
+      I
+    >,
+  >(base?: I): ProLink_TowerMessage_TowerAddMemberResponse {
     return ProLink_TowerMessage_TowerAddMemberResponse.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse>, I>>(
-    object: I,
-  ): ProLink_TowerMessage_TowerAddMemberResponse {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse>,
+      I
+    >,
+  >(object: I): ProLink_TowerMessage_TowerAddMemberResponse {
     const message = createBaseProLink_TowerMessage_TowerAddMemberResponse();
-    message.groupDefinition = (object.groupDefinition !== undefined && object.groupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
-      : undefined;
-    message.accept = (object.accept !== undefined && object.accept !== null)
-      ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromPartial(object.accept)
-      : undefined;
+    message.groupDefinition =
+      object.groupDefinition !== undefined && object.groupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
+        : undefined;
+    message.accept =
+      object.accept !== undefined && object.accept !== null
+        ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromPartial(
+            object.accept,
+          )
+        : undefined;
     message.declineReason = object.declineReason ?? undefined;
     return message;
   },
@@ -2256,14 +2503,22 @@ function createBaseProLink_TowerMessage_TowerAddMemberResponse_Accept(): ProLink
 }
 
 export const ProLink_TowerMessage_TowerAddMemberResponse_Accept = {
-  encode(_: ProLink_TowerMessage_TowerAddMemberResponse_Accept, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_TowerMessage_TowerAddMemberResponse_Accept,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_TowerMessage_TowerAddMemberResponse_Accept();
+    const message =
+      createBaseProLink_TowerMessage_TowerAddMemberResponse_Accept();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -2285,16 +2540,25 @@ export const ProLink_TowerMessage_TowerAddMemberResponse_Accept = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse_Accept>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
-    return ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse_Accept>,
+      I
+    >,
+  >(base?: I): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
+    return ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse_Accept>, I>>(
-    _: I,
-  ): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
-    const message = createBaseProLink_TowerMessage_TowerAddMemberResponse_Accept();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse_Accept>,
+      I
+    >,
+  >(_: I): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
+    const message =
+      createBaseProLink_TowerMessage_TowerAddMemberResponse_Accept();
     return message;
   },
 };
@@ -2304,12 +2568,19 @@ function createBaseProLink_TowerMessage_TowerHeartbeatRequest(): ProLink_TowerMe
 }
 
 export const ProLink_TowerMessage_TowerHeartbeatRequest = {
-  encode(_: ProLink_TowerMessage_TowerHeartbeatRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_TowerMessage_TowerHeartbeatRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerHeartbeatRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerHeartbeatRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerHeartbeatRequest();
     while (reader.pos < end) {
@@ -2333,15 +2604,15 @@ export const ProLink_TowerMessage_TowerHeartbeatRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatRequest>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerHeartbeatRequest {
+  create<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatRequest>, I>,
+  >(base?: I): ProLink_TowerMessage_TowerHeartbeatRequest {
     return ProLink_TowerMessage_TowerHeartbeatRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatRequest>, I>>(
-    _: I,
-  ): ProLink_TowerMessage_TowerHeartbeatRequest {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatRequest>, I>,
+  >(_: I): ProLink_TowerMessage_TowerHeartbeatRequest {
     const message = createBaseProLink_TowerMessage_TowerHeartbeatRequest();
     return message;
   },
@@ -2352,15 +2623,25 @@ function createBaseProLink_TowerMessage_TowerHeartbeatResponse(): ProLink_TowerM
 }
 
 export const ProLink_TowerMessage_TowerHeartbeatResponse = {
-  encode(message: ProLink_TowerMessage_TowerHeartbeatResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_TowerMessage_TowerHeartbeatResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupDefinition, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupDefinition,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_TowerMessage_TowerHeartbeatResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_TowerMessage_TowerHeartbeatResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_TowerMessage_TowerHeartbeatResponse();
     while (reader.pos < end) {
@@ -2371,7 +2652,10 @@ export const ProLink_TowerMessage_TowerHeartbeatResponse = {
             break;
           }
 
-          message.groupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2392,63 +2676,74 @@ export const ProLink_TowerMessage_TowerHeartbeatResponse = {
 
   toJSON(message: ProLink_TowerMessage_TowerHeartbeatResponse): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined && (obj.groupDefinition = message.groupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-      : undefined);
+    message.groupDefinition !== undefined &&
+      (obj.groupDefinition = message.groupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatResponse>, I>>(
-    base?: I,
-  ): ProLink_TowerMessage_TowerHeartbeatResponse {
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerHeartbeatResponse>,
+      I
+    >,
+  >(base?: I): ProLink_TowerMessage_TowerHeartbeatResponse {
     return ProLink_TowerMessage_TowerHeartbeatResponse.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatResponse>, I>>(
-    object: I,
-  ): ProLink_TowerMessage_TowerHeartbeatResponse {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_TowerMessage_TowerHeartbeatResponse>,
+      I
+    >,
+  >(object: I): ProLink_TowerMessage_TowerHeartbeatResponse {
     const message = createBaseProLink_TowerMessage_TowerHeartbeatResponse();
-    message.groupDefinition = (object.groupDefinition !== undefined && object.groupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
-      : undefined;
+    message.groupDefinition =
+      object.groupDefinition !== undefined && object.groupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
+        : undefined;
     return message;
   },
 };
 
 function createBaseProLink_MemberStatus(): ProLink_MemberStatus {
   return {
-    ip: "",
+    ip: '',
     port: 0,
-    name: "",
+    name: '',
     platform: 0,
-    osVersion: "",
-    hostDescription: "",
-    apiVersion: "",
+    osVersion: '',
+    hostDescription: '',
+    apiVersion: '',
     connectionStatus: 0,
   };
 }
 
 export const ProLink_MemberStatus = {
-  encode(message: ProLink_MemberStatus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ip !== "") {
+  encode(
+    message: ProLink_MemberStatus,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ip !== '') {
       writer.uint32(10).string(message.ip);
     }
     if (message.port !== 0) {
       writer.uint32(16).uint32(message.port);
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(26).string(message.name);
     }
     if (message.platform !== 0) {
       writer.uint32(32).int32(message.platform);
     }
-    if (message.osVersion !== "") {
+    if (message.osVersion !== '') {
       writer.uint32(42).string(message.osVersion);
     }
-    if (message.hostDescription !== "") {
+    if (message.hostDescription !== '') {
       writer.uint32(50).string(message.hostDescription);
     }
-    if (message.apiVersion !== "") {
+    if (message.apiVersion !== '') {
       writer.uint32(58).string(message.apiVersion);
     }
     if (message.connectionStatus !== 0) {
@@ -2457,8 +2752,12 @@ export const ProLink_MemberStatus = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_MemberStatus {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_MemberStatus {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_MemberStatus();
     while (reader.pos < end) {
@@ -2531,13 +2830,17 @@ export const ProLink_MemberStatus = {
 
   fromJSON(object: any): ProLink_MemberStatus {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : "",
+      ip: isSet(object.ip) ? String(object.ip) : '',
       port: isSet(object.port) ? Number(object.port) : 0,
-      name: isSet(object.name) ? String(object.name) : "",
-      platform: isSet(object.platform) ? proLink_MemberStatus_PlatformFromJSON(object.platform) : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : "",
-      hostDescription: isSet(object.hostDescription) ? String(object.hostDescription) : "",
-      apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : "",
+      name: isSet(object.name) ? String(object.name) : '',
+      platform: isSet(object.platform)
+        ? applicationInfo_PlatformFromJSON(object.platform)
+        : 0,
+      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
+      hostDescription: isSet(object.hostDescription)
+        ? String(object.hostDescription)
+        : '',
+      apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : '',
       connectionStatus: isSet(object.connectionStatus)
         ? proLink_MemberStatus_ConnectionStatusFromJSON(object.connectionStatus)
         : 0,
@@ -2549,56 +2852,88 @@ export const ProLink_MemberStatus = {
     message.ip !== undefined && (obj.ip = message.ip);
     message.port !== undefined && (obj.port = Math.round(message.port));
     message.name !== undefined && (obj.name = message.name);
-    message.platform !== undefined && (obj.platform = proLink_MemberStatus_PlatformToJSON(message.platform));
+    message.platform !== undefined &&
+      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
     message.osVersion !== undefined && (obj.osVersion = message.osVersion);
-    message.hostDescription !== undefined && (obj.hostDescription = message.hostDescription);
+    message.hostDescription !== undefined &&
+      (obj.hostDescription = message.hostDescription);
     message.apiVersion !== undefined && (obj.apiVersion = message.apiVersion);
     message.connectionStatus !== undefined &&
-      (obj.connectionStatus = proLink_MemberStatus_ConnectionStatusToJSON(message.connectionStatus));
+      (obj.connectionStatus = proLink_MemberStatus_ConnectionStatusToJSON(
+        message.connectionStatus,
+      ));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_MemberStatus>, I>>(base?: I): ProLink_MemberStatus {
+  create<I extends Exact<DeepPartial<ProLink_MemberStatus>, I>>(
+    base?: I,
+  ): ProLink_MemberStatus {
     return ProLink_MemberStatus.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_MemberStatus>, I>>(object: I): ProLink_MemberStatus {
+  fromPartial<I extends Exact<DeepPartial<ProLink_MemberStatus>, I>>(
+    object: I,
+  ): ProLink_MemberStatus {
     const message = createBaseProLink_MemberStatus();
-    message.ip = object.ip ?? "";
+    message.ip = object.ip ?? '';
     message.port = object.port ?? 0;
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     message.platform = object.platform ?? 0;
-    message.osVersion = object.osVersion ?? "";
-    message.hostDescription = object.hostDescription ?? "";
-    message.apiVersion = object.apiVersion ?? "";
+    message.osVersion = object.osVersion ?? '';
+    message.hostDescription = object.hostDescription ?? '';
+    message.apiVersion = object.apiVersion ?? '';
     message.connectionStatus = object.connectionStatus ?? 0;
     return message;
   },
 };
 
 function createBaseProLink_ClientAction(): ProLink_ClientAction {
-  return { addConnection: undefined, removeConnection: undefined, cancelAction: undefined, renderTime: undefined };
+  return {
+    addConnection: undefined,
+    removeConnection: undefined,
+    cancelAction: undefined,
+    renderTime: undefined,
+  };
 }
 
 export const ProLink_ClientAction = {
-  encode(message: ProLink_ClientAction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_ClientAction,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.addConnection !== undefined) {
-      ProLink_ClientAction_AddConnection.encode(message.addConnection, writer.uint32(10).fork()).ldelim();
+      ProLink_ClientAction_AddConnection.encode(
+        message.addConnection,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.removeConnection !== undefined) {
-      ProLink_ClientAction_RemoveConnection.encode(message.removeConnection, writer.uint32(18).fork()).ldelim();
+      ProLink_ClientAction_RemoveConnection.encode(
+        message.removeConnection,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.cancelAction !== undefined) {
-      ProLink_ClientAction_CancelAction.encode(message.cancelAction, writer.uint32(26).fork()).ldelim();
+      ProLink_ClientAction_CancelAction.encode(
+        message.cancelAction,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.renderTime !== undefined) {
-      ProLink_ClientAction_RenderTime.encode(message.renderTime, writer.uint32(34).fork()).ldelim();
+      ProLink_ClientAction_RenderTime.encode(
+        message.renderTime,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ClientAction {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ClientAction {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ClientAction();
     while (reader.pos < end) {
@@ -2609,28 +2944,41 @@ export const ProLink_ClientAction = {
             break;
           }
 
-          message.addConnection = ProLink_ClientAction_AddConnection.decode(reader, reader.uint32());
+          message.addConnection = ProLink_ClientAction_AddConnection.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.removeConnection = ProLink_ClientAction_RemoveConnection.decode(reader, reader.uint32());
+          message.removeConnection =
+            ProLink_ClientAction_RemoveConnection.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.cancelAction = ProLink_ClientAction_CancelAction.decode(reader, reader.uint32());
+          message.cancelAction = ProLink_ClientAction_CancelAction.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.renderTime = ProLink_ClientAction_RenderTime.decode(reader, reader.uint32());
+          message.renderTime = ProLink_ClientAction_RenderTime.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -2647,73 +2995,99 @@ export const ProLink_ClientAction = {
         ? ProLink_ClientAction_AddConnection.fromJSON(object.addConnection)
         : undefined,
       removeConnection: isSet(object.removeConnection)
-        ? ProLink_ClientAction_RemoveConnection.fromJSON(object.removeConnection)
+        ? ProLink_ClientAction_RemoveConnection.fromJSON(
+            object.removeConnection,
+          )
         : undefined,
       cancelAction: isSet(object.cancelAction)
         ? ProLink_ClientAction_CancelAction.fromJSON(object.cancelAction)
         : undefined,
-      renderTime: isSet(object.renderTime) ? ProLink_ClientAction_RenderTime.fromJSON(object.renderTime) : undefined,
+      renderTime: isSet(object.renderTime)
+        ? ProLink_ClientAction_RenderTime.fromJSON(object.renderTime)
+        : undefined,
     };
   },
 
   toJSON(message: ProLink_ClientAction): unknown {
     const obj: any = {};
-    message.addConnection !== undefined && (obj.addConnection = message.addConnection
-      ? ProLink_ClientAction_AddConnection.toJSON(message.addConnection)
-      : undefined);
-    message.removeConnection !== undefined && (obj.removeConnection = message.removeConnection
-      ? ProLink_ClientAction_RemoveConnection.toJSON(message.removeConnection)
-      : undefined);
-    message.cancelAction !== undefined && (obj.cancelAction = message.cancelAction
-      ? ProLink_ClientAction_CancelAction.toJSON(message.cancelAction)
-      : undefined);
+    message.addConnection !== undefined &&
+      (obj.addConnection = message.addConnection
+        ? ProLink_ClientAction_AddConnection.toJSON(message.addConnection)
+        : undefined);
+    message.removeConnection !== undefined &&
+      (obj.removeConnection = message.removeConnection
+        ? ProLink_ClientAction_RemoveConnection.toJSON(message.removeConnection)
+        : undefined);
+    message.cancelAction !== undefined &&
+      (obj.cancelAction = message.cancelAction
+        ? ProLink_ClientAction_CancelAction.toJSON(message.cancelAction)
+        : undefined);
     message.renderTime !== undefined &&
-      (obj.renderTime = message.renderTime ? ProLink_ClientAction_RenderTime.toJSON(message.renderTime) : undefined);
+      (obj.renderTime = message.renderTime
+        ? ProLink_ClientAction_RenderTime.toJSON(message.renderTime)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_ClientAction>, I>>(base?: I): ProLink_ClientAction {
+  create<I extends Exact<DeepPartial<ProLink_ClientAction>, I>>(
+    base?: I,
+  ): ProLink_ClientAction {
     return ProLink_ClientAction.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction>, I>>(object: I): ProLink_ClientAction {
+  fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction>, I>>(
+    object: I,
+  ): ProLink_ClientAction {
     const message = createBaseProLink_ClientAction();
-    message.addConnection = (object.addConnection !== undefined && object.addConnection !== null)
-      ? ProLink_ClientAction_AddConnection.fromPartial(object.addConnection)
-      : undefined;
-    message.removeConnection = (object.removeConnection !== undefined && object.removeConnection !== null)
-      ? ProLink_ClientAction_RemoveConnection.fromPartial(object.removeConnection)
-      : undefined;
-    message.cancelAction = (object.cancelAction !== undefined && object.cancelAction !== null)
-      ? ProLink_ClientAction_CancelAction.fromPartial(object.cancelAction)
-      : undefined;
-    message.renderTime = (object.renderTime !== undefined && object.renderTime !== null)
-      ? ProLink_ClientAction_RenderTime.fromPartial(object.renderTime)
-      : undefined;
+    message.addConnection =
+      object.addConnection !== undefined && object.addConnection !== null
+        ? ProLink_ClientAction_AddConnection.fromPartial(object.addConnection)
+        : undefined;
+    message.removeConnection =
+      object.removeConnection !== undefined && object.removeConnection !== null
+        ? ProLink_ClientAction_RemoveConnection.fromPartial(
+            object.removeConnection,
+          )
+        : undefined;
+    message.cancelAction =
+      object.cancelAction !== undefined && object.cancelAction !== null
+        ? ProLink_ClientAction_CancelAction.fromPartial(object.cancelAction)
+        : undefined;
+    message.renderTime =
+      object.renderTime !== undefined && object.renderTime !== null
+        ? ProLink_ClientAction_RenderTime.fromPartial(object.renderTime)
+        : undefined;
     return message;
   },
 };
 
 function createBaseProLink_ClientAction_AddConnection(): ProLink_ClientAction_AddConnection {
-  return { ip: "", port: 0, groupName: "" };
+  return { ip: '', port: 0, groupName: '' };
 }
 
 export const ProLink_ClientAction_AddConnection = {
-  encode(message: ProLink_ClientAction_AddConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ip !== "") {
+  encode(
+    message: ProLink_ClientAction_AddConnection,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ip !== '') {
       writer.uint32(10).string(message.ip);
     }
     if (message.port !== 0) {
       writer.uint32(16).uint32(message.port);
     }
-    if (message.groupName !== "") {
+    if (message.groupName !== '') {
       writer.uint32(26).string(message.groupName);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ClientAction_AddConnection {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ClientAction_AddConnection {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ClientAction_AddConnection();
     while (reader.pos < end) {
@@ -2751,9 +3125,9 @@ export const ProLink_ClientAction_AddConnection = {
 
   fromJSON(object: any): ProLink_ClientAction_AddConnection {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : "",
+      ip: isSet(object.ip) ? String(object.ip) : '',
       port: isSet(object.port) ? Number(object.port) : 0,
-      groupName: isSet(object.groupName) ? String(object.groupName) : "",
+      groupName: isSet(object.groupName) ? String(object.groupName) : '',
     };
   },
 
@@ -2771,24 +3145,27 @@ export const ProLink_ClientAction_AddConnection = {
     return ProLink_ClientAction_AddConnection.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction_AddConnection>, I>>(
-    object: I,
-  ): ProLink_ClientAction_AddConnection {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_ClientAction_AddConnection>, I>,
+  >(object: I): ProLink_ClientAction_AddConnection {
     const message = createBaseProLink_ClientAction_AddConnection();
-    message.ip = object.ip ?? "";
+    message.ip = object.ip ?? '';
     message.port = object.port ?? 0;
-    message.groupName = object.groupName ?? "";
+    message.groupName = object.groupName ?? '';
     return message;
   },
 };
 
 function createBaseProLink_ClientAction_RemoveConnection(): ProLink_ClientAction_RemoveConnection {
-  return { ip: "", port: 0 };
+  return { ip: '', port: 0 };
 }
 
 export const ProLink_ClientAction_RemoveConnection = {
-  encode(message: ProLink_ClientAction_RemoveConnection, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ip !== "") {
+  encode(
+    message: ProLink_ClientAction_RemoveConnection,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ip !== '') {
       writer.uint32(10).string(message.ip);
     }
     if (message.port !== 0) {
@@ -2797,8 +3174,12 @@ export const ProLink_ClientAction_RemoveConnection = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ClientAction_RemoveConnection {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ClientAction_RemoveConnection {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ClientAction_RemoveConnection();
     while (reader.pos < end) {
@@ -2828,7 +3209,10 @@ export const ProLink_ClientAction_RemoveConnection = {
   },
 
   fromJSON(object: any): ProLink_ClientAction_RemoveConnection {
-    return { ip: isSet(object.ip) ? String(object.ip) : "", port: isSet(object.port) ? Number(object.port) : 0 };
+    return {
+      ip: isSet(object.ip) ? String(object.ip) : '',
+      port: isSet(object.port) ? Number(object.port) : 0,
+    };
   },
 
   toJSON(message: ProLink_ClientAction_RemoveConnection): unknown {
@@ -2838,17 +3222,17 @@ export const ProLink_ClientAction_RemoveConnection = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_ClientAction_RemoveConnection>, I>>(
-    base?: I,
-  ): ProLink_ClientAction_RemoveConnection {
+  create<
+    I extends Exact<DeepPartial<ProLink_ClientAction_RemoveConnection>, I>,
+  >(base?: I): ProLink_ClientAction_RemoveConnection {
     return ProLink_ClientAction_RemoveConnection.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction_RemoveConnection>, I>>(
-    object: I,
-  ): ProLink_ClientAction_RemoveConnection {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_ClientAction_RemoveConnection>, I>,
+  >(object: I): ProLink_ClientAction_RemoveConnection {
     const message = createBaseProLink_ClientAction_RemoveConnection();
-    message.ip = object.ip ?? "";
+    message.ip = object.ip ?? '';
     message.port = object.port ?? 0;
     return message;
   },
@@ -2859,12 +3243,19 @@ function createBaseProLink_ClientAction_CancelAction(): ProLink_ClientAction_Can
 }
 
 export const ProLink_ClientAction_CancelAction = {
-  encode(_: ProLink_ClientAction_CancelAction, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_ClientAction_CancelAction,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ClientAction_CancelAction {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ClientAction_CancelAction {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ClientAction_CancelAction();
     while (reader.pos < end) {
@@ -2894,9 +3285,9 @@ export const ProLink_ClientAction_CancelAction = {
     return ProLink_ClientAction_CancelAction.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction_CancelAction>, I>>(
-    _: I,
-  ): ProLink_ClientAction_CancelAction {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_ClientAction_CancelAction>, I>,
+  >(_: I): ProLink_ClientAction_CancelAction {
     const message = createBaseProLink_ClientAction_CancelAction();
     return message;
   },
@@ -2907,7 +3298,10 @@ function createBaseProLink_ClientAction_RenderTime(): ProLink_ClientAction_Rende
 }
 
 export const ProLink_ClientAction_RenderTime = {
-  encode(message: ProLink_ClientAction_RenderTime, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_ClientAction_RenderTime,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.latency !== 0) {
       writer.uint32(8).uint64(message.latency);
     }
@@ -2917,8 +3311,12 @@ export const ProLink_ClientAction_RenderTime = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_ClientAction_RenderTime {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_ClientAction_RenderTime {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_ClientAction_RenderTime();
     while (reader.pos < end) {
@@ -2956,12 +3354,16 @@ export const ProLink_ClientAction_RenderTime = {
 
   toJSON(message: ProLink_ClientAction_RenderTime): unknown {
     const obj: any = {};
-    message.latency !== undefined && (obj.latency = Math.round(message.latency));
-    message.renderTime !== undefined && (obj.renderTime = Math.round(message.renderTime));
+    message.latency !== undefined &&
+      (obj.latency = Math.round(message.latency));
+    message.renderTime !== undefined &&
+      (obj.renderTime = Math.round(message.renderTime));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_ClientAction_RenderTime>, I>>(base?: I): ProLink_ClientAction_RenderTime {
+  create<I extends Exact<DeepPartial<ProLink_ClientAction_RenderTime>, I>>(
+    base?: I,
+  ): ProLink_ClientAction_RenderTime {
     return ProLink_ClientAction_RenderTime.fromPartial(base ?? {});
   },
 
@@ -2993,50 +3395,88 @@ function createBaseProLink_HandlerIn(): ProLink_HandlerIn {
 }
 
 export const ProLink_HandlerIn = {
-  encode(message: ProLink_HandlerIn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerIn,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupName !== undefined) {
-      ProLink_HandlerIn_GroupName.encode(message.groupName, writer.uint32(10).fork()).ldelim();
+      ProLink_HandlerIn_GroupName.encode(
+        message.groupName,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.groupDefinitionRequest !== undefined) {
-      ProLink_HandlerIn_GroupDefinitionRequest.encode(message.groupDefinitionRequest, writer.uint32(18).fork())
-        .ldelim();
+      ProLink_HandlerIn_GroupDefinitionRequest.encode(
+        message.groupDefinitionRequest,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.groupJoinConfirmation !== undefined) {
-      ProLink_HandlerIn_GroupJoinConfirmation.encode(message.groupJoinConfirmation, writer.uint32(26).fork()).ldelim();
+      ProLink_HandlerIn_GroupJoinConfirmation.encode(
+        message.groupJoinConfirmation,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.groupJoinPassword !== undefined) {
-      ProLink_HandlerIn_GroupJoinPassword.encode(message.groupJoinPassword, writer.uint32(34).fork()).ldelim();
+      ProLink_HandlerIn_GroupJoinPassword.encode(
+        message.groupJoinPassword,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.addConnectionResult !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult.encode(message.addConnectionResult, writer.uint32(42).fork()).ldelim();
+      ProLink_HandlerIn_AddConnectionResult.encode(
+        message.addConnectionResult,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.groupUpdate !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupUpdate, writer.uint32(50).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupUpdate,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.memberStatusChange !== undefined) {
-      ProLink_HandlerIn_MemberStatusChange.encode(message.memberStatusChange, writer.uint32(58).fork()).ldelim();
+      ProLink_HandlerIn_MemberStatusChange.encode(
+        message.memberStatusChange,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     if (message.propresenterInfo !== undefined) {
-      ProLink_HandlerIn_ProPresenterInfo.encode(message.propresenterInfo, writer.uint32(66).fork()).ldelim();
+      ProLink_HandlerIn_ProPresenterInfo.encode(
+        message.propresenterInfo,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.serverState !== undefined) {
-      ProLink_HandlerIn_ServerState.encode(message.serverState, writer.uint32(74).fork()).ldelim();
+      ProLink_HandlerIn_ServerState.encode(
+        message.serverState,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     if (message.configurationRequest !== undefined) {
-      ProLink_HandlerIn_ConfigurationRequest.encode(message.configurationRequest, writer.uint32(82).fork()).ldelim();
+      ProLink_HandlerIn_ConfigurationRequest.encode(
+        message.configurationRequest,
+        writer.uint32(82).fork(),
+      ).ldelim();
     }
     if (message.zeroconfigNetworkEnvironmentChange !== undefined) {
-      ProLink_ZeroConfig_NetworkEnvironment.encode(message.zeroconfigNetworkEnvironmentChange, writer.uint32(90).fork())
-        .ldelim();
+      ProLink_ZeroConfig_NetworkEnvironment.encode(
+        message.zeroconfigNetworkEnvironmentChange,
+        writer.uint32(90).fork(),
+      ).ldelim();
     }
     if (message.logRequest !== undefined) {
-      ProLink_HandlerIn_LogRequest.encode(message.logRequest, writer.uint32(98).fork()).ldelim();
+      ProLink_HandlerIn_LogRequest.encode(
+        message.logRequest,
+        writer.uint32(98).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn();
     while (reader.pos < end) {
@@ -3047,87 +3487,124 @@ export const ProLink_HandlerIn = {
             break;
           }
 
-          message.groupName = ProLink_HandlerIn_GroupName.decode(reader, reader.uint32());
+          message.groupName = ProLink_HandlerIn_GroupName.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.groupDefinitionRequest = ProLink_HandlerIn_GroupDefinitionRequest.decode(reader, reader.uint32());
+          message.groupDefinitionRequest =
+            ProLink_HandlerIn_GroupDefinitionRequest.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.groupJoinConfirmation = ProLink_HandlerIn_GroupJoinConfirmation.decode(reader, reader.uint32());
+          message.groupJoinConfirmation =
+            ProLink_HandlerIn_GroupJoinConfirmation.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.groupJoinPassword = ProLink_HandlerIn_GroupJoinPassword.decode(reader, reader.uint32());
+          message.groupJoinPassword =
+            ProLink_HandlerIn_GroupJoinPassword.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.addConnectionResult = ProLink_HandlerIn_AddConnectionResult.decode(reader, reader.uint32());
+          message.addConnectionResult =
+            ProLink_HandlerIn_AddConnectionResult.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.groupUpdate = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupUpdate = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 58) {
             break;
           }
 
-          message.memberStatusChange = ProLink_HandlerIn_MemberStatusChange.decode(reader, reader.uint32());
+          message.memberStatusChange =
+            ProLink_HandlerIn_MemberStatusChange.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 8:
           if (tag != 66) {
             break;
           }
 
-          message.propresenterInfo = ProLink_HandlerIn_ProPresenterInfo.decode(reader, reader.uint32());
+          message.propresenterInfo = ProLink_HandlerIn_ProPresenterInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 74) {
             break;
           }
 
-          message.serverState = ProLink_HandlerIn_ServerState.decode(reader, reader.uint32());
+          message.serverState = ProLink_HandlerIn_ServerState.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 10:
           if (tag != 82) {
             break;
           }
 
-          message.configurationRequest = ProLink_HandlerIn_ConfigurationRequest.decode(reader, reader.uint32());
+          message.configurationRequest =
+            ProLink_HandlerIn_ConfigurationRequest.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 11:
           if (tag != 90) {
             break;
           }
 
-          message.zeroconfigNetworkEnvironmentChange = ProLink_ZeroConfig_NetworkEnvironment.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.zeroconfigNetworkEnvironmentChange =
+            ProLink_ZeroConfig_NetworkEnvironment.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 12:
           if (tag != 98) {
             break;
           }
 
-          message.logRequest = ProLink_HandlerIn_LogRequest.decode(reader, reader.uint32());
+          message.logRequest = ProLink_HandlerIn_LogRequest.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3140,120 +3617,206 @@ export const ProLink_HandlerIn = {
 
   fromJSON(object: any): ProLink_HandlerIn {
     return {
-      groupName: isSet(object.groupName) ? ProLink_HandlerIn_GroupName.fromJSON(object.groupName) : undefined,
+      groupName: isSet(object.groupName)
+        ? ProLink_HandlerIn_GroupName.fromJSON(object.groupName)
+        : undefined,
       groupDefinitionRequest: isSet(object.groupDefinitionRequest)
-        ? ProLink_HandlerIn_GroupDefinitionRequest.fromJSON(object.groupDefinitionRequest)
+        ? ProLink_HandlerIn_GroupDefinitionRequest.fromJSON(
+            object.groupDefinitionRequest,
+          )
         : undefined,
       groupJoinConfirmation: isSet(object.groupJoinConfirmation)
-        ? ProLink_HandlerIn_GroupJoinConfirmation.fromJSON(object.groupJoinConfirmation)
+        ? ProLink_HandlerIn_GroupJoinConfirmation.fromJSON(
+            object.groupJoinConfirmation,
+          )
         : undefined,
       groupJoinPassword: isSet(object.groupJoinPassword)
         ? ProLink_HandlerIn_GroupJoinPassword.fromJSON(object.groupJoinPassword)
         : undefined,
       addConnectionResult: isSet(object.addConnectionResult)
-        ? ProLink_HandlerIn_AddConnectionResult.fromJSON(object.addConnectionResult)
+        ? ProLink_HandlerIn_AddConnectionResult.fromJSON(
+            object.addConnectionResult,
+          )
         : undefined,
-      groupUpdate: isSet(object.groupUpdate) ? ProLink_GroupDefinition.fromJSON(object.groupUpdate) : undefined,
+      groupUpdate: isSet(object.groupUpdate)
+        ? ProLink_GroupDefinition.fromJSON(object.groupUpdate)
+        : undefined,
       memberStatusChange: isSet(object.memberStatusChange)
-        ? ProLink_HandlerIn_MemberStatusChange.fromJSON(object.memberStatusChange)
+        ? ProLink_HandlerIn_MemberStatusChange.fromJSON(
+            object.memberStatusChange,
+          )
         : undefined,
       propresenterInfo: isSet(object.propresenterInfo)
         ? ProLink_HandlerIn_ProPresenterInfo.fromJSON(object.propresenterInfo)
         : undefined,
-      serverState: isSet(object.serverState) ? ProLink_HandlerIn_ServerState.fromJSON(object.serverState) : undefined,
+      serverState: isSet(object.serverState)
+        ? ProLink_HandlerIn_ServerState.fromJSON(object.serverState)
+        : undefined,
       configurationRequest: isSet(object.configurationRequest)
-        ? ProLink_HandlerIn_ConfigurationRequest.fromJSON(object.configurationRequest)
+        ? ProLink_HandlerIn_ConfigurationRequest.fromJSON(
+            object.configurationRequest,
+          )
         : undefined,
-      zeroconfigNetworkEnvironmentChange: isSet(object.zeroconfigNetworkEnvironmentChange)
-        ? ProLink_ZeroConfig_NetworkEnvironment.fromJSON(object.zeroconfigNetworkEnvironmentChange)
+      zeroconfigNetworkEnvironmentChange: isSet(
+        object.zeroconfigNetworkEnvironmentChange,
+      )
+        ? ProLink_ZeroConfig_NetworkEnvironment.fromJSON(
+            object.zeroconfigNetworkEnvironmentChange,
+          )
         : undefined,
-      logRequest: isSet(object.logRequest) ? ProLink_HandlerIn_LogRequest.fromJSON(object.logRequest) : undefined,
+      logRequest: isSet(object.logRequest)
+        ? ProLink_HandlerIn_LogRequest.fromJSON(object.logRequest)
+        : undefined,
     };
   },
 
   toJSON(message: ProLink_HandlerIn): unknown {
     const obj: any = {};
     message.groupName !== undefined &&
-      (obj.groupName = message.groupName ? ProLink_HandlerIn_GroupName.toJSON(message.groupName) : undefined);
-    message.groupDefinitionRequest !== undefined && (obj.groupDefinitionRequest = message.groupDefinitionRequest
-      ? ProLink_HandlerIn_GroupDefinitionRequest.toJSON(message.groupDefinitionRequest)
-      : undefined);
-    message.groupJoinConfirmation !== undefined && (obj.groupJoinConfirmation = message.groupJoinConfirmation
-      ? ProLink_HandlerIn_GroupJoinConfirmation.toJSON(message.groupJoinConfirmation)
-      : undefined);
-    message.groupJoinPassword !== undefined && (obj.groupJoinPassword = message.groupJoinPassword
-      ? ProLink_HandlerIn_GroupJoinPassword.toJSON(message.groupJoinPassword)
-      : undefined);
-    message.addConnectionResult !== undefined && (obj.addConnectionResult = message.addConnectionResult
-      ? ProLink_HandlerIn_AddConnectionResult.toJSON(message.addConnectionResult)
-      : undefined);
-    message.groupUpdate !== undefined &&
-      (obj.groupUpdate = message.groupUpdate ? ProLink_GroupDefinition.toJSON(message.groupUpdate) : undefined);
-    message.memberStatusChange !== undefined && (obj.memberStatusChange = message.memberStatusChange
-      ? ProLink_HandlerIn_MemberStatusChange.toJSON(message.memberStatusChange)
-      : undefined);
-    message.propresenterInfo !== undefined && (obj.propresenterInfo = message.propresenterInfo
-      ? ProLink_HandlerIn_ProPresenterInfo.toJSON(message.propresenterInfo)
-      : undefined);
-    message.serverState !== undefined &&
-      (obj.serverState = message.serverState ? ProLink_HandlerIn_ServerState.toJSON(message.serverState) : undefined);
-    message.configurationRequest !== undefined && (obj.configurationRequest = message.configurationRequest
-      ? ProLink_HandlerIn_ConfigurationRequest.toJSON(message.configurationRequest)
-      : undefined);
-    message.zeroconfigNetworkEnvironmentChange !== undefined &&
-      (obj.zeroconfigNetworkEnvironmentChange = message.zeroconfigNetworkEnvironmentChange
-        ? ProLink_ZeroConfig_NetworkEnvironment.toJSON(message.zeroconfigNetworkEnvironmentChange)
+      (obj.groupName = message.groupName
+        ? ProLink_HandlerIn_GroupName.toJSON(message.groupName)
         : undefined);
+    message.groupDefinitionRequest !== undefined &&
+      (obj.groupDefinitionRequest = message.groupDefinitionRequest
+        ? ProLink_HandlerIn_GroupDefinitionRequest.toJSON(
+            message.groupDefinitionRequest,
+          )
+        : undefined);
+    message.groupJoinConfirmation !== undefined &&
+      (obj.groupJoinConfirmation = message.groupJoinConfirmation
+        ? ProLink_HandlerIn_GroupJoinConfirmation.toJSON(
+            message.groupJoinConfirmation,
+          )
+        : undefined);
+    message.groupJoinPassword !== undefined &&
+      (obj.groupJoinPassword = message.groupJoinPassword
+        ? ProLink_HandlerIn_GroupJoinPassword.toJSON(message.groupJoinPassword)
+        : undefined);
+    message.addConnectionResult !== undefined &&
+      (obj.addConnectionResult = message.addConnectionResult
+        ? ProLink_HandlerIn_AddConnectionResult.toJSON(
+            message.addConnectionResult,
+          )
+        : undefined);
+    message.groupUpdate !== undefined &&
+      (obj.groupUpdate = message.groupUpdate
+        ? ProLink_GroupDefinition.toJSON(message.groupUpdate)
+        : undefined);
+    message.memberStatusChange !== undefined &&
+      (obj.memberStatusChange = message.memberStatusChange
+        ? ProLink_HandlerIn_MemberStatusChange.toJSON(
+            message.memberStatusChange,
+          )
+        : undefined);
+    message.propresenterInfo !== undefined &&
+      (obj.propresenterInfo = message.propresenterInfo
+        ? ProLink_HandlerIn_ProPresenterInfo.toJSON(message.propresenterInfo)
+        : undefined);
+    message.serverState !== undefined &&
+      (obj.serverState = message.serverState
+        ? ProLink_HandlerIn_ServerState.toJSON(message.serverState)
+        : undefined);
+    message.configurationRequest !== undefined &&
+      (obj.configurationRequest = message.configurationRequest
+        ? ProLink_HandlerIn_ConfigurationRequest.toJSON(
+            message.configurationRequest,
+          )
+        : undefined);
+    message.zeroconfigNetworkEnvironmentChange !== undefined &&
+      (obj.zeroconfigNetworkEnvironmentChange =
+        message.zeroconfigNetworkEnvironmentChange
+          ? ProLink_ZeroConfig_NetworkEnvironment.toJSON(
+              message.zeroconfigNetworkEnvironmentChange,
+            )
+          : undefined);
     message.logRequest !== undefined &&
-      (obj.logRequest = message.logRequest ? ProLink_HandlerIn_LogRequest.toJSON(message.logRequest) : undefined);
+      (obj.logRequest = message.logRequest
+        ? ProLink_HandlerIn_LogRequest.toJSON(message.logRequest)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn>, I>>(base?: I): ProLink_HandlerIn {
+  create<I extends Exact<DeepPartial<ProLink_HandlerIn>, I>>(
+    base?: I,
+  ): ProLink_HandlerIn {
     return ProLink_HandlerIn.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn>, I>>(object: I): ProLink_HandlerIn {
+  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn>, I>>(
+    object: I,
+  ): ProLink_HandlerIn {
     const message = createBaseProLink_HandlerIn();
-    message.groupName = (object.groupName !== undefined && object.groupName !== null)
-      ? ProLink_HandlerIn_GroupName.fromPartial(object.groupName)
-      : undefined;
+    message.groupName =
+      object.groupName !== undefined && object.groupName !== null
+        ? ProLink_HandlerIn_GroupName.fromPartial(object.groupName)
+        : undefined;
     message.groupDefinitionRequest =
-      (object.groupDefinitionRequest !== undefined && object.groupDefinitionRequest !== null)
-        ? ProLink_HandlerIn_GroupDefinitionRequest.fromPartial(object.groupDefinitionRequest)
+      object.groupDefinitionRequest !== undefined &&
+      object.groupDefinitionRequest !== null
+        ? ProLink_HandlerIn_GroupDefinitionRequest.fromPartial(
+            object.groupDefinitionRequest,
+          )
         : undefined;
     message.groupJoinConfirmation =
-      (object.groupJoinConfirmation !== undefined && object.groupJoinConfirmation !== null)
-        ? ProLink_HandlerIn_GroupJoinConfirmation.fromPartial(object.groupJoinConfirmation)
+      object.groupJoinConfirmation !== undefined &&
+      object.groupJoinConfirmation !== null
+        ? ProLink_HandlerIn_GroupJoinConfirmation.fromPartial(
+            object.groupJoinConfirmation,
+          )
         : undefined;
-    message.groupJoinPassword = (object.groupJoinPassword !== undefined && object.groupJoinPassword !== null)
-      ? ProLink_HandlerIn_GroupJoinPassword.fromPartial(object.groupJoinPassword)
-      : undefined;
-    message.addConnectionResult = (object.addConnectionResult !== undefined && object.addConnectionResult !== null)
-      ? ProLink_HandlerIn_AddConnectionResult.fromPartial(object.addConnectionResult)
-      : undefined;
-    message.groupUpdate = (object.groupUpdate !== undefined && object.groupUpdate !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupUpdate)
-      : undefined;
-    message.memberStatusChange = (object.memberStatusChange !== undefined && object.memberStatusChange !== null)
-      ? ProLink_HandlerIn_MemberStatusChange.fromPartial(object.memberStatusChange)
-      : undefined;
-    message.propresenterInfo = (object.propresenterInfo !== undefined && object.propresenterInfo !== null)
-      ? ProLink_HandlerIn_ProPresenterInfo.fromPartial(object.propresenterInfo)
-      : undefined;
-    message.serverState = (object.serverState !== undefined && object.serverState !== null)
-      ? ProLink_HandlerIn_ServerState.fromPartial(object.serverState)
-      : undefined;
-    message.configurationRequest = (object.configurationRequest !== undefined && object.configurationRequest !== null)
-      ? ProLink_HandlerIn_ConfigurationRequest.fromPartial(object.configurationRequest)
-      : undefined;
+    message.groupJoinPassword =
+      object.groupJoinPassword !== undefined &&
+      object.groupJoinPassword !== null
+        ? ProLink_HandlerIn_GroupJoinPassword.fromPartial(
+            object.groupJoinPassword,
+          )
+        : undefined;
+    message.addConnectionResult =
+      object.addConnectionResult !== undefined &&
+      object.addConnectionResult !== null
+        ? ProLink_HandlerIn_AddConnectionResult.fromPartial(
+            object.addConnectionResult,
+          )
+        : undefined;
+    message.groupUpdate =
+      object.groupUpdate !== undefined && object.groupUpdate !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupUpdate)
+        : undefined;
+    message.memberStatusChange =
+      object.memberStatusChange !== undefined &&
+      object.memberStatusChange !== null
+        ? ProLink_HandlerIn_MemberStatusChange.fromPartial(
+            object.memberStatusChange,
+          )
+        : undefined;
+    message.propresenterInfo =
+      object.propresenterInfo !== undefined && object.propresenterInfo !== null
+        ? ProLink_HandlerIn_ProPresenterInfo.fromPartial(
+            object.propresenterInfo,
+          )
+        : undefined;
+    message.serverState =
+      object.serverState !== undefined && object.serverState !== null
+        ? ProLink_HandlerIn_ServerState.fromPartial(object.serverState)
+        : undefined;
+    message.configurationRequest =
+      object.configurationRequest !== undefined &&
+      object.configurationRequest !== null
+        ? ProLink_HandlerIn_ConfigurationRequest.fromPartial(
+            object.configurationRequest,
+          )
+        : undefined;
     message.zeroconfigNetworkEnvironmentChange =
-      (object.zeroconfigNetworkEnvironmentChange !== undefined && object.zeroconfigNetworkEnvironmentChange !== null)
-        ? ProLink_ZeroConfig_NetworkEnvironment.fromPartial(object.zeroconfigNetworkEnvironmentChange)
+      object.zeroconfigNetworkEnvironmentChange !== undefined &&
+      object.zeroconfigNetworkEnvironmentChange !== null
+        ? ProLink_ZeroConfig_NetworkEnvironment.fromPartial(
+            object.zeroconfigNetworkEnvironmentChange,
+          )
         : undefined;
-    message.logRequest = (object.logRequest !== undefined && object.logRequest !== null)
-      ? ProLink_HandlerIn_LogRequest.fromPartial(object.logRequest)
-      : undefined;
+    message.logRequest =
+      object.logRequest !== undefined && object.logRequest !== null
+        ? ProLink_HandlerIn_LogRequest.fromPartial(object.logRequest)
+        : undefined;
     return message;
   },
 };
@@ -3263,12 +3826,19 @@ function createBaseProLink_HandlerIn_GroupName(): ProLink_HandlerIn_GroupName {
 }
 
 export const ProLink_HandlerIn_GroupName = {
-  encode(_: ProLink_HandlerIn_GroupName, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_HandlerIn_GroupName,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_GroupName {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_GroupName {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_GroupName();
     while (reader.pos < end) {
@@ -3292,11 +3862,15 @@ export const ProLink_HandlerIn_GroupName = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupName>, I>>(base?: I): ProLink_HandlerIn_GroupName {
+  create<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupName>, I>>(
+    base?: I,
+  ): ProLink_HandlerIn_GroupName {
     return ProLink_HandlerIn_GroupName.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupName>, I>>(_: I): ProLink_HandlerIn_GroupName {
+  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupName>, I>>(
+    _: I,
+  ): ProLink_HandlerIn_GroupName {
     const message = createBaseProLink_HandlerIn_GroupName();
     return message;
   },
@@ -3307,12 +3881,19 @@ function createBaseProLink_HandlerIn_GroupDefinitionRequest(): ProLink_HandlerIn
 }
 
 export const ProLink_HandlerIn_GroupDefinitionRequest = {
-  encode(_: ProLink_HandlerIn_GroupDefinitionRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_HandlerIn_GroupDefinitionRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_GroupDefinitionRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_GroupDefinitionRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_GroupDefinitionRequest();
     while (reader.pos < end) {
@@ -3336,34 +3917,41 @@ export const ProLink_HandlerIn_GroupDefinitionRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupDefinitionRequest>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_GroupDefinitionRequest {
+  create<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_GroupDefinitionRequest>, I>,
+  >(base?: I): ProLink_HandlerIn_GroupDefinitionRequest {
     return ProLink_HandlerIn_GroupDefinitionRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupDefinitionRequest>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_GroupDefinitionRequest {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_GroupDefinitionRequest>, I>,
+  >(_: I): ProLink_HandlerIn_GroupDefinitionRequest {
     const message = createBaseProLink_HandlerIn_GroupDefinitionRequest();
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_GroupJoinConfirmation(): ProLink_HandlerIn_GroupJoinConfirmation {
-  return { name: "" };
+  return { name: '' };
 }
 
 export const ProLink_HandlerIn_GroupJoinConfirmation = {
-  encode(message: ProLink_HandlerIn_GroupJoinConfirmation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: ProLink_HandlerIn_GroupJoinConfirmation,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_GroupJoinConfirmation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_GroupJoinConfirmation {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_GroupJoinConfirmation();
     while (reader.pos < end) {
@@ -3386,7 +3974,7 @@ export const ProLink_HandlerIn_GroupJoinConfirmation = {
   },
 
   fromJSON(object: any): ProLink_HandlerIn_GroupJoinConfirmation {
-    return { name: isSet(object.name) ? String(object.name) : "" };
+    return { name: isSet(object.name) ? String(object.name) : '' };
   },
 
   toJSON(message: ProLink_HandlerIn_GroupJoinConfirmation): unknown {
@@ -3395,35 +3983,42 @@ export const ProLink_HandlerIn_GroupJoinConfirmation = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinConfirmation>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_GroupJoinConfirmation {
+  create<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinConfirmation>, I>,
+  >(base?: I): ProLink_HandlerIn_GroupJoinConfirmation {
     return ProLink_HandlerIn_GroupJoinConfirmation.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinConfirmation>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_GroupJoinConfirmation {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinConfirmation>, I>,
+  >(object: I): ProLink_HandlerIn_GroupJoinConfirmation {
     const message = createBaseProLink_HandlerIn_GroupJoinConfirmation();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_GroupJoinPassword(): ProLink_HandlerIn_GroupJoinPassword {
-  return { name: "" };
+  return { name: '' };
 }
 
 export const ProLink_HandlerIn_GroupJoinPassword = {
-  encode(message: ProLink_HandlerIn_GroupJoinPassword, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: ProLink_HandlerIn_GroupJoinPassword,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_GroupJoinPassword {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_GroupJoinPassword {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_GroupJoinPassword();
     while (reader.pos < end) {
@@ -3446,7 +4041,7 @@ export const ProLink_HandlerIn_GroupJoinPassword = {
   },
 
   fromJSON(object: any): ProLink_HandlerIn_GroupJoinPassword {
-    return { name: isSet(object.name) ? String(object.name) : "" };
+    return { name: isSet(object.name) ? String(object.name) : '' };
   },
 
   toJSON(message: ProLink_HandlerIn_GroupJoinPassword): unknown {
@@ -3461,11 +4056,11 @@ export const ProLink_HandlerIn_GroupJoinPassword = {
     return ProLink_HandlerIn_GroupJoinPassword.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinPassword>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_GroupJoinPassword {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinPassword>, I>,
+  >(object: I): ProLink_HandlerIn_GroupJoinPassword {
     const message = createBaseProLink_HandlerIn_GroupJoinPassword();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     return message;
   },
 };
@@ -3475,18 +4070,31 @@ function createBaseProLink_HandlerIn_AddConnectionResult(): ProLink_HandlerIn_Ad
 }
 
 export const ProLink_HandlerIn_AddConnectionResult = {
-  encode(message: ProLink_HandlerIn_AddConnectionResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerIn_AddConnectionResult,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.success !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Success.encode(message.success, writer.uint32(10).fork()).ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Success.encode(
+        message.success,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.failure !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure.encode(message.failure, writer.uint32(18).fork()).ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure.encode(
+        message.failure,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_AddConnectionResult();
     while (reader.pos < end) {
@@ -3497,14 +4105,22 @@ export const ProLink_HandlerIn_AddConnectionResult = {
             break;
           }
 
-          message.success = ProLink_HandlerIn_AddConnectionResult_Success.decode(reader, reader.uint32());
+          message.success =
+            ProLink_HandlerIn_AddConnectionResult_Success.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.failure = ProLink_HandlerIn_AddConnectionResult_Failure.decode(reader, reader.uint32());
+          message.failure =
+            ProLink_HandlerIn_AddConnectionResult_Failure.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3539,22 +4155,28 @@ export const ProLink_HandlerIn_AddConnectionResult = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult {
+  create<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult>, I>,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult {
     return ProLink_HandlerIn_AddConnectionResult.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult>, I>,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult {
     const message = createBaseProLink_HandlerIn_AddConnectionResult();
-    message.success = (object.success !== undefined && object.success !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Success.fromPartial(object.success)
-      : undefined;
-    message.failure = (object.failure !== undefined && object.failure !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure.fromPartial(object.failure)
-      : undefined;
+    message.success =
+      object.success !== undefined && object.success !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Success.fromPartial(
+            object.success,
+          )
+        : undefined;
+    message.failure =
+      object.failure !== undefined && object.failure !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure.fromPartial(
+            object.failure,
+          )
+        : undefined;
     return message;
   },
 };
@@ -3564,15 +4186,25 @@ function createBaseProLink_HandlerIn_AddConnectionResult_Success(): ProLink_Hand
 }
 
 export const ProLink_HandlerIn_AddConnectionResult_Success = {
-  encode(message: ProLink_HandlerIn_AddConnectionResult_Success, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerIn_AddConnectionResult_Success,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.newGroupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.newGroupDefinition, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.newGroupDefinition,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Success {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Success {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_AddConnectionResult_Success();
     while (reader.pos < end) {
@@ -3583,7 +4215,10 @@ export const ProLink_HandlerIn_AddConnectionResult_Success = {
             break;
           }
 
-          message.newGroupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.newGroupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3604,25 +4239,36 @@ export const ProLink_HandlerIn_AddConnectionResult_Success = {
 
   toJSON(message: ProLink_HandlerIn_AddConnectionResult_Success): unknown {
     const obj: any = {};
-    message.newGroupDefinition !== undefined && (obj.newGroupDefinition = message.newGroupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.newGroupDefinition)
-      : undefined);
+    message.newGroupDefinition !== undefined &&
+      (obj.newGroupDefinition = message.newGroupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.newGroupDefinition)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Success>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Success {
-    return ProLink_HandlerIn_AddConnectionResult_Success.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Success>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Success {
+    return ProLink_HandlerIn_AddConnectionResult_Success.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Success>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Success {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Success>,
+      I
+    >,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult_Success {
     const message = createBaseProLink_HandlerIn_AddConnectionResult_Success();
-    message.newGroupDefinition = (object.newGroupDefinition !== undefined && object.newGroupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.newGroupDefinition)
-      : undefined;
+    message.newGroupDefinition =
+      object.newGroupDefinition !== undefined &&
+      object.newGroupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.newGroupDefinition)
+        : undefined;
     return message;
   },
 };
@@ -3642,25 +4288,39 @@ function createBaseProLink_HandlerIn_AddConnectionResult_Failure(): ProLink_Hand
 }
 
 export const ProLink_HandlerIn_AddConnectionResult_Failure = {
-  encode(message: ProLink_HandlerIn_AddConnectionResult_Failure, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerIn_AddConnectionResult_Failure,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.unexpected !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.encode(message.unexpected, writer.uint32(10).fork())
-        .ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.encode(
+        message.unexpected,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.declined !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_Declined.encode(message.declined, writer.uint32(18).fork())
-        .ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_Declined.encode(
+        message.declined,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.timeout !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.encode(message.timeout, writer.uint32(26).fork()).ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.encode(
+        message.timeout,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.linkDisabled !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.encode(message.linkDisabled, writer.uint32(34).fork())
-        .ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.encode(
+        message.linkDisabled,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.inOtherGroup !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.encode(message.inOtherGroup, writer.uint32(42).fork())
-        .ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.encode(
+        message.inOtherGroup,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.invalidIpAddress !== undefined) {
       ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.encode(
@@ -3675,18 +4335,26 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
       ).ldelim();
     }
     if (message.couldNotAdd !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.encode(message.couldNotAdd, writer.uint32(66).fork())
-        .ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.encode(
+        message.couldNotAdd,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.couldNotJoin !== undefined) {
-      ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.encode(message.couldNotJoin, writer.uint32(74).fork())
-        .ldelim();
+      ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.encode(
+        message.couldNotJoin,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure();
     while (reader.pos < end) {
@@ -3697,81 +4365,99 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             break;
           }
 
-          message.unexpected = ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.decode(reader, reader.uint32());
+          message.unexpected =
+            ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.declined = ProLink_HandlerIn_AddConnectionResult_Failure_Declined.decode(reader, reader.uint32());
+          message.declined =
+            ProLink_HandlerIn_AddConnectionResult_Failure_Declined.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.timeout = ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.decode(reader, reader.uint32());
+          message.timeout =
+            ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.linkDisabled = ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.linkDisabled =
+            ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.inOtherGroup = ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.inOtherGroup =
+            ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.invalidIpAddress = ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.invalidIpAddress =
+            ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 7:
           if (tag != 58) {
             break;
           }
 
-          message.alreadyInGroup = ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.alreadyInGroup =
+            ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 8:
           if (tag != 66) {
             break;
           }
 
-          message.couldNotAdd = ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.couldNotAdd =
+            ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 9:
           if (tag != 74) {
             break;
           }
 
-          message.couldNotJoin = ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.couldNotJoin =
+            ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -3785,104 +4471,184 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
   fromJSON(object: any): ProLink_HandlerIn_AddConnectionResult_Failure {
     return {
       unexpected: isSet(object.unexpected)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromJSON(object.unexpected)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromJSON(
+            object.unexpected,
+          )
         : undefined,
       declined: isSet(object.declined)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromJSON(object.declined)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromJSON(
+            object.declined,
+          )
         : undefined,
       timeout: isSet(object.timeout)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromJSON(object.timeout)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromJSON(
+            object.timeout,
+          )
         : undefined,
       linkDisabled: isSet(object.linkDisabled)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromJSON(object.linkDisabled)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromJSON(
+            object.linkDisabled,
+          )
         : undefined,
       inOtherGroup: isSet(object.inOtherGroup)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromJSON(object.inOtherGroup)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromJSON(
+            object.inOtherGroup,
+          )
         : undefined,
       invalidIpAddress: isSet(object.invalidIpAddress)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromJSON(object.invalidIpAddress)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromJSON(
+            object.invalidIpAddress,
+          )
         : undefined,
       alreadyInGroup: isSet(object.alreadyInGroup)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromJSON(object.alreadyInGroup)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromJSON(
+            object.alreadyInGroup,
+          )
         : undefined,
       couldNotAdd: isSet(object.couldNotAdd)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromJSON(object.couldNotAdd)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromJSON(
+            object.couldNotAdd,
+          )
         : undefined,
       couldNotJoin: isSet(object.couldNotJoin)
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromJSON(object.couldNotJoin)
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromJSON(
+            object.couldNotJoin,
+          )
         : undefined,
     };
   },
 
   toJSON(message: ProLink_HandlerIn_AddConnectionResult_Failure): unknown {
     const obj: any = {};
-    message.unexpected !== undefined && (obj.unexpected = message.unexpected
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.toJSON(message.unexpected)
-      : undefined);
-    message.declined !== undefined && (obj.declined = message.declined
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.toJSON(message.declined)
-      : undefined);
-    message.timeout !== undefined && (obj.timeout = message.timeout
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.toJSON(message.timeout)
-      : undefined);
-    message.linkDisabled !== undefined && (obj.linkDisabled = message.linkDisabled
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.toJSON(message.linkDisabled)
-      : undefined);
-    message.inOtherGroup !== undefined && (obj.inOtherGroup = message.inOtherGroup
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.toJSON(message.inOtherGroup)
-      : undefined);
-    message.invalidIpAddress !== undefined && (obj.invalidIpAddress = message.invalidIpAddress
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.toJSON(message.invalidIpAddress)
-      : undefined);
-    message.alreadyInGroup !== undefined && (obj.alreadyInGroup = message.alreadyInGroup
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.toJSON(message.alreadyInGroup)
-      : undefined);
-    message.couldNotAdd !== undefined && (obj.couldNotAdd = message.couldNotAdd
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.toJSON(message.couldNotAdd)
-      : undefined);
-    message.couldNotJoin !== undefined && (obj.couldNotJoin = message.couldNotJoin
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.toJSON(message.couldNotJoin)
-      : undefined);
+    message.unexpected !== undefined &&
+      (obj.unexpected = message.unexpected
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.toJSON(
+            message.unexpected,
+          )
+        : undefined);
+    message.declined !== undefined &&
+      (obj.declined = message.declined
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.toJSON(
+            message.declined,
+          )
+        : undefined);
+    message.timeout !== undefined &&
+      (obj.timeout = message.timeout
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.toJSON(
+            message.timeout,
+          )
+        : undefined);
+    message.linkDisabled !== undefined &&
+      (obj.linkDisabled = message.linkDisabled
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.toJSON(
+            message.linkDisabled,
+          )
+        : undefined);
+    message.inOtherGroup !== undefined &&
+      (obj.inOtherGroup = message.inOtherGroup
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.toJSON(
+            message.inOtherGroup,
+          )
+        : undefined);
+    message.invalidIpAddress !== undefined &&
+      (obj.invalidIpAddress = message.invalidIpAddress
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.toJSON(
+            message.invalidIpAddress,
+          )
+        : undefined);
+    message.alreadyInGroup !== undefined &&
+      (obj.alreadyInGroup = message.alreadyInGroup
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.toJSON(
+            message.alreadyInGroup,
+          )
+        : undefined);
+    message.couldNotAdd !== undefined &&
+      (obj.couldNotAdd = message.couldNotAdd
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.toJSON(
+            message.couldNotAdd,
+          )
+        : undefined);
+    message.couldNotJoin !== undefined &&
+      (obj.couldNotJoin = message.couldNotJoin
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.toJSON(
+            message.couldNotJoin,
+          )
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure {
-    return ProLink_HandlerIn_AddConnectionResult_Failure.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure {
+    return ProLink_HandlerIn_AddConnectionResult_Failure.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure>,
+      I
+    >,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult_Failure {
     const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure();
-    message.unexpected = (object.unexpected !== undefined && object.unexpected !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromPartial(object.unexpected)
-      : undefined;
-    message.declined = (object.declined !== undefined && object.declined !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromPartial(object.declined)
-      : undefined;
-    message.timeout = (object.timeout !== undefined && object.timeout !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromPartial(object.timeout)
-      : undefined;
-    message.linkDisabled = (object.linkDisabled !== undefined && object.linkDisabled !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromPartial(object.linkDisabled)
-      : undefined;
-    message.inOtherGroup = (object.inOtherGroup !== undefined && object.inOtherGroup !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromPartial(object.inOtherGroup)
-      : undefined;
-    message.invalidIpAddress = (object.invalidIpAddress !== undefined && object.invalidIpAddress !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromPartial(object.invalidIpAddress)
-      : undefined;
-    message.alreadyInGroup = (object.alreadyInGroup !== undefined && object.alreadyInGroup !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromPartial(object.alreadyInGroup)
-      : undefined;
-    message.couldNotAdd = (object.couldNotAdd !== undefined && object.couldNotAdd !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromPartial(object.couldNotAdd)
-      : undefined;
-    message.couldNotJoin = (object.couldNotJoin !== undefined && object.couldNotJoin !== null)
-      ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromPartial(object.couldNotJoin)
-      : undefined;
+    message.unexpected =
+      object.unexpected !== undefined && object.unexpected !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromPartial(
+            object.unexpected,
+          )
+        : undefined;
+    message.declined =
+      object.declined !== undefined && object.declined !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromPartial(
+            object.declined,
+          )
+        : undefined;
+    message.timeout =
+      object.timeout !== undefined && object.timeout !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromPartial(
+            object.timeout,
+          )
+        : undefined;
+    message.linkDisabled =
+      object.linkDisabled !== undefined && object.linkDisabled !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromPartial(
+            object.linkDisabled,
+          )
+        : undefined;
+    message.inOtherGroup =
+      object.inOtherGroup !== undefined && object.inOtherGroup !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromPartial(
+            object.inOtherGroup,
+          )
+        : undefined;
+    message.invalidIpAddress =
+      object.invalidIpAddress !== undefined && object.invalidIpAddress !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromPartial(
+            object.invalidIpAddress,
+          )
+        : undefined;
+    message.alreadyInGroup =
+      object.alreadyInGroup !== undefined && object.alreadyInGroup !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromPartial(
+            object.alreadyInGroup,
+          )
+        : undefined;
+    message.couldNotAdd =
+      object.couldNotAdd !== undefined && object.couldNotAdd !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromPartial(
+            object.couldNotAdd,
+          )
+        : undefined;
+    message.couldNotJoin =
+      object.couldNotJoin !== undefined && object.couldNotJoin !== null
+        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromPartial(
+            object.couldNotJoin,
+          )
+        : undefined;
     return message;
   },
 };
@@ -3899,10 +4665,15 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_Unexpected();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_Unexpected();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3924,16 +4695,25 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_Unexpected();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected>,
+      I
+    >,
+  >(_: I): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_Unexpected();
     return message;
   },
 };
@@ -3950,10 +4730,15 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Declined = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_Declined();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_Declined();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -3975,16 +4760,25 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Declined = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Declined>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Declined>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Declined>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_Declined();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Declined>,
+      I
+    >,
+  >(_: I): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_Declined();
     return message;
   },
 };
@@ -4001,10 +4795,15 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Timeout = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_Timeout();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_Timeout();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4026,16 +4825,25 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Timeout = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Timeout>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Timeout>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Timeout>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_Timeout();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Timeout>,
+      I
+    >,
+  >(_: I): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_Timeout();
     return message;
   },
 };
@@ -4052,10 +4860,15 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4072,27 +4885,38 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled = {
     return {};
   },
 
-  toJSON(_: ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled): unknown {
+  toJSON(
+    _: ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled,
+  ): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled>,
+      I
+    >,
+  >(_: I): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled();
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup(): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
-  return { memberName: "", groupName: "" };
+  return { memberName: '', groupName: '' };
 }
 
 export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
@@ -4100,19 +4924,24 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.memberName !== "") {
+    if (message.memberName !== '') {
       writer.uint32(10).string(message.memberName);
     }
-    if (message.groupName !== "") {
+    if (message.groupName !== '') {
       writer.uint32(18).string(message.groupName);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4139,32 +4968,45 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
     return message;
   },
 
-  fromJSON(object: any): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
+  fromJSON(
+    object: any,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : "",
-      groupName: isSet(object.groupName) ? String(object.groupName) : "",
+      memberName: isSet(object.memberName) ? String(object.memberName) : '',
+      groupName: isSet(object.groupName) ? String(object.groupName) : '',
     };
   },
 
-  toJSON(message: ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup): unknown {
+  toJSON(
+    message: ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup,
+  ): unknown {
     const obj: any = {};
     message.memberName !== undefined && (obj.memberName = message.memberName);
     message.groupName !== undefined && (obj.groupName = message.groupName);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup();
-    message.memberName = object.memberName ?? "";
-    message.groupName = object.groupName ?? "";
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup>,
+      I
+    >,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup();
+    message.memberName = object.memberName ?? '';
+    message.groupName = object.groupName ?? '';
     return message;
   },
 };
@@ -4185,9 +5027,11 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress = {
     input: _m0.Reader | Uint8Array,
     length?: number,
   ): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4200,31 +5044,44 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress = {
     return message;
   },
 
-  fromJSON(_: any): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
+  fromJSON(
+    _: any,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
     return {};
   },
 
-  toJSON(_: ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress): unknown {
+  toJSON(
+    _: ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress,
+  ): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress>,
+      I
+    >,
+  >(_: I): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress();
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup(): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
-  return { memberName: "", groupName: "" };
+  return { memberName: '', groupName: '' };
 }
 
 export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
@@ -4232,10 +5089,10 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.memberName !== "") {
+    if (message.memberName !== '') {
       writer.uint32(10).string(message.memberName);
     }
-    if (message.groupName !== "") {
+    if (message.groupName !== '') {
       writer.uint32(18).string(message.groupName);
     }
     return writer;
@@ -4245,9 +5102,11 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
     input: _m0.Reader | Uint8Array,
     length?: number,
   ): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4274,38 +5133,51 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
     return message;
   },
 
-  fromJSON(object: any): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
+  fromJSON(
+    object: any,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : "",
-      groupName: isSet(object.groupName) ? String(object.groupName) : "",
+      memberName: isSet(object.memberName) ? String(object.memberName) : '',
+      groupName: isSet(object.groupName) ? String(object.groupName) : '',
     };
   },
 
-  toJSON(message: ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup): unknown {
+  toJSON(
+    message: ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup,
+  ): unknown {
     const obj: any = {};
     message.memberName !== undefined && (obj.memberName = message.memberName);
     message.groupName !== undefined && (obj.groupName = message.groupName);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup();
-    message.memberName = object.memberName ?? "";
-    message.groupName = object.groupName ?? "";
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup>,
+      I
+    >,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup();
+    message.memberName = object.memberName ?? '';
+    message.groupName = object.groupName ?? '';
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd(): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
-  return { memberName: "" };
+  return { memberName: '' };
 }
 
 export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
@@ -4313,16 +5185,21 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.memberName !== "") {
+    if (message.memberName !== '') {
       writer.uint32(10).string(message.memberName);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4342,33 +5219,48 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
     return message;
   },
 
-  fromJSON(object: any): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
-    return { memberName: isSet(object.memberName) ? String(object.memberName) : "" };
+  fromJSON(
+    object: any,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
+    return {
+      memberName: isSet(object.memberName) ? String(object.memberName) : '',
+    };
   },
 
-  toJSON(message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd): unknown {
+  toJSON(
+    message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd,
+  ): unknown {
     const obj: any = {};
     message.memberName !== undefined && (obj.memberName = message.memberName);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd();
-    message.memberName = object.memberName ?? "";
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd>,
+      I
+    >,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd();
+    message.memberName = object.memberName ?? '';
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin(): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
-  return { groupName: "" };
+  return { groupName: '' };
 }
 
 export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
@@ -4376,16 +5268,21 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.groupName !== "") {
+    if (message.groupName !== '') {
       writer.uint32(10).string(message.groupName);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin();
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -4405,27 +5302,42 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
     return message;
   },
 
-  fromJSON(object: any): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
-    return { groupName: isSet(object.groupName) ? String(object.groupName) : "" };
+  fromJSON(
+    object: any,
+  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
+    return {
+      groupName: isSet(object.groupName) ? String(object.groupName) : '',
+    };
   },
 
-  toJSON(message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin): unknown {
+  toJSON(
+    message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin,
+  ): unknown {
     const obj: any = {};
     message.groupName !== undefined && (obj.groupName = message.groupName);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
-    return ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin>,
+      I
+    >,
+  >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
+    return ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
-    const message = createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin();
-    message.groupName = object.groupName ?? "";
+  fromPartial<
+    I extends Exact<
+      DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin>,
+      I
+    >,
+  >(object: I): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
+    const message =
+      createBaseProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin();
+    message.groupName = object.groupName ?? '';
     return message;
   },
 };
@@ -4435,15 +5347,22 @@ function createBaseProLink_HandlerIn_MemberStatusChange(): ProLink_HandlerIn_Mem
 }
 
 export const ProLink_HandlerIn_MemberStatusChange = {
-  encode(message: ProLink_HandlerIn_MemberStatusChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerIn_MemberStatusChange,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.members) {
       ProLink_MemberStatus.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_MemberStatusChange {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_MemberStatusChange {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_MemberStatusChange();
     while (reader.pos < end) {
@@ -4454,7 +5373,9 @@ export const ProLink_HandlerIn_MemberStatusChange = {
             break;
           }
 
-          message.members.push(ProLink_MemberStatus.decode(reader, reader.uint32()));
+          message.members.push(
+            ProLink_MemberStatus.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -4467,14 +5388,18 @@ export const ProLink_HandlerIn_MemberStatusChange = {
 
   fromJSON(object: any): ProLink_HandlerIn_MemberStatusChange {
     return {
-      members: Array.isArray(object?.members) ? object.members.map((e: any) => ProLink_MemberStatus.fromJSON(e)) : [],
+      members: Array.isArray(object?.members)
+        ? object.members.map((e: any) => ProLink_MemberStatus.fromJSON(e))
+        : [],
     };
   },
 
   toJSON(message: ProLink_HandlerIn_MemberStatusChange): unknown {
     const obj: any = {};
     if (message.members) {
-      obj.members = message.members.map((e) => e ? ProLink_MemberStatus.toJSON(e) : undefined);
+      obj.members = message.members.map((e) =>
+        e ? ProLink_MemberStatus.toJSON(e) : undefined,
+      );
     } else {
       obj.members = [];
     }
@@ -4487,11 +5412,12 @@ export const ProLink_HandlerIn_MemberStatusChange = {
     return ProLink_HandlerIn_MemberStatusChange.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_MemberStatusChange>, I>>(
-    object: I,
-  ): ProLink_HandlerIn_MemberStatusChange {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_MemberStatusChange>, I>,
+  >(object: I): ProLink_HandlerIn_MemberStatusChange {
     const message = createBaseProLink_HandlerIn_MemberStatusChange();
-    message.members = object.members?.map((e) => ProLink_MemberStatus.fromPartial(e)) || [];
+    message.members =
+      object.members?.map((e) => ProLink_MemberStatus.fromPartial(e)) || [];
     return message;
   },
 };
@@ -4501,12 +5427,19 @@ function createBaseProLink_HandlerIn_ProPresenterInfo(): ProLink_HandlerIn_ProPr
 }
 
 export const ProLink_HandlerIn_ProPresenterInfo = {
-  encode(_: ProLink_HandlerIn_ProPresenterInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_HandlerIn_ProPresenterInfo,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_ProPresenterInfo {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_ProPresenterInfo {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_ProPresenterInfo();
     while (reader.pos < end) {
@@ -4536,24 +5469,27 @@ export const ProLink_HandlerIn_ProPresenterInfo = {
     return ProLink_HandlerIn_ProPresenterInfo.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_ProPresenterInfo>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_ProPresenterInfo {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_ProPresenterInfo>, I>,
+  >(_: I): ProLink_HandlerIn_ProPresenterInfo {
     const message = createBaseProLink_HandlerIn_ProPresenterInfo();
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_ServerState(): ProLink_HandlerIn_ServerState {
-  return { localIp: "", publicIp: "", port: 0, success: false };
+  return { localIp: '', publicIp: '', port: 0, success: false };
 }
 
 export const ProLink_HandlerIn_ServerState = {
-  encode(message: ProLink_HandlerIn_ServerState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.localIp !== "") {
+  encode(
+    message: ProLink_HandlerIn_ServerState,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.localIp !== '') {
       writer.uint32(10).string(message.localIp);
     }
-    if (message.publicIp !== "") {
+    if (message.publicIp !== '') {
       writer.uint32(18).string(message.publicIp);
     }
     if (message.port !== 0) {
@@ -4565,8 +5501,12 @@ export const ProLink_HandlerIn_ServerState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_ServerState {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_ServerState {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_ServerState();
     while (reader.pos < end) {
@@ -4611,8 +5551,8 @@ export const ProLink_HandlerIn_ServerState = {
 
   fromJSON(object: any): ProLink_HandlerIn_ServerState {
     return {
-      localIp: isSet(object.localIp) ? String(object.localIp) : "",
-      publicIp: isSet(object.publicIp) ? String(object.publicIp) : "",
+      localIp: isSet(object.localIp) ? String(object.localIp) : '',
+      publicIp: isSet(object.publicIp) ? String(object.publicIp) : '',
       port: isSet(object.port) ? Number(object.port) : 0,
       success: isSet(object.success) ? Boolean(object.success) : false,
     };
@@ -4627,7 +5567,9 @@ export const ProLink_HandlerIn_ServerState = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_ServerState>, I>>(base?: I): ProLink_HandlerIn_ServerState {
+  create<I extends Exact<DeepPartial<ProLink_HandlerIn_ServerState>, I>>(
+    base?: I,
+  ): ProLink_HandlerIn_ServerState {
     return ProLink_HandlerIn_ServerState.fromPartial(base ?? {});
   },
 
@@ -4635,8 +5577,8 @@ export const ProLink_HandlerIn_ServerState = {
     object: I,
   ): ProLink_HandlerIn_ServerState {
     const message = createBaseProLink_HandlerIn_ServerState();
-    message.localIp = object.localIp ?? "";
-    message.publicIp = object.publicIp ?? "";
+    message.localIp = object.localIp ?? '';
+    message.publicIp = object.publicIp ?? '';
     message.port = object.port ?? 0;
     message.success = object.success ?? false;
     return message;
@@ -4648,12 +5590,19 @@ function createBaseProLink_HandlerIn_ConfigurationRequest(): ProLink_HandlerIn_C
 }
 
 export const ProLink_HandlerIn_ConfigurationRequest = {
-  encode(_: ProLink_HandlerIn_ConfigurationRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: ProLink_HandlerIn_ConfigurationRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_ConfigurationRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_ConfigurationRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_ConfigurationRequest();
     while (reader.pos < end) {
@@ -4677,37 +5626,44 @@ export const ProLink_HandlerIn_ConfigurationRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_ConfigurationRequest>, I>>(
-    base?: I,
-  ): ProLink_HandlerIn_ConfigurationRequest {
+  create<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_ConfigurationRequest>, I>,
+  >(base?: I): ProLink_HandlerIn_ConfigurationRequest {
     return ProLink_HandlerIn_ConfigurationRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_ConfigurationRequest>, I>>(
-    _: I,
-  ): ProLink_HandlerIn_ConfigurationRequest {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerIn_ConfigurationRequest>, I>,
+  >(_: I): ProLink_HandlerIn_ConfigurationRequest {
     const message = createBaseProLink_HandlerIn_ConfigurationRequest();
     return message;
   },
 };
 
 function createBaseProLink_HandlerIn_LogRequest(): ProLink_HandlerIn_LogRequest {
-  return { severity: 0, message: "" };
+  return { severity: 0, message: '' };
 }
 
 export const ProLink_HandlerIn_LogRequest = {
-  encode(message: ProLink_HandlerIn_LogRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerIn_LogRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.severity !== 0) {
       writer.uint32(8).int32(message.severity);
     }
-    if (message.message !== "") {
+    if (message.message !== '') {
       writer.uint32(18).string(message.message);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerIn_LogRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerIn_LogRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerIn_LogRequest();
     while (reader.pos < end) {
@@ -4738,26 +5694,35 @@ export const ProLink_HandlerIn_LogRequest = {
 
   fromJSON(object: any): ProLink_HandlerIn_LogRequest {
     return {
-      severity: isSet(object.severity) ? proLink_HandlerIn_LogRequest_SeverityFromJSON(object.severity) : 0,
-      message: isSet(object.message) ? String(object.message) : "",
+      severity: isSet(object.severity)
+        ? proLink_HandlerIn_LogRequest_SeverityFromJSON(object.severity)
+        : 0,
+      message: isSet(object.message) ? String(object.message) : '',
     };
   },
 
   toJSON(message: ProLink_HandlerIn_LogRequest): unknown {
     const obj: any = {};
-    message.severity !== undefined && (obj.severity = proLink_HandlerIn_LogRequest_SeverityToJSON(message.severity));
+    message.severity !== undefined &&
+      (obj.severity = proLink_HandlerIn_LogRequest_SeverityToJSON(
+        message.severity,
+      ));
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerIn_LogRequest>, I>>(base?: I): ProLink_HandlerIn_LogRequest {
+  create<I extends Exact<DeepPartial<ProLink_HandlerIn_LogRequest>, I>>(
+    base?: I,
+  ): ProLink_HandlerIn_LogRequest {
     return ProLink_HandlerIn_LogRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_LogRequest>, I>>(object: I): ProLink_HandlerIn_LogRequest {
+  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_LogRequest>, I>>(
+    object: I,
+  ): ProLink_HandlerIn_LogRequest {
     const message = createBaseProLink_HandlerIn_LogRequest();
     message.severity = object.severity ?? 0;
-    message.message = object.message ?? "";
+    message.message = object.message ?? '';
     return message;
   },
 };
@@ -4774,30 +5739,52 @@ function createBaseProLink_HandlerOut(): ProLink_HandlerOut {
 }
 
 export const ProLink_HandlerOut = {
-  encode(message: ProLink_HandlerOut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerOut,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupName !== undefined) {
-      ProLink_HandlerOut_GroupName.encode(message.groupName, writer.uint32(10).fork()).ldelim();
+      ProLink_HandlerOut_GroupName.encode(
+        message.groupName,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.groupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupDefinition, writer.uint32(18).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupDefinition,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.groupJoinConfirmation !== undefined) {
-      ProLink_HandlerOut_GroupJoinConfirmation.encode(message.groupJoinConfirmation, writer.uint32(26).fork()).ldelim();
+      ProLink_HandlerOut_GroupJoinConfirmation.encode(
+        message.groupJoinConfirmation,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.groupJoinPassword !== undefined) {
-      ProLink_HandlerOut_GroupJoinPassword.encode(message.groupJoinPassword, writer.uint32(34).fork()).ldelim();
+      ProLink_HandlerOut_GroupJoinPassword.encode(
+        message.groupJoinPassword,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.propresenterInfo !== undefined) {
-      ProLink_HandlerOut_ProPresenterInfo.encode(message.propresenterInfo, writer.uint32(42).fork()).ldelim();
+      ProLink_HandlerOut_ProPresenterInfo.encode(
+        message.propresenterInfo,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.configuration !== undefined) {
-      ProApiNetworkConfiguration.encode(message.configuration, writer.uint32(50).fork()).ldelim();
+      ProApiNetworkConfiguration.encode(
+        message.configuration,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerOut {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerOut();
     while (reader.pos < end) {
@@ -4808,42 +5795,62 @@ export const ProLink_HandlerOut = {
             break;
           }
 
-          message.groupName = ProLink_HandlerOut_GroupName.decode(reader, reader.uint32());
+          message.groupName = ProLink_HandlerOut_GroupName.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.groupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.groupJoinConfirmation = ProLink_HandlerOut_GroupJoinConfirmation.decode(reader, reader.uint32());
+          message.groupJoinConfirmation =
+            ProLink_HandlerOut_GroupJoinConfirmation.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.groupJoinPassword = ProLink_HandlerOut_GroupJoinPassword.decode(reader, reader.uint32());
+          message.groupJoinPassword =
+            ProLink_HandlerOut_GroupJoinPassword.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.propresenterInfo = ProLink_HandlerOut_ProPresenterInfo.decode(reader, reader.uint32());
+          message.propresenterInfo = ProLink_HandlerOut_ProPresenterInfo.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.configuration = ProApiNetworkConfiguration.decode(reader, reader.uint32());
+          message.configuration = ProApiNetworkConfiguration.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -4856,15 +5863,21 @@ export const ProLink_HandlerOut = {
 
   fromJSON(object: any): ProLink_HandlerOut {
     return {
-      groupName: isSet(object.groupName) ? ProLink_HandlerOut_GroupName.fromJSON(object.groupName) : undefined,
+      groupName: isSet(object.groupName)
+        ? ProLink_HandlerOut_GroupName.fromJSON(object.groupName)
+        : undefined,
       groupDefinition: isSet(object.groupDefinition)
         ? ProLink_GroupDefinition.fromJSON(object.groupDefinition)
         : undefined,
       groupJoinConfirmation: isSet(object.groupJoinConfirmation)
-        ? ProLink_HandlerOut_GroupJoinConfirmation.fromJSON(object.groupJoinConfirmation)
+        ? ProLink_HandlerOut_GroupJoinConfirmation.fromJSON(
+            object.groupJoinConfirmation,
+          )
         : undefined,
       groupJoinPassword: isSet(object.groupJoinPassword)
-        ? ProLink_HandlerOut_GroupJoinPassword.fromJSON(object.groupJoinPassword)
+        ? ProLink_HandlerOut_GroupJoinPassword.fromJSON(
+            object.groupJoinPassword,
+          )
         : undefined,
       propresenterInfo: isSet(object.propresenterInfo)
         ? ProLink_HandlerOut_ProPresenterInfo.fromJSON(object.propresenterInfo)
@@ -4878,19 +5891,27 @@ export const ProLink_HandlerOut = {
   toJSON(message: ProLink_HandlerOut): unknown {
     const obj: any = {};
     message.groupName !== undefined &&
-      (obj.groupName = message.groupName ? ProLink_HandlerOut_GroupName.toJSON(message.groupName) : undefined);
-    message.groupDefinition !== undefined && (obj.groupDefinition = message.groupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-      : undefined);
-    message.groupJoinConfirmation !== undefined && (obj.groupJoinConfirmation = message.groupJoinConfirmation
-      ? ProLink_HandlerOut_GroupJoinConfirmation.toJSON(message.groupJoinConfirmation)
-      : undefined);
-    message.groupJoinPassword !== undefined && (obj.groupJoinPassword = message.groupJoinPassword
-      ? ProLink_HandlerOut_GroupJoinPassword.toJSON(message.groupJoinPassword)
-      : undefined);
-    message.propresenterInfo !== undefined && (obj.propresenterInfo = message.propresenterInfo
-      ? ProLink_HandlerOut_ProPresenterInfo.toJSON(message.propresenterInfo)
-      : undefined);
+      (obj.groupName = message.groupName
+        ? ProLink_HandlerOut_GroupName.toJSON(message.groupName)
+        : undefined);
+    message.groupDefinition !== undefined &&
+      (obj.groupDefinition = message.groupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
+        : undefined);
+    message.groupJoinConfirmation !== undefined &&
+      (obj.groupJoinConfirmation = message.groupJoinConfirmation
+        ? ProLink_HandlerOut_GroupJoinConfirmation.toJSON(
+            message.groupJoinConfirmation,
+          )
+        : undefined);
+    message.groupJoinPassword !== undefined &&
+      (obj.groupJoinPassword = message.groupJoinPassword
+        ? ProLink_HandlerOut_GroupJoinPassword.toJSON(message.groupJoinPassword)
+        : undefined);
+    message.propresenterInfo !== undefined &&
+      (obj.propresenterInfo = message.propresenterInfo
+        ? ProLink_HandlerOut_ProPresenterInfo.toJSON(message.propresenterInfo)
+        : undefined);
     message.configuration !== undefined &&
       (obj.configuration = message.configuration
         ? ProApiNetworkConfiguration.toJSON(message.configuration)
@@ -4898,49 +5919,73 @@ export const ProLink_HandlerOut = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerOut>, I>>(base?: I): ProLink_HandlerOut {
+  create<I extends Exact<DeepPartial<ProLink_HandlerOut>, I>>(
+    base?: I,
+  ): ProLink_HandlerOut {
     return ProLink_HandlerOut.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut>, I>>(object: I): ProLink_HandlerOut {
+  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut>, I>>(
+    object: I,
+  ): ProLink_HandlerOut {
     const message = createBaseProLink_HandlerOut();
-    message.groupName = (object.groupName !== undefined && object.groupName !== null)
-      ? ProLink_HandlerOut_GroupName.fromPartial(object.groupName)
-      : undefined;
-    message.groupDefinition = (object.groupDefinition !== undefined && object.groupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
-      : undefined;
-    message.groupJoinConfirmation =
-      (object.groupJoinConfirmation !== undefined && object.groupJoinConfirmation !== null)
-        ? ProLink_HandlerOut_GroupJoinConfirmation.fromPartial(object.groupJoinConfirmation)
+    message.groupName =
+      object.groupName !== undefined && object.groupName !== null
+        ? ProLink_HandlerOut_GroupName.fromPartial(object.groupName)
         : undefined;
-    message.groupJoinPassword = (object.groupJoinPassword !== undefined && object.groupJoinPassword !== null)
-      ? ProLink_HandlerOut_GroupJoinPassword.fromPartial(object.groupJoinPassword)
-      : undefined;
-    message.propresenterInfo = (object.propresenterInfo !== undefined && object.propresenterInfo !== null)
-      ? ProLink_HandlerOut_ProPresenterInfo.fromPartial(object.propresenterInfo)
-      : undefined;
-    message.configuration = (object.configuration !== undefined && object.configuration !== null)
-      ? ProApiNetworkConfiguration.fromPartial(object.configuration)
-      : undefined;
+    message.groupDefinition =
+      object.groupDefinition !== undefined && object.groupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
+        : undefined;
+    message.groupJoinConfirmation =
+      object.groupJoinConfirmation !== undefined &&
+      object.groupJoinConfirmation !== null
+        ? ProLink_HandlerOut_GroupJoinConfirmation.fromPartial(
+            object.groupJoinConfirmation,
+          )
+        : undefined;
+    message.groupJoinPassword =
+      object.groupJoinPassword !== undefined &&
+      object.groupJoinPassword !== null
+        ? ProLink_HandlerOut_GroupJoinPassword.fromPartial(
+            object.groupJoinPassword,
+          )
+        : undefined;
+    message.propresenterInfo =
+      object.propresenterInfo !== undefined && object.propresenterInfo !== null
+        ? ProLink_HandlerOut_ProPresenterInfo.fromPartial(
+            object.propresenterInfo,
+          )
+        : undefined;
+    message.configuration =
+      object.configuration !== undefined && object.configuration !== null
+        ? ProApiNetworkConfiguration.fromPartial(object.configuration)
+        : undefined;
     return message;
   },
 };
 
 function createBaseProLink_HandlerOut_GroupName(): ProLink_HandlerOut_GroupName {
-  return { name: "" };
+  return { name: '' };
 }
 
 export const ProLink_HandlerOut_GroupName = {
-  encode(message: ProLink_HandlerOut_GroupName, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: ProLink_HandlerOut_GroupName,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerOut_GroupName {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerOut_GroupName {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerOut_GroupName();
     while (reader.pos < end) {
@@ -4963,7 +6008,7 @@ export const ProLink_HandlerOut_GroupName = {
   },
 
   fromJSON(object: any): ProLink_HandlerOut_GroupName {
-    return { name: isSet(object.name) ? String(object.name) : "" };
+    return { name: isSet(object.name) ? String(object.name) : '' };
   },
 
   toJSON(message: ProLink_HandlerOut_GroupName): unknown {
@@ -4972,13 +6017,17 @@ export const ProLink_HandlerOut_GroupName = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupName>, I>>(base?: I): ProLink_HandlerOut_GroupName {
+  create<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupName>, I>>(
+    base?: I,
+  ): ProLink_HandlerOut_GroupName {
     return ProLink_HandlerOut_GroupName.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupName>, I>>(object: I): ProLink_HandlerOut_GroupName {
+  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupName>, I>>(
+    object: I,
+  ): ProLink_HandlerOut_GroupName {
     const message = createBaseProLink_HandlerOut_GroupName();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     return message;
   },
 };
@@ -4988,15 +6037,22 @@ function createBaseProLink_HandlerOut_GroupJoinConfirmation(): ProLink_HandlerOu
 }
 
 export const ProLink_HandlerOut_GroupJoinConfirmation = {
-  encode(message: ProLink_HandlerOut_GroupJoinConfirmation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerOut_GroupJoinConfirmation,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.accept === true) {
       writer.uint32(8).bool(message.accept);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerOut_GroupJoinConfirmation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerOut_GroupJoinConfirmation {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerOut_GroupJoinConfirmation();
     while (reader.pos < end) {
@@ -5028,15 +6084,15 @@ export const ProLink_HandlerOut_GroupJoinConfirmation = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinConfirmation>, I>>(
-    base?: I,
-  ): ProLink_HandlerOut_GroupJoinConfirmation {
+  create<
+    I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinConfirmation>, I>,
+  >(base?: I): ProLink_HandlerOut_GroupJoinConfirmation {
     return ProLink_HandlerOut_GroupJoinConfirmation.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinConfirmation>, I>>(
-    object: I,
-  ): ProLink_HandlerOut_GroupJoinConfirmation {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinConfirmation>, I>,
+  >(object: I): ProLink_HandlerOut_GroupJoinConfirmation {
     const message = createBaseProLink_HandlerOut_GroupJoinConfirmation();
     message.accept = object.accept ?? false;
     return message;
@@ -5044,19 +6100,26 @@ export const ProLink_HandlerOut_GroupJoinConfirmation = {
 };
 
 function createBaseProLink_HandlerOut_GroupJoinPassword(): ProLink_HandlerOut_GroupJoinPassword {
-  return { password: "" };
+  return { password: '' };
 }
 
 export const ProLink_HandlerOut_GroupJoinPassword = {
-  encode(message: ProLink_HandlerOut_GroupJoinPassword, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.password !== "") {
+  encode(
+    message: ProLink_HandlerOut_GroupJoinPassword,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.password !== '') {
       writer.uint32(10).string(message.password);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerOut_GroupJoinPassword {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerOut_GroupJoinPassword {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerOut_GroupJoinPassword();
     while (reader.pos < end) {
@@ -5079,7 +6142,7 @@ export const ProLink_HandlerOut_GroupJoinPassword = {
   },
 
   fromJSON(object: any): ProLink_HandlerOut_GroupJoinPassword {
-    return { password: isSet(object.password) ? String(object.password) : "" };
+    return { password: isSet(object.password) ? String(object.password) : '' };
   },
 
   toJSON(message: ProLink_HandlerOut_GroupJoinPassword): unknown {
@@ -5094,35 +6157,42 @@ export const ProLink_HandlerOut_GroupJoinPassword = {
     return ProLink_HandlerOut_GroupJoinPassword.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinPassword>, I>>(
-    object: I,
-  ): ProLink_HandlerOut_GroupJoinPassword {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinPassword>, I>,
+  >(object: I): ProLink_HandlerOut_GroupJoinPassword {
     const message = createBaseProLink_HandlerOut_GroupJoinPassword();
-    message.password = object.password ?? "";
+    message.password = object.password ?? '';
     return message;
   },
 };
 
 function createBaseProLink_HandlerOut_ProPresenterInfo(): ProLink_HandlerOut_ProPresenterInfo {
-  return { platform: 0, osVersion: "", hostDescription: "" };
+  return { platform: 0, osVersion: '', hostDescription: '' };
 }
 
 export const ProLink_HandlerOut_ProPresenterInfo = {
-  encode(message: ProLink_HandlerOut_ProPresenterInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: ProLink_HandlerOut_ProPresenterInfo,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.platform !== 0) {
       writer.uint32(8).int32(message.platform);
     }
-    if (message.osVersion !== "") {
+    if (message.osVersion !== '') {
       writer.uint32(18).string(message.osVersion);
     }
-    if (message.hostDescription !== "") {
+    if (message.hostDescription !== '') {
       writer.uint32(26).string(message.hostDescription);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProLink_HandlerOut_ProPresenterInfo {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ProLink_HandlerOut_ProPresenterInfo {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProLink_HandlerOut_ProPresenterInfo();
     while (reader.pos < end) {
@@ -5160,18 +6230,23 @@ export const ProLink_HandlerOut_ProPresenterInfo = {
 
   fromJSON(object: any): ProLink_HandlerOut_ProPresenterInfo {
     return {
-      platform: isSet(object.platform) ? proLink_HandlerOut_ProPresenterInfo_PlatformFromJSON(object.platform) : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : "",
-      hostDescription: isSet(object.hostDescription) ? String(object.hostDescription) : "",
+      platform: isSet(object.platform)
+        ? applicationInfo_PlatformFromJSON(object.platform)
+        : 0,
+      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
+      hostDescription: isSet(object.hostDescription)
+        ? String(object.hostDescription)
+        : '',
     };
   },
 
   toJSON(message: ProLink_HandlerOut_ProPresenterInfo): unknown {
     const obj: any = {};
     message.platform !== undefined &&
-      (obj.platform = proLink_HandlerOut_ProPresenterInfo_PlatformToJSON(message.platform));
+      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
     message.osVersion !== undefined && (obj.osVersion = message.osVersion);
-    message.hostDescription !== undefined && (obj.hostDescription = message.hostDescription);
+    message.hostDescription !== undefined &&
+      (obj.hostDescription = message.hostDescription);
     return obj;
   },
 
@@ -5181,40 +6256,61 @@ export const ProLink_HandlerOut_ProPresenterInfo = {
     return ProLink_HandlerOut_ProPresenterInfo.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut_ProPresenterInfo>, I>>(
-    object: I,
-  ): ProLink_HandlerOut_ProPresenterInfo {
+  fromPartial<
+    I extends Exact<DeepPartial<ProLink_HandlerOut_ProPresenterInfo>, I>,
+  >(object: I): ProLink_HandlerOut_ProPresenterInfo {
     const message = createBaseProLink_HandlerOut_ProPresenterInfo();
     message.platform = object.platform ?? 0;
-    message.osVersion = object.osVersion ?? "";
-    message.hostDescription = object.hostDescription ?? "";
+    message.osVersion = object.osVersion ?? '';
+    message.hostDescription = object.hostDescription ?? '';
     return message;
   },
 };
 
 function createBaseNetworkAPI(): NetworkAPI {
-  return { action: undefined, serverState: undefined, groupChange: undefined, groupResponse: undefined };
+  return {
+    action: undefined,
+    serverState: undefined,
+    groupChange: undefined,
+    groupResponse: undefined,
+  };
 }
 
 export const NetworkAPI = {
-  encode(message: NetworkAPI, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.action !== undefined) {
-      NetworkAPI_Action.encode(message.action, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action.encode(
+        message.action,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.serverState !== undefined) {
-      NetworkAPI_ServerState.encode(message.serverState, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_ServerState.encode(
+        message.serverState,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.groupChange !== undefined) {
-      NetworkAPI_GroupChange.encode(message.groupChange, writer.uint32(42).fork()).ldelim();
+      NetworkAPI_GroupChange.encode(
+        message.groupChange,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.groupResponse !== undefined) {
-      NetworkAPI_GroupResponse.encode(message.groupResponse, writer.uint32(50).fork()).ldelim();
+      NetworkAPI_GroupResponse.encode(
+        message.groupResponse,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI();
     while (reader.pos < end) {
@@ -5232,21 +6328,30 @@ export const NetworkAPI = {
             break;
           }
 
-          message.serverState = NetworkAPI_ServerState.decode(reader, reader.uint32());
+          message.serverState = NetworkAPI_ServerState.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.groupChange = NetworkAPI_GroupChange.decode(reader, reader.uint32());
+          message.groupChange = NetworkAPI_GroupChange.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.groupResponse = NetworkAPI_GroupResponse.decode(reader, reader.uint32());
+          message.groupResponse = NetworkAPI_GroupResponse.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5259,23 +6364,39 @@ export const NetworkAPI = {
 
   fromJSON(object: any): NetworkAPI {
     return {
-      action: isSet(object.action) ? NetworkAPI_Action.fromJSON(object.action) : undefined,
-      serverState: isSet(object.serverState) ? NetworkAPI_ServerState.fromJSON(object.serverState) : undefined,
-      groupChange: isSet(object.groupChange) ? NetworkAPI_GroupChange.fromJSON(object.groupChange) : undefined,
-      groupResponse: isSet(object.groupResponse) ? NetworkAPI_GroupResponse.fromJSON(object.groupResponse) : undefined,
+      action: isSet(object.action)
+        ? NetworkAPI_Action.fromJSON(object.action)
+        : undefined,
+      serverState: isSet(object.serverState)
+        ? NetworkAPI_ServerState.fromJSON(object.serverState)
+        : undefined,
+      groupChange: isSet(object.groupChange)
+        ? NetworkAPI_GroupChange.fromJSON(object.groupChange)
+        : undefined,
+      groupResponse: isSet(object.groupResponse)
+        ? NetworkAPI_GroupResponse.fromJSON(object.groupResponse)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI): unknown {
     const obj: any = {};
     message.action !== undefined &&
-      (obj.action = message.action ? NetworkAPI_Action.toJSON(message.action) : undefined);
+      (obj.action = message.action
+        ? NetworkAPI_Action.toJSON(message.action)
+        : undefined);
     message.serverState !== undefined &&
-      (obj.serverState = message.serverState ? NetworkAPI_ServerState.toJSON(message.serverState) : undefined);
+      (obj.serverState = message.serverState
+        ? NetworkAPI_ServerState.toJSON(message.serverState)
+        : undefined);
     message.groupChange !== undefined &&
-      (obj.groupChange = message.groupChange ? NetworkAPI_GroupChange.toJSON(message.groupChange) : undefined);
+      (obj.groupChange = message.groupChange
+        ? NetworkAPI_GroupChange.toJSON(message.groupChange)
+        : undefined);
     message.groupResponse !== undefined &&
-      (obj.groupResponse = message.groupResponse ? NetworkAPI_GroupResponse.toJSON(message.groupResponse) : undefined);
+      (obj.groupResponse = message.groupResponse
+        ? NetworkAPI_GroupResponse.toJSON(message.groupResponse)
+        : undefined);
     return obj;
   },
 
@@ -5283,50 +6404,72 @@ export const NetworkAPI = {
     return NetworkAPI.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI>, I>>(object: I): NetworkAPI {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI>, I>>(
+    object: I,
+  ): NetworkAPI {
     const message = createBaseNetworkAPI();
-    message.action = (object.action !== undefined && object.action !== null)
-      ? NetworkAPI_Action.fromPartial(object.action)
-      : undefined;
-    message.serverState = (object.serverState !== undefined && object.serverState !== null)
-      ? NetworkAPI_ServerState.fromPartial(object.serverState)
-      : undefined;
-    message.groupChange = (object.groupChange !== undefined && object.groupChange !== null)
-      ? NetworkAPI_GroupChange.fromPartial(object.groupChange)
-      : undefined;
-    message.groupResponse = (object.groupResponse !== undefined && object.groupResponse !== null)
-      ? NetworkAPI_GroupResponse.fromPartial(object.groupResponse)
-      : undefined;
+    message.action =
+      object.action !== undefined && object.action !== null
+        ? NetworkAPI_Action.fromPartial(object.action)
+        : undefined;
+    message.serverState =
+      object.serverState !== undefined && object.serverState !== null
+        ? NetworkAPI_ServerState.fromPartial(object.serverState)
+        : undefined;
+    message.groupChange =
+      object.groupChange !== undefined && object.groupChange !== null
+        ? NetworkAPI_GroupChange.fromPartial(object.groupChange)
+        : undefined;
+    message.groupResponse =
+      object.groupResponse !== undefined && object.groupResponse !== null
+        ? NetworkAPI_GroupResponse.fromPartial(object.groupResponse)
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_LinkStatus(): NetworkAPI_LinkStatus {
-  return { platform: 0, osVersion: "", version: "", description: "", groupInfo: undefined };
+  return {
+    platform: 0,
+    osVersion: '',
+    version: '',
+    description: '',
+    groupInfo: undefined,
+  };
 }
 
 export const NetworkAPI_LinkStatus = {
-  encode(message: NetworkAPI_LinkStatus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_LinkStatus,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.platform !== 0) {
       writer.uint32(8).int32(message.platform);
     }
-    if (message.osVersion !== "") {
+    if (message.osVersion !== '') {
       writer.uint32(18).string(message.osVersion);
     }
-    if (message.version !== "") {
+    if (message.version !== '') {
       writer.uint32(26).string(message.version);
     }
-    if (message.description !== "") {
+    if (message.description !== '') {
       writer.uint32(34).string(message.description);
     }
     if (message.groupInfo !== undefined) {
-      NetworkAPI_Group.encode(message.groupInfo, writer.uint32(42).fork()).ldelim();
+      NetworkAPI_Group.encode(
+        message.groupInfo,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_LinkStatus {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_LinkStatus {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_LinkStatus();
     while (reader.pos < end) {
@@ -5378,49 +6521,65 @@ export const NetworkAPI_LinkStatus = {
 
   fromJSON(object: any): NetworkAPI_LinkStatus {
     return {
-      platform: isSet(object.platform) ? networkAPI_LinkStatus_PlatformFromJSON(object.platform) : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : "",
-      version: isSet(object.version) ? String(object.version) : "",
-      description: isSet(object.description) ? String(object.description) : "",
-      groupInfo: isSet(object.groupInfo) ? NetworkAPI_Group.fromJSON(object.groupInfo) : undefined,
+      platform: isSet(object.platform)
+        ? applicationInfo_PlatformFromJSON(object.platform)
+        : 0,
+      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
+      version: isSet(object.version) ? String(object.version) : '',
+      description: isSet(object.description) ? String(object.description) : '',
+      groupInfo: isSet(object.groupInfo)
+        ? NetworkAPI_Group.fromJSON(object.groupInfo)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_LinkStatus): unknown {
     const obj: any = {};
-    message.platform !== undefined && (obj.platform = networkAPI_LinkStatus_PlatformToJSON(message.platform));
+    message.platform !== undefined &&
+      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
     message.osVersion !== undefined && (obj.osVersion = message.osVersion);
     message.version !== undefined && (obj.version = message.version);
-    message.description !== undefined && (obj.description = message.description);
+    message.description !== undefined &&
+      (obj.description = message.description);
     message.groupInfo !== undefined &&
-      (obj.groupInfo = message.groupInfo ? NetworkAPI_Group.toJSON(message.groupInfo) : undefined);
+      (obj.groupInfo = message.groupInfo
+        ? NetworkAPI_Group.toJSON(message.groupInfo)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_LinkStatus>, I>>(base?: I): NetworkAPI_LinkStatus {
+  create<I extends Exact<DeepPartial<NetworkAPI_LinkStatus>, I>>(
+    base?: I,
+  ): NetworkAPI_LinkStatus {
     return NetworkAPI_LinkStatus.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_LinkStatus>, I>>(object: I): NetworkAPI_LinkStatus {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_LinkStatus>, I>>(
+    object: I,
+  ): NetworkAPI_LinkStatus {
     const message = createBaseNetworkAPI_LinkStatus();
     message.platform = object.platform ?? 0;
-    message.osVersion = object.osVersion ?? "";
-    message.version = object.version ?? "";
-    message.description = object.description ?? "";
-    message.groupInfo = (object.groupInfo !== undefined && object.groupInfo !== null)
-      ? NetworkAPI_Group.fromPartial(object.groupInfo)
-      : undefined;
+    message.osVersion = object.osVersion ?? '';
+    message.version = object.version ?? '';
+    message.description = object.description ?? '';
+    message.groupInfo =
+      object.groupInfo !== undefined && object.groupInfo !== null
+        ? NetworkAPI_Group.fromPartial(object.groupInfo)
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_Group(): NetworkAPI_Group {
-  return { name: "", members: [] };
+  return { name: '', members: [] };
 }
 
 export const NetworkAPI_Group = {
-  encode(message: NetworkAPI_Group, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: NetworkAPI_Group,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.members) {
@@ -5430,7 +6589,8 @@ export const NetworkAPI_Group = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Group {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Group();
     while (reader.pos < end) {
@@ -5448,7 +6608,9 @@ export const NetworkAPI_Group = {
             break;
           }
 
-          message.members.push(NetworkAPI_Group_Member.decode(reader, reader.uint32()));
+          message.members.push(
+            NetworkAPI_Group_Member.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5461,7 +6623,7 @@ export const NetworkAPI_Group = {
 
   fromJSON(object: any): NetworkAPI_Group {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       members: Array.isArray(object?.members)
         ? object.members.map((e: any) => NetworkAPI_Group_Member.fromJSON(e))
         : [],
@@ -5472,32 +6634,42 @@ export const NetworkAPI_Group = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.members) {
-      obj.members = message.members.map((e) => e ? NetworkAPI_Group_Member.toJSON(e) : undefined);
+      obj.members = message.members.map((e) =>
+        e ? NetworkAPI_Group_Member.toJSON(e) : undefined,
+      );
     } else {
       obj.members = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Group>, I>>(base?: I): NetworkAPI_Group {
+  create<I extends Exact<DeepPartial<NetworkAPI_Group>, I>>(
+    base?: I,
+  ): NetworkAPI_Group {
     return NetworkAPI_Group.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Group>, I>>(object: I): NetworkAPI_Group {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Group>, I>>(
+    object: I,
+  ): NetworkAPI_Group {
     const message = createBaseNetworkAPI_Group();
-    message.name = object.name ?? "";
-    message.members = object.members?.map((e) => NetworkAPI_Group_Member.fromPartial(e)) || [];
+    message.name = object.name ?? '';
+    message.members =
+      object.members?.map((e) => NetworkAPI_Group_Member.fromPartial(e)) || [];
     return message;
   },
 };
 
 function createBaseNetworkAPI_Group_Member(): NetworkAPI_Group_Member {
-  return { ipAddress: "", port: 0 };
+  return { ipAddress: '', port: 0 };
 }
 
 export const NetworkAPI_Group_Member = {
-  encode(message: NetworkAPI_Group_Member, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.ipAddress !== "") {
+  encode(
+    message: NetworkAPI_Group_Member,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.ipAddress !== '') {
       writer.uint32(10).string(message.ipAddress);
     }
     if (message.port !== 0) {
@@ -5506,8 +6678,12 @@ export const NetworkAPI_Group_Member = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Group_Member {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Group_Member {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Group_Member();
     while (reader.pos < end) {
@@ -5538,7 +6714,7 @@ export const NetworkAPI_Group_Member = {
 
   fromJSON(object: any): NetworkAPI_Group_Member {
     return {
-      ipAddress: isSet(object.ipAddress) ? String(object.ipAddress) : "",
+      ipAddress: isSet(object.ipAddress) ? String(object.ipAddress) : '',
       port: isSet(object.port) ? Number(object.port) : 0,
     };
   },
@@ -5550,41 +6726,69 @@ export const NetworkAPI_Group_Member = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Group_Member>, I>>(base?: I): NetworkAPI_Group_Member {
+  create<I extends Exact<DeepPartial<NetworkAPI_Group_Member>, I>>(
+    base?: I,
+  ): NetworkAPI_Group_Member {
     return NetworkAPI_Group_Member.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Group_Member>, I>>(object: I): NetworkAPI_Group_Member {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Group_Member>, I>>(
+    object: I,
+  ): NetworkAPI_Group_Member {
     const message = createBaseNetworkAPI_Group_Member();
-    message.ipAddress = object.ipAddress ?? "";
+    message.ipAddress = object.ipAddress ?? '';
     message.port = object.port ?? 0;
     return message;
   },
 };
 
 function createBaseNetworkAPI_GroupChange(): NetworkAPI_GroupChange {
-  return { invite: undefined, join: undefined, kick: undefined, status: undefined };
+  return {
+    invite: undefined,
+    join: undefined,
+    kick: undefined,
+    status: undefined,
+  };
 }
 
 export const NetworkAPI_GroupChange = {
-  encode(message: NetworkAPI_GroupChange, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_GroupChange,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.invite !== undefined) {
-      NetworkAPI_GroupInvite.encode(message.invite, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_GroupInvite.encode(
+        message.invite,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.join !== undefined) {
-      NetworkAPI_GroupJoin.encode(message.join, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_GroupJoin.encode(
+        message.join,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.kick !== undefined) {
-      NetworkAPI_GroupKick.encode(message.kick, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_GroupKick.encode(
+        message.kick,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.status !== undefined) {
-      NetworkAPI_GroupStatus.encode(message.status, writer.uint32(34).fork()).ldelim();
+      NetworkAPI_GroupStatus.encode(
+        message.status,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupChange {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupChange {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupChange();
     while (reader.pos < end) {
@@ -5595,7 +6799,10 @@ export const NetworkAPI_GroupChange = {
             break;
           }
 
-          message.invite = NetworkAPI_GroupInvite.decode(reader, reader.uint32());
+          message.invite = NetworkAPI_GroupInvite.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -5616,7 +6823,10 @@ export const NetworkAPI_GroupChange = {
             break;
           }
 
-          message.status = NetworkAPI_GroupStatus.decode(reader, reader.uint32());
+          message.status = NetworkAPI_GroupStatus.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5629,42 +6839,68 @@ export const NetworkAPI_GroupChange = {
 
   fromJSON(object: any): NetworkAPI_GroupChange {
     return {
-      invite: isSet(object.invite) ? NetworkAPI_GroupInvite.fromJSON(object.invite) : undefined,
-      join: isSet(object.join) ? NetworkAPI_GroupJoin.fromJSON(object.join) : undefined,
-      kick: isSet(object.kick) ? NetworkAPI_GroupKick.fromJSON(object.kick) : undefined,
-      status: isSet(object.status) ? NetworkAPI_GroupStatus.fromJSON(object.status) : undefined,
+      invite: isSet(object.invite)
+        ? NetworkAPI_GroupInvite.fromJSON(object.invite)
+        : undefined,
+      join: isSet(object.join)
+        ? NetworkAPI_GroupJoin.fromJSON(object.join)
+        : undefined,
+      kick: isSet(object.kick)
+        ? NetworkAPI_GroupKick.fromJSON(object.kick)
+        : undefined,
+      status: isSet(object.status)
+        ? NetworkAPI_GroupStatus.fromJSON(object.status)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_GroupChange): unknown {
     const obj: any = {};
     message.invite !== undefined &&
-      (obj.invite = message.invite ? NetworkAPI_GroupInvite.toJSON(message.invite) : undefined);
-    message.join !== undefined && (obj.join = message.join ? NetworkAPI_GroupJoin.toJSON(message.join) : undefined);
-    message.kick !== undefined && (obj.kick = message.kick ? NetworkAPI_GroupKick.toJSON(message.kick) : undefined);
+      (obj.invite = message.invite
+        ? NetworkAPI_GroupInvite.toJSON(message.invite)
+        : undefined);
+    message.join !== undefined &&
+      (obj.join = message.join
+        ? NetworkAPI_GroupJoin.toJSON(message.join)
+        : undefined);
+    message.kick !== undefined &&
+      (obj.kick = message.kick
+        ? NetworkAPI_GroupKick.toJSON(message.kick)
+        : undefined);
     message.status !== undefined &&
-      (obj.status = message.status ? NetworkAPI_GroupStatus.toJSON(message.status) : undefined);
+      (obj.status = message.status
+        ? NetworkAPI_GroupStatus.toJSON(message.status)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupChange>, I>>(base?: I): NetworkAPI_GroupChange {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupChange>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupChange {
     return NetworkAPI_GroupChange.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupChange>, I>>(object: I): NetworkAPI_GroupChange {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupChange>, I>>(
+    object: I,
+  ): NetworkAPI_GroupChange {
     const message = createBaseNetworkAPI_GroupChange();
-    message.invite = (object.invite !== undefined && object.invite !== null)
-      ? NetworkAPI_GroupInvite.fromPartial(object.invite)
-      : undefined;
-    message.join = (object.join !== undefined && object.join !== null)
-      ? NetworkAPI_GroupJoin.fromPartial(object.join)
-      : undefined;
-    message.kick = (object.kick !== undefined && object.kick !== null)
-      ? NetworkAPI_GroupKick.fromPartial(object.kick)
-      : undefined;
-    message.status = (object.status !== undefined && object.status !== null)
-      ? NetworkAPI_GroupStatus.fromPartial(object.status)
-      : undefined;
+    message.invite =
+      object.invite !== undefined && object.invite !== null
+        ? NetworkAPI_GroupInvite.fromPartial(object.invite)
+        : undefined;
+    message.join =
+      object.join !== undefined && object.join !== null
+        ? NetworkAPI_GroupJoin.fromPartial(object.join)
+        : undefined;
+    message.kick =
+      object.kick !== undefined && object.kick !== null
+        ? NetworkAPI_GroupKick.fromPartial(object.kick)
+        : undefined;
+    message.status =
+      object.status !== undefined && object.status !== null
+        ? NetworkAPI_GroupStatus.fromPartial(object.status)
+        : undefined;
     return message;
   },
 };
@@ -5674,18 +6910,31 @@ function createBaseNetworkAPI_GroupResponse(): NetworkAPI_GroupResponse {
 }
 
 export const NetworkAPI_GroupResponse = {
-  encode(message: NetworkAPI_GroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_GroupResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.success !== undefined) {
-      NetworkAPI_GroupResponse_Success.encode(message.success, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_GroupResponse_Success.encode(
+        message.success,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.status !== undefined) {
-      NetworkAPI_GroupResponse_Status.encode(message.status, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_GroupResponse_Status.encode(
+        message.status,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupResponse();
     while (reader.pos < end) {
@@ -5696,14 +6945,20 @@ export const NetworkAPI_GroupResponse = {
             break;
           }
 
-          message.success = NetworkAPI_GroupResponse_Success.decode(reader, reader.uint32());
+          message.success = NetworkAPI_GroupResponse_Success.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.status = NetworkAPI_GroupResponse_Status.decode(reader, reader.uint32());
+          message.status = NetworkAPI_GroupResponse_Status.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5716,32 +6971,46 @@ export const NetworkAPI_GroupResponse = {
 
   fromJSON(object: any): NetworkAPI_GroupResponse {
     return {
-      success: isSet(object.success) ? NetworkAPI_GroupResponse_Success.fromJSON(object.success) : undefined,
-      status: isSet(object.status) ? NetworkAPI_GroupResponse_Status.fromJSON(object.status) : undefined,
+      success: isSet(object.success)
+        ? NetworkAPI_GroupResponse_Success.fromJSON(object.success)
+        : undefined,
+      status: isSet(object.status)
+        ? NetworkAPI_GroupResponse_Status.fromJSON(object.status)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_GroupResponse): unknown {
     const obj: any = {};
     message.success !== undefined &&
-      (obj.success = message.success ? NetworkAPI_GroupResponse_Success.toJSON(message.success) : undefined);
+      (obj.success = message.success
+        ? NetworkAPI_GroupResponse_Success.toJSON(message.success)
+        : undefined);
     message.status !== undefined &&
-      (obj.status = message.status ? NetworkAPI_GroupResponse_Status.toJSON(message.status) : undefined);
+      (obj.status = message.status
+        ? NetworkAPI_GroupResponse_Status.toJSON(message.status)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse>, I>>(base?: I): NetworkAPI_GroupResponse {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupResponse {
     return NetworkAPI_GroupResponse.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupResponse>, I>>(object: I): NetworkAPI_GroupResponse {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupResponse>, I>>(
+    object: I,
+  ): NetworkAPI_GroupResponse {
     const message = createBaseNetworkAPI_GroupResponse();
-    message.success = (object.success !== undefined && object.success !== null)
-      ? NetworkAPI_GroupResponse_Success.fromPartial(object.success)
-      : undefined;
-    message.status = (object.status !== undefined && object.status !== null)
-      ? NetworkAPI_GroupResponse_Status.fromPartial(object.status)
-      : undefined;
+    message.success =
+      object.success !== undefined && object.success !== null
+        ? NetworkAPI_GroupResponse_Success.fromPartial(object.success)
+        : undefined;
+    message.status =
+      object.status !== undefined && object.status !== null
+        ? NetworkAPI_GroupResponse_Status.fromPartial(object.status)
+        : undefined;
     return message;
   },
 };
@@ -5751,12 +7020,19 @@ function createBaseNetworkAPI_GroupResponse_Success(): NetworkAPI_GroupResponse_
 }
 
 export const NetworkAPI_GroupResponse_Success = {
-  encode(_: NetworkAPI_GroupResponse_Success, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: NetworkAPI_GroupResponse_Success,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupResponse_Success {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupResponse_Success {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupResponse_Success();
     while (reader.pos < end) {
@@ -5786,31 +7062,38 @@ export const NetworkAPI_GroupResponse_Success = {
     return NetworkAPI_GroupResponse_Success.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Success>, I>>(
-    _: I,
-  ): NetworkAPI_GroupResponse_Success {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Success>, I>,
+  >(_: I): NetworkAPI_GroupResponse_Success {
     const message = createBaseNetworkAPI_GroupResponse_Success();
     return message;
   },
 };
 
 function createBaseNetworkAPI_GroupResponse_Status(): NetworkAPI_GroupResponse_Status {
-  return { memberName: "", groupName: "" };
+  return { memberName: '', groupName: '' };
 }
 
 export const NetworkAPI_GroupResponse_Status = {
-  encode(message: NetworkAPI_GroupResponse_Status, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.memberName !== "") {
+  encode(
+    message: NetworkAPI_GroupResponse_Status,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.memberName !== '') {
       writer.uint32(10).string(message.memberName);
     }
-    if (message.groupName !== "") {
+    if (message.groupName !== '') {
       writer.uint32(18).string(message.groupName);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupResponse_Status {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupResponse_Status {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupResponse_Status();
     while (reader.pos < end) {
@@ -5841,8 +7124,8 @@ export const NetworkAPI_GroupResponse_Status = {
 
   fromJSON(object: any): NetworkAPI_GroupResponse_Status {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : "",
-      groupName: isSet(object.groupName) ? String(object.groupName) : "",
+      memberName: isSet(object.memberName) ? String(object.memberName) : '',
+      groupName: isSet(object.groupName) ? String(object.groupName) : '',
     };
   },
 
@@ -5853,7 +7136,9 @@ export const NetworkAPI_GroupResponse_Status = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Status>, I>>(base?: I): NetworkAPI_GroupResponse_Status {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Status>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupResponse_Status {
     return NetworkAPI_GroupResponse_Status.fromPartial(base ?? {});
   },
 
@@ -5861,8 +7146,8 @@ export const NetworkAPI_GroupResponse_Status = {
     object: I,
   ): NetworkAPI_GroupResponse_Status {
     const message = createBaseNetworkAPI_GroupResponse_Status();
-    message.memberName = object.memberName ?? "";
-    message.groupName = object.groupName ?? "";
+    message.memberName = object.memberName ?? '';
+    message.groupName = object.groupName ?? '';
     return message;
   },
 };
@@ -5872,15 +7157,25 @@ function createBaseNetworkAPI_GroupStatus(): NetworkAPI_GroupStatus {
 }
 
 export const NetworkAPI_GroupStatus = {
-  encode(message: NetworkAPI_GroupStatus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_GroupStatus,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.member !== undefined) {
-      NetworkAPI_Group_Member.encode(message.member, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Group_Member.encode(
+        message.member,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupStatus {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupStatus {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupStatus();
     while (reader.pos < end) {
@@ -5891,7 +7186,10 @@ export const NetworkAPI_GroupStatus = {
             break;
           }
 
-          message.member = NetworkAPI_Group_Member.decode(reader, reader.uint32());
+          message.member = NetworkAPI_Group_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5903,49 +7201,73 @@ export const NetworkAPI_GroupStatus = {
   },
 
   fromJSON(object: any): NetworkAPI_GroupStatus {
-    return { member: isSet(object.member) ? NetworkAPI_Group_Member.fromJSON(object.member) : undefined };
+    return {
+      member: isSet(object.member)
+        ? NetworkAPI_Group_Member.fromJSON(object.member)
+        : undefined,
+    };
   },
 
   toJSON(message: NetworkAPI_GroupStatus): unknown {
     const obj: any = {};
     message.member !== undefined &&
-      (obj.member = message.member ? NetworkAPI_Group_Member.toJSON(message.member) : undefined);
+      (obj.member = message.member
+        ? NetworkAPI_Group_Member.toJSON(message.member)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupStatus>, I>>(base?: I): NetworkAPI_GroupStatus {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupStatus>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupStatus {
     return NetworkAPI_GroupStatus.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupStatus>, I>>(object: I): NetworkAPI_GroupStatus {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupStatus>, I>>(
+    object: I,
+  ): NetworkAPI_GroupStatus {
     const message = createBaseNetworkAPI_GroupStatus();
-    message.member = (object.member !== undefined && object.member !== null)
-      ? NetworkAPI_Group_Member.fromPartial(object.member)
-      : undefined;
+    message.member =
+      object.member !== undefined && object.member !== null
+        ? NetworkAPI_Group_Member.fromPartial(object.member)
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_GroupInvite(): NetworkAPI_GroupInvite {
-  return { groupInfo: undefined, secret: "", prospect: undefined };
+  return { groupInfo: undefined, secret: '', prospect: undefined };
 }
 
 export const NetworkAPI_GroupInvite = {
-  encode(message: NetworkAPI_GroupInvite, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_GroupInvite,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupInfo !== undefined) {
-      NetworkAPI_Group.encode(message.groupInfo, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Group.encode(
+        message.groupInfo,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
-    if (message.secret !== "") {
+    if (message.secret !== '') {
       writer.uint32(18).string(message.secret);
     }
     if (message.prospect !== undefined) {
-      NetworkAPI_Group_Member.encode(message.prospect, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_Group_Member.encode(
+        message.prospect,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupInvite {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupInvite {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupInvite();
     while (reader.pos < end) {
@@ -5970,7 +7292,10 @@ export const NetworkAPI_GroupInvite = {
             break;
           }
 
-          message.prospect = NetworkAPI_Group_Member.decode(reader, reader.uint32());
+          message.prospect = NetworkAPI_Group_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -5983,35 +7308,49 @@ export const NetworkAPI_GroupInvite = {
 
   fromJSON(object: any): NetworkAPI_GroupInvite {
     return {
-      groupInfo: isSet(object.groupInfo) ? NetworkAPI_Group.fromJSON(object.groupInfo) : undefined,
-      secret: isSet(object.secret) ? String(object.secret) : "",
-      prospect: isSet(object.prospect) ? NetworkAPI_Group_Member.fromJSON(object.prospect) : undefined,
+      groupInfo: isSet(object.groupInfo)
+        ? NetworkAPI_Group.fromJSON(object.groupInfo)
+        : undefined,
+      secret: isSet(object.secret) ? String(object.secret) : '',
+      prospect: isSet(object.prospect)
+        ? NetworkAPI_Group_Member.fromJSON(object.prospect)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_GroupInvite): unknown {
     const obj: any = {};
     message.groupInfo !== undefined &&
-      (obj.groupInfo = message.groupInfo ? NetworkAPI_Group.toJSON(message.groupInfo) : undefined);
+      (obj.groupInfo = message.groupInfo
+        ? NetworkAPI_Group.toJSON(message.groupInfo)
+        : undefined);
     message.secret !== undefined && (obj.secret = message.secret);
     message.prospect !== undefined &&
-      (obj.prospect = message.prospect ? NetworkAPI_Group_Member.toJSON(message.prospect) : undefined);
+      (obj.prospect = message.prospect
+        ? NetworkAPI_Group_Member.toJSON(message.prospect)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupInvite>, I>>(base?: I): NetworkAPI_GroupInvite {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupInvite>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupInvite {
     return NetworkAPI_GroupInvite.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupInvite>, I>>(object: I): NetworkAPI_GroupInvite {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupInvite>, I>>(
+    object: I,
+  ): NetworkAPI_GroupInvite {
     const message = createBaseNetworkAPI_GroupInvite();
-    message.groupInfo = (object.groupInfo !== undefined && object.groupInfo !== null)
-      ? NetworkAPI_Group.fromPartial(object.groupInfo)
-      : undefined;
-    message.secret = object.secret ?? "";
-    message.prospect = (object.prospect !== undefined && object.prospect !== null)
-      ? NetworkAPI_Group_Member.fromPartial(object.prospect)
-      : undefined;
+    message.groupInfo =
+      object.groupInfo !== undefined && object.groupInfo !== null
+        ? NetworkAPI_Group.fromPartial(object.groupInfo)
+        : undefined;
+    message.secret = object.secret ?? '';
+    message.prospect =
+      object.prospect !== undefined && object.prospect !== null
+        ? NetworkAPI_Group_Member.fromPartial(object.prospect)
+        : undefined;
     return message;
   },
 };
@@ -6021,18 +7360,31 @@ function createBaseNetworkAPI_GroupJoin(): NetworkAPI_GroupJoin {
 }
 
 export const NetworkAPI_GroupJoin = {
-  encode(message: NetworkAPI_GroupJoin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_GroupJoin,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.sponsor !== undefined) {
-      NetworkAPI_Group_Member.encode(message.sponsor, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Group_Member.encode(
+        message.sponsor,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.prospect !== undefined) {
-      NetworkAPI_Group_Member.encode(message.prospect, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Group_Member.encode(
+        message.prospect,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupJoin {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupJoin {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupJoin();
     while (reader.pos < end) {
@@ -6043,14 +7395,20 @@ export const NetworkAPI_GroupJoin = {
             break;
           }
 
-          message.sponsor = NetworkAPI_Group_Member.decode(reader, reader.uint32());
+          message.sponsor = NetworkAPI_Group_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.prospect = NetworkAPI_Group_Member.decode(reader, reader.uint32());
+          message.prospect = NetworkAPI_Group_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6063,32 +7421,46 @@ export const NetworkAPI_GroupJoin = {
 
   fromJSON(object: any): NetworkAPI_GroupJoin {
     return {
-      sponsor: isSet(object.sponsor) ? NetworkAPI_Group_Member.fromJSON(object.sponsor) : undefined,
-      prospect: isSet(object.prospect) ? NetworkAPI_Group_Member.fromJSON(object.prospect) : undefined,
+      sponsor: isSet(object.sponsor)
+        ? NetworkAPI_Group_Member.fromJSON(object.sponsor)
+        : undefined,
+      prospect: isSet(object.prospect)
+        ? NetworkAPI_Group_Member.fromJSON(object.prospect)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_GroupJoin): unknown {
     const obj: any = {};
     message.sponsor !== undefined &&
-      (obj.sponsor = message.sponsor ? NetworkAPI_Group_Member.toJSON(message.sponsor) : undefined);
+      (obj.sponsor = message.sponsor
+        ? NetworkAPI_Group_Member.toJSON(message.sponsor)
+        : undefined);
     message.prospect !== undefined &&
-      (obj.prospect = message.prospect ? NetworkAPI_Group_Member.toJSON(message.prospect) : undefined);
+      (obj.prospect = message.prospect
+        ? NetworkAPI_Group_Member.toJSON(message.prospect)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupJoin>, I>>(base?: I): NetworkAPI_GroupJoin {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupJoin>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupJoin {
     return NetworkAPI_GroupJoin.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupJoin>, I>>(object: I): NetworkAPI_GroupJoin {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupJoin>, I>>(
+    object: I,
+  ): NetworkAPI_GroupJoin {
     const message = createBaseNetworkAPI_GroupJoin();
-    message.sponsor = (object.sponsor !== undefined && object.sponsor !== null)
-      ? NetworkAPI_Group_Member.fromPartial(object.sponsor)
-      : undefined;
-    message.prospect = (object.prospect !== undefined && object.prospect !== null)
-      ? NetworkAPI_Group_Member.fromPartial(object.prospect)
-      : undefined;
+    message.sponsor =
+      object.sponsor !== undefined && object.sponsor !== null
+        ? NetworkAPI_Group_Member.fromPartial(object.sponsor)
+        : undefined;
+    message.prospect =
+      object.prospect !== undefined && object.prospect !== null
+        ? NetworkAPI_Group_Member.fromPartial(object.prospect)
+        : undefined;
     return message;
   },
 };
@@ -6098,15 +7470,25 @@ function createBaseNetworkAPI_GroupKick(): NetworkAPI_GroupKick {
 }
 
 export const NetworkAPI_GroupKick = {
-  encode(message: NetworkAPI_GroupKick, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_GroupKick,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.member !== undefined) {
-      NetworkAPI_Group_Member.encode(message.member, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Group_Member.encode(
+        message.member,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_GroupKick {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_GroupKick {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_GroupKick();
     while (reader.pos < end) {
@@ -6117,7 +7499,10 @@ export const NetworkAPI_GroupKick = {
             break;
           }
 
-          message.member = NetworkAPI_Group_Member.decode(reader, reader.uint32());
+          message.member = NetworkAPI_Group_Member.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6129,39 +7514,53 @@ export const NetworkAPI_GroupKick = {
   },
 
   fromJSON(object: any): NetworkAPI_GroupKick {
-    return { member: isSet(object.member) ? NetworkAPI_Group_Member.fromJSON(object.member) : undefined };
+    return {
+      member: isSet(object.member)
+        ? NetworkAPI_Group_Member.fromJSON(object.member)
+        : undefined,
+    };
   },
 
   toJSON(message: NetworkAPI_GroupKick): unknown {
     const obj: any = {};
     message.member !== undefined &&
-      (obj.member = message.member ? NetworkAPI_Group_Member.toJSON(message.member) : undefined);
+      (obj.member = message.member
+        ? NetworkAPI_Group_Member.toJSON(message.member)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_GroupKick>, I>>(base?: I): NetworkAPI_GroupKick {
+  create<I extends Exact<DeepPartial<NetworkAPI_GroupKick>, I>>(
+    base?: I,
+  ): NetworkAPI_GroupKick {
     return NetworkAPI_GroupKick.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupKick>, I>>(object: I): NetworkAPI_GroupKick {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupKick>, I>>(
+    object: I,
+  ): NetworkAPI_GroupKick {
     const message = createBaseNetworkAPI_GroupKick();
-    message.member = (object.member !== undefined && object.member !== null)
-      ? NetworkAPI_Group_Member.fromPartial(object.member)
-      : undefined;
+    message.member =
+      object.member !== undefined && object.member !== null
+        ? NetworkAPI_Group_Member.fromPartial(object.member)
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_ServerState(): NetworkAPI_ServerState {
-  return { localIp: "", publicIp: "", port: 0 };
+  return { localIp: '', publicIp: '', port: 0 };
 }
 
 export const NetworkAPI_ServerState = {
-  encode(message: NetworkAPI_ServerState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.localIp !== "") {
+  encode(
+    message: NetworkAPI_ServerState,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.localIp !== '') {
       writer.uint32(10).string(message.localIp);
     }
-    if (message.publicIp !== "") {
+    if (message.publicIp !== '') {
       writer.uint32(18).string(message.publicIp);
     }
     if (message.port !== 0) {
@@ -6170,8 +7569,12 @@ export const NetworkAPI_ServerState = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_ServerState {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_ServerState {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_ServerState();
     while (reader.pos < end) {
@@ -6209,8 +7612,8 @@ export const NetworkAPI_ServerState = {
 
   fromJSON(object: any): NetworkAPI_ServerState {
     return {
-      localIp: isSet(object.localIp) ? String(object.localIp) : "",
-      publicIp: isSet(object.publicIp) ? String(object.publicIp) : "",
+      localIp: isSet(object.localIp) ? String(object.localIp) : '',
+      publicIp: isSet(object.publicIp) ? String(object.publicIp) : '',
       port: isSet(object.port) ? Number(object.port) : 0,
     };
   },
@@ -6223,14 +7626,18 @@ export const NetworkAPI_ServerState = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_ServerState>, I>>(base?: I): NetworkAPI_ServerState {
+  create<I extends Exact<DeepPartial<NetworkAPI_ServerState>, I>>(
+    base?: I,
+  ): NetworkAPI_ServerState {
     return NetworkAPI_ServerState.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_ServerState>, I>>(object: I): NetworkAPI_ServerState {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_ServerState>, I>>(
+    object: I,
+  ): NetworkAPI_ServerState {
     const message = createBaseNetworkAPI_ServerState();
-    message.localIp = object.localIp ?? "";
-    message.publicIp = object.publicIp ?? "";
+    message.localIp = object.localIp ?? '';
+    message.publicIp = object.publicIp ?? '';
     message.port = object.port ?? 0;
     return message;
   },
@@ -6255,51 +7662,94 @@ function createBaseNetworkAPI_Action(): NetworkAPI_Action {
 }
 
 export const NetworkAPI_Action = {
-  encode(message: NetworkAPI_Action, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.clear !== undefined) {
-      NetworkAPI_Action_APIClear.encode(message.clear, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action_APIClear.encode(
+        message.clear,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.trigger !== undefined) {
-      NetworkAPI_Action_APITrigger.encode(message.trigger, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APITrigger.encode(
+        message.trigger,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.transport !== undefined) {
-      NetworkAPI_Action_APITransport.encode(message.transport, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_Action_APITransport.encode(
+        message.transport,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.prop !== undefined) {
-      NetworkAPI_Action_APIProp.encode(message.prop, writer.uint32(34).fork()).ldelim();
+      NetworkAPI_Action_APIProp.encode(
+        message.prop,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.timer !== undefined) {
-      NetworkAPI_Action_APITimer.encode(message.timer, writer.uint32(42).fork()).ldelim();
+      NetworkAPI_Action_APITimer.encode(
+        message.timer,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.message !== undefined) {
-      NetworkAPI_Action_APIMessage.encode(message.message, writer.uint32(50).fork()).ldelim();
+      NetworkAPI_Action_APIMessage.encode(
+        message.message,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.macro !== undefined) {
-      NetworkAPI_Action_APIMacro.encode(message.macro, writer.uint32(58).fork()).ldelim();
+      NetworkAPI_Action_APIMacro.encode(
+        message.macro,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     if (message.look !== undefined) {
-      NetworkAPI_Action_APILook.encode(message.look, writer.uint32(66).fork()).ldelim();
+      NetworkAPI_Action_APILook.encode(
+        message.look,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.stage !== undefined) {
-      NetworkAPI_Action_APIStage.encode(message.stage, writer.uint32(74).fork()).ldelim();
+      NetworkAPI_Action_APIStage.encode(
+        message.stage,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     if (message.status !== undefined) {
-      NetworkAPI_Action_APIStatus.encode(message.status, writer.uint32(82).fork()).ldelim();
+      NetworkAPI_Action_APIStatus.encode(
+        message.status,
+        writer.uint32(82).fork(),
+      ).ldelim();
     }
     if (message.statusResponse !== undefined) {
-      NetworkAPI_Action_APIStatusResponse.encode(message.statusResponse, writer.uint32(90).fork()).ldelim();
+      NetworkAPI_Action_APIStatusResponse.encode(
+        message.statusResponse,
+        writer.uint32(90).fork(),
+      ).ldelim();
     }
     if (message.twoStepTrigger !== undefined) {
-      NetworkAPI_Action_APITwoStepTrigger.encode(message.twoStepTrigger, writer.uint32(98).fork()).ldelim();
+      NetworkAPI_Action_APITwoStepTrigger.encode(
+        message.twoStepTrigger,
+        writer.uint32(98).fork(),
+      ).ldelim();
     }
     if (message.prerollComplete !== undefined) {
-      NetworkAPI_Action_APIPrerollComplete.encode(message.prerollComplete, writer.uint32(106).fork()).ldelim();
+      NetworkAPI_Action_APIPrerollComplete.encode(
+        message.prerollComplete,
+        writer.uint32(106).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action();
     while (reader.pos < end) {
@@ -6310,91 +7760,130 @@ export const NetworkAPI_Action = {
             break;
           }
 
-          message.clear = NetworkAPI_Action_APIClear.decode(reader, reader.uint32());
+          message.clear = NetworkAPI_Action_APIClear.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.trigger = NetworkAPI_Action_APITrigger.decode(reader, reader.uint32());
+          message.trigger = NetworkAPI_Action_APITrigger.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.transport = NetworkAPI_Action_APITransport.decode(reader, reader.uint32());
+          message.transport = NetworkAPI_Action_APITransport.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.prop = NetworkAPI_Action_APIProp.decode(reader, reader.uint32());
+          message.prop = NetworkAPI_Action_APIProp.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.timer = NetworkAPI_Action_APITimer.decode(reader, reader.uint32());
+          message.timer = NetworkAPI_Action_APITimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.message = NetworkAPI_Action_APIMessage.decode(reader, reader.uint32());
+          message.message = NetworkAPI_Action_APIMessage.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 58) {
             break;
           }
 
-          message.macro = NetworkAPI_Action_APIMacro.decode(reader, reader.uint32());
+          message.macro = NetworkAPI_Action_APIMacro.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 8:
           if (tag != 66) {
             break;
           }
 
-          message.look = NetworkAPI_Action_APILook.decode(reader, reader.uint32());
+          message.look = NetworkAPI_Action_APILook.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 74) {
             break;
           }
 
-          message.stage = NetworkAPI_Action_APIStage.decode(reader, reader.uint32());
+          message.stage = NetworkAPI_Action_APIStage.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 10:
           if (tag != 82) {
             break;
           }
 
-          message.status = NetworkAPI_Action_APIStatus.decode(reader, reader.uint32());
+          message.status = NetworkAPI_Action_APIStatus.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 11:
           if (tag != 90) {
             break;
           }
 
-          message.statusResponse = NetworkAPI_Action_APIStatusResponse.decode(reader, reader.uint32());
+          message.statusResponse = NetworkAPI_Action_APIStatusResponse.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 12:
           if (tag != 98) {
             break;
           }
 
-          message.twoStepTrigger = NetworkAPI_Action_APITwoStepTrigger.decode(reader, reader.uint32());
+          message.twoStepTrigger = NetworkAPI_Action_APITwoStepTrigger.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 13:
           if (tag != 106) {
             break;
           }
 
-          message.prerollComplete = NetworkAPI_Action_APIPrerollComplete.decode(reader, reader.uint32());
+          message.prerollComplete = NetworkAPI_Action_APIPrerollComplete.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6407,16 +7896,36 @@ export const NetworkAPI_Action = {
 
   fromJSON(object: any): NetworkAPI_Action {
     return {
-      clear: isSet(object.clear) ? NetworkAPI_Action_APIClear.fromJSON(object.clear) : undefined,
-      trigger: isSet(object.trigger) ? NetworkAPI_Action_APITrigger.fromJSON(object.trigger) : undefined,
-      transport: isSet(object.transport) ? NetworkAPI_Action_APITransport.fromJSON(object.transport) : undefined,
-      prop: isSet(object.prop) ? NetworkAPI_Action_APIProp.fromJSON(object.prop) : undefined,
-      timer: isSet(object.timer) ? NetworkAPI_Action_APITimer.fromJSON(object.timer) : undefined,
-      message: isSet(object.message) ? NetworkAPI_Action_APIMessage.fromJSON(object.message) : undefined,
-      macro: isSet(object.macro) ? NetworkAPI_Action_APIMacro.fromJSON(object.macro) : undefined,
-      look: isSet(object.look) ? NetworkAPI_Action_APILook.fromJSON(object.look) : undefined,
-      stage: isSet(object.stage) ? NetworkAPI_Action_APIStage.fromJSON(object.stage) : undefined,
-      status: isSet(object.status) ? NetworkAPI_Action_APIStatus.fromJSON(object.status) : undefined,
+      clear: isSet(object.clear)
+        ? NetworkAPI_Action_APIClear.fromJSON(object.clear)
+        : undefined,
+      trigger: isSet(object.trigger)
+        ? NetworkAPI_Action_APITrigger.fromJSON(object.trigger)
+        : undefined,
+      transport: isSet(object.transport)
+        ? NetworkAPI_Action_APITransport.fromJSON(object.transport)
+        : undefined,
+      prop: isSet(object.prop)
+        ? NetworkAPI_Action_APIProp.fromJSON(object.prop)
+        : undefined,
+      timer: isSet(object.timer)
+        ? NetworkAPI_Action_APITimer.fromJSON(object.timer)
+        : undefined,
+      message: isSet(object.message)
+        ? NetworkAPI_Action_APIMessage.fromJSON(object.message)
+        : undefined,
+      macro: isSet(object.macro)
+        ? NetworkAPI_Action_APIMacro.fromJSON(object.macro)
+        : undefined,
+      look: isSet(object.look)
+        ? NetworkAPI_Action_APILook.fromJSON(object.look)
+        : undefined,
+      stage: isSet(object.stage)
+        ? NetworkAPI_Action_APIStage.fromJSON(object.stage)
+        : undefined,
+      status: isSet(object.status)
+        ? NetworkAPI_Action_APIStatus.fromJSON(object.status)
+        : undefined,
       statusResponse: isSet(object.statusResponse)
         ? NetworkAPI_Action_APIStatusResponse.fromJSON(object.statusResponse)
         : undefined,
@@ -6432,82 +7941,124 @@ export const NetworkAPI_Action = {
   toJSON(message: NetworkAPI_Action): unknown {
     const obj: any = {};
     message.clear !== undefined &&
-      (obj.clear = message.clear ? NetworkAPI_Action_APIClear.toJSON(message.clear) : undefined);
+      (obj.clear = message.clear
+        ? NetworkAPI_Action_APIClear.toJSON(message.clear)
+        : undefined);
     message.trigger !== undefined &&
-      (obj.trigger = message.trigger ? NetworkAPI_Action_APITrigger.toJSON(message.trigger) : undefined);
+      (obj.trigger = message.trigger
+        ? NetworkAPI_Action_APITrigger.toJSON(message.trigger)
+        : undefined);
     message.transport !== undefined &&
-      (obj.transport = message.transport ? NetworkAPI_Action_APITransport.toJSON(message.transport) : undefined);
+      (obj.transport = message.transport
+        ? NetworkAPI_Action_APITransport.toJSON(message.transport)
+        : undefined);
     message.prop !== undefined &&
-      (obj.prop = message.prop ? NetworkAPI_Action_APIProp.toJSON(message.prop) : undefined);
+      (obj.prop = message.prop
+        ? NetworkAPI_Action_APIProp.toJSON(message.prop)
+        : undefined);
     message.timer !== undefined &&
-      (obj.timer = message.timer ? NetworkAPI_Action_APITimer.toJSON(message.timer) : undefined);
+      (obj.timer = message.timer
+        ? NetworkAPI_Action_APITimer.toJSON(message.timer)
+        : undefined);
     message.message !== undefined &&
-      (obj.message = message.message ? NetworkAPI_Action_APIMessage.toJSON(message.message) : undefined);
+      (obj.message = message.message
+        ? NetworkAPI_Action_APIMessage.toJSON(message.message)
+        : undefined);
     message.macro !== undefined &&
-      (obj.macro = message.macro ? NetworkAPI_Action_APIMacro.toJSON(message.macro) : undefined);
+      (obj.macro = message.macro
+        ? NetworkAPI_Action_APIMacro.toJSON(message.macro)
+        : undefined);
     message.look !== undefined &&
-      (obj.look = message.look ? NetworkAPI_Action_APILook.toJSON(message.look) : undefined);
+      (obj.look = message.look
+        ? NetworkAPI_Action_APILook.toJSON(message.look)
+        : undefined);
     message.stage !== undefined &&
-      (obj.stage = message.stage ? NetworkAPI_Action_APIStage.toJSON(message.stage) : undefined);
+      (obj.stage = message.stage
+        ? NetworkAPI_Action_APIStage.toJSON(message.stage)
+        : undefined);
     message.status !== undefined &&
-      (obj.status = message.status ? NetworkAPI_Action_APIStatus.toJSON(message.status) : undefined);
-    message.statusResponse !== undefined && (obj.statusResponse = message.statusResponse
-      ? NetworkAPI_Action_APIStatusResponse.toJSON(message.statusResponse)
-      : undefined);
-    message.twoStepTrigger !== undefined && (obj.twoStepTrigger = message.twoStepTrigger
-      ? NetworkAPI_Action_APITwoStepTrigger.toJSON(message.twoStepTrigger)
-      : undefined);
-    message.prerollComplete !== undefined && (obj.prerollComplete = message.prerollComplete
-      ? NetworkAPI_Action_APIPrerollComplete.toJSON(message.prerollComplete)
-      : undefined);
+      (obj.status = message.status
+        ? NetworkAPI_Action_APIStatus.toJSON(message.status)
+        : undefined);
+    message.statusResponse !== undefined &&
+      (obj.statusResponse = message.statusResponse
+        ? NetworkAPI_Action_APIStatusResponse.toJSON(message.statusResponse)
+        : undefined);
+    message.twoStepTrigger !== undefined &&
+      (obj.twoStepTrigger = message.twoStepTrigger
+        ? NetworkAPI_Action_APITwoStepTrigger.toJSON(message.twoStepTrigger)
+        : undefined);
+    message.prerollComplete !== undefined &&
+      (obj.prerollComplete = message.prerollComplete
+        ? NetworkAPI_Action_APIPrerollComplete.toJSON(message.prerollComplete)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action>, I>>(base?: I): NetworkAPI_Action {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action>, I>>(
+    base?: I,
+  ): NetworkAPI_Action {
     return NetworkAPI_Action.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action>, I>>(object: I): NetworkAPI_Action {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action>, I>>(
+    object: I,
+  ): NetworkAPI_Action {
     const message = createBaseNetworkAPI_Action();
-    message.clear = (object.clear !== undefined && object.clear !== null)
-      ? NetworkAPI_Action_APIClear.fromPartial(object.clear)
-      : undefined;
-    message.trigger = (object.trigger !== undefined && object.trigger !== null)
-      ? NetworkAPI_Action_APITrigger.fromPartial(object.trigger)
-      : undefined;
-    message.transport = (object.transport !== undefined && object.transport !== null)
-      ? NetworkAPI_Action_APITransport.fromPartial(object.transport)
-      : undefined;
-    message.prop = (object.prop !== undefined && object.prop !== null)
-      ? NetworkAPI_Action_APIProp.fromPartial(object.prop)
-      : undefined;
-    message.timer = (object.timer !== undefined && object.timer !== null)
-      ? NetworkAPI_Action_APITimer.fromPartial(object.timer)
-      : undefined;
-    message.message = (object.message !== undefined && object.message !== null)
-      ? NetworkAPI_Action_APIMessage.fromPartial(object.message)
-      : undefined;
-    message.macro = (object.macro !== undefined && object.macro !== null)
-      ? NetworkAPI_Action_APIMacro.fromPartial(object.macro)
-      : undefined;
-    message.look = (object.look !== undefined && object.look !== null)
-      ? NetworkAPI_Action_APILook.fromPartial(object.look)
-      : undefined;
-    message.stage = (object.stage !== undefined && object.stage !== null)
-      ? NetworkAPI_Action_APIStage.fromPartial(object.stage)
-      : undefined;
-    message.status = (object.status !== undefined && object.status !== null)
-      ? NetworkAPI_Action_APIStatus.fromPartial(object.status)
-      : undefined;
-    message.statusResponse = (object.statusResponse !== undefined && object.statusResponse !== null)
-      ? NetworkAPI_Action_APIStatusResponse.fromPartial(object.statusResponse)
-      : undefined;
-    message.twoStepTrigger = (object.twoStepTrigger !== undefined && object.twoStepTrigger !== null)
-      ? NetworkAPI_Action_APITwoStepTrigger.fromPartial(object.twoStepTrigger)
-      : undefined;
-    message.prerollComplete = (object.prerollComplete !== undefined && object.prerollComplete !== null)
-      ? NetworkAPI_Action_APIPrerollComplete.fromPartial(object.prerollComplete)
-      : undefined;
+    message.clear =
+      object.clear !== undefined && object.clear !== null
+        ? NetworkAPI_Action_APIClear.fromPartial(object.clear)
+        : undefined;
+    message.trigger =
+      object.trigger !== undefined && object.trigger !== null
+        ? NetworkAPI_Action_APITrigger.fromPartial(object.trigger)
+        : undefined;
+    message.transport =
+      object.transport !== undefined && object.transport !== null
+        ? NetworkAPI_Action_APITransport.fromPartial(object.transport)
+        : undefined;
+    message.prop =
+      object.prop !== undefined && object.prop !== null
+        ? NetworkAPI_Action_APIProp.fromPartial(object.prop)
+        : undefined;
+    message.timer =
+      object.timer !== undefined && object.timer !== null
+        ? NetworkAPI_Action_APITimer.fromPartial(object.timer)
+        : undefined;
+    message.message =
+      object.message !== undefined && object.message !== null
+        ? NetworkAPI_Action_APIMessage.fromPartial(object.message)
+        : undefined;
+    message.macro =
+      object.macro !== undefined && object.macro !== null
+        ? NetworkAPI_Action_APIMacro.fromPartial(object.macro)
+        : undefined;
+    message.look =
+      object.look !== undefined && object.look !== null
+        ? NetworkAPI_Action_APILook.fromPartial(object.look)
+        : undefined;
+    message.stage =
+      object.stage !== undefined && object.stage !== null
+        ? NetworkAPI_Action_APIStage.fromPartial(object.stage)
+        : undefined;
+    message.status =
+      object.status !== undefined && object.status !== null
+        ? NetworkAPI_Action_APIStatus.fromPartial(object.status)
+        : undefined;
+    message.statusResponse =
+      object.statusResponse !== undefined && object.statusResponse !== null
+        ? NetworkAPI_Action_APIStatusResponse.fromPartial(object.statusResponse)
+        : undefined;
+    message.twoStepTrigger =
+      object.twoStepTrigger !== undefined && object.twoStepTrigger !== null
+        ? NetworkAPI_Action_APITwoStepTrigger.fromPartial(object.twoStepTrigger)
+        : undefined;
+    message.prerollComplete =
+      object.prerollComplete !== undefined && object.prerollComplete !== null
+        ? NetworkAPI_Action_APIPrerollComplete.fromPartial(
+            object.prerollComplete,
+          )
+        : undefined;
     return message;
   },
 };
@@ -6517,18 +8068,28 @@ function createBaseNetworkAPI_Action_APIClear(): NetworkAPI_Action_APIClear {
 }
 
 export const NetworkAPI_Action_APIClear = {
-  encode(message: NetworkAPI_Action_APIClear, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIClear,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.layer !== undefined) {
       writer.uint32(8).int32(message.layer);
     }
     if (message.groupIdentifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.groupIdentifier, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.groupIdentifier,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIClear {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIClear {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIClear();
     while (reader.pos < end) {
@@ -6546,7 +8107,10 @@ export const NetworkAPI_Action_APIClear = {
             break;
           }
 
-          message.groupIdentifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.groupIdentifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6559,7 +8123,9 @@ export const NetworkAPI_Action_APIClear = {
 
   fromJSON(object: any): NetworkAPI_Action_APIClear {
     return {
-      layer: isSet(object.layer) ? networkAPI_Action_APIClear_LayerFromJSON(object.layer) : undefined,
+      layer: isSet(object.layer)
+        ? networkAPI_Action_APIClear_LayerFromJSON(object.layer)
+        : undefined,
       groupIdentifier: isSet(object.groupIdentifier)
         ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.groupIdentifier)
         : undefined,
@@ -6569,23 +8135,32 @@ export const NetworkAPI_Action_APIClear = {
   toJSON(message: NetworkAPI_Action_APIClear): unknown {
     const obj: any = {};
     message.layer !== undefined &&
-      (obj.layer = message.layer !== undefined ? networkAPI_Action_APIClear_LayerToJSON(message.layer) : undefined);
-    message.groupIdentifier !== undefined && (obj.groupIdentifier = message.groupIdentifier
-      ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.groupIdentifier)
-      : undefined);
+      (obj.layer =
+        message.layer !== undefined
+          ? networkAPI_Action_APIClear_LayerToJSON(message.layer)
+          : undefined);
+    message.groupIdentifier !== undefined &&
+      (obj.groupIdentifier = message.groupIdentifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.groupIdentifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIClear>, I>>(base?: I): NetworkAPI_Action_APIClear {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIClear>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APIClear {
     return NetworkAPI_Action_APIClear.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIClear>, I>>(object: I): NetworkAPI_Action_APIClear {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIClear>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APIClear {
     const message = createBaseNetworkAPI_Action_APIClear();
     message.layer = object.layer ?? undefined;
-    message.groupIdentifier = (object.groupIdentifier !== undefined && object.groupIdentifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.groupIdentifier)
-      : undefined;
+    message.groupIdentifier =
+      object.groupIdentifier !== undefined && object.groupIdentifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.groupIdentifier)
+        : undefined;
     return message;
   },
 };
@@ -6605,7 +8180,10 @@ function createBaseNetworkAPI_Action_APITwoStepTrigger(): NetworkAPI_Action_APIT
 }
 
 export const NetworkAPI_Action_APITwoStepTrigger = {
-  encode(message: NetworkAPI_Action_APITwoStepTrigger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITwoStepTrigger,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint64(message.id);
     }
@@ -6616,28 +8194,50 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
       writer.uint32(24).uint64(message.renderTime);
     }
     if (message.presentation !== undefined) {
-      NetworkAPI_Action_APITrigger_Presentation.encode(message.presentation, writer.uint32(34).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_Presentation.encode(
+        message.presentation,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.media !== undefined) {
-      NetworkAPI_Action_APITrigger_Media.encode(message.media, writer.uint32(42).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_Media.encode(
+        message.media,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.videoInput !== undefined) {
-      NetworkAPI_Action_APITrigger_VideoInput.encode(message.videoInput, writer.uint32(50).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_VideoInput.encode(
+        message.videoInput,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.audio !== undefined) {
-      NetworkAPI_Action_APITrigger_Audio.encode(message.audio, writer.uint32(58).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_Audio.encode(
+        message.audio,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     if (message.prop !== undefined) {
-      NetworkAPI_Action_APIProp_TriggerProp.encode(message.prop, writer.uint32(66).fork()).ldelim();
+      NetworkAPI_Action_APIProp_TriggerProp.encode(
+        message.prop,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.message !== undefined) {
-      NetworkAPI_Action_APIMessage_TriggerMessage.encode(message.message, writer.uint32(74).fork()).ldelim();
+      NetworkAPI_Action_APIMessage_TriggerMessage.encode(
+        message.message,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITwoStepTrigger {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITwoStepTrigger {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITwoStepTrigger();
     while (reader.pos < end) {
@@ -6669,42 +8269,61 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
             break;
           }
 
-          message.presentation = NetworkAPI_Action_APITrigger_Presentation.decode(reader, reader.uint32());
+          message.presentation =
+            NetworkAPI_Action_APITrigger_Presentation.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.media = NetworkAPI_Action_APITrigger_Media.decode(reader, reader.uint32());
+          message.media = NetworkAPI_Action_APITrigger_Media.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.videoInput = NetworkAPI_Action_APITrigger_VideoInput.decode(reader, reader.uint32());
+          message.videoInput = NetworkAPI_Action_APITrigger_VideoInput.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 58) {
             break;
           }
 
-          message.audio = NetworkAPI_Action_APITrigger_Audio.decode(reader, reader.uint32());
+          message.audio = NetworkAPI_Action_APITrigger_Audio.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 8:
           if (tag != 66) {
             break;
           }
 
-          message.prop = NetworkAPI_Action_APIProp_TriggerProp.decode(reader, reader.uint32());
+          message.prop = NetworkAPI_Action_APIProp_TriggerProp.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 74) {
             break;
           }
 
-          message.message = NetworkAPI_Action_APIMessage_TriggerMessage.decode(reader, reader.uint32());
+          message.message = NetworkAPI_Action_APIMessage_TriggerMessage.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6718,18 +8337,32 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
   fromJSON(object: any): NetworkAPI_Action_APITwoStepTrigger {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
-      operation: isSet(object.operation) ? networkAPI_Action_APITwoStepTrigger_OperationFromJSON(object.operation) : 0,
+      operation: isSet(object.operation)
+        ? networkAPI_Action_APITwoStepTrigger_OperationFromJSON(
+            object.operation,
+          )
+        : 0,
       renderTime: isSet(object.renderTime) ? Number(object.renderTime) : 0,
       presentation: isSet(object.presentation)
-        ? NetworkAPI_Action_APITrigger_Presentation.fromJSON(object.presentation)
+        ? NetworkAPI_Action_APITrigger_Presentation.fromJSON(
+            object.presentation,
+          )
         : undefined,
-      media: isSet(object.media) ? NetworkAPI_Action_APITrigger_Media.fromJSON(object.media) : undefined,
+      media: isSet(object.media)
+        ? NetworkAPI_Action_APITrigger_Media.fromJSON(object.media)
+        : undefined,
       videoInput: isSet(object.videoInput)
         ? NetworkAPI_Action_APITrigger_VideoInput.fromJSON(object.videoInput)
         : undefined,
-      audio: isSet(object.audio) ? NetworkAPI_Action_APITrigger_Audio.fromJSON(object.audio) : undefined,
-      prop: isSet(object.prop) ? NetworkAPI_Action_APIProp_TriggerProp.fromJSON(object.prop) : undefined,
-      message: isSet(object.message) ? NetworkAPI_Action_APIMessage_TriggerMessage.fromJSON(object.message) : undefined,
+      audio: isSet(object.audio)
+        ? NetworkAPI_Action_APITrigger_Audio.fromJSON(object.audio)
+        : undefined,
+      prop: isSet(object.prop)
+        ? NetworkAPI_Action_APIProp_TriggerProp.fromJSON(object.prop)
+        : undefined,
+      message: isSet(object.message)
+        ? NetworkAPI_Action_APIMessage_TriggerMessage.fromJSON(object.message)
+        : undefined,
     };
   },
 
@@ -6737,22 +8370,35 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.operation !== undefined &&
-      (obj.operation = networkAPI_Action_APITwoStepTrigger_OperationToJSON(message.operation));
-    message.renderTime !== undefined && (obj.renderTime = Math.round(message.renderTime));
-    message.presentation !== undefined && (obj.presentation = message.presentation
-      ? NetworkAPI_Action_APITrigger_Presentation.toJSON(message.presentation)
-      : undefined);
+      (obj.operation = networkAPI_Action_APITwoStepTrigger_OperationToJSON(
+        message.operation,
+      ));
+    message.renderTime !== undefined &&
+      (obj.renderTime = Math.round(message.renderTime));
+    message.presentation !== undefined &&
+      (obj.presentation = message.presentation
+        ? NetworkAPI_Action_APITrigger_Presentation.toJSON(message.presentation)
+        : undefined);
     message.media !== undefined &&
-      (obj.media = message.media ? NetworkAPI_Action_APITrigger_Media.toJSON(message.media) : undefined);
-    message.videoInput !== undefined && (obj.videoInput = message.videoInput
-      ? NetworkAPI_Action_APITrigger_VideoInput.toJSON(message.videoInput)
-      : undefined);
+      (obj.media = message.media
+        ? NetworkAPI_Action_APITrigger_Media.toJSON(message.media)
+        : undefined);
+    message.videoInput !== undefined &&
+      (obj.videoInput = message.videoInput
+        ? NetworkAPI_Action_APITrigger_VideoInput.toJSON(message.videoInput)
+        : undefined);
     message.audio !== undefined &&
-      (obj.audio = message.audio ? NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio) : undefined);
+      (obj.audio = message.audio
+        ? NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio)
+        : undefined);
     message.prop !== undefined &&
-      (obj.prop = message.prop ? NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.prop) : undefined);
+      (obj.prop = message.prop
+        ? NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.prop)
+        : undefined);
     message.message !== undefined &&
-      (obj.message = message.message ? NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(message.message) : undefined);
+      (obj.message = message.message
+        ? NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(message.message)
+        : undefined);
     return obj;
   },
 
@@ -6762,52 +8408,72 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
     return NetworkAPI_Action_APITwoStepTrigger.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITwoStepTrigger>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITwoStepTrigger {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITwoStepTrigger>, I>,
+  >(object: I): NetworkAPI_Action_APITwoStepTrigger {
     const message = createBaseNetworkAPI_Action_APITwoStepTrigger();
     message.id = object.id ?? 0;
     message.operation = object.operation ?? 0;
     message.renderTime = object.renderTime ?? 0;
-    message.presentation = (object.presentation !== undefined && object.presentation !== null)
-      ? NetworkAPI_Action_APITrigger_Presentation.fromPartial(object.presentation)
-      : undefined;
-    message.media = (object.media !== undefined && object.media !== null)
-      ? NetworkAPI_Action_APITrigger_Media.fromPartial(object.media)
-      : undefined;
-    message.videoInput = (object.videoInput !== undefined && object.videoInput !== null)
-      ? NetworkAPI_Action_APITrigger_VideoInput.fromPartial(object.videoInput)
-      : undefined;
-    message.audio = (object.audio !== undefined && object.audio !== null)
-      ? NetworkAPI_Action_APITrigger_Audio.fromPartial(object.audio)
-      : undefined;
-    message.prop = (object.prop !== undefined && object.prop !== null)
-      ? NetworkAPI_Action_APIProp_TriggerProp.fromPartial(object.prop)
-      : undefined;
-    message.message = (object.message !== undefined && object.message !== null)
-      ? NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(object.message)
-      : undefined;
+    message.presentation =
+      object.presentation !== undefined && object.presentation !== null
+        ? NetworkAPI_Action_APITrigger_Presentation.fromPartial(
+            object.presentation,
+          )
+        : undefined;
+    message.media =
+      object.media !== undefined && object.media !== null
+        ? NetworkAPI_Action_APITrigger_Media.fromPartial(object.media)
+        : undefined;
+    message.videoInput =
+      object.videoInput !== undefined && object.videoInput !== null
+        ? NetworkAPI_Action_APITrigger_VideoInput.fromPartial(object.videoInput)
+        : undefined;
+    message.audio =
+      object.audio !== undefined && object.audio !== null
+        ? NetworkAPI_Action_APITrigger_Audio.fromPartial(object.audio)
+        : undefined;
+    message.prop =
+      object.prop !== undefined && object.prop !== null
+        ? NetworkAPI_Action_APIProp_TriggerProp.fromPartial(object.prop)
+        : undefined;
+    message.message =
+      object.message !== undefined && object.message !== null
+        ? NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(
+            object.message,
+          )
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APIPrerollComplete(): NetworkAPI_Action_APIPrerollComplete {
-  return { id: 0, failed: false };
+  return { id: 0, failed: false, latency: 0 };
 }
 
 export const NetworkAPI_Action_APIPrerollComplete = {
-  encode(message: NetworkAPI_Action_APIPrerollComplete, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIPrerollComplete,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.failed === true) {
       writer.uint32(16).bool(message.failed);
     }
+    if (message.latency !== 0) {
+      writer.uint32(24).uint64(message.latency);
+    }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIPrerollComplete {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIPrerollComplete {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIPrerollComplete();
     while (reader.pos < end) {
@@ -6827,6 +8493,13 @@ export const NetworkAPI_Action_APIPrerollComplete = {
 
           message.failed = reader.bool();
           continue;
+        case 3:
+          if (tag != 24) {
+            break;
+          }
+
+          message.latency = longToNumber(reader.uint64() as Long);
+          continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
         break;
@@ -6840,6 +8513,7 @@ export const NetworkAPI_Action_APIPrerollComplete = {
     return {
       id: isSet(object.id) ? Number(object.id) : 0,
       failed: isSet(object.failed) ? Boolean(object.failed) : false,
+      latency: isSet(object.latency) ? Number(object.latency) : 0,
     };
   },
 
@@ -6847,6 +8521,8 @@ export const NetworkAPI_Action_APIPrerollComplete = {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.failed !== undefined && (obj.failed = message.failed);
+    message.latency !== undefined &&
+      (obj.latency = Math.round(message.latency));
     return obj;
   },
 
@@ -6856,39 +8532,64 @@ export const NetworkAPI_Action_APIPrerollComplete = {
     return NetworkAPI_Action_APIPrerollComplete.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIPrerollComplete>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIPrerollComplete {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIPrerollComplete>, I>,
+  >(object: I): NetworkAPI_Action_APIPrerollComplete {
     const message = createBaseNetworkAPI_Action_APIPrerollComplete();
     message.id = object.id ?? 0;
     message.failed = object.failed ?? false;
+    message.latency = object.latency ?? 0;
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APITrigger(): NetworkAPI_Action_APITrigger {
-  return { presentation: undefined, media: undefined, videoInput: undefined, audio: undefined };
+  return {
+    presentation: undefined,
+    media: undefined,
+    videoInput: undefined,
+    audio: undefined,
+  };
 }
 
 export const NetworkAPI_Action_APITrigger = {
-  encode(message: NetworkAPI_Action_APITrigger, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITrigger,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.presentation !== undefined) {
-      NetworkAPI_Action_APITrigger_Presentation.encode(message.presentation, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_Presentation.encode(
+        message.presentation,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.media !== undefined) {
-      NetworkAPI_Action_APITrigger_Media.encode(message.media, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_Media.encode(
+        message.media,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.videoInput !== undefined) {
-      NetworkAPI_Action_APITrigger_VideoInput.encode(message.videoInput, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_VideoInput.encode(
+        message.videoInput,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.audio !== undefined) {
-      NetworkAPI_Action_APITrigger_Audio.encode(message.audio, writer.uint32(34).fork()).ldelim();
+      NetworkAPI_Action_APITrigger_Audio.encode(
+        message.audio,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITrigger {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITrigger {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITrigger();
     while (reader.pos < end) {
@@ -6899,28 +8600,41 @@ export const NetworkAPI_Action_APITrigger = {
             break;
           }
 
-          message.presentation = NetworkAPI_Action_APITrigger_Presentation.decode(reader, reader.uint32());
+          message.presentation =
+            NetworkAPI_Action_APITrigger_Presentation.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.media = NetworkAPI_Action_APITrigger_Media.decode(reader, reader.uint32());
+          message.media = NetworkAPI_Action_APITrigger_Media.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.videoInput = NetworkAPI_Action_APITrigger_VideoInput.decode(reader, reader.uint32());
+          message.videoInput = NetworkAPI_Action_APITrigger_VideoInput.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.audio = NetworkAPI_Action_APITrigger_Audio.decode(reader, reader.uint32());
+          message.audio = NetworkAPI_Action_APITrigger_Audio.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -6934,62 +8648,84 @@ export const NetworkAPI_Action_APITrigger = {
   fromJSON(object: any): NetworkAPI_Action_APITrigger {
     return {
       presentation: isSet(object.presentation)
-        ? NetworkAPI_Action_APITrigger_Presentation.fromJSON(object.presentation)
+        ? NetworkAPI_Action_APITrigger_Presentation.fromJSON(
+            object.presentation,
+          )
         : undefined,
-      media: isSet(object.media) ? NetworkAPI_Action_APITrigger_Media.fromJSON(object.media) : undefined,
+      media: isSet(object.media)
+        ? NetworkAPI_Action_APITrigger_Media.fromJSON(object.media)
+        : undefined,
       videoInput: isSet(object.videoInput)
         ? NetworkAPI_Action_APITrigger_VideoInput.fromJSON(object.videoInput)
         : undefined,
-      audio: isSet(object.audio) ? NetworkAPI_Action_APITrigger_Audio.fromJSON(object.audio) : undefined,
+      audio: isSet(object.audio)
+        ? NetworkAPI_Action_APITrigger_Audio.fromJSON(object.audio)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITrigger): unknown {
     const obj: any = {};
-    message.presentation !== undefined && (obj.presentation = message.presentation
-      ? NetworkAPI_Action_APITrigger_Presentation.toJSON(message.presentation)
-      : undefined);
+    message.presentation !== undefined &&
+      (obj.presentation = message.presentation
+        ? NetworkAPI_Action_APITrigger_Presentation.toJSON(message.presentation)
+        : undefined);
     message.media !== undefined &&
-      (obj.media = message.media ? NetworkAPI_Action_APITrigger_Media.toJSON(message.media) : undefined);
-    message.videoInput !== undefined && (obj.videoInput = message.videoInput
-      ? NetworkAPI_Action_APITrigger_VideoInput.toJSON(message.videoInput)
-      : undefined);
+      (obj.media = message.media
+        ? NetworkAPI_Action_APITrigger_Media.toJSON(message.media)
+        : undefined);
+    message.videoInput !== undefined &&
+      (obj.videoInput = message.videoInput
+        ? NetworkAPI_Action_APITrigger_VideoInput.toJSON(message.videoInput)
+        : undefined);
     message.audio !== undefined &&
-      (obj.audio = message.audio ? NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio) : undefined);
+      (obj.audio = message.audio
+        ? NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger>, I>>(base?: I): NetworkAPI_Action_APITrigger {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APITrigger {
     return NetworkAPI_Action_APITrigger.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger>, I>>(object: I): NetworkAPI_Action_APITrigger {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APITrigger {
     const message = createBaseNetworkAPI_Action_APITrigger();
-    message.presentation = (object.presentation !== undefined && object.presentation !== null)
-      ? NetworkAPI_Action_APITrigger_Presentation.fromPartial(object.presentation)
-      : undefined;
-    message.media = (object.media !== undefined && object.media !== null)
-      ? NetworkAPI_Action_APITrigger_Media.fromPartial(object.media)
-      : undefined;
-    message.videoInput = (object.videoInput !== undefined && object.videoInput !== null)
-      ? NetworkAPI_Action_APITrigger_VideoInput.fromPartial(object.videoInput)
-      : undefined;
-    message.audio = (object.audio !== undefined && object.audio !== null)
-      ? NetworkAPI_Action_APITrigger_Audio.fromPartial(object.audio)
-      : undefined;
+    message.presentation =
+      object.presentation !== undefined && object.presentation !== null
+        ? NetworkAPI_Action_APITrigger_Presentation.fromPartial(
+            object.presentation,
+          )
+        : undefined;
+    message.media =
+      object.media !== undefined && object.media !== null
+        ? NetworkAPI_Action_APITrigger_Media.fromPartial(object.media)
+        : undefined;
+    message.videoInput =
+      object.videoInput !== undefined && object.videoInput !== null
+        ? NetworkAPI_Action_APITrigger_VideoInput.fromPartial(object.videoInput)
+        : undefined;
+    message.audio =
+      object.audio !== undefined && object.audio !== null
+        ? NetworkAPI_Action_APITrigger_Audio.fromPartial(object.audio)
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APITrigger_Presentation(): NetworkAPI_Action_APITrigger_Presentation {
-  return { cueIndex: undefined, playlistIndexPath: undefined, libraryIndexPath: undefined };
+  return { playlistIndexPath: undefined, libraryIndexPath: undefined };
 }
 
 export const NetworkAPI_Action_APITrigger_Presentation = {
-  encode(message: NetworkAPI_Action_APITrigger_Presentation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.cueIndex !== undefined) {
-      writer.uint32(8).int32(message.cueIndex);
-    }
+  encode(
+    message: NetworkAPI_Action_APITrigger_Presentation,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.playlistIndexPath !== undefined) {
       NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.encode(
         message.playlistIndexPath,
@@ -7005,39 +8741,38 @@ export const NetworkAPI_Action_APITrigger_Presentation = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITrigger_Presentation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITrigger_Presentation {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITrigger_Presentation();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
-        case 1:
-          if (tag != 8) {
-            break;
-          }
-
-          message.cueIndex = reader.int32();
-          continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.playlistIndexPath = NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.playlistIndexPath =
+            NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.libraryIndexPath = NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.libraryIndexPath =
+            NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7050,45 +8785,59 @@ export const NetworkAPI_Action_APITrigger_Presentation = {
 
   fromJSON(object: any): NetworkAPI_Action_APITrigger_Presentation {
     return {
-      cueIndex: isSet(object.cueIndex) ? Number(object.cueIndex) : undefined,
       playlistIndexPath: isSet(object.playlistIndexPath)
-        ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromJSON(object.playlistIndexPath)
+        ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromJSON(
+            object.playlistIndexPath,
+          )
         : undefined,
       libraryIndexPath: isSet(object.libraryIndexPath)
-        ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromJSON(object.libraryIndexPath)
+        ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromJSON(
+            object.libraryIndexPath,
+          )
         : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITrigger_Presentation): unknown {
     const obj: any = {};
-    message.cueIndex !== undefined && (obj.cueIndex = Math.round(message.cueIndex));
-    message.playlistIndexPath !== undefined && (obj.playlistIndexPath = message.playlistIndexPath
-      ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.toJSON(message.playlistIndexPath)
-      : undefined);
-    message.libraryIndexPath !== undefined && (obj.libraryIndexPath = message.libraryIndexPath
-      ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.toJSON(message.libraryIndexPath)
-      : undefined);
+    message.playlistIndexPath !== undefined &&
+      (obj.playlistIndexPath = message.playlistIndexPath
+        ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.toJSON(
+            message.playlistIndexPath,
+          )
+        : undefined);
+    message.libraryIndexPath !== undefined &&
+      (obj.libraryIndexPath = message.libraryIndexPath
+        ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.toJSON(
+            message.libraryIndexPath,
+          )
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITrigger_Presentation {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation>, I>,
+  >(base?: I): NetworkAPI_Action_APITrigger_Presentation {
     return NetworkAPI_Action_APITrigger_Presentation.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITrigger_Presentation {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation>, I>,
+  >(object: I): NetworkAPI_Action_APITrigger_Presentation {
     const message = createBaseNetworkAPI_Action_APITrigger_Presentation();
-    message.cueIndex = object.cueIndex ?? undefined;
-    message.playlistIndexPath = (object.playlistIndexPath !== undefined && object.playlistIndexPath !== null)
-      ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromPartial(object.playlistIndexPath)
-      : undefined;
-    message.libraryIndexPath = (object.libraryIndexPath !== undefined && object.libraryIndexPath !== null)
-      ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromPartial(object.libraryIndexPath)
-      : undefined;
+    message.playlistIndexPath =
+      object.playlistIndexPath !== undefined &&
+      object.playlistIndexPath !== null
+        ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromPartial(
+            object.playlistIndexPath,
+          )
+        : undefined;
+    message.libraryIndexPath =
+      object.libraryIndexPath !== undefined && object.libraryIndexPath !== null
+        ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromPartial(
+            object.libraryIndexPath,
+          )
+        : undefined;
     return message;
   },
 };
@@ -7103,7 +8852,10 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     for (const v of message.indexPathComponents) {
-      NetworkAPI_IndexOrNameIdentifier.encode(v!, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        v!,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -7112,9 +8864,11 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     input: _m0.Reader | Uint8Array,
     length?: number,
   ): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseNetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation();
+    const message =
+      createBaseNetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7123,7 +8877,9 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
             break;
           }
 
-          message.indexPathComponents.push(NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()));
+          message.indexPathComponents.push(
+            NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7134,19 +8890,25 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     return message;
   },
 
-  fromJSON(object: any): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
+  fromJSON(
+    object: any,
+  ): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
     return {
       indexPathComponents: Array.isArray(object?.indexPathComponents)
-        ? object.indexPathComponents.map((e: any) => NetworkAPI_IndexOrNameIdentifier.fromJSON(e))
+        ? object.indexPathComponents.map((e: any) =>
+            NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
+          )
         : [],
     };
   },
 
-  toJSON(message: NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation): unknown {
+  toJSON(
+    message: NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation,
+  ): unknown {
     const obj: any = {};
     if (message.indexPathComponents) {
       obj.indexPathComponents = message.indexPathComponents.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined
+        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined,
       );
     } else {
       obj.indexPathComponents = [];
@@ -7154,24 +8916,39 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
-    return NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
+    return NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
-    const message = createBaseNetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation>,
+      I
+    >,
+  >(object: I): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
+    const message =
+      createBaseNetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation();
     message.indexPathComponents =
-      object.indexPathComponents?.map((e) => NetworkAPI_IndexOrNameIdentifier.fromPartial(e)) || [];
+      object.indexPathComponents?.map((e) =>
+        NetworkAPI_IndexOrNameIdentifier.fromPartial(e),
+      ) || [];
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APITrigger_Presentation_LibraryPresentation(): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
-  return { libraryComponent: undefined, presentationComponent: undefined, cueComponent: undefined };
+  return {
+    libraryComponent: undefined,
+    presentationComponent: undefined,
+    cueComponent: undefined,
+  };
 }
 
 export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
@@ -7180,13 +8957,22 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.libraryComponent !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.libraryComponent, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.libraryComponent,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.presentationComponent !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.presentationComponent, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.presentationComponent,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.cueComponent !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.cueComponent, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.cueComponent,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -7195,9 +8981,11 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
     input: _m0.Reader | Uint8Array,
     length?: number,
   ): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseNetworkAPI_Action_APITrigger_Presentation_LibraryPresentation();
+    const message =
+      createBaseNetworkAPI_Action_APITrigger_Presentation_LibraryPresentation();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -7206,21 +8994,28 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
             break;
           }
 
-          message.libraryComponent = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.libraryComponent = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.presentationComponent = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.presentationComponent =
+            NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.cueComponent = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.cueComponent = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7231,13 +9026,17 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
     return message;
   },
 
-  fromJSON(object: any): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
+  fromJSON(
+    object: any,
+  ): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
     return {
       libraryComponent: isSet(object.libraryComponent)
         ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.libraryComponent)
         : undefined,
       presentationComponent: isSet(object.presentationComponent)
-        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.presentationComponent)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(
+            object.presentationComponent,
+          )
         : undefined,
       cueComponent: isSet(object.cueComponent)
         ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.cueComponent)
@@ -7245,40 +9044,59 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
     };
   },
 
-  toJSON(message: NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation): unknown {
+  toJSON(
+    message: NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation,
+  ): unknown {
     const obj: any = {};
-    message.libraryComponent !== undefined && (obj.libraryComponent = message.libraryComponent
-      ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.libraryComponent)
-      : undefined);
-    message.presentationComponent !== undefined && (obj.presentationComponent = message.presentationComponent
-      ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.presentationComponent)
-      : undefined);
-    message.cueComponent !== undefined && (obj.cueComponent = message.cueComponent
-      ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.cueComponent)
-      : undefined);
+    message.libraryComponent !== undefined &&
+      (obj.libraryComponent = message.libraryComponent
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.libraryComponent)
+        : undefined);
+    message.presentationComponent !== undefined &&
+      (obj.presentationComponent = message.presentationComponent
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.presentationComponent)
+        : undefined);
+    message.cueComponent !== undefined &&
+      (obj.cueComponent = message.cueComponent
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.cueComponent)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
-    return NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
+    return NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
-    const message = createBaseNetworkAPI_Action_APITrigger_Presentation_LibraryPresentation();
-    message.libraryComponent = (object.libraryComponent !== undefined && object.libraryComponent !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.libraryComponent)
-      : undefined;
-    message.presentationComponent =
-      (object.presentationComponent !== undefined && object.presentationComponent !== null)
-        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.presentationComponent)
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation>,
+      I
+    >,
+  >(object: I): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
+    const message =
+      createBaseNetworkAPI_Action_APITrigger_Presentation_LibraryPresentation();
+    message.libraryComponent =
+      object.libraryComponent !== undefined && object.libraryComponent !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.libraryComponent)
         : undefined;
-    message.cueComponent = (object.cueComponent !== undefined && object.cueComponent !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.cueComponent)
-      : undefined;
+    message.presentationComponent =
+      object.presentationComponent !== undefined &&
+      object.presentationComponent !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(
+            object.presentationComponent,
+          )
+        : undefined;
+    message.cueComponent =
+      object.cueComponent !== undefined && object.cueComponent !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.cueComponent)
+        : undefined;
     return message;
   },
 };
@@ -7288,15 +9106,25 @@ function createBaseNetworkAPI_Action_APITrigger_Media(): NetworkAPI_Action_APITr
 }
 
 export const NetworkAPI_Action_APITrigger_Media = {
-  encode(message: NetworkAPI_Action_APITrigger_Media, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITrigger_Media,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.indexPathComponents) {
-      NetworkAPI_IndexOrNameIdentifier.encode(v!, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        v!,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITrigger_Media {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITrigger_Media {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITrigger_Media();
     while (reader.pos < end) {
@@ -7307,7 +9135,9 @@ export const NetworkAPI_Action_APITrigger_Media = {
             break;
           }
 
-          message.indexPathComponents.push(NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()));
+          message.indexPathComponents.push(
+            NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7321,7 +9151,9 @@ export const NetworkAPI_Action_APITrigger_Media = {
   fromJSON(object: any): NetworkAPI_Action_APITrigger_Media {
     return {
       indexPathComponents: Array.isArray(object?.indexPathComponents)
-        ? object.indexPathComponents.map((e: any) => NetworkAPI_IndexOrNameIdentifier.fromJSON(e))
+        ? object.indexPathComponents.map((e: any) =>
+            NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
+          )
         : [],
     };
   },
@@ -7330,7 +9162,7 @@ export const NetworkAPI_Action_APITrigger_Media = {
     const obj: any = {};
     if (message.indexPathComponents) {
       obj.indexPathComponents = message.indexPathComponents.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined
+        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined,
       );
     } else {
       obj.indexPathComponents = [];
@@ -7344,12 +9176,14 @@ export const NetworkAPI_Action_APITrigger_Media = {
     return NetworkAPI_Action_APITrigger_Media.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Media>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITrigger_Media {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Media>, I>,
+  >(object: I): NetworkAPI_Action_APITrigger_Media {
     const message = createBaseNetworkAPI_Action_APITrigger_Media();
     message.indexPathComponents =
-      object.indexPathComponents?.map((e) => NetworkAPI_IndexOrNameIdentifier.fromPartial(e)) || [];
+      object.indexPathComponents?.map((e) =>
+        NetworkAPI_IndexOrNameIdentifier.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -7359,15 +9193,25 @@ function createBaseNetworkAPI_Action_APITrigger_VideoInput(): NetworkAPI_Action_
 }
 
 export const NetworkAPI_Action_APITrigger_VideoInput = {
-  encode(message: NetworkAPI_Action_APITrigger_VideoInput, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITrigger_VideoInput,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.videoInputId !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.videoInputId, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.videoInputId,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITrigger_VideoInput {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITrigger_VideoInput {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITrigger_VideoInput();
     while (reader.pos < end) {
@@ -7378,7 +9222,10 @@ export const NetworkAPI_Action_APITrigger_VideoInput = {
             break;
           }
 
-          message.videoInputId = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.videoInputId = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7399,25 +9246,27 @@ export const NetworkAPI_Action_APITrigger_VideoInput = {
 
   toJSON(message: NetworkAPI_Action_APITrigger_VideoInput): unknown {
     const obj: any = {};
-    message.videoInputId !== undefined && (obj.videoInputId = message.videoInputId
-      ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.videoInputId)
-      : undefined);
+    message.videoInputId !== undefined &&
+      (obj.videoInputId = message.videoInputId
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.videoInputId)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_VideoInput>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITrigger_VideoInput {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_VideoInput>, I>,
+  >(base?: I): NetworkAPI_Action_APITrigger_VideoInput {
     return NetworkAPI_Action_APITrigger_VideoInput.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_VideoInput>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITrigger_VideoInput {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_VideoInput>, I>,
+  >(object: I): NetworkAPI_Action_APITrigger_VideoInput {
     const message = createBaseNetworkAPI_Action_APITrigger_VideoInput();
-    message.videoInputId = (object.videoInputId !== undefined && object.videoInputId !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.videoInputId)
-      : undefined;
+    message.videoInputId =
+      object.videoInputId !== undefined && object.videoInputId !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.videoInputId)
+        : undefined;
     return message;
   },
 };
@@ -7427,15 +9276,25 @@ function createBaseNetworkAPI_Action_APITrigger_Audio(): NetworkAPI_Action_APITr
 }
 
 export const NetworkAPI_Action_APITrigger_Audio = {
-  encode(message: NetworkAPI_Action_APITrigger_Audio, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITrigger_Audio,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.indexPathComponents) {
-      NetworkAPI_IndexOrNameIdentifier.encode(v!, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        v!,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITrigger_Audio {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITrigger_Audio {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITrigger_Audio();
     while (reader.pos < end) {
@@ -7446,7 +9305,9 @@ export const NetworkAPI_Action_APITrigger_Audio = {
             break;
           }
 
-          message.indexPathComponents.push(NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()));
+          message.indexPathComponents.push(
+            NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7460,7 +9321,9 @@ export const NetworkAPI_Action_APITrigger_Audio = {
   fromJSON(object: any): NetworkAPI_Action_APITrigger_Audio {
     return {
       indexPathComponents: Array.isArray(object?.indexPathComponents)
-        ? object.indexPathComponents.map((e: any) => NetworkAPI_IndexOrNameIdentifier.fromJSON(e))
+        ? object.indexPathComponents.map((e: any) =>
+            NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
+          )
         : [],
     };
   },
@@ -7469,7 +9332,7 @@ export const NetworkAPI_Action_APITrigger_Audio = {
     const obj: any = {};
     if (message.indexPathComponents) {
       obj.indexPathComponents = message.indexPathComponents.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined
+        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined,
       );
     } else {
       obj.indexPathComponents = [];
@@ -7483,12 +9346,14 @@ export const NetworkAPI_Action_APITrigger_Audio = {
     return NetworkAPI_Action_APITrigger_Audio.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Audio>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITrigger_Audio {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Audio>, I>,
+  >(object: I): NetworkAPI_Action_APITrigger_Audio {
     const message = createBaseNetworkAPI_Action_APITrigger_Audio();
     message.indexPathComponents =
-      object.indexPathComponents?.map((e) => NetworkAPI_IndexOrNameIdentifier.fromPartial(e)) || [];
+      object.indexPathComponents?.map((e) =>
+        NetworkAPI_IndexOrNameIdentifier.fromPartial(e),
+      ) || [];
     return message;
   },
 };
@@ -7505,30 +9370,52 @@ function createBaseNetworkAPI_Action_APITransport(): NetworkAPI_Action_APITransp
 }
 
 export const NetworkAPI_Action_APITransport = {
-  encode(message: NetworkAPI_Action_APITransport, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITransport,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.layer !== 0) {
       writer.uint32(8).int32(message.layer);
     }
     if (message.play !== undefined) {
-      NetworkAPI_Action_APITransport_Play.encode(message.play, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APITransport_Play.encode(
+        message.play,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.pause !== undefined) {
-      NetworkAPI_Action_APITransport_Pause.encode(message.pause, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_Action_APITransport_Pause.encode(
+        message.pause,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.skipBackward !== undefined) {
-      NetworkAPI_Action_APITransport_SkipBackward.encode(message.skipBackward, writer.uint32(34).fork()).ldelim();
+      NetworkAPI_Action_APITransport_SkipBackward.encode(
+        message.skipBackward,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.skipForward !== undefined) {
-      NetworkAPI_Action_APITransport_SkipForward.encode(message.skipForward, writer.uint32(42).fork()).ldelim();
+      NetworkAPI_Action_APITransport_SkipForward.encode(
+        message.skipForward,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.goToEnd !== undefined) {
-      NetworkAPI_Action_APITransport_GoToEnd.encode(message.goToEnd, writer.uint32(50).fork()).ldelim();
+      NetworkAPI_Action_APITransport_GoToEnd.encode(
+        message.goToEnd,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITransport {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITransport {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITransport();
     while (reader.pos < end) {
@@ -7546,35 +9433,52 @@ export const NetworkAPI_Action_APITransport = {
             break;
           }
 
-          message.play = NetworkAPI_Action_APITransport_Play.decode(reader, reader.uint32());
+          message.play = NetworkAPI_Action_APITransport_Play.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.pause = NetworkAPI_Action_APITransport_Pause.decode(reader, reader.uint32());
+          message.pause = NetworkAPI_Action_APITransport_Pause.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.skipBackward = NetworkAPI_Action_APITransport_SkipBackward.decode(reader, reader.uint32());
+          message.skipBackward =
+            NetworkAPI_Action_APITransport_SkipBackward.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 5:
           if (tag != 42) {
             break;
           }
 
-          message.skipForward = NetworkAPI_Action_APITransport_SkipForward.decode(reader, reader.uint32());
+          message.skipForward =
+            NetworkAPI_Action_APITransport_SkipForward.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.goToEnd = NetworkAPI_Action_APITransport_GoToEnd.decode(reader, reader.uint32());
+          message.goToEnd = NetworkAPI_Action_APITransport_GoToEnd.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7587,38 +9491,65 @@ export const NetworkAPI_Action_APITransport = {
 
   fromJSON(object: any): NetworkAPI_Action_APITransport {
     return {
-      layer: isSet(object.layer) ? networkAPI_Action_APITransport_TransportLayerFromJSON(object.layer) : 0,
-      play: isSet(object.play) ? NetworkAPI_Action_APITransport_Play.fromJSON(object.play) : undefined,
-      pause: isSet(object.pause) ? NetworkAPI_Action_APITransport_Pause.fromJSON(object.pause) : undefined,
+      layer: isSet(object.layer)
+        ? networkAPI_Action_APITransport_TransportLayerFromJSON(object.layer)
+        : 0,
+      play: isSet(object.play)
+        ? NetworkAPI_Action_APITransport_Play.fromJSON(object.play)
+        : undefined,
+      pause: isSet(object.pause)
+        ? NetworkAPI_Action_APITransport_Pause.fromJSON(object.pause)
+        : undefined,
       skipBackward: isSet(object.skipBackward)
-        ? NetworkAPI_Action_APITransport_SkipBackward.fromJSON(object.skipBackward)
+        ? NetworkAPI_Action_APITransport_SkipBackward.fromJSON(
+            object.skipBackward,
+          )
         : undefined,
       skipForward: isSet(object.skipForward)
-        ? NetworkAPI_Action_APITransport_SkipForward.fromJSON(object.skipForward)
+        ? NetworkAPI_Action_APITransport_SkipForward.fromJSON(
+            object.skipForward,
+          )
         : undefined,
-      goToEnd: isSet(object.goToEnd) ? NetworkAPI_Action_APITransport_GoToEnd.fromJSON(object.goToEnd) : undefined,
+      goToEnd: isSet(object.goToEnd)
+        ? NetworkAPI_Action_APITransport_GoToEnd.fromJSON(object.goToEnd)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITransport): unknown {
     const obj: any = {};
-    message.layer !== undefined && (obj.layer = networkAPI_Action_APITransport_TransportLayerToJSON(message.layer));
+    message.layer !== undefined &&
+      (obj.layer = networkAPI_Action_APITransport_TransportLayerToJSON(
+        message.layer,
+      ));
     message.play !== undefined &&
-      (obj.play = message.play ? NetworkAPI_Action_APITransport_Play.toJSON(message.play) : undefined);
+      (obj.play = message.play
+        ? NetworkAPI_Action_APITransport_Play.toJSON(message.play)
+        : undefined);
     message.pause !== undefined &&
-      (obj.pause = message.pause ? NetworkAPI_Action_APITransport_Pause.toJSON(message.pause) : undefined);
-    message.skipBackward !== undefined && (obj.skipBackward = message.skipBackward
-      ? NetworkAPI_Action_APITransport_SkipBackward.toJSON(message.skipBackward)
-      : undefined);
-    message.skipForward !== undefined && (obj.skipForward = message.skipForward
-      ? NetworkAPI_Action_APITransport_SkipForward.toJSON(message.skipForward)
-      : undefined);
+      (obj.pause = message.pause
+        ? NetworkAPI_Action_APITransport_Pause.toJSON(message.pause)
+        : undefined);
+    message.skipBackward !== undefined &&
+      (obj.skipBackward = message.skipBackward
+        ? NetworkAPI_Action_APITransport_SkipBackward.toJSON(
+            message.skipBackward,
+          )
+        : undefined);
+    message.skipForward !== undefined &&
+      (obj.skipForward = message.skipForward
+        ? NetworkAPI_Action_APITransport_SkipForward.toJSON(message.skipForward)
+        : undefined);
     message.goToEnd !== undefined &&
-      (obj.goToEnd = message.goToEnd ? NetworkAPI_Action_APITransport_GoToEnd.toJSON(message.goToEnd) : undefined);
+      (obj.goToEnd = message.goToEnd
+        ? NetworkAPI_Action_APITransport_GoToEnd.toJSON(message.goToEnd)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport>, I>>(base?: I): NetworkAPI_Action_APITransport {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APITransport {
     return NetworkAPI_Action_APITransport.fromPartial(base ?? {});
   },
 
@@ -7627,21 +9558,30 @@ export const NetworkAPI_Action_APITransport = {
   ): NetworkAPI_Action_APITransport {
     const message = createBaseNetworkAPI_Action_APITransport();
     message.layer = object.layer ?? 0;
-    message.play = (object.play !== undefined && object.play !== null)
-      ? NetworkAPI_Action_APITransport_Play.fromPartial(object.play)
-      : undefined;
-    message.pause = (object.pause !== undefined && object.pause !== null)
-      ? NetworkAPI_Action_APITransport_Pause.fromPartial(object.pause)
-      : undefined;
-    message.skipBackward = (object.skipBackward !== undefined && object.skipBackward !== null)
-      ? NetworkAPI_Action_APITransport_SkipBackward.fromPartial(object.skipBackward)
-      : undefined;
-    message.skipForward = (object.skipForward !== undefined && object.skipForward !== null)
-      ? NetworkAPI_Action_APITransport_SkipForward.fromPartial(object.skipForward)
-      : undefined;
-    message.goToEnd = (object.goToEnd !== undefined && object.goToEnd !== null)
-      ? NetworkAPI_Action_APITransport_GoToEnd.fromPartial(object.goToEnd)
-      : undefined;
+    message.play =
+      object.play !== undefined && object.play !== null
+        ? NetworkAPI_Action_APITransport_Play.fromPartial(object.play)
+        : undefined;
+    message.pause =
+      object.pause !== undefined && object.pause !== null
+        ? NetworkAPI_Action_APITransport_Pause.fromPartial(object.pause)
+        : undefined;
+    message.skipBackward =
+      object.skipBackward !== undefined && object.skipBackward !== null
+        ? NetworkAPI_Action_APITransport_SkipBackward.fromPartial(
+            object.skipBackward,
+          )
+        : undefined;
+    message.skipForward =
+      object.skipForward !== undefined && object.skipForward !== null
+        ? NetworkAPI_Action_APITransport_SkipForward.fromPartial(
+            object.skipForward,
+          )
+        : undefined;
+    message.goToEnd =
+      object.goToEnd !== undefined && object.goToEnd !== null
+        ? NetworkAPI_Action_APITransport_GoToEnd.fromPartial(object.goToEnd)
+        : undefined;
     return message;
   },
 };
@@ -7651,12 +9591,19 @@ function createBaseNetworkAPI_Action_APITransport_Play(): NetworkAPI_Action_APIT
 }
 
 export const NetworkAPI_Action_APITransport_Play = {
-  encode(_: NetworkAPI_Action_APITransport_Play, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: NetworkAPI_Action_APITransport_Play,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITransport_Play {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITransport_Play {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITransport_Play();
     while (reader.pos < end) {
@@ -7686,9 +9633,9 @@ export const NetworkAPI_Action_APITransport_Play = {
     return NetworkAPI_Action_APITransport_Play.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Play>, I>>(
-    _: I,
-  ): NetworkAPI_Action_APITransport_Play {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Play>, I>,
+  >(_: I): NetworkAPI_Action_APITransport_Play {
     const message = createBaseNetworkAPI_Action_APITransport_Play();
     return message;
   },
@@ -7699,12 +9646,19 @@ function createBaseNetworkAPI_Action_APITransport_Pause(): NetworkAPI_Action_API
 }
 
 export const NetworkAPI_Action_APITransport_Pause = {
-  encode(_: NetworkAPI_Action_APITransport_Pause, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: NetworkAPI_Action_APITransport_Pause,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITransport_Pause {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITransport_Pause {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITransport_Pause();
     while (reader.pos < end) {
@@ -7734,9 +9688,9 @@ export const NetworkAPI_Action_APITransport_Pause = {
     return NetworkAPI_Action_APITransport_Pause.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Pause>, I>>(
-    _: I,
-  ): NetworkAPI_Action_APITransport_Pause {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Pause>, I>,
+  >(_: I): NetworkAPI_Action_APITransport_Pause {
     const message = createBaseNetworkAPI_Action_APITransport_Pause();
     return message;
   },
@@ -7747,15 +9701,22 @@ function createBaseNetworkAPI_Action_APITransport_SkipBackward(): NetworkAPI_Act
 }
 
 export const NetworkAPI_Action_APITransport_SkipBackward = {
-  encode(message: NetworkAPI_Action_APITransport_SkipBackward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITransport_SkipBackward,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.seconds !== 0) {
       writer.uint32(8).int32(message.seconds);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITransport_SkipBackward {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITransport_SkipBackward {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITransport_SkipBackward();
     while (reader.pos < end) {
@@ -7783,19 +9744,26 @@ export const NetworkAPI_Action_APITransport_SkipBackward = {
 
   toJSON(message: NetworkAPI_Action_APITransport_SkipBackward): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = Math.round(message.seconds));
+    message.seconds !== undefined &&
+      (obj.seconds = Math.round(message.seconds));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipBackward>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITransport_SkipBackward {
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APITransport_SkipBackward>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APITransport_SkipBackward {
     return NetworkAPI_Action_APITransport_SkipBackward.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipBackward>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITransport_SkipBackward {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APITransport_SkipBackward>,
+      I
+    >,
+  >(object: I): NetworkAPI_Action_APITransport_SkipBackward {
     const message = createBaseNetworkAPI_Action_APITransport_SkipBackward();
     message.seconds = object.seconds ?? 0;
     return message;
@@ -7807,15 +9775,22 @@ function createBaseNetworkAPI_Action_APITransport_SkipForward(): NetworkAPI_Acti
 }
 
 export const NetworkAPI_Action_APITransport_SkipForward = {
-  encode(message: NetworkAPI_Action_APITransport_SkipForward, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITransport_SkipForward,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.seconds !== 0) {
       writer.uint32(8).int32(message.seconds);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITransport_SkipForward {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITransport_SkipForward {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITransport_SkipForward();
     while (reader.pos < end) {
@@ -7843,19 +9818,20 @@ export const NetworkAPI_Action_APITransport_SkipForward = {
 
   toJSON(message: NetworkAPI_Action_APITransport_SkipForward): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = Math.round(message.seconds));
+    message.seconds !== undefined &&
+      (obj.seconds = Math.round(message.seconds));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipForward>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITransport_SkipForward {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipForward>, I>,
+  >(base?: I): NetworkAPI_Action_APITransport_SkipForward {
     return NetworkAPI_Action_APITransport_SkipForward.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipForward>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITransport_SkipForward {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipForward>, I>,
+  >(object: I): NetworkAPI_Action_APITransport_SkipForward {
     const message = createBaseNetworkAPI_Action_APITransport_SkipForward();
     message.seconds = object.seconds ?? 0;
     return message;
@@ -7867,15 +9843,22 @@ function createBaseNetworkAPI_Action_APITransport_GoToEnd(): NetworkAPI_Action_A
 }
 
 export const NetworkAPI_Action_APITransport_GoToEnd = {
-  encode(message: NetworkAPI_Action_APITransport_GoToEnd, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITransport_GoToEnd,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.secondsToEnd !== 0) {
       writer.uint32(8).int32(message.secondsToEnd);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITransport_GoToEnd {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITransport_GoToEnd {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITransport_GoToEnd();
     while (reader.pos < end) {
@@ -7898,24 +9881,29 @@ export const NetworkAPI_Action_APITransport_GoToEnd = {
   },
 
   fromJSON(object: any): NetworkAPI_Action_APITransport_GoToEnd {
-    return { secondsToEnd: isSet(object.secondsToEnd) ? Number(object.secondsToEnd) : 0 };
+    return {
+      secondsToEnd: isSet(object.secondsToEnd)
+        ? Number(object.secondsToEnd)
+        : 0,
+    };
   },
 
   toJSON(message: NetworkAPI_Action_APITransport_GoToEnd): unknown {
     const obj: any = {};
-    message.secondsToEnd !== undefined && (obj.secondsToEnd = Math.round(message.secondsToEnd));
+    message.secondsToEnd !== undefined &&
+      (obj.secondsToEnd = Math.round(message.secondsToEnd));
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_GoToEnd>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITransport_GoToEnd {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_GoToEnd>, I>,
+  >(base?: I): NetworkAPI_Action_APITransport_GoToEnd {
     return NetworkAPI_Action_APITransport_GoToEnd.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_GoToEnd>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITransport_GoToEnd {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_GoToEnd>, I>,
+  >(object: I): NetworkAPI_Action_APITransport_GoToEnd {
     const message = createBaseNetworkAPI_Action_APITransport_GoToEnd();
     message.secondsToEnd = object.secondsToEnd ?? 0;
     return message;
@@ -7927,18 +9915,31 @@ function createBaseNetworkAPI_Action_APIProp(): NetworkAPI_Action_APIProp {
 }
 
 export const NetworkAPI_Action_APIProp = {
-  encode(message: NetworkAPI_Action_APIProp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIProp,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.trigger !== undefined) {
-      NetworkAPI_Action_APIProp_TriggerProp.encode(message.trigger, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action_APIProp_TriggerProp.encode(
+        message.trigger,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.clear !== undefined) {
-      NetworkAPI_Action_APIProp_ClearProp.encode(message.clear, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APIProp_ClearProp.encode(
+        message.clear,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIProp {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIProp {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIProp();
     while (reader.pos < end) {
@@ -7949,14 +9950,20 @@ export const NetworkAPI_Action_APIProp = {
             break;
           }
 
-          message.trigger = NetworkAPI_Action_APIProp_TriggerProp.decode(reader, reader.uint32());
+          message.trigger = NetworkAPI_Action_APIProp_TriggerProp.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.clear = NetworkAPI_Action_APIProp_ClearProp.decode(reader, reader.uint32());
+          message.clear = NetworkAPI_Action_APIProp_ClearProp.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -7969,32 +9976,46 @@ export const NetworkAPI_Action_APIProp = {
 
   fromJSON(object: any): NetworkAPI_Action_APIProp {
     return {
-      trigger: isSet(object.trigger) ? NetworkAPI_Action_APIProp_TriggerProp.fromJSON(object.trigger) : undefined,
-      clear: isSet(object.clear) ? NetworkAPI_Action_APIProp_ClearProp.fromJSON(object.clear) : undefined,
+      trigger: isSet(object.trigger)
+        ? NetworkAPI_Action_APIProp_TriggerProp.fromJSON(object.trigger)
+        : undefined,
+      clear: isSet(object.clear)
+        ? NetworkAPI_Action_APIProp_ClearProp.fromJSON(object.clear)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIProp): unknown {
     const obj: any = {};
     message.trigger !== undefined &&
-      (obj.trigger = message.trigger ? NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.trigger) : undefined);
+      (obj.trigger = message.trigger
+        ? NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.trigger)
+        : undefined);
     message.clear !== undefined &&
-      (obj.clear = message.clear ? NetworkAPI_Action_APIProp_ClearProp.toJSON(message.clear) : undefined);
+      (obj.clear = message.clear
+        ? NetworkAPI_Action_APIProp_ClearProp.toJSON(message.clear)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp>, I>>(base?: I): NetworkAPI_Action_APIProp {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APIProp {
     return NetworkAPI_Action_APIProp.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp>, I>>(object: I): NetworkAPI_Action_APIProp {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APIProp {
     const message = createBaseNetworkAPI_Action_APIProp();
-    message.trigger = (object.trigger !== undefined && object.trigger !== null)
-      ? NetworkAPI_Action_APIProp_TriggerProp.fromPartial(object.trigger)
-      : undefined;
-    message.clear = (object.clear !== undefined && object.clear !== null)
-      ? NetworkAPI_Action_APIProp_ClearProp.fromPartial(object.clear)
-      : undefined;
+    message.trigger =
+      object.trigger !== undefined && object.trigger !== null
+        ? NetworkAPI_Action_APIProp_TriggerProp.fromPartial(object.trigger)
+        : undefined;
+    message.clear =
+      object.clear !== undefined && object.clear !== null
+        ? NetworkAPI_Action_APIProp_ClearProp.fromPartial(object.clear)
+        : undefined;
     return message;
   },
 };
@@ -8004,15 +10025,25 @@ function createBaseNetworkAPI_Action_APIProp_TriggerProp(): NetworkAPI_Action_AP
 }
 
 export const NetworkAPI_Action_APIProp_TriggerProp = {
-  encode(message: NetworkAPI_Action_APIProp_TriggerProp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIProp_TriggerProp,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIProp_TriggerProp {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIProp_TriggerProp {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIProp_TriggerProp();
     while (reader.pos < end) {
@@ -8023,7 +10054,10 @@ export const NetworkAPI_Action_APIProp_TriggerProp = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8036,30 +10070,35 @@ export const NetworkAPI_Action_APIProp_TriggerProp = {
 
   fromJSON(object: any): NetworkAPI_Action_APIProp_TriggerProp {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIProp_TriggerProp): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_TriggerProp>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIProp_TriggerProp {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_TriggerProp>, I>,
+  >(base?: I): NetworkAPI_Action_APIProp_TriggerProp {
     return NetworkAPI_Action_APIProp_TriggerProp.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_TriggerProp>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIProp_TriggerProp {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_TriggerProp>, I>,
+  >(object: I): NetworkAPI_Action_APIProp_TriggerProp {
     const message = createBaseNetworkAPI_Action_APIProp_TriggerProp();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8069,15 +10108,25 @@ function createBaseNetworkAPI_Action_APIProp_ClearProp(): NetworkAPI_Action_APIP
 }
 
 export const NetworkAPI_Action_APIProp_ClearProp = {
-  encode(message: NetworkAPI_Action_APIProp_ClearProp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIProp_ClearProp,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIProp_ClearProp {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIProp_ClearProp {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIProp_ClearProp();
     while (reader.pos < end) {
@@ -8088,7 +10137,10 @@ export const NetworkAPI_Action_APIProp_ClearProp = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8101,14 +10153,18 @@ export const NetworkAPI_Action_APIProp_ClearProp = {
 
   fromJSON(object: any): NetworkAPI_Action_APIProp_ClearProp {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIProp_ClearProp): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
@@ -8118,40 +10174,65 @@ export const NetworkAPI_Action_APIProp_ClearProp = {
     return NetworkAPI_Action_APIProp_ClearProp.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_ClearProp>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIProp_ClearProp {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_ClearProp>, I>,
+  >(object: I): NetworkAPI_Action_APIProp_ClearProp {
     const message = createBaseNetworkAPI_Action_APIProp_ClearProp();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APITimer(): NetworkAPI_Action_APITimer {
-  return { start: undefined, stop: undefined, reset: undefined, configure: undefined };
+  return {
+    start: undefined,
+    stop: undefined,
+    reset: undefined,
+    configure: undefined,
+  };
 }
 
 export const NetworkAPI_Action_APITimer = {
-  encode(message: NetworkAPI_Action_APITimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.start !== undefined) {
-      NetworkAPI_Action_APITimer_StartTimer.encode(message.start, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action_APITimer_StartTimer.encode(
+        message.start,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.stop !== undefined) {
-      NetworkAPI_Action_APITimer_StopTimer.encode(message.stop, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APITimer_StopTimer.encode(
+        message.stop,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.reset !== undefined) {
-      NetworkAPI_Action_APITimer_ResetTimer.encode(message.reset, writer.uint32(26).fork()).ldelim();
+      NetworkAPI_Action_APITimer_ResetTimer.encode(
+        message.reset,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.configure !== undefined) {
-      NetworkAPI_Action_APITimer_ConfigureTimer.encode(message.configure, writer.uint32(34).fork()).ldelim();
+      NetworkAPI_Action_APITimer_ConfigureTimer.encode(
+        message.configure,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITimer();
     while (reader.pos < end) {
@@ -8162,28 +10243,40 @@ export const NetworkAPI_Action_APITimer = {
             break;
           }
 
-          message.start = NetworkAPI_Action_APITimer_StartTimer.decode(reader, reader.uint32());
+          message.start = NetworkAPI_Action_APITimer_StartTimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.stop = NetworkAPI_Action_APITimer_StopTimer.decode(reader, reader.uint32());
+          message.stop = NetworkAPI_Action_APITimer_StopTimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.reset = NetworkAPI_Action_APITimer_ResetTimer.decode(reader, reader.uint32());
+          message.reset = NetworkAPI_Action_APITimer_ResetTimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 4:
           if (tag != 34) {
             break;
           }
 
-          message.configure = NetworkAPI_Action_APITimer_ConfigureTimer.decode(reader, reader.uint32());
+          message.configure = NetworkAPI_Action_APITimer_ConfigureTimer.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8196,9 +10289,15 @@ export const NetworkAPI_Action_APITimer = {
 
   fromJSON(object: any): NetworkAPI_Action_APITimer {
     return {
-      start: isSet(object.start) ? NetworkAPI_Action_APITimer_StartTimer.fromJSON(object.start) : undefined,
-      stop: isSet(object.stop) ? NetworkAPI_Action_APITimer_StopTimer.fromJSON(object.stop) : undefined,
-      reset: isSet(object.reset) ? NetworkAPI_Action_APITimer_ResetTimer.fromJSON(object.reset) : undefined,
+      start: isSet(object.start)
+        ? NetworkAPI_Action_APITimer_StartTimer.fromJSON(object.start)
+        : undefined,
+      stop: isSet(object.stop)
+        ? NetworkAPI_Action_APITimer_StopTimer.fromJSON(object.stop)
+        : undefined,
+      reset: isSet(object.reset)
+        ? NetworkAPI_Action_APITimer_ResetTimer.fromJSON(object.reset)
+        : undefined,
       configure: isSet(object.configure)
         ? NetworkAPI_Action_APITimer_ConfigureTimer.fromJSON(object.configure)
         : undefined,
@@ -8208,35 +10307,52 @@ export const NetworkAPI_Action_APITimer = {
   toJSON(message: NetworkAPI_Action_APITimer): unknown {
     const obj: any = {};
     message.start !== undefined &&
-      (obj.start = message.start ? NetworkAPI_Action_APITimer_StartTimer.toJSON(message.start) : undefined);
+      (obj.start = message.start
+        ? NetworkAPI_Action_APITimer_StartTimer.toJSON(message.start)
+        : undefined);
     message.stop !== undefined &&
-      (obj.stop = message.stop ? NetworkAPI_Action_APITimer_StopTimer.toJSON(message.stop) : undefined);
+      (obj.stop = message.stop
+        ? NetworkAPI_Action_APITimer_StopTimer.toJSON(message.stop)
+        : undefined);
     message.reset !== undefined &&
-      (obj.reset = message.reset ? NetworkAPI_Action_APITimer_ResetTimer.toJSON(message.reset) : undefined);
-    message.configure !== undefined && (obj.configure = message.configure
-      ? NetworkAPI_Action_APITimer_ConfigureTimer.toJSON(message.configure)
-      : undefined);
+      (obj.reset = message.reset
+        ? NetworkAPI_Action_APITimer_ResetTimer.toJSON(message.reset)
+        : undefined);
+    message.configure !== undefined &&
+      (obj.configure = message.configure
+        ? NetworkAPI_Action_APITimer_ConfigureTimer.toJSON(message.configure)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer>, I>>(base?: I): NetworkAPI_Action_APITimer {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APITimer {
     return NetworkAPI_Action_APITimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer>, I>>(object: I): NetworkAPI_Action_APITimer {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APITimer {
     const message = createBaseNetworkAPI_Action_APITimer();
-    message.start = (object.start !== undefined && object.start !== null)
-      ? NetworkAPI_Action_APITimer_StartTimer.fromPartial(object.start)
-      : undefined;
-    message.stop = (object.stop !== undefined && object.stop !== null)
-      ? NetworkAPI_Action_APITimer_StopTimer.fromPartial(object.stop)
-      : undefined;
-    message.reset = (object.reset !== undefined && object.reset !== null)
-      ? NetworkAPI_Action_APITimer_ResetTimer.fromPartial(object.reset)
-      : undefined;
-    message.configure = (object.configure !== undefined && object.configure !== null)
-      ? NetworkAPI_Action_APITimer_ConfigureTimer.fromPartial(object.configure)
-      : undefined;
+    message.start =
+      object.start !== undefined && object.start !== null
+        ? NetworkAPI_Action_APITimer_StartTimer.fromPartial(object.start)
+        : undefined;
+    message.stop =
+      object.stop !== undefined && object.stop !== null
+        ? NetworkAPI_Action_APITimer_StopTimer.fromPartial(object.stop)
+        : undefined;
+    message.reset =
+      object.reset !== undefined && object.reset !== null
+        ? NetworkAPI_Action_APITimer_ResetTimer.fromPartial(object.reset)
+        : undefined;
+    message.configure =
+      object.configure !== undefined && object.configure !== null
+        ? NetworkAPI_Action_APITimer_ConfigureTimer.fromPartial(
+            object.configure,
+          )
+        : undefined;
     return message;
   },
 };
@@ -8246,15 +10362,25 @@ function createBaseNetworkAPI_Action_APITimer_StartTimer(): NetworkAPI_Action_AP
 }
 
 export const NetworkAPI_Action_APITimer_StartTimer = {
-  encode(message: NetworkAPI_Action_APITimer_StartTimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITimer_StartTimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITimer_StartTimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITimer_StartTimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITimer_StartTimer();
     while (reader.pos < end) {
@@ -8265,7 +10391,10 @@ export const NetworkAPI_Action_APITimer_StartTimer = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8278,30 +10407,35 @@ export const NetworkAPI_Action_APITimer_StartTimer = {
 
   fromJSON(object: any): NetworkAPI_Action_APITimer_StartTimer {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITimer_StartTimer): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StartTimer>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITimer_StartTimer {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StartTimer>, I>,
+  >(base?: I): NetworkAPI_Action_APITimer_StartTimer {
     return NetworkAPI_Action_APITimer_StartTimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StartTimer>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITimer_StartTimer {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StartTimer>, I>,
+  >(object: I): NetworkAPI_Action_APITimer_StartTimer {
     const message = createBaseNetworkAPI_Action_APITimer_StartTimer();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8311,15 +10445,25 @@ function createBaseNetworkAPI_Action_APITimer_StopTimer(): NetworkAPI_Action_API
 }
 
 export const NetworkAPI_Action_APITimer_StopTimer = {
-  encode(message: NetworkAPI_Action_APITimer_StopTimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITimer_StopTimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITimer_StopTimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITimer_StopTimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITimer_StopTimer();
     while (reader.pos < end) {
@@ -8330,7 +10474,10 @@ export const NetworkAPI_Action_APITimer_StopTimer = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8343,14 +10490,18 @@ export const NetworkAPI_Action_APITimer_StopTimer = {
 
   fromJSON(object: any): NetworkAPI_Action_APITimer_StopTimer {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITimer_StopTimer): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
@@ -8360,13 +10511,14 @@ export const NetworkAPI_Action_APITimer_StopTimer = {
     return NetworkAPI_Action_APITimer_StopTimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StopTimer>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITimer_StopTimer {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StopTimer>, I>,
+  >(object: I): NetworkAPI_Action_APITimer_StopTimer {
     const message = createBaseNetworkAPI_Action_APITimer_StopTimer();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8376,15 +10528,25 @@ function createBaseNetworkAPI_Action_APITimer_ResetTimer(): NetworkAPI_Action_AP
 }
 
 export const NetworkAPI_Action_APITimer_ResetTimer = {
-  encode(message: NetworkAPI_Action_APITimer_ResetTimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITimer_ResetTimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITimer_ResetTimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITimer_ResetTimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITimer_ResetTimer();
     while (reader.pos < end) {
@@ -8395,7 +10557,10 @@ export const NetworkAPI_Action_APITimer_ResetTimer = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8408,30 +10573,35 @@ export const NetworkAPI_Action_APITimer_ResetTimer = {
 
   fromJSON(object: any): NetworkAPI_Action_APITimer_ResetTimer {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITimer_ResetTimer): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ResetTimer>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITimer_ResetTimer {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ResetTimer>, I>,
+  >(base?: I): NetworkAPI_Action_APITimer_ResetTimer {
     return NetworkAPI_Action_APITimer_ResetTimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ResetTimer>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITimer_ResetTimer {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ResetTimer>, I>,
+  >(object: I): NetworkAPI_Action_APITimer_ResetTimer {
     const message = createBaseNetworkAPI_Action_APITimer_ResetTimer();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8441,18 +10611,31 @@ function createBaseNetworkAPI_Action_APITimer_ConfigureTimer(): NetworkAPI_Actio
 }
 
 export const NetworkAPI_Action_APITimer_ConfigureTimer = {
-  encode(message: NetworkAPI_Action_APITimer_ConfigureTimer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APITimer_ConfigureTimer,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.configuration !== undefined) {
-      Timer_Configuration.encode(message.configuration, writer.uint32(18).fork()).ldelim();
+      Timer_Configuration.encode(
+        message.configuration,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APITimer_ConfigureTimer {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APITimer_ConfigureTimer {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APITimer_ConfigureTimer();
     while (reader.pos < end) {
@@ -8463,14 +10646,20 @@ export const NetworkAPI_Action_APITimer_ConfigureTimer = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.configuration = Timer_Configuration.decode(reader, reader.uint32());
+          message.configuration = Timer_Configuration.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8483,36 +10672,46 @@ export const NetworkAPI_Action_APITimer_ConfigureTimer = {
 
   fromJSON(object: any): NetworkAPI_Action_APITimer_ConfigureTimer {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
-      configuration: isSet(object.configuration) ? Timer_Configuration.fromJSON(object.configuration) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
+      configuration: isSet(object.configuration)
+        ? Timer_Configuration.fromJSON(object.configuration)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITimer_ConfigureTimer): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     message.configuration !== undefined &&
-      (obj.configuration = message.configuration ? Timer_Configuration.toJSON(message.configuration) : undefined);
+      (obj.configuration = message.configuration
+        ? Timer_Configuration.toJSON(message.configuration)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ConfigureTimer>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APITimer_ConfigureTimer {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ConfigureTimer>, I>,
+  >(base?: I): NetworkAPI_Action_APITimer_ConfigureTimer {
     return NetworkAPI_Action_APITimer_ConfigureTimer.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ConfigureTimer>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APITimer_ConfigureTimer {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ConfigureTimer>, I>,
+  >(object: I): NetworkAPI_Action_APITimer_ConfigureTimer {
     const message = createBaseNetworkAPI_Action_APITimer_ConfigureTimer();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
-    message.configuration = (object.configuration !== undefined && object.configuration !== null)
-      ? Timer_Configuration.fromPartial(object.configuration)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
+    message.configuration =
+      object.configuration !== undefined && object.configuration !== null
+        ? Timer_Configuration.fromPartial(object.configuration)
+        : undefined;
     return message;
   },
 };
@@ -8522,18 +10721,31 @@ function createBaseNetworkAPI_Action_APIMessage(): NetworkAPI_Action_APIMessage 
 }
 
 export const NetworkAPI_Action_APIMessage = {
-  encode(message: NetworkAPI_Action_APIMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIMessage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.trigger !== undefined) {
-      NetworkAPI_Action_APIMessage_TriggerMessage.encode(message.trigger, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action_APIMessage_TriggerMessage.encode(
+        message.trigger,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.clear !== undefined) {
-      NetworkAPI_Action_APIMessage_ClearMessage.encode(message.clear, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APIMessage_ClearMessage.encode(
+        message.clear,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIMessage();
     while (reader.pos < end) {
@@ -8544,14 +10756,20 @@ export const NetworkAPI_Action_APIMessage = {
             break;
           }
 
-          message.trigger = NetworkAPI_Action_APIMessage_TriggerMessage.decode(reader, reader.uint32());
+          message.trigger = NetworkAPI_Action_APIMessage_TriggerMessage.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.clear = NetworkAPI_Action_APIMessage_ClearMessage.decode(reader, reader.uint32());
+          message.clear = NetworkAPI_Action_APIMessage_ClearMessage.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8564,32 +10782,48 @@ export const NetworkAPI_Action_APIMessage = {
 
   fromJSON(object: any): NetworkAPI_Action_APIMessage {
     return {
-      trigger: isSet(object.trigger) ? NetworkAPI_Action_APIMessage_TriggerMessage.fromJSON(object.trigger) : undefined,
-      clear: isSet(object.clear) ? NetworkAPI_Action_APIMessage_ClearMessage.fromJSON(object.clear) : undefined,
+      trigger: isSet(object.trigger)
+        ? NetworkAPI_Action_APIMessage_TriggerMessage.fromJSON(object.trigger)
+        : undefined,
+      clear: isSet(object.clear)
+        ? NetworkAPI_Action_APIMessage_ClearMessage.fromJSON(object.clear)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIMessage): unknown {
     const obj: any = {};
     message.trigger !== undefined &&
-      (obj.trigger = message.trigger ? NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(message.trigger) : undefined);
+      (obj.trigger = message.trigger
+        ? NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(message.trigger)
+        : undefined);
     message.clear !== undefined &&
-      (obj.clear = message.clear ? NetworkAPI_Action_APIMessage_ClearMessage.toJSON(message.clear) : undefined);
+      (obj.clear = message.clear
+        ? NetworkAPI_Action_APIMessage_ClearMessage.toJSON(message.clear)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage>, I>>(base?: I): NetworkAPI_Action_APIMessage {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APIMessage {
     return NetworkAPI_Action_APIMessage.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage>, I>>(object: I): NetworkAPI_Action_APIMessage {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APIMessage {
     const message = createBaseNetworkAPI_Action_APIMessage();
-    message.trigger = (object.trigger !== undefined && object.trigger !== null)
-      ? NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(object.trigger)
-      : undefined;
-    message.clear = (object.clear !== undefined && object.clear !== null)
-      ? NetworkAPI_Action_APIMessage_ClearMessage.fromPartial(object.clear)
-      : undefined;
+    message.trigger =
+      object.trigger !== undefined && object.trigger !== null
+        ? NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(
+            object.trigger,
+          )
+        : undefined;
+    message.clear =
+      object.clear !== undefined && object.clear !== null
+        ? NetworkAPI_Action_APIMessage_ClearMessage.fromPartial(object.clear)
+        : undefined;
     return message;
   },
 };
@@ -8599,9 +10833,15 @@ function createBaseNetworkAPI_Action_APIMessage_TriggerMessage(): NetworkAPI_Act
 }
 
 export const NetworkAPI_Action_APIMessage_TriggerMessage = {
-  encode(message: NetworkAPI_Action_APIMessage_TriggerMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIMessage_TriggerMessage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     for (const v of message.tokenValues) {
       Message_TokenValue.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -8609,8 +10849,12 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIMessage_TriggerMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIMessage_TriggerMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIMessage_TriggerMessage();
     while (reader.pos < end) {
@@ -8621,14 +10865,19 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.tokenValues.push(Message_TokenValue.decode(reader, reader.uint32()));
+          message.tokenValues.push(
+            Message_TokenValue.decode(reader, reader.uint32()),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8641,7 +10890,9 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
 
   fromJSON(object: any): NetworkAPI_Action_APIMessage_TriggerMessage {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
       tokenValues: Array.isArray(object?.tokenValues)
         ? object.tokenValues.map((e: any) => Message_TokenValue.fromJSON(e))
         : [],
@@ -8651,29 +10902,41 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
   toJSON(message: NetworkAPI_Action_APIMessage_TriggerMessage): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     if (message.tokenValues) {
-      obj.tokenValues = message.tokenValues.map((e) => e ? Message_TokenValue.toJSON(e) : undefined);
+      obj.tokenValues = message.tokenValues.map((e) =>
+        e ? Message_TokenValue.toJSON(e) : undefined,
+      );
     } else {
       obj.tokenValues = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_TriggerMessage>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIMessage_TriggerMessage {
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIMessage_TriggerMessage>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APIMessage_TriggerMessage {
     return NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_TriggerMessage>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIMessage_TriggerMessage {
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIMessage_TriggerMessage>,
+      I
+    >,
+  >(object: I): NetworkAPI_Action_APIMessage_TriggerMessage {
     const message = createBaseNetworkAPI_Action_APIMessage_TriggerMessage();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
-    message.tokenValues = object.tokenValues?.map((e) => Message_TokenValue.fromPartial(e)) || [];
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
+    message.tokenValues =
+      object.tokenValues?.map((e) => Message_TokenValue.fromPartial(e)) || [];
     return message;
   },
 };
@@ -8683,15 +10946,25 @@ function createBaseNetworkAPI_Action_APIMessage_ClearMessage(): NetworkAPI_Actio
 }
 
 export const NetworkAPI_Action_APIMessage_ClearMessage = {
-  encode(message: NetworkAPI_Action_APIMessage_ClearMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIMessage_ClearMessage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIMessage_ClearMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIMessage_ClearMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIMessage_ClearMessage();
     while (reader.pos < end) {
@@ -8702,7 +10975,10 @@ export const NetworkAPI_Action_APIMessage_ClearMessage = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8715,30 +10991,35 @@ export const NetworkAPI_Action_APIMessage_ClearMessage = {
 
   fromJSON(object: any): NetworkAPI_Action_APIMessage_ClearMessage {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIMessage_ClearMessage): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_ClearMessage>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIMessage_ClearMessage {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_ClearMessage>, I>,
+  >(base?: I): NetworkAPI_Action_APIMessage_ClearMessage {
     return NetworkAPI_Action_APIMessage_ClearMessage.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_ClearMessage>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIMessage_ClearMessage {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_ClearMessage>, I>,
+  >(object: I): NetworkAPI_Action_APIMessage_ClearMessage {
     const message = createBaseNetworkAPI_Action_APIMessage_ClearMessage();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8748,15 +11029,25 @@ function createBaseNetworkAPI_Action_APIMacro(): NetworkAPI_Action_APIMacro {
 }
 
 export const NetworkAPI_Action_APIMacro = {
-  encode(message: NetworkAPI_Action_APIMacro, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIMacro,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIMacro {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIMacro {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIMacro();
     while (reader.pos < end) {
@@ -8767,7 +11058,10 @@ export const NetworkAPI_Action_APIMacro = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8780,26 +11074,35 @@ export const NetworkAPI_Action_APIMacro = {
 
   fromJSON(object: any): NetworkAPI_Action_APIMacro {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIMacro): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMacro>, I>>(base?: I): NetworkAPI_Action_APIMacro {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMacro>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APIMacro {
     return NetworkAPI_Action_APIMacro.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMacro>, I>>(object: I): NetworkAPI_Action_APIMacro {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMacro>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APIMacro {
     const message = createBaseNetworkAPI_Action_APIMacro();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8809,15 +11112,25 @@ function createBaseNetworkAPI_Action_APILook(): NetworkAPI_Action_APILook {
 }
 
 export const NetworkAPI_Action_APILook = {
-  encode(message: NetworkAPI_Action_APILook, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APILook,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.identifier !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.identifier,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APILook {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APILook {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APILook();
     while (reader.pos < end) {
@@ -8828,7 +11141,10 @@ export const NetworkAPI_Action_APILook = {
             break;
           }
 
-          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.identifier = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8841,26 +11157,35 @@ export const NetworkAPI_Action_APILook = {
 
   fromJSON(object: any): NetworkAPI_Action_APILook {
     return {
-      identifier: isSet(object.identifier) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier) : undefined,
+      identifier: isSet(object.identifier)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APILook): unknown {
     const obj: any = {};
     message.identifier !== undefined &&
-      (obj.identifier = message.identifier ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier) : undefined);
+      (obj.identifier = message.identifier
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APILook>, I>>(base?: I): NetworkAPI_Action_APILook {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APILook>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APILook {
     return NetworkAPI_Action_APILook.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APILook>, I>>(object: I): NetworkAPI_Action_APILook {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APILook>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APILook {
     const message = createBaseNetworkAPI_Action_APILook();
-    message.identifier = (object.identifier !== undefined && object.identifier !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
-      : undefined;
+    message.identifier =
+      object.identifier !== undefined && object.identifier !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
+        : undefined;
     return message;
   },
 };
@@ -8870,18 +11195,31 @@ function createBaseNetworkAPI_Action_APIStage(): NetworkAPI_Action_APIStage {
 }
 
 export const NetworkAPI_Action_APIStage = {
-  encode(message: NetworkAPI_Action_APIStage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIStage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.layouts !== undefined) {
-      NetworkAPI_Action_APIStage_StageLayouts.encode(message.layouts, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_Action_APIStage_StageLayouts.encode(
+        message.layouts,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.message !== undefined) {
-      NetworkAPI_Action_APIStage_StageMessage.encode(message.message, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_Action_APIStage_StageMessage.encode(
+        message.message,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIStage();
     while (reader.pos < end) {
@@ -8892,14 +11230,20 @@ export const NetworkAPI_Action_APIStage = {
             break;
           }
 
-          message.layouts = NetworkAPI_Action_APIStage_StageLayouts.decode(reader, reader.uint32());
+          message.layouts = NetworkAPI_Action_APIStage_StageLayouts.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.message = NetworkAPI_Action_APIStage_StageMessage.decode(reader, reader.uint32());
+          message.message = NetworkAPI_Action_APIStage_StageMessage.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8912,32 +11256,46 @@ export const NetworkAPI_Action_APIStage = {
 
   fromJSON(object: any): NetworkAPI_Action_APIStage {
     return {
-      layouts: isSet(object.layouts) ? NetworkAPI_Action_APIStage_StageLayouts.fromJSON(object.layouts) : undefined,
-      message: isSet(object.message) ? NetworkAPI_Action_APIStage_StageMessage.fromJSON(object.message) : undefined,
+      layouts: isSet(object.layouts)
+        ? NetworkAPI_Action_APIStage_StageLayouts.fromJSON(object.layouts)
+        : undefined,
+      message: isSet(object.message)
+        ? NetworkAPI_Action_APIStage_StageMessage.fromJSON(object.message)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIStage): unknown {
     const obj: any = {};
     message.layouts !== undefined &&
-      (obj.layouts = message.layouts ? NetworkAPI_Action_APIStage_StageLayouts.toJSON(message.layouts) : undefined);
+      (obj.layouts = message.layouts
+        ? NetworkAPI_Action_APIStage_StageLayouts.toJSON(message.layouts)
+        : undefined);
     message.message !== undefined &&
-      (obj.message = message.message ? NetworkAPI_Action_APIStage_StageMessage.toJSON(message.message) : undefined);
+      (obj.message = message.message
+        ? NetworkAPI_Action_APIStage_StageMessage.toJSON(message.message)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage>, I>>(base?: I): NetworkAPI_Action_APIStage {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APIStage {
     return NetworkAPI_Action_APIStage.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage>, I>>(object: I): NetworkAPI_Action_APIStage {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage>, I>>(
+    object: I,
+  ): NetworkAPI_Action_APIStage {
     const message = createBaseNetworkAPI_Action_APIStage();
-    message.layouts = (object.layouts !== undefined && object.layouts !== null)
-      ? NetworkAPI_Action_APIStage_StageLayouts.fromPartial(object.layouts)
-      : undefined;
-    message.message = (object.message !== undefined && object.message !== null)
-      ? NetworkAPI_Action_APIStage_StageMessage.fromPartial(object.message)
-      : undefined;
+    message.layouts =
+      object.layouts !== undefined && object.layouts !== null
+        ? NetworkAPI_Action_APIStage_StageLayouts.fromPartial(object.layouts)
+        : undefined;
+    message.message =
+      object.message !== undefined && object.message !== null
+        ? NetworkAPI_Action_APIStage_StageMessage.fromPartial(object.message)
+        : undefined;
     return message;
   },
 };
@@ -8947,15 +11305,25 @@ function createBaseNetworkAPI_Action_APIStage_StageLayouts(): NetworkAPI_Action_
 }
 
 export const NetworkAPI_Action_APIStage_StageLayouts = {
-  encode(message: NetworkAPI_Action_APIStage_StageLayouts, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIStage_StageLayouts,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.layouts) {
-      NetworkAPI_IndexOrNameIdentifierPair.encode(v!, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifierPair.encode(
+        v!,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStage_StageLayouts {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStage_StageLayouts {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIStage_StageLayouts();
     while (reader.pos < end) {
@@ -8966,7 +11334,12 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
             break;
           }
 
-          message.layouts.push(NetworkAPI_IndexOrNameIdentifierPair.decode(reader, reader.uint32()));
+          message.layouts.push(
+            NetworkAPI_IndexOrNameIdentifierPair.decode(
+              reader,
+              reader.uint32(),
+            ),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -8980,7 +11353,9 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
   fromJSON(object: any): NetworkAPI_Action_APIStage_StageLayouts {
     return {
       layouts: Array.isArray(object?.layouts)
-        ? object.layouts.map((e: any) => NetworkAPI_IndexOrNameIdentifierPair.fromJSON(e))
+        ? object.layouts.map((e: any) =>
+            NetworkAPI_IndexOrNameIdentifierPair.fromJSON(e),
+          )
         : [],
     };
   },
@@ -8988,51 +11363,73 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
   toJSON(message: NetworkAPI_Action_APIStage_StageLayouts): unknown {
     const obj: any = {};
     if (message.layouts) {
-      obj.layouts = message.layouts.map((e) => e ? NetworkAPI_IndexOrNameIdentifierPair.toJSON(e) : undefined);
+      obj.layouts = message.layouts.map((e) =>
+        e ? NetworkAPI_IndexOrNameIdentifierPair.toJSON(e) : undefined,
+      );
     } else {
       obj.layouts = [];
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageLayouts>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIStage_StageLayouts {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageLayouts>, I>,
+  >(base?: I): NetworkAPI_Action_APIStage_StageLayouts {
     return NetworkAPI_Action_APIStage_StageLayouts.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageLayouts>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIStage_StageLayouts {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageLayouts>, I>,
+  >(object: I): NetworkAPI_Action_APIStage_StageLayouts {
     const message = createBaseNetworkAPI_Action_APIStage_StageLayouts();
-    message.layouts = object.layouts?.map((e) => NetworkAPI_IndexOrNameIdentifierPair.fromPartial(e)) || [];
+    message.layouts =
+      object.layouts?.map((e) =>
+        NetworkAPI_IndexOrNameIdentifierPair.fromPartial(e),
+      ) || [];
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APIStage_StageMessage(): NetworkAPI_Action_APIStage_StageMessage {
-  return { showMessage: undefined, clearMessage: undefined, hideMessage: undefined };
+  return {
+    showMessage: undefined,
+    clearMessage: undefined,
+    hideMessage: undefined,
+  };
 }
 
 export const NetworkAPI_Action_APIStage_StageMessage = {
-  encode(message: NetworkAPI_Action_APIStage_StageMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIStage_StageMessage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.showMessage !== undefined) {
-      NetworkAPI_Action_APIStage_StageMessage_ShowMessage.encode(message.showMessage, writer.uint32(10).fork())
-        .ldelim();
+      NetworkAPI_Action_APIStage_StageMessage_ShowMessage.encode(
+        message.showMessage,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.clearMessage !== undefined) {
-      NetworkAPI_Action_APIStage_StageMessage_ClearMessage.encode(message.clearMessage, writer.uint32(18).fork())
-        .ldelim();
+      NetworkAPI_Action_APIStage_StageMessage_ClearMessage.encode(
+        message.clearMessage,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.hideMessage !== undefined) {
-      NetworkAPI_Action_APIStage_StageMessage_HideMessage.encode(message.hideMessage, writer.uint32(26).fork())
-        .ldelim();
+      NetworkAPI_Action_APIStage_StageMessage_HideMessage.encode(
+        message.hideMessage,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStage_StageMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStage_StageMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIStage_StageMessage();
     while (reader.pos < end) {
@@ -9043,21 +11440,33 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
             break;
           }
 
-          message.showMessage = NetworkAPI_Action_APIStage_StageMessage_ShowMessage.decode(reader, reader.uint32());
+          message.showMessage =
+            NetworkAPI_Action_APIStage_StageMessage_ShowMessage.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.clearMessage = NetworkAPI_Action_APIStage_StageMessage_ClearMessage.decode(reader, reader.uint32());
+          message.clearMessage =
+            NetworkAPI_Action_APIStage_StageMessage_ClearMessage.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
         case 3:
           if (tag != 26) {
             break;
           }
 
-          message.hideMessage = NetworkAPI_Action_APIStage_StageMessage_HideMessage.decode(reader, reader.uint32());
+          message.hideMessage =
+            NetworkAPI_Action_APIStage_StageMessage_HideMessage.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -9071,56 +11480,80 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
   fromJSON(object: any): NetworkAPI_Action_APIStage_StageMessage {
     return {
       showMessage: isSet(object.showMessage)
-        ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromJSON(object.showMessage)
+        ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromJSON(
+            object.showMessage,
+          )
         : undefined,
       clearMessage: isSet(object.clearMessage)
-        ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromJSON(object.clearMessage)
+        ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromJSON(
+            object.clearMessage,
+          )
         : undefined,
       hideMessage: isSet(object.hideMessage)
-        ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromJSON(object.hideMessage)
+        ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromJSON(
+            object.hideMessage,
+          )
         : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIStage_StageMessage): unknown {
     const obj: any = {};
-    message.showMessage !== undefined && (obj.showMessage = message.showMessage
-      ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.toJSON(message.showMessage)
-      : undefined);
-    message.clearMessage !== undefined && (obj.clearMessage = message.clearMessage
-      ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.toJSON(message.clearMessage)
-      : undefined);
-    message.hideMessage !== undefined && (obj.hideMessage = message.hideMessage
-      ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.toJSON(message.hideMessage)
-      : undefined);
+    message.showMessage !== undefined &&
+      (obj.showMessage = message.showMessage
+        ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.toJSON(
+            message.showMessage,
+          )
+        : undefined);
+    message.clearMessage !== undefined &&
+      (obj.clearMessage = message.clearMessage
+        ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.toJSON(
+            message.clearMessage,
+          )
+        : undefined);
+    message.hideMessage !== undefined &&
+      (obj.hideMessage = message.hideMessage
+        ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.toJSON(
+            message.hideMessage,
+          )
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIStage_StageMessage {
+  create<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage>, I>,
+  >(base?: I): NetworkAPI_Action_APIStage_StageMessage {
     return NetworkAPI_Action_APIStage_StageMessage.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIStage_StageMessage {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage>, I>,
+  >(object: I): NetworkAPI_Action_APIStage_StageMessage {
     const message = createBaseNetworkAPI_Action_APIStage_StageMessage();
-    message.showMessage = (object.showMessage !== undefined && object.showMessage !== null)
-      ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromPartial(object.showMessage)
-      : undefined;
-    message.clearMessage = (object.clearMessage !== undefined && object.clearMessage !== null)
-      ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromPartial(object.clearMessage)
-      : undefined;
-    message.hideMessage = (object.hideMessage !== undefined && object.hideMessage !== null)
-      ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromPartial(object.hideMessage)
-      : undefined;
+    message.showMessage =
+      object.showMessage !== undefined && object.showMessage !== null
+        ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromPartial(
+            object.showMessage,
+          )
+        : undefined;
+    message.clearMessage =
+      object.clearMessage !== undefined && object.clearMessage !== null
+        ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromPartial(
+            object.clearMessage,
+          )
+        : undefined;
+    message.hideMessage =
+      object.hideMessage !== undefined && object.hideMessage !== null
+        ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromPartial(
+            object.hideMessage,
+          )
+        : undefined;
     return message;
   },
 };
 
 function createBaseNetworkAPI_Action_APIStage_StageMessage_ShowMessage(): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
-  return { message: "" };
+  return { message: '' };
 }
 
 export const NetworkAPI_Action_APIStage_StageMessage_ShowMessage = {
@@ -9128,16 +11561,21 @@ export const NetworkAPI_Action_APIStage_StageMessage_ShowMessage = {
     message: NetworkAPI_Action_APIStage_StageMessage_ShowMessage,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.message !== "") {
+    if (message.message !== '') {
       writer.uint32(10).string(message.message);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseNetworkAPI_Action_APIStage_StageMessage_ShowMessage();
+    const message =
+      createBaseNetworkAPI_Action_APIStage_StageMessage_ShowMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9158,26 +11596,37 @@ export const NetworkAPI_Action_APIStage_StageMessage_ShowMessage = {
   },
 
   fromJSON(object: any): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
-    return { message: isSet(object.message) ? String(object.message) : "" };
+    return { message: isSet(object.message) ? String(object.message) : '' };
   },
 
-  toJSON(message: NetworkAPI_Action_APIStage_StageMessage_ShowMessage): unknown {
+  toJSON(
+    message: NetworkAPI_Action_APIStage_StageMessage_ShowMessage,
+  ): unknown {
     const obj: any = {};
     message.message !== undefined && (obj.message = message.message);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ShowMessage>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
-    return NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ShowMessage>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
+    return NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ShowMessage>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
-    const message = createBaseNetworkAPI_Action_APIStage_StageMessage_ShowMessage();
-    message.message = object.message ?? "";
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ShowMessage>,
+      I
+    >,
+  >(object: I): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
+    const message =
+      createBaseNetworkAPI_Action_APIStage_StageMessage_ShowMessage();
+    message.message = object.message ?? '';
     return message;
   },
 };
@@ -9194,10 +11643,15 @@ export const NetworkAPI_Action_APIStage_StageMessage_ClearMessage = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseNetworkAPI_Action_APIStage_StageMessage_ClearMessage();
+    const message =
+      createBaseNetworkAPI_Action_APIStage_StageMessage_ClearMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9219,16 +11673,25 @@ export const NetworkAPI_Action_APIStage_StageMessage_ClearMessage = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ClearMessage>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
-    return NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ClearMessage>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
+    return NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ClearMessage>, I>>(
-    _: I,
-  ): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
-    const message = createBaseNetworkAPI_Action_APIStage_StageMessage_ClearMessage();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ClearMessage>,
+      I
+    >,
+  >(_: I): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
+    const message =
+      createBaseNetworkAPI_Action_APIStage_StageMessage_ClearMessage();
     return message;
   },
 };
@@ -9238,14 +11701,22 @@ function createBaseNetworkAPI_Action_APIStage_StageMessage_HideMessage(): Networ
 }
 
 export const NetworkAPI_Action_APIStage_StageMessage_HideMessage = {
-  encode(_: NetworkAPI_Action_APIStage_StageMessage_HideMessage, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: NetworkAPI_Action_APIStage_StageMessage_HideMessage,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseNetworkAPI_Action_APIStage_StageMessage_HideMessage();
+    const message =
+      createBaseNetworkAPI_Action_APIStage_StageMessage_HideMessage();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -9267,16 +11738,25 @@ export const NetworkAPI_Action_APIStage_StageMessage_HideMessage = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage_HideMessage>, I>>(
-    base?: I,
-  ): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
-    return NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromPartial(base ?? {});
+  create<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIStage_StageMessage_HideMessage>,
+      I
+    >,
+  >(base?: I): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
+    return NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromPartial(
+      base ?? {},
+    );
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage_HideMessage>, I>>(
-    _: I,
-  ): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
-    const message = createBaseNetworkAPI_Action_APIStage_StageMessage_HideMessage();
+  fromPartial<
+    I extends Exact<
+      DeepPartial<NetworkAPI_Action_APIStage_StageMessage_HideMessage>,
+      I
+    >,
+  >(_: I): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
+    const message =
+      createBaseNetworkAPI_Action_APIStage_StageMessage_HideMessage();
     return message;
   },
 };
@@ -9286,12 +11766,19 @@ function createBaseNetworkAPI_Action_StatusRequest(): NetworkAPI_Action_StatusRe
 }
 
 export const NetworkAPI_Action_StatusRequest = {
-  encode(_: NetworkAPI_Action_StatusRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: NetworkAPI_Action_StatusRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_StatusRequest {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_StatusRequest {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_StatusRequest();
     while (reader.pos < end) {
@@ -9315,11 +11802,15 @@ export const NetworkAPI_Action_StatusRequest = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_StatusRequest>, I>>(base?: I): NetworkAPI_Action_StatusRequest {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_StatusRequest>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_StatusRequest {
     return NetworkAPI_Action_StatusRequest.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_StatusRequest>, I>>(_: I): NetworkAPI_Action_StatusRequest {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_StatusRequest>, I>>(
+    _: I,
+  ): NetworkAPI_Action_StatusRequest {
     const message = createBaseNetworkAPI_Action_StatusRequest();
     return message;
   },
@@ -9330,12 +11821,19 @@ function createBaseNetworkAPI_Action_APIStatus(): NetworkAPI_Action_APIStatus {
 }
 
 export const NetworkAPI_Action_APIStatus = {
-  encode(_: NetworkAPI_Action_APIStatus, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: NetworkAPI_Action_APIStatus,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStatus {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStatus {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIStatus();
     while (reader.pos < end) {
@@ -9359,11 +11857,15 @@ export const NetworkAPI_Action_APIStatus = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatus>, I>>(base?: I): NetworkAPI_Action_APIStatus {
+  create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatus>, I>>(
+    base?: I,
+  ): NetworkAPI_Action_APIStatus {
     return NetworkAPI_Action_APIStatus.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatus>, I>>(_: I): NetworkAPI_Action_APIStatus {
+  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatus>, I>>(
+    _: I,
+  ): NetworkAPI_Action_APIStatus {
     const message = createBaseNetworkAPI_Action_APIStatus();
     return message;
   },
@@ -9374,18 +11876,31 @@ function createBaseNetworkAPI_Action_APIStatusResponse(): NetworkAPI_Action_APIS
 }
 
 export const NetworkAPI_Action_APIStatusResponse = {
-  encode(message: NetworkAPI_Action_APIStatusResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_Action_APIStatusResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.groupDefinition !== undefined) {
-      ProLink_GroupDefinition.encode(message.groupDefinition, writer.uint32(10).fork()).ldelim();
+      ProLink_GroupDefinition.encode(
+        message.groupDefinition,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.status !== undefined) {
-      ProLink_MemberStatus.encode(message.status, writer.uint32(18).fork()).ldelim();
+      ProLink_MemberStatus.encode(
+        message.status,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_Action_APIStatusResponse {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_Action_APIStatusResponse {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_Action_APIStatusResponse();
     while (reader.pos < end) {
@@ -9396,7 +11911,10 @@ export const NetworkAPI_Action_APIStatusResponse = {
             break;
           }
 
-          message.groupDefinition = ProLink_GroupDefinition.decode(reader, reader.uint32());
+          message.groupDefinition = ProLink_GroupDefinition.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
@@ -9419,17 +11937,22 @@ export const NetworkAPI_Action_APIStatusResponse = {
       groupDefinition: isSet(object.groupDefinition)
         ? ProLink_GroupDefinition.fromJSON(object.groupDefinition)
         : undefined,
-      status: isSet(object.status) ? ProLink_MemberStatus.fromJSON(object.status) : undefined,
+      status: isSet(object.status)
+        ? ProLink_MemberStatus.fromJSON(object.status)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIStatusResponse): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined && (obj.groupDefinition = message.groupDefinition
-      ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-      : undefined);
+    message.groupDefinition !== undefined &&
+      (obj.groupDefinition = message.groupDefinition
+        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
+        : undefined);
     message.status !== undefined &&
-      (obj.status = message.status ? ProLink_MemberStatus.toJSON(message.status) : undefined);
+      (obj.status = message.status
+        ? ProLink_MemberStatus.toJSON(message.status)
+        : undefined);
     return obj;
   },
 
@@ -9439,16 +11962,18 @@ export const NetworkAPI_Action_APIStatusResponse = {
     return NetworkAPI_Action_APIStatusResponse.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatusResponse>, I>>(
-    object: I,
-  ): NetworkAPI_Action_APIStatusResponse {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_Action_APIStatusResponse>, I>,
+  >(object: I): NetworkAPI_Action_APIStatusResponse {
     const message = createBaseNetworkAPI_Action_APIStatusResponse();
-    message.groupDefinition = (object.groupDefinition !== undefined && object.groupDefinition !== null)
-      ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
-      : undefined;
-    message.status = (object.status !== undefined && object.status !== null)
-      ? ProLink_MemberStatus.fromPartial(object.status)
-      : undefined;
+    message.groupDefinition =
+      object.groupDefinition !== undefined && object.groupDefinition !== null
+        ? ProLink_GroupDefinition.fromPartial(object.groupDefinition)
+        : undefined;
+    message.status =
+      object.status !== undefined && object.status !== null
+        ? ProLink_MemberStatus.fromPartial(object.status)
+        : undefined;
     return message;
   },
 };
@@ -9458,7 +11983,10 @@ function createBaseNetworkAPI_IndexOrNameIdentifier(): NetworkAPI_IndexOrNameIde
 }
 
 export const NetworkAPI_IndexOrNameIdentifier = {
-  encode(message: NetworkAPI_IndexOrNameIdentifier, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_IndexOrNameIdentifier,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.index !== undefined) {
       writer.uint32(8).int32(message.index);
     }
@@ -9468,8 +11996,12 @@ export const NetworkAPI_IndexOrNameIdentifier = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_IndexOrNameIdentifier {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_IndexOrNameIdentifier {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_IndexOrNameIdentifier();
     while (reader.pos < end) {
@@ -9518,9 +12050,9 @@ export const NetworkAPI_IndexOrNameIdentifier = {
     return NetworkAPI_IndexOrNameIdentifier.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifier>, I>>(
-    object: I,
-  ): NetworkAPI_IndexOrNameIdentifier {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifier>, I>,
+  >(object: I): NetworkAPI_IndexOrNameIdentifier {
     const message = createBaseNetworkAPI_IndexOrNameIdentifier();
     message.index = object.index ?? undefined;
     message.name = object.name ?? undefined;
@@ -9533,18 +12065,31 @@ function createBaseNetworkAPI_IndexOrNameIdentifierPair(): NetworkAPI_IndexOrNam
 }
 
 export const NetworkAPI_IndexOrNameIdentifierPair = {
-  encode(message: NetworkAPI_IndexOrNameIdentifierPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: NetworkAPI_IndexOrNameIdentifierPair,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.key !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.key, writer.uint32(10).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.key,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     if (message.value !== undefined) {
-      NetworkAPI_IndexOrNameIdentifier.encode(message.value, writer.uint32(18).fork()).ldelim();
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        message.value,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): NetworkAPI_IndexOrNameIdentifierPair {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): NetworkAPI_IndexOrNameIdentifierPair {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNetworkAPI_IndexOrNameIdentifierPair();
     while (reader.pos < end) {
@@ -9555,14 +12100,20 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
             break;
           }
 
-          message.key = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.key = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 2:
           if (tag != 18) {
             break;
           }
 
-          message.value = NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
+          message.value = NetworkAPI_IndexOrNameIdentifier.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -9575,17 +12126,25 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
 
   fromJSON(object: any): NetworkAPI_IndexOrNameIdentifierPair {
     return {
-      key: isSet(object.key) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.key) : undefined,
-      value: isSet(object.value) ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.value) : undefined,
+      key: isSet(object.key)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.key)
+        : undefined,
+      value: isSet(object.value)
+        ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.value)
+        : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_IndexOrNameIdentifierPair): unknown {
     const obj: any = {};
     message.key !== undefined &&
-      (obj.key = message.key ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.key) : undefined);
+      (obj.key = message.key
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.key)
+        : undefined);
     message.value !== undefined &&
-      (obj.value = message.value ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.value) : undefined);
+      (obj.value = message.value
+        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.value)
+        : undefined);
     return obj;
   },
 
@@ -9595,16 +12154,18 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
     return NetworkAPI_IndexOrNameIdentifierPair.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifierPair>, I>>(
-    object: I,
-  ): NetworkAPI_IndexOrNameIdentifierPair {
+  fromPartial<
+    I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifierPair>, I>,
+  >(object: I): NetworkAPI_IndexOrNameIdentifierPair {
     const message = createBaseNetworkAPI_IndexOrNameIdentifierPair();
-    message.key = (object.key !== undefined && object.key !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.key)
-      : undefined;
-    message.value = (object.value !== undefined && object.value !== null)
-      ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.value)
-      : undefined;
+    message.key =
+      object.key !== undefined && object.key !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.key)
+        : undefined;
+    message.value =
+      object.value !== undefined && object.value !== null
+        ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.value)
+        : undefined;
     return message;
   },
 };
@@ -9613,35 +12174,52 @@ declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
 var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== "undefined") {
+  if (typeof globalThis !== 'undefined') {
     return globalThis;
   }
-  if (typeof self !== "undefined") {
+  if (typeof self !== 'undefined') {
     return self;
   }
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     return window;
   }
-  if (typeof global !== "undefined") {
+  if (typeof global !== 'undefined') {
     return global;
   }
-  throw "Unable to locate global object";
+  throw 'Unable to locate global object';
 })();
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function longToNumber(long: Long): number {
   if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new tsProtoGlobalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+    throw new tsProtoGlobalThis.Error(
+      'Value is larger than Number.MAX_SAFE_INTEGER',
+    );
   }
   return long.toNumber();
 }

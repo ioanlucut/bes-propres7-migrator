@@ -1,9 +1,9 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
-import { Color, UUID } from "./basicTypes";
-import { Graphics_Point, Graphics_Rect } from "./graphicsData";
+import _m0 from 'protobufjs/minimal';
+import { Color, UUID } from './basicTypes';
+import { Graphics_Point, Graphics_Rect } from './graphicsData';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface Screen {
   uuid: UUID | undefined;
@@ -65,7 +65,9 @@ export interface OutputDisplay {
   type: OutputDisplay_Type;
   mode: DisplayMode | undefined;
   renderId: string;
-  blackMagicAlphaKeySettings?: OutputDisplay_BlackmagicAlphaKeySettings | undefined;
+  blackMagicAlphaKeySettings?:
+    | OutputDisplay_BlackmagicAlphaKeySettings
+    | undefined;
 }
 
 export enum OutputDisplay_Type {
@@ -81,25 +83,25 @@ export enum OutputDisplay_Type {
 export function outputDisplay_TypeFromJSON(object: any): OutputDisplay_Type {
   switch (object) {
     case 0:
-    case "TYPE_UNKNOWN":
+    case 'TYPE_UNKNOWN':
       return OutputDisplay_Type.TYPE_UNKNOWN;
     case 1:
-    case "TYPE_SCREEN":
+    case 'TYPE_SCREEN':
       return OutputDisplay_Type.TYPE_SCREEN;
     case 2:
-    case "TYPE_CARD":
+    case 'TYPE_CARD':
       return OutputDisplay_Type.TYPE_CARD;
     case 3:
-    case "TYPE_NDI":
+    case 'TYPE_NDI':
       return OutputDisplay_Type.TYPE_NDI;
     case 4:
-    case "TYPE_SYPHON":
+    case 'TYPE_SYPHON':
       return OutputDisplay_Type.TYPE_SYPHON;
     case 5:
-    case "TYPE_CUSTOM":
+    case 'TYPE_CUSTOM':
       return OutputDisplay_Type.TYPE_CUSTOM;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return OutputDisplay_Type.UNRECOGNIZED;
   }
@@ -108,20 +110,20 @@ export function outputDisplay_TypeFromJSON(object: any): OutputDisplay_Type {
 export function outputDisplay_TypeToJSON(object: OutputDisplay_Type): string {
   switch (object) {
     case OutputDisplay_Type.TYPE_UNKNOWN:
-      return "TYPE_UNKNOWN";
+      return 'TYPE_UNKNOWN';
     case OutputDisplay_Type.TYPE_SCREEN:
-      return "TYPE_SCREEN";
+      return 'TYPE_SCREEN';
     case OutputDisplay_Type.TYPE_CARD:
-      return "TYPE_CARD";
+      return 'TYPE_CARD';
     case OutputDisplay_Type.TYPE_NDI:
-      return "TYPE_NDI";
+      return 'TYPE_NDI';
     case OutputDisplay_Type.TYPE_SYPHON:
-      return "TYPE_SYPHON";
+      return 'TYPE_SYPHON';
     case OutputDisplay_Type.TYPE_CUSTOM:
-      return "TYPE_CUSTOM";
+      return 'TYPE_CUSTOM';
     case OutputDisplay_Type.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -142,13 +144,13 @@ export function outputDisplay_BlackmagicAlphaKeySettings_KeyModeFromJSON(
 ): OutputDisplay_BlackmagicAlphaKeySettings_KeyMode {
   switch (object) {
     case 0:
-    case "KEY_MODE_INTERNAL":
+    case 'KEY_MODE_INTERNAL':
       return OutputDisplay_BlackmagicAlphaKeySettings_KeyMode.KEY_MODE_INTERNAL;
     case 1:
-    case "KEY_MODE_EXTERNAL":
+    case 'KEY_MODE_EXTERNAL':
       return OutputDisplay_BlackmagicAlphaKeySettings_KeyMode.KEY_MODE_EXTERNAL;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return OutputDisplay_BlackmagicAlphaKeySettings_KeyMode.UNRECOGNIZED;
   }
@@ -159,12 +161,12 @@ export function outputDisplay_BlackmagicAlphaKeySettings_KeyModeToJSON(
 ): string {
   switch (object) {
     case OutputDisplay_BlackmagicAlphaKeySettings_KeyMode.KEY_MODE_INTERNAL:
-      return "KEY_MODE_INTERNAL";
+      return 'KEY_MODE_INTERNAL';
     case OutputDisplay_BlackmagicAlphaKeySettings_KeyMode.KEY_MODE_EXTERNAL:
-      return "KEY_MODE_EXTERNAL";
+      return 'KEY_MODE_EXTERNAL';
     case OutputDisplay_BlackmagicAlphaKeySettings_KeyMode.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -191,16 +193,16 @@ export enum EdgeBlend_Mode {
 export function edgeBlend_ModeFromJSON(object: any): EdgeBlend_Mode {
   switch (object) {
     case 0:
-    case "MODE_LINEAR":
+    case 'MODE_LINEAR':
       return EdgeBlend_Mode.MODE_LINEAR;
     case 1:
-    case "MODE_CUBIC":
+    case 'MODE_CUBIC':
       return EdgeBlend_Mode.MODE_CUBIC;
     case 2:
-    case "MODE_QUADRATIC":
+    case 'MODE_QUADRATIC':
       return EdgeBlend_Mode.MODE_QUADRATIC;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return EdgeBlend_Mode.UNRECOGNIZED;
   }
@@ -209,14 +211,14 @@ export function edgeBlend_ModeFromJSON(object: any): EdgeBlend_Mode {
 export function edgeBlend_ModeToJSON(object: EdgeBlend_Mode): string {
   switch (object) {
     case EdgeBlend_Mode.MODE_LINEAR:
-      return "MODE_LINEAR";
+      return 'MODE_LINEAR';
     case EdgeBlend_Mode.MODE_CUBIC:
-      return "MODE_CUBIC";
+      return 'MODE_CUBIC';
     case EdgeBlend_Mode.MODE_QUADRATIC:
-      return "MODE_QUADRATIC";
+      return 'MODE_QUADRATIC';
     case EdgeBlend_Mode.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
@@ -225,7 +227,7 @@ export interface EdgeBlend_Screen {
   edge: EdgeBlend_Screen_Edge;
   gamma: number;
   blackLevel: number;
-  mode: EdgeBlend_Screen_Mode;
+  mode: EdgeBlend_Mode;
   radius: number;
   intensity: number;
 }
@@ -239,91 +241,56 @@ export enum EdgeBlend_Screen_Edge {
   UNRECOGNIZED = -1,
 }
 
-export function edgeBlend_Screen_EdgeFromJSON(object: any): EdgeBlend_Screen_Edge {
+export function edgeBlend_Screen_EdgeFromJSON(
+  object: any,
+): EdgeBlend_Screen_Edge {
   switch (object) {
     case 0:
-    case "EDGE_UNKNOWN":
+    case 'EDGE_UNKNOWN':
       return EdgeBlend_Screen_Edge.EDGE_UNKNOWN;
     case 1:
-    case "EDGE_LEFT":
+    case 'EDGE_LEFT':
       return EdgeBlend_Screen_Edge.EDGE_LEFT;
     case 2:
-    case "EDGE_RIGHT":
+    case 'EDGE_RIGHT':
       return EdgeBlend_Screen_Edge.EDGE_RIGHT;
     case 3:
-    case "EDGE_TOP":
+    case 'EDGE_TOP':
       return EdgeBlend_Screen_Edge.EDGE_TOP;
     case 4:
-    case "EDGE_BOTTOM":
+    case 'EDGE_BOTTOM':
       return EdgeBlend_Screen_Edge.EDGE_BOTTOM;
     case -1:
-    case "UNRECOGNIZED":
+    case 'UNRECOGNIZED':
     default:
       return EdgeBlend_Screen_Edge.UNRECOGNIZED;
   }
 }
 
-export function edgeBlend_Screen_EdgeToJSON(object: EdgeBlend_Screen_Edge): string {
+export function edgeBlend_Screen_EdgeToJSON(
+  object: EdgeBlend_Screen_Edge,
+): string {
   switch (object) {
     case EdgeBlend_Screen_Edge.EDGE_UNKNOWN:
-      return "EDGE_UNKNOWN";
+      return 'EDGE_UNKNOWN';
     case EdgeBlend_Screen_Edge.EDGE_LEFT:
-      return "EDGE_LEFT";
+      return 'EDGE_LEFT';
     case EdgeBlend_Screen_Edge.EDGE_RIGHT:
-      return "EDGE_RIGHT";
+      return 'EDGE_RIGHT';
     case EdgeBlend_Screen_Edge.EDGE_TOP:
-      return "EDGE_TOP";
+      return 'EDGE_TOP';
     case EdgeBlend_Screen_Edge.EDGE_BOTTOM:
-      return "EDGE_BOTTOM";
+      return 'EDGE_BOTTOM';
     case EdgeBlend_Screen_Edge.UNRECOGNIZED:
     default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum EdgeBlend_Screen_Mode {
-  MODE_LINEAR = 0,
-  MODE_CUBIC = 1,
-  MODE_QUADRATIC = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function edgeBlend_Screen_ModeFromJSON(object: any): EdgeBlend_Screen_Mode {
-  switch (object) {
-    case 0:
-    case "MODE_LINEAR":
-      return EdgeBlend_Screen_Mode.MODE_LINEAR;
-    case 1:
-    case "MODE_CUBIC":
-      return EdgeBlend_Screen_Mode.MODE_CUBIC;
-    case 2:
-    case "MODE_QUADRATIC":
-      return EdgeBlend_Screen_Mode.MODE_QUADRATIC;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return EdgeBlend_Screen_Mode.UNRECOGNIZED;
-  }
-}
-
-export function edgeBlend_Screen_ModeToJSON(object: EdgeBlend_Screen_Mode): string {
-  switch (object) {
-    case EdgeBlend_Screen_Mode.MODE_LINEAR:
-      return "MODE_LINEAR";
-    case EdgeBlend_Screen_Mode.MODE_CUBIC:
-      return "MODE_CUBIC";
-    case EdgeBlend_Screen_Mode.MODE_QUADRATIC:
-      return "MODE_QUADRATIC";
-    case EdgeBlend_Screen_Mode.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
+      return 'UNRECOGNIZED';
   }
 }
 
 function createBaseScreen(): Screen {
   return {
     uuid: undefined,
-    name: "",
+    name: '',
     color: undefined,
     bounds: undefined,
     aspectRatioLocked: false,
@@ -343,11 +310,14 @@ function createBaseScreen(): Screen {
 }
 
 export const Screen = {
-  encode(message: Screen, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Screen,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== '') {
       writer.uint32(18).string(message.name);
     }
     if (message.color !== undefined) {
@@ -366,7 +336,10 @@ export const Screen = {
       writer.uint32(56).bool(message.cornerPinningEnabled);
     }
     if (message.subscreenUnitRect !== undefined) {
-      Graphics_Rect.encode(message.subscreenUnitRect, writer.uint32(66).fork()).ldelim();
+      Graphics_Rect.encode(
+        message.subscreenUnitRect,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.rotation !== 0) {
       writer.uint32(73).double(message.rotation);
@@ -381,25 +354,38 @@ export const Screen = {
       writer.uint32(96).uint32(message.blendedEdges);
     }
     if (message.cornerValues !== undefined) {
-      CornerValues.encode(message.cornerValues, writer.uint32(106).fork()).ldelim();
+      CornerValues.encode(
+        message.cornerValues,
+        writer.uint32(106).fork(),
+      ).ldelim();
     }
     if (message.outputDisplay !== undefined) {
-      OutputDisplay.encode(message.outputDisplay, writer.uint32(114).fork()).ldelim();
+      OutputDisplay.encode(
+        message.outputDisplay,
+        writer.uint32(114).fork(),
+      ).ldelim();
     }
     if (message.colorEnabled === true) {
       writer.uint32(120).bool(message.colorEnabled);
     }
     if (message.colorAdjustment !== undefined) {
-      Screen_ColorAdjustment.encode(message.colorAdjustment, writer.uint32(130).fork()).ldelim();
+      Screen_ColorAdjustment.encode(
+        message.colorAdjustment,
+        writer.uint32(130).fork(),
+      ).ldelim();
     }
     if (message.blendCompensation !== undefined) {
-      Screen_BlendCompensation.encode(message.blendCompensation, writer.uint32(138).fork()).ldelim();
+      Screen_BlendCompensation.encode(
+        message.blendCompensation,
+        writer.uint32(138).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): Screen {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScreen();
     while (reader.pos < end) {
@@ -459,7 +445,10 @@ export const Screen = {
             break;
           }
 
-          message.subscreenUnitRect = Graphics_Rect.decode(reader, reader.uint32());
+          message.subscreenUnitRect = Graphics_Rect.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 73) {
@@ -515,14 +504,20 @@ export const Screen = {
             break;
           }
 
-          message.colorAdjustment = Screen_ColorAdjustment.decode(reader, reader.uint32());
+          message.colorAdjustment = Screen_ColorAdjustment.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 17:
           if (tag != 138) {
             break;
           }
 
-          message.blendCompensation = Screen_BlendCompensation.decode(reader, reader.uint32());
+          message.blendCompensation = Screen_BlendCompensation.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -536,22 +531,38 @@ export const Screen = {
   fromJSON(object: any): Screen {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      bounds: isSet(object.bounds) ? Graphics_Rect.fromJSON(object.bounds) : undefined,
-      aspectRatioLocked: isSet(object.aspectRatioLocked) ? Boolean(object.aspectRatioLocked) : false,
+      bounds: isSet(object.bounds)
+        ? Graphics_Rect.fromJSON(object.bounds)
+        : undefined,
+      aspectRatioLocked: isSet(object.aspectRatioLocked)
+        ? Boolean(object.aspectRatioLocked)
+        : false,
       outputBoundsAspectRatioLocked: isSet(object.outputBoundsAspectRatioLocked)
         ? Boolean(object.outputBoundsAspectRatioLocked)
         : false,
-      cornerPinningEnabled: isSet(object.cornerPinningEnabled) ? Boolean(object.cornerPinningEnabled) : false,
-      subscreenUnitRect: isSet(object.subscreenUnitRect) ? Graphics_Rect.fromJSON(object.subscreenUnitRect) : undefined,
+      cornerPinningEnabled: isSet(object.cornerPinningEnabled)
+        ? Boolean(object.cornerPinningEnabled)
+        : false,
+      subscreenUnitRect: isSet(object.subscreenUnitRect)
+        ? Graphics_Rect.fromJSON(object.subscreenUnitRect)
+        : undefined,
       rotation: isSet(object.rotation) ? Number(object.rotation) : 0,
       gamma: isSet(object.gamma) ? Number(object.gamma) : 0,
       blackLevel: isSet(object.blackLevel) ? Number(object.blackLevel) : 0,
-      blendedEdges: isSet(object.blendedEdges) ? Number(object.blendedEdges) : 0,
-      cornerValues: isSet(object.cornerValues) ? CornerValues.fromJSON(object.cornerValues) : undefined,
-      outputDisplay: isSet(object.outputDisplay) ? OutputDisplay.fromJSON(object.outputDisplay) : undefined,
-      colorEnabled: isSet(object.colorEnabled) ? Boolean(object.colorEnabled) : false,
+      blendedEdges: isSet(object.blendedEdges)
+        ? Number(object.blendedEdges)
+        : 0,
+      cornerValues: isSet(object.cornerValues)
+        ? CornerValues.fromJSON(object.cornerValues)
+        : undefined,
+      outputDisplay: isSet(object.outputDisplay)
+        ? OutputDisplay.fromJSON(object.outputDisplay)
+        : undefined,
+      colorEnabled: isSet(object.colorEnabled)
+        ? Boolean(object.colorEnabled)
+        : false,
       colorAdjustment: isSet(object.colorAdjustment)
         ? Screen_ColorAdjustment.fromJSON(object.colorAdjustment)
         : undefined,
@@ -563,31 +574,49 @@ export const Screen = {
 
   toJSON(message: Screen): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.name !== undefined && (obj.name = message.name);
-    message.color !== undefined && (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.bounds !== undefined && (obj.bounds = message.bounds ? Graphics_Rect.toJSON(message.bounds) : undefined);
-    message.aspectRatioLocked !== undefined && (obj.aspectRatioLocked = message.aspectRatioLocked);
+    message.color !== undefined &&
+      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    message.bounds !== undefined &&
+      (obj.bounds = message.bounds
+        ? Graphics_Rect.toJSON(message.bounds)
+        : undefined);
+    message.aspectRatioLocked !== undefined &&
+      (obj.aspectRatioLocked = message.aspectRatioLocked);
     message.outputBoundsAspectRatioLocked !== undefined &&
-      (obj.outputBoundsAspectRatioLocked = message.outputBoundsAspectRatioLocked);
-    message.cornerPinningEnabled !== undefined && (obj.cornerPinningEnabled = message.cornerPinningEnabled);
+      (obj.outputBoundsAspectRatioLocked =
+        message.outputBoundsAspectRatioLocked);
+    message.cornerPinningEnabled !== undefined &&
+      (obj.cornerPinningEnabled = message.cornerPinningEnabled);
     message.subscreenUnitRect !== undefined &&
-      (obj.subscreenUnitRect = message.subscreenUnitRect ? Graphics_Rect.toJSON(message.subscreenUnitRect) : undefined);
+      (obj.subscreenUnitRect = message.subscreenUnitRect
+        ? Graphics_Rect.toJSON(message.subscreenUnitRect)
+        : undefined);
     message.rotation !== undefined && (obj.rotation = message.rotation);
     message.gamma !== undefined && (obj.gamma = message.gamma);
     message.blackLevel !== undefined && (obj.blackLevel = message.blackLevel);
-    message.blendedEdges !== undefined && (obj.blendedEdges = Math.round(message.blendedEdges));
+    message.blendedEdges !== undefined &&
+      (obj.blendedEdges = Math.round(message.blendedEdges));
     message.cornerValues !== undefined &&
-      (obj.cornerValues = message.cornerValues ? CornerValues.toJSON(message.cornerValues) : undefined);
+      (obj.cornerValues = message.cornerValues
+        ? CornerValues.toJSON(message.cornerValues)
+        : undefined);
     message.outputDisplay !== undefined &&
-      (obj.outputDisplay = message.outputDisplay ? OutputDisplay.toJSON(message.outputDisplay) : undefined);
-    message.colorEnabled !== undefined && (obj.colorEnabled = message.colorEnabled);
-    message.colorAdjustment !== undefined && (obj.colorAdjustment = message.colorAdjustment
-      ? Screen_ColorAdjustment.toJSON(message.colorAdjustment)
-      : undefined);
-    message.blendCompensation !== undefined && (obj.blendCompensation = message.blendCompensation
-      ? Screen_BlendCompensation.toJSON(message.blendCompensation)
-      : undefined);
+      (obj.outputDisplay = message.outputDisplay
+        ? OutputDisplay.toJSON(message.outputDisplay)
+        : undefined);
+    message.colorEnabled !== undefined &&
+      (obj.colorEnabled = message.colorEnabled);
+    message.colorAdjustment !== undefined &&
+      (obj.colorAdjustment = message.colorAdjustment
+        ? Screen_ColorAdjustment.toJSON(message.colorAdjustment)
+        : undefined);
+    message.blendCompensation !== undefined &&
+      (obj.blendCompensation = message.blendCompensation
+        ? Screen_BlendCompensation.toJSON(message.blendCompensation)
+        : undefined);
     return obj;
   },
 
@@ -597,45 +626,71 @@ export const Screen = {
 
   fromPartial<I extends Exact<DeepPartial<Screen>, I>>(object: I): Screen {
     const message = createBaseScreen();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
-    message.name = object.name ?? "";
-    message.color = (object.color !== undefined && object.color !== null) ? Color.fromPartial(object.color) : undefined;
-    message.bounds = (object.bounds !== undefined && object.bounds !== null)
-      ? Graphics_Rect.fromPartial(object.bounds)
-      : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
+    message.name = object.name ?? '';
+    message.color =
+      object.color !== undefined && object.color !== null
+        ? Color.fromPartial(object.color)
+        : undefined;
+    message.bounds =
+      object.bounds !== undefined && object.bounds !== null
+        ? Graphics_Rect.fromPartial(object.bounds)
+        : undefined;
     message.aspectRatioLocked = object.aspectRatioLocked ?? false;
-    message.outputBoundsAspectRatioLocked = object.outputBoundsAspectRatioLocked ?? false;
+    message.outputBoundsAspectRatioLocked =
+      object.outputBoundsAspectRatioLocked ?? false;
     message.cornerPinningEnabled = object.cornerPinningEnabled ?? false;
-    message.subscreenUnitRect = (object.subscreenUnitRect !== undefined && object.subscreenUnitRect !== null)
-      ? Graphics_Rect.fromPartial(object.subscreenUnitRect)
-      : undefined;
+    message.subscreenUnitRect =
+      object.subscreenUnitRect !== undefined &&
+      object.subscreenUnitRect !== null
+        ? Graphics_Rect.fromPartial(object.subscreenUnitRect)
+        : undefined;
     message.rotation = object.rotation ?? 0;
     message.gamma = object.gamma ?? 0;
     message.blackLevel = object.blackLevel ?? 0;
     message.blendedEdges = object.blendedEdges ?? 0;
-    message.cornerValues = (object.cornerValues !== undefined && object.cornerValues !== null)
-      ? CornerValues.fromPartial(object.cornerValues)
-      : undefined;
-    message.outputDisplay = (object.outputDisplay !== undefined && object.outputDisplay !== null)
-      ? OutputDisplay.fromPartial(object.outputDisplay)
-      : undefined;
+    message.cornerValues =
+      object.cornerValues !== undefined && object.cornerValues !== null
+        ? CornerValues.fromPartial(object.cornerValues)
+        : undefined;
+    message.outputDisplay =
+      object.outputDisplay !== undefined && object.outputDisplay !== null
+        ? OutputDisplay.fromPartial(object.outputDisplay)
+        : undefined;
     message.colorEnabled = object.colorEnabled ?? false;
-    message.colorAdjustment = (object.colorAdjustment !== undefined && object.colorAdjustment !== null)
-      ? Screen_ColorAdjustment.fromPartial(object.colorAdjustment)
-      : undefined;
-    message.blendCompensation = (object.blendCompensation !== undefined && object.blendCompensation !== null)
-      ? Screen_BlendCompensation.fromPartial(object.blendCompensation)
-      : undefined;
+    message.colorAdjustment =
+      object.colorAdjustment !== undefined && object.colorAdjustment !== null
+        ? Screen_ColorAdjustment.fromPartial(object.colorAdjustment)
+        : undefined;
+    message.blendCompensation =
+      object.blendCompensation !== undefined &&
+      object.blendCompensation !== null
+        ? Screen_BlendCompensation.fromPartial(object.blendCompensation)
+        : undefined;
     return message;
   },
 };
 
 function createBaseScreen_ColorAdjustment(): Screen_ColorAdjustment {
-  return { gamma: 0, blackLevel: 0, redLevel: 0, greenLevel: 0, blueLevel: 0, brightness: 0, contrast: 0 };
+  return {
+    gamma: 0,
+    blackLevel: 0,
+    redLevel: 0,
+    greenLevel: 0,
+    blueLevel: 0,
+    brightness: 0,
+    contrast: 0,
+  };
 }
 
 export const Screen_ColorAdjustment = {
-  encode(message: Screen_ColorAdjustment, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Screen_ColorAdjustment,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.gamma !== 0) {
       writer.uint32(9).double(message.gamma);
     }
@@ -660,8 +715,12 @@ export const Screen_ColorAdjustment = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Screen_ColorAdjustment {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Screen_ColorAdjustment {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScreen_ColorAdjustment();
     while (reader.pos < end) {
@@ -749,11 +808,15 @@ export const Screen_ColorAdjustment = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Screen_ColorAdjustment>, I>>(base?: I): Screen_ColorAdjustment {
+  create<I extends Exact<DeepPartial<Screen_ColorAdjustment>, I>>(
+    base?: I,
+  ): Screen_ColorAdjustment {
     return Screen_ColorAdjustment.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Screen_ColorAdjustment>, I>>(object: I): Screen_ColorAdjustment {
+  fromPartial<I extends Exact<DeepPartial<Screen_ColorAdjustment>, I>>(
+    object: I,
+  ): Screen_ColorAdjustment {
     const message = createBaseScreen_ColorAdjustment();
     message.gamma = object.gamma ?? 0;
     message.blackLevel = object.blackLevel ?? 0;
@@ -771,15 +834,22 @@ function createBaseScreen_BlendCompensation(): Screen_BlendCompensation {
 }
 
 export const Screen_BlendCompensation = {
-  encode(message: Screen_BlendCompensation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: Screen_BlendCompensation,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.blackLevel !== 0) {
       writer.uint32(9).double(message.blackLevel);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): Screen_BlendCompensation {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Screen_BlendCompensation {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScreen_BlendCompensation();
     while (reader.pos < end) {
@@ -802,7 +872,9 @@ export const Screen_BlendCompensation = {
   },
 
   fromJSON(object: any): Screen_BlendCompensation {
-    return { blackLevel: isSet(object.blackLevel) ? Number(object.blackLevel) : 0 };
+    return {
+      blackLevel: isSet(object.blackLevel) ? Number(object.blackLevel) : 0,
+    };
   },
 
   toJSON(message: Screen_BlendCompensation): unknown {
@@ -811,11 +883,15 @@ export const Screen_BlendCompensation = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<Screen_BlendCompensation>, I>>(base?: I): Screen_BlendCompensation {
+  create<I extends Exact<DeepPartial<Screen_BlendCompensation>, I>>(
+    base?: I,
+  ): Screen_BlendCompensation {
     return Screen_BlendCompensation.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<Screen_BlendCompensation>, I>>(object: I): Screen_BlendCompensation {
+  fromPartial<I extends Exact<DeepPartial<Screen_BlendCompensation>, I>>(
+    object: I,
+  ): Screen_BlendCompensation {
     const message = createBaseScreen_BlendCompensation();
     message.blackLevel = object.blackLevel ?? 0;
     return message;
@@ -823,28 +899,46 @@ export const Screen_BlendCompensation = {
 };
 
 function createBaseCornerValues(): CornerValues {
-  return { topLeft: undefined, topRight: undefined, bottomLeft: undefined, bottomRight: undefined };
+  return {
+    topLeft: undefined,
+    topRight: undefined,
+    bottomLeft: undefined,
+    bottomRight: undefined,
+  };
 }
 
 export const CornerValues = {
-  encode(message: CornerValues, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: CornerValues,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.topLeft !== undefined) {
       Graphics_Point.encode(message.topLeft, writer.uint32(10).fork()).ldelim();
     }
     if (message.topRight !== undefined) {
-      Graphics_Point.encode(message.topRight, writer.uint32(18).fork()).ldelim();
+      Graphics_Point.encode(
+        message.topRight,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     if (message.bottomLeft !== undefined) {
-      Graphics_Point.encode(message.bottomLeft, writer.uint32(26).fork()).ldelim();
+      Graphics_Point.encode(
+        message.bottomLeft,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     if (message.bottomRight !== undefined) {
-      Graphics_Point.encode(message.bottomRight, writer.uint32(34).fork()).ldelim();
+      Graphics_Point.encode(
+        message.bottomRight,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): CornerValues {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCornerValues();
     while (reader.pos < end) {
@@ -889,55 +983,82 @@ export const CornerValues = {
 
   fromJSON(object: any): CornerValues {
     return {
-      topLeft: isSet(object.topLeft) ? Graphics_Point.fromJSON(object.topLeft) : undefined,
-      topRight: isSet(object.topRight) ? Graphics_Point.fromJSON(object.topRight) : undefined,
-      bottomLeft: isSet(object.bottomLeft) ? Graphics_Point.fromJSON(object.bottomLeft) : undefined,
-      bottomRight: isSet(object.bottomRight) ? Graphics_Point.fromJSON(object.bottomRight) : undefined,
+      topLeft: isSet(object.topLeft)
+        ? Graphics_Point.fromJSON(object.topLeft)
+        : undefined,
+      topRight: isSet(object.topRight)
+        ? Graphics_Point.fromJSON(object.topRight)
+        : undefined,
+      bottomLeft: isSet(object.bottomLeft)
+        ? Graphics_Point.fromJSON(object.bottomLeft)
+        : undefined,
+      bottomRight: isSet(object.bottomRight)
+        ? Graphics_Point.fromJSON(object.bottomRight)
+        : undefined,
     };
   },
 
   toJSON(message: CornerValues): unknown {
     const obj: any = {};
     message.topLeft !== undefined &&
-      (obj.topLeft = message.topLeft ? Graphics_Point.toJSON(message.topLeft) : undefined);
+      (obj.topLeft = message.topLeft
+        ? Graphics_Point.toJSON(message.topLeft)
+        : undefined);
     message.topRight !== undefined &&
-      (obj.topRight = message.topRight ? Graphics_Point.toJSON(message.topRight) : undefined);
+      (obj.topRight = message.topRight
+        ? Graphics_Point.toJSON(message.topRight)
+        : undefined);
     message.bottomLeft !== undefined &&
-      (obj.bottomLeft = message.bottomLeft ? Graphics_Point.toJSON(message.bottomLeft) : undefined);
+      (obj.bottomLeft = message.bottomLeft
+        ? Graphics_Point.toJSON(message.bottomLeft)
+        : undefined);
     message.bottomRight !== undefined &&
-      (obj.bottomRight = message.bottomRight ? Graphics_Point.toJSON(message.bottomRight) : undefined);
+      (obj.bottomRight = message.bottomRight
+        ? Graphics_Point.toJSON(message.bottomRight)
+        : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<CornerValues>, I>>(base?: I): CornerValues {
+  create<I extends Exact<DeepPartial<CornerValues>, I>>(
+    base?: I,
+  ): CornerValues {
     return CornerValues.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<CornerValues>, I>>(object: I): CornerValues {
+  fromPartial<I extends Exact<DeepPartial<CornerValues>, I>>(
+    object: I,
+  ): CornerValues {
     const message = createBaseCornerValues();
-    message.topLeft = (object.topLeft !== undefined && object.topLeft !== null)
-      ? Graphics_Point.fromPartial(object.topLeft)
-      : undefined;
-    message.topRight = (object.topRight !== undefined && object.topRight !== null)
-      ? Graphics_Point.fromPartial(object.topRight)
-      : undefined;
-    message.bottomLeft = (object.bottomLeft !== undefined && object.bottomLeft !== null)
-      ? Graphics_Point.fromPartial(object.bottomLeft)
-      : undefined;
-    message.bottomRight = (object.bottomRight !== undefined && object.bottomRight !== null)
-      ? Graphics_Point.fromPartial(object.bottomRight)
-      : undefined;
+    message.topLeft =
+      object.topLeft !== undefined && object.topLeft !== null
+        ? Graphics_Point.fromPartial(object.topLeft)
+        : undefined;
+    message.topRight =
+      object.topRight !== undefined && object.topRight !== null
+        ? Graphics_Point.fromPartial(object.topRight)
+        : undefined;
+    message.bottomLeft =
+      object.bottomLeft !== undefined && object.bottomLeft !== null
+        ? Graphics_Point.fromPartial(object.bottomLeft)
+        : undefined;
+    message.bottomRight =
+      object.bottomRight !== undefined && object.bottomRight !== null
+        ? Graphics_Point.fromPartial(object.bottomRight)
+        : undefined;
     return message;
   },
 };
 
 function createBaseDisplayMode(): DisplayMode {
-  return { name: "", width: 0, height: 0, refreshRate: 0, interlaced: false };
+  return { name: '', width: 0, height: 0, refreshRate: 0, interlaced: false };
 }
 
 export const DisplayMode = {
-  encode(message: DisplayMode, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: DisplayMode,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
     if (message.width !== 0) {
@@ -956,7 +1077,8 @@ export const DisplayMode = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): DisplayMode {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDisplayMode();
     while (reader.pos < end) {
@@ -1008,7 +1130,7 @@ export const DisplayMode = {
 
   fromJSON(object: any): DisplayMode {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
+      name: isSet(object.name) ? String(object.name) : '',
       width: isSet(object.width) ? Number(object.width) : 0,
       height: isSet(object.height) ? Number(object.height) : 0,
       refreshRate: isSet(object.refreshRate) ? Number(object.refreshRate) : 0,
@@ -1021,7 +1143,8 @@ export const DisplayMode = {
     message.name !== undefined && (obj.name = message.name);
     message.width !== undefined && (obj.width = Math.round(message.width));
     message.height !== undefined && (obj.height = Math.round(message.height));
-    message.refreshRate !== undefined && (obj.refreshRate = message.refreshRate);
+    message.refreshRate !== undefined &&
+      (obj.refreshRate = message.refreshRate);
     message.interlaced !== undefined && (obj.interlaced = message.interlaced);
     return obj;
   },
@@ -1030,9 +1153,11 @@ export const DisplayMode = {
     return DisplayMode.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<DisplayMode>, I>>(object: I): DisplayMode {
+  fromPartial<I extends Exact<DeepPartial<DisplayMode>, I>>(
+    object: I,
+  ): DisplayMode {
     const message = createBaseDisplayMode();
-    message.name = object.name ?? "";
+    message.name = object.name ?? '';
     message.width = object.width ?? 0;
     message.height = object.height ?? 0;
     message.refreshRate = object.refreshRate ?? 0;
@@ -1043,35 +1168,38 @@ export const DisplayMode = {
 
 function createBaseOutputDisplay(): OutputDisplay {
   return {
-    name: "",
-    model: "",
-    serial: "",
-    deviceName: "",
-    vendor: "",
+    name: '',
+    model: '',
+    serial: '',
+    deviceName: '',
+    vendor: '',
     modeIndex: 0,
     bounds: undefined,
     type: 0,
     mode: undefined,
-    renderId: "",
+    renderId: '',
     blackMagicAlphaKeySettings: undefined,
   };
 }
 
 export const OutputDisplay = {
-  encode(message: OutputDisplay, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.name !== "") {
+  encode(
+    message: OutputDisplay,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
-    if (message.model !== "") {
+    if (message.model !== '') {
       writer.uint32(18).string(message.model);
     }
-    if (message.serial !== "") {
+    if (message.serial !== '') {
       writer.uint32(26).string(message.serial);
     }
-    if (message.deviceName !== "") {
+    if (message.deviceName !== '') {
       writer.uint32(34).string(message.deviceName);
     }
-    if (message.vendor !== "") {
+    if (message.vendor !== '') {
       writer.uint32(42).string(message.vendor);
     }
     if (message.modeIndex !== 0) {
@@ -1086,18 +1214,21 @@ export const OutputDisplay = {
     if (message.mode !== undefined) {
       DisplayMode.encode(message.mode, writer.uint32(74).fork()).ldelim();
     }
-    if (message.renderId !== "") {
+    if (message.renderId !== '') {
       writer.uint32(82).string(message.renderId);
     }
     if (message.blackMagicAlphaKeySettings !== undefined) {
-      OutputDisplay_BlackmagicAlphaKeySettings.encode(message.blackMagicAlphaKeySettings, writer.uint32(90).fork())
-        .ldelim();
+      OutputDisplay_BlackmagicAlphaKeySettings.encode(
+        message.blackMagicAlphaKeySettings,
+        writer.uint32(90).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): OutputDisplay {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutputDisplay();
     while (reader.pos < end) {
@@ -1178,7 +1309,11 @@ export const OutputDisplay = {
             break;
           }
 
-          message.blackMagicAlphaKeySettings = OutputDisplay_BlackmagicAlphaKeySettings.decode(reader, reader.uint32());
+          message.blackMagicAlphaKeySettings =
+            OutputDisplay_BlackmagicAlphaKeySettings.decode(
+              reader,
+              reader.uint32(),
+            );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1191,18 +1326,22 @@ export const OutputDisplay = {
 
   fromJSON(object: any): OutputDisplay {
     return {
-      name: isSet(object.name) ? String(object.name) : "",
-      model: isSet(object.model) ? String(object.model) : "",
-      serial: isSet(object.serial) ? String(object.serial) : "",
-      deviceName: isSet(object.deviceName) ? String(object.deviceName) : "",
-      vendor: isSet(object.vendor) ? String(object.vendor) : "",
+      name: isSet(object.name) ? String(object.name) : '',
+      model: isSet(object.model) ? String(object.model) : '',
+      serial: isSet(object.serial) ? String(object.serial) : '',
+      deviceName: isSet(object.deviceName) ? String(object.deviceName) : '',
+      vendor: isSet(object.vendor) ? String(object.vendor) : '',
       modeIndex: isSet(object.modeIndex) ? Number(object.modeIndex) : 0,
-      bounds: isSet(object.bounds) ? Graphics_Rect.fromJSON(object.bounds) : undefined,
+      bounds: isSet(object.bounds)
+        ? Graphics_Rect.fromJSON(object.bounds)
+        : undefined,
       type: isSet(object.type) ? outputDisplay_TypeFromJSON(object.type) : 0,
       mode: isSet(object.mode) ? DisplayMode.fromJSON(object.mode) : undefined,
-      renderId: isSet(object.renderId) ? String(object.renderId) : "",
+      renderId: isSet(object.renderId) ? String(object.renderId) : '',
       blackMagicAlphaKeySettings: isSet(object.blackMagicAlphaKeySettings)
-        ? OutputDisplay_BlackmagicAlphaKeySettings.fromJSON(object.blackMagicAlphaKeySettings)
+        ? OutputDisplay_BlackmagicAlphaKeySettings.fromJSON(
+            object.blackMagicAlphaKeySettings,
+          )
         : undefined,
     };
   },
@@ -1214,41 +1353,58 @@ export const OutputDisplay = {
     message.serial !== undefined && (obj.serial = message.serial);
     message.deviceName !== undefined && (obj.deviceName = message.deviceName);
     message.vendor !== undefined && (obj.vendor = message.vendor);
-    message.modeIndex !== undefined && (obj.modeIndex = Math.round(message.modeIndex));
-    message.bounds !== undefined && (obj.bounds = message.bounds ? Graphics_Rect.toJSON(message.bounds) : undefined);
-    message.type !== undefined && (obj.type = outputDisplay_TypeToJSON(message.type));
-    message.mode !== undefined && (obj.mode = message.mode ? DisplayMode.toJSON(message.mode) : undefined);
+    message.modeIndex !== undefined &&
+      (obj.modeIndex = Math.round(message.modeIndex));
+    message.bounds !== undefined &&
+      (obj.bounds = message.bounds
+        ? Graphics_Rect.toJSON(message.bounds)
+        : undefined);
+    message.type !== undefined &&
+      (obj.type = outputDisplay_TypeToJSON(message.type));
+    message.mode !== undefined &&
+      (obj.mode = message.mode ? DisplayMode.toJSON(message.mode) : undefined);
     message.renderId !== undefined && (obj.renderId = message.renderId);
     message.blackMagicAlphaKeySettings !== undefined &&
       (obj.blackMagicAlphaKeySettings = message.blackMagicAlphaKeySettings
-        ? OutputDisplay_BlackmagicAlphaKeySettings.toJSON(message.blackMagicAlphaKeySettings)
+        ? OutputDisplay_BlackmagicAlphaKeySettings.toJSON(
+            message.blackMagicAlphaKeySettings,
+          )
         : undefined);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OutputDisplay>, I>>(base?: I): OutputDisplay {
+  create<I extends Exact<DeepPartial<OutputDisplay>, I>>(
+    base?: I,
+  ): OutputDisplay {
     return OutputDisplay.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<OutputDisplay>, I>>(object: I): OutputDisplay {
+  fromPartial<I extends Exact<DeepPartial<OutputDisplay>, I>>(
+    object: I,
+  ): OutputDisplay {
     const message = createBaseOutputDisplay();
-    message.name = object.name ?? "";
-    message.model = object.model ?? "";
-    message.serial = object.serial ?? "";
-    message.deviceName = object.deviceName ?? "";
-    message.vendor = object.vendor ?? "";
+    message.name = object.name ?? '';
+    message.model = object.model ?? '';
+    message.serial = object.serial ?? '';
+    message.deviceName = object.deviceName ?? '';
+    message.vendor = object.vendor ?? '';
     message.modeIndex = object.modeIndex ?? 0;
-    message.bounds = (object.bounds !== undefined && object.bounds !== null)
-      ? Graphics_Rect.fromPartial(object.bounds)
-      : undefined;
+    message.bounds =
+      object.bounds !== undefined && object.bounds !== null
+        ? Graphics_Rect.fromPartial(object.bounds)
+        : undefined;
     message.type = object.type ?? 0;
-    message.mode = (object.mode !== undefined && object.mode !== null)
-      ? DisplayMode.fromPartial(object.mode)
-      : undefined;
-    message.renderId = object.renderId ?? "";
+    message.mode =
+      object.mode !== undefined && object.mode !== null
+        ? DisplayMode.fromPartial(object.mode)
+        : undefined;
+    message.renderId = object.renderId ?? '';
     message.blackMagicAlphaKeySettings =
-      (object.blackMagicAlphaKeySettings !== undefined && object.blackMagicAlphaKeySettings !== null)
-        ? OutputDisplay_BlackmagicAlphaKeySettings.fromPartial(object.blackMagicAlphaKeySettings)
+      object.blackMagicAlphaKeySettings !== undefined &&
+      object.blackMagicAlphaKeySettings !== null
+        ? OutputDisplay_BlackmagicAlphaKeySettings.fromPartial(
+            object.blackMagicAlphaKeySettings,
+          )
         : undefined;
     return message;
   },
@@ -1259,7 +1415,10 @@ function createBaseOutputDisplay_BlackmagicAlphaKeySettings(): OutputDisplay_Bla
 }
 
 export const OutputDisplay_BlackmagicAlphaKeySettings = {
-  encode(message: OutputDisplay_BlackmagicAlphaKeySettings, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: OutputDisplay_BlackmagicAlphaKeySettings,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
@@ -1272,8 +1431,12 @@ export const OutputDisplay_BlackmagicAlphaKeySettings = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): OutputDisplay_BlackmagicAlphaKeySettings {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): OutputDisplay_BlackmagicAlphaKeySettings {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutputDisplay_BlackmagicAlphaKeySettings();
     while (reader.pos < end) {
@@ -1312,7 +1475,11 @@ export const OutputDisplay_BlackmagicAlphaKeySettings = {
   fromJSON(object: any): OutputDisplay_BlackmagicAlphaKeySettings {
     return {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      keyMode: isSet(object.keyMode) ? outputDisplay_BlackmagicAlphaKeySettings_KeyModeFromJSON(object.keyMode) : 0,
+      keyMode: isSet(object.keyMode)
+        ? outputDisplay_BlackmagicAlphaKeySettings_KeyModeFromJSON(
+            object.keyMode,
+          )
+        : 0,
       blendValue: isSet(object.blendValue) ? Number(object.blendValue) : 0,
     };
   },
@@ -1321,20 +1488,22 @@ export const OutputDisplay_BlackmagicAlphaKeySettings = {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
     message.keyMode !== undefined &&
-      (obj.keyMode = outputDisplay_BlackmagicAlphaKeySettings_KeyModeToJSON(message.keyMode));
+      (obj.keyMode = outputDisplay_BlackmagicAlphaKeySettings_KeyModeToJSON(
+        message.keyMode,
+      ));
     message.blendValue !== undefined && (obj.blendValue = message.blendValue);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<OutputDisplay_BlackmagicAlphaKeySettings>, I>>(
-    base?: I,
-  ): OutputDisplay_BlackmagicAlphaKeySettings {
+  create<
+    I extends Exact<DeepPartial<OutputDisplay_BlackmagicAlphaKeySettings>, I>,
+  >(base?: I): OutputDisplay_BlackmagicAlphaKeySettings {
     return OutputDisplay_BlackmagicAlphaKeySettings.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<OutputDisplay_BlackmagicAlphaKeySettings>, I>>(
-    object: I,
-  ): OutputDisplay_BlackmagicAlphaKeySettings {
+  fromPartial<
+    I extends Exact<DeepPartial<OutputDisplay_BlackmagicAlphaKeySettings>, I>,
+  >(object: I): OutputDisplay_BlackmagicAlphaKeySettings {
     const message = createBaseOutputDisplay_BlackmagicAlphaKeySettings();
     message.enabled = object.enabled ?? false;
     message.keyMode = object.keyMode ?? 0;
@@ -1359,7 +1528,10 @@ function createBaseEdgeBlend(): EdgeBlend {
 }
 
 export const EdgeBlend = {
-  encode(message: EdgeBlend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: EdgeBlend,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
@@ -1373,28 +1545,47 @@ export const EdgeBlend = {
       writer.uint32(32).int32(message.mode);
     }
     if (message.firstScreen !== undefined) {
-      EdgeBlend_Screen.encode(message.firstScreen, writer.uint32(42).fork()).ldelim();
+      EdgeBlend_Screen.encode(
+        message.firstScreen,
+        writer.uint32(42).fork(),
+      ).ldelim();
     }
     if (message.secondScreen !== undefined) {
-      EdgeBlend_Screen.encode(message.secondScreen, writer.uint32(50).fork()).ldelim();
+      EdgeBlend_Screen.encode(
+        message.secondScreen,
+        writer.uint32(50).fork(),
+      ).ldelim();
     }
     if (message.leftScreen !== undefined) {
-      EdgeBlend_Screen.encode(message.leftScreen, writer.uint32(58).fork()).ldelim();
+      EdgeBlend_Screen.encode(
+        message.leftScreen,
+        writer.uint32(58).fork(),
+      ).ldelim();
     }
     if (message.rightScreen !== undefined) {
-      EdgeBlend_Screen.encode(message.rightScreen, writer.uint32(66).fork()).ldelim();
+      EdgeBlend_Screen.encode(
+        message.rightScreen,
+        writer.uint32(66).fork(),
+      ).ldelim();
     }
     if (message.topScreen !== undefined) {
-      EdgeBlend_Screen.encode(message.topScreen, writer.uint32(74).fork()).ldelim();
+      EdgeBlend_Screen.encode(
+        message.topScreen,
+        writer.uint32(74).fork(),
+      ).ldelim();
     }
     if (message.bottomScreen !== undefined) {
-      EdgeBlend_Screen.encode(message.bottomScreen, writer.uint32(82).fork()).ldelim();
+      EdgeBlend_Screen.encode(
+        message.bottomScreen,
+        writer.uint32(82).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): EdgeBlend {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEdgeBlend();
     while (reader.pos < end) {
@@ -1433,14 +1624,20 @@ export const EdgeBlend = {
             break;
           }
 
-          message.firstScreen = EdgeBlend_Screen.decode(reader, reader.uint32());
+          message.firstScreen = EdgeBlend_Screen.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 6:
           if (tag != 50) {
             break;
           }
 
-          message.secondScreen = EdgeBlend_Screen.decode(reader, reader.uint32());
+          message.secondScreen = EdgeBlend_Screen.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 7:
           if (tag != 58) {
@@ -1454,7 +1651,10 @@ export const EdgeBlend = {
             break;
           }
 
-          message.rightScreen = EdgeBlend_Screen.decode(reader, reader.uint32());
+          message.rightScreen = EdgeBlend_Screen.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
         case 9:
           if (tag != 74) {
@@ -1468,7 +1668,10 @@ export const EdgeBlend = {
             break;
           }
 
-          message.bottomScreen = EdgeBlend_Screen.decode(reader, reader.uint32());
+          message.bottomScreen = EdgeBlend_Screen.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
       if ((tag & 7) == 4 || tag == 0) {
@@ -1485,33 +1688,59 @@ export const EdgeBlend = {
       radius: isSet(object.radius) ? Number(object.radius) : 0,
       intensity: isSet(object.intensity) ? Number(object.intensity) : 0,
       mode: isSet(object.mode) ? edgeBlend_ModeFromJSON(object.mode) : 0,
-      firstScreen: isSet(object.firstScreen) ? EdgeBlend_Screen.fromJSON(object.firstScreen) : undefined,
-      secondScreen: isSet(object.secondScreen) ? EdgeBlend_Screen.fromJSON(object.secondScreen) : undefined,
-      leftScreen: isSet(object.leftScreen) ? EdgeBlend_Screen.fromJSON(object.leftScreen) : undefined,
-      rightScreen: isSet(object.rightScreen) ? EdgeBlend_Screen.fromJSON(object.rightScreen) : undefined,
-      topScreen: isSet(object.topScreen) ? EdgeBlend_Screen.fromJSON(object.topScreen) : undefined,
-      bottomScreen: isSet(object.bottomScreen) ? EdgeBlend_Screen.fromJSON(object.bottomScreen) : undefined,
+      firstScreen: isSet(object.firstScreen)
+        ? EdgeBlend_Screen.fromJSON(object.firstScreen)
+        : undefined,
+      secondScreen: isSet(object.secondScreen)
+        ? EdgeBlend_Screen.fromJSON(object.secondScreen)
+        : undefined,
+      leftScreen: isSet(object.leftScreen)
+        ? EdgeBlend_Screen.fromJSON(object.leftScreen)
+        : undefined,
+      rightScreen: isSet(object.rightScreen)
+        ? EdgeBlend_Screen.fromJSON(object.rightScreen)
+        : undefined,
+      topScreen: isSet(object.topScreen)
+        ? EdgeBlend_Screen.fromJSON(object.topScreen)
+        : undefined,
+      bottomScreen: isSet(object.bottomScreen)
+        ? EdgeBlend_Screen.fromJSON(object.bottomScreen)
+        : undefined,
     };
   },
 
   toJSON(message: EdgeBlend): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
     message.radius !== undefined && (obj.radius = message.radius);
     message.intensity !== undefined && (obj.intensity = message.intensity);
-    message.mode !== undefined && (obj.mode = edgeBlend_ModeToJSON(message.mode));
+    message.mode !== undefined &&
+      (obj.mode = edgeBlend_ModeToJSON(message.mode));
     message.firstScreen !== undefined &&
-      (obj.firstScreen = message.firstScreen ? EdgeBlend_Screen.toJSON(message.firstScreen) : undefined);
+      (obj.firstScreen = message.firstScreen
+        ? EdgeBlend_Screen.toJSON(message.firstScreen)
+        : undefined);
     message.secondScreen !== undefined &&
-      (obj.secondScreen = message.secondScreen ? EdgeBlend_Screen.toJSON(message.secondScreen) : undefined);
+      (obj.secondScreen = message.secondScreen
+        ? EdgeBlend_Screen.toJSON(message.secondScreen)
+        : undefined);
     message.leftScreen !== undefined &&
-      (obj.leftScreen = message.leftScreen ? EdgeBlend_Screen.toJSON(message.leftScreen) : undefined);
+      (obj.leftScreen = message.leftScreen
+        ? EdgeBlend_Screen.toJSON(message.leftScreen)
+        : undefined);
     message.rightScreen !== undefined &&
-      (obj.rightScreen = message.rightScreen ? EdgeBlend_Screen.toJSON(message.rightScreen) : undefined);
+      (obj.rightScreen = message.rightScreen
+        ? EdgeBlend_Screen.toJSON(message.rightScreen)
+        : undefined);
     message.topScreen !== undefined &&
-      (obj.topScreen = message.topScreen ? EdgeBlend_Screen.toJSON(message.topScreen) : undefined);
+      (obj.topScreen = message.topScreen
+        ? EdgeBlend_Screen.toJSON(message.topScreen)
+        : undefined);
     message.bottomScreen !== undefined &&
-      (obj.bottomScreen = message.bottomScreen ? EdgeBlend_Screen.toJSON(message.bottomScreen) : undefined);
+      (obj.bottomScreen = message.bottomScreen
+        ? EdgeBlend_Screen.toJSON(message.bottomScreen)
+        : undefined);
     return obj;
   },
 
@@ -1519,40 +1748,62 @@ export const EdgeBlend = {
     return EdgeBlend.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<EdgeBlend>, I>>(object: I): EdgeBlend {
+  fromPartial<I extends Exact<DeepPartial<EdgeBlend>, I>>(
+    object: I,
+  ): EdgeBlend {
     const message = createBaseEdgeBlend();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
     message.radius = object.radius ?? 0;
     message.intensity = object.intensity ?? 0;
     message.mode = object.mode ?? 0;
-    message.firstScreen = (object.firstScreen !== undefined && object.firstScreen !== null)
-      ? EdgeBlend_Screen.fromPartial(object.firstScreen)
-      : undefined;
-    message.secondScreen = (object.secondScreen !== undefined && object.secondScreen !== null)
-      ? EdgeBlend_Screen.fromPartial(object.secondScreen)
-      : undefined;
-    message.leftScreen = (object.leftScreen !== undefined && object.leftScreen !== null)
-      ? EdgeBlend_Screen.fromPartial(object.leftScreen)
-      : undefined;
-    message.rightScreen = (object.rightScreen !== undefined && object.rightScreen !== null)
-      ? EdgeBlend_Screen.fromPartial(object.rightScreen)
-      : undefined;
-    message.topScreen = (object.topScreen !== undefined && object.topScreen !== null)
-      ? EdgeBlend_Screen.fromPartial(object.topScreen)
-      : undefined;
-    message.bottomScreen = (object.bottomScreen !== undefined && object.bottomScreen !== null)
-      ? EdgeBlend_Screen.fromPartial(object.bottomScreen)
-      : undefined;
+    message.firstScreen =
+      object.firstScreen !== undefined && object.firstScreen !== null
+        ? EdgeBlend_Screen.fromPartial(object.firstScreen)
+        : undefined;
+    message.secondScreen =
+      object.secondScreen !== undefined && object.secondScreen !== null
+        ? EdgeBlend_Screen.fromPartial(object.secondScreen)
+        : undefined;
+    message.leftScreen =
+      object.leftScreen !== undefined && object.leftScreen !== null
+        ? EdgeBlend_Screen.fromPartial(object.leftScreen)
+        : undefined;
+    message.rightScreen =
+      object.rightScreen !== undefined && object.rightScreen !== null
+        ? EdgeBlend_Screen.fromPartial(object.rightScreen)
+        : undefined;
+    message.topScreen =
+      object.topScreen !== undefined && object.topScreen !== null
+        ? EdgeBlend_Screen.fromPartial(object.topScreen)
+        : undefined;
+    message.bottomScreen =
+      object.bottomScreen !== undefined && object.bottomScreen !== null
+        ? EdgeBlend_Screen.fromPartial(object.bottomScreen)
+        : undefined;
     return message;
   },
 };
 
 function createBaseEdgeBlend_Screen(): EdgeBlend_Screen {
-  return { uuid: undefined, edge: 0, gamma: 0, blackLevel: 0, mode: 0, radius: 0, intensity: 0 };
+  return {
+    uuid: undefined,
+    edge: 0,
+    gamma: 0,
+    blackLevel: 0,
+    mode: 0,
+    radius: 0,
+    intensity: 0,
+  };
 }
 
 export const EdgeBlend_Screen = {
-  encode(message: EdgeBlend_Screen, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: EdgeBlend_Screen,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
@@ -1578,7 +1829,8 @@ export const EdgeBlend_Screen = {
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): EdgeBlend_Screen {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEdgeBlend_Screen();
     while (reader.pos < end) {
@@ -1648,7 +1900,7 @@ export const EdgeBlend_Screen = {
       edge: isSet(object.edge) ? edgeBlend_Screen_EdgeFromJSON(object.edge) : 0,
       gamma: isSet(object.gamma) ? Number(object.gamma) : 0,
       blackLevel: isSet(object.blackLevel) ? Number(object.blackLevel) : 0,
-      mode: isSet(object.mode) ? edgeBlend_Screen_ModeFromJSON(object.mode) : 0,
+      mode: isSet(object.mode) ? edgeBlend_ModeFromJSON(object.mode) : 0,
       radius: isSet(object.radius) ? Number(object.radius) : 0,
       intensity: isSet(object.intensity) ? Number(object.intensity) : 0,
     };
@@ -1656,23 +1908,33 @@ export const EdgeBlend_Screen = {
 
   toJSON(message: EdgeBlend_Screen): unknown {
     const obj: any = {};
-    message.uuid !== undefined && (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.edge !== undefined && (obj.edge = edgeBlend_Screen_EdgeToJSON(message.edge));
+    message.uuid !== undefined &&
+      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    message.edge !== undefined &&
+      (obj.edge = edgeBlend_Screen_EdgeToJSON(message.edge));
     message.gamma !== undefined && (obj.gamma = message.gamma);
     message.blackLevel !== undefined && (obj.blackLevel = message.blackLevel);
-    message.mode !== undefined && (obj.mode = edgeBlend_Screen_ModeToJSON(message.mode));
+    message.mode !== undefined &&
+      (obj.mode = edgeBlend_ModeToJSON(message.mode));
     message.radius !== undefined && (obj.radius = message.radius);
     message.intensity !== undefined && (obj.intensity = message.intensity);
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<EdgeBlend_Screen>, I>>(base?: I): EdgeBlend_Screen {
+  create<I extends Exact<DeepPartial<EdgeBlend_Screen>, I>>(
+    base?: I,
+  ): EdgeBlend_Screen {
     return EdgeBlend_Screen.fromPartial(base ?? {});
   },
 
-  fromPartial<I extends Exact<DeepPartial<EdgeBlend_Screen>, I>>(object: I): EdgeBlend_Screen {
+  fromPartial<I extends Exact<DeepPartial<EdgeBlend_Screen>, I>>(
+    object: I,
+  ): EdgeBlend_Screen {
     const message = createBaseEdgeBlend_Screen();
-    message.uuid = (object.uuid !== undefined && object.uuid !== null) ? UUID.fromPartial(object.uuid) : undefined;
+    message.uuid =
+      object.uuid !== undefined && object.uuid !== null
+        ? UUID.fromPartial(object.uuid)
+        : undefined;
     message.edge = object.edge ?? 0;
     message.gamma = object.gamma ?? 0;
     message.blackLevel = object.blackLevel ?? 0;
@@ -1683,16 +1945,31 @@ export const EdgeBlend_Screen = {
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
