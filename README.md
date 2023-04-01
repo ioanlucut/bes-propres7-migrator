@@ -23,7 +23,7 @@ cd proto
 for f in ./*; do protoc --plugin=../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=. --ts_proto_opt=esModuleInterop=true ./$f ; done
 ```
 
-#### Decode a single presentation file called `experriment.pro` to `TS`
+#### Decode a single presentation file called `experiment.pro` to `TS`
 
 ```unix
 cd proto
