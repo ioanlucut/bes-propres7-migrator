@@ -8,16 +8,16 @@ import { convertSongToProPresenter7 } from './proPresenter7SongConverter';
 /**
  * Removes all the files from the out directory
  */
-export const migrateFromTo = ({
+export const migrateSongsToPP7Format = ({
   sourceDir,
   outDir,
-  clearOutputDir,
+  clearOutputDirFirst,
 }: {
   sourceDir: string;
   outDir: string;
-  clearOutputDir?: boolean;
+  clearOutputDirFirst?: boolean;
 }) => {
-  if (clearOutputDir) {
+  if (clearOutputDirFirst) {
     fsExtra.emptydirSync(outDir);
   }
 
