@@ -52,14 +52,15 @@ import {
 import { Group } from '../proto/groups';
 import { Song, SongSection, Verse } from './types';
 import { Stage_ScreenAssignment } from '../proto/stage';
+import { convertToRtf } from './txtToRtfConverter';
 
-const DEFAULT_BES_ARRANGEMENT = 'BES arrangement';
+const DEFAULT_BES_ARRANGEMENT = 'BES';
 
-const FONT_SIZE = 90;
+const FONT_SIZE = 64;
 
 const GRAPHIC_SIZE = {
-  width: 2048,
-  height: 1280,
+  width: 1920,
+  height: 1080,
 };
 const INTRO_SLIDE_CONFIG_NAME = 'Slide config';
 const INTRO_SLIDE_LABEL = 'Blank';
@@ -67,12 +68,13 @@ const LAYOUT_STAGE_NAME = 'Stage Layout';
 const SCREEN_NAME = 'Display Stage';
 
 const FONT_CONFIG = {
-  name: 'BebasNeue-Bold',
+  name: 'CMGSans-Regular',
   size: FONT_SIZE,
-  family: 'Bebas Neue',
+  family: 'CMGSans',
+  bold: true,
 };
 
-const TEXT_FILL_CONFIG = {
+const WHITE_COLOR = {
   red: 1,
   green: 1,
   blue: 1,
@@ -132,46 +134,7 @@ const FULL_SIZE_PATH_OBJECT = Graphics_Path.create({
   ],
 });
 
-const PRESENTATION_CATEGORY = 'Generated Worship Songs ~ BBE 2023';
-
-const encodeVerseContentToUnicodeRTFFormat = (verseContent: string) =>
-  verseContent
-    // For some reason, if it's at the end of the word, we need to inject a new space char
-    .replaceAll('Â ', '\\uc0\\u194  ')
-    .replaceAll('â ', '\\uc0\\u226  ')
-    .replaceAll('Ă ', '\\uc0\\u258  ')
-    .replaceAll('ă ', '\\uc0\\u259  ')
-    .replaceAll('Î ', '\\uc0\\u206  ')
-    .replaceAll('î ', '\\uc0\\u238  ')
-    .replaceAll('ș ', '\\uc0\\u537  ')
-    .replaceAll('Ș ', '\\uc0\\u536  ')
-    .replaceAll('ț ', '\\uc0\\u539  ')
-    .replaceAll('Ț ', '\\uc0\\u538  ')
-    .replaceAll('” ', '\\uc0\\u8221  ')
-    .replaceAll('„ ', '\\uc0\\u8222  ')
-    .replaceAll('’ ', '\\uc0\\u8217  ')
-    // Remaining chars
-    .replaceAll('Â', '\\uc0\\u194')
-    .replaceAll('â', '\\uc0\\u226')
-    .replaceAll('Ă', '\\uc0\\u258')
-    .replaceAll('ă', '\\uc0\\u259')
-    .replaceAll('Î', '\\uc0\\u206')
-    .replaceAll('î', '\\uc0\\u238')
-    .replaceAll('ș', '\\uc0\\u537')
-    .replaceAll('Ș', '\\uc0\\u536')
-    .replaceAll('ț', '\\uc0\\u539')
-    .replaceAll('Ț', '\\uc0\\u538')
-    .replaceAll('”', '\\uc0\\u8221')
-    .replaceAll('„', '\\uc0\\u8222')
-    .replaceAll('’', '\\uc0\\u8217');
-
-const convertToRtf = (multiLineVerseContent: string) => {
-  return (
-    '{\\rtf1\\ansi\\ansicpg1252\\cocoartf2639\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 BebasNeue-Bold;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c100000;}\n\\deftab720\n\\pard\\lang1048\\qc\\partightenfactor0\n\n\\f0\\fs140 \\cf2' +
-    multiLineVerseContent.replace(/\n/g, '\\\n') +
-    '}'
-  );
-};
+const PRESENTATION_CATEGORY = 'Generated Worship Songs ~ BES 2023';
 
 const createTextFromSection = (verse: string) =>
   Graphics_Text.create({
@@ -186,7 +149,8 @@ const createTextFromSection = (verse: string) =>
       ],
       capitalization:
         Graphics_Text_Attributes_Capitalization.CAPITALIZATION_ALL_CAPS,
-      textSolidFill: Color.create(TEXT_FILL_CONFIG),
+      textSolidFill: Color.create(WHITE_COLOR),
+      backgroundColor: Color.create(WHITE_COLOR),
       kerning: 1,
       paragraphStyle: Graphics_Text_Attributes_Paragraph.create({
         alignment: Graphics_Text_Attributes_Alignment.ALIGNMENT_CENTER,
@@ -200,10 +164,7 @@ const createTextFromSection = (verse: string) =>
     transform: Graphics_Text_Transform.TRANSFORM_NONE,
     verticalAlignment:
       Graphics_Text_VerticalAlignment.VERTICAL_ALIGNMENT_MIDDLE,
-    rtfData: Buffer.from(
-      convertToRtf(encodeVerseContentToUnicodeRTFFormat(verse)),
-      ENCODING,
-    ),
+    rtfData: Buffer.from(convertToRtf(verse), ENCODING),
   });
 
 const createEmptySmartIntroCue = () => {
