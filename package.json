@@ -7,7 +7,7 @@
     "test:ci": "NODE_ENV=test jest --runInBand --no-cache",
     "test:watch": "NODE_ENV=test TZ='Europe/Berlin' jest --watch --logHeapUsage",
     "test": "is-ci-cli test:ci test:watch",
-    "migrate:all": "ts-node runner.ts"
+    "migrate:local": "ts-node runner.ts"
   },
   "author": "Ioan Lucut",
   "dependencies": {

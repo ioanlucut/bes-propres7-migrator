@@ -213,10 +213,6 @@ const createEmptySmartIntroCue = () => {
       string: randomUUID(),
     }),
     isEnabled: true,
-    label: Action_Label.create({
-      text: `Action: ${INTRO_SLIDE_LABEL}`,
-      color: DEFAULT_ACTION_COLOR,
-    }),
     slide,
     type: Action_ActionType.ACTION_TYPE_PRESENTATION_SLIDE,
   });
@@ -278,7 +274,7 @@ const createEmptySmartIntroCue = () => {
   const cue = Cue.create({
     uuid: cueUUID,
     isEnabled: true,
-    actions: [clearMediaAction, setStageAction, presentationAction],
+    actions: [clearMediaAction, presentationAction],
   });
 
   const cueGroup = Presentation_CueGroup.create({
@@ -338,10 +334,6 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
       string: randomUUID(),
     }),
     isEnabled: true,
-    label: Action_Label.create({
-      text: `Action: ${sectionLabel}`,
-      color: Color.create(DEFAULT_ACTION_COLOR),
-    }),
     slide,
     type: Action_ActionType.ACTION_TYPE_PRESENTATION_SLIDE,
   });

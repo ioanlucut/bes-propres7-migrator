@@ -40,7 +40,7 @@ SOURCE_DIR=../bes-lyrics/inverification
 OUT_DIR=./pp7-songs
 ```
 
-Simply call the `npm run migrate:all`
+Simply call the `npm run migrate:local`
 
 ### How to customize the runner
 

@@ -29,7 +29,7 @@ export const migrateSongsToPP7Format = ({
     const song = parseSong(fileAsText);
     const presentation = convertSongToProPresenter7(song);
 
-    const outFile = `${outDir}/${fileName.replace('.txt', '')} ~ BES 2023.pro`;
+    const outFile = `${outDir}/${fileName.replace('.txt', '')}.pro`;
 
     fs.writeFileSync(
       outFile,
