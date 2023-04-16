@@ -56,7 +56,7 @@ import { convertToRtf } from './txtToRtfConverter';
 
 const DEFAULT_BES_ARRANGEMENT = 'BES';
 
-const FONT_SIZE = 64;
+const FONT_SIZE = 60;
 
 const GRAPHIC_SIZE = {
   width: 1920,
