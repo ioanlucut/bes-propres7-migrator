@@ -1,6 +1,8 @@
 import { convertSongToProPresenter7 } from './proPresenter7SongConverter';
 import { Song, SongSection } from './types';
 import { SongSectionLabel } from './SongSectionLabel';
+import { Presentation_CCLI } from '../proto/presentation';
+import { Graphics_Text_Attributes_Font } from '../proto/graphicsData';
 
 jest.mock('crypto', () => {
   let index = 1;
@@ -9,6 +11,30 @@ jest.mock('crypto', () => {
     randomUUID: jest.fn().mockImplementation(() => `RANDOM_UUID_${index++}`),
   };
 });
+
+const ANY_CONFIG = {
+  arrangementName: 'BES',
+  ccliSettings: {
+    publisher: 'Biserica Emanuel Sibiu',
+    author: 'Ioan Lucuț',
+    copyrightYear: new Date().getFullYear(),
+    album: `Biserica Emanuel Sibiu ${new Date().getFullYear()}`,
+    songNumber: 0,
+  } as Presentation_CCLI,
+  fontConfig: {
+    name: 'CMGSans-Regular',
+    size: 60,
+    family: 'CMGSans',
+    bold: true,
+  } as Graphics_Text_Attributes_Font,
+  graphicSize: {
+    width: 1920,
+    height: 1080,
+  },
+  presentationCategory: `Worship Songs ~ BES ${new Date().getFullYear()}`,
+  refMacroId: '3ffd01b7-104f-499f-aac9-a13135006d0e',
+  refMacroName: 'Songs',
+};
 
 describe('proPresenter7SongConverter', () => {
   const ANY_SONG = {
@@ -129,11 +155,11 @@ Row 2-2`,
   } as Song;
 
   it('should convert to a presentation w/ settings correctly', () => {
-    expect(convertSongToProPresenter7(ANY_SONG)).toMatchSnapshot();
+    expect(convertSongToProPresenter7(ANY_SONG, ANY_CONFIG)).toMatchSnapshot();
   });
 
   it('should correctly encode the content to RTF', () => {
-    const actual = convertSongToProPresenter7(ANY_SONG);
+    const actual = convertSongToProPresenter7(ANY_SONG, ANY_CONFIG);
 
     expect(
       actual?.cues

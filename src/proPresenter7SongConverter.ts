@@ -17,14 +17,9 @@ import { Cue } from '../proto/cue';
 import {
   Action,
   Action_ActionType,
-  Action_ClearType,
-  Action_ClearType_ClearTargetLayer,
   Action_ContentDestination,
-  Action_Label,
   Action_MacroType,
   Action_SlideType,
-  Action_StageLayoutType,
-  Action_StageLayoutType_SlideTarget,
 } from '../proto/action';
 import { PresentationSlide } from '../proto/presentationSlide';
 import { Slide, Slide_Element } from '../proto/slide';
@@ -52,44 +47,29 @@ import {
 } from '../proto/graphicsData';
 import { Group } from '../proto/groups';
 import { Song, SongSection, Verse } from './types';
-import { Stage_ScreenAssignment } from '../proto/stage';
 import { convertToRtf } from './txtToRtfConverter';
 
-const DEFAULT_BES_ARRANGEMENT = 'BES';
-
-const FONT_SIZE = 60;
-
-const GRAPHIC_SIZE = {
-  width: 1920,
-  height: 1080,
+export type Config = {
+  arrangementName: string;
+  ccliSettings: Presentation_CCLI;
+  fontConfig: Graphics_Text_Attributes_Font;
+  graphicSize: Graphics_Size;
+  presentationCategory: string;
+  refMacroId: string;
+  refMacroName: string;
 };
-const INTRO_SLIDE_CONFIG_NAME = 'Slide config';
+
+const INTRO_SLIDE_NAME = 'Slide config';
 const INTRO_SLIDE_LABEL = 'Blank';
-const LAYOUT_STAGE_NAME = 'Stage Layout';
-const SCREEN_NAME = 'Display Stage';
-
-const FONT_CONFIG = {
-  name: 'CMGSans-Regular',
-  size: FONT_SIZE,
-  family: 'CMGSans',
-  bold: true,
-};
 
 const WHITE_COLOR = {
   red: 1,
   green: 1,
   blue: 1,
   alpha: 1,
-};
+} as Color;
 
 const ENCODING = 'utf8';
-
-const DEFAULT_ACTION_COLOR = Color.create({
-  red: 0.8,
-  green: 0.1,
-  blue: 0.4,
-  alpha: 1,
-});
 
 const CUE_GROUP_COLOR = Color.create({
   green: 0.467,
@@ -135,15 +115,13 @@ const FULL_SIZE_PATH_OBJECT = Graphics_Path.create({
   ],
 });
 
-const PRESENTATION_CATEGORY = 'Generated Worship Songs ~ BES 2023';
-
-const createTextFromSection = (verse: string) =>
+const createTextFromSection = (verse: string, config: Config) =>
   Graphics_Text.create({
     attributes: Graphics_Text_Attributes.create({
-      font: Graphics_Text_Attributes_Font.create(FONT_CONFIG),
+      font: Graphics_Text_Attributes_Font.create(config.fontConfig),
       customAttributes: [
         Graphics_Text_Attributes_CustomAttribute.create({
-          originalFontSize: FONT_SIZE,
+          originalFontSize: config.fontConfig.size,
           capitalization:
             Graphics_Text_Attributes_Capitalization.CAPITALIZATION_ALL_CAPS,
         }),
@@ -168,7 +146,7 @@ const createTextFromSection = (verse: string) =>
     rtfData: Buffer.from(convertToRtf(verse), ENCODING),
   });
 
-const createEmptySmartIntroCue = () => {
+const createEmptySmartIntroCue = (config: Config) => {
   const cueUUID = UUID.create({
     string: randomUUID(),
   });
@@ -181,17 +159,17 @@ const createEmptySmartIntroCue = () => {
       fill: Graphics_Fill.create({
         color: Color.create(TRANSPARENT_COLOR),
       }),
-      name: INTRO_SLIDE_CONFIG_NAME,
+      name: INTRO_SLIDE_NAME,
       flipMode: Graphics_Element_FlipMode.FLIP_MODE_BOTH,
       bounds: Graphics_Rect.create({
         origin: Graphics_Point.create({
           x: 1,
           y: 1,
         }),
-        size: Graphics_Size.create(GRAPHIC_SIZE),
+        size: Graphics_Size.create(config.graphicSize),
       }),
       opacity: 1,
-      text: createTextFromSection(''),
+      text: createTextFromSection('', config),
       path: FULL_SIZE_PATH_OBJECT,
     }),
   });
@@ -203,7 +181,7 @@ const createEmptySmartIntroCue = () => {
           string: randomUUID(),
         }),
         drawsBackgroundColor: false,
-        size: Graphics_Size.create(GRAPHIC_SIZE),
+        size: Graphics_Size.create(config.graphicSize),
         elements: [slideElement],
       }),
     }),
@@ -218,47 +196,12 @@ const createEmptySmartIntroCue = () => {
     type: Action_ActionType.ACTION_TYPE_PRESENTATION_SLIDE,
   });
 
-  const setStageAction = Action.create({
-    uuid: UUID.create({
-      string: randomUUID(),
-    }),
-    isEnabled: true,
-    stage: Action_StageLayoutType.create({
-      stageScreenAssignments: [
-        Stage_ScreenAssignment.create({
-          screen: CollectionElementType.create({
-            parameterName: SCREEN_NAME,
-            parameterUuid: UUID.create({
-              string: randomUUID(),
-            }),
-          }),
-          layout: CollectionElementType.create({
-            parameterName: LAYOUT_STAGE_NAME,
-            parameterUuid: UUID.create({
-              string: randomUUID(),
-            }),
-          }),
-        }),
-      ],
-      slideTarget: Action_StageLayoutType_SlideTarget.SLIDE_TARGET_ALL,
-    }),
-    label: Action_Label.create({
-      text: 'Set correct stage',
-      color: DEFAULT_ACTION_COLOR,
-    }),
-    slide,
-    type: Action_ActionType.ACTION_TYPE_STAGE_LAYOUT,
-  });
-
   const groupUUID = UUID.create({
     string: randomUUID(),
   });
 
-  const REMOTE_MACHINE_MACRO_ID = '3ffd01b7-104f-499f-aac9-a13135006d0e';
-  const REMOTE_MACRO_NAME = 'Songs';
-
   const macroAction = Action.create({
-    name: REMOTE_MACRO_NAME,
+    name: config.refMacroName,
     uuid: UUID.create({
       string: randomUUID(),
     }),
@@ -267,9 +210,9 @@ const createEmptySmartIntroCue = () => {
     type: Action_ActionType.ACTION_TYPE_MACRO,
     macro: Action_MacroType.create({
       identification: CollectionElementType.create({
-        parameterName: REMOTE_MACRO_NAME,
+        parameterName: config.refMacroName,
         parameterUuid: UUID.create({
-          string: REMOTE_MACHINE_MACRO_ID,
+          string: config.refMacroId,
         }),
       }),
     }),
@@ -293,7 +236,11 @@ const createEmptySmartIntroCue = () => {
   return { cue, cueGroup };
 };
 
-const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
+const processVerse = (
+  { content, sectionLabel }: Verse,
+  { title }: Song,
+  config: Config,
+) => {
   const cueUUID = UUID.create({
     string: randomUUID(),
   });
@@ -312,10 +259,10 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
           x: 0,
           y: 0,
         }),
-        size: Graphics_Size.create(GRAPHIC_SIZE),
+        size: Graphics_Size.create(config.graphicSize),
       }),
       opacity: 1,
-      text: createTextFromSection(content),
+      text: createTextFromSection(content, config),
       path: FULL_SIZE_PATH_OBJECT,
     }),
   });
@@ -327,7 +274,7 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
           string: randomUUID(),
         }),
         drawsBackgroundColor: false,
-        size: Graphics_Size.create(GRAPHIC_SIZE),
+        size: Graphics_Size.create(config.graphicSize),
         elements: [slideElement],
       }),
     }),
@@ -364,7 +311,10 @@ const processVerse = ({ content, sectionLabel }: Verse, { title }: Song) => {
   return { cue, cueGroup };
 };
 
-export const convertSongToProPresenter7 = (song: Song): Presentation => {
+export const convertSongToProPresenter7 = (
+  song: Song,
+  config: Config,
+): Presentation => {
   const { verses, title, sequence } = song;
 
   const presentationUUId = UUID.create({
@@ -380,7 +330,7 @@ export const convertSongToProPresenter7 = (song: Song): Presentation => {
   >;
 
   const slidesConfig = verses.map((verse) => {
-    const { cue, cueGroup } = processVerse(verse, song);
+    const { cue, cueGroup } = processVerse(verse, song, config);
 
     songConfigHashMap[verse.section] = { cue, cueGroup };
 
@@ -392,12 +342,12 @@ export const convertSongToProPresenter7 = (song: Song): Presentation => {
   });
 
   const { cue: introConfigCue, cueGroup: introConfigCueGroup } =
-    createEmptySmartIntroCue();
+    createEmptySmartIntroCue(config);
 
   const arrangements = [
     Presentation_Arrangement.create({
       uuid: arrangementUUID,
-      name: DEFAULT_BES_ARRANGEMENT,
+      name: config.arrangementName,
       groupIdentifiers: [
         introConfigCueGroup?.group?.uuid as UUID,
         ...sequence.map(
@@ -408,23 +358,16 @@ export const convertSongToProPresenter7 = (song: Song): Presentation => {
     }),
   ];
 
-  const PRESENTATION_NAME = `${title} ~ Biserica Emanuel Sibiu`;
-  const CCLI = Presentation_CCLI.create({
-    publisher: 'Biserica Emanuel Sibiu',
-    author: 'Ioan Lucuț',
-    songTitle: title,
-    copyrightYear: 2023,
-    album: 'Biserica Emanuel Sibiu 2023',
-    songNumber: 0,
-  });
-
   return Presentation.create({
-    category: PRESENTATION_CATEGORY,
+    category: config.presentationCategory,
     contentDestination: Action_ContentDestination.CONTENT_DESTINATION_GLOBAL,
-    ccli: CCLI,
+    ccli: Presentation_CCLI.create({
+      ...config.ccliSettings,
+      songTitle: title,
+    }),
     applicationInfo: APPLICATION_INFO,
     uuid: presentationUUId,
-    name: PRESENTATION_NAME,
+    name: title,
     cues: [introConfigCue, ...slidesConfig.map(({ cue }) => cue)],
     cueGroups: [
       introConfigCueGroup,

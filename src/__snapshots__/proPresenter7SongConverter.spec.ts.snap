@@ -12,7 +12,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
     {
       "groupIdentifiers": [
         {
-          "string": "RANDOM_UUID_95",
+          "string": "RANDOM_UUID_92",
         },
         {
           "string": "RANDOM_UUID_16",
@@ -83,7 +83,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
   ],
   "background": undefined,
   "bibleReference": undefined,
-  "category": "Generated Worship Songs ~ BES 2023",
+  "category": "Worship Songs ~ BES 2023",
   "ccli": {
     "album": "Biserica Emanuel Sibiu 2023",
     "artistCredits": "",
@@ -116,7 +116,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
         "hotKey": undefined,
         "name": "Blank",
         "uuid": {
-          "string": "RANDOM_UUID_95",
+          "string": "RANDOM_UUID_92",
         },
       },
     },
@@ -2014,7 +2014,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
           "transportControl": undefined,
           "type": 23,
           "uuid": {
-            "string": "RANDOM_UUID_96",
+            "string": "RANDOM_UUID_93",
           },
         },
       ],
@@ -15670,7 +15670,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
   "multiTracksLicensing": undefined,
   "music": undefined,
   "musicKey": "",
-  "name": "My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț ~ Biserica Emanuel Sibiu",
+  "name": "My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț",
   "notes": "",
   "selectedArrangement": {
     "string": "RANDOM_UUID_87",
