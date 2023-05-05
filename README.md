@@ -1,6 +1,6 @@
 # bes-propres7-migrator
 
-A migrator from the `bes-lyrics` to `ProPresenter7` `pro` format
+A migrator from the `txt` songs (special markup format) to `ProPresenter7` `pro` format
 
 ### Expected songs format
 
@@ -31,38 +31,67 @@ Alfa și Omega, de-a pururi viu,
 Domn al veșniciei, în veci! Amin!
 ```
 
-### How to run
+### How to run?
 
 - Assuming that the following config is fine:
 
 ```dotenv
-SOURCE_DIR=../bes-lyrics/inverification
-OUT_DIR=./pp7-songs
+SOURCE_DIR=directory-with-txt-songs
+OUT_DIR=directory-with-pro-songs
 ```
 
-Simply call the `npm run migrate:local`
+Simply run the `npm run migrate:local`
 
 ### How to customize the runner
 
 - Pass the following env variables with your source and out directories
 
 ```dotenv
-SOURCE_DIR=../bes-lyrics/inverification
-OUT_DIR=./pp7-songs
+SOURCE_DIR=directory-with-txt-songs
+OUT_DIR=directory-with-pro-songs
 ```
 
 - Use the `migrateSongsToPP7Format` method to do the conversion as follows:
 
 ```typescript
 import dotenv from 'dotenv';
-import { migrateSongsToPP7Format } from './';
+import { Config, migrateSongsToPP7Format } from './';
+import { Presentation_CCLI } from './proto/presentation';
+import { Graphics_Text_Attributes_Font } from './proto/graphicsData';
 
 dotenv.config();
+
+const CONFIG = {
+  arrangementName: 'Any arrangement name',
+  ccliSettings: {
+    publisher: 'Any publisher info',
+    author: 'Any author info',
+    copyrightYear: new Date().getFullYear(),
+    album: `Any album from ${new Date().getFullYear()}`,
+    songNumber: 0,
+  } as Presentation_CCLI,
+  fontConfig: {
+    name: 'CMGSans-Regular',
+    size: 60,
+    family: 'CMGSans',
+    bold: true,
+  } as Graphics_Text_Attributes_Font,
+  graphicSize: {
+    width: 1920,
+    height: 1080,
+  },
+  presentationCategory: 'Any presentation category',
+  refMacroId:
+    'A UUID string for referencing the macro id in the first intro blank slide',
+  refMacroName:
+    'A macro name for referencing the macro id in the first intro blank slide',
+};
 
 migrateSongsToPP7Format({
   sourceDir: process.env.SOURCE_DIR as string,
   outDir: process.env.OUT_DIR as string,
   clearOutputDirFirst: true,
+  config: CONFIG,
 });
 ```
 
@@ -87,10 +116,10 @@ cd proto
 for f in ./proto/*; do protoc --plugin=../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./proto --ts_proto_opt=esModuleInterop=true ./$f ; done
 ```
 
-#### Decode a single presentation file called `experiment.pro` to `TS`
+#### Decode a single presentation file called `TEMP.pro` to `TS`
 
 ```unix
 cd proto
 
-protoc --decode rv.data.Presentation ./presentation.proto < ~/Documents/ProPresenter/Libraries/Default/experiment.pro > ../experiment_decoded_from_propres7.txt
+protoc --decode rv.data.Presentation ./presentation.proto < ~/Documents/ProPresenter/Libraries/Default/TEMP.pro > ../TEMP_decoded_from_propres7.txt
 ```
