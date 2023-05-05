@@ -21,6 +21,7 @@ import {
   Action_ClearType_ClearTargetLayer,
   Action_ContentDestination,
   Action_Label,
+  Action_MacroType,
   Action_SlideType,
   Action_StageLayoutType,
   Action_StageLayoutType_SlideTarget,
@@ -217,24 +218,6 @@ const createEmptySmartIntroCue = () => {
     type: Action_ActionType.ACTION_TYPE_PRESENTATION_SLIDE,
   });
 
-  const clearMediaAction = Action.create({
-    uuid: UUID.create({
-      string: randomUUID(),
-    }),
-    isEnabled: true,
-    clear: Action_ClearType.create({
-      targetLayer:
-        Action_ClearType_ClearTargetLayer.CLEAR_TARGET_LAYER_BACKGROUND,
-      contentDestination: Action_ContentDestination.CONTENT_DESTINATION_GLOBAL,
-    }),
-    label: Action_Label.create({
-      text: 'Clear media',
-      color: DEFAULT_ACTION_COLOR,
-    }),
-    slide,
-    type: Action_ActionType.ACTION_TYPE_CLEAR,
-  });
-
   const setStageAction = Action.create({
     uuid: UUID.create({
       string: randomUUID(),
@@ -271,10 +254,31 @@ const createEmptySmartIntroCue = () => {
     string: randomUUID(),
   });
 
+  const REMOTE_MACHINE_MACRO_ID = '3ffd01b7-104f-499f-aac9-a13135006d0e';
+  const REMOTE_MACRO_NAME = 'Songs';
+
+  const macroAction = Action.create({
+    name: REMOTE_MACRO_NAME,
+    uuid: UUID.create({
+      string: randomUUID(),
+    }),
+    isEnabled: true,
+    slide,
+    type: Action_ActionType.ACTION_TYPE_MACRO,
+    macro: Action_MacroType.create({
+      identification: CollectionElementType.create({
+        parameterName: REMOTE_MACRO_NAME,
+        parameterUuid: UUID.create({
+          string: REMOTE_MACHINE_MACRO_ID,
+        }),
+      }),
+    }),
+  });
+
   const cue = Cue.create({
     uuid: cueUUID,
     isEnabled: true,
-    actions: [clearMediaAction, presentationAction],
+    actions: [presentationAction, macroAction],
   });
 
   const cueGroup = Presentation_CueGroup.create({

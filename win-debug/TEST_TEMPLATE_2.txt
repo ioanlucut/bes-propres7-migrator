@@ -1,0 +1,811 @@
+application_info {
+  platform: PLATFORM_MACOS
+  application: APPLICATION_PROPRESENTER
+}
+uuid {
+  string: "93e90e5b-e180-4c5e-a17a-1ba84f1bc15b"
+}
+name: "A b\304\203tut la u\310\231a ta Cineva ~ Biserica Emanuel Sibiu"
+category: "Generated Worship Songs ~ BES 2023"
+selected_arrangement {
+  string: "96231ec0-292c-4993-9cc9-21836292171b"
+}
+arrangements {
+  uuid {
+    string: "96231ec0-292c-4993-9cc9-21836292171b"
+  }
+  name: "BES"
+  group_identifiers {
+    string: "ecfa7549-ef67-4e00-82d6-863ba186fcef"
+  }
+  group_identifiers {
+    string: "5aefe29a-d437-4235-b57a-c4c40fb3c5fc"
+  }
+  group_identifiers {
+    string: "5eeafdc2-959d-4e81-a019-4e8d2f74099e"
+  }
+  group_identifiers {
+    string: "b47ee53d-e125-4e5e-ae57-8a91cf1d50d5"
+  }
+  group_identifiers {
+    string: "889a9628-bf74-4950-afeb-bdfad948062d"
+  }
+  group_identifiers {
+    string: "18d3f52e-e01f-4ab3-a1b1-54467986b520"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "ecfa7549-ef67-4e00-82d6-863ba186fcef"
+    }
+    name: "Blank"
+    color {
+      green: 0.467
+      blue: 0.8
+      alpha: 1
+    }
+  }
+  cue_identifiers {
+    string: "7b047e81-a59d-429b-bc84-1c60c50a91da"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "5aefe29a-d437-4235-b57a-c4c40fb3c5fc"
+    }
+    name: "Verse 1"
+    color {
+      green: 0.467
+      blue: 0.8
+      alpha: 1
+    }
+  }
+  cue_identifiers {
+    string: "1d39fbdc-d156-4830-ba9e-cde1ec979ac2"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "5eeafdc2-959d-4e81-a019-4e8d2f74099e"
+    }
+    name: "Verse 2"
+    color {
+      green: 0.467
+      blue: 0.8
+      alpha: 1
+    }
+  }
+  cue_identifiers {
+    string: "d3fd2fc4-5ced-4745-baea-266e714d19d0"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "b47ee53d-e125-4e5e-ae57-8a91cf1d50d5"
+    }
+    name: "Verse 3"
+    color {
+      green: 0.467
+      blue: 0.8
+      alpha: 1
+    }
+  }
+  cue_identifiers {
+    string: "75f85df8-a3e6-4a03-9cc5-0279a44187a1"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "889a9628-bf74-4950-afeb-bdfad948062d"
+    }
+    name: "Verse 4"
+    color {
+      green: 0.467
+      blue: 0.8
+      alpha: 1
+    }
+  }
+  cue_identifiers {
+    string: "0a6e1262-7aed-4289-898f-ac48fdf18d57"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "18d3f52e-e01f-4ab3-a1b1-54467986b520"
+    }
+    name: "Verse 5"
+    color {
+      green: 0.467
+      blue: 0.8
+      alpha: 1
+    }
+  }
+  cue_identifiers {
+    string: "752e2a30-bd4c-489c-9f93-00a79ff95956"
+  }
+}
+cues {
+  uuid {
+    string: "7b047e81-a59d-429b-bc84-1c60c50a91da"
+  }
+  actions {
+    uuid {
+      string: "3681f595-7065-4632-8e3a-ade95c44832b"
+    }
+    name: "Songs"
+    isEnabled: true
+    type: ACTION_TYPE_MACRO
+    macro {
+      identification {
+        parameter_uuid {
+          string: "3ffd01b7-104f-499f-aac9-a13135006d0e"
+        }
+        parameter_name: "Songs"
+      }
+    }
+  }
+  isEnabled: true
+}
+cues {
+  uuid {
+    string: "1d39fbdc-d156-4830-ba9e-cde1ec979ac2"
+  }
+  actions {
+    uuid {
+      string: "b615e3bd-b60e-441b-8957-28cc31a7191a"
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "ff956d7d-611c-4b9c-a69a-bf38045af1c2"
+              }
+              name: "Verse 1"
+              bounds {
+                origin {
+                }
+                size {
+                  width: 1344
+                  height: 768
+                }
+              }
+              opacity: 1
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                color {
+                }
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-Regular"
+                    size: 60
+                    bold: true
+                    family: "CMGSans"
+                  }
+                  capitalization: CAPITALIZATION_ALL_CAPS
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    line_spacing: 1.2
+                    paragraph_spacing: 4.2
+                    default_tab_interval: 36
+                  }
+                  kerning: 1
+                  custom_attributes {
+                    original_font_size: 60
+                  }
+                  background_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                rtf_data: "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c99985;\\cssrgb\\c100000\\c100000\\c100000\\c0;}\n\\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0\n\n\\f0\\b\\fs120 \\cf2 \\cb3 /: A b\\uc0\\u259tut la u\\uc0\\u537a ta Cineva\r\\\n\\uc0\\u536i n-a deschis nimenea. :/\r\\\n\\uc0\\u206n t\\uc0\\u259cerea negrei nop\\uc0\\u539i,\r\\\nSt\\uc0\\u259  un om \\uc0\\u537i pl\\uc0\\u226nge,\r\\\n/: Fa\\uc0\\u539a Lui e numai r\\uc0\\u259ni,\r\\\nPieptul numai s\\uc0\\u226nge. :/}\n"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+              }
+            }
+          }
+          size {
+            width: 1344
+            height: 768
+          }
+          uuid {
+            string: "9ef6f0e1-cd27-4c3a-8752-9e35d56d6487"
+          }
+        }
+      }
+    }
+  }
+  isEnabled: true
+}
+cues {
+  uuid {
+    string: "d3fd2fc4-5ced-4745-baea-266e714d19d0"
+  }
+  actions {
+    uuid {
+      string: "dd1884c1-c09d-4a28-952a-6f25ffd9078f"
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "d075b625-199f-49b4-9a3b-36cb562de01c"
+              }
+              name: "Verse 2"
+              bounds {
+                origin {
+                }
+                size {
+                  width: 1344
+                  height: 768
+                }
+              }
+              opacity: 1
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                color {
+                }
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-Regular"
+                    size: 60
+                    bold: true
+                    family: "CMGSans"
+                  }
+                  capitalization: CAPITALIZATION_ALL_CAPS
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    line_spacing: 1.2
+                    paragraph_spacing: 4.2
+                    default_tab_interval: 36
+                  }
+                  kerning: 1
+                  custom_attributes {
+                    original_font_size: 60
+                  }
+                  background_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                rtf_data: "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c99985;\\cssrgb\\c100000\\c100000\\c100000\\c0;}\n\\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0\n\n\\f0\\b\\fs120 \\cf2 \\cb3 /: Cine e\\uc0\\u537ti, str\\uc0\\u259in pribeag, cine e\\uc0\\u537ti?\r\\\nDe-al cui dor Tu pribege\\uc0\\u537ti? :/\r\\\nPentru cine Te-au br\\uc0\\u259zdat\r\\\nBice f\\uc0\\u259r\\uc0\\u259  num\\uc0\\u259r?\r\\\n/: Ce povar\\uc0\\u259  \\uc0\\u538i-a l\\uc0\\u259sat\r\\\nRana de pe um\\uc0\\u259r? :/}\n"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+              }
+            }
+          }
+          size {
+            width: 1344
+            height: 768
+          }
+          uuid {
+            string: "a88329bb-c54e-4370-bd5d-55afa3efba87"
+          }
+        }
+      }
+    }
+  }
+  isEnabled: true
+}
+cues {
+  uuid {
+    string: "75f85df8-a3e6-4a03-9cc5-0279a44187a1"
+  }
+  actions {
+    uuid {
+      string: "c7a584f5-0d50-4af3-97e0-474f31d2d305"
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "70ac361b-cc8b-4f66-84e9-daf1e534e7b5"
+              }
+              name: "Verse 3"
+              bounds {
+                origin {
+                }
+                size {
+                  width: 1344
+                  height: 768
+                }
+              }
+              opacity: 1
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                color {
+                }
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-Regular"
+                    size: 60
+                    bold: true
+                    family: "CMGSans"
+                  }
+                  capitalization: CAPITALIZATION_ALL_CAPS
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    line_spacing: 1.2
+                    paragraph_spacing: 4.2
+                    default_tab_interval: 36
+                  }
+                  kerning: 1
+                  custom_attributes {
+                    original_font_size: 60
+                  }
+                  background_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                rtf_data: "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c99985;\\cssrgb\\c100000\\c100000\\c100000\\c0;}\n\\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0\n\n\\f0\\b\\fs120 \\cf2 \\cb3 /: Eu sunt Robul ce slujesc tuturor,\r\\\nUn om al durerilor. :/\r\\\nNimeni plat\\uc0\\u259  nu Mi-a dat,\r\\\nDec\\uc0\\u226t spini \\uc0\\u537i ur\\uc0\\u259.\r\\\n/: Numai ro\\uc0\\u537ii trandafiri,\r\\\nPieptul Mi-l umplur\\uc0\\u259. :/}\n"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+              }
+            }
+          }
+          size {
+            width: 1344
+            height: 768
+          }
+          uuid {
+            string: "731a2a9e-ae17-4360-bf8f-3bb5a88528c9"
+          }
+        }
+      }
+    }
+  }
+  isEnabled: true
+}
+cues {
+  uuid {
+    string: "0a6e1262-7aed-4289-898f-ac48fdf18d57"
+  }
+  actions {
+    uuid {
+      string: "05a8462d-17d8-40be-8519-0e8894e711b1"
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "b89d9365-ea70-4289-84e7-d63c647ae469"
+              }
+              name: "Verse 4"
+              bounds {
+                origin {
+                }
+                size {
+                  width: 1344
+                  height: 768
+                }
+              }
+              opacity: 1
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                color {
+                }
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-Regular"
+                    size: 60
+                    bold: true
+                    family: "CMGSans"
+                  }
+                  capitalization: CAPITALIZATION_ALL_CAPS
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    line_spacing: 1.2
+                    paragraph_spacing: 4.2
+                    default_tab_interval: 36
+                  }
+                  kerning: 1
+                  custom_attributes {
+                    original_font_size: 60
+                  }
+                  background_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                rtf_data: "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c99985;\\cssrgb\\c100000\\c100000\\c100000\\c0;}\n\\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0\n\n\\f0\\b\\fs120 \\cf2 \\cb3 /: Eu sunt P\\uc0\\u226inea ce s-a fr\\uc0\\u226nt lumii-ntregi\r\\\n\\uc0\\u536i sunt Vinul noii legi. :/\r\\\nN-am venit s\\uc0\\u259  pl\\uc0\\u226ng \\uc0\\u238n drum\r\\\nR\\uc0\\u259ni ustur\\uc0\\u259toare,\r\\\n/: Pl\\uc0\\u226ng pe-acei ce pierd acum\r\\\nUltima chemare. :/}\n"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+              }
+            }
+          }
+          size {
+            width: 1344
+            height: 768
+          }
+          uuid {
+            string: "dde98ec8-bcf6-44f7-a894-fb60232d3072"
+          }
+        }
+      }
+    }
+  }
+  isEnabled: true
+}
+cues {
+  uuid {
+    string: "752e2a30-bd4c-489c-9f93-00a79ff95956"
+  }
+  actions {
+    uuid {
+      string: "4ea4c0e6-d4f2-4f74-9967-aeae5c4e8ffe"
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "592dd4f4-b968-43ec-891a-ef42923f8869"
+              }
+              name: "Verse 5"
+              bounds {
+                origin {
+                }
+                size {
+                  width: 1344
+                  height: 768
+                }
+              }
+              opacity: 1
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                color {
+                }
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-Regular"
+                    size: 60
+                    bold: true
+                    family: "CMGSans"
+                  }
+                  capitalization: CAPITALIZATION_ALL_CAPS
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    line_spacing: 1.2
+                    paragraph_spacing: 4.2
+                    default_tab_interval: 36
+                  }
+                  kerning: 1
+                  custom_attributes {
+                    original_font_size: 60
+                  }
+                  background_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                rtf_data: "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709\n\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}\n{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}\n{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c99985;\\cssrgb\\c100000\\c100000\\c100000\\c0;}\n\\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0\n\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0\n\n\\f0\\b\\fs120 \\cf2 \\cb3 /: A b\\uc0\\u259tut la u\\uc0\\u537a ta Cineva.\r\\\nO, deschide-I, nu mai sta! :/\r\\\nNu-L l\\uc0\\u259sa s\\uc0\\u259  plece trist,\r\\\nPoate niciodat\\uc0\\u259\r\\\n/: M\\uc0\\u226na Lui, la u\\uc0\\u537a ta,\r\\\nN-are s\\uc0\\u259  mai bat\\uc0\\u259. :/}\n"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+              }
+            }
+          }
+          size {
+            width: 1344
+            height: 768
+          }
+          uuid {
+            string: "3366dc6c-5181-4a96-b5a3-377c942b5e7f"
+          }
+        }
+      }
+    }
+  }
+  isEnabled: true
+}
+ccli {
+  author: "Ioan Lucu\310\233"
+  song_title: "A b\304\203tut la u\310\231a ta Cineva"
+  publisher: "Biserica Emanuel Sibiu"
+  copyright_year: 2023
+  album: "Biserica Emanuel Sibiu 2023"
+}
