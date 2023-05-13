@@ -18,6 +18,7 @@
     "google-protobuf": "^3.21.2",
     "lodash": "^4.17.21",
     "protobufjs": "^7.2.3",
+    "recursive-readdir": "^2.2.3",
     "ts-proto": "^1.147.1",
     "uuid": "^9.0.0"
   },
@@ -27,6 +28,7 @@
     "@types/jest": "^29.5.1",
     "@types/lodash": "^4.14.194",
     "@types/node": "^20.0.0",
+    "@types/recursive-readdir": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",

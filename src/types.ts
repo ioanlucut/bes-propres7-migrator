@@ -18,6 +18,9 @@ export enum SongSection {
   VERSE_6 = '[6]',
   VERSE_7 = '[7]',
   VERSE_8 = '[8]',
+  VERSE_9 = '[9]',
+  VERSE_10 = '[10]',
+  VERSE_11 = '[11]',
 }
 
 export type Verse = {

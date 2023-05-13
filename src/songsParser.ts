@@ -39,6 +39,15 @@ export const parseSong = (songText: string): Song => {
         case SequenceChar[SongSection.VERSE_8]: {
           return SongSection.VERSE_8;
         }
+        case SequenceChar[SongSection.VERSE_9]: {
+          return SongSection.VERSE_9;
+        }
+        case SequenceChar[SongSection.VERSE_10]: {
+          return SongSection.VERSE_10;
+        }
+        case SequenceChar[SongSection.VERSE_11]: {
+          return SongSection.VERSE_11;
+        }
         case SequenceChar[SongSection.CHORUS]: {
           return SongSection.CHORUS;
         }

@@ -1,11 +1,12 @@
 import fs from 'fs';
 import fsExtra from 'fs-extra';
 import path from 'path';
+import recursive from 'recursive-readdir';
 import { Presentation } from '../proto/presentation';
 import { parseSong } from './songsParser';
 import {
-  convertSongToProPresenter7,
   Config,
+  convertSongToProPresenter7,
 } from './proPresenter7SongConverter';
 
 const TXT_SONG_EXTENSION = '.txt';
@@ -15,7 +16,7 @@ const EMPTY_STRING = '';
 /**
  * Removes all the files from the out directory
  */
-export const migrateSongsToPP7Format = ({
+export const migrateSongsToPP7Format = async ({
   sourceDir,
   outDir,
   clearOutputDirFirst,
@@ -30,11 +31,11 @@ export const migrateSongsToPP7Format = ({
     fsExtra.emptydirSync(outDir);
   }
 
-  fs.readdirSync(sourceDir).forEach((fileName) => {
-    const filePath = path.join(sourceDir, fileName);
+  (await recursive(sourceDir)).forEach((filePath) => {
     const fileAsText = fs.readFileSync(filePath).toString();
+    const fileName = path.basename(filePath);
 
-    console.log(`Processing "${fileName}"...`);
+    console.log(`Processing "${filePath}"...`);
 
     const song = parseSong(fileAsText);
     const presentation = convertSongToProPresenter7(song, config);
@@ -49,6 +50,6 @@ export const migrateSongsToPP7Format = ({
       Buffer.from(Presentation.encode(presentation).finish()),
     );
 
-    console.log(`Successfully created "${outFile}".`);
+    console.log(`Successfully generated "${outFile}".`);
   });
 };
