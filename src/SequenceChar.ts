@@ -12,6 +12,7 @@ export const SequenceChar = {
   [SongSection.VERSE_9]: '9',
   [SongSection.VERSE_10]: '10',
   [SongSection.VERSE_11]: '11',
+  [SongSection.VERSE_12]: '12',
   [SongSection.CHORUS]: 'c',
   [SongSection.CHORUS_2]: 't',
   [SongSection.PRECHORUS]: 'p',

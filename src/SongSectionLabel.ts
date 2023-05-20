@@ -12,6 +12,7 @@ export const SongSectionLabel = {
   [SongSection.VERSE_9]: 'Verse 9',
   [SongSection.VERSE_10]: 'Verse 10',
   [SongSection.VERSE_11]: 'Verse 11',
+  [SongSection.VERSE_12]: 'Verse 11',
   [SongSection.BRIDGE]: 'Bridge',
   [SongSection.BRIDGE_2]: 'Bridge 2',
   [SongSection.CHORUS]: 'Chorus',
