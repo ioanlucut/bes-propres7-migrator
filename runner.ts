@@ -29,9 +29,11 @@ const CONFIG = {
   refMacroName: 'Songs',
 };
 
-migrateSongsToPP7Format({
-  sourceDir: process.env.SOURCE_DIR as string,
-  outDir: process.env.OUT_DIR as string,
-  clearOutputDirFirst: true,
-  config: CONFIG,
-});
+(async () => {
+  await migrateSongsToPP7Format({
+    sourceDir: process.env.SOURCE_DIR as string,
+    outDir: process.env.OUT_DIR as string,
+    clearOutputDirFirst: true,
+    config: CONFIG,
+  });
+})();
