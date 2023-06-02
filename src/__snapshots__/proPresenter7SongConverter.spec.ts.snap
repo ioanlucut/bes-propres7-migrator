@@ -93,7 +93,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
     "display": false,
     "publisher": "Biserica Emanuel Sibiu",
     "songNumber": 0,
-    "songTitle": "My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț",
+    "songTitle": "My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}",
   },
   "chordChart": undefined,
   "contentDestination": 0,
@@ -15670,7 +15670,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
   "multiTracksLicensing": undefined,
   "music": undefined,
   "musicKey": "",
-  "name": "My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț",
+  "name": "My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}",
   "notes": "",
   "selectedArrangement": {
     "string": "RANDOM_UUID_87",

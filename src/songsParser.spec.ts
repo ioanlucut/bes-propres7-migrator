@@ -1,7 +1,7 @@
 import { parseSong } from './songsParser';
 
 const SIMPLE_SONG = `[title]
-My custom title
+My custom title {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}
 
 [sequence]
 1,2,3,4,c,t,b,w,e,p,q,c,3,c
@@ -59,7 +59,7 @@ Row sequence 1
 Row sequence 2`;
 
 const SONG_WITH_SEQUENCE = `[title]
-My custom title
+My custom title {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}
 
 [sequence]
 1,2,3,4,c,t,b,w,e,p,q,c,3,c,c
@@ -120,7 +120,7 @@ Row sequence 1
 Row sequence 2`;
 
 const SONG_WITH_MISMATCHING_SEQUENCE = `[title]
-My custom title
+My custom title {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}
 
 [sequence]
 1,c,2,c,3,c,4,c

@@ -1,9 +1,15 @@
-import _, { without } from 'lodash';
+import _, { trim, without } from 'lodash';
 import { Song, SongSection, Verse } from './types';
 import { SongSectionLabel } from './SongSectionLabel';
 import { SequenceChar } from './SequenceChar';
 
 const COMMA = ',';
+
+export const getRelevantTitleContent = (titleContent: string) =>
+  titleContent
+    .split(/\{((?:[^{}]*\{[^{}]*})*[^{}]*?)}/gim)
+    .map(trim)
+    .filter(Boolean)[0];
 
 export const parseSong = (songText: string): Song => {
   const sectionTuples = songText
@@ -89,6 +95,10 @@ export const parseSong = (songText: string): Song => {
     const songSection = sectionTuples[sectionIndex] as SongSection;
     const songSectionContent = sectionTuples[sectionIndex + 1];
     hashMap[songSection] = songSectionContent;
+
+    if (songSection === SongSection.TITLE) {
+      hashMap[songSection] = getRelevantTitleContent(songSectionContent);
+    }
 
     if (
       songSection !== SongSection.TITLE &&

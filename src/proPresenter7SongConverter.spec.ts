@@ -60,7 +60,8 @@ describe('proPresenter7SongConverter', () => {
       SongSection.VERSE_7,
       SongSection.VERSE_8,
     ],
-    title: 'My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț',
+    title:
+      'My custom test song title abcdefghijlmnopqrstuvwxzÎâîăÂȘșĂȚț {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}',
     verses: [
       {
         content: `Row 1-1
