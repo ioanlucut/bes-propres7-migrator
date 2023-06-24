@@ -33,7 +33,7 @@ export const migrateSongsToPP7Format = async ({
 
   await fsExtra.ensureDirSync(outDir);
 
-  (await recursive(sourceDir)).forEach((filePath) => {
+  (await recursive(sourceDir, ['.DS_Store'])).forEach((filePath) => {
     const fileAsText = fs.readFileSync(filePath).toString();
     const fileName = path.basename(filePath);
 
