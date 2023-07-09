@@ -322,7 +322,7 @@ export const convertSongToProPresenter7 = (
   });
 
   const songConfigHashMap = {} as Record<
-    SongSection,
+    string,
     {
       cue: Cue;
       cueGroup: Presentation_CueGroup;

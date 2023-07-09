@@ -4563,11 +4563,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             98,
-                            114,
-                            105,
-                            100,
-                            103,
-                            101,
                             93,
                             125,
                             10,
@@ -5353,12 +5348,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             98,
-                            114,
-                            105,
-                            100,
-                            103,
-                            101,
-                            32,
                             50,
                             93,
                             125,
@@ -6145,11 +6134,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             99,
-                            104,
-                            111,
-                            114,
-                            117,
-                            115,
                             93,
                             125,
                             10,
@@ -6935,12 +6919,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             99,
-                            104,
-                            111,
-                            114,
-                            117,
-                            115,
-                            32,
                             50,
                             93,
                             125,
@@ -7727,11 +7705,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             101,
-                            110,
-                            100,
-                            105,
-                            110,
-                            103,
                             93,
                             125,
                             10,
@@ -8517,14 +8490,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             112,
-                            114,
-                            101,
-                            99,
-                            104,
-                            111,
-                            114,
-                            117,
-                            115,
                             93,
                             125,
                             10,
@@ -9310,15 +9275,6 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             32,
                             91,
                             112,
-                            114,
-                            101,
-                            99,
-                            104,
-                            111,
-                            114,
-                            117,
-                            115,
-                            32,
                             50,
                             93,
                             125,
@@ -10104,6 +10060,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             49,
                             93,
                             125,
@@ -10889,6 +10846,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             50,
                             93,
                             125,
@@ -11674,6 +11632,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             51,
                             93,
                             125,
@@ -12459,6 +12418,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             52,
                             93,
                             125,
@@ -13244,6 +13204,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             53,
                             93,
                             125,
@@ -14029,6 +13990,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             54,
                             93,
                             125,
@@ -14814,6 +14776,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             55,
                             93,
                             125,
@@ -15599,6 +15562,7 @@ exports[`proPresenter7SongConverter should convert to a presentation w/ settings
                             58,
                             32,
                             91,
+                            118,
                             56,
                             93,
                             125,
@@ -15724,7 +15688,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [bridge]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [b]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15733,7 +15697,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [bridge 2]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [b2]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15742,7 +15706,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [chorus]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [c]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15751,7 +15715,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [chorus 2]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [c2]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15760,7 +15724,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [ending]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [e]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15769,7 +15733,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [prechorus]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [p]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15778,7 +15742,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [prechorus 2]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [p2]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15787,7 +15751,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [1]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v1]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15796,7 +15760,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [2]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v2]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15805,7 +15769,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [3]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v3]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15814,7 +15778,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [4]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v4]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15823,7 +15787,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [5]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v5]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15832,7 +15796,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [6]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v6]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15841,7 +15805,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [7]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v7]}
 ",
   "{\\rtf1\\ansi\\ansicpg1252\\cocoartf2709
 \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset0 CMGSans-BoldCAPS;}
@@ -15850,7 +15814,7 @@ Row 2-2}
 \\paperw12240\\paperh15840\\vieww40760\\viewh23980\\viewkind0
 \\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\pardirnatural\\qc\\partightenfactor0
 
-\\f0\\b\\fs120 \\cf2 \\cb3 Content: [8]}
+\\f0\\b\\fs120 \\cf2 \\cb3 Content: [v8]}
 ",
 ]
 `;

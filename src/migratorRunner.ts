@@ -8,10 +8,7 @@ import {
   Config,
   convertSongToProPresenter7,
 } from './proPresenter7SongConverter';
-
-const TXT_SONG_EXTENSION = '.txt';
-const PRO_EXTENSION = `.pro`;
-const EMPTY_STRING = '';
+import { EMPTY_STRING, PRO_EXTENSION, TXT_EXTENSION } from './constants';
 
 /**
  * Removes all the files from the out directory
@@ -43,7 +40,7 @@ export const migrateSongsToPP7Format = async ({
     const presentation = convertSongToProPresenter7(song, config);
 
     const outFile = `${outDir}/${fileName.replace(
-      TXT_SONG_EXTENSION,
+      TXT_EXTENSION,
       EMPTY_STRING,
     )}${PRO_EXTENSION}`;
 

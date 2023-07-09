@@ -1,356 +1,171 @@
 import { parseSong } from './songsParser';
 
 const SIMPLE_SONG = `[title]
-My custom title {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}
+My custom title
 
 [sequence]
-1,2,3,4,c,t,b,w,e,p,q,c,3,c
+v1,v2,v3,p,p2,p3,c,c2,c3,b,b2,b3
 
-[1]
-Row 1
-Row 2
+[v1]
+Row for v1 
 
-[2]
-Row 3
-Row 4
+[v2]
+Row for v2 
 
-[3]
-Row 5
-Row 6
+[v3]
+Row for v3 
 
-[4]
-Row 7
-Row 8
+[p]
+Row for p 
 
-[bridge]
-Row bridge 1
-Row bridge 2
+[p2]
+Row for p2 
 
-[bridge 2]
-Row bridge 1
-Row bridge 2
+[p3]
+Row for p3 
 
-[chorus]
-Row chorus 1
-Row chorus 2
+[c]
+Row for c 
 
-[chorus 2]
-Row chorus 1
-Row chorus 2
+[c2]
+Row for c2 
 
-[ending]
-Row ending 1
-Row ending 2
+[c3]
+Row for c3 
 
-[prechorus]
-Row prechorus 1
-Row prechorus 2
+[b]
+Row for b 
 
-[prechorus 2]
-Row prechorus 1
-Row prechorus 2
+[b2]
+Row for b2 
 
-[title]
-Row title 1
-Row title 2
+[b3]
+Row for b3 
 
-[sequence]
-Row sequence 1
-Row sequence 2`;
-
-const SONG_WITH_SEQUENCE = `[title]
-My custom title {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}
-
-[sequence]
-1,2,3,4,c,t,b,w,e,p,q,c,3,c,c
-
-[1]
-Row 1
-
-[2]
-Row 3
-Row 4
-
-[2]
-Row 3
-Row 4
-
-[3]
-Row 5
-Row 6
-
-[4]
-Row 7
-Row 8
-
-[bridge]
-Row bridge 1
-Row bridge 2
-
-[bridge 2]
-Row bridge 1
-Row bridge 2
-
-[chorus]
-Row chorus 1
-Row chorus 2
-
-[chorus 2]
-Row chorus 1
-Row chorus 2
-
-[ending]
-Row ending 1
-Row ending 2
-
-[prechorus]
-Row prechorus 1
-Row prechorus 2
-
-[prechorus 2]
-Row prechorus 1
-Row prechorus 2
-
-[title]
-Row title 1
-Row title 2
-
-[sequence]
-Row sequence 1
-Row sequence 2`;
+`;
 
 const SONG_WITH_MISMATCHING_SEQUENCE = `[title]
-My custom title {Alternative: {The Cause Of Christ}, Author: {Kari Jobe}}
+My custom title
 
 [sequence]
-1,c,2,c,3,c,4,c
+v1
 
-[1]
-Row 1
+[v1]
+Row for v1 
 
-[2]
-Row 3
+[v2]
+Row for v2 
 
-[3]
-Row 5
+[v3]
+Row for v3 
 
-[4]
-Row 7
+[p]
+Row for p 
 
-[bridge]
-Row bridge 1
+[p2]
+Row for p2 
 
-[bridge 2]
-Row bridge 1
+[p3]
+Row for p3 
 
-[chorus]
-Row chorus 1
+[c]
+Row for c 
 
-[chorus 2]
-Row chorus 1
+[c2]
+Row for c2 
 
-[ending]
-Row ending 1
+[c3]
+Row for c3 
 
-[prechorus]
-Row prechorus 1
+[b]
+Row for b 
 
-[prechorus 2]
-Row prechorus 1
+[b2]
+Row for b2 
 
-[title]
-Row title 1
-
-[sequence]
-Row sequence 2`;
+[b3]
+Row for b3 
+`;
 
 describe('songsParser', () => {
   it('should work correctly with a simple song', () => {
     expect(parseSong(SIMPLE_SONG)).toMatchInlineSnapshot(`
       {
         "sequence": [
-          "[1]",
-          "[2]",
-          "[3]",
-          "[4]",
-          "[chorus]",
-          "[chorus 2]",
-          "[bridge]",
-          "[bridge 2]",
-          "[ending]",
-          "[prechorus]",
-          "[prechorus 2]",
-          "[chorus]",
-          "[3]",
-          "[chorus]",
+          "[v1]",
+          "[v2]",
+          "[v3]",
+          "[p]",
+          "[p2]",
+          "[p3]",
+          "[c]",
+          "[c2]",
+          "[c3]",
+          "[b]",
+          "[b2]",
+          "[b3]",
         ],
-        "title": "Row title 1
-      Row title 2",
+        "title": "My custom title",
         "verses": [
           {
-            "content": "Row 1
-      Row 2",
-            "section": "[1]",
+            "content": "Row for v1",
+            "section": "[v1]",
             "sectionLabel": "Verse 1",
           },
           {
-            "content": "Row 3
-      Row 4",
-            "section": "[2]",
+            "content": "Row for v2",
+            "section": "[v2]",
             "sectionLabel": "Verse 2",
           },
           {
-            "content": "Row 5
-      Row 6",
-            "section": "[3]",
+            "content": "Row for v3",
+            "section": "[v3]",
             "sectionLabel": "Verse 3",
           },
           {
-            "content": "Row 7
-      Row 8",
-            "section": "[4]",
-            "sectionLabel": "Verse 4",
-          },
-          {
-            "content": "Row bridge 1
-      Row bridge 2",
-            "section": "[bridge]",
-            "sectionLabel": "Bridge",
-          },
-          {
-            "content": "Row bridge 1
-      Row bridge 2",
-            "section": "[bridge 2]",
-            "sectionLabel": "Bridge 2",
-          },
-          {
-            "content": "Row chorus 1
-      Row chorus 2",
-            "section": "[chorus]",
-            "sectionLabel": "Chorus",
-          },
-          {
-            "content": "Row chorus 1
-      Row chorus 2",
-            "section": "[chorus 2]",
-            "sectionLabel": "Chorus 2",
-          },
-          {
-            "content": "Row ending 1
-      Row ending 2",
-            "section": "[ending]",
-            "sectionLabel": "Ending",
-          },
-          {
-            "content": "Row prechorus 1
-      Row prechorus 2",
-            "section": "[prechorus]",
+            "content": "Row for p",
+            "section": "[p]",
             "sectionLabel": "Prechorus",
           },
           {
-            "content": "Row prechorus 1
-      Row prechorus 2",
-            "section": "[prechorus 2]",
+            "content": "Row for p2",
+            "section": "[p2]",
             "sectionLabel": "Prechorus 2",
           },
-        ],
-      }
-    `);
-  });
-
-  it('should correctly follow the sequence', () => {
-    expect(parseSong(SONG_WITH_SEQUENCE)).toMatchInlineSnapshot(`
-      {
-        "sequence": [
-          "[1]",
-          "[2]",
-          "[3]",
-          "[4]",
-          "[chorus]",
-          "[chorus 2]",
-          "[bridge]",
-          "[bridge 2]",
-          "[ending]",
-          "[prechorus]",
-          "[prechorus 2]",
-          "[chorus]",
-          "[3]",
-          "[chorus]",
-          "[chorus]",
-        ],
-        "title": "Row title 1
-      Row title 2",
-        "verses": [
           {
-            "content": "Row 1",
-            "section": "[1]",
-            "sectionLabel": "Verse 1",
+            "content": "Row for p3",
+            "section": "[p3]",
+            "sectionLabel": "Prechorus 3",
           },
           {
-            "content": "Row 3
-      Row 4",
-            "section": "[2]",
-            "sectionLabel": "Verse 2",
-          },
-          {
-            "content": "Row 3
-      Row 4",
-            "section": "[2]",
-            "sectionLabel": "Verse 2",
-          },
-          {
-            "content": "Row 5
-      Row 6",
-            "section": "[3]",
-            "sectionLabel": "Verse 3",
-          },
-          {
-            "content": "Row 7
-      Row 8",
-            "section": "[4]",
-            "sectionLabel": "Verse 4",
-          },
-          {
-            "content": "Row bridge 1
-      Row bridge 2",
-            "section": "[bridge]",
-            "sectionLabel": "Bridge",
-          },
-          {
-            "content": "Row bridge 1
-      Row bridge 2",
-            "section": "[bridge 2]",
-            "sectionLabel": "Bridge 2",
-          },
-          {
-            "content": "Row chorus 1
-      Row chorus 2",
-            "section": "[chorus]",
+            "content": "Row for c",
+            "section": "[c]",
             "sectionLabel": "Chorus",
           },
           {
-            "content": "Row chorus 1
-      Row chorus 2",
-            "section": "[chorus 2]",
+            "content": "Row for c2",
+            "section": "[c2]",
             "sectionLabel": "Chorus 2",
           },
           {
-            "content": "Row ending 1
-      Row ending 2",
-            "section": "[ending]",
-            "sectionLabel": "Ending",
+            "content": "Row for c3",
+            "section": "[c3]",
+            "sectionLabel": "Chorus 3",
           },
           {
-            "content": "Row prechorus 1
-      Row prechorus 2",
-            "section": "[prechorus]",
-            "sectionLabel": "Prechorus",
+            "content": "Row for b",
+            "section": "[b]",
+            "sectionLabel": "Bridge",
           },
           {
-            "content": "Row prechorus 1
-      Row prechorus 2",
-            "section": "[prechorus 2]",
-            "sectionLabel": "Prechorus 2",
+            "content": "Row for b2",
+            "section": "[b2]",
+            "sectionLabel": "Bridge 2",
+          },
+          {
+            "content": "Row for b3",
+            "section": "[b3]",
+            "sectionLabel": "Bridge 3",
           },
         ],
       }
@@ -361,7 +176,7 @@ describe('songsParser', () => {
     expect(() =>
       parseSong(SONG_WITH_MISMATCHING_SEQUENCE),
     ).toThrowErrorMatchingInlineSnapshot(
-      `"The following are present in the content but not in the sequence: [bridge],[bridge 2],[chorus 2],[ending],[prechorus],[prechorus 2]"`,
+      `"The following are present in the content but not in the sequence: [v2],[v3],[p],[p2],[p3],[c],[c2],[c3],[b],[b2],[b3]"`,
     );
   });
 });
