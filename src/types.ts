@@ -22,12 +22,6 @@ export const SongSection = {
   ENDING: `[${SequenceChar.ENDING}]`,
 };
 
-export enum SongMeta {
-  ALTERNATIVE = 'alternative',
-  AUTHOR = 'author',
-  VERSION = 'version',
-}
-
 export enum PPGroup {
   VERSE = 'Verse',
   BRIDGE = 'Bridge',
