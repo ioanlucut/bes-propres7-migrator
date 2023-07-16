@@ -18,6 +18,7 @@ import {
   Action,
   Action_ActionType,
   Action_ContentDestination,
+  Action_Label,
   Action_MacroType,
   Action_SlideType,
 } from '../proto/action';
@@ -190,6 +191,10 @@ const createEmptySmartIntroCue = (config: Config) => {
   const presentationAction = Action.create({
     uuid: UUID.create({
       string: randomUUID(),
+    }),
+    label: Action_Label.create({
+      text: 'Click me first!',
+      color: TRANSPARENT_COLOR,
     }),
     isEnabled: true,
     slide,
