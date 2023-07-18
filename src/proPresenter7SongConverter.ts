@@ -47,7 +47,7 @@ import {
   Graphics_Text_VerticalAlignment,
 } from '../proto/graphicsData';
 import { Group } from '../proto/groups';
-import { Song, SongSection, Verse } from './types';
+import { Section, Song } from './types';
 import { convertToRtf } from './txtToRtfConverter';
 
 export type Config = {
@@ -193,7 +193,7 @@ const createEmptySmartIntroCue = (config: Config) => {
       string: randomUUID(),
     }),
     label: Action_Label.create({
-      text: 'Click me first!',
+      text: 'Click me!',
       color: TRANSPARENT_COLOR,
     }),
     isEnabled: true,
@@ -242,7 +242,7 @@ const createEmptySmartIntroCue = (config: Config) => {
 };
 
 const processVerse = (
-  { content, sectionLabel }: Verse,
+  { content, sectionGroup, subSectionLabel }: Section,
   { title }: Song,
   config: Config,
 ) => {
@@ -258,7 +258,7 @@ const processVerse = (
       fill: Graphics_Fill.create({
         color: TRANSPARENT_COLOR,
       }),
-      name: sectionLabel,
+      name: sectionGroup,
       bounds: Graphics_Rect.create({
         origin: Graphics_Point.create({
           x: 0,
@@ -291,6 +291,12 @@ const processVerse = (
     }),
     isEnabled: true,
     slide,
+    label: subSectionLabel
+      ? Action_Label.create({
+          text: subSectionLabel,
+          color: TRANSPARENT_COLOR,
+        })
+      : undefined,
     type: Action_ActionType.ACTION_TYPE_PRESENTATION_SLIDE,
   });
 
@@ -307,7 +313,7 @@ const processVerse = (
   const cueGroup = Presentation_CueGroup.create({
     group: Group.create({
       uuid: groupUUID,
-      name: sectionLabel,
+      name: sectionGroup,
       color: CUE_GROUP_COLOR,
     }),
     cueIdentifiers: [cueUUID],
@@ -337,7 +343,7 @@ export const convertSongToProPresenter7 = (
   const slidesConfig = verses.map((verse) => {
     const { cue, cueGroup } = processVerse(verse, song, config);
 
-    songConfigHashMap[verse.section] = { cue, cueGroup };
+    songConfigHashMap[verse.sectionIdentifier] = { cue, cueGroup };
 
     return { cue, cueGroup };
   });
@@ -356,8 +362,8 @@ export const convertSongToProPresenter7 = (
       groupIdentifiers: [
         introConfigCueGroup?.group?.uuid as UUID,
         ...sequence.map(
-          (section) =>
-            songConfigHashMap[section]?.cueGroup?.group?.uuid as UUID,
+          (sectionIdentifier) =>
+            songConfigHashMap[sectionIdentifier]?.cueGroup?.group?.uuid as UUID,
         ),
       ],
     }),

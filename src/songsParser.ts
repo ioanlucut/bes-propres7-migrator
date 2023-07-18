@@ -1,52 +1,54 @@
-import _, { trim, without } from 'lodash';
-import { Song, SongSection, Verse } from './types';
-import { deriveSlideLabelFrom } from './slideLabelDeriver';
-import { COMMA, EMPTY_STRING } from './constants';
+import { difference, first, identity, isEmpty, pickBy, without } from 'lodash';
+import { Song, SongMeta, SongSection, Section } from './types';
+import { getMatchingGroup } from './proPresenterMatchingGroupDeriver';
+import { COMMA } from './constants';
+import {
+  getCharWithMarkup,
+  getCharWithoutMarkup,
+  getMetaSectionsFromTitle,
+  getSongInSectionTuples,
+  getTitleBySections,
+} from './core';
+import { getMatchingSubGroupLabel } from './proPresenterMatchingSubGroupLabelDeriver';
 
-export const getRelevantTitleContent = (titleContent: string) =>
-  titleContent
-    .split(/\{((?:[^{}]*\{[^{}]*})*[^{}]*?)}/gim)
-    .map(trim)
-    .filter(Boolean)[0];
-
-export const parseSong = (songText: string): Song => {
-  const sectionTuples = songText
-    .split(/(\[.*])/gim)
-    .filter(Boolean)
-    .map(_.trim);
+export const parseSong = (songContent: string): Song => {
+  const sectionTuples = getSongInSectionTuples(songContent);
 
   const definedSequenceWithMarkup = sectionTuples[3]
     .split(COMMA)
-    .map((charWithoutMarkup: string) => `[${charWithoutMarkup}]`);
+    .map(getCharWithMarkup);
 
   const hashMap = {} as Record<string, string>;
-  const verses = [] as Verse[];
+  const sections = [] as Section[];
 
   for (
     let sectionIndex = 0;
     sectionIndex < sectionTuples.length;
     sectionIndex = sectionIndex + 2
   ) {
-    const songSection = sectionTuples[sectionIndex];
+    const sectionIdentifier = sectionTuples[sectionIndex];
     const songSectionContent = sectionTuples[sectionIndex + 1];
-    hashMap[songSection] = songSectionContent;
 
-    if (songSection === SongSection.TITLE) {
-      hashMap[songSection] = getRelevantTitleContent(songSectionContent);
+    hashMap[sectionIdentifier] = songSectionContent;
+
+    if (sectionIdentifier === SongSection.TITLE) {
+      hashMap[SongSection.TITLE] = first(
+        getTitleBySections(songSectionContent),
+      ) as string;
     }
 
     if (
-      songSection !== SongSection.TITLE &&
-      songSection !== SongSection.SEQUENCE
+      sectionIdentifier !== SongSection.TITLE &&
+      sectionIdentifier !== SongSection.SEQUENCE
     ) {
-      verses.push({
-        content: songSectionContent,
-        sectionLabel: deriveSlideLabelFrom(
-          songSection
-            .replaceAll('[', EMPTY_STRING)
-            .replaceAll(']', EMPTY_STRING),
+      sections.push({
+        sectionIdentifier,
+        sectionGroup: getMatchingGroup(getCharWithoutMarkup(sectionIdentifier)),
+        subSectionLabel: getMatchingSubGroupLabel(
+          getCharWithoutMarkup(sectionIdentifier),
+          definedSequenceWithMarkup.map(getCharWithoutMarkup),
         ),
-        section: songSection,
+        content: songSectionContent,
       });
     }
   }
@@ -57,20 +59,31 @@ export const parseSong = (songText: string): Song => {
     SongSection.SEQUENCE,
   );
 
-  const mismatchingSequence = _.difference(
+  const mismatchingSequence = difference(
     actualSections,
     definedSequenceWithMarkup,
   );
 
-  if (!_.isEmpty(mismatchingSequence)) {
+  if (!isEmpty(mismatchingSequence)) {
     throw new Error(
-      `The following are present in the content but not in the sequence: ${mismatchingSequence}`,
+      `The following are present in the content but not in the sequence: ${mismatchingSequence}.`,
     );
   }
 
-  return {
-    sequence: definedSequenceWithMarkup,
-    title: hashMap[SongSection.TITLE],
-    verses,
-  } as Song;
+  const titleContent = hashMap[SongSection.TITLE];
+  const metaSectionsFromTitle = getMetaSectionsFromTitle(
+    titleContent,
+  ) as Record<SongMeta, string>;
+
+  return pickBy(
+    {
+      id: metaSectionsFromTitle[SongMeta.ID],
+      title: titleContent,
+      author: metaSectionsFromTitle[SongMeta.AUTHOR],
+      sequence: definedSequenceWithMarkup,
+      contentHash: metaSectionsFromTitle[SongMeta.CONTENT_HASH],
+      verses: sections,
+    },
+    identity,
+  ) as Song;
 };
