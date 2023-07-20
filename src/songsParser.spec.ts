@@ -363,7 +363,6 @@ describe('songsParser', () => {
       parseSong(
         createAdvancedSongMock([
           ['v1', ['Subsection 1.1', 'Subsection 1.2'].join(DOUBLE_LINE_TUPLE)],
-
           ['v2', 'Section 2'],
           ['v3', 'Section 3'],
         ]),
