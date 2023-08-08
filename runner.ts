@@ -1,39 +1,23 @@
-import dotenv from 'dotenv';
-import { Config, migrateSongsToPP7Format } from './';
-import { Presentation_CCLI } from './proto/presentation';
-import { Graphics_Text_Attributes_Font } from './proto/graphicsData';
-
-dotenv.config();
-
-const CONFIG = {
-  arrangementName: 'BES',
-  ccliSettings: {
-    publisher: 'Biserica Emanuel Sibiu',
-    author: 'Ioan Lucuț',
-    copyrightYear: new Date().getFullYear(),
-    album: `Biserica Emanuel Sibiu ${new Date().getFullYear()}`,
-    songNumber: 0,
-  } as Presentation_CCLI,
-  fontConfig: {
-    name: 'CMGSans-Regular',
-    size: 60,
-    family: 'CMGSans',
-    bold: true,
-  } as Graphics_Text_Attributes_Font,
-  graphicSize: {
-    width: 1920,
-    height: 1080,
+const x = {
+  address: {
+    zip: '1220',
+    city: 'Wien',
+    street: 'Donau-City-Strasse 3',
+    countryCode: 'AT',
   },
-  presentationCategory: `Worship Songs ~ BES ${new Date().getFullYear()}`,
-  refMacroId: '3ffd01b7-104f-499f-aac9-a13135006d0e',
-  refMacroName: 'Songs',
+  information: {},
+  external: {
+    geo: {
+      lat: 48.231334,
+      lon: 16.414352,
+    },
+    rootRegion: '009',
+  },
+  geo: {
+    lon: 16.41241,
+    lat: 48.23337,
+  },
+  geoHierarchy: ['009', '009001', '009001022'],
+  shapeIds: ['1040009', '1040009001', '1040009001022', 'P040-1220'],
+  rootRegion: '009',
 };
-
-(async () => {
-  await migrateSongsToPP7Format({
-    sourceDir: process.env.SOURCE_DIR as string,
-    outDir: process.env.OUT_DIR as string,
-    clearOutputDirFirst: true,
-    config: CONFIG,
-  });
-})();

@@ -116,6 +116,9 @@ describe('songsParser', () => {
     expect(parseSong(SONG_WITH_SUBSECTIONS_MOCK_FILE_CONTENT))
       .toMatchInlineSnapshot(`
       {
+        "author": "CustomAuthor",
+        "contentHash": "#customHash",
+        "id": "customId",
         "sequence": [
           "[v1.1]",
           "[v1.2]",
@@ -287,6 +290,9 @@ describe('songsParser', () => {
     expect(parseSong(SONG_WITH_SUBSECTIONS_MOCK_FILE_CONTENT))
       .toMatchInlineSnapshot(`
       {
+        "author": "CustomAuthor",
+        "contentHash": "#customHash",
+        "id": "customId",
         "sequence": [
           "[v1.1]",
           "[v1.2]",

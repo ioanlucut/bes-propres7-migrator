@@ -115,3 +115,25 @@ export type Song = {
   verses: Section[];
   version?: string;
 };
+
+export type SongManifest = {
+  id: string;
+  fileName: string;
+  contentHash: string;
+};
+
+export type SongsInventoryManifest = {
+  updatedOn: string;
+  inventory: SongManifest[];
+};
+
+export type DeployableSong = {
+  song: Song;
+  fileName: string;
+  fileAsText: string;
+};
+
+export type ConvertedFileStats = {
+  songFileName: string;
+  songFilePath: string;
+};

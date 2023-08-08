@@ -36,26 +36,26 @@ Domn al veșniciei, în veci! Amin!
 - Assuming that the following config is fine:
 
 ```dotenv
-SOURCE_DIR=directory-with-txt-songs
-OUT_DIR=directory-with-pro-songs
+LOCAL_SOURCE_DIR=directory-with-txt-songs
+LOCAL_OUT_DIR=directory-with-pro-songs
 ```
 
-Simply run the `npm run migrate:local`
+Simply run the `npm run convert:local`
 
 ### How to customize the runner
 
 - Pass the following env variables with your source and out directories
 
 ```dotenv
-SOURCE_DIR=directory-with-txt-songs
-OUT_DIR=directory-with-pro-songs
+LOCAL_SOURCE_DIR=directory-with-txt-songs
+LOCAL_OUT_DIR=directory-with-pro-songs
 ```
 
-- Use the `migrateSongsToPP7Format` method to do the conversion as follows:
+- Use the `convertSongsToPP7FormatLocally` method to do the conversion as follows:
 
 ```typescript
 import dotenv from 'dotenv';
-import { Config, migrateSongsToPP7Format } from './';
+import { Config, convertSongsToPP7FormatLocally } from './';
 import { Presentation_CCLI } from './proto/presentation';
 import { Graphics_Text_Attributes_Font } from './proto/graphicsData';
 
@@ -87,10 +87,9 @@ const CONFIG = {
     'A macro name for referencing the macro id in the first intro blank slide',
 };
 
-migrateSongsToPP7Format({
-  sourceDir: process.env.SOURCE_DIR as string,
-  outDir: process.env.OUT_DIR as string,
-  clearOutputDirFirst: true,
+convertSongsToPP7FormatLocally({
+  sourceDir: process.env.LOCAL_SOURCE_DIR as string,
+  baseLocalDir: process.env.LOCAL_OUT_DIR as string,
   config: CONFIG,
 });
 ```

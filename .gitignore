@@ -1,3 +1,5 @@
 node_modules/
 .idea
-pp7-songs
+out_temp_for_local
+.env.debug
+out_temp_for_remote

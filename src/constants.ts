@@ -12,6 +12,8 @@ export const SLASH = '/';
 
 export const HASH = '#';
 
+export const DASH = '-';
+
 export const TXT_EXTENSION = '.txt';
 
 export const TEST_FILE = 'TEMPLATE.txt';
@@ -34,3 +36,5 @@ export const TEST_ENV = 'test';
 export const EMPTY_SPACE = ' ';
 
 export const PRO_EXTENSION = `.pro`;
+
+export const MANIFEST_FILE_NAME = 'manifest.json';
