@@ -3,3 +3,4 @@ node_modules/
 out_temp_for_local
 .env.debug
 out_temp_for_remote
+out_temp_for_remote_debug
