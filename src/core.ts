@@ -1,15 +1,26 @@
-import { first, last, parseInt, trim } from 'lodash';
 import chalk from 'chalk';
-import { SequenceChar } from './types';
+import {
+  filter,
+  first,
+  includes,
+  last,
+  parseInt,
+  size,
+  trim,
+  uniq,
+} from 'lodash';
+import { SequenceChar, SongMeta } from './types';
 import {
   COLON,
   COMMA,
+  DASH,
   DOUBLE_LINE_TUPLE,
   EMPTY_STRING,
   HASH,
   NEW_LINE_TUPLE,
   TEST_ENV,
 } from './constants';
+import assert from 'node:assert';
 
 const MISSING_SEQUENCE_NUMBER = 1;
 
@@ -84,7 +95,7 @@ export const getMetaSectionsFromTitle = (titleContent: string) => {
       const [sequence, content] = entry.split(COLON);
 
       return { ...accumulator, [sequence]: trim(content) };
-    }, {});
+    }, {}) as Record<SongMeta, string>;
 };
 
 export const createSongMock = (
@@ -119,3 +130,47 @@ ${tuples
 
 export const convertSequenceToNumber = (sequenceOrderQualifier: string) =>
   parseInt(sequenceOrderQualifier) || MISSING_SEQUENCE_NUMBER;
+
+export const getVersionedDir = (now = new Date()) =>
+  now.getFullYear() +
+  DASH +
+  ('0' + (now.getMonth() + 1)).slice(-2) +
+  DASH +
+  ('0' + now.getDate()).slice(-2) +
+  DASH +
+  ('0' + now.getHours()).slice(-2) +
+  COLON +
+  ('0' + now.getMinutes()).slice(-2) +
+  COLON +
+  ('0' + now.getSeconds()).slice(-2);
+
+export const parseDateFromVersionedDir = (versionFolder: string) => {
+  const [year, month, day, time] = versionFolder.split(DASH);
+  const [hour, minute, second] = time.split(COLON);
+
+  return new Date(
+    parseInt(year),
+    parseInt(month) - 1,
+    parseInt(day),
+    parseInt(hour),
+    parseInt(minute),
+    parseInt(second),
+  );
+};
+
+export const getClosestVersionedDir = (diffDate: Date, dates: Date[]) =>
+  first(
+    dates.sort((a, b) => {
+      // @ts-ignore
+      return Math.abs(diffDate - a) - Math.abs(diffDate - b); // sort a before b when the distance is smaller
+    }),
+  );
+
+export const assertUniqueness = (array: string[]) =>
+  assert.equal(
+    size(uniq(array)),
+    size(array),
+    `There are duplicates: ${filter(array, (value, index, iteratee) =>
+      includes(iteratee, value, index + 1),
+    ).join(COMMA)}`,
+  );

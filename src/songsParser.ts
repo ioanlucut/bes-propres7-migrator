@@ -20,6 +20,7 @@ export const parseSong = (songContent: string): Song => {
 
   const hashMap = {} as Record<string, string>;
   const sections = [] as Section[];
+  let rawTitle = '';
 
   for (
     let sectionIndex = 0;
@@ -32,7 +33,8 @@ export const parseSong = (songContent: string): Song => {
     hashMap[sectionIdentifier] = songSectionContent;
 
     if (sectionIdentifier === SongSection.TITLE) {
-      hashMap[SongSection.TITLE] = first(
+      rawTitle = songSectionContent;
+      hashMap[sectionIdentifier] = first(
         getTitleBySections(songSectionContent),
       ) as string;
     }
@@ -71,9 +73,10 @@ export const parseSong = (songContent: string): Song => {
   }
 
   const titleContent = hashMap[SongSection.TITLE];
-  const metaSectionsFromTitle = getMetaSectionsFromTitle(
-    titleContent,
-  ) as Record<SongMeta, string>;
+  const metaSectionsFromTitle = getMetaSectionsFromTitle(rawTitle) as Record<
+    SongMeta,
+    string
+  >;
 
   return pickBy(
     {

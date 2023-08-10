@@ -1,9 +1,16 @@
 import {
+  parseDateFromVersionedDir,
   getMetaSectionsFromTitle,
   getSongInSectionTuples,
   getTitleWithoutMeta,
+  getVersionedDir,
+  getClosestVersionedDir,
 } from './core';
 import { SIMPLE_SONG_MOCK_FILE_CONTENT } from '../mocks';
+
+jest
+  .useFakeTimers()
+  .setSystemTime(new Date('2023-02-19T11:12:13.000Z').getTime());
 
 describe('core', () => {
   describe('getSongInSectionTuples', () => {
@@ -72,6 +79,40 @@ describe('core', () => {
           "id": "customId",
         }
       `);
+    });
+  });
+
+  describe('getClosestVersionedDir', () => {
+    it('should work correctly', () => {
+      expect(getVersionedDir()).toMatchInlineSnapshot(`"2023-02-19-13:12:13"`);
+    });
+  });
+
+  describe('parseDateFromVersionedDir', () => {
+    it('should work correctly', () => {
+      expect(
+        parseDateFromVersionedDir('2023-02-19-11:12:13'),
+      ).toMatchInlineSnapshot(`2023-02-19T09:12:13.000Z`);
+
+      expect(
+        parseDateFromVersionedDir('2023-08-08-19:17:25'),
+      ).toMatchInlineSnapshot(`2023-08-08T16:17:25.000Z`);
+    });
+  });
+
+  describe('getClosestVersionedDir', () => {
+    it('should work correctly', () => {
+      expect(
+        getClosestVersionedDir(
+          parseDateFromVersionedDir('2023-26-20-11:12:13'),
+          [
+            parseDateFromVersionedDir('2023-02-20-11:12:13'),
+            parseDateFromVersionedDir('2023-02-19-11:12:13'),
+            parseDateFromVersionedDir('2023-02-23-11:12:13'),
+            parseDateFromVersionedDir('2023-02-24-11:12:13'),
+          ],
+        ),
+      ).toMatchInlineSnapshot(`2023-02-24T09:12:13.000Z`);
     });
   });
 });

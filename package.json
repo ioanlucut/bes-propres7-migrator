@@ -1,22 +1,24 @@
 {
   "name": "migrator_propres7-node",
   "version": "1.0.0",
-  "description": "A migrator from .txt song lyrics to PP7 pro format.",
+  "description": "A converter from .txt song lyrics to PP7 pro format.",
   "main": "index.ts",
   "scripts": {
-    "test:ci": "NODE_ENV=test jest --runInBand --no-cache",
-    "test:watch": "NODE_ENV=test TZ='Europe/Berlin' jest --watch --logHeapUsage",
+    "test:ci": "NODE_ENV=test TZ='Europe/Bucharest' jest --runInBand --no-cache",
+    "test:watch": "NODE_ENV=test TZ='Europe/Bucharest' jest --watch --logHeapUsage",
     "test": "is-ci-cli test:ci test:watch",
-    "migrate:local": "ts-node runner.ts",
-    "migrate:remote": "dotenv -e .env.remote ts-node runner.ts"
+    "convert:local": "dotenv -e .env.local ts-node runner.ts",
+    "convert:remote": "dotenv -e .env.remote ts-node runner.ts"
   },
   "author": "Ioan Lucut",
   "dependencies": {
+    "@googleapis/drive": "^8.0.0",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^7.2.1",
     "fs-extra": "^11.1.1",
     "google-protobuf": "^3.21.2",
     "lodash": "^4.17.21",
+    "p-map": "^4.0.0",
     "protobufjs": "^7.2.3",
     "recursive-readdir": "^2.2.3",
     "ts-proto": "^1.147.1",
