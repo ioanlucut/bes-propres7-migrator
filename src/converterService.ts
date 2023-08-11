@@ -64,9 +64,9 @@ export const getPreviousDeploymentDirectory = (
 };
 
 export const transformManifestToHashMapForFasterRetrievals = (
-  manifest: SongManifest[],
+  songManifests: SongManifest[],
 ) =>
-  manifest.reduce(
+  songManifests.reduce(
     (accumulator, entry) => ({
       ...accumulator,
       [entry.id]: entry,
@@ -87,13 +87,19 @@ export const getSongDiffFromManifest = (
     currentManifest.inventory,
   );
 
-  const newOrUpdatedSongs = currentManifest.inventory.filter(
-    ({ id, fileName, contentHash }) =>
-      // Is new song
-      !previousManifestHashMap[id] ||
-      // Is an existing-updated song
-      !isEqual(previousManifestHashMap[id]?.contentHash, contentHash),
-  );
+  const newOrUpdatedSongs = currentManifest.inventory.filter(function ({
+    id,
+    fileName,
+    contentHash,
+  }) {
+    const maybePreviousSong = previousManifestHashMap[id];
+    const isNewSong = !maybePreviousSong;
+
+    return (
+      isNewSong ||
+      (!isNewSong && !isEqual(maybePreviousSong?.contentHash, contentHash))
+    );
+  });
 
   const toBeRemovedFileNames = previousManifest.inventory
     .filter(
