@@ -72,7 +72,7 @@ const CONFIG = {
   } as Presentation_CCLI,
   fontConfig: {
     name: 'CMGSans-Regular',
-    size: 60,
+    size: 58,
     family: 'CMGSans',
     bold: true,
   } as Graphics_Text_Attributes_Font,

@@ -234,7 +234,7 @@ cues {
                 attributes {
                   font {
                     name: "CMGSans-Regular"
-                    size: 60
+                    size: 58
                     bold: true
                     family: "CMGSans"
                   }
@@ -254,7 +254,7 @@ cues {
                   }
                   kerning: 1
                   custom_attributes {
-                    original_font_size: 60
+                    original_font_size: 58
                   }
                   background_color {
                     red: 1
@@ -364,7 +364,7 @@ cues {
                 attributes {
                   font {
                     name: "CMGSans-Regular"
-                    size: 60
+                    size: 58
                     bold: true
                     family: "CMGSans"
                   }
@@ -384,7 +384,7 @@ cues {
                   }
                   kerning: 1
                   custom_attributes {
-                    original_font_size: 60
+                    original_font_size: 58
                   }
                   background_color {
                     red: 1
@@ -494,7 +494,7 @@ cues {
                 attributes {
                   font {
                     name: "CMGSans-Regular"
-                    size: 60
+                    size: 58
                     bold: true
                     family: "CMGSans"
                   }
@@ -514,7 +514,7 @@ cues {
                   }
                   kerning: 1
                   custom_attributes {
-                    original_font_size: 60
+                    original_font_size: 58
                   }
                   background_color {
                     red: 1
@@ -624,7 +624,7 @@ cues {
                 attributes {
                   font {
                     name: "CMGSans-Regular"
-                    size: 60
+                    size: 58
                     bold: true
                     family: "CMGSans"
                   }
@@ -644,7 +644,7 @@ cues {
                   }
                   kerning: 1
                   custom_attributes {
-                    original_font_size: 60
+                    original_font_size: 58
                   }
                   background_color {
                     red: 1
@@ -754,7 +754,7 @@ cues {
                 attributes {
                   font {
                     name: "CMGSans-Regular"
-                    size: 60
+                    size: 58
                     bold: true
                     family: "CMGSans"
                   }
@@ -774,7 +774,7 @@ cues {
                   }
                   kerning: 1
                   custom_attributes {
-                    original_font_size: 60
+                    original_font_size: 58
                   }
                   background_color {
                     red: 1
