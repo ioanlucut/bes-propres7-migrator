@@ -102,7 +102,7 @@ export const getExistingFoldersFromRoot = async () => {
   const newGDriveFolder = await (
     await getGoogleDriveClient()
   ).files.list({
-    q: `'${process.env.GDRIVE_ROOT_FOLDER_ID}' in parents and mimeType = '${FOLDER_MIME_TYPE} and trashed=false'`,
+    q: `'${process.env.GDRIVE_ROOT_FOLDER_ID}' in parents and mimeType = '${FOLDER_MIME_TYPE}'`,
     fields: 'nextPageToken, files(id, name)',
     spaces: 'drive',
   });
@@ -122,7 +122,7 @@ export const getPreviousManifestFileBy = async (
   const previousGDriveManifestFileInDeploymentFolder = await (
     await getGoogleDriveClient()
   ).files.list({
-    q: `'${previousDeploymentDirFileId}' in parents and name = '${MANIFEST_FILE_NAME} and trashed=false'`,
+    q: `'${previousDeploymentDirFileId}' in parents and name = '${MANIFEST_FILE_NAME}'`,
     fields: 'nextPageToken, files(id, name)',
     spaces: 'drive',
   });
