@@ -82,7 +82,6 @@ export const parseSong = (songContent: string): Song => {
     {
       id: metaSectionsFromTitle[SongMeta.ID],
       title: titleContent,
-      author: metaSectionsFromTitle[SongMeta.AUTHOR],
       sequence: definedSequenceWithMarkup,
       contentHash: metaSectionsFromTitle[SongMeta.CONTENT_HASH],
       verses: sections,

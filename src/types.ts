@@ -1,9 +1,33 @@
 export enum SequenceChar {
+  /**
+   * Simple verse section
+   */
   VERSE = 'v',
+
+  /**
+   * Pre-chorus section
+   */
   PRECHORUS = 'p',
+
+  /**
+   * Chorus section
+   */
   CHORUS = 'c',
+
+  /**
+   * Bridge section
+   */
   BRIDGE = 'b',
+
+  /**
+   * Ending section
+   */
   ENDING = 'e',
+
+  /**
+   * Recital section
+   */
+  RECITAL = 's',
 }
 
 /**
@@ -24,8 +48,12 @@ const C_START_INDEX = 1;
 /**
  * Bridge 1 will always be 1 (cannot be just `b`, thus `b,b2`)
  */
-
 const B_START_INDEX = 1;
+
+/**
+ * Recital 1 will always be 1 (cannot be just `s`, thus `s,s2`)
+ */
+const S_START_INDEX = 1;
 
 export const SongSection = {
   SEQUENCE: '[sequence]',
@@ -54,30 +82,17 @@ export const SongSection = {
         ? `${SequenceChar.BRIDGE}${index}`
         : SequenceChar.BRIDGE
     }]`,
+  RECITAL: (index = 0) =>
+    `[${
+      index > S_START_INDEX
+        ? `${SequenceChar.RECITAL}${index}`
+        : SequenceChar.RECITAL
+    }]`,
   ENDING: `[${SequenceChar.ENDING}]`,
 };
 
 export enum SongMeta {
-  /**
-   * Alternative song title
-   */
-  ALTERNATIVE = 'alternative',
-
-  /**
-   * Song author
-   */
-  AUTHOR = 'author',
-
-  /**
-   * Song version (can be multiple / duplicated)
-   */
-  VERSION = 'version',
-
-  /**
-   * Song content hash (used to detect changes between the corrections & do partial deployments)
-   */
   CONTENT_HASH = 'contentHash',
-
   ID = 'id',
 }
 
@@ -90,6 +105,7 @@ export enum SectionGroupCategory {
   PRECHORUS = 'Prechorus',
   CHORUS = 'Chorus',
   ENDING = 'Ending',
+  RECITAL = 'Recital',
 }
 
 export type Section = {
@@ -107,7 +123,6 @@ export type Section = {
 };
 
 export type Song = {
-  author?: string;
   contentHash: string;
   id: string;
   sequence: string[];

@@ -55,7 +55,7 @@ describe('core', () => {
     it('should work correctly', () => {
       expect(
         getTitleWithoutMeta(
-          'Any title {alternative: {Any other title}, author: {CustomAuthor}, contentHash: {#customHash}, id: {customId}}',
+          'Any title {alternative: {Any other title}, composer: {CustomAuthor}, contentHash: {#customHash}, id: {customId}}',
         ),
       ).toMatchInlineSnapshot(`"Any title"`);
 
@@ -69,12 +69,12 @@ describe('core', () => {
     it('should work correctly', () => {
       expect(
         getMetaSectionsFromTitle(
-          'Any title {alternative: {Any other title}, author: {CustomAuthor}, contentHash: {#customHash}, id: {customId}}',
+          'Any title {alternative: {Any other title}, composer: {CustomAuthor}, contentHash: {#customHash}, id: {customId}}',
         ),
       ).toMatchInlineSnapshot(`
         {
           "alternative": "Any other title",
-          "author": "CustomAuthor",
+          "composer": "CustomAuthor",
           "contentHash": "#customHash",
           "id": "customId",
         }
