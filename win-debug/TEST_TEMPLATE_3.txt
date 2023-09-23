@@ -1,0 +1,769 @@
+application_info {
+  platform: PLATFORM_WINDOWS
+  platform_version {
+    major_version: 10
+    patch_version: 4294967295
+    build: "22621"
+  }
+  application: APPLICATION_PROPRESENTER
+  application_version {
+    major_version: 7
+    minor_version: 14
+    patch_version: 1
+    build: "118358275"
+  }
+}
+uuid {
+  string: "a26cbbc3-ac28-4e03-bfdb-085ab72599bf"
+}
+name: "Alin Timofte - Pregateste-mi inima Doamne"
+last_modified_date {
+  seconds: 1695469578
+}
+background {
+  color {
+    red: 1
+    green: 1
+    blue: 1
+  }
+}
+selected_arrangement {
+  string: "6f24eef7-1820-4998-b356-c5beb8ee84d9"
+}
+arrangements {
+  uuid {
+    string: "6f24eef7-1820-4998-b356-c5beb8ee84d9"
+  }
+  name: "BES"
+  group_identifiers {
+    string: "7094d2d0-4372-406d-a63f-9d94226a24a7"
+  }
+  group_identifiers {
+    string: "9109d32b-1857-46b3-93d3-647d40b8323b"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "7094d2d0-4372-406d-a63f-9d94226a24a7"
+    }
+    name: "Blank"
+    color {
+      alpha: 1
+    }
+    application_group_identifier {
+      string: "89026065-e077-4745-8dea-ea835029b9d1"
+    }
+    application_group_name: "Blank"
+  }
+  cue_identifiers {
+    string: "f0d02510-ebf2-43d1-87d3-3e70a4f63139"
+  }
+}
+cue_groups {
+  group {
+    uuid {
+      string: "9109d32b-1857-46b3-93d3-647d40b8323b"
+    }
+    name: "Chorus"
+    color {
+      red: 0.8
+      blue: 0.305882365
+      alpha: 1
+    }
+    hotKey {
+      code: KEY_CODE_ANSI_C
+    }
+    application_group_identifier {
+      string: "69d8b61c-9c91-4f82-8bdd-c365a71c10b8"
+    }
+    application_group_name: "Chorus"
+  }
+  cue_identifiers {
+    string: "43fd93f0-4b16-4746-b6ac-2b1de60772fb"
+  }
+}
+cues {
+  uuid {
+    string: "f0d02510-ebf2-43d1-87d3-3e70a4f63139"
+  }
+  completion_target_uuid {
+    string: "00000000-0000-0000-0000-000000000000"
+  }
+  completion_action_uuid {
+    string: "00000000-0000-0000-0000-000000000000"
+  }
+  trigger_time {
+  }
+  actions {
+    uuid {
+      string: "6f7bb420-df07-49e5-986e-95af83ef08c6"
+    }
+    label {
+      text: "Click me!"
+      color {
+      }
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "2d7aabf4-80f8-4c1a-9b8d-4f5d0de394dd"
+              }
+              bounds {
+                origin {
+                  x: 69.953488372093
+                  y: 271.04651162790697
+                }
+                size {
+                  width: 1780.0930232558137
+                  height: 537.90697674418607
+                }
+              }
+              opacity: 1
+              locked: true
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                  q0 {
+                  }
+                  q1 {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                backgroundEffect {
+                  backgroundBlur {
+                    blur_amount: 0.01
+                  }
+                }
+              }
+              stroke {
+                width: 3
+                color {
+                  red: 1
+                  green: 1
+                  blue: 1
+                  alpha: 1
+                }
+              }
+              shadow {
+                angle: 315
+                offset: 5
+                radius: 5
+                color {
+                  alpha: 1
+                }
+                opacity: 0.75
+              }
+              feather {
+                radius: 0.05
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-BoldCnCAPS"
+                    size: 58
+                    bold: true
+                    family: "CMG Sans Cn CAPS"
+                    face: "Bold"
+                  }
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    text_list {
+                    }
+                  }
+                  stroke_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                shadow {
+                  angle: 315
+                  offset: 5
+                  radius: 5
+                  color {
+                    alpha: 1
+                  }
+                  opacity: 0.75
+                }
+                rtf_data: "{\\rtf0\\ansi\\ansicpg1252{\\fonttbl\\f0\\fnil CMGSans-BoldCnCAPS;}{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}{\\*\\expandedcolortbl;\\csgenericrgb\\c100000\\c100000\\c100000\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c0;}{\\*\\listtable}{\\*\\listoverridetable}\\uc1\\paperw35601\\margl0\\margr0\\margt0\\margb0\\pard\\li0\\fi0\\ri0\\qc\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2}"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+                margins {
+                }
+                is_superscript_standardized: true
+                transformDelimiter: "  \342\200\242  "
+                chord_pro {
+                  color {
+                    alpha: 1
+                  }
+                }
+              }
+              text_line_mask {
+              }
+            }
+            info: 3
+            data_links {
+              visibility_link {
+                conditions {
+                  element_visibility {
+                    other_element_uuid {
+                      string: "2d7aabf4-80f8-4c1a-9b8d-4f5d0de394dd"
+                    }
+                    other_element_name: "Background Effect - Background Blur"
+                  }
+                }
+              }
+            }
+            text_scroller {
+              scroll_rate: 0.5
+              should_repeat: true
+              repeat_distance: 0.056176839464882958
+            }
+          }
+          elements {
+            element {
+              uuid {
+                string: "3c866202-6705-433b-9dfb-05956dcc2c85"
+              }
+              name: "Slide config"
+              bounds {
+                origin {
+                  x: 1
+                  y: 1
+                }
+                size {
+                  width: 1920
+                  height: 1080
+                }
+              }
+              opacity: 1
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                  q0 {
+                  }
+                  q1 {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                color {
+                }
+              }
+              stroke {
+                width: 3
+                color {
+                  red: 1
+                  green: 1
+                  blue: 1
+                  alpha: 1
+                }
+              }
+              shadow {
+                angle: 315
+                offset: 5
+                radius: 5
+                color {
+                  alpha: 1
+                }
+                opacity: 0.75
+              }
+              feather {
+                radius: 0.05
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-Regular"
+                    size: 58
+                    bold: true
+                    family: "CMGSans"
+                  }
+                  capitalization: CAPITALIZATION_ALL_CAPS
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    line_spacing: 1.2
+                    paragraph_spacing: 4.2
+                    text_list {
+                    }
+                  }
+                  stroke_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  custom_attributes {
+                    range {
+                    }
+                    capitalization: CAPITALIZATION_ALL_CAPS
+                  }
+                }
+                shadow {
+                  angle: 315
+                  offset: 5
+                  radius: 5
+                  color {
+                    alpha: 1
+                  }
+                  opacity: 0.75
+                }
+                rtf_data: "{\\rtf0\\ansi\\ansicpg1252{\\fonttbl\\f0\\fnil CMGSans-Regular;}{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}{\\*\\expandedcolortbl;\\csgenericrgb\\c100000\\c100000\\c100000\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c0;}{\\*\\listtable}{\\*\\listoverridetable}\\uc1\\paperw12240\\margl0\\margr0\\margt0\\margb0\\pard\\li0\\fi0\\ri0\\qc\\sb0\\sa84\\sl240\\slmult1\\slleading24\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2}"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+                margins {
+                }
+                is_superscript_standardized: true
+                chord_pro {
+                }
+              }
+              text_line_mask {
+              }
+              flipMode: FLIP_MODE_BOTH
+            }
+            text_scroller {
+              scroll_rate: 0.5
+              should_repeat: true
+              repeat_distance: 0.052083333333333336
+            }
+          }
+          background_color {
+            alpha: 1
+          }
+          size {
+            width: 1920
+            height: 1080
+          }
+          uuid {
+            string: "6b356925-9a34-4765-bad9-bbebec12e315"
+          }
+        }
+        notes {
+          rtf_data: "{\\rtf0\\ansi\\ansicpg1252{\\fonttbl\\f0\\fnil ArialMT;}{\\colortbl;\\red0\\green0\\blue0;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}{\\*\\expandedcolortbl;\\csgenericrgb\\c0\\c0\\c0\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c0;}{\\*\\listtable}{\\*\\listoverridetable}\\uc1\\paperw12240\\margl0\\margr0\\margt0\\margb0\\pard\\li0\\fi0\\ri0\\ql\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b0\\i0\\ul0\\strike0\\fs100\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec2\\nosupersub\\ulc0\\highlight3\\cb3}"
+          attributes {
+            font {
+              name: "ArialMT"
+              size: 50
+              family: "Arial"
+              face: "Regular"
+            }
+            text_solid_fill {
+              alpha: 1
+            }
+            paragraph_style {
+              line_height_multiple: 1
+              text_list {
+              }
+            }
+            stroke_color {
+              red: 1
+              green: 1
+              blue: 1
+              alpha: 1
+            }
+          }
+        }
+        chord_chart {
+        }
+      }
+    }
+  }
+  actions {
+    uuid {
+      string: "3dd012ad-90ce-4882-911e-67eb91a1a293"
+    }
+    name: "Songs"
+    isEnabled: true
+    type: ACTION_TYPE_MACRO
+    macro {
+      identification {
+        parameter_uuid {
+          string: "3ffd01b7-104f-499f-aac9-a13135006d0e"
+        }
+        parameter_name: "Songs"
+      }
+    }
+  }
+  isEnabled: true
+}
+cues {
+  uuid {
+    string: "43fd93f0-4b16-4746-b6ac-2b1de60772fb"
+  }
+  completion_target_uuid {
+    string: "00000000-0000-0000-0000-000000000000"
+  }
+  completion_action_uuid {
+    string: "00000000-0000-0000-0000-000000000000"
+  }
+  trigger_time {
+  }
+  actions {
+    uuid {
+      string: "7724e4e5-a00c-4b3c-9637-3b3c243d5909"
+    }
+    isEnabled: true
+    type: ACTION_TYPE_PRESENTATION_SLIDE
+    slide {
+      presentation {
+        base_slide {
+          elements {
+            element {
+              uuid {
+                string: "41ec6f80-7774-49d5-9a8c-060b4d9af433"
+              }
+              bounds {
+                origin {
+                  x: 69.953488372093
+                  y: 271.04651162790697
+                }
+                size {
+                  width: 1780.0930232558137
+                  height: 537.90697674418607
+                }
+              }
+              opacity: 1
+              locked: true
+              path {
+                closed: true
+                points {
+                  point {
+                  }
+                  q0 {
+                  }
+                  q1 {
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                  }
+                  q0 {
+                    x: 1
+                  }
+                  q1 {
+                    x: 1
+                  }
+                }
+                points {
+                  point {
+                    x: 1
+                    y: 1
+                  }
+                  q0 {
+                    x: 1
+                    y: 1
+                  }
+                  q1 {
+                    x: 1
+                    y: 1
+                  }
+                }
+                points {
+                  point {
+                    y: 1
+                  }
+                  q0 {
+                    y: 1
+                  }
+                  q1 {
+                    y: 1
+                  }
+                }
+                shape {
+                  type: TYPE_RECTANGLE
+                }
+              }
+              fill {
+                backgroundEffect {
+                  backgroundBlur {
+                    blur_amount: 0.01
+                  }
+                }
+              }
+              stroke {
+                width: 3
+                color {
+                  red: 1
+                  green: 1
+                  blue: 1
+                  alpha: 1
+                }
+              }
+              shadow {
+                angle: 315
+                offset: 5
+                radius: 5
+                color {
+                  alpha: 1
+                }
+                opacity: 0.75
+              }
+              feather {
+                radius: 0.05
+              }
+              text {
+                attributes {
+                  font {
+                    name: "CMGSans-BoldCnCAPS"
+                    size: 58
+                    bold: true
+                    family: "CMG Sans Cn CAPS"
+                    face: "Bold"
+                  }
+                  text_solid_fill {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                  paragraph_style {
+                    alignment: ALIGNMENT_CENTER
+                    line_height_multiple: 1
+                    tab_stops {
+                      location: 28
+                    }
+                    tab_stops {
+                      location: 56
+                    }
+                    tab_stops {
+                      location: 84
+                    }
+                    tab_stops {
+                      location: 112
+                    }
+                    tab_stops {
+                      location: 140
+                    }
+                    tab_stops {
+                      location: 168
+                    }
+                    tab_stops {
+                      location: 196
+                    }
+                    tab_stops {
+                      location: 224
+                    }
+                    tab_stops {
+                      location: 252
+                    }
+                    tab_stops {
+                      location: 280
+                    }
+                    tab_stops {
+                      location: 308
+                    }
+                    tab_stops {
+                      location: 336
+                    }
+                    text_list {
+                    }
+                  }
+                  stroke_color {
+                    red: 1
+                    green: 1
+                    blue: 1
+                    alpha: 1
+                  }
+                }
+                shadow {
+                  angle: 315
+                  offset: 5
+                  radius: 5
+                  color {
+                    alpha: 1
+                  }
+                  opacity: 0.75
+                }
+                rtf_data: "{\\rtf0\\ansi\\ansicpg1252{\\fonttbl\\f0\\fnil CMGSans-BoldCnCAPS;}{\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}{\\*\\expandedcolortbl;\\csgenericrgb\\c100000\\c100000\\c100000\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c0;}{\\*\\listtable}{\\*\\listoverridetable}\\uc1\\paperw35601\\margl0\\margr0\\margt0\\margb0\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\li0\\fi0\\ri0\\qc\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2 /: Preg\\u259 ?te\\u537 ?te-mi inima, Doamne,\\par\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\li0\\fi0\\ri0\\qc\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2 S\\u259 ? fie un templu sf\\u226 ?nt \\u537 ?i curat.\\par\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\li0\\fi0\\ri0\\qc\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2 Cu mul\\u539 ?umire tr\\u259 ?iesc pentru Tine.\\par\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\li0\\fi0\\ri0\\qc\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2 Te sl\\u259 ?vesc, Isus!\\par\\pard\\tx560\\tx1120\\tx1680\\tx2240\\tx2800\\tx3360\\tx3920\\tx4480\\tx5040\\tx5600\\tx6160\\tx6720\\li0\\fi0\\ri0\\qc\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b\\i0\\ul0\\strike0\\fs116\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec1\\nosupersub\\ulc0\\highlight2\\cb2 Fii l\\u259 ?udat! :/ (4x)}"
+                vertical_alignment: VERTICAL_ALIGNMENT_MIDDLE
+                scale_behavior: SCALE_BEHAVIOR_SCALE_FONT_DOWN
+                margins {
+                }
+                is_superscript_standardized: true
+                transformDelimiter: "  \342\200\242  "
+                chord_pro {
+                  color {
+                    alpha: 1
+                  }
+                }
+              }
+              text_line_mask {
+              }
+            }
+            info: 3
+            data_links {
+              visibility_link {
+                conditions {
+                  element_visibility {
+                    other_element_uuid {
+                      string: "41ec6f80-7774-49d5-9a8c-060b4d9af433"
+                    }
+                    other_element_name: "/: Preg\304\203te\310\231te-mi inima, Doamne,..."
+                  }
+                }
+              }
+            }
+            text_scroller {
+              scroll_rate: 0.5
+              should_repeat: true
+              repeat_distance: 0.056176839464882958
+            }
+          }
+          background_color {
+            alpha: 1
+          }
+          size {
+            width: 1920
+            height: 1080
+          }
+          uuid {
+            string: "3914c4b1-52cb-45e0-88d8-534f71376c45"
+          }
+        }
+        notes {
+          rtf_data: "{\\rtf0\\ansi\\ansicpg1252{\\fonttbl\\f0\\fnil ArialMT;}{\\colortbl;\\red0\\green0\\blue0;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}{\\*\\expandedcolortbl;\\csgenericrgb\\c0\\c0\\c0\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c100000;\\csgenericrgb\\c100000\\c100000\\c100000\\c0;}{\\*\\listtable}{\\*\\listoverridetable}\\uc1\\paperw12240\\margl0\\margr0\\margt0\\margb0\\pard\\li0\\fi0\\ri0\\ql\\sb0\\sa0\\sl240\\slmult1\\slleading0\\f0\\b0\\i0\\ul0\\strike0\\fs100\\expnd0\\expndtw0\\cf1\\strokewidth0\\strokec2\\nosupersub\\ulc0\\highlight3\\cb3}"
+          attributes {
+            font {
+              name: "ArialMT"
+              size: 50
+              family: "Arial"
+              face: "Regular"
+            }
+            text_solid_fill {
+              alpha: 1
+            }
+            paragraph_style {
+              line_height_multiple: 1
+              text_list {
+              }
+            }
+            stroke_color {
+              red: 1
+              green: 1
+              blue: 1
+              alpha: 1
+            }
+          }
+        }
+        chord_chart {
+        }
+      }
+    }
+  }
+  isEnabled: true
+}
+ccli {
+  author: "Ioan Lucu\310\233"
+  song_title: "Preg\304\203te\310\231te-mi inima, Doamne"
+  publisher: "Biserica Emanuel Sibiu"
+  copyright_year: 2023
+  album: "Biserica Emanuel Sibiu 2023"
+}
+timeline {
+  duration: 300
+}

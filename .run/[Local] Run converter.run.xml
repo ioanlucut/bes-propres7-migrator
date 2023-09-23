@@ -1,5 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="[Local] Run converter" type="NodeJSConfigurationType" node-parameters="--require ts-node/register" path-to-js-file="runner.ts" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="[Local] Run converter" type="NodeJSConfigurationType" node-parameters="--require ts-node/register --require dotenv/config" path-to-js-file="runner.ts" working-dir="$PROJECT_DIR$">
+    <envs>
+      <env name="DOTENV_CONFIG_PATH" value="./.env.local" />
+      <env name="FORCE_RELEASE_OF_ALL_SONGS" value="true" />
+    </envs>
     <method v="2" />
   </configuration>
 </component>

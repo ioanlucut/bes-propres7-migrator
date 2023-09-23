@@ -31,7 +31,7 @@ export const getConvertedAndWrittenToLocalOutDirSongs = (
     const songInProPresenter7Format = convertSongToProPresenter7(song, config);
 
     const songFileName = fileName.replace(TXT_EXTENSION, PRO_EXTENSION);
-    const songFilePath = path.join(dir, fileName);
+    const songFilePath = path.join(dir, songFileName);
 
     fs.writeFileSync(
       songFilePath,

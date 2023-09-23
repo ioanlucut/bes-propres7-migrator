@@ -13,16 +13,17 @@ const CONFIG = {
   arrangementName: 'BES',
   ccliSettings: {
     publisher: 'Biserica Emanuel Sibiu',
-    author: 'Ioan Lucuț',
+    author: 'Echipa Versuri',
     copyrightYear: new Date().getFullYear(),
     album: `Biserica Emanuel Sibiu ${new Date().getFullYear()}`,
     songNumber: 0,
   } as Presentation_CCLI,
   fontConfig: {
-    name: 'CMGSans-Regular',
+    name: 'CMGSans-BoldCnCAPS',
     size: 58,
-    family: 'CMGSans',
     bold: true,
+    family: 'CMG Sans Cn CAPS',
+    face: 'Bold',
   } as Graphics_Text_Attributes_Font,
   graphicSize: {
     width: 1920,

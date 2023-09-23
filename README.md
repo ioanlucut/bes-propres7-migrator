@@ -122,3 +122,11 @@ cd proto
 
 protoc --decode rv.data.Presentation ./presentation.proto < ~/Documents/ProPresenter/Libraries/Default/TEMP.pro > ../TEMP_decoded_from_propres7.txt
 ```
+
+#### Decode a single win presentation file called `TEMP.pro` to `TS`
+
+```unix
+cd proto
+
+protoc --decode rv.data.Presentation ./presentation.proto < ../win-debug/TEST_TEMPLATE_3.pro > ../win-debug/TEST_TEMPLATE_3.txt
+```

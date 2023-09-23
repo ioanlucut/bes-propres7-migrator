@@ -75,6 +75,18 @@ export const convertSongsToPP7FormatLocally = async ({
   // Create directory
   fsExtra.ensureDirSync(deploymentVersionedDir);
 
+  if (process.env.FORCE_RELEASE_OF_ALL_SONGS === 'true') {
+    console.log(`Just debug.`);
+
+    getConvertedAndWrittenToLocalOutDirSongs(
+      deployableSongs,
+      deploymentVersionedDir,
+      config,
+    );
+
+    return;
+  }
+
   fs.writeFileSync(localManifestFilePath, JSON.stringify(currentManifest));
 
   // ---

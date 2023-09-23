@@ -117,7 +117,7 @@ export const convertSongsToPP7FormatRemotely = async ({
 
   if (process.env.FORCE_RELEASE_OF_ALL_SONGS === 'true') {
     console.log(
-      `[Remote]: Force release of all songs from GH.  Skip incremental deployments by doing a full deployment. Please proceed with applying the theme.`,
+      `[Remote]: Force release of all songs from GH. Skip incremental deployments by doing a full deployment. Please proceed with applying the theme.`,
     );
 
     await uploadSongsAndManifestToGDrive(
