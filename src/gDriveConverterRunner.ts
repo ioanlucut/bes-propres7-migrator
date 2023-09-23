@@ -99,7 +99,25 @@ export const convertSongsToPP7FormatRemotely = async ({
 
   if (isAFirstDeployment) {
     console.log(
-      `[Remote]: No previous deployment found in. Skip incremental deployments by doing a full deployment. Please proceed with a full manual import in PP7.`,
+      `[Remote]: No previous deployment found in. Skip incremental deployments by doing a full deployment. Please proceed with applying the theme.`,
+    );
+
+    await uploadSongsAndManifestToGDrive(
+      getConvertedAndWrittenToLocalOutDirSongs(
+        deployableSongs,
+        deploymentVersionedDir,
+        config,
+      ),
+      versionedDir,
+      localManifestFilePath,
+    );
+
+    return;
+  }
+
+  if (process.env.FORCE_RELEASE_OF_ALL_SONGS === 'true') {
+    console.log(
+      `[Remote]: Force release of all songs from GH.  Skip incremental deployments by doing a full deployment. Please proceed with applying the theme.`,
     );
 
     await uploadSongsAndManifestToGDrive(

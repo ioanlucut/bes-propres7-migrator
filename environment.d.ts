@@ -10,6 +10,9 @@ declare global {
       GDRIVE_BES_CLIENT_ID: string;
       GDRIVE_BES_CLIENT_SECRET: string;
       GDRIVE_BES_CLIENT_REFRESH_TOKEN: string;
+
+      // From GH Actions
+      FORCE_RELEASE_OF_ALL_SONGS: string;
     }
   }
 }
