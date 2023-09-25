@@ -2,6 +2,7 @@ import fs from 'fs';
 import fsExtra from 'fs-extra';
 import assert from 'node:assert';
 import { isEmpty, isEqual } from 'lodash';
+import chalk from 'chalk';
 import { Config } from './proPresenter7SongConverter';
 import { parseDateFromVersionedDir } from './core';
 import {
@@ -145,7 +146,7 @@ export const convertSongsToPP7FormatRemotely = async ({
 
   if (isEmpty(newOrUpdatedSongs)) {
     console.log(
-      `[Remote]: Skip incremental local deployments as no changes have been found between the last two versions.`,
+      '[Remote]: Skip incremental local deployments as no changes have been found between the last two versions.',
     );
     return;
   }
@@ -156,15 +157,22 @@ export const convertSongsToPP7FormatRemotely = async ({
       .includes(id),
   );
 
-  await uploadSongsAndManifestToGDrive(
+  const convertedAndWrittenToLocalOutDirSongs =
     getConvertedAndWrittenToLocalOutDirSongs(
       partialDeployableSongs,
       deploymentVersionedDir,
       config,
-    ),
+    );
+
+  await uploadSongsAndManifestToGDrive(
+    convertedAndWrittenToLocalOutDirSongs,
     versionedDir,
     localManifestFilePath,
   );
+
+  console.log(chalk.green(JSON.stringify(versionedDir)));
+  console.log(chalk.green(JSON.stringify(newOrUpdatedSongs)));
+  console.log(chalk.red(JSON.stringify(toBeRemovedFileNames)));
 
   if (!isEmpty(toBeRemovedFileNames)) {
     console.log(
