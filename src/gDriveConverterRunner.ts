@@ -14,7 +14,7 @@ import {
 import {
   getExistingFoldersFromRoot,
   getPreviousManifestFileBy,
-  uploadSongsAndManifestToGDrive,
+  uploadAssetsToGDrive,
 } from './gDriveService';
 
 const getPreviousRemoteInventoryManifest = async (
@@ -74,6 +74,7 @@ export const convertSongsToPP7FormatRemotely = async ({
     deployableSongs,
     currentManifest,
     localManifestFilePath,
+    localObsoleteSongsFilePath,
   } = await getBasicDeploymentInfo(sourceDir, baseLocalDir);
 
   assert.ok(
@@ -85,6 +86,8 @@ export const convertSongsToPP7FormatRemotely = async ({
   // Create directory
   fsExtra.ensureDirSync(deploymentVersionedDir);
 
+  // ---
+  // Write manifest
   fs.writeFileSync(localManifestFilePath, JSON.stringify(currentManifest));
 
   // ---
@@ -103,7 +106,7 @@ export const convertSongsToPP7FormatRemotely = async ({
       `[Remote]: No previous deployment found in. Skip incremental deployments by doing a full deployment. Please proceed with applying the theme.`,
     );
 
-    await uploadSongsAndManifestToGDrive(
+    await uploadAssetsToGDrive(
       getConvertedAndWrittenToLocalOutDirSongs(
         deployableSongs,
         deploymentVersionedDir,
@@ -116,12 +119,12 @@ export const convertSongsToPP7FormatRemotely = async ({
     return;
   }
 
-  if (process.env.FORCE_RELEASE_OF_ALL_SONGS === 'true') {
+  if (isEqual(process.env.FORCE_RELEASE_OF_ALL_SONGS, 'true')) {
     console.log(
       `[Remote]: Force release of all songs from GH. Skip incremental deployments by doing a full deployment. Please proceed with applying the theme.`,
     );
 
-    await uploadSongsAndManifestToGDrive(
+    await uploadAssetsToGDrive(
       getConvertedAndWrittenToLocalOutDirSongs(
         deployableSongs,
         deploymentVersionedDir,
@@ -144,12 +147,27 @@ export const convertSongsToPP7FormatRemotely = async ({
     previousManifest,
   );
 
-  if (isEmpty(newOrUpdatedSongs)) {
+  if (isEmpty(newOrUpdatedSongs) && isEmpty(toBeRemovedFileNames)) {
     console.log(
-      '[Remote]: Skip incremental local deployments as no changes have been found between the last two versions.',
+      `[Remote]: Skip incremental local deployments as no changes have been found between the last two versions.`,
     );
+
     return;
   }
+
+  // ---
+  // Write empty removal file
+  fs.writeFileSync(
+    localObsoleteSongsFilePath,
+    JSON.stringify(toBeRemovedFileNames),
+  );
+
+  // ---
+  // Write some stats
+  // ---
+  console.log(chalk.green(JSON.stringify(versionedDir)));
+  console.log(chalk.green(JSON.stringify(newOrUpdatedSongs)));
+  console.log(chalk.red(JSON.stringify(toBeRemovedFileNames)));
 
   const partialDeployableSongs = deployableSongs.filter(({ song: { id } }) =>
     newOrUpdatedSongs
@@ -164,19 +182,10 @@ export const convertSongsToPP7FormatRemotely = async ({
       config,
     );
 
-  await uploadSongsAndManifestToGDrive(
+  await uploadAssetsToGDrive(
     convertedAndWrittenToLocalOutDirSongs,
     versionedDir,
     localManifestFilePath,
+    localObsoleteSongsFilePath,
   );
-
-  console.log(chalk.green(JSON.stringify(versionedDir)));
-  console.log(chalk.green(JSON.stringify(newOrUpdatedSongs)));
-  console.log(chalk.red(JSON.stringify(toBeRemovedFileNames)));
-
-  if (!isEmpty(toBeRemovedFileNames)) {
-    console.log(
-      `[Remote]: The following songs have been removed: ${toBeRemovedFileNames} manually.`,
-    );
-  }
 };

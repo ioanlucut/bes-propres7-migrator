@@ -11,6 +11,7 @@ import {
   DS_STORE_FILE,
   MANIFEST_FILE_NAME,
   PRO_EXTENSION,
+  SONGS_TO_BE_DELETED_FILE_NAME,
   TXT_EXTENSION,
 } from './constants';
 import {
@@ -151,6 +152,10 @@ export const getBasicDeploymentInfo = async (
     deploymentVersionedDir,
     MANIFEST_FILE_NAME,
   );
+  const localObsoleteSongsFilePath = path.join(
+    deploymentVersionedDir,
+    SONGS_TO_BE_DELETED_FILE_NAME,
+  );
 
   return {
     versionedDir,
@@ -159,5 +164,6 @@ export const getBasicDeploymentInfo = async (
     deployableSongs,
     currentManifest,
     localManifestFilePath,
+    localObsoleteSongsFilePath,
   };
 };

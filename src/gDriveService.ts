@@ -6,8 +6,8 @@ import { logProcessingFile } from './core';
 import { ConvertedFileStats, SongsInventoryManifest } from './types';
 import assert from 'node:assert';
 import { first, size } from 'lodash';
+import { MANIFEST_FILE_NAME, SONGS_TO_BE_DELETED_FILE_NAME } from './constants';
 
-const MANIFEST_FILE_NAME = 'manifest.json';
 const FOLDER_MIME_TYPE = 'application/vnd.google-apps.folder';
 const DEFAULT_PP7_MIME_FILE = 'application/octet-stream';
 const JSON_MIME_TYPE = 'application/json';
@@ -37,10 +37,11 @@ const getGoogleDriveClient: () => Promise<drive_v3.Drive> = async () => {
   return gDriveClient;
 };
 
-export const uploadSongsAndManifestToGDrive = async (
+export const uploadAssetsToGDrive = async (
   convertedFilesStats: ConvertedFileStats[],
   versionedDir: string,
   localManifestFilePath: string,
+  localObsoleteSongsFilePath?: string,
 ) => {
   // ---
   // New GDrive folder
@@ -73,6 +74,25 @@ export const uploadSongsAndManifestToGDrive = async (
       body: fs.createReadStream(localManifestFilePath),
     },
   });
+
+  if (localObsoleteSongsFilePath) {
+    // ---
+    // Upload obsolete songs list
+
+    await (
+      await getGoogleDriveClient()
+    ).files.create({
+      requestBody: {
+        name: SONGS_TO_BE_DELETED_FILE_NAME,
+        mimeType: JSON_MIME_TYPE,
+        parents: [newGDriveFolder.data.id as string],
+      },
+      media: {
+        mimeType: JSON_MIME_TYPE,
+        body: fs.createReadStream(localObsoleteSongsFilePath),
+      },
+    });
+  }
 
   (
     await pMap(

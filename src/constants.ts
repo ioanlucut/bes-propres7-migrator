@@ -38,5 +38,6 @@ export const EMPTY_SPACE = ' ';
 export const PRO_EXTENSION = `.pro`;
 
 export const MANIFEST_FILE_NAME = 'manifest.json';
+export const SONGS_TO_BE_DELETED_FILE_NAME = 'songsToBeDeleted.json';
 
 export const DS_STORE_FILE = '.DS_Store';
