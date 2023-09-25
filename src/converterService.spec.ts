@@ -252,5 +252,47 @@ describe('converterService', () => {
         }
       `);
     });
+
+    it('should work correctly for file renames only (no changes)', () => {
+      expect(
+        getSongDiffFromManifest(
+          {
+            inventory: [
+              {
+                id: 'de8UGb2cKEsThEuMwFvjQq',
+                fileName: 'A Mea iubire si mantuire.txt',
+                contentHash: 'a83f0e',
+              },
+            ],
+
+            updatedOn: '2023-09-25-17:14:16',
+          },
+          {
+            inventory: [
+              {
+                id: 'de8UGb2cKEsThEuMwFvjQq',
+                fileName: 'A mea iubire si mantuire.txt',
+                contentHash: 'a83f0e',
+              },
+            ],
+
+            updatedOn: '2023-09-25-17:14:16',
+          },
+        ),
+      ).toMatchInlineSnapshot(`
+        {
+          "newOrUpdatedSongs": [
+            {
+              "contentHash": "a83f0e",
+              "fileName": "A Mea iubire si mantuire.txt",
+              "id": "de8UGb2cKEsThEuMwFvjQq",
+            },
+          ],
+          "toBeRemovedFileNames": [
+            "A mea iubire si mantuire.txt",
+          ],
+        }
+      `);
+    });
   });
 });

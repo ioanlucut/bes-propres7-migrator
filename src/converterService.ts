@@ -82,28 +82,29 @@ export const transformManifestToHashMapForFasterRetrievals = (
   );
 
 export const getSongDiffFromManifest = (
-  currentManifest: SongsInventoryManifest,
+  newManifest: SongsInventoryManifest,
   previousManifest: SongsInventoryManifest,
 ) => {
   const previousManifestHashMap = transformManifestToHashMapForFasterRetrievals(
     previousManifest.inventory,
   );
   const currentManifestHashMap = transformManifestToHashMapForFasterRetrievals(
-    currentManifest.inventory,
+    newManifest.inventory,
   );
 
-  const newOrUpdatedSongs = currentManifest.inventory.filter(function ({
+  const newOrUpdatedSongs = newManifest.inventory.filter(function ({
     id,
     fileName,
     contentHash,
   }) {
     const maybePreviousSong = previousManifestHashMap[id];
     const isNewSong = !maybePreviousSong;
+    const isExistingSongChanged =
+      !isNewSong && !isEqual(maybePreviousSong?.contentHash, contentHash);
+    const isFileNameChanged =
+      !isNewSong && !isEqual(previousManifestHashMap[id]?.fileName, fileName);
 
-    return (
-      isNewSong ||
-      (!isNewSong && !isEqual(maybePreviousSong?.contentHash, contentHash))
-    );
+    return isNewSong || isExistingSongChanged || isFileNameChanged;
   });
 
   const toBeRemovedFileNames = previousManifest.inventory
