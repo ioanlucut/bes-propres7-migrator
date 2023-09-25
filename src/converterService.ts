@@ -1,12 +1,18 @@
 import fs from 'fs';
 import path from 'path';
 import { isEqual } from 'lodash';
+import recursive from 'recursive-readdir';
 import { Presentation } from '../proto/presentation';
 import {
   Config,
   convertSongToProPresenter7,
 } from './proPresenter7SongConverter';
-import { MANIFEST_FILE_NAME, PRO_EXTENSION, TXT_EXTENSION } from './constants';
+import {
+  DS_STORE_FILE,
+  MANIFEST_FILE_NAME,
+  PRO_EXTENSION,
+  TXT_EXTENSION,
+} from './constants';
 import {
   getClosestVersionedDir,
   getVersionedDir,
@@ -18,7 +24,6 @@ import {
   SongManifest,
   SongsInventoryManifest,
 } from './types';
-import recursive from 'recursive-readdir';
 import { parseSong } from './songsParser';
 import { generateManifest } from './manifestGenerator';
 
@@ -116,7 +121,7 @@ export const getSongDiffFromManifest = (
 };
 
 export const getDeployableSongs = async (sourceDir: string) =>
-  (await recursive(sourceDir, ['.DS_Store'])).map((filePath) => {
+  (await recursive(sourceDir, [DS_STORE_FILE])).map((filePath) => {
     const fileAsText = fs.readFileSync(filePath).toString();
     const fileName = path.basename(filePath);
     const song = parseSong(fileAsText);

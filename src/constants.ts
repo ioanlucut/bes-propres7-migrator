@@ -38,3 +38,5 @@ export const EMPTY_SPACE = ' ';
 export const PRO_EXTENSION = `.pro`;
 
 export const MANIFEST_FILE_NAME = 'manifest.json';
+
+export const DS_STORE_FILE = '.DS_Store';

@@ -2,9 +2,9 @@ import fs from 'fs';
 import fsExtra from 'fs-extra';
 import path from 'path';
 import assert from 'node:assert';
-import { isEmpty } from 'lodash';
+import { isEmpty, isEqual, negate } from 'lodash';
 import { Config } from './proPresenter7SongConverter';
-import { MANIFEST_FILE_NAME } from './constants';
+import { DS_STORE_FILE, MANIFEST_FILE_NAME } from './constants';
 import {
   logFileWithLinkInConsole,
   logProcessingFile,
@@ -54,16 +54,17 @@ export const convertSongsToPP7FormatLocally = async ({
   baseLocalDir,
   config,
 }: {
-  sourceDir: string;
   baseLocalDir: string;
   config: Config;
+  sourceDir: string;
 }) => {
   const {
+    currentManifest,
+    deployableSongs,
     deploymentDate,
     deploymentVersionedDir,
-    deployableSongs,
-    currentManifest,
     localManifestFilePath,
+    versionedDir,
   } = await getBasicDeploymentInfo(sourceDir, baseLocalDir);
 
   assert(
@@ -75,24 +76,17 @@ export const convertSongsToPP7FormatLocally = async ({
   // Create directory
   fsExtra.ensureDirSync(deploymentVersionedDir);
 
-  if (process.env.FORCE_RELEASE_OF_ALL_SONGS === 'true') {
-    console.log(`Just debug.`);
-
-    getConvertedAndWrittenToLocalOutDirSongs(
-      deployableSongs,
-      deploymentVersionedDir,
-      config,
-    );
-
-    return;
-  }
-
   fs.writeFileSync(localManifestFilePath, JSON.stringify(currentManifest));
 
   // ---
   // Existing deployments
   const allPreviousDeploymentDirs = fsExtra
     .readdirSync(baseLocalDir)
+    .filter(
+      (deploymentDir) =>
+        negate(isEqual)(deploymentDir, DS_STORE_FILE) &&
+        negate(isEqual)(deploymentDir, versionedDir),
+    )
     .map((deploymentDir) => ({
       deploymentDir,
       deploymentDirDate: parseDateFromVersionedDir(deploymentDir),
