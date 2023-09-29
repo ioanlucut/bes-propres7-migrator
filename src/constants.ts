@@ -19,7 +19,7 @@ export const TXT_EXTENSION = '.txt';
 export const TEST_FILE = 'TEMPLATE.txt';
 
 export const ALLOWED_CHARS =
-  ` {}&#!(),-./1234567890:;?ABCDEFGHIJKLMNOPRSTUVWXZYQ[\\]abcdefghijklmnopqrstuvwxyzÎâîăÂȘșĂȚț’”„\n`.split(
+  ` *_{}&!(),-./1234567890:;?ABCDEFGHIJKLMNOPRSTUVWXZYQ[\\]abcdefghijklmnopqrstuvwxyzÎâîăÂȘșĂȚț‘’”„\n`.split(
     EMPTY_STRING,
   );
 

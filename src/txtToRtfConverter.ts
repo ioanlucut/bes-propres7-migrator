@@ -23,6 +23,7 @@ const encodeVerseContentToUnicodeRTFFormat = (verseContent: string) =>
     .replaceAll('” ', '\\uc0\\u8221  ')
     .replaceAll('„ ', '\\uc0\\u8222  ')
     .replaceAll('’ ', '\\uc0\\u8217  ')
+    .replaceAll('‘ ', '\\uc0\\u8216  ')
     // Remaining chars
     .replaceAll('Â', '\\uc0\\u194')
     .replaceAll('â', '\\uc0\\u226')
@@ -36,7 +37,8 @@ const encodeVerseContentToUnicodeRTFFormat = (verseContent: string) =>
     .replaceAll('Ț', '\\uc0\\u538')
     .replaceAll('”', '\\uc0\\u8221')
     .replaceAll('„', '\\uc0\\u8222')
-    .replaceAll('’', '\\uc0\\u8217');
+    .replaceAll('’', '\\uc0\\u8217')
+    .replaceAll('‘', '\\uc0\\u8216');
 
 export const convertToRtf = (multiLineVerseContent: string) => {
   if (!rtfTemplate) {
