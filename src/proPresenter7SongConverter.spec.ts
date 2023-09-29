@@ -17,25 +17,25 @@ jest.mock('crypto', () => {
 const ANY_CONFIG = {
   arrangementName: 'BES',
   ccliSettings: {
-    publisher: 'Biserica Emanuel Sibiu',
-    author: 'Ioan Lucuț',
-    copyrightYear: new Date().getFullYear(),
-    album: `Biserica Emanuel Sibiu ${new Date().getFullYear()}`,
+    publisher: 'ANY_PUBLISHER',
+    author: 'ANY_AUTHOR',
+    copyrightYear: 2023,
+    album: `Biserica Emanuel Sibiu 2023`,
     songNumber: 0,
   } as Presentation_CCLI,
   fontConfig: {
-    name: 'CMGSans-Regular',
+    name: 'CMGSans-BoldCnCAPS',
     size: 58,
-    family: 'CMGSans',
+    family: 'CMG Sans Cn CAPS',
     bold: true,
   } as Graphics_Text_Attributes_Font,
   graphicSize: {
     width: 1920,
     height: 1080,
   },
-  presentationCategory: `Worship Songs ~ BES ${new Date().getFullYear()}`,
-  refMacroId: '3ffd01b7-104f-499f-aac9-a13135006d0e',
-  refMacroName: 'Songs',
+  presentationCategory: `Worship Songs ~ BES 2023`,
+  refMacroId: 'ANY_REF_MACRO_ID',
+  refMacroName: 'ANY_REF_MACRO_NAME',
 };
 
 describe('proPresenter7SongConverter', () => {

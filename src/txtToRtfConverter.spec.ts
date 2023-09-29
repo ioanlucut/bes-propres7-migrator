@@ -4,7 +4,8 @@ import { convertToRtf } from './txtToRtfConverter';
 describe('txtToRtfConverter', () => {
   it('should convert to expected `rtf` correctly', () => {
     const rtfContent = convertToRtf(`Row 1-1
-Row 1-2 !(),-./1234567890:;?ABCDEFGHIJKLMNOPRSTUVWXZY[\\]abcdefghijklmnopqrstuvwxyzÎâîăÂȘșĂȚț’”„
+Row 1-2 !(),-./1234567890:;?ABCDEFGHIJKLMNOPRSTUVWXZY[\\]abcdefghijklmnopqrstuvwxyzÎâîăÂȘșĂȚț’‘”„
+Row 1-2 !(),-./1234567890:;?ABCDEFGHIJKLMNOPRSTUVWXZY[\\]abcdefghijklmnopqrstuvwxyzÎâîăÂȘșĂȚț’‘”„
 Row 1-3`);
 
     expect(rtfContent).toMatchSnapshot();
@@ -25,6 +26,7 @@ space-not-expected-before Țtext
 space-not-expected-before țtext
 space-not-expected-before -text
 space-not-expected-before ’text
+space-not-expected-before ‘text
 space-not-expected-before ”text
 space-not-expected-before „text
 
@@ -40,6 +42,7 @@ textȚ single-space-expected-after-this
 textț single-space-expected-after-this
 text- single-space-expected-after-this
 text’ single-space-expected-after-this
+text‘ single-space-expected-after-this
 text” single-space-expected-after-this
 text„ single-space-expected-after-this
 
@@ -55,6 +58,7 @@ end-of-line-works-without-extra-space-textȚ
 end-of-line-works-without-extra-space-textț
 end-of-line-works-without-extra-space-text-
 end-of-line-works-without-extra-space-text’
+end-of-line-works-without-extra-space-text‘
 end-of-line-works-without-extra-space-text”
 end-of-line-works-without-extra-space-text„`);
 
