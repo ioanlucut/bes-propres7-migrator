@@ -37,21 +37,21 @@ export const PropSlide = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.baseSlide = Slide.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -72,21 +72,18 @@ export const PropSlide = {
 
   toJSON(message: PropSlide): unknown {
     const obj: any = {};
-    message.baseSlide !== undefined &&
-      (obj.baseSlide = message.baseSlide
-        ? Slide.toJSON(message.baseSlide)
-        : undefined);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
+    if (message.baseSlide !== undefined) {
+      obj.baseSlide = Slide.toJSON(message.baseSlide);
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PropSlide>, I>>(base?: I): PropSlide {
-    return PropSlide.fromPartial(base ?? {});
+    return PropSlide.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PropSlide>, I>>(
     object: I,
   ): PropSlide {
@@ -114,8 +111,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

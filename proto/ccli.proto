@@ -6,7 +6,7 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "basicTypes.proto";
+import "applicationInfo.proto";
 import "template.proto";
 
 message CCLIDocument {
@@ -22,5 +22,25 @@ message CCLIDocument {
   string ccli_license = 3;
   .rv.data.CCLIDocument.DisplayType display_type = 4;
   .rv.data.Template.Slide template = 5;
+}
+
+message CopyrightLayout {
+  message Token {
+    .rv.data.CopyrightLayout.TokenType token_type = 1;
+    string text = 2;
+  }
+
+  enum TokenType {
+    Text = 0;
+    Artist = 1;
+    Author = 2;
+    Publisher = 3;
+    Title = 4;
+    CopyrightYear = 5;
+    LicenseNumber = 6;
+    SongNumber = 7;
+  }
+
+  repeated .rv.data.CopyrightLayout.Token tokens = 2;
 }
 

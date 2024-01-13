@@ -1,8 +1,9 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color, UUID } from './basicTypes';
+import { Color } from './color';
 import { Effect, Transition } from './effects';
 import { HotKey } from './hotKey';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -321,112 +322,112 @@ export const Layer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.muted = reader.bool();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.hidden = reader.bool();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.blendMode = reader.int32() as any;
           continue;
         case 7:
-          if (tag != 57) {
+          if (tag !== 57) {
             break;
           }
 
           message.opacity = reader.double();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.selectedTargetSetUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.effectsPresetUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 10:
-          if (tag != 81) {
+          if (tag !== 81) {
             break;
           }
 
           message.effectsBuildDuration = reader.double();
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
           message.layerPresetUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
           message.hotKey = HotKey.decode(reader, reader.uint32());
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
           message.effects.push(Effect.decode(reader, reader.uint32()));
           continue;
         case 15:
-          if (tag != 122) {
+          if (tag !== 122) {
             break;
           }
 
           message.blend = Layer_Blending.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -437,14 +438,14 @@ export const Layer = {
   fromJSON(object: any): Layer {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      muted: isSet(object.muted) ? Boolean(object.muted) : false,
-      hidden: isSet(object.hidden) ? Boolean(object.hidden) : false,
+      muted: isSet(object.muted) ? globalThis.Boolean(object.muted) : false,
+      hidden: isSet(object.hidden) ? globalThis.Boolean(object.hidden) : false,
       blendMode: isSet(object.blendMode)
         ? layer_BlendModeFromJSON(object.blendMode)
         : 0,
-      opacity: isSet(object.opacity) ? Number(object.opacity) : 0,
+      opacity: isSet(object.opacity) ? globalThis.Number(object.opacity) : 0,
       selectedTargetSetUuid: isSet(object.selectedTargetSetUuid)
         ? UUID.fromJSON(object.selectedTargetSetUuid)
         : undefined,
@@ -452,7 +453,7 @@ export const Layer = {
         ? UUID.fromJSON(object.effectsPresetUuid)
         : undefined,
       effectsBuildDuration: isSet(object.effectsBuildDuration)
-        ? Number(object.effectsBuildDuration)
+        ? globalThis.Number(object.effectsBuildDuration)
         : 0,
       layerPresetUuid: isSet(object.layerPresetUuid)
         ? UUID.fromJSON(object.layerPresetUuid)
@@ -461,7 +462,7 @@ export const Layer = {
       transition: isSet(object.transition)
         ? Transition.fromJSON(object.transition)
         : undefined,
-      effects: Array.isArray(object?.effects)
+      effects: globalThis.Array.isArray(object?.effects)
         ? object.effects.map((e: any) => Effect.fromJSON(e))
         : [],
       blend: isSet(object.blend)
@@ -472,54 +473,57 @@ export const Layer = {
 
   toJSON(message: Layer): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.muted !== undefined && (obj.muted = message.muted);
-    message.hidden !== undefined && (obj.hidden = message.hidden);
-    message.blendMode !== undefined &&
-      (obj.blendMode = layer_BlendModeToJSON(message.blendMode));
-    message.opacity !== undefined && (obj.opacity = message.opacity);
-    message.selectedTargetSetUuid !== undefined &&
-      (obj.selectedTargetSetUuid = message.selectedTargetSetUuid
-        ? UUID.toJSON(message.selectedTargetSetUuid)
-        : undefined);
-    message.effectsPresetUuid !== undefined &&
-      (obj.effectsPresetUuid = message.effectsPresetUuid
-        ? UUID.toJSON(message.effectsPresetUuid)
-        : undefined);
-    message.effectsBuildDuration !== undefined &&
-      (obj.effectsBuildDuration = message.effectsBuildDuration);
-    message.layerPresetUuid !== undefined &&
-      (obj.layerPresetUuid = message.layerPresetUuid
-        ? UUID.toJSON(message.layerPresetUuid)
-        : undefined);
-    message.hotKey !== undefined &&
-      (obj.hotKey = message.hotKey ? HotKey.toJSON(message.hotKey) : undefined);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
-    if (message.effects) {
-      obj.effects = message.effects.map((e) =>
-        e ? Effect.toJSON(e) : undefined,
-      );
-    } else {
-      obj.effects = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.blend !== undefined &&
-      (obj.blend = message.blend
-        ? Layer_Blending.toJSON(message.blend)
-        : undefined);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.muted === true) {
+      obj.muted = message.muted;
+    }
+    if (message.hidden === true) {
+      obj.hidden = message.hidden;
+    }
+    if (message.blendMode !== 0) {
+      obj.blendMode = layer_BlendModeToJSON(message.blendMode);
+    }
+    if (message.opacity !== 0) {
+      obj.opacity = message.opacity;
+    }
+    if (message.selectedTargetSetUuid !== undefined) {
+      obj.selectedTargetSetUuid = UUID.toJSON(message.selectedTargetSetUuid);
+    }
+    if (message.effectsPresetUuid !== undefined) {
+      obj.effectsPresetUuid = UUID.toJSON(message.effectsPresetUuid);
+    }
+    if (message.effectsBuildDuration !== 0) {
+      obj.effectsBuildDuration = message.effectsBuildDuration;
+    }
+    if (message.layerPresetUuid !== undefined) {
+      obj.layerPresetUuid = UUID.toJSON(message.layerPresetUuid);
+    }
+    if (message.hotKey !== undefined) {
+      obj.hotKey = HotKey.toJSON(message.hotKey);
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
+    if (message.effects?.length) {
+      obj.effects = message.effects.map((e) => Effect.toJSON(e));
+    }
+    if (message.blend !== undefined) {
+      obj.blend = Layer_Blending.toJSON(message.blend);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer>, I>>(base?: I): Layer {
-    return Layer.fromPartial(base ?? {});
+    return Layer.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer>, I>>(object: I): Layer {
     const message = createBaseLayer();
     message.uuid =
@@ -597,28 +601,28 @@ export const Layer_Preset = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.layer = Layer.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -629,27 +633,30 @@ export const Layer_Preset = {
   fromJSON(object: any): Layer_Preset {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       layer: isSet(object.layer) ? Layer.fromJSON(object.layer) : undefined,
     };
   },
 
   toJSON(message: Layer_Preset): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.layer !== undefined &&
-      (obj.layer = message.layer ? Layer.toJSON(message.layer) : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.layer !== undefined) {
+      obj.layer = Layer.toJSON(message.layer);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer_Preset>, I>>(
     base?: I,
   ): Layer_Preset {
-    return Layer_Preset.fromPartial(base ?? {});
+    return Layer_Preset.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Preset>, I>>(
     object: I,
   ): Layer_Preset {
@@ -700,7 +707,7 @@ export const Layer_Blending = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -710,14 +717,14 @@ export const Layer_Blending = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.matte = Layer_Blending_Matte.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -738,23 +745,20 @@ export const Layer_Blending = {
 
   toJSON(message: Layer_Blending): unknown {
     const obj: any = {};
-    message.standard !== undefined &&
-      (obj.standard = message.standard
-        ? Layer_Blending_Standard.toJSON(message.standard)
-        : undefined);
-    message.matte !== undefined &&
-      (obj.matte = message.matte
-        ? Layer_Blending_Matte.toJSON(message.matte)
-        : undefined);
+    if (message.standard !== undefined) {
+      obj.standard = Layer_Blending_Standard.toJSON(message.standard);
+    }
+    if (message.matte !== undefined) {
+      obj.matte = Layer_Blending_Matte.toJSON(message.matte);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer_Blending>, I>>(
     base?: I,
   ): Layer_Blending {
-    return Layer_Blending.fromPartial(base ?? {});
+    return Layer_Blending.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Blending>, I>>(
     object: I,
   ): Layer_Blending {
@@ -801,21 +805,21 @@ export const Layer_Blending_Standard = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.mode = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.opacity = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -826,24 +830,26 @@ export const Layer_Blending_Standard = {
   fromJSON(object: any): Layer_Blending_Standard {
     return {
       mode: isSet(object.mode) ? layer_BlendModeFromJSON(object.mode) : 0,
-      opacity: isSet(object.opacity) ? Number(object.opacity) : 0,
+      opacity: isSet(object.opacity) ? globalThis.Number(object.opacity) : 0,
     };
   },
 
   toJSON(message: Layer_Blending_Standard): unknown {
     const obj: any = {};
-    message.mode !== undefined &&
-      (obj.mode = layer_BlendModeToJSON(message.mode));
-    message.opacity !== undefined && (obj.opacity = message.opacity);
+    if (message.mode !== 0) {
+      obj.mode = layer_BlendModeToJSON(message.mode);
+    }
+    if (message.opacity !== 0) {
+      obj.opacity = message.opacity;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer_Blending_Standard>, I>>(
     base?: I,
   ): Layer_Blending_Standard {
-    return Layer_Blending_Standard.fromPartial(base ?? {});
+    return Layer_Blending_Standard.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Blending_Standard>, I>>(
     object: I,
   ): Layer_Blending_Standard {
@@ -896,7 +902,7 @@ export const Layer_Blending_Matte = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -906,7 +912,7 @@ export const Layer_Blending_Matte = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -916,7 +922,7 @@ export const Layer_Blending_Matte = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -926,7 +932,7 @@ export const Layer_Blending_Matte = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -950,27 +956,23 @@ export const Layer_Blending_Matte = {
 
   toJSON(message: Layer_Blending_Matte): unknown {
     const obj: any = {};
-    message.alpha !== undefined &&
-      (obj.alpha = message.alpha
-        ? Layer_Blending_Matte_Alpha.toJSON(message.alpha)
-        : undefined);
-    message.luma !== undefined &&
-      (obj.luma = message.luma
-        ? Layer_Blending_Matte_Luma.toJSON(message.luma)
-        : undefined);
-    message.white !== undefined &&
-      (obj.white = message.white
-        ? Layer_Blending_Matte_White.toJSON(message.white)
-        : undefined);
+    if (message.alpha !== undefined) {
+      obj.alpha = Layer_Blending_Matte_Alpha.toJSON(message.alpha);
+    }
+    if (message.luma !== undefined) {
+      obj.luma = Layer_Blending_Matte_Luma.toJSON(message.luma);
+    }
+    if (message.white !== undefined) {
+      obj.white = Layer_Blending_Matte_White.toJSON(message.white);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer_Blending_Matte>, I>>(
     base?: I,
   ): Layer_Blending_Matte {
-    return Layer_Blending_Matte.fromPartial(base ?? {});
+    return Layer_Blending_Matte.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Blending_Matte>, I>>(
     object: I,
   ): Layer_Blending_Matte {
@@ -1018,14 +1020,14 @@ export const Layer_Blending_Matte_Alpha = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.inverted = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1035,22 +1037,25 @@ export const Layer_Blending_Matte_Alpha = {
 
   fromJSON(object: any): Layer_Blending_Matte_Alpha {
     return {
-      inverted: isSet(object.inverted) ? Boolean(object.inverted) : false,
+      inverted: isSet(object.inverted)
+        ? globalThis.Boolean(object.inverted)
+        : false,
     };
   },
 
   toJSON(message: Layer_Blending_Matte_Alpha): unknown {
     const obj: any = {};
-    message.inverted !== undefined && (obj.inverted = message.inverted);
+    if (message.inverted === true) {
+      obj.inverted = message.inverted;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer_Blending_Matte_Alpha>, I>>(
     base?: I,
   ): Layer_Blending_Matte_Alpha {
-    return Layer_Blending_Matte_Alpha.fromPartial(base ?? {});
+    return Layer_Blending_Matte_Alpha.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Blending_Matte_Alpha>, I>>(
     object: I,
   ): Layer_Blending_Matte_Alpha {
@@ -1087,14 +1092,14 @@ export const Layer_Blending_Matte_Luma = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.inverted = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1104,22 +1109,25 @@ export const Layer_Blending_Matte_Luma = {
 
   fromJSON(object: any): Layer_Blending_Matte_Luma {
     return {
-      inverted: isSet(object.inverted) ? Boolean(object.inverted) : false,
+      inverted: isSet(object.inverted)
+        ? globalThis.Boolean(object.inverted)
+        : false,
     };
   },
 
   toJSON(message: Layer_Blending_Matte_Luma): unknown {
     const obj: any = {};
-    message.inverted !== undefined && (obj.inverted = message.inverted);
+    if (message.inverted === true) {
+      obj.inverted = message.inverted;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Layer_Blending_Matte_Luma>, I>>(
     base?: I,
   ): Layer_Blending_Matte_Luma {
-    return Layer_Blending_Matte_Luma.fromPartial(base ?? {});
+    return Layer_Blending_Matte_Luma.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Blending_Matte_Luma>, I>>(
     object: I,
   ): Layer_Blending_Matte_Luma {
@@ -1153,7 +1161,7 @@ export const Layer_Blending_Matte_White = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1173,9 +1181,8 @@ export const Layer_Blending_Matte_White = {
   create<I extends Exact<DeepPartial<Layer_Blending_Matte_White>, I>>(
     base?: I,
   ): Layer_Blending_Matte_White {
-    return Layer_Blending_Matte_White.fromPartial(base ?? {});
+    return Layer_Blending_Matte_White.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Layer_Blending_Matte_White>, I>>(
     _: I,
   ): Layer_Blending_Matte_White {
@@ -1195,8 +1202,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

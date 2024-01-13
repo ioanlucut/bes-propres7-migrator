@@ -1,9 +1,13 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color, IntRange, URL, UUID } from './basicTypes';
+import { AlphaType, alphaTypeFromJSON, alphaTypeToJSON } from './alphaType';
+import { Color } from './color';
 import { DigitalAudio_Device_Routing } from './digitalAudio';
 import { Effect } from './effects';
 import { FileProperties } from './fileProperties';
+import { IntRange } from './intRange';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -1397,6 +1401,7 @@ export interface Media_TransportProperties {
   playbackBehavior: Media_TransportProperties_PlaybackBehavior;
   loopTime: number;
   timesToLoop: number;
+  retrigger: Media_TransportProperties_RetriggerSetting;
 }
 
 export enum Media_TransportProperties_PlaybackBehavior {
@@ -1448,6 +1453,55 @@ export function media_TransportProperties_PlaybackBehaviorToJSON(
   }
 }
 
+export enum Media_TransportProperties_RetriggerSetting {
+  RETRIGGER_SETTING_UNSET = 0,
+  RETRIGGER_SETTING_ALWAYS = 1,
+  RETRIGGER_SETTING_NEVER = 2,
+  RETRIGGER_SETTING_AUTOMATIC = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function media_TransportProperties_RetriggerSettingFromJSON(
+  object: any,
+): Media_TransportProperties_RetriggerSetting {
+  switch (object) {
+    case 0:
+    case 'RETRIGGER_SETTING_UNSET':
+      return Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_UNSET;
+    case 1:
+    case 'RETRIGGER_SETTING_ALWAYS':
+      return Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_ALWAYS;
+    case 2:
+    case 'RETRIGGER_SETTING_NEVER':
+      return Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_NEVER;
+    case 3:
+    case 'RETRIGGER_SETTING_AUTOMATIC':
+      return Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_AUTOMATIC;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Media_TransportProperties_RetriggerSetting.UNRECOGNIZED;
+  }
+}
+
+export function media_TransportProperties_RetriggerSettingToJSON(
+  object: Media_TransportProperties_RetriggerSetting,
+): string {
+  switch (object) {
+    case Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_UNSET:
+      return 'RETRIGGER_SETTING_UNSET';
+    case Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_ALWAYS:
+      return 'RETRIGGER_SETTING_ALWAYS';
+    case Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_NEVER:
+      return 'RETRIGGER_SETTING_NEVER';
+    case Media_TransportProperties_RetriggerSetting.RETRIGGER_SETTING_AUTOMATIC:
+      return 'RETRIGGER_SETTING_AUTOMATIC';
+    case Media_TransportProperties_RetriggerSetting.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
 export interface Media_DrawingProperties {
   scaleBehavior: Media_ScaleBehavior;
   scaleAlignment: Media_ScaleAlignment;
@@ -1463,6 +1517,7 @@ export interface Media_DrawingProperties {
   effects: Effect[];
   cropEnable: boolean;
   cropInsets: Graphics_EdgeInsets | undefined;
+  alphaType: AlphaType;
 }
 
 export enum Media_DrawingProperties_NativeRotationType {
@@ -1681,7 +1736,7 @@ export const Graphics = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1699,9 +1754,8 @@ export const Graphics = {
   },
 
   create<I extends Exact<DeepPartial<Graphics>, I>>(base?: I): Graphics {
-    return Graphics.fromPartial(base ?? {});
+    return Graphics.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics>, I>>(_: I): Graphics {
     const message = createBaseGraphics();
     return message;
@@ -1800,112 +1854,112 @@ export const Graphics_Element = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.bounds = Graphics_Rect.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.rotation = reader.double();
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.opacity = reader.double();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.locked = reader.bool();
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.aspectRatioLocked = reader.bool();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.path = Graphics_Path.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.fill = Graphics_Fill.decode(reader, reader.uint32());
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.stroke = Graphics_Stroke.decode(reader, reader.uint32());
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
           message.shadow = Graphics_Shadow.decode(reader, reader.uint32());
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
           message.feather = Graphics_Feather.decode(reader, reader.uint32());
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
           message.text = Graphics_Text.decode(reader, reader.uint32());
           continue;
         case 15:
-          if (tag != 120) {
+          if (tag !== 120) {
             break;
           }
 
           message.flipMode = reader.int32() as any;
           continue;
         case 16:
-          if (tag != 128) {
+          if (tag !== 128) {
             break;
           }
 
           message.hidden = reader.bool();
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
@@ -1915,7 +1969,7 @@ export const Graphics_Element = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1926,15 +1980,15 @@ export const Graphics_Element = {
   fromJSON(object: any): Graphics_Element {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       bounds: isSet(object.bounds)
         ? Graphics_Rect.fromJSON(object.bounds)
         : undefined,
-      rotation: isSet(object.rotation) ? Number(object.rotation) : 0,
-      opacity: isSet(object.opacity) ? Number(object.opacity) : 0,
-      locked: isSet(object.locked) ? Boolean(object.locked) : false,
+      rotation: isSet(object.rotation) ? globalThis.Number(object.rotation) : 0,
+      opacity: isSet(object.opacity) ? globalThis.Number(object.opacity) : 0,
+      locked: isSet(object.locked) ? globalThis.Boolean(object.locked) : false,
       aspectRatioLocked: isSet(object.aspectRatioLocked)
-        ? Boolean(object.aspectRatioLocked)
+        ? globalThis.Boolean(object.aspectRatioLocked)
         : false,
       path: isSet(object.path)
         ? Graphics_Path.fromJSON(object.path)
@@ -1957,7 +2011,7 @@ export const Graphics_Element = {
       flipMode: isSet(object.flipMode)
         ? graphics_Element_FlipModeFromJSON(object.flipMode)
         : 0,
-      hidden: isSet(object.hidden) ? Boolean(object.hidden) : false,
+      hidden: isSet(object.hidden) ? globalThis.Boolean(object.hidden) : false,
       textLineMask: isSet(object.textLineMask)
         ? Graphics_Text_LineFillMask.fromJSON(object.textLineMask)
         : undefined,
@@ -1966,58 +2020,64 @@ export const Graphics_Element = {
 
   toJSON(message: Graphics_Element): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.bounds !== undefined &&
-      (obj.bounds = message.bounds
-        ? Graphics_Rect.toJSON(message.bounds)
-        : undefined);
-    message.rotation !== undefined && (obj.rotation = message.rotation);
-    message.opacity !== undefined && (obj.opacity = message.opacity);
-    message.locked !== undefined && (obj.locked = message.locked);
-    message.aspectRatioLocked !== undefined &&
-      (obj.aspectRatioLocked = message.aspectRatioLocked);
-    message.path !== undefined &&
-      (obj.path = message.path
-        ? Graphics_Path.toJSON(message.path)
-        : undefined);
-    message.fill !== undefined &&
-      (obj.fill = message.fill
-        ? Graphics_Fill.toJSON(message.fill)
-        : undefined);
-    message.stroke !== undefined &&
-      (obj.stroke = message.stroke
-        ? Graphics_Stroke.toJSON(message.stroke)
-        : undefined);
-    message.shadow !== undefined &&
-      (obj.shadow = message.shadow
-        ? Graphics_Shadow.toJSON(message.shadow)
-        : undefined);
-    message.feather !== undefined &&
-      (obj.feather = message.feather
-        ? Graphics_Feather.toJSON(message.feather)
-        : undefined);
-    message.text !== undefined &&
-      (obj.text = message.text
-        ? Graphics_Text.toJSON(message.text)
-        : undefined);
-    message.flipMode !== undefined &&
-      (obj.flipMode = graphics_Element_FlipModeToJSON(message.flipMode));
-    message.hidden !== undefined && (obj.hidden = message.hidden);
-    message.textLineMask !== undefined &&
-      (obj.textLineMask = message.textLineMask
-        ? Graphics_Text_LineFillMask.toJSON(message.textLineMask)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.bounds !== undefined) {
+      obj.bounds = Graphics_Rect.toJSON(message.bounds);
+    }
+    if (message.rotation !== 0) {
+      obj.rotation = message.rotation;
+    }
+    if (message.opacity !== 0) {
+      obj.opacity = message.opacity;
+    }
+    if (message.locked === true) {
+      obj.locked = message.locked;
+    }
+    if (message.aspectRatioLocked === true) {
+      obj.aspectRatioLocked = message.aspectRatioLocked;
+    }
+    if (message.path !== undefined) {
+      obj.path = Graphics_Path.toJSON(message.path);
+    }
+    if (message.fill !== undefined) {
+      obj.fill = Graphics_Fill.toJSON(message.fill);
+    }
+    if (message.stroke !== undefined) {
+      obj.stroke = Graphics_Stroke.toJSON(message.stroke);
+    }
+    if (message.shadow !== undefined) {
+      obj.shadow = Graphics_Shadow.toJSON(message.shadow);
+    }
+    if (message.feather !== undefined) {
+      obj.feather = Graphics_Feather.toJSON(message.feather);
+    }
+    if (message.text !== undefined) {
+      obj.text = Graphics_Text.toJSON(message.text);
+    }
+    if (message.flipMode !== 0) {
+      obj.flipMode = graphics_Element_FlipModeToJSON(message.flipMode);
+    }
+    if (message.hidden === true) {
+      obj.hidden = message.hidden;
+    }
+    if (message.textLineMask !== undefined) {
+      obj.textLineMask = Graphics_Text_LineFillMask.toJSON(
+        message.textLineMask,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Element>, I>>(
     base?: I,
   ): Graphics_Element {
-    return Graphics_Element.fromPartial(base ?? {});
+    return Graphics_Element.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Element>, I>>(
     object: I,
   ): Graphics_Element {
@@ -2096,21 +2156,21 @@ export const Graphics_Rect = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.origin = Graphics_Point.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.size = Graphics_Size.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2131,23 +2191,20 @@ export const Graphics_Rect = {
 
   toJSON(message: Graphics_Rect): unknown {
     const obj: any = {};
-    message.origin !== undefined &&
-      (obj.origin = message.origin
-        ? Graphics_Point.toJSON(message.origin)
-        : undefined);
-    message.size !== undefined &&
-      (obj.size = message.size
-        ? Graphics_Size.toJSON(message.size)
-        : undefined);
+    if (message.origin !== undefined) {
+      obj.origin = Graphics_Point.toJSON(message.origin);
+    }
+    if (message.size !== undefined) {
+      obj.size = Graphics_Size.toJSON(message.size);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Rect>, I>>(
     base?: I,
   ): Graphics_Rect {
-    return Graphics_Rect.fromPartial(base ?? {});
+    return Graphics_Rect.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Rect>, I>>(
     object: I,
   ): Graphics_Rect {
@@ -2191,21 +2248,21 @@ export const Graphics_Point = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.x = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.y = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2215,24 +2272,27 @@ export const Graphics_Point = {
 
   fromJSON(object: any): Graphics_Point {
     return {
-      x: isSet(object.x) ? Number(object.x) : 0,
-      y: isSet(object.y) ? Number(object.y) : 0,
+      x: isSet(object.x) ? globalThis.Number(object.x) : 0,
+      y: isSet(object.y) ? globalThis.Number(object.y) : 0,
     };
   },
 
   toJSON(message: Graphics_Point): unknown {
     const obj: any = {};
-    message.x !== undefined && (obj.x = message.x);
-    message.y !== undefined && (obj.y = message.y);
+    if (message.x !== 0) {
+      obj.x = message.x;
+    }
+    if (message.y !== 0) {
+      obj.y = message.y;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Point>, I>>(
     base?: I,
   ): Graphics_Point {
-    return Graphics_Point.fromPartial(base ?? {});
+    return Graphics_Point.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Point>, I>>(
     object: I,
   ): Graphics_Point {
@@ -2270,21 +2330,21 @@ export const Graphics_Size = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.width = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.height = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2294,24 +2354,27 @@ export const Graphics_Size = {
 
   fromJSON(object: any): Graphics_Size {
     return {
-      width: isSet(object.width) ? Number(object.width) : 0,
-      height: isSet(object.height) ? Number(object.height) : 0,
+      width: isSet(object.width) ? globalThis.Number(object.width) : 0,
+      height: isSet(object.height) ? globalThis.Number(object.height) : 0,
     };
   },
 
   toJSON(message: Graphics_Size): unknown {
     const obj: any = {};
-    message.width !== undefined && (obj.width = message.width);
-    message.height !== undefined && (obj.height = message.height);
+    if (message.width !== 0) {
+      obj.width = message.width;
+    }
+    if (message.height !== 0) {
+      obj.height = message.height;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Size>, I>>(
     base?: I,
   ): Graphics_Size {
-    return Graphics_Size.fromPartial(base ?? {});
+    return Graphics_Size.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Size>, I>>(
     object: I,
   ): Graphics_Size {
@@ -2355,35 +2418,35 @@ export const Graphics_EdgeInsets = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.left = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.right = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.top = reader.double();
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.bottom = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2393,28 +2456,35 @@ export const Graphics_EdgeInsets = {
 
   fromJSON(object: any): Graphics_EdgeInsets {
     return {
-      left: isSet(object.left) ? Number(object.left) : 0,
-      right: isSet(object.right) ? Number(object.right) : 0,
-      top: isSet(object.top) ? Number(object.top) : 0,
-      bottom: isSet(object.bottom) ? Number(object.bottom) : 0,
+      left: isSet(object.left) ? globalThis.Number(object.left) : 0,
+      right: isSet(object.right) ? globalThis.Number(object.right) : 0,
+      top: isSet(object.top) ? globalThis.Number(object.top) : 0,
+      bottom: isSet(object.bottom) ? globalThis.Number(object.bottom) : 0,
     };
   },
 
   toJSON(message: Graphics_EdgeInsets): unknown {
     const obj: any = {};
-    message.left !== undefined && (obj.left = message.left);
-    message.right !== undefined && (obj.right = message.right);
-    message.top !== undefined && (obj.top = message.top);
-    message.bottom !== undefined && (obj.bottom = message.bottom);
+    if (message.left !== 0) {
+      obj.left = message.left;
+    }
+    if (message.right !== 0) {
+      obj.right = message.right;
+    }
+    if (message.top !== 0) {
+      obj.top = message.top;
+    }
+    if (message.bottom !== 0) {
+      obj.bottom = message.bottom;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_EdgeInsets>, I>>(
     base?: I,
   ): Graphics_EdgeInsets {
-    return Graphics_EdgeInsets.fromPartial(base ?? {});
+    return Graphics_EdgeInsets.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_EdgeInsets>, I>>(
     object: I,
   ): Graphics_EdgeInsets {
@@ -2460,14 +2530,14 @@ export const Graphics_Path = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.closed = reader.bool();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2476,14 +2546,14 @@ export const Graphics_Path = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.shape = Graphics_Path_Shape.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2493,8 +2563,8 @@ export const Graphics_Path = {
 
   fromJSON(object: any): Graphics_Path {
     return {
-      closed: isSet(object.closed) ? Boolean(object.closed) : false,
-      points: Array.isArray(object?.points)
+      closed: isSet(object.closed) ? globalThis.Boolean(object.closed) : false,
+      points: globalThis.Array.isArray(object?.points)
         ? object.points.map((e: any) => Graphics_Path_BezierPoint.fromJSON(e))
         : [],
       shape: isSet(object.shape)
@@ -2505,27 +2575,25 @@ export const Graphics_Path = {
 
   toJSON(message: Graphics_Path): unknown {
     const obj: any = {};
-    message.closed !== undefined && (obj.closed = message.closed);
-    if (message.points) {
-      obj.points = message.points.map((e) =>
-        e ? Graphics_Path_BezierPoint.toJSON(e) : undefined,
-      );
-    } else {
-      obj.points = [];
+    if (message.closed === true) {
+      obj.closed = message.closed;
     }
-    message.shape !== undefined &&
-      (obj.shape = message.shape
-        ? Graphics_Path_Shape.toJSON(message.shape)
-        : undefined);
+    if (message.points?.length) {
+      obj.points = message.points.map((e) =>
+        Graphics_Path_BezierPoint.toJSON(e),
+      );
+    }
+    if (message.shape !== undefined) {
+      obj.shape = Graphics_Path_Shape.toJSON(message.shape);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path>, I>>(
     base?: I,
   ): Graphics_Path {
-    return Graphics_Path.fromPartial(base ?? {});
+    return Graphics_Path.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Path>, I>>(
     object: I,
   ): Graphics_Path {
@@ -2577,35 +2645,35 @@ export const Graphics_Path_BezierPoint = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.point = Graphics_Point.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.q0 = Graphics_Point.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.q1 = Graphics_Point.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.curved = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2620,30 +2688,32 @@ export const Graphics_Path_BezierPoint = {
         : undefined,
       q0: isSet(object.q0) ? Graphics_Point.fromJSON(object.q0) : undefined,
       q1: isSet(object.q1) ? Graphics_Point.fromJSON(object.q1) : undefined,
-      curved: isSet(object.curved) ? Boolean(object.curved) : false,
+      curved: isSet(object.curved) ? globalThis.Boolean(object.curved) : false,
     };
   },
 
   toJSON(message: Graphics_Path_BezierPoint): unknown {
     const obj: any = {};
-    message.point !== undefined &&
-      (obj.point = message.point
-        ? Graphics_Point.toJSON(message.point)
-        : undefined);
-    message.q0 !== undefined &&
-      (obj.q0 = message.q0 ? Graphics_Point.toJSON(message.q0) : undefined);
-    message.q1 !== undefined &&
-      (obj.q1 = message.q1 ? Graphics_Point.toJSON(message.q1) : undefined);
-    message.curved !== undefined && (obj.curved = message.curved);
+    if (message.point !== undefined) {
+      obj.point = Graphics_Point.toJSON(message.point);
+    }
+    if (message.q0 !== undefined) {
+      obj.q0 = Graphics_Point.toJSON(message.q0);
+    }
+    if (message.q1 !== undefined) {
+      obj.q1 = Graphics_Point.toJSON(message.q1);
+    }
+    if (message.curved === true) {
+      obj.curved = message.curved;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path_BezierPoint>, I>>(
     base?: I,
   ): Graphics_Path_BezierPoint {
-    return Graphics_Path_BezierPoint.fromPartial(base ?? {});
+    return Graphics_Path_BezierPoint.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Path_BezierPoint>, I>>(
     object: I,
   ): Graphics_Path_BezierPoint {
@@ -2719,14 +2789,14 @@ export const Graphics_Path_Shape = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2737,7 +2807,7 @@ export const Graphics_Path_Shape = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -2747,7 +2817,7 @@ export const Graphics_Path_Shape = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -2757,7 +2827,7 @@ export const Graphics_Path_Shape = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -2767,7 +2837,7 @@ export const Graphics_Path_Shape = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2797,33 +2867,31 @@ export const Graphics_Path_Shape = {
 
   toJSON(message: Graphics_Path_Shape): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = graphics_Path_Shape_TypeToJSON(message.type));
-    message.roundedRectangle !== undefined &&
-      (obj.roundedRectangle = message.roundedRectangle
-        ? Graphics_Path_Shape_RoundedRectangle.toJSON(message.roundedRectangle)
-        : undefined);
-    message.polygon !== undefined &&
-      (obj.polygon = message.polygon
-        ? Graphics_Path_Shape_Polygon.toJSON(message.polygon)
-        : undefined);
-    message.star !== undefined &&
-      (obj.star = message.star
-        ? Graphics_Path_Shape_Star.toJSON(message.star)
-        : undefined);
-    message.arrow !== undefined &&
-      (obj.arrow = message.arrow
-        ? Graphics_Path_Shape_Arrow.toJSON(message.arrow)
-        : undefined);
+    if (message.type !== 0) {
+      obj.type = graphics_Path_Shape_TypeToJSON(message.type);
+    }
+    if (message.roundedRectangle !== undefined) {
+      obj.roundedRectangle = Graphics_Path_Shape_RoundedRectangle.toJSON(
+        message.roundedRectangle,
+      );
+    }
+    if (message.polygon !== undefined) {
+      obj.polygon = Graphics_Path_Shape_Polygon.toJSON(message.polygon);
+    }
+    if (message.star !== undefined) {
+      obj.star = Graphics_Path_Shape_Star.toJSON(message.star);
+    }
+    if (message.arrow !== undefined) {
+      obj.arrow = Graphics_Path_Shape_Arrow.toJSON(message.arrow);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path_Shape>, I>>(
     base?: I,
   ): Graphics_Path_Shape {
-    return Graphics_Path_Shape.fromPartial(base ?? {});
+    return Graphics_Path_Shape.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape>, I>>(
     object: I,
   ): Graphics_Path_Shape {
@@ -2878,14 +2946,14 @@ export const Graphics_Path_Shape_RoundedRectangle = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.roundness = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2895,22 +2963,27 @@ export const Graphics_Path_Shape_RoundedRectangle = {
 
   fromJSON(object: any): Graphics_Path_Shape_RoundedRectangle {
     return {
-      roundness: isSet(object.roundness) ? Number(object.roundness) : 0,
+      roundness: isSet(object.roundness)
+        ? globalThis.Number(object.roundness)
+        : 0,
     };
   },
 
   toJSON(message: Graphics_Path_Shape_RoundedRectangle): unknown {
     const obj: any = {};
-    message.roundness !== undefined && (obj.roundness = message.roundness);
+    if (message.roundness !== 0) {
+      obj.roundness = message.roundness;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path_Shape_RoundedRectangle>, I>>(
     base?: I,
   ): Graphics_Path_Shape_RoundedRectangle {
-    return Graphics_Path_Shape_RoundedRectangle.fromPartial(base ?? {});
+    return Graphics_Path_Shape_RoundedRectangle.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Graphics_Path_Shape_RoundedRectangle>, I>,
   >(object: I): Graphics_Path_Shape_RoundedRectangle {
@@ -2947,14 +3020,14 @@ export const Graphics_Path_Shape_Arrow = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.corner = Graphics_Point.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2972,19 +3045,17 @@ export const Graphics_Path_Shape_Arrow = {
 
   toJSON(message: Graphics_Path_Shape_Arrow): unknown {
     const obj: any = {};
-    message.corner !== undefined &&
-      (obj.corner = message.corner
-        ? Graphics_Point.toJSON(message.corner)
-        : undefined);
+    if (message.corner !== undefined) {
+      obj.corner = Graphics_Point.toJSON(message.corner);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path_Shape_Arrow>, I>>(
     base?: I,
   ): Graphics_Path_Shape_Arrow {
-    return Graphics_Path_Shape_Arrow.fromPartial(base ?? {});
+    return Graphics_Path_Shape_Arrow.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Arrow>, I>>(
     object: I,
   ): Graphics_Path_Shape_Arrow {
@@ -3024,14 +3095,14 @@ export const Graphics_Path_Shape_Polygon = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.numberSides = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3041,23 +3112,25 @@ export const Graphics_Path_Shape_Polygon = {
 
   fromJSON(object: any): Graphics_Path_Shape_Polygon {
     return {
-      numberSides: isSet(object.numberSides) ? Number(object.numberSides) : 0,
+      numberSides: isSet(object.numberSides)
+        ? globalThis.Number(object.numberSides)
+        : 0,
     };
   },
 
   toJSON(message: Graphics_Path_Shape_Polygon): unknown {
     const obj: any = {};
-    message.numberSides !== undefined &&
-      (obj.numberSides = Math.round(message.numberSides));
+    if (message.numberSides !== 0) {
+      obj.numberSides = Math.round(message.numberSides);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path_Shape_Polygon>, I>>(
     base?: I,
   ): Graphics_Path_Shape_Polygon {
-    return Graphics_Path_Shape_Polygon.fromPartial(base ?? {});
+    return Graphics_Path_Shape_Polygon.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Polygon>, I>>(
     object: I,
   ): Graphics_Path_Shape_Polygon {
@@ -3097,21 +3170,21 @@ export const Graphics_Path_Shape_Star = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.innerRadius = reader.double();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.numberPoints = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3121,28 +3194,31 @@ export const Graphics_Path_Shape_Star = {
 
   fromJSON(object: any): Graphics_Path_Shape_Star {
     return {
-      innerRadius: isSet(object.innerRadius) ? Number(object.innerRadius) : 0,
+      innerRadius: isSet(object.innerRadius)
+        ? globalThis.Number(object.innerRadius)
+        : 0,
       numberPoints: isSet(object.numberPoints)
-        ? Number(object.numberPoints)
+        ? globalThis.Number(object.numberPoints)
         : 0,
     };
   },
 
   toJSON(message: Graphics_Path_Shape_Star): unknown {
     const obj: any = {};
-    message.innerRadius !== undefined &&
-      (obj.innerRadius = message.innerRadius);
-    message.numberPoints !== undefined &&
-      (obj.numberPoints = Math.round(message.numberPoints));
+    if (message.innerRadius !== 0) {
+      obj.innerRadius = message.innerRadius;
+    }
+    if (message.numberPoints !== 0) {
+      obj.numberPoints = Math.round(message.numberPoints);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Path_Shape_Star>, I>>(
     base?: I,
   ): Graphics_Path_Shape_Star {
-    return Graphics_Path_Shape_Star.fromPartial(base ?? {});
+    return Graphics_Path_Shape_Star.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Path_Shape_Star>, I>>(
     object: I,
   ): Graphics_Path_Shape_Star {
@@ -3201,35 +3277,35 @@ export const Graphics_Fill = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.enable = reader.bool();
           continue;
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.gradient = Graphics_Gradient.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.media = Media.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -3239,7 +3315,7 @@ export const Graphics_Fill = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3249,7 +3325,7 @@ export const Graphics_Fill = {
 
   fromJSON(object: any): Graphics_Fill {
     return {
-      enable: isSet(object.enable) ? Boolean(object.enable) : false,
+      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
       gradient: isSet(object.gradient)
         ? Graphics_Gradient.fromJSON(object.gradient)
@@ -3263,28 +3339,31 @@ export const Graphics_Fill = {
 
   toJSON(message: Graphics_Fill): unknown {
     const obj: any = {};
-    message.enable !== undefined && (obj.enable = message.enable);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.gradient !== undefined &&
-      (obj.gradient = message.gradient
-        ? Graphics_Gradient.toJSON(message.gradient)
-        : undefined);
-    message.media !== undefined &&
-      (obj.media = message.media ? Media.toJSON(message.media) : undefined);
-    message.backgroundEffect !== undefined &&
-      (obj.backgroundEffect = message.backgroundEffect
-        ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
-        : undefined);
+    if (message.enable === true) {
+      obj.enable = message.enable;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.gradient !== undefined) {
+      obj.gradient = Graphics_Gradient.toJSON(message.gradient);
+    }
+    if (message.media !== undefined) {
+      obj.media = Media.toJSON(message.media);
+    }
+    if (message.backgroundEffect !== undefined) {
+      obj.backgroundEffect = Graphics_BackgroundEffect.toJSON(
+        message.backgroundEffect,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Fill>, I>>(
     base?: I,
   ): Graphics_Fill {
-    return Graphics_Fill.fromPartial(base ?? {});
+    return Graphics_Fill.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Fill>, I>>(
     object: I,
   ): Graphics_Fill {
@@ -3346,7 +3425,7 @@ export const Graphics_BackgroundEffect = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -3357,7 +3436,7 @@ export const Graphics_BackgroundEffect = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -3368,7 +3447,7 @@ export const Graphics_BackgroundEffect = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3393,27 +3472,26 @@ export const Graphics_BackgroundEffect = {
 
   toJSON(message: Graphics_BackgroundEffect): unknown {
     const obj: any = {};
-    message.backgroundBlur !== undefined &&
-      (obj.backgroundBlur = message.backgroundBlur
-        ? Graphics_BackgroundEffect_BackgroundEffectBlur.toJSON(
-            message.backgroundBlur,
-          )
-        : undefined);
-    message.backgroundInvert !== undefined &&
-      (obj.backgroundInvert = message.backgroundInvert
-        ? Graphics_BackgroundEffect_BackgroundEffectInvert.toJSON(
-            message.backgroundInvert,
-          )
-        : undefined);
+    if (message.backgroundBlur !== undefined) {
+      obj.backgroundBlur =
+        Graphics_BackgroundEffect_BackgroundEffectBlur.toJSON(
+          message.backgroundBlur,
+        );
+    }
+    if (message.backgroundInvert !== undefined) {
+      obj.backgroundInvert =
+        Graphics_BackgroundEffect_BackgroundEffectInvert.toJSON(
+          message.backgroundInvert,
+        );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_BackgroundEffect>, I>>(
     base?: I,
   ): Graphics_BackgroundEffect {
-    return Graphics_BackgroundEffect.fromPartial(base ?? {});
+    return Graphics_BackgroundEffect.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_BackgroundEffect>, I>>(
     object: I,
   ): Graphics_BackgroundEffect {
@@ -3464,21 +3542,21 @@ export const Graphics_BackgroundEffect_BackgroundEffectBlur = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.saturation = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.blurAmount = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3488,15 +3566,23 @@ export const Graphics_BackgroundEffect_BackgroundEffectBlur = {
 
   fromJSON(object: any): Graphics_BackgroundEffect_BackgroundEffectBlur {
     return {
-      saturation: isSet(object.saturation) ? Number(object.saturation) : 0,
-      blurAmount: isSet(object.blurAmount) ? Number(object.blurAmount) : 0,
+      saturation: isSet(object.saturation)
+        ? globalThis.Number(object.saturation)
+        : 0,
+      blurAmount: isSet(object.blurAmount)
+        ? globalThis.Number(object.blurAmount)
+        : 0,
     };
   },
 
   toJSON(message: Graphics_BackgroundEffect_BackgroundEffectBlur): unknown {
     const obj: any = {};
-    message.saturation !== undefined && (obj.saturation = message.saturation);
-    message.blurAmount !== undefined && (obj.blurAmount = message.blurAmount);
+    if (message.saturation !== 0) {
+      obj.saturation = message.saturation;
+    }
+    if (message.blurAmount !== 0) {
+      obj.blurAmount = message.blurAmount;
+    }
     return obj;
   },
 
@@ -3507,10 +3593,9 @@ export const Graphics_BackgroundEffect_BackgroundEffectBlur = {
     >,
   >(base?: I): Graphics_BackgroundEffect_BackgroundEffectBlur {
     return Graphics_BackgroundEffect_BackgroundEffectBlur.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Graphics_BackgroundEffect_BackgroundEffectBlur>,
@@ -3549,7 +3634,7 @@ export const Graphics_BackgroundEffect_BackgroundEffectInvert = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3573,10 +3658,9 @@ export const Graphics_BackgroundEffect_BackgroundEffectInvert = {
     >,
   >(base?: I): Graphics_BackgroundEffect_BackgroundEffectInvert {
     return Graphics_BackgroundEffect_BackgroundEffectInvert.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Graphics_BackgroundEffect_BackgroundEffectInvert>,
@@ -3622,28 +3706,28 @@ export const Graphics_Gradient = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.angle = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.length = reader.double();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -3652,7 +3736,7 @@ export const Graphics_Gradient = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3665,9 +3749,9 @@ export const Graphics_Gradient = {
       type: isSet(object.type)
         ? graphics_Gradient_TypeFromJSON(object.type)
         : 0,
-      angle: isSet(object.angle) ? Number(object.angle) : 0,
-      length: isSet(object.length) ? Number(object.length) : 0,
-      stops: Array.isArray(object?.stops)
+      angle: isSet(object.angle) ? globalThis.Number(object.angle) : 0,
+      length: isSet(object.length) ? globalThis.Number(object.length) : 0,
+      stops: globalThis.Array.isArray(object?.stops)
         ? object.stops.map((e: any) => Graphics_Gradient_ColorStop.fromJSON(e))
         : [],
     };
@@ -3675,16 +3759,19 @@ export const Graphics_Gradient = {
 
   toJSON(message: Graphics_Gradient): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = graphics_Gradient_TypeToJSON(message.type));
-    message.angle !== undefined && (obj.angle = message.angle);
-    message.length !== undefined && (obj.length = message.length);
-    if (message.stops) {
+    if (message.type !== 0) {
+      obj.type = graphics_Gradient_TypeToJSON(message.type);
+    }
+    if (message.angle !== 0) {
+      obj.angle = message.angle;
+    }
+    if (message.length !== 0) {
+      obj.length = message.length;
+    }
+    if (message.stops?.length) {
       obj.stops = message.stops.map((e) =>
-        e ? Graphics_Gradient_ColorStop.toJSON(e) : undefined,
+        Graphics_Gradient_ColorStop.toJSON(e),
       );
-    } else {
-      obj.stops = [];
     }
     return obj;
   },
@@ -3692,9 +3779,8 @@ export const Graphics_Gradient = {
   create<I extends Exact<DeepPartial<Graphics_Gradient>, I>>(
     base?: I,
   ): Graphics_Gradient {
-    return Graphics_Gradient.fromPartial(base ?? {});
+    return Graphics_Gradient.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Gradient>, I>>(
     object: I,
   ): Graphics_Gradient {
@@ -3742,28 +3828,28 @@ export const Graphics_Gradient_ColorStop = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.position = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.blendPoint = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3774,26 +3860,32 @@ export const Graphics_Gradient_ColorStop = {
   fromJSON(object: any): Graphics_Gradient_ColorStop {
     return {
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      position: isSet(object.position) ? Number(object.position) : 0,
-      blendPoint: isSet(object.blendPoint) ? Number(object.blendPoint) : 0,
+      position: isSet(object.position) ? globalThis.Number(object.position) : 0,
+      blendPoint: isSet(object.blendPoint)
+        ? globalThis.Number(object.blendPoint)
+        : 0,
     };
   },
 
   toJSON(message: Graphics_Gradient_ColorStop): unknown {
     const obj: any = {};
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.position !== undefined && (obj.position = message.position);
-    message.blendPoint !== undefined && (obj.blendPoint = message.blendPoint);
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.position !== 0) {
+      obj.position = message.position;
+    }
+    if (message.blendPoint !== 0) {
+      obj.blendPoint = message.blendPoint;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Gradient_ColorStop>, I>>(
     base?: I,
   ): Graphics_Gradient_ColorStop {
-    return Graphics_Gradient_ColorStop.fromPartial(base ?? {});
+    return Graphics_Gradient_ColorStop.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Gradient_ColorStop>, I>>(
     object: I,
   ): Graphics_Gradient_ColorStop {
@@ -3858,56 +3950,56 @@ export const Graphics_Shadow = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.style = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.angle = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.offset = reader.double();
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.radius = reader.double();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.opacity = reader.double();
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.enable = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3920,35 +4012,46 @@ export const Graphics_Shadow = {
       style: isSet(object.style)
         ? graphics_Shadow_StyleFromJSON(object.style)
         : 0,
-      angle: isSet(object.angle) ? Number(object.angle) : 0,
-      offset: isSet(object.offset) ? Number(object.offset) : 0,
-      radius: isSet(object.radius) ? Number(object.radius) : 0,
+      angle: isSet(object.angle) ? globalThis.Number(object.angle) : 0,
+      offset: isSet(object.offset) ? globalThis.Number(object.offset) : 0,
+      radius: isSet(object.radius) ? globalThis.Number(object.radius) : 0,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      opacity: isSet(object.opacity) ? Number(object.opacity) : 0,
-      enable: isSet(object.enable) ? Boolean(object.enable) : false,
+      opacity: isSet(object.opacity) ? globalThis.Number(object.opacity) : 0,
+      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
     };
   },
 
   toJSON(message: Graphics_Shadow): unknown {
     const obj: any = {};
-    message.style !== undefined &&
-      (obj.style = graphics_Shadow_StyleToJSON(message.style));
-    message.angle !== undefined && (obj.angle = message.angle);
-    message.offset !== undefined && (obj.offset = message.offset);
-    message.radius !== undefined && (obj.radius = message.radius);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.opacity !== undefined && (obj.opacity = message.opacity);
-    message.enable !== undefined && (obj.enable = message.enable);
+    if (message.style !== 0) {
+      obj.style = graphics_Shadow_StyleToJSON(message.style);
+    }
+    if (message.angle !== 0) {
+      obj.angle = message.angle;
+    }
+    if (message.offset !== 0) {
+      obj.offset = message.offset;
+    }
+    if (message.radius !== 0) {
+      obj.radius = message.radius;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.opacity !== 0) {
+      obj.opacity = message.opacity;
+    }
+    if (message.enable === true) {
+      obj.enable = message.enable;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Shadow>, I>>(
     base?: I,
   ): Graphics_Shadow {
-    return Graphics_Shadow.fromPartial(base ?? {});
+    return Graphics_Shadow.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Shadow>, I>>(
     object: I,
   ): Graphics_Shadow {
@@ -4005,33 +4108,34 @@ export const Graphics_Stroke = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.style = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.width = reader.double();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag == 33) {
+          if (tag === 33) {
             message.pattern.push(reader.double());
+
             continue;
           }
 
-          if (tag == 34) {
+          if (tag === 34) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.pattern.push(reader.double());
@@ -4042,14 +4146,14 @@ export const Graphics_Stroke = {
 
           break;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.enable = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4062,37 +4166,40 @@ export const Graphics_Stroke = {
       style: isSet(object.style)
         ? graphics_Stroke_StyleFromJSON(object.style)
         : 0,
-      width: isSet(object.width) ? Number(object.width) : 0,
+      width: isSet(object.width) ? globalThis.Number(object.width) : 0,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      pattern: Array.isArray(object?.pattern)
-        ? object.pattern.map((e: any) => Number(e))
+      pattern: globalThis.Array.isArray(object?.pattern)
+        ? object.pattern.map((e: any) => globalThis.Number(e))
         : [],
-      enable: isSet(object.enable) ? Boolean(object.enable) : false,
+      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
     };
   },
 
   toJSON(message: Graphics_Stroke): unknown {
     const obj: any = {};
-    message.style !== undefined &&
-      (obj.style = graphics_Stroke_StyleToJSON(message.style));
-    message.width !== undefined && (obj.width = message.width);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    if (message.pattern) {
-      obj.pattern = message.pattern.map((e) => e);
-    } else {
-      obj.pattern = [];
+    if (message.style !== 0) {
+      obj.style = graphics_Stroke_StyleToJSON(message.style);
     }
-    message.enable !== undefined && (obj.enable = message.enable);
+    if (message.width !== 0) {
+      obj.width = message.width;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.pattern?.length) {
+      obj.pattern = message.pattern;
+    }
+    if (message.enable === true) {
+      obj.enable = message.enable;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Stroke>, I>>(
     base?: I,
   ): Graphics_Stroke {
-    return Graphics_Stroke.fromPartial(base ?? {});
+    return Graphics_Stroke.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Stroke>, I>>(
     object: I,
   ): Graphics_Stroke {
@@ -4139,28 +4246,28 @@ export const Graphics_Feather = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.style = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.radius = reader.double();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.enable = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4173,26 +4280,30 @@ export const Graphics_Feather = {
       style: isSet(object.style)
         ? graphics_Feather_StyleFromJSON(object.style)
         : 0,
-      radius: isSet(object.radius) ? Number(object.radius) : 0,
-      enable: isSet(object.enable) ? Boolean(object.enable) : false,
+      radius: isSet(object.radius) ? globalThis.Number(object.radius) : 0,
+      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
     };
   },
 
   toJSON(message: Graphics_Feather): unknown {
     const obj: any = {};
-    message.style !== undefined &&
-      (obj.style = graphics_Feather_StyleToJSON(message.style));
-    message.radius !== undefined && (obj.radius = message.radius);
-    message.enable !== undefined && (obj.enable = message.enable);
+    if (message.style !== 0) {
+      obj.style = graphics_Feather_StyleToJSON(message.style);
+    }
+    if (message.radius !== 0) {
+      obj.radius = message.radius;
+    }
+    if (message.enable === true) {
+      obj.enable = message.enable;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Feather>, I>>(
     base?: I,
   ): Graphics_Feather {
-    return Graphics_Feather.fromPartial(base ?? {});
+    return Graphics_Feather.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Feather>, I>>(
     object: I,
   ): Graphics_Feather {
@@ -4208,7 +4319,7 @@ function createBaseGraphics_Text(): Graphics_Text {
   return {
     attributes: undefined,
     shadow: undefined,
-    rtfData: new Uint8Array(),
+    rtfData: new Uint8Array(0),
     verticalAlignment: 0,
     scaleBehavior: 0,
     margins: undefined,
@@ -4275,7 +4386,7 @@ export const Graphics_Text = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4285,63 +4396,63 @@ export const Graphics_Text = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.shadow = Graphics_Shadow.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.rtfData = reader.bytes();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.verticalAlignment = reader.int32() as any;
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.scaleBehavior = reader.int32() as any;
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.margins = Graphics_EdgeInsets.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.isSuperscriptStandardized = reader.bool();
           continue;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.transform = reader.int32() as any;
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
           message.transformDelimiter = reader.string();
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -4351,7 +4462,7 @@ export const Graphics_Text = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4369,7 +4480,7 @@ export const Graphics_Text = {
         : undefined,
       rtfData: isSet(object.rtfData)
         ? bytesFromBase64(object.rtfData)
-        : new Uint8Array(),
+        : new Uint8Array(0),
       verticalAlignment: isSet(object.verticalAlignment)
         ? graphics_Text_VerticalAlignmentFromJSON(object.verticalAlignment)
         : 0,
@@ -4380,13 +4491,13 @@ export const Graphics_Text = {
         ? Graphics_EdgeInsets.fromJSON(object.margins)
         : undefined,
       isSuperscriptStandardized: isSet(object.isSuperscriptStandardized)
-        ? Boolean(object.isSuperscriptStandardized)
+        ? globalThis.Boolean(object.isSuperscriptStandardized)
         : false,
       transform: isSet(object.transform)
         ? graphics_Text_TransformFromJSON(object.transform)
         : 0,
       transformDelimiter: isSet(object.transformDelimiter)
-        ? String(object.transformDelimiter)
+        ? globalThis.String(object.transformDelimiter)
         : '',
       chordPro: isSet(object.chordPro)
         ? Graphics_Text_ChordPro.fromJSON(object.chordPro)
@@ -4396,49 +4507,48 @@ export const Graphics_Text = {
 
   toJSON(message: Graphics_Text): unknown {
     const obj: any = {};
-    message.attributes !== undefined &&
-      (obj.attributes = message.attributes
-        ? Graphics_Text_Attributes.toJSON(message.attributes)
-        : undefined);
-    message.shadow !== undefined &&
-      (obj.shadow = message.shadow
-        ? Graphics_Shadow.toJSON(message.shadow)
-        : undefined);
-    message.rtfData !== undefined &&
-      (obj.rtfData = base64FromBytes(
-        message.rtfData !== undefined ? message.rtfData : new Uint8Array(),
-      ));
-    message.verticalAlignment !== undefined &&
-      (obj.verticalAlignment = graphics_Text_VerticalAlignmentToJSON(
+    if (message.attributes !== undefined) {
+      obj.attributes = Graphics_Text_Attributes.toJSON(message.attributes);
+    }
+    if (message.shadow !== undefined) {
+      obj.shadow = Graphics_Shadow.toJSON(message.shadow);
+    }
+    if (message.rtfData.length !== 0) {
+      obj.rtfData = base64FromBytes(message.rtfData);
+    }
+    if (message.verticalAlignment !== 0) {
+      obj.verticalAlignment = graphics_Text_VerticalAlignmentToJSON(
         message.verticalAlignment,
-      ));
-    message.scaleBehavior !== undefined &&
-      (obj.scaleBehavior = graphics_Text_ScaleBehaviorToJSON(
+      );
+    }
+    if (message.scaleBehavior !== 0) {
+      obj.scaleBehavior = graphics_Text_ScaleBehaviorToJSON(
         message.scaleBehavior,
-      ));
-    message.margins !== undefined &&
-      (obj.margins = message.margins
-        ? Graphics_EdgeInsets.toJSON(message.margins)
-        : undefined);
-    message.isSuperscriptStandardized !== undefined &&
-      (obj.isSuperscriptStandardized = message.isSuperscriptStandardized);
-    message.transform !== undefined &&
-      (obj.transform = graphics_Text_TransformToJSON(message.transform));
-    message.transformDelimiter !== undefined &&
-      (obj.transformDelimiter = message.transformDelimiter);
-    message.chordPro !== undefined &&
-      (obj.chordPro = message.chordPro
-        ? Graphics_Text_ChordPro.toJSON(message.chordPro)
-        : undefined);
+      );
+    }
+    if (message.margins !== undefined) {
+      obj.margins = Graphics_EdgeInsets.toJSON(message.margins);
+    }
+    if (message.isSuperscriptStandardized === true) {
+      obj.isSuperscriptStandardized = message.isSuperscriptStandardized;
+    }
+    if (message.transform !== 0) {
+      obj.transform = graphics_Text_TransformToJSON(message.transform);
+    }
+    if (message.transformDelimiter !== '') {
+      obj.transformDelimiter = message.transformDelimiter;
+    }
+    if (message.chordPro !== undefined) {
+      obj.chordPro = Graphics_Text_ChordPro.toJSON(message.chordPro);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text>, I>>(
     base?: I,
   ): Graphics_Text {
-    return Graphics_Text.fromPartial(base ?? {});
+    return Graphics_Text.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text>, I>>(
     object: I,
   ): Graphics_Text {
@@ -4451,7 +4561,7 @@ export const Graphics_Text = {
       object.shadow !== undefined && object.shadow !== null
         ? Graphics_Shadow.fromPartial(object.shadow)
         : undefined;
-    message.rtfData = object.rtfData ?? new Uint8Array();
+    message.rtfData = object.rtfData ?? new Uint8Array(0);
     message.verticalAlignment = object.verticalAlignment ?? 0;
     message.scaleBehavior = object.scaleBehavior ?? 0;
     message.margins =
@@ -4519,49 +4629,49 @@ export const Graphics_Text_LineFillMask = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.enabled = reader.bool();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.heightOffset = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.verticalOffset = reader.double();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.maskStyle = reader.int32() as any;
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.widthOffset = reader.double();
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.horizontalOffset = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4571,47 +4681,57 @@ export const Graphics_Text_LineFillMask = {
 
   fromJSON(object: any): Graphics_Text_LineFillMask {
     return {
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      enabled: isSet(object.enabled)
+        ? globalThis.Boolean(object.enabled)
+        : false,
       heightOffset: isSet(object.heightOffset)
-        ? Number(object.heightOffset)
+        ? globalThis.Number(object.heightOffset)
         : 0,
       verticalOffset: isSet(object.verticalOffset)
-        ? Number(object.verticalOffset)
+        ? globalThis.Number(object.verticalOffset)
         : 0,
       maskStyle: isSet(object.maskStyle)
         ? graphics_Text_LineFillMask_LineMaskStyleFromJSON(object.maskStyle)
         : 0,
-      widthOffset: isSet(object.widthOffset) ? Number(object.widthOffset) : 0,
+      widthOffset: isSet(object.widthOffset)
+        ? globalThis.Number(object.widthOffset)
+        : 0,
       horizontalOffset: isSet(object.horizontalOffset)
-        ? Number(object.horizontalOffset)
+        ? globalThis.Number(object.horizontalOffset)
         : 0,
     };
   },
 
   toJSON(message: Graphics_Text_LineFillMask): unknown {
     const obj: any = {};
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.heightOffset !== undefined &&
-      (obj.heightOffset = message.heightOffset);
-    message.verticalOffset !== undefined &&
-      (obj.verticalOffset = message.verticalOffset);
-    message.maskStyle !== undefined &&
-      (obj.maskStyle = graphics_Text_LineFillMask_LineMaskStyleToJSON(
+    if (message.enabled === true) {
+      obj.enabled = message.enabled;
+    }
+    if (message.heightOffset !== 0) {
+      obj.heightOffset = message.heightOffset;
+    }
+    if (message.verticalOffset !== 0) {
+      obj.verticalOffset = message.verticalOffset;
+    }
+    if (message.maskStyle !== 0) {
+      obj.maskStyle = graphics_Text_LineFillMask_LineMaskStyleToJSON(
         message.maskStyle,
-      ));
-    message.widthOffset !== undefined &&
-      (obj.widthOffset = message.widthOffset);
-    message.horizontalOffset !== undefined &&
-      (obj.horizontalOffset = message.horizontalOffset);
+      );
+    }
+    if (message.widthOffset !== 0) {
+      obj.widthOffset = message.widthOffset;
+    }
+    if (message.horizontalOffset !== 0) {
+      obj.horizontalOffset = message.horizontalOffset;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_LineFillMask>, I>>(
     base?: I,
   ): Graphics_Text_LineFillMask {
-    return Graphics_Text_LineFillMask.fromPartial(base ?? {});
+    return Graphics_Text_LineFillMask.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_LineFillMask>, I>>(
     object: I,
   ): Graphics_Text_LineFillMask {
@@ -4659,21 +4779,21 @@ export const Graphics_Text_GradientFill = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.gradient = Graphics_Gradient.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.stretchToDocumentBounds = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4687,28 +4807,27 @@ export const Graphics_Text_GradientFill = {
         ? Graphics_Gradient.fromJSON(object.gradient)
         : undefined,
       stretchToDocumentBounds: isSet(object.stretchToDocumentBounds)
-        ? Boolean(object.stretchToDocumentBounds)
+        ? globalThis.Boolean(object.stretchToDocumentBounds)
         : false,
     };
   },
 
   toJSON(message: Graphics_Text_GradientFill): unknown {
     const obj: any = {};
-    message.gradient !== undefined &&
-      (obj.gradient = message.gradient
-        ? Graphics_Gradient.toJSON(message.gradient)
-        : undefined);
-    message.stretchToDocumentBounds !== undefined &&
-      (obj.stretchToDocumentBounds = message.stretchToDocumentBounds);
+    if (message.gradient !== undefined) {
+      obj.gradient = Graphics_Gradient.toJSON(message.gradient);
+    }
+    if (message.stretchToDocumentBounds === true) {
+      obj.stretchToDocumentBounds = message.stretchToDocumentBounds;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_GradientFill>, I>>(
     base?: I,
   ): Graphics_Text_GradientFill {
-    return Graphics_Text_GradientFill.fromPartial(base ?? {});
+    return Graphics_Text_GradientFill.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_GradientFill>, I>>(
     object: I,
   ): Graphics_Text_GradientFill {
@@ -4746,7 +4865,7 @@ export const Graphics_Text_CutOutFill = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4766,9 +4885,8 @@ export const Graphics_Text_CutOutFill = {
   create<I extends Exact<DeepPartial<Graphics_Text_CutOutFill>, I>>(
     base?: I,
   ): Graphics_Text_CutOutFill {
-    return Graphics_Text_CutOutFill.fromPartial(base ?? {});
+    return Graphics_Text_CutOutFill.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_CutOutFill>, I>>(
     _: I,
   ): Graphics_Text_CutOutFill {
@@ -4804,14 +4922,14 @@ export const Graphics_Text_MediaFill = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.media = Media.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4827,17 +4945,17 @@ export const Graphics_Text_MediaFill = {
 
   toJSON(message: Graphics_Text_MediaFill): unknown {
     const obj: any = {};
-    message.media !== undefined &&
-      (obj.media = message.media ? Media.toJSON(message.media) : undefined);
+    if (message.media !== undefined) {
+      obj.media = Media.toJSON(message.media);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_MediaFill>, I>>(
     base?: I,
   ): Graphics_Text_MediaFill {
-    return Graphics_Text_MediaFill.fromPartial(base ?? {});
+    return Graphics_Text_MediaFill.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_MediaFill>, I>>(
     object: I,
   ): Graphics_Text_MediaFill {
@@ -4883,28 +5001,28 @@ export const Graphics_Text_ChordPro = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.enabled = reader.bool();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.notation = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4914,7 +5032,9 @@ export const Graphics_Text_ChordPro = {
 
   fromJSON(object: any): Graphics_Text_ChordPro {
     return {
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+      enabled: isSet(object.enabled)
+        ? globalThis.Boolean(object.enabled)
+        : false,
       notation: isSet(object.notation)
         ? graphics_Text_ChordPro_NotationFromJSON(object.notation)
         : 0,
@@ -4924,20 +5044,23 @@ export const Graphics_Text_ChordPro = {
 
   toJSON(message: Graphics_Text_ChordPro): unknown {
     const obj: any = {};
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.notation !== undefined &&
-      (obj.notation = graphics_Text_ChordPro_NotationToJSON(message.notation));
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    if (message.enabled === true) {
+      obj.enabled = message.enabled;
+    }
+    if (message.notation !== 0) {
+      obj.notation = graphics_Text_ChordPro_NotationToJSON(message.notation);
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_ChordPro>, I>>(
     base?: I,
   ): Graphics_Text_ChordPro {
-    return Graphics_Text_ChordPro.fromPartial(base ?? {});
+    return Graphics_Text_ChordPro.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_ChordPro>, I>>(
     object: I,
   ): Graphics_Text_ChordPro {
@@ -5079,7 +5202,7 @@ export const Graphics_Text_Attributes = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -5089,14 +5212,14 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.capitalization = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -5106,14 +5229,14 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.underlineColor = Color.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -5123,21 +5246,21 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 7:
-          if (tag != 57) {
+          if (tag !== 57) {
             break;
           }
 
           message.kerning = reader.double();
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.superscript = reader.int32();
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -5145,28 +5268,28 @@ export const Graphics_Text_Attributes = {
             Graphics_Text_Attributes_Underline.decode(reader, reader.uint32());
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.strikethroughColor = Color.decode(reader, reader.uint32());
           continue;
         case 11:
-          if (tag != 89) {
+          if (tag !== 89) {
             break;
           }
 
           message.strokeWidth = reader.double();
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
           message.strokeColor = Color.decode(reader, reader.uint32());
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
@@ -5178,21 +5301,21 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 15:
-          if (tag != 122) {
+          if (tag !== 122) {
             break;
           }
 
           message.backgroundColor = Color.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.textSolidFill = Color.decode(reader, reader.uint32());
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
@@ -5202,7 +5325,7 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 16:
-          if (tag != 130) {
+          if (tag !== 130) {
             break;
           }
 
@@ -5212,7 +5335,7 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 17:
-          if (tag != 138) {
+          if (tag !== 138) {
             break;
           }
 
@@ -5222,7 +5345,7 @@ export const Graphics_Text_Attributes = {
           );
           continue;
         case 18:
-          if (tag != 146) {
+          if (tag !== 146) {
             break;
           }
 
@@ -5232,7 +5355,7 @@ export const Graphics_Text_Attributes = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5257,19 +5380,23 @@ export const Graphics_Text_Attributes = {
       paragraphStyle: isSet(object.paragraphStyle)
         ? Graphics_Text_Attributes_Paragraph.fromJSON(object.paragraphStyle)
         : undefined,
-      kerning: isSet(object.kerning) ? Number(object.kerning) : 0,
-      superscript: isSet(object.superscript) ? Number(object.superscript) : 0,
+      kerning: isSet(object.kerning) ? globalThis.Number(object.kerning) : 0,
+      superscript: isSet(object.superscript)
+        ? globalThis.Number(object.superscript)
+        : 0,
       strikethroughStyle: isSet(object.strikethroughStyle)
         ? Graphics_Text_Attributes_Underline.fromJSON(object.strikethroughStyle)
         : undefined,
       strikethroughColor: isSet(object.strikethroughColor)
         ? Color.fromJSON(object.strikethroughColor)
         : undefined,
-      strokeWidth: isSet(object.strokeWidth) ? Number(object.strokeWidth) : 0,
+      strokeWidth: isSet(object.strokeWidth)
+        ? globalThis.Number(object.strokeWidth)
+        : 0,
       strokeColor: isSet(object.strokeColor)
         ? Color.fromJSON(object.strokeColor)
         : undefined,
-      customAttributes: Array.isArray(object?.customAttributes)
+      customAttributes: globalThis.Array.isArray(object?.customAttributes)
         ? object.customAttributes.map((e: any) =>
             Graphics_Text_Attributes_CustomAttribute.fromJSON(e),
           )
@@ -5297,83 +5424,82 @@ export const Graphics_Text_Attributes = {
 
   toJSON(message: Graphics_Text_Attributes): unknown {
     const obj: any = {};
-    message.font !== undefined &&
-      (obj.font = message.font
-        ? Graphics_Text_Attributes_Font.toJSON(message.font)
-        : undefined);
-    message.capitalization !== undefined &&
-      (obj.capitalization = graphics_Text_Attributes_CapitalizationToJSON(
-        message.capitalization,
-      ));
-    message.underlineStyle !== undefined &&
-      (obj.underlineStyle = message.underlineStyle
-        ? Graphics_Text_Attributes_Underline.toJSON(message.underlineStyle)
-        : undefined);
-    message.underlineColor !== undefined &&
-      (obj.underlineColor = message.underlineColor
-        ? Color.toJSON(message.underlineColor)
-        : undefined);
-    message.paragraphStyle !== undefined &&
-      (obj.paragraphStyle = message.paragraphStyle
-        ? Graphics_Text_Attributes_Paragraph.toJSON(message.paragraphStyle)
-        : undefined);
-    message.kerning !== undefined && (obj.kerning = message.kerning);
-    message.superscript !== undefined &&
-      (obj.superscript = Math.round(message.superscript));
-    message.strikethroughStyle !== undefined &&
-      (obj.strikethroughStyle = message.strikethroughStyle
-        ? Graphics_Text_Attributes_Underline.toJSON(message.strikethroughStyle)
-        : undefined);
-    message.strikethroughColor !== undefined &&
-      (obj.strikethroughColor = message.strikethroughColor
-        ? Color.toJSON(message.strikethroughColor)
-        : undefined);
-    message.strokeWidth !== undefined &&
-      (obj.strokeWidth = message.strokeWidth);
-    message.strokeColor !== undefined &&
-      (obj.strokeColor = message.strokeColor
-        ? Color.toJSON(message.strokeColor)
-        : undefined);
-    if (message.customAttributes) {
-      obj.customAttributes = message.customAttributes.map((e) =>
-        e ? Graphics_Text_Attributes_CustomAttribute.toJSON(e) : undefined,
-      );
-    } else {
-      obj.customAttributes = [];
+    if (message.font !== undefined) {
+      obj.font = Graphics_Text_Attributes_Font.toJSON(message.font);
     }
-    message.backgroundColor !== undefined &&
-      (obj.backgroundColor = message.backgroundColor
-        ? Color.toJSON(message.backgroundColor)
-        : undefined);
-    message.textSolidFill !== undefined &&
-      (obj.textSolidFill = message.textSolidFill
-        ? Color.toJSON(message.textSolidFill)
-        : undefined);
-    message.textGradientFill !== undefined &&
-      (obj.textGradientFill = message.textGradientFill
-        ? Graphics_Text_GradientFill.toJSON(message.textGradientFill)
-        : undefined);
-    message.cutOutFill !== undefined &&
-      (obj.cutOutFill = message.cutOutFill
-        ? Graphics_Text_CutOutFill.toJSON(message.cutOutFill)
-        : undefined);
-    message.mediaFill !== undefined &&
-      (obj.mediaFill = message.mediaFill
-        ? Graphics_Text_MediaFill.toJSON(message.mediaFill)
-        : undefined);
-    message.backgroundEffect !== undefined &&
-      (obj.backgroundEffect = message.backgroundEffect
-        ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
-        : undefined);
+    if (message.capitalization !== 0) {
+      obj.capitalization = graphics_Text_Attributes_CapitalizationToJSON(
+        message.capitalization,
+      );
+    }
+    if (message.underlineStyle !== undefined) {
+      obj.underlineStyle = Graphics_Text_Attributes_Underline.toJSON(
+        message.underlineStyle,
+      );
+    }
+    if (message.underlineColor !== undefined) {
+      obj.underlineColor = Color.toJSON(message.underlineColor);
+    }
+    if (message.paragraphStyle !== undefined) {
+      obj.paragraphStyle = Graphics_Text_Attributes_Paragraph.toJSON(
+        message.paragraphStyle,
+      );
+    }
+    if (message.kerning !== 0) {
+      obj.kerning = message.kerning;
+    }
+    if (message.superscript !== 0) {
+      obj.superscript = Math.round(message.superscript);
+    }
+    if (message.strikethroughStyle !== undefined) {
+      obj.strikethroughStyle = Graphics_Text_Attributes_Underline.toJSON(
+        message.strikethroughStyle,
+      );
+    }
+    if (message.strikethroughColor !== undefined) {
+      obj.strikethroughColor = Color.toJSON(message.strikethroughColor);
+    }
+    if (message.strokeWidth !== 0) {
+      obj.strokeWidth = message.strokeWidth;
+    }
+    if (message.strokeColor !== undefined) {
+      obj.strokeColor = Color.toJSON(message.strokeColor);
+    }
+    if (message.customAttributes?.length) {
+      obj.customAttributes = message.customAttributes.map((e) =>
+        Graphics_Text_Attributes_CustomAttribute.toJSON(e),
+      );
+    }
+    if (message.backgroundColor !== undefined) {
+      obj.backgroundColor = Color.toJSON(message.backgroundColor);
+    }
+    if (message.textSolidFill !== undefined) {
+      obj.textSolidFill = Color.toJSON(message.textSolidFill);
+    }
+    if (message.textGradientFill !== undefined) {
+      obj.textGradientFill = Graphics_Text_GradientFill.toJSON(
+        message.textGradientFill,
+      );
+    }
+    if (message.cutOutFill !== undefined) {
+      obj.cutOutFill = Graphics_Text_CutOutFill.toJSON(message.cutOutFill);
+    }
+    if (message.mediaFill !== undefined) {
+      obj.mediaFill = Graphics_Text_MediaFill.toJSON(message.mediaFill);
+    }
+    if (message.backgroundEffect !== undefined) {
+      obj.backgroundEffect = Graphics_BackgroundEffect.toJSON(
+        message.backgroundEffect,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_Attributes>, I>>(
     base?: I,
   ): Graphics_Text_Attributes {
-    return Graphics_Text_Attributes.fromPartial(base ?? {});
+    return Graphics_Text_Attributes.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes>, I>>(
     object: I,
   ): Graphics_Text_Attributes {
@@ -5495,49 +5621,49 @@ export const Graphics_Text_Attributes_Font = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.size = reader.double();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.italic = reader.bool();
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.bold = reader.bool();
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.family = reader.string();
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.face = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5547,32 +5673,43 @@ export const Graphics_Text_Attributes_Font = {
 
   fromJSON(object: any): Graphics_Text_Attributes_Font {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      size: isSet(object.size) ? Number(object.size) : 0,
-      italic: isSet(object.italic) ? Boolean(object.italic) : false,
-      bold: isSet(object.bold) ? Boolean(object.bold) : false,
-      family: isSet(object.family) ? String(object.family) : '',
-      face: isSet(object.face) ? String(object.face) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
+      italic: isSet(object.italic) ? globalThis.Boolean(object.italic) : false,
+      bold: isSet(object.bold) ? globalThis.Boolean(object.bold) : false,
+      family: isSet(object.family) ? globalThis.String(object.family) : '',
+      face: isSet(object.face) ? globalThis.String(object.face) : '',
     };
   },
 
   toJSON(message: Graphics_Text_Attributes_Font): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.size !== undefined && (obj.size = message.size);
-    message.italic !== undefined && (obj.italic = message.italic);
-    message.bold !== undefined && (obj.bold = message.bold);
-    message.family !== undefined && (obj.family = message.family);
-    message.face !== undefined && (obj.face = message.face);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.size !== 0) {
+      obj.size = message.size;
+    }
+    if (message.italic === true) {
+      obj.italic = message.italic;
+    }
+    if (message.bold === true) {
+      obj.bold = message.bold;
+    }
+    if (message.family !== '') {
+      obj.family = message.family;
+    }
+    if (message.face !== '') {
+      obj.face = message.face;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Font>, I>>(
     base?: I,
   ): Graphics_Text_Attributes_Font {
-    return Graphics_Text_Attributes_Font.fromPartial(base ?? {});
+    return Graphics_Text_Attributes_Font.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_Font>, I>>(
     object: I,
   ): Graphics_Text_Attributes_Font {
@@ -5620,28 +5757,28 @@ export const Graphics_Text_Attributes_Underline = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.style = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.pattern = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.byWord = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5657,30 +5794,31 @@ export const Graphics_Text_Attributes_Underline = {
       pattern: isSet(object.pattern)
         ? graphics_Text_Attributes_Underline_PatternFromJSON(object.pattern)
         : 0,
-      byWord: isSet(object.byWord) ? Boolean(object.byWord) : false,
+      byWord: isSet(object.byWord) ? globalThis.Boolean(object.byWord) : false,
     };
   },
 
   toJSON(message: Graphics_Text_Attributes_Underline): unknown {
     const obj: any = {};
-    message.style !== undefined &&
-      (obj.style = graphics_Text_Attributes_Underline_StyleToJSON(
-        message.style,
-      ));
-    message.pattern !== undefined &&
-      (obj.pattern = graphics_Text_Attributes_Underline_PatternToJSON(
+    if (message.style !== 0) {
+      obj.style = graphics_Text_Attributes_Underline_StyleToJSON(message.style);
+    }
+    if (message.pattern !== 0) {
+      obj.pattern = graphics_Text_Attributes_Underline_PatternToJSON(
         message.pattern,
-      ));
-    message.byWord !== undefined && (obj.byWord = message.byWord);
+      );
+    }
+    if (message.byWord === true) {
+      obj.byWord = message.byWord;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Underline>, I>>(
     base?: I,
   ): Graphics_Text_Attributes_Underline {
-    return Graphics_Text_Attributes_Underline.fromPartial(base ?? {});
+    return Graphics_Text_Attributes_Underline.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Graphics_Text_Attributes_Underline>, I>,
   >(object: I): Graphics_Text_Attributes_Underline {
@@ -5782,77 +5920,77 @@ export const Graphics_Text_Attributes_Paragraph = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.alignment = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.firstLineHeadIndent = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.headIndent = reader.double();
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.tailIndent = reader.double();
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.lineHeightMultiple = reader.double();
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.maximumLineHeight = reader.double();
           continue;
         case 7:
-          if (tag != 57) {
+          if (tag !== 57) {
             break;
           }
 
           message.minimumLineHeight = reader.double();
           continue;
         case 8:
-          if (tag != 65) {
+          if (tag !== 65) {
             break;
           }
 
           message.lineSpacing = reader.double();
           continue;
         case 9:
-          if (tag != 73) {
+          if (tag !== 73) {
             break;
           }
 
           message.paragraphSpacing = reader.double();
           continue;
         case 10:
-          if (tag != 81) {
+          if (tag !== 81) {
             break;
           }
 
           message.paragraphSpacingBefore = reader.double();
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -5864,14 +6002,14 @@ export const Graphics_Text_Attributes_Paragraph = {
           );
           continue;
         case 12:
-          if (tag != 97) {
+          if (tag !== 97) {
             break;
           }
 
           message.defaultTabInterval = reader.double();
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
@@ -5881,7 +6019,7 @@ export const Graphics_Text_Attributes_Paragraph = {
           );
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
@@ -5893,7 +6031,7 @@ export const Graphics_Text_Attributes_Paragraph = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5907,38 +6045,44 @@ export const Graphics_Text_Attributes_Paragraph = {
         ? graphics_Text_Attributes_AlignmentFromJSON(object.alignment)
         : 0,
       firstLineHeadIndent: isSet(object.firstLineHeadIndent)
-        ? Number(object.firstLineHeadIndent)
+        ? globalThis.Number(object.firstLineHeadIndent)
         : 0,
-      headIndent: isSet(object.headIndent) ? Number(object.headIndent) : 0,
-      tailIndent: isSet(object.tailIndent) ? Number(object.tailIndent) : 0,
+      headIndent: isSet(object.headIndent)
+        ? globalThis.Number(object.headIndent)
+        : 0,
+      tailIndent: isSet(object.tailIndent)
+        ? globalThis.Number(object.tailIndent)
+        : 0,
       lineHeightMultiple: isSet(object.lineHeightMultiple)
-        ? Number(object.lineHeightMultiple)
+        ? globalThis.Number(object.lineHeightMultiple)
         : 0,
       maximumLineHeight: isSet(object.maximumLineHeight)
-        ? Number(object.maximumLineHeight)
+        ? globalThis.Number(object.maximumLineHeight)
         : 0,
       minimumLineHeight: isSet(object.minimumLineHeight)
-        ? Number(object.minimumLineHeight)
+        ? globalThis.Number(object.minimumLineHeight)
         : 0,
-      lineSpacing: isSet(object.lineSpacing) ? Number(object.lineSpacing) : 0,
+      lineSpacing: isSet(object.lineSpacing)
+        ? globalThis.Number(object.lineSpacing)
+        : 0,
       paragraphSpacing: isSet(object.paragraphSpacing)
-        ? Number(object.paragraphSpacing)
+        ? globalThis.Number(object.paragraphSpacing)
         : 0,
       paragraphSpacingBefore: isSet(object.paragraphSpacingBefore)
-        ? Number(object.paragraphSpacingBefore)
+        ? globalThis.Number(object.paragraphSpacingBefore)
         : 0,
-      tabStops: Array.isArray(object?.tabStops)
+      tabStops: globalThis.Array.isArray(object?.tabStops)
         ? object.tabStops.map((e: any) =>
             Graphics_Text_Attributes_Paragraph_TabStop.fromJSON(e),
           )
         : [],
       defaultTabInterval: isSet(object.defaultTabInterval)
-        ? Number(object.defaultTabInterval)
+        ? globalThis.Number(object.defaultTabInterval)
         : 0,
       textList: isSet(object.textList)
         ? Graphics_Text_Attributes_Paragraph_TextList.fromJSON(object.textList)
         : undefined,
-      textLists: Array.isArray(object?.textLists)
+      textLists: globalThis.Array.isArray(object?.textLists)
         ? object.textLists.map((e: any) =>
             Graphics_Text_Attributes_Paragraph_TextList.fromJSON(e),
           )
@@ -5948,45 +6092,55 @@ export const Graphics_Text_Attributes_Paragraph = {
 
   toJSON(message: Graphics_Text_Attributes_Paragraph): unknown {
     const obj: any = {};
-    message.alignment !== undefined &&
-      (obj.alignment = graphics_Text_Attributes_AlignmentToJSON(
+    if (message.alignment !== 0) {
+      obj.alignment = graphics_Text_Attributes_AlignmentToJSON(
         message.alignment,
-      ));
-    message.firstLineHeadIndent !== undefined &&
-      (obj.firstLineHeadIndent = message.firstLineHeadIndent);
-    message.headIndent !== undefined && (obj.headIndent = message.headIndent);
-    message.tailIndent !== undefined && (obj.tailIndent = message.tailIndent);
-    message.lineHeightMultiple !== undefined &&
-      (obj.lineHeightMultiple = message.lineHeightMultiple);
-    message.maximumLineHeight !== undefined &&
-      (obj.maximumLineHeight = message.maximumLineHeight);
-    message.minimumLineHeight !== undefined &&
-      (obj.minimumLineHeight = message.minimumLineHeight);
-    message.lineSpacing !== undefined &&
-      (obj.lineSpacing = message.lineSpacing);
-    message.paragraphSpacing !== undefined &&
-      (obj.paragraphSpacing = message.paragraphSpacing);
-    message.paragraphSpacingBefore !== undefined &&
-      (obj.paragraphSpacingBefore = message.paragraphSpacingBefore);
-    if (message.tabStops) {
-      obj.tabStops = message.tabStops.map((e) =>
-        e ? Graphics_Text_Attributes_Paragraph_TabStop.toJSON(e) : undefined,
       );
-    } else {
-      obj.tabStops = [];
     }
-    message.defaultTabInterval !== undefined &&
-      (obj.defaultTabInterval = message.defaultTabInterval);
-    message.textList !== undefined &&
-      (obj.textList = message.textList
-        ? Graphics_Text_Attributes_Paragraph_TextList.toJSON(message.textList)
-        : undefined);
-    if (message.textLists) {
-      obj.textLists = message.textLists.map((e) =>
-        e ? Graphics_Text_Attributes_Paragraph_TextList.toJSON(e) : undefined,
+    if (message.firstLineHeadIndent !== 0) {
+      obj.firstLineHeadIndent = message.firstLineHeadIndent;
+    }
+    if (message.headIndent !== 0) {
+      obj.headIndent = message.headIndent;
+    }
+    if (message.tailIndent !== 0) {
+      obj.tailIndent = message.tailIndent;
+    }
+    if (message.lineHeightMultiple !== 0) {
+      obj.lineHeightMultiple = message.lineHeightMultiple;
+    }
+    if (message.maximumLineHeight !== 0) {
+      obj.maximumLineHeight = message.maximumLineHeight;
+    }
+    if (message.minimumLineHeight !== 0) {
+      obj.minimumLineHeight = message.minimumLineHeight;
+    }
+    if (message.lineSpacing !== 0) {
+      obj.lineSpacing = message.lineSpacing;
+    }
+    if (message.paragraphSpacing !== 0) {
+      obj.paragraphSpacing = message.paragraphSpacing;
+    }
+    if (message.paragraphSpacingBefore !== 0) {
+      obj.paragraphSpacingBefore = message.paragraphSpacingBefore;
+    }
+    if (message.tabStops?.length) {
+      obj.tabStops = message.tabStops.map((e) =>
+        Graphics_Text_Attributes_Paragraph_TabStop.toJSON(e),
       );
-    } else {
-      obj.textLists = [];
+    }
+    if (message.defaultTabInterval !== 0) {
+      obj.defaultTabInterval = message.defaultTabInterval;
+    }
+    if (message.textList !== undefined) {
+      obj.textList = Graphics_Text_Attributes_Paragraph_TextList.toJSON(
+        message.textList,
+      );
+    }
+    if (message.textLists?.length) {
+      obj.textLists = message.textLists.map((e) =>
+        Graphics_Text_Attributes_Paragraph_TextList.toJSON(e),
+      );
     }
     return obj;
   },
@@ -5994,9 +6148,8 @@ export const Graphics_Text_Attributes_Paragraph = {
   create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph>, I>>(
     base?: I,
   ): Graphics_Text_Attributes_Paragraph {
-    return Graphics_Text_Attributes_Paragraph.fromPartial(base ?? {});
+    return Graphics_Text_Attributes_Paragraph.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph>, I>,
   >(object: I): Graphics_Text_Attributes_Paragraph {
@@ -6060,21 +6213,21 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.location = reader.double();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.alignment = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6084,7 +6237,7 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
 
   fromJSON(object: any): Graphics_Text_Attributes_Paragraph_TabStop {
     return {
-      location: isSet(object.location) ? Number(object.location) : 0,
+      location: isSet(object.location) ? globalThis.Number(object.location) : 0,
       alignment: isSet(object.alignment)
         ? graphics_Text_Attributes_AlignmentFromJSON(object.alignment)
         : 0,
@@ -6093,20 +6246,24 @@ export const Graphics_Text_Attributes_Paragraph_TabStop = {
 
   toJSON(message: Graphics_Text_Attributes_Paragraph_TabStop): unknown {
     const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.alignment !== undefined &&
-      (obj.alignment = graphics_Text_Attributes_AlignmentToJSON(
+    if (message.location !== 0) {
+      obj.location = message.location;
+    }
+    if (message.alignment !== 0) {
+      obj.alignment = graphics_Text_Attributes_AlignmentToJSON(
         message.alignment,
-      ));
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TabStop>, I>,
   >(base?: I): Graphics_Text_Attributes_Paragraph_TabStop {
-    return Graphics_Text_Attributes_Paragraph_TabStop.fromPartial(base ?? {});
+    return Graphics_Text_Attributes_Paragraph_TabStop.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Graphics_Text_Attributes_Paragraph_TabStop>, I>,
   >(object: I): Graphics_Text_Attributes_Paragraph_TabStop {
@@ -6162,42 +6319,42 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.isEnabled = reader.bool();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.numberType = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.prefix = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.postfix = reader.string();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.startingNumber = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6207,32 +6364,42 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
 
   fromJSON(object: any): Graphics_Text_Attributes_Paragraph_TextList {
     return {
-      isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
+      isEnabled: isSet(object.isEnabled)
+        ? globalThis.Boolean(object.isEnabled)
+        : false,
       numberType: isSet(object.numberType)
         ? graphics_Text_Attributes_Paragraph_TextList_NumberTypeFromJSON(
             object.numberType,
           )
         : 0,
-      prefix: isSet(object.prefix) ? String(object.prefix) : '',
-      postfix: isSet(object.postfix) ? String(object.postfix) : '',
+      prefix: isSet(object.prefix) ? globalThis.String(object.prefix) : '',
+      postfix: isSet(object.postfix) ? globalThis.String(object.postfix) : '',
       startingNumber: isSet(object.startingNumber)
-        ? Number(object.startingNumber)
+        ? globalThis.Number(object.startingNumber)
         : 0,
     };
   },
 
   toJSON(message: Graphics_Text_Attributes_Paragraph_TextList): unknown {
     const obj: any = {};
-    message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
-    message.numberType !== undefined &&
-      (obj.numberType =
+    if (message.isEnabled === true) {
+      obj.isEnabled = message.isEnabled;
+    }
+    if (message.numberType !== 0) {
+      obj.numberType =
         graphics_Text_Attributes_Paragraph_TextList_NumberTypeToJSON(
           message.numberType,
-        ));
-    message.prefix !== undefined && (obj.prefix = message.prefix);
-    message.postfix !== undefined && (obj.postfix = message.postfix);
-    message.startingNumber !== undefined &&
-      (obj.startingNumber = Math.round(message.startingNumber));
+        );
+    }
+    if (message.prefix !== '') {
+      obj.prefix = message.prefix;
+    }
+    if (message.postfix !== '') {
+      obj.postfix = message.postfix;
+    }
+    if (message.startingNumber !== 0) {
+      obj.startingNumber = Math.round(message.startingNumber);
+    }
     return obj;
   },
 
@@ -6242,9 +6409,10 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
       I
     >,
   >(base?: I): Graphics_Text_Attributes_Paragraph_TextList {
-    return Graphics_Text_Attributes_Paragraph_TextList.fromPartial(base ?? {});
+    return Graphics_Text_Attributes_Paragraph_TextList.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Graphics_Text_Attributes_Paragraph_TextList>,
@@ -6338,35 +6506,35 @@ export const Graphics_Text_Attributes_CustomAttribute = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.range = IntRange.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.capitalization = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.originalFontSize = reader.double();
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.fontScaleFactor = reader.double();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -6376,21 +6544,21 @@ export const Graphics_Text_Attributes_CustomAttribute = {
           );
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.shouldPreserveForegroundColor = reader.bool();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.chord = reader.string();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -6400,7 +6568,7 @@ export const Graphics_Text_Attributes_CustomAttribute = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -6410,7 +6578,7 @@ export const Graphics_Text_Attributes_CustomAttribute = {
           );
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -6420,7 +6588,7 @@ export const Graphics_Text_Attributes_CustomAttribute = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6435,18 +6603,18 @@ export const Graphics_Text_Attributes_CustomAttribute = {
         ? graphics_Text_Attributes_CapitalizationFromJSON(object.capitalization)
         : undefined,
       originalFontSize: isSet(object.originalFontSize)
-        ? Number(object.originalFontSize)
+        ? globalThis.Number(object.originalFontSize)
         : undefined,
       fontScaleFactor: isSet(object.fontScaleFactor)
-        ? Number(object.fontScaleFactor)
+        ? globalThis.Number(object.fontScaleFactor)
         : undefined,
       textGradientFill: isSet(object.textGradientFill)
         ? Graphics_Text_GradientFill.fromJSON(object.textGradientFill)
         : undefined,
       shouldPreserveForegroundColor: isSet(object.shouldPreserveForegroundColor)
-        ? Boolean(object.shouldPreserveForegroundColor)
+        ? globalThis.Boolean(object.shouldPreserveForegroundColor)
         : undefined,
-      chord: isSet(object.chord) ? String(object.chord) : undefined,
+      chord: isSet(object.chord) ? globalThis.String(object.chord) : undefined,
       cutOutFill: isSet(object.cutOutFill)
         ? Graphics_Text_CutOutFill.fromJSON(object.cutOutFill)
         : undefined,
@@ -6461,48 +6629,52 @@ export const Graphics_Text_Attributes_CustomAttribute = {
 
   toJSON(message: Graphics_Text_Attributes_CustomAttribute): unknown {
     const obj: any = {};
-    message.range !== undefined &&
-      (obj.range = message.range ? IntRange.toJSON(message.range) : undefined);
-    message.capitalization !== undefined &&
-      (obj.capitalization =
-        message.capitalization !== undefined
-          ? graphics_Text_Attributes_CapitalizationToJSON(
-              message.capitalization,
-            )
-          : undefined);
-    message.originalFontSize !== undefined &&
-      (obj.originalFontSize = message.originalFontSize);
-    message.fontScaleFactor !== undefined &&
-      (obj.fontScaleFactor = message.fontScaleFactor);
-    message.textGradientFill !== undefined &&
-      (obj.textGradientFill = message.textGradientFill
-        ? Graphics_Text_GradientFill.toJSON(message.textGradientFill)
-        : undefined);
-    message.shouldPreserveForegroundColor !== undefined &&
-      (obj.shouldPreserveForegroundColor =
-        message.shouldPreserveForegroundColor);
-    message.chord !== undefined && (obj.chord = message.chord);
-    message.cutOutFill !== undefined &&
-      (obj.cutOutFill = message.cutOutFill
-        ? Graphics_Text_CutOutFill.toJSON(message.cutOutFill)
-        : undefined);
-    message.mediaFill !== undefined &&
-      (obj.mediaFill = message.mediaFill
-        ? Graphics_Text_MediaFill.toJSON(message.mediaFill)
-        : undefined);
-    message.backgroundEffect !== undefined &&
-      (obj.backgroundEffect = message.backgroundEffect
-        ? Graphics_BackgroundEffect.toJSON(message.backgroundEffect)
-        : undefined);
+    if (message.range !== undefined) {
+      obj.range = IntRange.toJSON(message.range);
+    }
+    if (message.capitalization !== undefined) {
+      obj.capitalization = graphics_Text_Attributes_CapitalizationToJSON(
+        message.capitalization,
+      );
+    }
+    if (message.originalFontSize !== undefined) {
+      obj.originalFontSize = message.originalFontSize;
+    }
+    if (message.fontScaleFactor !== undefined) {
+      obj.fontScaleFactor = message.fontScaleFactor;
+    }
+    if (message.textGradientFill !== undefined) {
+      obj.textGradientFill = Graphics_Text_GradientFill.toJSON(
+        message.textGradientFill,
+      );
+    }
+    if (message.shouldPreserveForegroundColor !== undefined) {
+      obj.shouldPreserveForegroundColor = message.shouldPreserveForegroundColor;
+    }
+    if (message.chord !== undefined) {
+      obj.chord = message.chord;
+    }
+    if (message.cutOutFill !== undefined) {
+      obj.cutOutFill = Graphics_Text_CutOutFill.toJSON(message.cutOutFill);
+    }
+    if (message.mediaFill !== undefined) {
+      obj.mediaFill = Graphics_Text_MediaFill.toJSON(message.mediaFill);
+    }
+    if (message.backgroundEffect !== undefined) {
+      obj.backgroundEffect = Graphics_BackgroundEffect.toJSON(
+        message.backgroundEffect,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Graphics_Text_Attributes_CustomAttribute>, I>,
   >(base?: I): Graphics_Text_Attributes_CustomAttribute {
-    return Graphics_Text_Attributes_CustomAttribute.fromPartial(base ?? {});
+    return Graphics_Text_Attributes_CustomAttribute.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Graphics_Text_Attributes_CustomAttribute>, I>,
   >(object: I): Graphics_Text_Attributes_CustomAttribute {
@@ -6606,28 +6778,28 @@ export const Media = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.metadata = Media_Metadata.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -6637,7 +6809,7 @@ export const Media = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -6647,7 +6819,7 @@ export const Media = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -6657,7 +6829,7 @@ export const Media = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -6667,7 +6839,7 @@ export const Media = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -6677,7 +6849,7 @@ export const Media = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6712,41 +6884,38 @@ export const Media = {
 
   toJSON(message: Media): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
-    message.metadata !== undefined &&
-      (obj.metadata = message.metadata
-        ? Media_Metadata.toJSON(message.metadata)
-        : undefined);
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? Media_AudioTypeProperties.toJSON(message.audio)
-        : undefined);
-    message.image !== undefined &&
-      (obj.image = message.image
-        ? Media_ImageTypeProperties.toJSON(message.image)
-        : undefined);
-    message.video !== undefined &&
-      (obj.video = message.video
-        ? Media_VideoTypeProperties.toJSON(message.video)
-        : undefined);
-    message.liveVideo !== undefined &&
-      (obj.liveVideo = message.liveVideo
-        ? Media_LiveVideoTypeProperties.toJSON(message.liveVideo)
-        : undefined);
-    message.webContent !== undefined &&
-      (obj.webContent = message.webContent
-        ? Media_WebContentTypeProperties.toJSON(message.webContent)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
+    if (message.metadata !== undefined) {
+      obj.metadata = Media_Metadata.toJSON(message.metadata);
+    }
+    if (message.audio !== undefined) {
+      obj.audio = Media_AudioTypeProperties.toJSON(message.audio);
+    }
+    if (message.image !== undefined) {
+      obj.image = Media_ImageTypeProperties.toJSON(message.image);
+    }
+    if (message.video !== undefined) {
+      obj.video = Media_VideoTypeProperties.toJSON(message.video);
+    }
+    if (message.liveVideo !== undefined) {
+      obj.liveVideo = Media_LiveVideoTypeProperties.toJSON(message.liveVideo);
+    }
+    if (message.webContent !== undefined) {
+      obj.webContent = Media_WebContentTypeProperties.toJSON(
+        message.webContent,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media>, I>>(base?: I): Media {
-    return Media.fromPartial(base ?? {});
+    return Media.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media>, I>>(object: I): Media {
     const message = createBaseMedia();
     message.uuid =
@@ -6827,42 +6996,42 @@ export const Media_Metadata = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.manufactureName = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.manufactureUrl = URL.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.information = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.artist = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.format = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6873,38 +7042,44 @@ export const Media_Metadata = {
   fromJSON(object: any): Media_Metadata {
     return {
       manufactureName: isSet(object.manufactureName)
-        ? String(object.manufactureName)
+        ? globalThis.String(object.manufactureName)
         : '',
       manufactureUrl: isSet(object.manufactureUrl)
         ? URL.fromJSON(object.manufactureUrl)
         : undefined,
-      information: isSet(object.information) ? String(object.information) : '',
-      artist: isSet(object.artist) ? String(object.artist) : '',
-      format: isSet(object.format) ? String(object.format) : '',
+      information: isSet(object.information)
+        ? globalThis.String(object.information)
+        : '',
+      artist: isSet(object.artist) ? globalThis.String(object.artist) : '',
+      format: isSet(object.format) ? globalThis.String(object.format) : '',
     };
   },
 
   toJSON(message: Media_Metadata): unknown {
     const obj: any = {};
-    message.manufactureName !== undefined &&
-      (obj.manufactureName = message.manufactureName);
-    message.manufactureUrl !== undefined &&
-      (obj.manufactureUrl = message.manufactureUrl
-        ? URL.toJSON(message.manufactureUrl)
-        : undefined);
-    message.information !== undefined &&
-      (obj.information = message.information);
-    message.artist !== undefined && (obj.artist = message.artist);
-    message.format !== undefined && (obj.format = message.format);
+    if (message.manufactureName !== '') {
+      obj.manufactureName = message.manufactureName;
+    }
+    if (message.manufactureUrl !== undefined) {
+      obj.manufactureUrl = URL.toJSON(message.manufactureUrl);
+    }
+    if (message.information !== '') {
+      obj.information = message.information;
+    }
+    if (message.artist !== '') {
+      obj.artist = message.artist;
+    }
+    if (message.format !== '') {
+      obj.format = message.format;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_Metadata>, I>>(
     base?: I,
   ): Media_Metadata {
-    return Media_Metadata.fromPartial(base ?? {});
+    return Media_Metadata.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_Metadata>, I>>(
     object: I,
   ): Media_Metadata {
@@ -6970,42 +7145,42 @@ export const Media_VideoDevice = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.uniqueId = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.modelId = reader.string();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.formatIndex = reader.uint32();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -7015,7 +7190,7 @@ export const Media_VideoDevice = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7028,10 +7203,14 @@ export const Media_VideoDevice = {
       type: isSet(object.type)
         ? media_VideoDevice_TypeFromJSON(object.type)
         : 0,
-      name: isSet(object.name) ? String(object.name) : '',
-      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : '',
-      modelId: isSet(object.modelId) ? String(object.modelId) : '',
-      formatIndex: isSet(object.formatIndex) ? Number(object.formatIndex) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      uniqueId: isSet(object.uniqueId)
+        ? globalThis.String(object.uniqueId)
+        : '',
+      modelId: isSet(object.modelId) ? globalThis.String(object.modelId) : '',
+      formatIndex: isSet(object.formatIndex)
+        ? globalThis.Number(object.formatIndex)
+        : 0,
       audioRouting: isSet(object.audioRouting)
         ? DigitalAudio_Device_Routing.fromJSON(object.audioRouting)
         : undefined,
@@ -7040,26 +7219,34 @@ export const Media_VideoDevice = {
 
   toJSON(message: Media_VideoDevice): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = media_VideoDevice_TypeToJSON(message.type));
-    message.name !== undefined && (obj.name = message.name);
-    message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);
-    message.modelId !== undefined && (obj.modelId = message.modelId);
-    message.formatIndex !== undefined &&
-      (obj.formatIndex = Math.round(message.formatIndex));
-    message.audioRouting !== undefined &&
-      (obj.audioRouting = message.audioRouting
-        ? DigitalAudio_Device_Routing.toJSON(message.audioRouting)
-        : undefined);
+    if (message.type !== 0) {
+      obj.type = media_VideoDevice_TypeToJSON(message.type);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.uniqueId !== '') {
+      obj.uniqueId = message.uniqueId;
+    }
+    if (message.modelId !== '') {
+      obj.modelId = message.modelId;
+    }
+    if (message.formatIndex !== 0) {
+      obj.formatIndex = Math.round(message.formatIndex);
+    }
+    if (message.audioRouting !== undefined) {
+      obj.audioRouting = DigitalAudio_Device_Routing.toJSON(
+        message.audioRouting,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_VideoDevice>, I>>(
     base?: I,
   ): Media_VideoDevice {
-    return Media_VideoDevice.fromPartial(base ?? {});
+    return Media_VideoDevice.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_VideoDevice>, I>>(
     object: I,
   ): Media_VideoDevice {
@@ -7110,35 +7297,35 @@ export const Media_AudioDevice = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.uniqueId = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.modelId = reader.string();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.channelCount = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7148,31 +7335,39 @@ export const Media_AudioDevice = {
 
   fromJSON(object: any): Media_AudioDevice {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : '',
-      modelId: isSet(object.modelId) ? String(object.modelId) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      uniqueId: isSet(object.uniqueId)
+        ? globalThis.String(object.uniqueId)
+        : '',
+      modelId: isSet(object.modelId) ? globalThis.String(object.modelId) : '',
       channelCount: isSet(object.channelCount)
-        ? Number(object.channelCount)
+        ? globalThis.Number(object.channelCount)
         : 0,
     };
   },
 
   toJSON(message: Media_AudioDevice): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);
-    message.modelId !== undefined && (obj.modelId = message.modelId);
-    message.channelCount !== undefined &&
-      (obj.channelCount = Math.round(message.channelCount));
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.uniqueId !== '') {
+      obj.uniqueId = message.uniqueId;
+    }
+    if (message.modelId !== '') {
+      obj.modelId = message.modelId;
+    }
+    if (message.channelCount !== 0) {
+      obj.channelCount = Math.round(message.channelCount);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_AudioDevice>, I>>(
     base?: I,
   ): Media_AudioDevice {
-    return Media_AudioDevice.fromPartial(base ?? {});
+    return Media_AudioDevice.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_AudioDevice>, I>>(
     object: I,
   ): Media_AudioDevice {
@@ -7203,7 +7398,7 @@ export const Media_Audio = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7221,9 +7416,8 @@ export const Media_Audio = {
   },
 
   create<I extends Exact<DeepPartial<Media_Audio>, I>>(base?: I): Media_Audio {
-    return Media_Audio.fromPartial(base ?? {});
+    return Media_Audio.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_Audio>, I>>(_: I): Media_Audio {
     const message = createBaseMedia_Audio();
     return message;
@@ -7272,35 +7466,35 @@ export const Media_Audio_Channel = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.index = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.muted = reader.bool();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.volume = reader.double();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.compressLimit = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -7309,7 +7503,7 @@ export const Media_Audio_Channel = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7319,13 +7513,13 @@ export const Media_Audio_Channel = {
 
   fromJSON(object: any): Media_Audio_Channel {
     return {
-      index: isSet(object.index) ? Number(object.index) : 0,
-      muted: isSet(object.muted) ? Boolean(object.muted) : false,
-      volume: isSet(object.volume) ? Number(object.volume) : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
+      muted: isSet(object.muted) ? globalThis.Boolean(object.muted) : false,
+      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
       compressLimit: isSet(object.compressLimit)
-        ? Boolean(object.compressLimit)
+        ? globalThis.Boolean(object.compressLimit)
         : false,
-      outputs: Array.isArray(object?.outputs)
+      outputs: globalThis.Array.isArray(object?.outputs)
         ? object.outputs.map((e: any) => Media_Audio_Channel_Output.fromJSON(e))
         : [],
     };
@@ -7333,17 +7527,22 @@ export const Media_Audio_Channel = {
 
   toJSON(message: Media_Audio_Channel): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.muted !== undefined && (obj.muted = message.muted);
-    message.volume !== undefined && (obj.volume = message.volume);
-    message.compressLimit !== undefined &&
-      (obj.compressLimit = message.compressLimit);
-    if (message.outputs) {
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.muted === true) {
+      obj.muted = message.muted;
+    }
+    if (message.volume !== 0) {
+      obj.volume = message.volume;
+    }
+    if (message.compressLimit === true) {
+      obj.compressLimit = message.compressLimit;
+    }
+    if (message.outputs?.length) {
       obj.outputs = message.outputs.map((e) =>
-        e ? Media_Audio_Channel_Output.toJSON(e) : undefined,
+        Media_Audio_Channel_Output.toJSON(e),
       );
-    } else {
-      obj.outputs = [];
     }
     return obj;
   },
@@ -7351,9 +7550,8 @@ export const Media_Audio_Channel = {
   create<I extends Exact<DeepPartial<Media_Audio_Channel>, I>>(
     base?: I,
   ): Media_Audio_Channel {
-    return Media_Audio_Channel.fromPartial(base ?? {});
+    return Media_Audio_Channel.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_Audio_Channel>, I>>(
     object: I,
   ): Media_Audio_Channel {
@@ -7396,14 +7594,14 @@ export const Media_Audio_Channel_Output = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.channelIndex = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7414,24 +7612,24 @@ export const Media_Audio_Channel_Output = {
   fromJSON(object: any): Media_Audio_Channel_Output {
     return {
       channelIndex: isSet(object.channelIndex)
-        ? Number(object.channelIndex)
+        ? globalThis.Number(object.channelIndex)
         : 0,
     };
   },
 
   toJSON(message: Media_Audio_Channel_Output): unknown {
     const obj: any = {};
-    message.channelIndex !== undefined &&
-      (obj.channelIndex = Math.round(message.channelIndex));
+    if (message.channelIndex !== 0) {
+      obj.channelIndex = Math.round(message.channelIndex);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_Audio_Channel_Output>, I>>(
     base?: I,
   ): Media_Audio_Channel_Output {
-    return Media_Audio_Channel_Output.fromPartial(base ?? {});
+    return Media_Audio_Channel_Output.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_Audio_Channel_Output>, I>>(
     object: I,
   ): Media_Audio_Channel_Output {
@@ -7474,14 +7672,14 @@ export const Media_AudioProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.volume = reader.double();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -7490,14 +7688,14 @@ export const Media_AudioProperties = {
           );
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.isCustomMapping = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7507,37 +7705,37 @@ export const Media_AudioProperties = {
 
   fromJSON(object: any): Media_AudioProperties {
     return {
-      volume: isSet(object.volume) ? Number(object.volume) : 0,
-      audioChannels: Array.isArray(object?.audioChannels)
+      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
+      audioChannels: globalThis.Array.isArray(object?.audioChannels)
         ? object.audioChannels.map((e: any) => Media_Audio_Channel.fromJSON(e))
         : [],
       isCustomMapping: isSet(object.isCustomMapping)
-        ? Boolean(object.isCustomMapping)
+        ? globalThis.Boolean(object.isCustomMapping)
         : false,
     };
   },
 
   toJSON(message: Media_AudioProperties): unknown {
     const obj: any = {};
-    message.volume !== undefined && (obj.volume = message.volume);
-    if (message.audioChannels) {
-      obj.audioChannels = message.audioChannels.map((e) =>
-        e ? Media_Audio_Channel.toJSON(e) : undefined,
-      );
-    } else {
-      obj.audioChannels = [];
+    if (message.volume !== 0) {
+      obj.volume = message.volume;
     }
-    message.isCustomMapping !== undefined &&
-      (obj.isCustomMapping = message.isCustomMapping);
+    if (message.audioChannels?.length) {
+      obj.audioChannels = message.audioChannels.map((e) =>
+        Media_Audio_Channel.toJSON(e),
+      );
+    }
+    if (message.isCustomMapping === true) {
+      obj.isCustomMapping = message.isCustomMapping;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_AudioProperties>, I>>(
     base?: I,
   ): Media_AudioProperties {
-    return Media_AudioProperties.fromPartial(base ?? {});
+    return Media_AudioProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_AudioProperties>, I>>(
     object: I,
   ): Media_AudioProperties {
@@ -7564,6 +7762,7 @@ function createBaseMedia_TransportProperties(): Media_TransportProperties {
     playbackBehavior: 0,
     loopTime: 0,
     timesToLoop: 0,
+    retrigger: 0,
   };
 }
 
@@ -7605,6 +7804,9 @@ export const Media_TransportProperties = {
     if (message.timesToLoop !== 0) {
       writer.uint32(112).uint32(message.timesToLoop);
     }
+    if (message.retrigger !== 0) {
+      writer.uint32(120).int32(message.retrigger);
+    }
     return writer;
   },
 
@@ -7620,84 +7822,91 @@ export const Media_TransportProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.playRate = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.inPoint = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.outPoint = reader.double();
           continue;
         case 7:
-          if (tag != 57) {
+          if (tag !== 57) {
             break;
           }
 
           message.fadeInDuration = reader.double();
           continue;
         case 8:
-          if (tag != 65) {
+          if (tag !== 65) {
             break;
           }
 
           message.fadeOutDuration = reader.double();
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.shouldFadeIn = reader.bool();
           continue;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.shouldFadeOut = reader.bool();
           continue;
         case 11:
-          if (tag != 89) {
+          if (tag !== 89) {
             break;
           }
 
           message.endPoint = reader.double();
           continue;
         case 12:
-          if (tag != 96) {
+          if (tag !== 96) {
             break;
           }
 
           message.playbackBehavior = reader.int32() as any;
           continue;
         case 13:
-          if (tag != 105) {
+          if (tag !== 105) {
             break;
           }
 
           message.loopTime = reader.double();
           continue;
         case 14:
-          if (tag != 112) {
+          if (tag !== 112) {
             break;
           }
 
           message.timesToLoop = reader.uint32();
           continue;
+        case 15:
+          if (tag !== 120) {
+            break;
+          }
+
+          message.retrigger = reader.int32() as any;
+          continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7707,62 +7916,87 @@ export const Media_TransportProperties = {
 
   fromJSON(object: any): Media_TransportProperties {
     return {
-      playRate: isSet(object.playRate) ? Number(object.playRate) : 0,
-      inPoint: isSet(object.inPoint) ? Number(object.inPoint) : 0,
-      outPoint: isSet(object.outPoint) ? Number(object.outPoint) : 0,
+      playRate: isSet(object.playRate) ? globalThis.Number(object.playRate) : 0,
+      inPoint: isSet(object.inPoint) ? globalThis.Number(object.inPoint) : 0,
+      outPoint: isSet(object.outPoint) ? globalThis.Number(object.outPoint) : 0,
       fadeInDuration: isSet(object.fadeInDuration)
-        ? Number(object.fadeInDuration)
+        ? globalThis.Number(object.fadeInDuration)
         : 0,
       fadeOutDuration: isSet(object.fadeOutDuration)
-        ? Number(object.fadeOutDuration)
+        ? globalThis.Number(object.fadeOutDuration)
         : 0,
       shouldFadeIn: isSet(object.shouldFadeIn)
-        ? Boolean(object.shouldFadeIn)
+        ? globalThis.Boolean(object.shouldFadeIn)
         : false,
       shouldFadeOut: isSet(object.shouldFadeOut)
-        ? Boolean(object.shouldFadeOut)
+        ? globalThis.Boolean(object.shouldFadeOut)
         : false,
-      endPoint: isSet(object.endPoint) ? Number(object.endPoint) : 0,
+      endPoint: isSet(object.endPoint) ? globalThis.Number(object.endPoint) : 0,
       playbackBehavior: isSet(object.playbackBehavior)
         ? media_TransportProperties_PlaybackBehaviorFromJSON(
             object.playbackBehavior,
           )
         : 0,
-      loopTime: isSet(object.loopTime) ? Number(object.loopTime) : 0,
-      timesToLoop: isSet(object.timesToLoop) ? Number(object.timesToLoop) : 0,
+      loopTime: isSet(object.loopTime) ? globalThis.Number(object.loopTime) : 0,
+      timesToLoop: isSet(object.timesToLoop)
+        ? globalThis.Number(object.timesToLoop)
+        : 0,
+      retrigger: isSet(object.retrigger)
+        ? media_TransportProperties_RetriggerSettingFromJSON(object.retrigger)
+        : 0,
     };
   },
 
   toJSON(message: Media_TransportProperties): unknown {
     const obj: any = {};
-    message.playRate !== undefined && (obj.playRate = message.playRate);
-    message.inPoint !== undefined && (obj.inPoint = message.inPoint);
-    message.outPoint !== undefined && (obj.outPoint = message.outPoint);
-    message.fadeInDuration !== undefined &&
-      (obj.fadeInDuration = message.fadeInDuration);
-    message.fadeOutDuration !== undefined &&
-      (obj.fadeOutDuration = message.fadeOutDuration);
-    message.shouldFadeIn !== undefined &&
-      (obj.shouldFadeIn = message.shouldFadeIn);
-    message.shouldFadeOut !== undefined &&
-      (obj.shouldFadeOut = message.shouldFadeOut);
-    message.endPoint !== undefined && (obj.endPoint = message.endPoint);
-    message.playbackBehavior !== undefined &&
-      (obj.playbackBehavior = media_TransportProperties_PlaybackBehaviorToJSON(
+    if (message.playRate !== 0) {
+      obj.playRate = message.playRate;
+    }
+    if (message.inPoint !== 0) {
+      obj.inPoint = message.inPoint;
+    }
+    if (message.outPoint !== 0) {
+      obj.outPoint = message.outPoint;
+    }
+    if (message.fadeInDuration !== 0) {
+      obj.fadeInDuration = message.fadeInDuration;
+    }
+    if (message.fadeOutDuration !== 0) {
+      obj.fadeOutDuration = message.fadeOutDuration;
+    }
+    if (message.shouldFadeIn === true) {
+      obj.shouldFadeIn = message.shouldFadeIn;
+    }
+    if (message.shouldFadeOut === true) {
+      obj.shouldFadeOut = message.shouldFadeOut;
+    }
+    if (message.endPoint !== 0) {
+      obj.endPoint = message.endPoint;
+    }
+    if (message.playbackBehavior !== 0) {
+      obj.playbackBehavior = media_TransportProperties_PlaybackBehaviorToJSON(
         message.playbackBehavior,
-      ));
-    message.loopTime !== undefined && (obj.loopTime = message.loopTime);
-    message.timesToLoop !== undefined &&
-      (obj.timesToLoop = Math.round(message.timesToLoop));
+      );
+    }
+    if (message.loopTime !== 0) {
+      obj.loopTime = message.loopTime;
+    }
+    if (message.timesToLoop !== 0) {
+      obj.timesToLoop = Math.round(message.timesToLoop);
+    }
+    if (message.retrigger !== 0) {
+      obj.retrigger = media_TransportProperties_RetriggerSettingToJSON(
+        message.retrigger,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_TransportProperties>, I>>(
     base?: I,
   ): Media_TransportProperties {
-    return Media_TransportProperties.fromPartial(base ?? {});
+    return Media_TransportProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_TransportProperties>, I>>(
     object: I,
   ): Media_TransportProperties {
@@ -7778,6 +8012,7 @@ export const Media_TransportProperties = {
     message.playbackBehavior = object.playbackBehavior ?? 0;
     message.loopTime = object.loopTime ?? 0;
     message.timesToLoop = object.timesToLoop ?? 0;
+    message.retrigger = object.retrigger ?? 0;
     return message;
   },
 };
@@ -7798,6 +8033,7 @@ function createBaseMedia_DrawingProperties(): Media_DrawingProperties {
     effects: [],
     cropEnable: false,
     cropInsets: undefined,
+    alphaType: 0,
   };
 }
 
@@ -7860,6 +8096,9 @@ export const Media_DrawingProperties = {
         writer.uint32(114).fork(),
       ).ldelim();
     }
+    if (message.alphaType !== 0) {
+      writer.uint32(120).int32(message.alphaType);
+    }
     return writer;
   },
 
@@ -7875,49 +8114,49 @@ export const Media_DrawingProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.scaleBehavior = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.scaleAlignment = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.flippedHorizontally = reader.bool();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.flippedVertically = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.naturalSize = Graphics_Size.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.customImageRotation = reader.double();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -7927,28 +8166,28 @@ export const Media_DrawingProperties = {
           );
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.customImageAspectLocked = reader.bool();
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.alphaInverted = reader.bool();
           continue;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.nativeRotation = reader.int32() as any;
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -7958,21 +8197,21 @@ export const Media_DrawingProperties = {
           );
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
           message.effects.push(Effect.decode(reader, reader.uint32()));
           continue;
         case 13:
-          if (tag != 104) {
+          if (tag !== 104) {
             break;
           }
 
           message.cropEnable = reader.bool();
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
@@ -7981,8 +8220,15 @@ export const Media_DrawingProperties = {
             reader.uint32(),
           );
           continue;
+        case 15:
+          if (tag !== 120) {
+            break;
+          }
+
+          message.alphaType = reader.int32() as any;
+          continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7999,25 +8245,25 @@ export const Media_DrawingProperties = {
         ? media_ScaleAlignmentFromJSON(object.scaleAlignment)
         : 0,
       flippedHorizontally: isSet(object.flippedHorizontally)
-        ? Boolean(object.flippedHorizontally)
+        ? globalThis.Boolean(object.flippedHorizontally)
         : false,
       flippedVertically: isSet(object.flippedVertically)
-        ? Boolean(object.flippedVertically)
+        ? globalThis.Boolean(object.flippedVertically)
         : false,
       naturalSize: isSet(object.naturalSize)
         ? Graphics_Size.fromJSON(object.naturalSize)
         : undefined,
       customImageRotation: isSet(object.customImageRotation)
-        ? Number(object.customImageRotation)
+        ? globalThis.Number(object.customImageRotation)
         : 0,
       customImageBounds: isSet(object.customImageBounds)
         ? Graphics_Rect.fromJSON(object.customImageBounds)
         : undefined,
       customImageAspectLocked: isSet(object.customImageAspectLocked)
-        ? Boolean(object.customImageAspectLocked)
+        ? globalThis.Boolean(object.customImageAspectLocked)
         : false,
       alphaInverted: isSet(object.alphaInverted)
-        ? Boolean(object.alphaInverted)
+        ? globalThis.Boolean(object.alphaInverted)
         : false,
       nativeRotation: isSet(object.nativeRotation)
         ? media_DrawingProperties_NativeRotationTypeFromJSON(
@@ -8027,69 +8273,80 @@ export const Media_DrawingProperties = {
       selectedEffectPresetUuid: isSet(object.selectedEffectPresetUuid)
         ? UUID.fromJSON(object.selectedEffectPresetUuid)
         : undefined,
-      effects: Array.isArray(object?.effects)
+      effects: globalThis.Array.isArray(object?.effects)
         ? object.effects.map((e: any) => Effect.fromJSON(e))
         : [],
-      cropEnable: isSet(object.cropEnable) ? Boolean(object.cropEnable) : false,
+      cropEnable: isSet(object.cropEnable)
+        ? globalThis.Boolean(object.cropEnable)
+        : false,
       cropInsets: isSet(object.cropInsets)
         ? Graphics_EdgeInsets.fromJSON(object.cropInsets)
         : undefined,
+      alphaType: isSet(object.alphaType)
+        ? alphaTypeFromJSON(object.alphaType)
+        : 0,
     };
   },
 
   toJSON(message: Media_DrawingProperties): unknown {
     const obj: any = {};
-    message.scaleBehavior !== undefined &&
-      (obj.scaleBehavior = media_ScaleBehaviorToJSON(message.scaleBehavior));
-    message.scaleAlignment !== undefined &&
-      (obj.scaleAlignment = media_ScaleAlignmentToJSON(message.scaleAlignment));
-    message.flippedHorizontally !== undefined &&
-      (obj.flippedHorizontally = message.flippedHorizontally);
-    message.flippedVertically !== undefined &&
-      (obj.flippedVertically = message.flippedVertically);
-    message.naturalSize !== undefined &&
-      (obj.naturalSize = message.naturalSize
-        ? Graphics_Size.toJSON(message.naturalSize)
-        : undefined);
-    message.customImageRotation !== undefined &&
-      (obj.customImageRotation = message.customImageRotation);
-    message.customImageBounds !== undefined &&
-      (obj.customImageBounds = message.customImageBounds
-        ? Graphics_Rect.toJSON(message.customImageBounds)
-        : undefined);
-    message.customImageAspectLocked !== undefined &&
-      (obj.customImageAspectLocked = message.customImageAspectLocked);
-    message.alphaInverted !== undefined &&
-      (obj.alphaInverted = message.alphaInverted);
-    message.nativeRotation !== undefined &&
-      (obj.nativeRotation = media_DrawingProperties_NativeRotationTypeToJSON(
-        message.nativeRotation,
-      ));
-    message.selectedEffectPresetUuid !== undefined &&
-      (obj.selectedEffectPresetUuid = message.selectedEffectPresetUuid
-        ? UUID.toJSON(message.selectedEffectPresetUuid)
-        : undefined);
-    if (message.effects) {
-      obj.effects = message.effects.map((e) =>
-        e ? Effect.toJSON(e) : undefined,
-      );
-    } else {
-      obj.effects = [];
+    if (message.scaleBehavior !== 0) {
+      obj.scaleBehavior = media_ScaleBehaviorToJSON(message.scaleBehavior);
     }
-    message.cropEnable !== undefined && (obj.cropEnable = message.cropEnable);
-    message.cropInsets !== undefined &&
-      (obj.cropInsets = message.cropInsets
-        ? Graphics_EdgeInsets.toJSON(message.cropInsets)
-        : undefined);
+    if (message.scaleAlignment !== 0) {
+      obj.scaleAlignment = media_ScaleAlignmentToJSON(message.scaleAlignment);
+    }
+    if (message.flippedHorizontally === true) {
+      obj.flippedHorizontally = message.flippedHorizontally;
+    }
+    if (message.flippedVertically === true) {
+      obj.flippedVertically = message.flippedVertically;
+    }
+    if (message.naturalSize !== undefined) {
+      obj.naturalSize = Graphics_Size.toJSON(message.naturalSize);
+    }
+    if (message.customImageRotation !== 0) {
+      obj.customImageRotation = message.customImageRotation;
+    }
+    if (message.customImageBounds !== undefined) {
+      obj.customImageBounds = Graphics_Rect.toJSON(message.customImageBounds);
+    }
+    if (message.customImageAspectLocked === true) {
+      obj.customImageAspectLocked = message.customImageAspectLocked;
+    }
+    if (message.alphaInverted === true) {
+      obj.alphaInverted = message.alphaInverted;
+    }
+    if (message.nativeRotation !== 0) {
+      obj.nativeRotation = media_DrawingProperties_NativeRotationTypeToJSON(
+        message.nativeRotation,
+      );
+    }
+    if (message.selectedEffectPresetUuid !== undefined) {
+      obj.selectedEffectPresetUuid = UUID.toJSON(
+        message.selectedEffectPresetUuid,
+      );
+    }
+    if (message.effects?.length) {
+      obj.effects = message.effects.map((e) => Effect.toJSON(e));
+    }
+    if (message.cropEnable === true) {
+      obj.cropEnable = message.cropEnable;
+    }
+    if (message.cropInsets !== undefined) {
+      obj.cropInsets = Graphics_EdgeInsets.toJSON(message.cropInsets);
+    }
+    if (message.alphaType !== 0) {
+      obj.alphaType = alphaTypeToJSON(message.alphaType);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_DrawingProperties>, I>>(
     base?: I,
   ): Media_DrawingProperties {
-    return Media_DrawingProperties.fromPartial(base ?? {});
+    return Media_DrawingProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_DrawingProperties>, I>>(
     object: I,
   ): Media_DrawingProperties {
@@ -8122,6 +8379,7 @@ export const Media_DrawingProperties = {
       object.cropInsets !== undefined && object.cropInsets !== null
         ? Graphics_EdgeInsets.fromPartial(object.cropInsets)
         : undefined;
+    message.alphaType = object.alphaType ?? 0;
     return message;
   },
 };
@@ -8175,49 +8433,49 @@ export const Media_VideoProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.frameRate = reader.double();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.fieldType = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.thumbnailPosition = reader.double();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.endBehavior = reader.int32() as any;
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.softLoop = reader.bool();
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.softLoopDuration = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8227,48 +8485,57 @@ export const Media_VideoProperties = {
 
   fromJSON(object: any): Media_VideoProperties {
     return {
-      frameRate: isSet(object.frameRate) ? Number(object.frameRate) : 0,
+      frameRate: isSet(object.frameRate)
+        ? globalThis.Number(object.frameRate)
+        : 0,
       fieldType: isSet(object.fieldType)
         ? media_VideoProperties_FieldTypeFromJSON(object.fieldType)
         : 0,
       thumbnailPosition: isSet(object.thumbnailPosition)
-        ? Number(object.thumbnailPosition)
+        ? globalThis.Number(object.thumbnailPosition)
         : 0,
       endBehavior: isSet(object.endBehavior)
         ? media_VideoProperties_EndBehaviorFromJSON(object.endBehavior)
         : 0,
-      softLoop: isSet(object.softLoop) ? Boolean(object.softLoop) : false,
+      softLoop: isSet(object.softLoop)
+        ? globalThis.Boolean(object.softLoop)
+        : false,
       softLoopDuration: isSet(object.softLoopDuration)
-        ? Number(object.softLoopDuration)
+        ? globalThis.Number(object.softLoopDuration)
         : 0,
     };
   },
 
   toJSON(message: Media_VideoProperties): unknown {
     const obj: any = {};
-    message.frameRate !== undefined && (obj.frameRate = message.frameRate);
-    message.fieldType !== undefined &&
-      (obj.fieldType = media_VideoProperties_FieldTypeToJSON(
-        message.fieldType,
-      ));
-    message.thumbnailPosition !== undefined &&
-      (obj.thumbnailPosition = message.thumbnailPosition);
-    message.endBehavior !== undefined &&
-      (obj.endBehavior = media_VideoProperties_EndBehaviorToJSON(
+    if (message.frameRate !== 0) {
+      obj.frameRate = message.frameRate;
+    }
+    if (message.fieldType !== 0) {
+      obj.fieldType = media_VideoProperties_FieldTypeToJSON(message.fieldType);
+    }
+    if (message.thumbnailPosition !== 0) {
+      obj.thumbnailPosition = message.thumbnailPosition;
+    }
+    if (message.endBehavior !== 0) {
+      obj.endBehavior = media_VideoProperties_EndBehaviorToJSON(
         message.endBehavior,
-      ));
-    message.softLoop !== undefined && (obj.softLoop = message.softLoop);
-    message.softLoopDuration !== undefined &&
-      (obj.softLoopDuration = message.softLoopDuration);
+      );
+    }
+    if (message.softLoop === true) {
+      obj.softLoop = message.softLoop;
+    }
+    if (message.softLoopDuration !== 0) {
+      obj.softLoopDuration = message.softLoopDuration;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_VideoProperties>, I>>(
     base?: I,
   ): Media_VideoProperties {
-    return Media_VideoProperties.fromPartial(base ?? {});
+    return Media_VideoProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_VideoProperties>, I>>(
     object: I,
   ): Media_VideoProperties {
@@ -8322,7 +8589,7 @@ export const Media_LiveVideoProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -8332,7 +8599,7 @@ export const Media_LiveVideoProperties = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -8342,14 +8609,14 @@ export const Media_LiveVideoProperties = {
           );
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.liveVideoIndex = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8366,32 +8633,30 @@ export const Media_LiveVideoProperties = {
         ? Media_AudioDevice.fromJSON(object.audioDevice)
         : undefined,
       liveVideoIndex: isSet(object.liveVideoIndex)
-        ? Number(object.liveVideoIndex)
+        ? globalThis.Number(object.liveVideoIndex)
         : 0,
     };
   },
 
   toJSON(message: Media_LiveVideoProperties): unknown {
     const obj: any = {};
-    message.videoDevice !== undefined &&
-      (obj.videoDevice = message.videoDevice
-        ? Media_VideoDevice.toJSON(message.videoDevice)
-        : undefined);
-    message.audioDevice !== undefined &&
-      (obj.audioDevice = message.audioDevice
-        ? Media_AudioDevice.toJSON(message.audioDevice)
-        : undefined);
-    message.liveVideoIndex !== undefined &&
-      (obj.liveVideoIndex = Math.round(message.liveVideoIndex));
+    if (message.videoDevice !== undefined) {
+      obj.videoDevice = Media_VideoDevice.toJSON(message.videoDevice);
+    }
+    if (message.audioDevice !== undefined) {
+      obj.audioDevice = Media_AudioDevice.toJSON(message.audioDevice);
+    }
+    if (message.liveVideoIndex !== 0) {
+      obj.liveVideoIndex = Math.round(message.liveVideoIndex);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_LiveVideoProperties>, I>>(
     base?: I,
   ): Media_LiveVideoProperties {
-    return Media_LiveVideoProperties.fromPartial(base ?? {});
+    return Media_LiveVideoProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_LiveVideoProperties>, I>>(
     object: I,
   ): Media_LiveVideoProperties {
@@ -8448,14 +8713,14 @@ export const Media_AudioTypeProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.audio = Media_AudioProperties.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -8465,14 +8730,14 @@ export const Media_AudioTypeProperties = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.file = FileProperties.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8496,27 +8761,23 @@ export const Media_AudioTypeProperties = {
 
   toJSON(message: Media_AudioTypeProperties): unknown {
     const obj: any = {};
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? Media_AudioProperties.toJSON(message.audio)
-        : undefined);
-    message.transport !== undefined &&
-      (obj.transport = message.transport
-        ? Media_TransportProperties.toJSON(message.transport)
-        : undefined);
-    message.file !== undefined &&
-      (obj.file = message.file
-        ? FileProperties.toJSON(message.file)
-        : undefined);
+    if (message.audio !== undefined) {
+      obj.audio = Media_AudioProperties.toJSON(message.audio);
+    }
+    if (message.transport !== undefined) {
+      obj.transport = Media_TransportProperties.toJSON(message.transport);
+    }
+    if (message.file !== undefined) {
+      obj.file = FileProperties.toJSON(message.file);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_AudioTypeProperties>, I>>(
     base?: I,
   ): Media_AudioTypeProperties {
-    return Media_AudioTypeProperties.fromPartial(base ?? {});
+    return Media_AudioTypeProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_AudioTypeProperties>, I>>(
     object: I,
   ): Media_AudioTypeProperties {
@@ -8570,7 +8831,7 @@ export const Media_ImageTypeProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -8580,14 +8841,14 @@ export const Media_ImageTypeProperties = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.file = FileProperties.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8608,23 +8869,20 @@ export const Media_ImageTypeProperties = {
 
   toJSON(message: Media_ImageTypeProperties): unknown {
     const obj: any = {};
-    message.drawing !== undefined &&
-      (obj.drawing = message.drawing
-        ? Media_DrawingProperties.toJSON(message.drawing)
-        : undefined);
-    message.file !== undefined &&
-      (obj.file = message.file
-        ? FileProperties.toJSON(message.file)
-        : undefined);
+    if (message.drawing !== undefined) {
+      obj.drawing = Media_DrawingProperties.toJSON(message.drawing);
+    }
+    if (message.file !== undefined) {
+      obj.file = FileProperties.toJSON(message.file);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_ImageTypeProperties>, I>>(
     base?: I,
   ): Media_ImageTypeProperties {
-    return Media_ImageTypeProperties.fromPartial(base ?? {});
+    return Media_ImageTypeProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_ImageTypeProperties>, I>>(
     object: I,
   ): Media_ImageTypeProperties {
@@ -8698,7 +8956,7 @@ export const Media_VideoTypeProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -8708,14 +8966,14 @@ export const Media_VideoTypeProperties = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.audio = Media_AudioProperties.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -8725,21 +8983,21 @@ export const Media_VideoTypeProperties = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.video = Media_VideoProperties.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.file = FileProperties.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8769,35 +9027,29 @@ export const Media_VideoTypeProperties = {
 
   toJSON(message: Media_VideoTypeProperties): unknown {
     const obj: any = {};
-    message.drawing !== undefined &&
-      (obj.drawing = message.drawing
-        ? Media_DrawingProperties.toJSON(message.drawing)
-        : undefined);
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? Media_AudioProperties.toJSON(message.audio)
-        : undefined);
-    message.transport !== undefined &&
-      (obj.transport = message.transport
-        ? Media_TransportProperties.toJSON(message.transport)
-        : undefined);
-    message.video !== undefined &&
-      (obj.video = message.video
-        ? Media_VideoProperties.toJSON(message.video)
-        : undefined);
-    message.file !== undefined &&
-      (obj.file = message.file
-        ? FileProperties.toJSON(message.file)
-        : undefined);
+    if (message.drawing !== undefined) {
+      obj.drawing = Media_DrawingProperties.toJSON(message.drawing);
+    }
+    if (message.audio !== undefined) {
+      obj.audio = Media_AudioProperties.toJSON(message.audio);
+    }
+    if (message.transport !== undefined) {
+      obj.transport = Media_TransportProperties.toJSON(message.transport);
+    }
+    if (message.video !== undefined) {
+      obj.video = Media_VideoProperties.toJSON(message.video);
+    }
+    if (message.file !== undefined) {
+      obj.file = FileProperties.toJSON(message.file);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_VideoTypeProperties>, I>>(
     base?: I,
   ): Media_VideoTypeProperties {
-    return Media_VideoTypeProperties.fromPartial(base ?? {});
+    return Media_VideoTypeProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_VideoTypeProperties>, I>>(
     object: I,
   ): Media_VideoTypeProperties {
@@ -8868,7 +9120,7 @@ export const Media_LiveVideoTypeProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -8878,14 +9130,14 @@ export const Media_LiveVideoTypeProperties = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.audio = Media_AudioProperties.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -8895,7 +9147,7 @@ export const Media_LiveVideoTypeProperties = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8919,27 +9171,23 @@ export const Media_LiveVideoTypeProperties = {
 
   toJSON(message: Media_LiveVideoTypeProperties): unknown {
     const obj: any = {};
-    message.drawing !== undefined &&
-      (obj.drawing = message.drawing
-        ? Media_DrawingProperties.toJSON(message.drawing)
-        : undefined);
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? Media_AudioProperties.toJSON(message.audio)
-        : undefined);
-    message.liveVideo !== undefined &&
-      (obj.liveVideo = message.liveVideo
-        ? Media_LiveVideoProperties.toJSON(message.liveVideo)
-        : undefined);
+    if (message.drawing !== undefined) {
+      obj.drawing = Media_DrawingProperties.toJSON(message.drawing);
+    }
+    if (message.audio !== undefined) {
+      obj.audio = Media_AudioProperties.toJSON(message.audio);
+    }
+    if (message.liveVideo !== undefined) {
+      obj.liveVideo = Media_LiveVideoProperties.toJSON(message.liveVideo);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_LiveVideoTypeProperties>, I>>(
     base?: I,
   ): Media_LiveVideoTypeProperties {
-    return Media_LiveVideoTypeProperties.fromPartial(base ?? {});
+    return Media_LiveVideoTypeProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_LiveVideoTypeProperties>, I>>(
     object: I,
   ): Media_LiveVideoTypeProperties {
@@ -8993,7 +9241,7 @@ export const Media_WebContentTypeProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -9003,14 +9251,14 @@ export const Media_WebContentTypeProperties = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9029,21 +9277,20 @@ export const Media_WebContentTypeProperties = {
 
   toJSON(message: Media_WebContentTypeProperties): unknown {
     const obj: any = {};
-    message.drawing !== undefined &&
-      (obj.drawing = message.drawing
-        ? Media_DrawingProperties.toJSON(message.drawing)
-        : undefined);
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    if (message.drawing !== undefined) {
+      obj.drawing = Media_DrawingProperties.toJSON(message.drawing);
+    }
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Media_WebContentTypeProperties>, I>>(
     base?: I,
   ): Media_WebContentTypeProperties {
-    return Media_WebContentTypeProperties.fromPartial(base ?? {});
+    return Media_WebContentTypeProperties.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Media_WebContentTypeProperties>, I>>(
     object: I,
   ): Media_WebContentTypeProperties {
@@ -9060,30 +9307,11 @@ export const Media_WebContentTypeProperties = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') {
-    return globalThis;
-  }
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-  throw 'Unable to locate global object';
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, 'base64'));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -9093,14 +9321,14 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString('base64');
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(''));
+    return globalThis.btoa(bin.join(''));
   }
 }
 
@@ -9115,8 +9343,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

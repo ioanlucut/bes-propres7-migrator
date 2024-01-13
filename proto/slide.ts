@@ -1,10 +1,12 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { AlignmentGuide } from './alignmentGuide';
-import { Color, URL, UUID } from './basicTypes';
+import { Color } from './color';
 import { Transition } from './effects';
 import { Graphics_Element, Graphics_Size } from './graphicsData';
 import { Clock_Format, Timer_Format } from './timers';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -1564,21 +1566,21 @@ export const Slide = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.elements.push(Slide_Element.decode(reader, reader.uint32()));
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.elementBuildOrder.push(UUID.decode(reader, reader.uint32()));
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -1587,35 +1589,35 @@ export const Slide = {
           );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.drawsBackgroundColor = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.backgroundColor = Color.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.size = Graphics_Size.decode(reader, reader.uint32());
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1625,17 +1627,17 @@ export const Slide = {
 
   fromJSON(object: any): Slide {
     return {
-      elements: Array.isArray(object?.elements)
+      elements: globalThis.Array.isArray(object?.elements)
         ? object.elements.map((e: any) => Slide_Element.fromJSON(e))
         : [],
-      elementBuildOrder: Array.isArray(object?.elementBuildOrder)
+      elementBuildOrder: globalThis.Array.isArray(object?.elementBuildOrder)
         ? object.elementBuildOrder.map((e: any) => UUID.fromJSON(e))
         : [],
-      guidelines: Array.isArray(object?.guidelines)
+      guidelines: globalThis.Array.isArray(object?.guidelines)
         ? object.guidelines.map((e: any) => AlignmentGuide.fromJSON(e))
         : [],
       drawsBackgroundColor: isSet(object.drawsBackgroundColor)
-        ? Boolean(object.drawsBackgroundColor)
+        ? globalThis.Boolean(object.drawsBackgroundColor)
         : false,
       backgroundColor: isSet(object.backgroundColor)
         ? Color.fromJSON(object.backgroundColor)
@@ -1649,46 +1651,35 @@ export const Slide = {
 
   toJSON(message: Slide): unknown {
     const obj: any = {};
-    if (message.elements) {
-      obj.elements = message.elements.map((e) =>
-        e ? Slide_Element.toJSON(e) : undefined,
-      );
-    } else {
-      obj.elements = [];
+    if (message.elements?.length) {
+      obj.elements = message.elements.map((e) => Slide_Element.toJSON(e));
     }
-    if (message.elementBuildOrder) {
+    if (message.elementBuildOrder?.length) {
       obj.elementBuildOrder = message.elementBuildOrder.map((e) =>
-        e ? UUID.toJSON(e) : undefined,
+        UUID.toJSON(e),
       );
-    } else {
-      obj.elementBuildOrder = [];
     }
-    if (message.guidelines) {
-      obj.guidelines = message.guidelines.map((e) =>
-        e ? AlignmentGuide.toJSON(e) : undefined,
-      );
-    } else {
-      obj.guidelines = [];
+    if (message.guidelines?.length) {
+      obj.guidelines = message.guidelines.map((e) => AlignmentGuide.toJSON(e));
     }
-    message.drawsBackgroundColor !== undefined &&
-      (obj.drawsBackgroundColor = message.drawsBackgroundColor);
-    message.backgroundColor !== undefined &&
-      (obj.backgroundColor = message.backgroundColor
-        ? Color.toJSON(message.backgroundColor)
-        : undefined);
-    message.size !== undefined &&
-      (obj.size = message.size
-        ? Graphics_Size.toJSON(message.size)
-        : undefined);
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    if (message.drawsBackgroundColor === true) {
+      obj.drawsBackgroundColor = message.drawsBackgroundColor;
+    }
+    if (message.backgroundColor !== undefined) {
+      obj.backgroundColor = Color.toJSON(message.backgroundColor);
+    }
+    if (message.size !== undefined) {
+      obj.size = Graphics_Size.toJSON(message.size);
+    }
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide>, I>>(base?: I): Slide {
-    return Slide.fromPartial(base ?? {});
+    return Slide.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide>, I>>(object: I): Slide {
     const message = createBaseSlide();
     message.elements =
@@ -1784,21 +1775,21 @@ export const Slide_Element = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.element = Graphics_Element.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.buildIn = Slide_Element_Build.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -1808,21 +1799,21 @@ export const Slide_Element = {
           );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.info = reader.uint32();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.revealType = reader.int32() as any;
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -1831,7 +1822,7 @@ export const Slide_Element = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -1840,14 +1831,14 @@ export const Slide_Element = {
           );
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.revealFromIndex = reader.uint32();
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -1857,7 +1848,7 @@ export const Slide_Element = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1876,20 +1867,20 @@ export const Slide_Element = {
       buildOut: isSet(object.buildOut)
         ? Slide_Element_Build.fromJSON(object.buildOut)
         : undefined,
-      info: isSet(object.info) ? Number(object.info) : 0,
+      info: isSet(object.info) ? globalThis.Number(object.info) : 0,
       revealType: isSet(object.revealType)
         ? slide_Element_TextRevealTypeFromJSON(object.revealType)
         : 0,
-      dataLinks: Array.isArray(object?.dataLinks)
+      dataLinks: globalThis.Array.isArray(object?.dataLinks)
         ? object.dataLinks.map((e: any) => Slide_Element_DataLink.fromJSON(e))
         : [],
-      childBuilds: Array.isArray(object?.childBuilds)
+      childBuilds: globalThis.Array.isArray(object?.childBuilds)
         ? object.childBuilds.map((e: any) =>
             Slide_Element_ChildBuild.fromJSON(e),
           )
         : [],
       revealFromIndex: isSet(object.revealFromIndex)
-        ? Number(object.revealFromIndex)
+        ? globalThis.Number(object.revealFromIndex)
         : 0,
       textScroller: isSet(object.textScroller)
         ? Slide_Element_TextScroller.fromJSON(object.textScroller)
@@ -1899,50 +1890,47 @@ export const Slide_Element = {
 
   toJSON(message: Slide_Element): unknown {
     const obj: any = {};
-    message.element !== undefined &&
-      (obj.element = message.element
-        ? Graphics_Element.toJSON(message.element)
-        : undefined);
-    message.buildIn !== undefined &&
-      (obj.buildIn = message.buildIn
-        ? Slide_Element_Build.toJSON(message.buildIn)
-        : undefined);
-    message.buildOut !== undefined &&
-      (obj.buildOut = message.buildOut
-        ? Slide_Element_Build.toJSON(message.buildOut)
-        : undefined);
-    message.info !== undefined && (obj.info = Math.round(message.info));
-    message.revealType !== undefined &&
-      (obj.revealType = slide_Element_TextRevealTypeToJSON(message.revealType));
-    if (message.dataLinks) {
+    if (message.element !== undefined) {
+      obj.element = Graphics_Element.toJSON(message.element);
+    }
+    if (message.buildIn !== undefined) {
+      obj.buildIn = Slide_Element_Build.toJSON(message.buildIn);
+    }
+    if (message.buildOut !== undefined) {
+      obj.buildOut = Slide_Element_Build.toJSON(message.buildOut);
+    }
+    if (message.info !== 0) {
+      obj.info = Math.round(message.info);
+    }
+    if (message.revealType !== 0) {
+      obj.revealType = slide_Element_TextRevealTypeToJSON(message.revealType);
+    }
+    if (message.dataLinks?.length) {
       obj.dataLinks = message.dataLinks.map((e) =>
-        e ? Slide_Element_DataLink.toJSON(e) : undefined,
+        Slide_Element_DataLink.toJSON(e),
       );
-    } else {
-      obj.dataLinks = [];
     }
-    if (message.childBuilds) {
+    if (message.childBuilds?.length) {
       obj.childBuilds = message.childBuilds.map((e) =>
-        e ? Slide_Element_ChildBuild.toJSON(e) : undefined,
+        Slide_Element_ChildBuild.toJSON(e),
       );
-    } else {
-      obj.childBuilds = [];
     }
-    message.revealFromIndex !== undefined &&
-      (obj.revealFromIndex = Math.round(message.revealFromIndex));
-    message.textScroller !== undefined &&
-      (obj.textScroller = message.textScroller
-        ? Slide_Element_TextScroller.toJSON(message.textScroller)
-        : undefined);
+    if (message.revealFromIndex !== 0) {
+      obj.revealFromIndex = Math.round(message.revealFromIndex);
+    }
+    if (message.textScroller !== undefined) {
+      obj.textScroller = Slide_Element_TextScroller.toJSON(
+        message.textScroller,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element>, I>>(
     base?: I,
   ): Slide_Element {
-    return Slide_Element.fromPartial(base ?? {});
+    return Slide_Element.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element>, I>>(
     object: I,
   ): Slide_Element {
@@ -2017,42 +2005,42 @@ export const Slide_Element_Build = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.elementUUID = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.start = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.delayTime = reader.double();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2069,7 +2057,9 @@ export const Slide_Element_Build = {
       start: isSet(object.start)
         ? slide_Element_Build_StartFromJSON(object.start)
         : 0,
-      delayTime: isSet(object.delayTime) ? Number(object.delayTime) : 0,
+      delayTime: isSet(object.delayTime)
+        ? globalThis.Number(object.delayTime)
+        : 0,
       transition: isSet(object.transition)
         ? Transition.fromJSON(object.transition)
         : undefined,
@@ -2078,28 +2068,29 @@ export const Slide_Element_Build = {
 
   toJSON(message: Slide_Element_Build): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.elementUUID !== undefined &&
-      (obj.elementUUID = message.elementUUID
-        ? UUID.toJSON(message.elementUUID)
-        : undefined);
-    message.start !== undefined &&
-      (obj.start = slide_Element_Build_StartToJSON(message.start));
-    message.delayTime !== undefined && (obj.delayTime = message.delayTime);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.elementUUID !== undefined) {
+      obj.elementUUID = UUID.toJSON(message.elementUUID);
+    }
+    if (message.start !== 0) {
+      obj.start = slide_Element_Build_StartToJSON(message.start);
+    }
+    if (message.delayTime !== 0) {
+      obj.delayTime = message.delayTime;
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_Build>, I>>(
     base?: I,
   ): Slide_Element_Build {
-    return Slide_Element_Build.fromPartial(base ?? {});
+    return Slide_Element_Build.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_Build>, I>>(
     object: I,
   ): Slide_Element_Build {
@@ -2158,35 +2149,35 @@ export const Slide_Element_ChildBuild = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.start = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.delayTime = reader.double();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.index = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2200,28 +2191,35 @@ export const Slide_Element_ChildBuild = {
       start: isSet(object.start)
         ? slide_Element_Build_StartFromJSON(object.start)
         : 0,
-      delayTime: isSet(object.delayTime) ? Number(object.delayTime) : 0,
-      index: isSet(object.index) ? Number(object.index) : 0,
+      delayTime: isSet(object.delayTime)
+        ? globalThis.Number(object.delayTime)
+        : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
     };
   },
 
   toJSON(message: Slide_Element_ChildBuild): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.start !== undefined &&
-      (obj.start = slide_Element_Build_StartToJSON(message.start));
-    message.delayTime !== undefined && (obj.delayTime = message.delayTime);
-    message.index !== undefined && (obj.index = Math.round(message.index));
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.start !== 0) {
+      obj.start = slide_Element_Build_StartToJSON(message.start);
+    }
+    if (message.delayTime !== 0) {
+      obj.delayTime = message.delayTime;
+    }
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_ChildBuild>, I>>(
     base?: I,
   ): Slide_Element_ChildBuild {
-    return Slide_Element_ChildBuild.fromPartial(base ?? {});
+    return Slide_Element_ChildBuild.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_ChildBuild>, I>>(
     object: I,
   ): Slide_Element_ChildBuild {
@@ -2493,7 +2491,7 @@ export const Slide_Element_DataLink = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2503,7 +2501,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2514,7 +2512,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -2524,7 +2522,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -2534,7 +2532,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -2544,7 +2542,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -2554,7 +2552,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -2564,7 +2562,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -2575,7 +2573,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -2585,7 +2583,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -2595,7 +2593,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -2605,7 +2603,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -2615,7 +2613,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
@@ -2625,7 +2623,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
@@ -2635,7 +2633,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 15:
-          if (tag != 122) {
+          if (tag !== 122) {
             break;
           }
 
@@ -2645,7 +2643,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 16:
-          if (tag != 130) {
+          if (tag !== 130) {
             break;
           }
 
@@ -2655,7 +2653,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 17:
-          if (tag != 138) {
+          if (tag !== 138) {
             break;
           }
 
@@ -2666,7 +2664,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 18:
-          if (tag != 146) {
+          if (tag !== 146) {
             break;
           }
 
@@ -2676,7 +2674,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 19:
-          if (tag != 154) {
+          if (tag !== 154) {
             break;
           }
 
@@ -2687,7 +2685,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 20:
-          if (tag != 162) {
+          if (tag !== 162) {
             break;
           }
 
@@ -2698,7 +2696,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 21:
-          if (tag != 170) {
+          if (tag !== 170) {
             break;
           }
 
@@ -2709,7 +2707,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 22:
-          if (tag != 178) {
+          if (tag !== 178) {
             break;
           }
 
@@ -2719,7 +2717,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 23:
-          if (tag != 186) {
+          if (tag !== 186) {
             break;
           }
 
@@ -2729,7 +2727,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 24:
-          if (tag != 194) {
+          if (tag !== 194) {
             break;
           }
 
@@ -2739,7 +2737,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 25:
-          if (tag != 202) {
+          if (tag !== 202) {
             break;
           }
 
@@ -2749,7 +2747,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 26:
-          if (tag != 210) {
+          if (tag !== 210) {
             break;
           }
 
@@ -2760,7 +2758,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 27:
-          if (tag != 218) {
+          if (tag !== 218) {
             break;
           }
 
@@ -2770,7 +2768,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 28:
-          if (tag != 226) {
+          if (tag !== 226) {
             break;
           }
 
@@ -2780,7 +2778,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 29:
-          if (tag != 234) {
+          if (tag !== 234) {
             break;
           }
 
@@ -2790,7 +2788,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 30:
-          if (tag != 242) {
+          if (tag !== 242) {
             break;
           }
 
@@ -2801,7 +2799,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 32:
-          if (tag != 258) {
+          if (tag !== 258) {
             break;
           }
 
@@ -2812,7 +2810,7 @@ export const Slide_Element_DataLink = {
             );
           continue;
         case 33:
-          if (tag != 266) {
+          if (tag !== 266) {
             break;
           }
 
@@ -2822,7 +2820,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
         case 34:
-          if (tag != 274) {
+          if (tag !== 274) {
             break;
           }
 
@@ -2832,7 +2830,7 @@ export const Slide_Element_DataLink = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2964,163 +2962,171 @@ export const Slide_Element_DataLink = {
 
   toJSON(message: Slide_Element_DataLink): unknown {
     const obj: any = {};
-    message.ticker !== undefined &&
-      (obj.ticker = message.ticker
-        ? Slide_Element_DataLink_Ticker.toJSON(message.ticker)
-        : undefined);
-    message.alternateText !== undefined &&
-      (obj.alternateText = message.alternateText
-        ? Slide_Element_DataLink_AlternateElementText.toJSON(
-            message.alternateText,
-          )
-        : undefined);
-    message.timerText !== undefined &&
-      (obj.timerText = message.timerText
-        ? Slide_Element_DataLink_TimerText.toJSON(message.timerText)
-        : undefined);
-    message.clockText !== undefined &&
-      (obj.clockText = message.clockText
-        ? Slide_Element_DataLink_ClockText.toJSON(message.clockText)
-        : undefined);
-    message.chordChart !== undefined &&
-      (obj.chordChart = message.chordChart
-        ? Slide_Element_DataLink_ChordChart.toJSON(message.chordChart)
-        : undefined);
-    message.outputScreen !== undefined &&
-      (obj.outputScreen = message.outputScreen
-        ? Slide_Element_DataLink_OutputScreen.toJSON(message.outputScreen)
-        : undefined);
-    message.pcoLive !== undefined &&
-      (obj.pcoLive = message.pcoLive
-        ? Slide_Element_DataLink_PCOLive.toJSON(message.pcoLive)
-        : undefined);
-    message.alternateFill !== undefined &&
-      (obj.alternateFill = message.alternateFill
-        ? Slide_Element_DataLink_AlternateElementFill.toJSON(
-            message.alternateFill,
-          )
-        : undefined);
-    message.visibilityLink !== undefined &&
-      (obj.visibilityLink = message.visibilityLink
-        ? Slide_Element_DataLink_VisibilityLink.toJSON(message.visibilityLink)
-        : undefined);
-    message.slideText !== undefined &&
-      (obj.slideText = message.slideText
-        ? Slide_Element_DataLink_SlideText.toJSON(message.slideText)
-        : undefined);
-    message.stageMessage !== undefined &&
-      (obj.stageMessage = message.stageMessage
-        ? Slide_Element_DataLink_StageMessage.toJSON(message.stageMessage)
-        : undefined);
-    message.videoCountdown !== undefined &&
-      (obj.videoCountdown = message.videoCountdown
-        ? Slide_Element_DataLink_VideoCountdown.toJSON(message.videoCountdown)
-        : undefined);
-    message.slideImage !== undefined &&
-      (obj.slideImage = message.slideImage
-        ? Slide_Element_DataLink_SlideImage.toJSON(message.slideImage)
-        : undefined);
-    message.ccliText !== undefined &&
-      (obj.ccliText = message.ccliText
-        ? Slide_Element_DataLink_CCLIText.toJSON(message.ccliText)
-        : undefined);
-    message.groupName !== undefined &&
-      (obj.groupName = message.groupName
-        ? Slide_Element_DataLink_GroupName.toJSON(message.groupName)
-        : undefined);
-    message.groupColor !== undefined &&
-      (obj.groupColor = message.groupColor
-        ? Slide_Element_DataLink_GroupColor.toJSON(message.groupColor)
-        : undefined);
-    message.presentationNotes !== undefined &&
-      (obj.presentationNotes = message.presentationNotes
-        ? Slide_Element_DataLink_PresentationNotes.toJSON(
-            message.presentationNotes,
-          )
-        : undefined);
-    message.playlistItem !== undefined &&
-      (obj.playlistItem = message.playlistItem
-        ? Slide_Element_DataLink_PlaylistItem.toJSON(message.playlistItem)
-        : undefined);
-    message.autoAdvanceTimeRemaining !== undefined &&
-      (obj.autoAdvanceTimeRemaining = message.autoAdvanceTimeRemaining
-        ? Slide_Element_DataLink_AutoAdvanceTimeRemaining.toJSON(
-            message.autoAdvanceTimeRemaining,
-          )
-        : undefined);
-    message.captureStatusText !== undefined &&
-      (obj.captureStatusText = message.captureStatusText
-        ? Slide_Element_DataLink_CaptureStatusText.toJSON(
-            message.captureStatusText,
-          )
-        : undefined);
-    message.captureStatusColor !== undefined &&
-      (obj.captureStatusColor = message.captureStatusColor
-        ? Slide_Element_DataLink_CaptureStatusColor.toJSON(
-            message.captureStatusColor,
-          )
-        : undefined);
-    message.slideCount !== undefined &&
-      (obj.slideCount = message.slideCount
-        ? Slide_Element_DataLink_SlideCount.toJSON(message.slideCount)
-        : undefined);
-    message.audioCountdown !== undefined &&
-      (obj.audioCountdown = message.audioCountdown
-        ? Slide_Element_DataLink_AudioCountdown.toJSON(message.audioCountdown)
-        : undefined);
-    message.presentation !== undefined &&
-      (obj.presentation = message.presentation
-        ? Slide_Element_DataLink_Presentation.toJSON(message.presentation)
-        : undefined);
-    message.slideLabelText !== undefined &&
-      (obj.slideLabelText = message.slideLabelText
-        ? Slide_Element_DataLink_SlideLabelText.toJSON(message.slideLabelText)
-        : undefined);
-    message.slideLabelColor !== undefined &&
-      (obj.slideLabelColor = message.slideLabelColor
-        ? Slide_Element_DataLink_SlideLabelColor.toJSON(message.slideLabelColor)
-        : undefined);
-    message.rssFeed !== undefined &&
-      (obj.rssFeed = message.rssFeed
-        ? Slide_Element_DataLink_RSSFeed.toJSON(message.rssFeed)
-        : undefined);
-    message.fileFeed !== undefined &&
-      (obj.fileFeed = message.fileFeed
-        ? Slide_Element_DataLink_FileFeed.toJSON(message.fileFeed)
-        : undefined);
-    message.chordProChart !== undefined &&
-      (obj.chordProChart = message.chordProChart
-        ? Slide_Element_DataLink_ChordProChart.toJSON(message.chordProChart)
-        : undefined);
-    message.playbackMarkerText !== undefined &&
-      (obj.playbackMarkerText = message.playbackMarkerText
-        ? Slide_Element_DataLink_PlaybackMarkerText.toJSON(
-            message.playbackMarkerText,
-          )
-        : undefined);
-    message.playbackMarkerColor !== undefined &&
-      (obj.playbackMarkerColor = message.playbackMarkerColor
-        ? Slide_Element_DataLink_PlaybackMarkerIdentifier.toJSON(
-            message.playbackMarkerColor,
-          )
-        : undefined);
-    message.timecodeText !== undefined &&
-      (obj.timecodeText = message.timecodeText
-        ? Slide_Element_DataLink_TimecodeText.toJSON(message.timecodeText)
-        : undefined);
-    message.timecodeStatus !== undefined &&
-      (obj.timecodeStatus = message.timecodeStatus
-        ? Slide_Element_DataLink_TimecodeStatus.toJSON(message.timecodeStatus)
-        : undefined);
+    if (message.ticker !== undefined) {
+      obj.ticker = Slide_Element_DataLink_Ticker.toJSON(message.ticker);
+    }
+    if (message.alternateText !== undefined) {
+      obj.alternateText = Slide_Element_DataLink_AlternateElementText.toJSON(
+        message.alternateText,
+      );
+    }
+    if (message.timerText !== undefined) {
+      obj.timerText = Slide_Element_DataLink_TimerText.toJSON(
+        message.timerText,
+      );
+    }
+    if (message.clockText !== undefined) {
+      obj.clockText = Slide_Element_DataLink_ClockText.toJSON(
+        message.clockText,
+      );
+    }
+    if (message.chordChart !== undefined) {
+      obj.chordChart = Slide_Element_DataLink_ChordChart.toJSON(
+        message.chordChart,
+      );
+    }
+    if (message.outputScreen !== undefined) {
+      obj.outputScreen = Slide_Element_DataLink_OutputScreen.toJSON(
+        message.outputScreen,
+      );
+    }
+    if (message.pcoLive !== undefined) {
+      obj.pcoLive = Slide_Element_DataLink_PCOLive.toJSON(message.pcoLive);
+    }
+    if (message.alternateFill !== undefined) {
+      obj.alternateFill = Slide_Element_DataLink_AlternateElementFill.toJSON(
+        message.alternateFill,
+      );
+    }
+    if (message.visibilityLink !== undefined) {
+      obj.visibilityLink = Slide_Element_DataLink_VisibilityLink.toJSON(
+        message.visibilityLink,
+      );
+    }
+    if (message.slideText !== undefined) {
+      obj.slideText = Slide_Element_DataLink_SlideText.toJSON(
+        message.slideText,
+      );
+    }
+    if (message.stageMessage !== undefined) {
+      obj.stageMessage = Slide_Element_DataLink_StageMessage.toJSON(
+        message.stageMessage,
+      );
+    }
+    if (message.videoCountdown !== undefined) {
+      obj.videoCountdown = Slide_Element_DataLink_VideoCountdown.toJSON(
+        message.videoCountdown,
+      );
+    }
+    if (message.slideImage !== undefined) {
+      obj.slideImage = Slide_Element_DataLink_SlideImage.toJSON(
+        message.slideImage,
+      );
+    }
+    if (message.ccliText !== undefined) {
+      obj.ccliText = Slide_Element_DataLink_CCLIText.toJSON(message.ccliText);
+    }
+    if (message.groupName !== undefined) {
+      obj.groupName = Slide_Element_DataLink_GroupName.toJSON(
+        message.groupName,
+      );
+    }
+    if (message.groupColor !== undefined) {
+      obj.groupColor = Slide_Element_DataLink_GroupColor.toJSON(
+        message.groupColor,
+      );
+    }
+    if (message.presentationNotes !== undefined) {
+      obj.presentationNotes = Slide_Element_DataLink_PresentationNotes.toJSON(
+        message.presentationNotes,
+      );
+    }
+    if (message.playlistItem !== undefined) {
+      obj.playlistItem = Slide_Element_DataLink_PlaylistItem.toJSON(
+        message.playlistItem,
+      );
+    }
+    if (message.autoAdvanceTimeRemaining !== undefined) {
+      obj.autoAdvanceTimeRemaining =
+        Slide_Element_DataLink_AutoAdvanceTimeRemaining.toJSON(
+          message.autoAdvanceTimeRemaining,
+        );
+    }
+    if (message.captureStatusText !== undefined) {
+      obj.captureStatusText = Slide_Element_DataLink_CaptureStatusText.toJSON(
+        message.captureStatusText,
+      );
+    }
+    if (message.captureStatusColor !== undefined) {
+      obj.captureStatusColor = Slide_Element_DataLink_CaptureStatusColor.toJSON(
+        message.captureStatusColor,
+      );
+    }
+    if (message.slideCount !== undefined) {
+      obj.slideCount = Slide_Element_DataLink_SlideCount.toJSON(
+        message.slideCount,
+      );
+    }
+    if (message.audioCountdown !== undefined) {
+      obj.audioCountdown = Slide_Element_DataLink_AudioCountdown.toJSON(
+        message.audioCountdown,
+      );
+    }
+    if (message.presentation !== undefined) {
+      obj.presentation = Slide_Element_DataLink_Presentation.toJSON(
+        message.presentation,
+      );
+    }
+    if (message.slideLabelText !== undefined) {
+      obj.slideLabelText = Slide_Element_DataLink_SlideLabelText.toJSON(
+        message.slideLabelText,
+      );
+    }
+    if (message.slideLabelColor !== undefined) {
+      obj.slideLabelColor = Slide_Element_DataLink_SlideLabelColor.toJSON(
+        message.slideLabelColor,
+      );
+    }
+    if (message.rssFeed !== undefined) {
+      obj.rssFeed = Slide_Element_DataLink_RSSFeed.toJSON(message.rssFeed);
+    }
+    if (message.fileFeed !== undefined) {
+      obj.fileFeed = Slide_Element_DataLink_FileFeed.toJSON(message.fileFeed);
+    }
+    if (message.chordProChart !== undefined) {
+      obj.chordProChart = Slide_Element_DataLink_ChordProChart.toJSON(
+        message.chordProChart,
+      );
+    }
+    if (message.playbackMarkerText !== undefined) {
+      obj.playbackMarkerText = Slide_Element_DataLink_PlaybackMarkerText.toJSON(
+        message.playbackMarkerText,
+      );
+    }
+    if (message.playbackMarkerColor !== undefined) {
+      obj.playbackMarkerColor =
+        Slide_Element_DataLink_PlaybackMarkerIdentifier.toJSON(
+          message.playbackMarkerColor,
+        );
+    }
+    if (message.timecodeText !== undefined) {
+      obj.timecodeText = Slide_Element_DataLink_TimecodeText.toJSON(
+        message.timecodeText,
+      );
+    }
+    if (message.timecodeStatus !== undefined) {
+      obj.timecodeStatus = Slide_Element_DataLink_TimecodeStatus.toJSON(
+        message.timecodeStatus,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink>, I>>(
     base?: I,
   ): Slide_Element_DataLink {
-    return Slide_Element_DataLink.fromPartial(base ?? {});
+    return Slide_Element_DataLink.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_DataLink>, I>>(
     object: I,
   ): Slide_Element_DataLink {
@@ -3328,28 +3334,28 @@ export const Slide_Element_DataLink_RSSFeed = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.content = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.textDelimiter = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3364,30 +3370,32 @@ export const Slide_Element_DataLink_RSSFeed = {
         ? slide_Element_DataLink_RSSFeed_ContentTypeFromJSON(object.content)
         : 0,
       textDelimiter: isSet(object.textDelimiter)
-        ? String(object.textDelimiter)
+        ? globalThis.String(object.textDelimiter)
         : '',
     };
   },
 
   toJSON(message: Slide_Element_DataLink_RSSFeed): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
-    message.content !== undefined &&
-      (obj.content = slide_Element_DataLink_RSSFeed_ContentTypeToJSON(
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
+    if (message.content !== 0) {
+      obj.content = slide_Element_DataLink_RSSFeed_ContentTypeToJSON(
         message.content,
-      ));
-    message.textDelimiter !== undefined &&
-      (obj.textDelimiter = message.textDelimiter);
+      );
+    }
+    if (message.textDelimiter !== '') {
+      obj.textDelimiter = message.textDelimiter;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_RSSFeed>, I>>(
     base?: I,
   ): Slide_Element_DataLink_RSSFeed {
-    return Slide_Element_DataLink_RSSFeed.fromPartial(base ?? {});
+    return Slide_Element_DataLink_RSSFeed.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_DataLink_RSSFeed>, I>>(
     object: I,
   ): Slide_Element_DataLink_RSSFeed {
@@ -3429,14 +3437,14 @@ export const Slide_Element_DataLink_FileFeed = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3450,17 +3458,17 @@ export const Slide_Element_DataLink_FileFeed = {
 
   toJSON(message: Slide_Element_DataLink_FileFeed): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_FileFeed>, I>>(
     base?: I,
   ): Slide_Element_DataLink_FileFeed {
-    return Slide_Element_DataLink_FileFeed.fromPartial(base ?? {});
+    return Slide_Element_DataLink_FileFeed.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_DataLink_FileFeed>, I>>(
     object: I,
   ): Slide_Element_DataLink_FileFeed {
@@ -3535,35 +3543,35 @@ export const Slide_Element_DataLink_Ticker = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.playRate = reader.double();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.shouldLoop = reader.bool();
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.loopDelay = reader.double();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.textDelimiter = reader.string();
           continue;
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -3573,7 +3581,7 @@ export const Slide_Element_DataLink_Ticker = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -3583,7 +3591,7 @@ export const Slide_Element_DataLink_Ticker = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -3593,7 +3601,7 @@ export const Slide_Element_DataLink_Ticker = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3603,11 +3611,15 @@ export const Slide_Element_DataLink_Ticker = {
 
   fromJSON(object: any): Slide_Element_DataLink_Ticker {
     return {
-      playRate: isSet(object.playRate) ? Number(object.playRate) : 0,
-      shouldLoop: isSet(object.shouldLoop) ? Boolean(object.shouldLoop) : false,
-      loopDelay: isSet(object.loopDelay) ? Number(object.loopDelay) : 0,
+      playRate: isSet(object.playRate) ? globalThis.Number(object.playRate) : 0,
+      shouldLoop: isSet(object.shouldLoop)
+        ? globalThis.Boolean(object.shouldLoop)
+        : false,
+      loopDelay: isSet(object.loopDelay)
+        ? globalThis.Number(object.loopDelay)
+        : 0,
       textDelimiter: isSet(object.textDelimiter)
-        ? String(object.textDelimiter)
+        ? globalThis.String(object.textDelimiter)
         : '',
       textType: isSet(object.textType)
         ? Slide_Element_DataLink_Ticker_TextType.fromJSON(object.textType)
@@ -3623,32 +3635,41 @@ export const Slide_Element_DataLink_Ticker = {
 
   toJSON(message: Slide_Element_DataLink_Ticker): unknown {
     const obj: any = {};
-    message.playRate !== undefined && (obj.playRate = message.playRate);
-    message.shouldLoop !== undefined && (obj.shouldLoop = message.shouldLoop);
-    message.loopDelay !== undefined && (obj.loopDelay = message.loopDelay);
-    message.textDelimiter !== undefined &&
-      (obj.textDelimiter = message.textDelimiter);
-    message.textType !== undefined &&
-      (obj.textType = message.textType
-        ? Slide_Element_DataLink_Ticker_TextType.toJSON(message.textType)
-        : undefined);
-    message.rssType !== undefined &&
-      (obj.rssType = message.rssType
-        ? Slide_Element_DataLink_Ticker_RSSType.toJSON(message.rssType)
-        : undefined);
-    message.fileType !== undefined &&
-      (obj.fileType = message.fileType
-        ? Slide_Element_DataLink_Ticker_FileType.toJSON(message.fileType)
-        : undefined);
+    if (message.playRate !== 0) {
+      obj.playRate = message.playRate;
+    }
+    if (message.shouldLoop === true) {
+      obj.shouldLoop = message.shouldLoop;
+    }
+    if (message.loopDelay !== 0) {
+      obj.loopDelay = message.loopDelay;
+    }
+    if (message.textDelimiter !== '') {
+      obj.textDelimiter = message.textDelimiter;
+    }
+    if (message.textType !== undefined) {
+      obj.textType = Slide_Element_DataLink_Ticker_TextType.toJSON(
+        message.textType,
+      );
+    }
+    if (message.rssType !== undefined) {
+      obj.rssType = Slide_Element_DataLink_Ticker_RSSType.toJSON(
+        message.rssType,
+      );
+    }
+    if (message.fileType !== undefined) {
+      obj.fileType = Slide_Element_DataLink_Ticker_FileType.toJSON(
+        message.fileType,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker>, I>>(
     base?: I,
   ): Slide_Element_DataLink_Ticker {
-    return Slide_Element_DataLink_Ticker.fromPartial(base ?? {});
+    return Slide_Element_DataLink_Ticker.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker>, I>>(
     object: I,
   ): Slide_Element_DataLink_Ticker {
@@ -3700,14 +3721,14 @@ export const Slide_Element_DataLink_Ticker_TextType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.text = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3716,21 +3737,24 @@ export const Slide_Element_DataLink_Ticker_TextType = {
   },
 
   fromJSON(object: any): Slide_Element_DataLink_Ticker_TextType {
-    return { text: isSet(object.text) ? String(object.text) : '' };
+    return { text: isSet(object.text) ? globalThis.String(object.text) : '' };
   },
 
   toJSON(message: Slide_Element_DataLink_Ticker_TextType): unknown {
     const obj: any = {};
-    message.text !== undefined && (obj.text = message.text);
+    if (message.text !== '') {
+      obj.text = message.text;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker_TextType>, I>,
   >(base?: I): Slide_Element_DataLink_Ticker_TextType {
-    return Slide_Element_DataLink_Ticker_TextType.fromPartial(base ?? {});
+    return Slide_Element_DataLink_Ticker_TextType.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker_TextType>, I>,
   >(object: I): Slide_Element_DataLink_Ticker_TextType {
@@ -3770,21 +3794,21 @@ export const Slide_Element_DataLink_Ticker_RSSType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.content = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3805,21 +3829,24 @@ export const Slide_Element_DataLink_Ticker_RSSType = {
 
   toJSON(message: Slide_Element_DataLink_Ticker_RSSType): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
-    message.content !== undefined &&
-      (obj.content = slide_Element_DataLink_Ticker_RSSType_ContentTypeToJSON(
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
+    if (message.content !== 0) {
+      obj.content = slide_Element_DataLink_Ticker_RSSType_ContentTypeToJSON(
         message.content,
-      ));
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker_RSSType>, I>,
   >(base?: I): Slide_Element_DataLink_Ticker_RSSType {
-    return Slide_Element_DataLink_Ticker_RSSType.fromPartial(base ?? {});
+    return Slide_Element_DataLink_Ticker_RSSType.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker_RSSType>, I>,
   >(object: I): Slide_Element_DataLink_Ticker_RSSType {
@@ -3860,14 +3887,14 @@ export const Slide_Element_DataLink_Ticker_FileType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3881,17 +3908,19 @@ export const Slide_Element_DataLink_Ticker_FileType = {
 
   toJSON(message: Slide_Element_DataLink_Ticker_FileType): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker_FileType>, I>,
   >(base?: I): Slide_Element_DataLink_Ticker_FileType {
-    return Slide_Element_DataLink_Ticker_FileType.fromPartial(base ?? {});
+    return Slide_Element_DataLink_Ticker_FileType.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Ticker_FileType>, I>,
   >(object: I): Slide_Element_DataLink_Ticker_FileType {
@@ -3945,35 +3974,35 @@ export const Slide_Element_DataLink_AlternateElementText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.otherElementUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.otherElementName = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.textTransformOptions = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.textTransform = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3987,10 +4016,10 @@ export const Slide_Element_DataLink_AlternateElementText = {
         ? UUID.fromJSON(object.otherElementUuid)
         : undefined,
       otherElementName: isSet(object.otherElementName)
-        ? String(object.otherElementName)
+        ? globalThis.String(object.otherElementName)
         : '',
       textTransformOptions: isSet(object.textTransformOptions)
-        ? Number(object.textTransformOptions)
+        ? globalThis.Number(object.textTransformOptions)
         : 0,
       textTransform: isSet(object.textTransform)
         ? slide_Element_DataLink_AlternateElementText_TextTransformOptionFromJSON(
@@ -4002,19 +4031,21 @@ export const Slide_Element_DataLink_AlternateElementText = {
 
   toJSON(message: Slide_Element_DataLink_AlternateElementText): unknown {
     const obj: any = {};
-    message.otherElementUuid !== undefined &&
-      (obj.otherElementUuid = message.otherElementUuid
-        ? UUID.toJSON(message.otherElementUuid)
-        : undefined);
-    message.otherElementName !== undefined &&
-      (obj.otherElementName = message.otherElementName);
-    message.textTransformOptions !== undefined &&
-      (obj.textTransformOptions = Math.round(message.textTransformOptions));
-    message.textTransform !== undefined &&
-      (obj.textTransform =
+    if (message.otherElementUuid !== undefined) {
+      obj.otherElementUuid = UUID.toJSON(message.otherElementUuid);
+    }
+    if (message.otherElementName !== '') {
+      obj.otherElementName = message.otherElementName;
+    }
+    if (message.textTransformOptions !== 0) {
+      obj.textTransformOptions = Math.round(message.textTransformOptions);
+    }
+    if (message.textTransform !== 0) {
+      obj.textTransform =
         slide_Element_DataLink_AlternateElementText_TextTransformOptionToJSON(
           message.textTransform,
-        ));
+        );
+    }
     return obj;
   },
 
@@ -4024,9 +4055,10 @@ export const Slide_Element_DataLink_AlternateElementText = {
       I
     >,
   >(base?: I): Slide_Element_DataLink_AlternateElementText {
-    return Slide_Element_DataLink_AlternateElementText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_AlternateElementText.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_AlternateElementText>,
@@ -4069,7 +4101,7 @@ export const Slide_Element_DataLink_CCLIText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4089,9 +4121,8 @@ export const Slide_Element_DataLink_CCLIText = {
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_CCLIText>, I>>(
     base?: I,
   ): Slide_Element_DataLink_CCLIText {
-    return Slide_Element_DataLink_CCLIText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_CCLIText.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_DataLink_CCLIText>, I>>(
     _: I,
   ): Slide_Element_DataLink_CCLIText {
@@ -4130,21 +4161,21 @@ export const Slide_Element_DataLink_ColorTrigger = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.time = reader.double();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4154,25 +4185,27 @@ export const Slide_Element_DataLink_ColorTrigger = {
 
   fromJSON(object: any): Slide_Element_DataLink_ColorTrigger {
     return {
-      time: isSet(object.time) ? Number(object.time) : 0,
+      time: isSet(object.time) ? globalThis.Number(object.time) : 0,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
     };
   },
 
   toJSON(message: Slide_Element_DataLink_ColorTrigger): unknown {
     const obj: any = {};
-    message.time !== undefined && (obj.time = message.time);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    if (message.time !== 0) {
+      obj.time = message.time;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_ColorTrigger>, I>>(
     base?: I,
   ): Slide_Element_DataLink_ColorTrigger {
-    return Slide_Element_DataLink_ColorTrigger.fromPartial(base ?? {});
+    return Slide_Element_DataLink_ColorTrigger.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_ColorTrigger>, I>,
   >(object: I): Slide_Element_DataLink_ColorTrigger {
@@ -4237,35 +4270,35 @@ export const Slide_Element_DataLink_TimerText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.timerUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.timerName = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.timerFormat = Timer_Format.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.timerFormatString = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -4274,7 +4307,7 @@ export const Slide_Element_DataLink_TimerText = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4287,14 +4320,16 @@ export const Slide_Element_DataLink_TimerText = {
       timerUuid: isSet(object.timerUuid)
         ? UUID.fromJSON(object.timerUuid)
         : undefined,
-      timerName: isSet(object.timerName) ? String(object.timerName) : '',
+      timerName: isSet(object.timerName)
+        ? globalThis.String(object.timerName)
+        : '',
       timerFormat: isSet(object.timerFormat)
         ? Timer_Format.fromJSON(object.timerFormat)
         : undefined,
       timerFormatString: isSet(object.timerFormatString)
-        ? String(object.timerFormatString)
+        ? globalThis.String(object.timerFormatString)
         : '',
-      colorTriggers: Array.isArray(object?.colorTriggers)
+      colorTriggers: globalThis.Array.isArray(object?.colorTriggers)
         ? object.colorTriggers.map((e: any) =>
             Slide_Element_DataLink_ColorTrigger.fromJSON(e),
           )
@@ -4304,23 +4339,22 @@ export const Slide_Element_DataLink_TimerText = {
 
   toJSON(message: Slide_Element_DataLink_TimerText): unknown {
     const obj: any = {};
-    message.timerUuid !== undefined &&
-      (obj.timerUuid = message.timerUuid
-        ? UUID.toJSON(message.timerUuid)
-        : undefined);
-    message.timerName !== undefined && (obj.timerName = message.timerName);
-    message.timerFormat !== undefined &&
-      (obj.timerFormat = message.timerFormat
-        ? Timer_Format.toJSON(message.timerFormat)
-        : undefined);
-    message.timerFormatString !== undefined &&
-      (obj.timerFormatString = message.timerFormatString);
-    if (message.colorTriggers) {
+    if (message.timerUuid !== undefined) {
+      obj.timerUuid = UUID.toJSON(message.timerUuid);
+    }
+    if (message.timerName !== '') {
+      obj.timerName = message.timerName;
+    }
+    if (message.timerFormat !== undefined) {
+      obj.timerFormat = Timer_Format.toJSON(message.timerFormat);
+    }
+    if (message.timerFormatString !== '') {
+      obj.timerFormatString = message.timerFormatString;
+    }
+    if (message.colorTriggers?.length) {
       obj.colorTriggers = message.colorTriggers.map((e) =>
-        e ? Slide_Element_DataLink_ColorTrigger.toJSON(e) : undefined,
+        Slide_Element_DataLink_ColorTrigger.toJSON(e),
       );
-    } else {
-      obj.colorTriggers = [];
     }
     return obj;
   },
@@ -4328,9 +4362,8 @@ export const Slide_Element_DataLink_TimerText = {
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_TimerText>, I>>(
     base?: I,
   ): Slide_Element_DataLink_TimerText {
-    return Slide_Element_DataLink_TimerText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_TimerText.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_TimerText>, I>,
   >(object: I): Slide_Element_DataLink_TimerText {
@@ -4383,21 +4416,21 @@ export const Slide_Element_DataLink_ClockText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.clockFormatString = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.format = Clock_Format.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4408,7 +4441,7 @@ export const Slide_Element_DataLink_ClockText = {
   fromJSON(object: any): Slide_Element_DataLink_ClockText {
     return {
       clockFormatString: isSet(object.clockFormatString)
-        ? String(object.clockFormatString)
+        ? globalThis.String(object.clockFormatString)
         : '',
       format: isSet(object.format)
         ? Clock_Format.fromJSON(object.format)
@@ -4418,21 +4451,20 @@ export const Slide_Element_DataLink_ClockText = {
 
   toJSON(message: Slide_Element_DataLink_ClockText): unknown {
     const obj: any = {};
-    message.clockFormatString !== undefined &&
-      (obj.clockFormatString = message.clockFormatString);
-    message.format !== undefined &&
-      (obj.format = message.format
-        ? Clock_Format.toJSON(message.format)
-        : undefined);
+    if (message.clockFormatString !== '') {
+      obj.clockFormatString = message.clockFormatString;
+    }
+    if (message.format !== undefined) {
+      obj.format = Clock_Format.toJSON(message.format);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_ClockText>, I>>(
     base?: I,
   ): Slide_Element_DataLink_ClockText {
-    return Slide_Element_DataLink_ClockText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_ClockText.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_ClockText>, I>,
   >(object: I): Slide_Element_DataLink_ClockText {
@@ -4470,7 +4502,7 @@ export const Slide_Element_DataLink_ChordChart = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4490,9 +4522,8 @@ export const Slide_Element_DataLink_ChordChart = {
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_ChordChart>, I>>(
     base?: I,
   ): Slide_Element_DataLink_ChordChart {
-    return Slide_Element_DataLink_ChordChart.fromPartial(base ?? {});
+    return Slide_Element_DataLink_ChordChart.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_ChordChart>, I>,
   >(_: I): Slide_Element_DataLink_ChordChart {
@@ -4531,21 +4562,21 @@ export const Slide_Element_DataLink_OutputScreen = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.screenId = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.screenName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4558,26 +4589,28 @@ export const Slide_Element_DataLink_OutputScreen = {
       screenId: isSet(object.screenId)
         ? UUID.fromJSON(object.screenId)
         : undefined,
-      screenName: isSet(object.screenName) ? String(object.screenName) : '',
+      screenName: isSet(object.screenName)
+        ? globalThis.String(object.screenName)
+        : '',
     };
   },
 
   toJSON(message: Slide_Element_DataLink_OutputScreen): unknown {
     const obj: any = {};
-    message.screenId !== undefined &&
-      (obj.screenId = message.screenId
-        ? UUID.toJSON(message.screenId)
-        : undefined);
-    message.screenName !== undefined && (obj.screenName = message.screenName);
+    if (message.screenId !== undefined) {
+      obj.screenId = UUID.toJSON(message.screenId);
+    }
+    if (message.screenName !== '') {
+      obj.screenName = message.screenName;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_OutputScreen>, I>>(
     base?: I,
   ): Slide_Element_DataLink_OutputScreen {
-    return Slide_Element_DataLink_OutputScreen.fromPartial(base ?? {});
+    return Slide_Element_DataLink_OutputScreen.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_OutputScreen>, I>,
   >(object: I): Slide_Element_DataLink_OutputScreen {
@@ -4621,21 +4654,21 @@ export const Slide_Element_DataLink_PCOLive = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.theme = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.countdownType = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4658,21 +4691,22 @@ export const Slide_Element_DataLink_PCOLive = {
 
   toJSON(message: Slide_Element_DataLink_PCOLive): unknown {
     const obj: any = {};
-    message.theme !== undefined &&
-      (obj.theme = slide_Element_DataLink_PCOLive_ThemeToJSON(message.theme));
-    message.countdownType !== undefined &&
-      (obj.countdownType = slide_Element_DataLink_PCOLive_CountdownTypeToJSON(
+    if (message.theme !== 0) {
+      obj.theme = slide_Element_DataLink_PCOLive_ThemeToJSON(message.theme);
+    }
+    if (message.countdownType !== 0) {
+      obj.countdownType = slide_Element_DataLink_PCOLive_CountdownTypeToJSON(
         message.countdownType,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_PCOLive>, I>>(
     base?: I,
   ): Slide_Element_DataLink_PCOLive {
-    return Slide_Element_DataLink_PCOLive.fromPartial(base ?? {});
+    return Slide_Element_DataLink_PCOLive.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_DataLink_PCOLive>, I>>(
     object: I,
   ): Slide_Element_DataLink_PCOLive {
@@ -4713,21 +4747,21 @@ export const Slide_Element_DataLink_AlternateElementFill = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.otherElementUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.otherElementName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4741,19 +4775,19 @@ export const Slide_Element_DataLink_AlternateElementFill = {
         ? UUID.fromJSON(object.otherElementUuid)
         : undefined,
       otherElementName: isSet(object.otherElementName)
-        ? String(object.otherElementName)
+        ? globalThis.String(object.otherElementName)
         : '',
     };
   },
 
   toJSON(message: Slide_Element_DataLink_AlternateElementFill): unknown {
     const obj: any = {};
-    message.otherElementUuid !== undefined &&
-      (obj.otherElementUuid = message.otherElementUuid
-        ? UUID.toJSON(message.otherElementUuid)
-        : undefined);
-    message.otherElementName !== undefined &&
-      (obj.otherElementName = message.otherElementName);
+    if (message.otherElementUuid !== undefined) {
+      obj.otherElementUuid = UUID.toJSON(message.otherElementUuid);
+    }
+    if (message.otherElementName !== '') {
+      obj.otherElementName = message.otherElementName;
+    }
     return obj;
   },
 
@@ -4763,9 +4797,10 @@ export const Slide_Element_DataLink_AlternateElementFill = {
       I
     >,
   >(base?: I): Slide_Element_DataLink_AlternateElementFill {
-    return Slide_Element_DataLink_AlternateElementFill.fromPartial(base ?? {});
+    return Slide_Element_DataLink_AlternateElementFill.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_AlternateElementFill>,
@@ -4815,14 +4850,14 @@ export const Slide_Element_DataLink_VisibilityLink = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.visibilityCriterion = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -4834,7 +4869,7 @@ export const Slide_Element_DataLink_VisibilityLink = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4849,7 +4884,7 @@ export const Slide_Element_DataLink_VisibilityLink = {
             object.visibilityCriterion,
           )
         : 0,
-      conditions: Array.isArray(object?.conditions)
+      conditions: globalThis.Array.isArray(object?.conditions)
         ? object.conditions.map((e: any) =>
             Slide_Element_DataLink_VisibilityLink_Condition.fromJSON(e),
           )
@@ -4859,19 +4894,16 @@ export const Slide_Element_DataLink_VisibilityLink = {
 
   toJSON(message: Slide_Element_DataLink_VisibilityLink): unknown {
     const obj: any = {};
-    message.visibilityCriterion !== undefined &&
-      (obj.visibilityCriterion =
+    if (message.visibilityCriterion !== 0) {
+      obj.visibilityCriterion =
         slide_Element_DataLink_VisibilityLink_VisibilityCriterionToJSON(
           message.visibilityCriterion,
-        ));
-    if (message.conditions) {
+        );
+    }
+    if (message.conditions?.length) {
       obj.conditions = message.conditions.map((e) =>
-        e
-          ? Slide_Element_DataLink_VisibilityLink_Condition.toJSON(e)
-          : undefined,
+        Slide_Element_DataLink_VisibilityLink_Condition.toJSON(e),
       );
-    } else {
-      obj.conditions = [];
     }
     return obj;
   },
@@ -4879,9 +4911,10 @@ export const Slide_Element_DataLink_VisibilityLink = {
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_VisibilityLink>, I>,
   >(base?: I): Slide_Element_DataLink_VisibilityLink {
-    return Slide_Element_DataLink_VisibilityLink.fromPartial(base ?? {});
+    return Slide_Element_DataLink_VisibilityLink.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_VisibilityLink>, I>,
   >(object: I): Slide_Element_DataLink_VisibilityLink {
@@ -4962,7 +4995,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4973,7 +5006,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
             );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -4984,7 +5017,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4995,7 +5028,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
             );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -5006,7 +5039,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -5017,7 +5050,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
             );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -5028,7 +5061,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5073,42 +5106,42 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
 
   toJSON(message: Slide_Element_DataLink_VisibilityLink_Condition): unknown {
     const obj: any = {};
-    message.elementVisibility !== undefined &&
-      (obj.elementVisibility = message.elementVisibility
-        ? Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility.toJSON(
-            message.elementVisibility,
-          )
-        : undefined);
-    message.timerVisibility !== undefined &&
-      (obj.timerVisibility = message.timerVisibility
-        ? Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility.toJSON(
-            message.timerVisibility,
-          )
-        : undefined);
-    message.videoCountdownVisibility !== undefined &&
-      (obj.videoCountdownVisibility = message.videoCountdownVisibility
-        ? Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility.toJSON(
-            message.videoCountdownVisibility,
-          )
-        : undefined);
-    message.captureSessionVisibility !== undefined &&
-      (obj.captureSessionVisibility = message.captureSessionVisibility
-        ? Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility.toJSON(
-            message.captureSessionVisibility,
-          )
-        : undefined);
-    message.videoInputVisibility !== undefined &&
-      (obj.videoInputVisibility = message.videoInputVisibility
-        ? Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility.toJSON(
-            message.videoInputVisibility,
-          )
-        : undefined);
-    message.audioCountdownVisibility !== undefined &&
-      (obj.audioCountdownVisibility = message.audioCountdownVisibility
-        ? Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility.toJSON(
-            message.audioCountdownVisibility,
-          )
-        : undefined);
+    if (message.elementVisibility !== undefined) {
+      obj.elementVisibility =
+        Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility.toJSON(
+          message.elementVisibility,
+        );
+    }
+    if (message.timerVisibility !== undefined) {
+      obj.timerVisibility =
+        Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility.toJSON(
+          message.timerVisibility,
+        );
+    }
+    if (message.videoCountdownVisibility !== undefined) {
+      obj.videoCountdownVisibility =
+        Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility.toJSON(
+          message.videoCountdownVisibility,
+        );
+    }
+    if (message.captureSessionVisibility !== undefined) {
+      obj.captureSessionVisibility =
+        Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility.toJSON(
+          message.captureSessionVisibility,
+        );
+    }
+    if (message.videoInputVisibility !== undefined) {
+      obj.videoInputVisibility =
+        Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility.toJSON(
+          message.videoInputVisibility,
+        );
+    }
+    if (message.audioCountdownVisibility !== undefined) {
+      obj.audioCountdownVisibility =
+        Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility.toJSON(
+          message.audioCountdownVisibility,
+        );
+    }
     return obj;
   },
 
@@ -5119,10 +5152,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition = {
     >,
   >(base?: I): Slide_Element_DataLink_VisibilityLink_Condition {
     return Slide_Element_DataLink_VisibilityLink_Condition.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition>,
@@ -5217,28 +5249,28 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility =
         const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1:
-            if (tag != 10) {
+            if (tag !== 10) {
               break;
             }
 
             message.otherElementUuid = UUID.decode(reader, reader.uint32());
             continue;
           case 2:
-            if (tag != 18) {
+            if (tag !== 18) {
               break;
             }
 
             message.otherElementName = reader.string();
             continue;
           case 3:
-            if (tag != 24) {
+            if (tag !== 24) {
               break;
             }
 
             message.visibilityCriterion = reader.int32() as any;
             continue;
         }
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
         reader.skipType(tag & 7);
@@ -5254,7 +5286,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility =
           ? UUID.fromJSON(object.otherElementUuid)
           : undefined,
         otherElementName: isSet(object.otherElementName)
-          ? String(object.otherElementName)
+          ? globalThis.String(object.otherElementName)
           : '',
         visibilityCriterion: isSet(object.visibilityCriterion)
           ? slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility_ElementVisibilityCriterionFromJSON(
@@ -5268,17 +5300,18 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility =
       message: Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility,
     ): unknown {
       const obj: any = {};
-      message.otherElementUuid !== undefined &&
-        (obj.otherElementUuid = message.otherElementUuid
-          ? UUID.toJSON(message.otherElementUuid)
-          : undefined);
-      message.otherElementName !== undefined &&
-        (obj.otherElementName = message.otherElementName);
-      message.visibilityCriterion !== undefined &&
-        (obj.visibilityCriterion =
+      if (message.otherElementUuid !== undefined) {
+        obj.otherElementUuid = UUID.toJSON(message.otherElementUuid);
+      }
+      if (message.otherElementName !== '') {
+        obj.otherElementName = message.otherElementName;
+      }
+      if (message.visibilityCriterion !== 0) {
+        obj.visibilityCriterion =
           slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility_ElementVisibilityCriterionToJSON(
             message.visibilityCriterion,
-          ));
+          );
+      }
       return obj;
     },
 
@@ -5291,10 +5324,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility =
       base?: I,
     ): Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility {
       return Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility.fromPartial(
-        base ?? {},
+        base ?? ({} as any),
       );
     },
-
     fromPartial<
       I extends Exact<
         DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition_ElementVisibility>,
@@ -5350,28 +5382,28 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.timerUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.timerName = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.visibilityCriterion = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5386,7 +5418,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility = {
       timerUuid: isSet(object.timerUuid)
         ? UUID.fromJSON(object.timerUuid)
         : undefined,
-      timerName: isSet(object.timerName) ? String(object.timerName) : '',
+      timerName: isSet(object.timerName)
+        ? globalThis.String(object.timerName)
+        : '',
       visibilityCriterion: isSet(object.visibilityCriterion)
         ? slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility_TimerVisibilityCriterionFromJSON(
             object.visibilityCriterion,
@@ -5399,16 +5433,18 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility = {
     message: Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility,
   ): unknown {
     const obj: any = {};
-    message.timerUuid !== undefined &&
-      (obj.timerUuid = message.timerUuid
-        ? UUID.toJSON(message.timerUuid)
-        : undefined);
-    message.timerName !== undefined && (obj.timerName = message.timerName);
-    message.visibilityCriterion !== undefined &&
-      (obj.visibilityCriterion =
+    if (message.timerUuid !== undefined) {
+      obj.timerUuid = UUID.toJSON(message.timerUuid);
+    }
+    if (message.timerName !== '') {
+      obj.timerName = message.timerName;
+    }
+    if (message.visibilityCriterion !== 0) {
+      obj.visibilityCriterion =
         slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility_TimerVisibilityCriterionToJSON(
           message.visibilityCriterion,
-        ));
+        );
+    }
     return obj;
   },
 
@@ -5419,10 +5455,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility = {
     >,
   >(base?: I): Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility {
     return Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition_TimerVisibility>,
@@ -5472,14 +5507,14 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisib
         const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1:
-            if (tag != 8) {
+            if (tag !== 8) {
               break;
             }
 
             message.visibilityCriterion = reader.int32() as any;
             continue;
         }
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
         reader.skipType(tag & 7);
@@ -5503,11 +5538,12 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisib
       message: Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility,
     ): unknown {
       const obj: any = {};
-      message.visibilityCriterion !== undefined &&
-        (obj.visibilityCriterion =
+      if (message.visibilityCriterion !== 0) {
+        obj.visibilityCriterion =
           slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility_VideoCountdownVisibilityCriterionToJSON(
             message.visibilityCriterion,
-          ));
+          );
+      }
       return obj;
     },
 
@@ -5520,10 +5556,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisib
       base?: I,
     ): Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility {
       return Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility.fromPartial(
-        base ?? {},
+        base ?? ({} as any),
       );
     },
-
     fromPartial<
       I extends Exact<
         DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition_VideoCountdownVisibility>,
@@ -5568,14 +5603,14 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisib
         const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1:
-            if (tag != 8) {
+            if (tag !== 8) {
               break;
             }
 
             message.visibilityCriterion = reader.int32() as any;
             continue;
         }
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
         reader.skipType(tag & 7);
@@ -5599,11 +5634,12 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisib
       message: Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility,
     ): unknown {
       const obj: any = {};
-      message.visibilityCriterion !== undefined &&
-        (obj.visibilityCriterion =
+      if (message.visibilityCriterion !== 0) {
+        obj.visibilityCriterion =
           slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility_AudioCountdownVisibilityCriterionToJSON(
             message.visibilityCriterion,
-          ));
+          );
+      }
       return obj;
     },
 
@@ -5616,10 +5652,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisib
       base?: I,
     ): Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility {
       return Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility.fromPartial(
-        base ?? {},
+        base ?? ({} as any),
       );
     },
-
     fromPartial<
       I extends Exact<
         DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition_AudioCountdownVisibility>,
@@ -5664,14 +5699,14 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisib
         const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1:
-            if (tag != 8) {
+            if (tag !== 8) {
               break;
             }
 
             message.visibilityCriterion = reader.int32() as any;
             continue;
         }
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
         reader.skipType(tag & 7);
@@ -5695,11 +5730,12 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisib
       message: Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility,
     ): unknown {
       const obj: any = {};
-      message.visibilityCriterion !== undefined &&
-        (obj.visibilityCriterion =
+      if (message.visibilityCriterion !== 0) {
+        obj.visibilityCriterion =
           slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility_CaptureSessionVisibilityCriterionToJSON(
             message.visibilityCriterion,
-          ));
+          );
+      }
       return obj;
     },
 
@@ -5712,10 +5748,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisib
       base?: I,
     ): Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility {
       return Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility.fromPartial(
-        base ?? {},
+        base ?? ({} as any),
       );
     },
-
     fromPartial<
       I extends Exact<
         DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition_CaptureSessionVisibility>,
@@ -5763,21 +5798,21 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibilit
         const tag = reader.uint32();
         switch (tag >>> 3) {
           case 1:
-            if (tag != 8) {
+            if (tag !== 8) {
               break;
             }
 
             message.videoInputIndex = reader.int32();
             continue;
           case 2:
-            if (tag != 16) {
+            if (tag !== 16) {
               break;
             }
 
             message.visibilityCriterion = reader.int32() as any;
             continue;
         }
-        if ((tag & 7) == 4 || tag == 0) {
+        if ((tag & 7) === 4 || tag === 0) {
           break;
         }
         reader.skipType(tag & 7);
@@ -5790,7 +5825,7 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibilit
     ): Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility {
       return {
         videoInputIndex: isSet(object.videoInputIndex)
-          ? Number(object.videoInputIndex)
+          ? globalThis.Number(object.videoInputIndex)
           : 0,
         visibilityCriterion: isSet(object.visibilityCriterion)
           ? slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility_VideoInputVisibilityCriterionFromJSON(
@@ -5804,13 +5839,15 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibilit
       message: Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility,
     ): unknown {
       const obj: any = {};
-      message.videoInputIndex !== undefined &&
-        (obj.videoInputIndex = Math.round(message.videoInputIndex));
-      message.visibilityCriterion !== undefined &&
-        (obj.visibilityCriterion =
+      if (message.videoInputIndex !== 0) {
+        obj.videoInputIndex = Math.round(message.videoInputIndex);
+      }
+      if (message.visibilityCriterion !== 0) {
+        obj.visibilityCriterion =
           slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility_VideoInputVisibilityCriterionToJSON(
             message.visibilityCriterion,
-          ));
+          );
+      }
       return obj;
     },
 
@@ -5823,10 +5860,9 @@ export const Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibilit
       base?: I,
     ): Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility {
       return Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility.fromPartial(
-        base ?? {},
+        base ?? ({} as any),
       );
     },
-
     fromPartial<
       I extends Exact<
         DeepPartial<Slide_Element_DataLink_VisibilityLink_Condition_VideoInputVisibility>,
@@ -5888,42 +5924,42 @@ export const Slide_Element_DataLink_SlideText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.sourceSlide = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.sourceOption = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.preserveNotesFormat = reader.bool();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.nameToMatch = reader.string();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.elementTextTransform = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5942,9 +5978,11 @@ export const Slide_Element_DataLink_SlideText = {
           )
         : 0,
       preserveNotesFormat: isSet(object.preserveNotesFormat)
-        ? Boolean(object.preserveNotesFormat)
+        ? globalThis.Boolean(object.preserveNotesFormat)
         : false,
-      nameToMatch: isSet(object.nameToMatch) ? String(object.nameToMatch) : '',
+      nameToMatch: isSet(object.nameToMatch)
+        ? globalThis.String(object.nameToMatch)
+        : '',
       elementTextTransform: isSet(object.elementTextTransform)
         ? slide_Element_DataLink_AlternateElementText_TextTransformOptionFromJSON(
             object.elementTextTransform,
@@ -5955,33 +5993,37 @@ export const Slide_Element_DataLink_SlideText = {
 
   toJSON(message: Slide_Element_DataLink_SlideText): unknown {
     const obj: any = {};
-    message.sourceSlide !== undefined &&
-      (obj.sourceSlide = slide_Element_DataLink_SlideSourceTypeToJSON(
+    if (message.sourceSlide !== 0) {
+      obj.sourceSlide = slide_Element_DataLink_SlideSourceTypeToJSON(
         message.sourceSlide,
-      ));
-    message.sourceOption !== undefined &&
-      (obj.sourceOption =
+      );
+    }
+    if (message.sourceOption !== 0) {
+      obj.sourceOption =
         slide_Element_DataLink_SlideText_TextSourceOptionToJSON(
           message.sourceOption,
-        ));
-    message.preserveNotesFormat !== undefined &&
-      (obj.preserveNotesFormat = message.preserveNotesFormat);
-    message.nameToMatch !== undefined &&
-      (obj.nameToMatch = message.nameToMatch);
-    message.elementTextTransform !== undefined &&
-      (obj.elementTextTransform =
+        );
+    }
+    if (message.preserveNotesFormat === true) {
+      obj.preserveNotesFormat = message.preserveNotesFormat;
+    }
+    if (message.nameToMatch !== '') {
+      obj.nameToMatch = message.nameToMatch;
+    }
+    if (message.elementTextTransform !== 0) {
+      obj.elementTextTransform =
         slide_Element_DataLink_AlternateElementText_TextTransformOptionToJSON(
           message.elementTextTransform,
-        ));
+        );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_SlideText>, I>>(
     base?: I,
   ): Slide_Element_DataLink_SlideText {
-    return Slide_Element_DataLink_SlideText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_SlideText.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideText>, I>,
   >(object: I): Slide_Element_DataLink_SlideText {
@@ -6022,14 +6064,14 @@ export const Slide_Element_DataLink_SlideImage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.sourceSlide = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6047,19 +6089,19 @@ export const Slide_Element_DataLink_SlideImage = {
 
   toJSON(message: Slide_Element_DataLink_SlideImage): unknown {
     const obj: any = {};
-    message.sourceSlide !== undefined &&
-      (obj.sourceSlide = slide_Element_DataLink_SlideSourceTypeToJSON(
+    if (message.sourceSlide !== 0) {
+      obj.sourceSlide = slide_Element_DataLink_SlideSourceTypeToJSON(
         message.sourceSlide,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_SlideImage>, I>>(
     base?: I,
   ): Slide_Element_DataLink_SlideImage {
-    return Slide_Element_DataLink_SlideImage.fromPartial(base ?? {});
+    return Slide_Element_DataLink_SlideImage.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideImage>, I>,
   >(object: I): Slide_Element_DataLink_SlideImage {
@@ -6099,21 +6141,21 @@ export const Slide_Element_DataLink_StageMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.shouldFlash = reader.bool();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.flashColor = Color.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6124,7 +6166,7 @@ export const Slide_Element_DataLink_StageMessage = {
   fromJSON(object: any): Slide_Element_DataLink_StageMessage {
     return {
       shouldFlash: isSet(object.shouldFlash)
-        ? Boolean(object.shouldFlash)
+        ? globalThis.Boolean(object.shouldFlash)
         : false,
       flashColor: isSet(object.flashColor)
         ? Color.fromJSON(object.flashColor)
@@ -6134,21 +6176,20 @@ export const Slide_Element_DataLink_StageMessage = {
 
   toJSON(message: Slide_Element_DataLink_StageMessage): unknown {
     const obj: any = {};
-    message.shouldFlash !== undefined &&
-      (obj.shouldFlash = message.shouldFlash);
-    message.flashColor !== undefined &&
-      (obj.flashColor = message.flashColor
-        ? Color.toJSON(message.flashColor)
-        : undefined);
+    if (message.shouldFlash === true) {
+      obj.shouldFlash = message.shouldFlash;
+    }
+    if (message.flashColor !== undefined) {
+      obj.flashColor = Color.toJSON(message.flashColor);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_StageMessage>, I>>(
     base?: I,
   ): Slide_Element_DataLink_StageMessage {
-    return Slide_Element_DataLink_StageMessage.fromPartial(base ?? {});
+    return Slide_Element_DataLink_StageMessage.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_StageMessage>, I>,
   >(object: I): Slide_Element_DataLink_StageMessage {
@@ -6213,21 +6254,21 @@ export const Slide_Element_DataLink_VideoCountdown = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.timerFormat = Timer_Format.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.timerFormatString = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -6236,21 +6277,21 @@ export const Slide_Element_DataLink_VideoCountdown = {
           );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.ignoreLoopingVideos = reader.bool();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.videoCountdownSource = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6264,15 +6305,15 @@ export const Slide_Element_DataLink_VideoCountdown = {
         ? Timer_Format.fromJSON(object.timerFormat)
         : undefined,
       timerFormatString: isSet(object.timerFormatString)
-        ? String(object.timerFormatString)
+        ? globalThis.String(object.timerFormatString)
         : '',
-      colorTriggers: Array.isArray(object?.colorTriggers)
+      colorTriggers: globalThis.Array.isArray(object?.colorTriggers)
         ? object.colorTriggers.map((e: any) =>
             Slide_Element_DataLink_ColorTrigger.fromJSON(e),
           )
         : [],
       ignoreLoopingVideos: isSet(object.ignoreLoopingVideos)
-        ? Boolean(object.ignoreLoopingVideos)
+        ? globalThis.Boolean(object.ignoreLoopingVideos)
         : false,
       videoCountdownSource: isSet(object.videoCountdownSource)
         ? slide_Element_DataLink_VideoCountdown_VideoCountdownSourceFromJSON(
@@ -6284,35 +6325,36 @@ export const Slide_Element_DataLink_VideoCountdown = {
 
   toJSON(message: Slide_Element_DataLink_VideoCountdown): unknown {
     const obj: any = {};
-    message.timerFormat !== undefined &&
-      (obj.timerFormat = message.timerFormat
-        ? Timer_Format.toJSON(message.timerFormat)
-        : undefined);
-    message.timerFormatString !== undefined &&
-      (obj.timerFormatString = message.timerFormatString);
-    if (message.colorTriggers) {
-      obj.colorTriggers = message.colorTriggers.map((e) =>
-        e ? Slide_Element_DataLink_ColorTrigger.toJSON(e) : undefined,
-      );
-    } else {
-      obj.colorTriggers = [];
+    if (message.timerFormat !== undefined) {
+      obj.timerFormat = Timer_Format.toJSON(message.timerFormat);
     }
-    message.ignoreLoopingVideos !== undefined &&
-      (obj.ignoreLoopingVideos = message.ignoreLoopingVideos);
-    message.videoCountdownSource !== undefined &&
-      (obj.videoCountdownSource =
+    if (message.timerFormatString !== '') {
+      obj.timerFormatString = message.timerFormatString;
+    }
+    if (message.colorTriggers?.length) {
+      obj.colorTriggers = message.colorTriggers.map((e) =>
+        Slide_Element_DataLink_ColorTrigger.toJSON(e),
+      );
+    }
+    if (message.ignoreLoopingVideos === true) {
+      obj.ignoreLoopingVideos = message.ignoreLoopingVideos;
+    }
+    if (message.videoCountdownSource !== 0) {
+      obj.videoCountdownSource =
         slide_Element_DataLink_VideoCountdown_VideoCountdownSourceToJSON(
           message.videoCountdownSource,
-        ));
+        );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_VideoCountdown>, I>,
   >(base?: I): Slide_Element_DataLink_VideoCountdown {
-    return Slide_Element_DataLink_VideoCountdown.fromPartial(base ?? {});
+    return Slide_Element_DataLink_VideoCountdown.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_VideoCountdown>, I>,
   >(object: I): Slide_Element_DataLink_VideoCountdown {
@@ -6379,21 +6421,21 @@ export const Slide_Element_DataLink_AudioCountdown = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.timerFormat = Timer_Format.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.timerFormatString = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -6402,14 +6444,14 @@ export const Slide_Element_DataLink_AudioCountdown = {
           );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.ignoreLoopingAudio = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6423,45 +6465,45 @@ export const Slide_Element_DataLink_AudioCountdown = {
         ? Timer_Format.fromJSON(object.timerFormat)
         : undefined,
       timerFormatString: isSet(object.timerFormatString)
-        ? String(object.timerFormatString)
+        ? globalThis.String(object.timerFormatString)
         : '',
-      colorTriggers: Array.isArray(object?.colorTriggers)
+      colorTriggers: globalThis.Array.isArray(object?.colorTriggers)
         ? object.colorTriggers.map((e: any) =>
             Slide_Element_DataLink_ColorTrigger.fromJSON(e),
           )
         : [],
       ignoreLoopingAudio: isSet(object.ignoreLoopingAudio)
-        ? Boolean(object.ignoreLoopingAudio)
+        ? globalThis.Boolean(object.ignoreLoopingAudio)
         : false,
     };
   },
 
   toJSON(message: Slide_Element_DataLink_AudioCountdown): unknown {
     const obj: any = {};
-    message.timerFormat !== undefined &&
-      (obj.timerFormat = message.timerFormat
-        ? Timer_Format.toJSON(message.timerFormat)
-        : undefined);
-    message.timerFormatString !== undefined &&
-      (obj.timerFormatString = message.timerFormatString);
-    if (message.colorTriggers) {
-      obj.colorTriggers = message.colorTriggers.map((e) =>
-        e ? Slide_Element_DataLink_ColorTrigger.toJSON(e) : undefined,
-      );
-    } else {
-      obj.colorTriggers = [];
+    if (message.timerFormat !== undefined) {
+      obj.timerFormat = Timer_Format.toJSON(message.timerFormat);
     }
-    message.ignoreLoopingAudio !== undefined &&
-      (obj.ignoreLoopingAudio = message.ignoreLoopingAudio);
+    if (message.timerFormatString !== '') {
+      obj.timerFormatString = message.timerFormatString;
+    }
+    if (message.colorTriggers?.length) {
+      obj.colorTriggers = message.colorTriggers.map((e) =>
+        Slide_Element_DataLink_ColorTrigger.toJSON(e),
+      );
+    }
+    if (message.ignoreLoopingAudio === true) {
+      obj.ignoreLoopingAudio = message.ignoreLoopingAudio;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_AudioCountdown>, I>,
   >(base?: I): Slide_Element_DataLink_AudioCountdown {
-    return Slide_Element_DataLink_AudioCountdown.fromPartial(base ?? {});
+    return Slide_Element_DataLink_AudioCountdown.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_AudioCountdown>, I>,
   >(object: I): Slide_Element_DataLink_AudioCountdown {
@@ -6507,14 +6549,14 @@ export const Slide_Element_DataLink_GroupName = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.groupSource = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6532,19 +6574,19 @@ export const Slide_Element_DataLink_GroupName = {
 
   toJSON(message: Slide_Element_DataLink_GroupName): unknown {
     const obj: any = {};
-    message.groupSource !== undefined &&
-      (obj.groupSource = slide_Element_DataLink_GroupSourceTypeToJSON(
+    if (message.groupSource !== 0) {
+      obj.groupSource = slide_Element_DataLink_GroupSourceTypeToJSON(
         message.groupSource,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_GroupName>, I>>(
     base?: I,
   ): Slide_Element_DataLink_GroupName {
-    return Slide_Element_DataLink_GroupName.fromPartial(base ?? {});
+    return Slide_Element_DataLink_GroupName.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_GroupName>, I>,
   >(object: I): Slide_Element_DataLink_GroupName {
@@ -6581,14 +6623,14 @@ export const Slide_Element_DataLink_GroupColor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.groupSource = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6606,19 +6648,19 @@ export const Slide_Element_DataLink_GroupColor = {
 
   toJSON(message: Slide_Element_DataLink_GroupColor): unknown {
     const obj: any = {};
-    message.groupSource !== undefined &&
-      (obj.groupSource = slide_Element_DataLink_GroupSourceTypeToJSON(
+    if (message.groupSource !== 0) {
+      obj.groupSource = slide_Element_DataLink_GroupSourceTypeToJSON(
         message.groupSource,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_GroupColor>, I>>(
     base?: I,
   ): Slide_Element_DataLink_GroupColor {
-    return Slide_Element_DataLink_GroupColor.fromPartial(base ?? {});
+    return Slide_Element_DataLink_GroupColor.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_GroupColor>, I>,
   >(object: I): Slide_Element_DataLink_GroupColor {
@@ -6655,14 +6697,14 @@ export const Slide_Element_DataLink_SlideLabelText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.slideLabelSource = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6682,19 +6724,21 @@ export const Slide_Element_DataLink_SlideLabelText = {
 
   toJSON(message: Slide_Element_DataLink_SlideLabelText): unknown {
     const obj: any = {};
-    message.slideLabelSource !== undefined &&
-      (obj.slideLabelSource = slide_Element_DataLink_SlideLabelSourceToJSON(
+    if (message.slideLabelSource !== 0) {
+      obj.slideLabelSource = slide_Element_DataLink_SlideLabelSourceToJSON(
         message.slideLabelSource,
-      ));
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideLabelText>, I>,
   >(base?: I): Slide_Element_DataLink_SlideLabelText {
-    return Slide_Element_DataLink_SlideLabelText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_SlideLabelText.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideLabelText>, I>,
   >(object: I): Slide_Element_DataLink_SlideLabelText {
@@ -6731,14 +6775,14 @@ export const Slide_Element_DataLink_SlideLabelColor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.slideLabelSource = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6758,19 +6802,21 @@ export const Slide_Element_DataLink_SlideLabelColor = {
 
   toJSON(message: Slide_Element_DataLink_SlideLabelColor): unknown {
     const obj: any = {};
-    message.slideLabelSource !== undefined &&
-      (obj.slideLabelSource = slide_Element_DataLink_SlideLabelSourceToJSON(
+    if (message.slideLabelSource !== 0) {
+      obj.slideLabelSource = slide_Element_DataLink_SlideLabelSourceToJSON(
         message.slideLabelSource,
-      ));
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideLabelColor>, I>,
   >(base?: I): Slide_Element_DataLink_SlideLabelColor {
-    return Slide_Element_DataLink_SlideLabelColor.fromPartial(base ?? {});
+    return Slide_Element_DataLink_SlideLabelColor.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideLabelColor>, I>,
   >(object: I): Slide_Element_DataLink_SlideLabelColor {
@@ -6804,7 +6850,7 @@ export const Slide_Element_DataLink_PresentationNotes = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6824,9 +6870,10 @@ export const Slide_Element_DataLink_PresentationNotes = {
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_PresentationNotes>, I>,
   >(base?: I): Slide_Element_DataLink_PresentationNotes {
-    return Slide_Element_DataLink_PresentationNotes.fromPartial(base ?? {});
+    return Slide_Element_DataLink_PresentationNotes.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_PresentationNotes>, I>,
   >(_: I): Slide_Element_DataLink_PresentationNotes {
@@ -6862,14 +6909,14 @@ export const Slide_Element_DataLink_Presentation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.presentationSource = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6889,20 +6936,20 @@ export const Slide_Element_DataLink_Presentation = {
 
   toJSON(message: Slide_Element_DataLink_Presentation): unknown {
     const obj: any = {};
-    message.presentationSource !== undefined &&
-      (obj.presentationSource =
+    if (message.presentationSource !== 0) {
+      obj.presentationSource =
         slide_Element_DataLink_Presentation_PresentationSourceToJSON(
           message.presentationSource,
-        ));
+        );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_Presentation>, I>>(
     base?: I,
   ): Slide_Element_DataLink_Presentation {
-    return Slide_Element_DataLink_Presentation.fromPartial(base ?? {});
+    return Slide_Element_DataLink_Presentation.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_Presentation>, I>,
   >(object: I): Slide_Element_DataLink_Presentation {
@@ -6942,21 +6989,21 @@ export const Slide_Element_DataLink_PlaylistItem = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.playlistItemSource = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.showArrangement = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6972,29 +7019,30 @@ export const Slide_Element_DataLink_PlaylistItem = {
           )
         : 0,
       showArrangement: isSet(object.showArrangement)
-        ? Boolean(object.showArrangement)
+        ? globalThis.Boolean(object.showArrangement)
         : false,
     };
   },
 
   toJSON(message: Slide_Element_DataLink_PlaylistItem): unknown {
     const obj: any = {};
-    message.playlistItemSource !== undefined &&
-      (obj.playlistItemSource =
+    if (message.playlistItemSource !== 0) {
+      obj.playlistItemSource =
         slide_Element_DataLink_PlaylistItem_PlaylistItemSourceTypeToJSON(
           message.playlistItemSource,
-        ));
-    message.showArrangement !== undefined &&
-      (obj.showArrangement = message.showArrangement);
+        );
+    }
+    if (message.showArrangement === true) {
+      obj.showArrangement = message.showArrangement;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_PlaylistItem>, I>>(
     base?: I,
   ): Slide_Element_DataLink_PlaylistItem {
-    return Slide_Element_DataLink_PlaylistItem.fromPartial(base ?? {});
+    return Slide_Element_DataLink_PlaylistItem.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_PlaylistItem>, I>,
   >(object: I): Slide_Element_DataLink_PlaylistItem {
@@ -7038,21 +7086,21 @@ export const Slide_Element_DataLink_AutoAdvanceTimeRemaining = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.autoAdvanceSource = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.timerFormat = Timer_Format.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7075,15 +7123,15 @@ export const Slide_Element_DataLink_AutoAdvanceTimeRemaining = {
 
   toJSON(message: Slide_Element_DataLink_AutoAdvanceTimeRemaining): unknown {
     const obj: any = {};
-    message.autoAdvanceSource !== undefined &&
-      (obj.autoAdvanceSource =
+    if (message.autoAdvanceSource !== 0) {
+      obj.autoAdvanceSource =
         slide_Element_DataLink_AutoAdvanceTimeRemaining_AutoAdvanceSourceToJSON(
           message.autoAdvanceSource,
-        ));
-    message.timerFormat !== undefined &&
-      (obj.timerFormat = message.timerFormat
-        ? Timer_Format.toJSON(message.timerFormat)
-        : undefined);
+        );
+    }
+    if (message.timerFormat !== undefined) {
+      obj.timerFormat = Timer_Format.toJSON(message.timerFormat);
+    }
     return obj;
   },
 
@@ -7094,10 +7142,9 @@ export const Slide_Element_DataLink_AutoAdvanceTimeRemaining = {
     >,
   >(base?: I): Slide_Element_DataLink_AutoAdvanceTimeRemaining {
     return Slide_Element_DataLink_AutoAdvanceTimeRemaining.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_AutoAdvanceTimeRemaining>,
@@ -7150,7 +7197,7 @@ export const Slide_Element_DataLink_CaptureStatusText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -7161,7 +7208,7 @@ export const Slide_Element_DataLink_CaptureStatusText = {
             );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -7172,7 +7219,7 @@ export const Slide_Element_DataLink_CaptureStatusText = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7197,27 +7244,28 @@ export const Slide_Element_DataLink_CaptureStatusText = {
 
   toJSON(message: Slide_Element_DataLink_CaptureStatusText): unknown {
     const obj: any = {};
-    message.statusText !== undefined &&
-      (obj.statusText = message.statusText
-        ? Slide_Element_DataLink_CaptureStatusText_StatusText.toJSON(
-            message.statusText,
-          )
-        : undefined);
-    message.elapsedTime !== undefined &&
-      (obj.elapsedTime = message.elapsedTime
-        ? Slide_Element_DataLink_CaptureStatusText_ElapsedTime.toJSON(
-            message.elapsedTime,
-          )
-        : undefined);
+    if (message.statusText !== undefined) {
+      obj.statusText =
+        Slide_Element_DataLink_CaptureStatusText_StatusText.toJSON(
+          message.statusText,
+        );
+    }
+    if (message.elapsedTime !== undefined) {
+      obj.elapsedTime =
+        Slide_Element_DataLink_CaptureStatusText_ElapsedTime.toJSON(
+          message.elapsedTime,
+        );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_CaptureStatusText>, I>,
   >(base?: I): Slide_Element_DataLink_CaptureStatusText {
-    return Slide_Element_DataLink_CaptureStatusText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_CaptureStatusText.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_CaptureStatusText>, I>,
   >(object: I): Slide_Element_DataLink_CaptureStatusText {
@@ -7263,7 +7311,7 @@ export const Slide_Element_DataLink_CaptureStatusText_StatusText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7287,10 +7335,9 @@ export const Slide_Element_DataLink_CaptureStatusText_StatusText = {
     >,
   >(base?: I): Slide_Element_DataLink_CaptureStatusText_StatusText {
     return Slide_Element_DataLink_CaptureStatusText_StatusText.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_CaptureStatusText_StatusText>,
@@ -7334,14 +7381,14 @@ export const Slide_Element_DataLink_CaptureStatusText_ElapsedTime = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.timerFormat = Timer_Format.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7361,10 +7408,9 @@ export const Slide_Element_DataLink_CaptureStatusText_ElapsedTime = {
     message: Slide_Element_DataLink_CaptureStatusText_ElapsedTime,
   ): unknown {
     const obj: any = {};
-    message.timerFormat !== undefined &&
-      (obj.timerFormat = message.timerFormat
-        ? Timer_Format.toJSON(message.timerFormat)
-        : undefined);
+    if (message.timerFormat !== undefined) {
+      obj.timerFormat = Timer_Format.toJSON(message.timerFormat);
+    }
     return obj;
   },
 
@@ -7375,10 +7421,9 @@ export const Slide_Element_DataLink_CaptureStatusText_ElapsedTime = {
     >,
   >(base?: I): Slide_Element_DataLink_CaptureStatusText_ElapsedTime {
     return Slide_Element_DataLink_CaptureStatusText_ElapsedTime.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_CaptureStatusText_ElapsedTime>,
@@ -7419,7 +7464,7 @@ export const Slide_Element_DataLink_CaptureStatusColor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7439,9 +7484,10 @@ export const Slide_Element_DataLink_CaptureStatusColor = {
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_CaptureStatusColor>, I>,
   >(base?: I): Slide_Element_DataLink_CaptureStatusColor {
-    return Slide_Element_DataLink_CaptureStatusColor.fromPartial(base ?? {});
+    return Slide_Element_DataLink_CaptureStatusColor.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_CaptureStatusColor>, I>,
   >(_: I): Slide_Element_DataLink_CaptureStatusColor {
@@ -7477,14 +7523,14 @@ export const Slide_Element_DataLink_SlideCount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.slideCountSourceType = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7504,20 +7550,20 @@ export const Slide_Element_DataLink_SlideCount = {
 
   toJSON(message: Slide_Element_DataLink_SlideCount): unknown {
     const obj: any = {};
-    message.slideCountSourceType !== undefined &&
-      (obj.slideCountSourceType =
+    if (message.slideCountSourceType !== 0) {
+      obj.slideCountSourceType =
         slide_Element_DataLink_SlideCount_SlideCountSourceTypeToJSON(
           message.slideCountSourceType,
-        ));
+        );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_SlideCount>, I>>(
     base?: I,
   ): Slide_Element_DataLink_SlideCount {
-    return Slide_Element_DataLink_SlideCount.fromPartial(base ?? {});
+    return Slide_Element_DataLink_SlideCount.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_SlideCount>, I>,
   >(object: I): Slide_Element_DataLink_SlideCount {
@@ -7560,28 +7606,28 @@ export const Slide_Element_DataLink_PlaybackMarkerIdentifier = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.destination = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7601,22 +7647,26 @@ export const Slide_Element_DataLink_PlaybackMarkerIdentifier = {
             object.type,
           )
         : 0,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
     };
   },
 
   toJSON(message: Slide_Element_DataLink_PlaybackMarkerIdentifier): unknown {
     const obj: any = {};
-    message.destination !== undefined &&
-      (obj.destination =
+    if (message.destination !== 0) {
+      obj.destination =
         slide_Element_DataLink_PlaybackMarkerIdentifier_DestinationToJSON(
           message.destination,
-        ));
-    message.type !== undefined &&
-      (obj.type = slide_Element_DataLink_PlaybackMarkerIdentifier_TypeToJSON(
+        );
+    }
+    if (message.type !== 0) {
+      obj.type = slide_Element_DataLink_PlaybackMarkerIdentifier_TypeToJSON(
         message.type,
-      ));
-    message.name !== undefined && (obj.name = message.name);
+      );
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
     return obj;
   },
 
@@ -7627,10 +7677,9 @@ export const Slide_Element_DataLink_PlaybackMarkerIdentifier = {
     >,
   >(base?: I): Slide_Element_DataLink_PlaybackMarkerIdentifier {
     return Slide_Element_DataLink_PlaybackMarkerIdentifier.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_PlaybackMarkerIdentifier>,
@@ -7695,7 +7744,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -7706,14 +7755,14 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
             );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.shouldUseMarkerColor = reader.bool();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -7723,7 +7772,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -7733,7 +7782,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7749,7 +7798,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
           )
         : undefined,
       shouldUseMarkerColor: isSet(object.shouldUseMarkerColor)
-        ? Boolean(object.shouldUseMarkerColor)
+        ? globalThis.Boolean(object.shouldUseMarkerColor)
         : false,
       name: isSet(object.name)
         ? Slide_Element_DataLink_PlaybackMarkerText_Name.fromJSON(object.name)
@@ -7762,31 +7811,34 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
 
   toJSON(message: Slide_Element_DataLink_PlaybackMarkerText): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? Slide_Element_DataLink_PlaybackMarkerIdentifier.toJSON(
-            message.identifier,
-          )
-        : undefined);
-    message.shouldUseMarkerColor !== undefined &&
-      (obj.shouldUseMarkerColor = message.shouldUseMarkerColor);
-    message.name !== undefined &&
-      (obj.name = message.name
-        ? Slide_Element_DataLink_PlaybackMarkerText_Name.toJSON(message.name)
-        : undefined);
-    message.time !== undefined &&
-      (obj.time = message.time
-        ? Slide_Element_DataLink_PlaybackMarkerText_Time.toJSON(message.time)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = Slide_Element_DataLink_PlaybackMarkerIdentifier.toJSON(
+        message.identifier,
+      );
+    }
+    if (message.shouldUseMarkerColor === true) {
+      obj.shouldUseMarkerColor = message.shouldUseMarkerColor;
+    }
+    if (message.name !== undefined) {
+      obj.name = Slide_Element_DataLink_PlaybackMarkerText_Name.toJSON(
+        message.name,
+      );
+    }
+    if (message.time !== undefined) {
+      obj.time = Slide_Element_DataLink_PlaybackMarkerText_Time.toJSON(
+        message.time,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_PlaybackMarkerText>, I>,
   >(base?: I): Slide_Element_DataLink_PlaybackMarkerText {
-    return Slide_Element_DataLink_PlaybackMarkerText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_PlaybackMarkerText.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_PlaybackMarkerText>, I>,
   >(object: I): Slide_Element_DataLink_PlaybackMarkerText {
@@ -7838,7 +7890,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText_Name = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7862,10 +7914,9 @@ export const Slide_Element_DataLink_PlaybackMarkerText_Name = {
     >,
   >(base?: I): Slide_Element_DataLink_PlaybackMarkerText_Name {
     return Slide_Element_DataLink_PlaybackMarkerText_Name.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_PlaybackMarkerText_Name>,
@@ -7904,14 +7955,14 @@ export const Slide_Element_DataLink_PlaybackMarkerText_Time = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.format = Timer_Format.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7929,10 +7980,9 @@ export const Slide_Element_DataLink_PlaybackMarkerText_Time = {
 
   toJSON(message: Slide_Element_DataLink_PlaybackMarkerText_Time): unknown {
     const obj: any = {};
-    message.format !== undefined &&
-      (obj.format = message.format
-        ? Timer_Format.toJSON(message.format)
-        : undefined);
+    if (message.format !== undefined) {
+      obj.format = Timer_Format.toJSON(message.format);
+    }
     return obj;
   },
 
@@ -7943,10 +7993,9 @@ export const Slide_Element_DataLink_PlaybackMarkerText_Time = {
     >,
   >(base?: I): Slide_Element_DataLink_PlaybackMarkerText_Time {
     return Slide_Element_DataLink_PlaybackMarkerText_Time.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Slide_Element_DataLink_PlaybackMarkerText_Time>,
@@ -7986,7 +8035,7 @@ export const Slide_Element_DataLink_ChordProChart = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8006,9 +8055,10 @@ export const Slide_Element_DataLink_ChordProChart = {
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_ChordProChart>, I>>(
     base?: I,
   ): Slide_Element_DataLink_ChordProChart {
-    return Slide_Element_DataLink_ChordProChart.fromPartial(base ?? {});
+    return Slide_Element_DataLink_ChordProChart.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_ChordProChart>, I>,
   >(_: I): Slide_Element_DataLink_ChordProChart {
@@ -8041,7 +8091,7 @@ export const Slide_Element_DataLink_TimecodeText = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8061,9 +8111,8 @@ export const Slide_Element_DataLink_TimecodeText = {
   create<I extends Exact<DeepPartial<Slide_Element_DataLink_TimecodeText>, I>>(
     base?: I,
   ): Slide_Element_DataLink_TimecodeText {
-    return Slide_Element_DataLink_TimecodeText.fromPartial(base ?? {});
+    return Slide_Element_DataLink_TimecodeText.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_TimecodeText>, I>,
   >(_: I): Slide_Element_DataLink_TimecodeText {
@@ -8096,7 +8145,7 @@ export const Slide_Element_DataLink_TimecodeStatus = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8116,9 +8165,10 @@ export const Slide_Element_DataLink_TimecodeStatus = {
   create<
     I extends Exact<DeepPartial<Slide_Element_DataLink_TimecodeStatus>, I>,
   >(base?: I): Slide_Element_DataLink_TimecodeStatus {
-    return Slide_Element_DataLink_TimecodeStatus.fromPartial(base ?? {});
+    return Slide_Element_DataLink_TimecodeStatus.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Slide_Element_DataLink_TimecodeStatus>, I>,
   >(_: I): Slide_Element_DataLink_TimecodeStatus {
@@ -8184,63 +8234,63 @@ export const Slide_Element_TextScroller = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.shouldScroll = reader.bool();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.scrollRate = reader.double();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.shouldRepeat = reader.bool();
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.repeatDistance = reader.double();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.scrollingDirection = reader.int32() as any;
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.startsOffScreen = reader.bool();
           continue;
         case 7:
-          if (tag != 57) {
+          if (tag !== 57) {
             break;
           }
 
           message.fadeLeft = reader.double();
           continue;
         case 8:
-          if (tag != 65) {
+          if (tag !== 65) {
             break;
           }
 
           message.fadeRight = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8251,14 +8301,16 @@ export const Slide_Element_TextScroller = {
   fromJSON(object: any): Slide_Element_TextScroller {
     return {
       shouldScroll: isSet(object.shouldScroll)
-        ? Boolean(object.shouldScroll)
+        ? globalThis.Boolean(object.shouldScroll)
         : false,
-      scrollRate: isSet(object.scrollRate) ? Number(object.scrollRate) : 0,
+      scrollRate: isSet(object.scrollRate)
+        ? globalThis.Number(object.scrollRate)
+        : 0,
       shouldRepeat: isSet(object.shouldRepeat)
-        ? Boolean(object.shouldRepeat)
+        ? globalThis.Boolean(object.shouldRepeat)
         : false,
       repeatDistance: isSet(object.repeatDistance)
-        ? Number(object.repeatDistance)
+        ? globalThis.Number(object.repeatDistance)
         : 0,
       scrollingDirection: isSet(object.scrollingDirection)
         ? slide_Element_TextScroller_DirectionFromJSON(
@@ -8266,39 +8318,51 @@ export const Slide_Element_TextScroller = {
           )
         : 0,
       startsOffScreen: isSet(object.startsOffScreen)
-        ? Boolean(object.startsOffScreen)
+        ? globalThis.Boolean(object.startsOffScreen)
         : false,
-      fadeLeft: isSet(object.fadeLeft) ? Number(object.fadeLeft) : 0,
-      fadeRight: isSet(object.fadeRight) ? Number(object.fadeRight) : 0,
+      fadeLeft: isSet(object.fadeLeft) ? globalThis.Number(object.fadeLeft) : 0,
+      fadeRight: isSet(object.fadeRight)
+        ? globalThis.Number(object.fadeRight)
+        : 0,
     };
   },
 
   toJSON(message: Slide_Element_TextScroller): unknown {
     const obj: any = {};
-    message.shouldScroll !== undefined &&
-      (obj.shouldScroll = message.shouldScroll);
-    message.scrollRate !== undefined && (obj.scrollRate = message.scrollRate);
-    message.shouldRepeat !== undefined &&
-      (obj.shouldRepeat = message.shouldRepeat);
-    message.repeatDistance !== undefined &&
-      (obj.repeatDistance = message.repeatDistance);
-    message.scrollingDirection !== undefined &&
-      (obj.scrollingDirection = slide_Element_TextScroller_DirectionToJSON(
+    if (message.shouldScroll === true) {
+      obj.shouldScroll = message.shouldScroll;
+    }
+    if (message.scrollRate !== 0) {
+      obj.scrollRate = message.scrollRate;
+    }
+    if (message.shouldRepeat === true) {
+      obj.shouldRepeat = message.shouldRepeat;
+    }
+    if (message.repeatDistance !== 0) {
+      obj.repeatDistance = message.repeatDistance;
+    }
+    if (message.scrollingDirection !== 0) {
+      obj.scrollingDirection = slide_Element_TextScroller_DirectionToJSON(
         message.scrollingDirection,
-      ));
-    message.startsOffScreen !== undefined &&
-      (obj.startsOffScreen = message.startsOffScreen);
-    message.fadeLeft !== undefined && (obj.fadeLeft = message.fadeLeft);
-    message.fadeRight !== undefined && (obj.fadeRight = message.fadeRight);
+      );
+    }
+    if (message.startsOffScreen === true) {
+      obj.startsOffScreen = message.startsOffScreen;
+    }
+    if (message.fadeLeft !== 0) {
+      obj.fadeLeft = message.fadeLeft;
+    }
+    if (message.fadeRight !== 0) {
+      obj.fadeRight = message.fadeRight;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Slide_Element_TextScroller>, I>>(
     base?: I,
   ): Slide_Element_TextScroller {
-    return Slide_Element_TextScroller.fromPartial(base ?? {});
+    return Slide_Element_TextScroller.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Slide_Element_TextScroller>, I>>(
     object: I,
   ): Slide_Element_TextScroller {
@@ -8326,8 +8390,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

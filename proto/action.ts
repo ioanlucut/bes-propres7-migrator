@@ -1,16 +1,12 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { Background } from './background';
-import {
-  CollectionElementType,
-  Color,
-  IntRange,
-  URL,
-  UUID,
-} from './basicTypes';
+import { CollectionElementType } from './collectionElementType';
+import { Color } from './color';
 import { Effect, Transition } from './effects';
 import { Media } from './graphicsData';
 import { AudioInput_BehaviorMode } from './input';
+import { IntRange } from './intRange';
 import {
   Layer_Blending,
   Layer_BlendMode,
@@ -22,6 +18,8 @@ import { PresentationSlide } from './presentationSlide';
 import { PropSlide } from './propSlide';
 import { Stage_ScreenAssignment } from './stage';
 import { Timer_Configuration } from './timers';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -60,6 +58,7 @@ export interface Action {
   macro?: Action_MacroType | undefined;
   clearGroup?: Action_ClearGroupType | undefined;
   transportControl?: Action_TransportControlType | undefined;
+  capture?: Action_CaptureType | undefined;
 }
 
 export enum Action_ContentDestination {
@@ -169,6 +168,8 @@ export enum Action_ActionType {
   ACTION_TYPE_SLIDE_DESTINATION = 22,
   ACTION_TYPE_MACRO = 23,
   ACTION_TYPE_CLEAR_GROUP = 24,
+  ACTION_TYPE_CAPTURE = 25,
+  ACTION_TYPE_LIBRARY_PLAYLIST = 26,
   UNRECOGNIZED = -1,
 }
 
@@ -246,6 +247,12 @@ export function action_ActionTypeFromJSON(object: any): Action_ActionType {
     case 24:
     case 'ACTION_TYPE_CLEAR_GROUP':
       return Action_ActionType.ACTION_TYPE_CLEAR_GROUP;
+    case 25:
+    case 'ACTION_TYPE_CAPTURE':
+      return Action_ActionType.ACTION_TYPE_CAPTURE;
+    case 26:
+    case 'ACTION_TYPE_LIBRARY_PLAYLIST':
+      return Action_ActionType.ACTION_TYPE_LIBRARY_PLAYLIST;
     case -1:
     case 'UNRECOGNIZED':
     default:
@@ -303,6 +310,10 @@ export function action_ActionTypeToJSON(object: Action_ActionType): string {
       return 'ACTION_TYPE_MACRO';
     case Action_ActionType.ACTION_TYPE_CLEAR_GROUP:
       return 'ACTION_TYPE_CLEAR_GROUP';
+    case Action_ActionType.ACTION_TYPE_CAPTURE:
+      return 'ACTION_TYPE_CAPTURE';
+    case Action_ActionType.ACTION_TYPE_LIBRARY_PLAYLIST:
+      return 'ACTION_TYPE_LIBRARY_PLAYLIST';
     case Action_ActionType.UNRECOGNIZED:
     default:
       return 'UNRECOGNIZED';
@@ -1069,6 +1080,19 @@ export interface Action_MacroType {
   identification: CollectionElementType | undefined;
 }
 
+export interface Action_CaptureType {
+  start?: Action_CaptureType_CaptureStart | undefined;
+  stop?: Action_CaptureType_CaptureStop | undefined;
+}
+
+export interface Action_CaptureType_CaptureStart {
+  presetIdentification: CollectionElementType | undefined;
+}
+
+export interface Action_CaptureType_CaptureStop {
+  showsAlertBeforeStopping: boolean;
+}
+
 function createBaseAction(): Action {
   return {
     uuid: undefined,
@@ -1105,6 +1129,7 @@ function createBaseAction(): Action {
     macro: undefined,
     clearGroup: undefined,
     transportControl: undefined,
+    capture: undefined,
   };
 }
 
@@ -1287,6 +1312,12 @@ export const Action = {
         writer.uint32(338).fork(),
       ).ldelim();
     }
+    if (message.capture !== undefined) {
+      Action_CaptureType.encode(
+        message.capture,
+        writer.uint32(346).fork(),
+      ).ldelim();
+    }
     return writer;
   },
 
@@ -1299,49 +1330,49 @@ export const Action = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.label = Action_Label.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.delayTime = reader.double();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.oldType = Action_OldType.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.isEnabled = reader.bool();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -1351,21 +1382,21 @@ export const Action = {
           );
           continue;
         case 8:
-          if (tag != 65) {
+          if (tag !== 65) {
             break;
           }
 
           message.duration = reader.double();
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 16:
-          if (tag != 130) {
+          if (tag !== 130) {
             break;
           }
 
@@ -1375,7 +1406,7 @@ export const Action = {
           );
           continue;
         case 17:
-          if (tag != 138) {
+          if (tag !== 138) {
             break;
           }
 
@@ -1385,7 +1416,7 @@ export const Action = {
           );
           continue;
         case 18:
-          if (tag != 146) {
+          if (tag !== 146) {
             break;
           }
 
@@ -1395,7 +1426,7 @@ export const Action = {
           );
           continue;
         case 19:
-          if (tag != 154) {
+          if (tag !== 154) {
             break;
           }
 
@@ -1405,14 +1436,14 @@ export const Action = {
           );
           continue;
         case 20:
-          if (tag != 162) {
+          if (tag !== 162) {
             break;
           }
 
           message.media = Action_MediaType.decode(reader, reader.uint32());
           continue;
         case 21:
-          if (tag != 170) {
+          if (tag !== 170) {
             break;
           }
 
@@ -1422,21 +1453,21 @@ export const Action = {
           );
           continue;
         case 22:
-          if (tag != 178) {
+          if (tag !== 178) {
             break;
           }
 
           message.effects = Action_EffectsType.decode(reader, reader.uint32());
           continue;
         case 23:
-          if (tag != 186) {
+          if (tag !== 186) {
             break;
           }
 
           message.slide = Action_SlideType.decode(reader, reader.uint32());
           continue;
         case 24:
-          if (tag != 194) {
+          if (tag !== 194) {
             break;
           }
 
@@ -1446,21 +1477,21 @@ export const Action = {
           );
           continue;
         case 25:
-          if (tag != 202) {
+          if (tag !== 202) {
             break;
           }
 
           message.timer = Action_TimerType.decode(reader, reader.uint32());
           continue;
         case 26:
-          if (tag != 210) {
+          if (tag !== 210) {
             break;
           }
 
           message.clear = Action_ClearType.decode(reader, reader.uint32());
           continue;
         case 27:
-          if (tag != 218) {
+          if (tag !== 218) {
             break;
           }
 
@@ -1470,28 +1501,28 @@ export const Action = {
           );
           continue;
         case 28:
-          if (tag != 226) {
+          if (tag !== 226) {
             break;
           }
 
           message.prop = Action_PropType.decode(reader, reader.uint32());
           continue;
         case 29:
-          if (tag != 234) {
+          if (tag !== 234) {
             break;
           }
 
           message.mask = Action_MaskType.decode(reader, reader.uint32());
           continue;
         case 30:
-          if (tag != 242) {
+          if (tag !== 242) {
             break;
           }
 
           message.message = Action_MessageType.decode(reader, reader.uint32());
           continue;
         case 32:
-          if (tag != 258) {
+          if (tag !== 258) {
             break;
           }
 
@@ -1501,7 +1532,7 @@ export const Action = {
           );
           continue;
         case 33:
-          if (tag != 266) {
+          if (tag !== 266) {
             break;
           }
 
@@ -1511,7 +1542,7 @@ export const Action = {
           );
           continue;
         case 34:
-          if (tag != 274) {
+          if (tag !== 274) {
             break;
           }
 
@@ -1521,7 +1552,7 @@ export const Action = {
           );
           continue;
         case 36:
-          if (tag != 290) {
+          if (tag !== 290) {
             break;
           }
 
@@ -1531,7 +1562,7 @@ export const Action = {
           );
           continue;
         case 37:
-          if (tag != 298) {
+          if (tag !== 298) {
             break;
           }
 
@@ -1541,7 +1572,7 @@ export const Action = {
           );
           continue;
         case 38:
-          if (tag != 306) {
+          if (tag !== 306) {
             break;
           }
 
@@ -1551,7 +1582,7 @@ export const Action = {
           );
           continue;
         case 39:
-          if (tag != 314) {
+          if (tag !== 314) {
             break;
           }
 
@@ -1561,14 +1592,14 @@ export const Action = {
           );
           continue;
         case 40:
-          if (tag != 322) {
+          if (tag !== 322) {
             break;
           }
 
           message.macro = Action_MacroType.decode(reader, reader.uint32());
           continue;
         case 41:
-          if (tag != 330) {
+          if (tag !== 330) {
             break;
           }
 
@@ -1578,7 +1609,7 @@ export const Action = {
           );
           continue;
         case 42:
-          if (tag != 338) {
+          if (tag !== 338) {
             break;
           }
 
@@ -1587,8 +1618,15 @@ export const Action = {
             reader.uint32(),
           );
           continue;
+        case 43:
+          if (tag !== 346) {
+            break;
+          }
+
+          message.capture = Action_CaptureType.decode(reader, reader.uint32());
+          continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1599,19 +1637,23 @@ export const Action = {
   fromJSON(object: any): Action {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       label: isSet(object.label)
         ? Action_Label.fromJSON(object.label)
         : undefined,
-      delayTime: isSet(object.delayTime) ? Number(object.delayTime) : 0,
+      delayTime: isSet(object.delayTime)
+        ? globalThis.Number(object.delayTime)
+        : 0,
       oldType: isSet(object.oldType)
         ? Action_OldType.fromJSON(object.oldType)
         : undefined,
-      isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
+      isEnabled: isSet(object.isEnabled)
+        ? globalThis.Boolean(object.isEnabled)
+        : false,
       layerIdentification: isSet(object.layerIdentification)
         ? Action_LayerIdentification.fromJSON(object.layerIdentification)
         : undefined,
-      duration: isSet(object.duration) ? Number(object.duration) : 0,
+      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
       type: isSet(object.type) ? action_ActionTypeFromJSON(object.type) : 0,
       collectionElement: isSet(object.collectionElement)
         ? CollectionElementType.fromJSON(object.collectionElement)
@@ -1688,138 +1730,139 @@ export const Action = {
       transportControl: isSet(object.transportControl)
         ? Action_TransportControlType.fromJSON(object.transportControl)
         : undefined,
+      capture: isSet(object.capture)
+        ? Action_CaptureType.fromJSON(object.capture)
+        : undefined,
     };
   },
 
   toJSON(message: Action): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.label !== undefined &&
-      (obj.label = message.label
-        ? Action_Label.toJSON(message.label)
-        : undefined);
-    message.delayTime !== undefined && (obj.delayTime = message.delayTime);
-    message.oldType !== undefined &&
-      (obj.oldType = message.oldType
-        ? Action_OldType.toJSON(message.oldType)
-        : undefined);
-    message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
-    message.layerIdentification !== undefined &&
-      (obj.layerIdentification = message.layerIdentification
-        ? Action_LayerIdentification.toJSON(message.layerIdentification)
-        : undefined);
-    message.duration !== undefined && (obj.duration = message.duration);
-    message.type !== undefined &&
-      (obj.type = action_ActionTypeToJSON(message.type));
-    message.collectionElement !== undefined &&
-      (obj.collectionElement = message.collectionElement
-        ? CollectionElementType.toJSON(message.collectionElement)
-        : undefined);
-    message.playlistItem !== undefined &&
-      (obj.playlistItem = message.playlistItem
-        ? Action_PlaylistItemType.toJSON(message.playlistItem)
-        : undefined);
-    message.blendMode !== undefined &&
-      (obj.blendMode = message.blendMode
-        ? Action_BlendModeType.toJSON(message.blendMode)
-        : undefined);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Action_TransitionType.toJSON(message.transition)
-        : undefined);
-    message.media !== undefined &&
-      (obj.media = message.media
-        ? Action_MediaType.toJSON(message.media)
-        : undefined);
-    message.doubleItem !== undefined &&
-      (obj.doubleItem = message.doubleItem
-        ? Action_DoubleType.toJSON(message.doubleItem)
-        : undefined);
-    message.effects !== undefined &&
-      (obj.effects = message.effects
-        ? Action_EffectsType.toJSON(message.effects)
-        : undefined);
-    message.slide !== undefined &&
-      (obj.slide = message.slide
-        ? Action_SlideType.toJSON(message.slide)
-        : undefined);
-    message.background !== undefined &&
-      (obj.background = message.background
-        ? Action_BackgroundType.toJSON(message.background)
-        : undefined);
-    message.timer !== undefined &&
-      (obj.timer = message.timer
-        ? Action_TimerType.toJSON(message.timer)
-        : undefined);
-    message.clear !== undefined &&
-      (obj.clear = message.clear
-        ? Action_ClearType.toJSON(message.clear)
-        : undefined);
-    message.stage !== undefined &&
-      (obj.stage = message.stage
-        ? Action_StageLayoutType.toJSON(message.stage)
-        : undefined);
-    message.prop !== undefined &&
-      (obj.prop = message.prop
-        ? Action_PropType.toJSON(message.prop)
-        : undefined);
-    message.mask !== undefined &&
-      (obj.mask = message.mask
-        ? Action_MaskType.toJSON(message.mask)
-        : undefined);
-    message.message !== undefined &&
-      (obj.message = message.message
-        ? Action_MessageType.toJSON(message.message)
-        : undefined);
-    message.communication !== undefined &&
-      (obj.communication = message.communication
-        ? Action_CommunicationType.toJSON(message.communication)
-        : undefined);
-    message.multiScreen !== undefined &&
-      (obj.multiScreen = message.multiScreen
-        ? Action_MultiScreenType.toJSON(message.multiScreen)
-        : undefined);
-    message.presentationDocument !== undefined &&
-      (obj.presentationDocument = message.presentationDocument
-        ? Action_DocumentType.toJSON(message.presentationDocument)
-        : undefined);
-    message.externalPresentation !== undefined &&
-      (obj.externalPresentation = message.externalPresentation
-        ? Action_ExternalPresentationType.toJSON(message.externalPresentation)
-        : undefined);
-    message.audienceLook !== undefined &&
-      (obj.audienceLook = message.audienceLook
-        ? Action_AudienceLookType.toJSON(message.audienceLook)
-        : undefined);
-    message.audioInput !== undefined &&
-      (obj.audioInput = message.audioInput
-        ? Action_AudioInputType.toJSON(message.audioInput)
-        : undefined);
-    message.slideDestination !== undefined &&
-      (obj.slideDestination = message.slideDestination
-        ? Action_SlideDestinationType.toJSON(message.slideDestination)
-        : undefined);
-    message.macro !== undefined &&
-      (obj.macro = message.macro
-        ? Action_MacroType.toJSON(message.macro)
-        : undefined);
-    message.clearGroup !== undefined &&
-      (obj.clearGroup = message.clearGroup
-        ? Action_ClearGroupType.toJSON(message.clearGroup)
-        : undefined);
-    message.transportControl !== undefined &&
-      (obj.transportControl = message.transportControl
-        ? Action_TransportControlType.toJSON(message.transportControl)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.label !== undefined) {
+      obj.label = Action_Label.toJSON(message.label);
+    }
+    if (message.delayTime !== 0) {
+      obj.delayTime = message.delayTime;
+    }
+    if (message.oldType !== undefined) {
+      obj.oldType = Action_OldType.toJSON(message.oldType);
+    }
+    if (message.isEnabled === true) {
+      obj.isEnabled = message.isEnabled;
+    }
+    if (message.layerIdentification !== undefined) {
+      obj.layerIdentification = Action_LayerIdentification.toJSON(
+        message.layerIdentification,
+      );
+    }
+    if (message.duration !== 0) {
+      obj.duration = message.duration;
+    }
+    if (message.type !== 0) {
+      obj.type = action_ActionTypeToJSON(message.type);
+    }
+    if (message.collectionElement !== undefined) {
+      obj.collectionElement = CollectionElementType.toJSON(
+        message.collectionElement,
+      );
+    }
+    if (message.playlistItem !== undefined) {
+      obj.playlistItem = Action_PlaylistItemType.toJSON(message.playlistItem);
+    }
+    if (message.blendMode !== undefined) {
+      obj.blendMode = Action_BlendModeType.toJSON(message.blendMode);
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Action_TransitionType.toJSON(message.transition);
+    }
+    if (message.media !== undefined) {
+      obj.media = Action_MediaType.toJSON(message.media);
+    }
+    if (message.doubleItem !== undefined) {
+      obj.doubleItem = Action_DoubleType.toJSON(message.doubleItem);
+    }
+    if (message.effects !== undefined) {
+      obj.effects = Action_EffectsType.toJSON(message.effects);
+    }
+    if (message.slide !== undefined) {
+      obj.slide = Action_SlideType.toJSON(message.slide);
+    }
+    if (message.background !== undefined) {
+      obj.background = Action_BackgroundType.toJSON(message.background);
+    }
+    if (message.timer !== undefined) {
+      obj.timer = Action_TimerType.toJSON(message.timer);
+    }
+    if (message.clear !== undefined) {
+      obj.clear = Action_ClearType.toJSON(message.clear);
+    }
+    if (message.stage !== undefined) {
+      obj.stage = Action_StageLayoutType.toJSON(message.stage);
+    }
+    if (message.prop !== undefined) {
+      obj.prop = Action_PropType.toJSON(message.prop);
+    }
+    if (message.mask !== undefined) {
+      obj.mask = Action_MaskType.toJSON(message.mask);
+    }
+    if (message.message !== undefined) {
+      obj.message = Action_MessageType.toJSON(message.message);
+    }
+    if (message.communication !== undefined) {
+      obj.communication = Action_CommunicationType.toJSON(
+        message.communication,
+      );
+    }
+    if (message.multiScreen !== undefined) {
+      obj.multiScreen = Action_MultiScreenType.toJSON(message.multiScreen);
+    }
+    if (message.presentationDocument !== undefined) {
+      obj.presentationDocument = Action_DocumentType.toJSON(
+        message.presentationDocument,
+      );
+    }
+    if (message.externalPresentation !== undefined) {
+      obj.externalPresentation = Action_ExternalPresentationType.toJSON(
+        message.externalPresentation,
+      );
+    }
+    if (message.audienceLook !== undefined) {
+      obj.audienceLook = Action_AudienceLookType.toJSON(message.audienceLook);
+    }
+    if (message.audioInput !== undefined) {
+      obj.audioInput = Action_AudioInputType.toJSON(message.audioInput);
+    }
+    if (message.slideDestination !== undefined) {
+      obj.slideDestination = Action_SlideDestinationType.toJSON(
+        message.slideDestination,
+      );
+    }
+    if (message.macro !== undefined) {
+      obj.macro = Action_MacroType.toJSON(message.macro);
+    }
+    if (message.clearGroup !== undefined) {
+      obj.clearGroup = Action_ClearGroupType.toJSON(message.clearGroup);
+    }
+    if (message.transportControl !== undefined) {
+      obj.transportControl = Action_TransportControlType.toJSON(
+        message.transportControl,
+      );
+    }
+    if (message.capture !== undefined) {
+      obj.capture = Action_CaptureType.toJSON(message.capture);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action>, I>>(base?: I): Action {
-    return Action.fromPartial(base ?? {});
+    return Action.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action>, I>>(object: I): Action {
     const message = createBaseAction();
     message.uuid =
@@ -1949,6 +1992,10 @@ export const Action = {
       object.transportControl !== undefined && object.transportControl !== null
         ? Action_TransportControlType.fromPartial(object.transportControl)
         : undefined;
+    message.capture =
+      object.capture !== undefined && object.capture !== null
+        ? Action_CaptureType.fromPartial(object.capture)
+        : undefined;
     return message;
   },
 };
@@ -1980,21 +2027,21 @@ export const Action_OldType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.category = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.applicationType = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2008,26 +2055,27 @@ export const Action_OldType = {
         ? action_OldType_CategoryFromJSON(object.category)
         : 0,
       applicationType: isSet(object.applicationType)
-        ? Number(object.applicationType)
+        ? globalThis.Number(object.applicationType)
         : 0,
     };
   },
 
   toJSON(message: Action_OldType): unknown {
     const obj: any = {};
-    message.category !== undefined &&
-      (obj.category = action_OldType_CategoryToJSON(message.category));
-    message.applicationType !== undefined &&
-      (obj.applicationType = Math.round(message.applicationType));
+    if (message.category !== 0) {
+      obj.category = action_OldType_CategoryToJSON(message.category);
+    }
+    if (message.applicationType !== 0) {
+      obj.applicationType = Math.round(message.applicationType);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_OldType>, I>>(
     base?: I,
   ): Action_OldType {
-    return Action_OldType.fromPartial(base ?? {});
+    return Action_OldType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_OldType>, I>>(
     object: I,
   ): Action_OldType {
@@ -2065,21 +2113,21 @@ export const Action_Label = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.text = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2089,25 +2137,27 @@ export const Action_Label = {
 
   fromJSON(object: any): Action_Label {
     return {
-      text: isSet(object.text) ? String(object.text) : '',
+      text: isSet(object.text) ? globalThis.String(object.text) : '',
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
     };
   },
 
   toJSON(message: Action_Label): unknown {
     const obj: any = {};
-    message.text !== undefined && (obj.text = message.text);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    if (message.text !== '') {
+      obj.text = message.text;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_Label>, I>>(
     base?: I,
   ): Action_Label {
-    return Action_Label.fromPartial(base ?? {});
+    return Action_Label.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_Label>, I>>(
     object: I,
   ): Action_Label {
@@ -2151,21 +2201,21 @@ export const Action_LayerIdentification = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2176,24 +2226,26 @@ export const Action_LayerIdentification = {
   fromJSON(object: any): Action_LayerIdentification {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
     };
   },
 
   toJSON(message: Action_LayerIdentification): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_LayerIdentification>, I>>(
     base?: I,
   ): Action_LayerIdentification {
-    return Action_LayerIdentification.fromPartial(base ?? {});
+    return Action_LayerIdentification.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_LayerIdentification>, I>>(
     object: I,
   ): Action_LayerIdentification {
@@ -2256,49 +2308,49 @@ export const Action_PlaylistItemType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.playlistUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.playlistName = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.itemUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.itemName = reader.string();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.selectPlaylist = reader.bool();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.alwaysRetrigger = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2312,47 +2364,51 @@ export const Action_PlaylistItemType = {
         ? UUID.fromJSON(object.playlistUuid)
         : undefined,
       playlistName: isSet(object.playlistName)
-        ? String(object.playlistName)
+        ? globalThis.String(object.playlistName)
         : '',
       itemUuid: isSet(object.itemUuid)
         ? UUID.fromJSON(object.itemUuid)
         : undefined,
-      itemName: isSet(object.itemName) ? String(object.itemName) : '',
+      itemName: isSet(object.itemName)
+        ? globalThis.String(object.itemName)
+        : '',
       selectPlaylist: isSet(object.selectPlaylist)
-        ? Boolean(object.selectPlaylist)
+        ? globalThis.Boolean(object.selectPlaylist)
         : false,
       alwaysRetrigger: isSet(object.alwaysRetrigger)
-        ? Boolean(object.alwaysRetrigger)
+        ? globalThis.Boolean(object.alwaysRetrigger)
         : false,
     };
   },
 
   toJSON(message: Action_PlaylistItemType): unknown {
     const obj: any = {};
-    message.playlistUuid !== undefined &&
-      (obj.playlistUuid = message.playlistUuid
-        ? UUID.toJSON(message.playlistUuid)
-        : undefined);
-    message.playlistName !== undefined &&
-      (obj.playlistName = message.playlistName);
-    message.itemUuid !== undefined &&
-      (obj.itemUuid = message.itemUuid
-        ? UUID.toJSON(message.itemUuid)
-        : undefined);
-    message.itemName !== undefined && (obj.itemName = message.itemName);
-    message.selectPlaylist !== undefined &&
-      (obj.selectPlaylist = message.selectPlaylist);
-    message.alwaysRetrigger !== undefined &&
-      (obj.alwaysRetrigger = message.alwaysRetrigger);
+    if (message.playlistUuid !== undefined) {
+      obj.playlistUuid = UUID.toJSON(message.playlistUuid);
+    }
+    if (message.playlistName !== '') {
+      obj.playlistName = message.playlistName;
+    }
+    if (message.itemUuid !== undefined) {
+      obj.itemUuid = UUID.toJSON(message.itemUuid);
+    }
+    if (message.itemName !== '') {
+      obj.itemName = message.itemName;
+    }
+    if (message.selectPlaylist === true) {
+      obj.selectPlaylist = message.selectPlaylist;
+    }
+    if (message.alwaysRetrigger === true) {
+      obj.alwaysRetrigger = message.alwaysRetrigger;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_PlaylistItemType>, I>>(
     base?: I,
   ): Action_PlaylistItemType {
-    return Action_PlaylistItemType.fromPartial(base ?? {});
+    return Action_PlaylistItemType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_PlaylistItemType>, I>>(
     object: I,
   ): Action_PlaylistItemType {
@@ -2403,21 +2459,21 @@ export const Action_BlendModeType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.blendMode = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.blend = Layer_Blending.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2438,21 +2494,20 @@ export const Action_BlendModeType = {
 
   toJSON(message: Action_BlendModeType): unknown {
     const obj: any = {};
-    message.blendMode !== undefined &&
-      (obj.blendMode = layer_BlendModeToJSON(message.blendMode));
-    message.blend !== undefined &&
-      (obj.blend = message.blend
-        ? Layer_Blending.toJSON(message.blend)
-        : undefined);
+    if (message.blendMode !== 0) {
+      obj.blendMode = layer_BlendModeToJSON(message.blendMode);
+    }
+    if (message.blend !== undefined) {
+      obj.blend = Layer_Blending.toJSON(message.blend);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_BlendModeType>, I>>(
     base?: I,
   ): Action_BlendModeType {
-    return Action_BlendModeType.fromPartial(base ?? {});
+    return Action_BlendModeType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_BlendModeType>, I>>(
     object: I,
   ): Action_BlendModeType {
@@ -2496,21 +2551,21 @@ export const Action_TransitionType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.transitionName = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2521,7 +2576,7 @@ export const Action_TransitionType = {
   fromJSON(object: any): Action_TransitionType {
     return {
       transitionName: isSet(object.transitionName)
-        ? String(object.transitionName)
+        ? globalThis.String(object.transitionName)
         : '',
       transition: isSet(object.transition)
         ? Transition.fromJSON(object.transition)
@@ -2531,21 +2586,20 @@ export const Action_TransitionType = {
 
   toJSON(message: Action_TransitionType): unknown {
     const obj: any = {};
-    message.transitionName !== undefined &&
-      (obj.transitionName = message.transitionName);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
+    if (message.transitionName !== '') {
+      obj.transitionName = message.transitionName;
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_TransitionType>, I>>(
     base?: I,
   ): Action_TransitionType {
-    return Action_TransitionType.fromPartial(base ?? {});
+    return Action_TransitionType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_TransitionType>, I>>(
     object: I,
   ): Action_TransitionType {
@@ -2583,14 +2637,14 @@ export const Action_DoubleType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.value = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2599,21 +2653,22 @@ export const Action_DoubleType = {
   },
 
   fromJSON(object: any): Action_DoubleType {
-    return { value: isSet(object.value) ? Number(object.value) : 0 };
+    return { value: isSet(object.value) ? globalThis.Number(object.value) : 0 };
   },
 
   toJSON(message: Action_DoubleType): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
+    if (message.value !== 0) {
+      obj.value = message.value;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_DoubleType>, I>>(
     base?: I,
   ): Action_DoubleType {
-    return Action_DoubleType.fromPartial(base ?? {});
+    return Action_DoubleType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_DoubleType>, I>>(
     object: I,
   ): Action_DoubleType {
@@ -2647,14 +2702,14 @@ export const Action_EffectsType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.effects.push(Effect.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2664,7 +2719,7 @@ export const Action_EffectsType = {
 
   fromJSON(object: any): Action_EffectsType {
     return {
-      effects: Array.isArray(object?.effects)
+      effects: globalThis.Array.isArray(object?.effects)
         ? object.effects.map((e: any) => Effect.fromJSON(e))
         : [],
     };
@@ -2672,12 +2727,8 @@ export const Action_EffectsType = {
 
   toJSON(message: Action_EffectsType): unknown {
     const obj: any = {};
-    if (message.effects) {
-      obj.effects = message.effects.map((e) =>
-        e ? Effect.toJSON(e) : undefined,
-      );
-    } else {
-      obj.effects = [];
+    if (message.effects?.length) {
+      obj.effects = message.effects.map((e) => Effect.toJSON(e));
     }
     return obj;
   },
@@ -2685,9 +2736,8 @@ export const Action_EffectsType = {
   create<I extends Exact<DeepPartial<Action_EffectsType>, I>>(
     base?: I,
   ): Action_EffectsType {
-    return Action_EffectsType.fromPartial(base ?? {});
+    return Action_EffectsType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_EffectsType>, I>>(
     object: I,
   ): Action_EffectsType {
@@ -2785,14 +2835,14 @@ export const Action_MediaType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.transitionDuration = reader.double();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2802,42 +2852,42 @@ export const Action_MediaType = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.effects.push(Effect.decode(reader, reader.uint32()));
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.element = Media.decode(reader, reader.uint32());
           continue;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.layerType = reader.int32() as any;
           continue;
         case 11:
-          if (tag != 88) {
+          if (tag !== 88) {
             break;
           }
 
           message.alwaysRetrigger = reader.bool();
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -2846,7 +2896,7 @@ export const Action_MediaType = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -2856,7 +2906,7 @@ export const Action_MediaType = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -2866,7 +2916,7 @@ export const Action_MediaType = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -2876,7 +2926,7 @@ export const Action_MediaType = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -2886,7 +2936,7 @@ export const Action_MediaType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2897,7 +2947,7 @@ export const Action_MediaType = {
   fromJSON(object: any): Action_MediaType {
     return {
       transitionDuration: isSet(object.transitionDuration)
-        ? Number(object.transitionDuration)
+        ? globalThis.Number(object.transitionDuration)
         : 0,
       selectedEffectPresetUuid: isSet(object.selectedEffectPresetUuid)
         ? UUID.fromJSON(object.selectedEffectPresetUuid)
@@ -2905,7 +2955,7 @@ export const Action_MediaType = {
       transition: isSet(object.transition)
         ? Transition.fromJSON(object.transition)
         : undefined,
-      effects: Array.isArray(object?.effects)
+      effects: globalThis.Array.isArray(object?.effects)
         ? object.effects.map((e: any) => Effect.fromJSON(e))
         : [],
       element: isSet(object.element)
@@ -2915,9 +2965,9 @@ export const Action_MediaType = {
         ? action_LayerTypeFromJSON(object.layerType)
         : 0,
       alwaysRetrigger: isSet(object.alwaysRetrigger)
-        ? Boolean(object.alwaysRetrigger)
+        ? globalThis.Boolean(object.alwaysRetrigger)
         : false,
-      markers: Array.isArray(object?.markers)
+      markers: globalThis.Array.isArray(object?.markers)
         ? object.markers.map((e: any) =>
             Action_MediaType_PlaybackMarker.fromJSON(e),
           )
@@ -2939,63 +2989,54 @@ export const Action_MediaType = {
 
   toJSON(message: Action_MediaType): unknown {
     const obj: any = {};
-    message.transitionDuration !== undefined &&
-      (obj.transitionDuration = message.transitionDuration);
-    message.selectedEffectPresetUuid !== undefined &&
-      (obj.selectedEffectPresetUuid = message.selectedEffectPresetUuid
-        ? UUID.toJSON(message.selectedEffectPresetUuid)
-        : undefined);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
-    if (message.effects) {
-      obj.effects = message.effects.map((e) =>
-        e ? Effect.toJSON(e) : undefined,
-      );
-    } else {
-      obj.effects = [];
+    if (message.transitionDuration !== 0) {
+      obj.transitionDuration = message.transitionDuration;
     }
-    message.element !== undefined &&
-      (obj.element = message.element
-        ? Media.toJSON(message.element)
-        : undefined);
-    message.layerType !== undefined &&
-      (obj.layerType = action_LayerTypeToJSON(message.layerType));
-    message.alwaysRetrigger !== undefined &&
-      (obj.alwaysRetrigger = message.alwaysRetrigger);
-    if (message.markers) {
+    if (message.selectedEffectPresetUuid !== undefined) {
+      obj.selectedEffectPresetUuid = UUID.toJSON(
+        message.selectedEffectPresetUuid,
+      );
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
+    if (message.effects?.length) {
+      obj.effects = message.effects.map((e) => Effect.toJSON(e));
+    }
+    if (message.element !== undefined) {
+      obj.element = Media.toJSON(message.element);
+    }
+    if (message.layerType !== 0) {
+      obj.layerType = action_LayerTypeToJSON(message.layerType);
+    }
+    if (message.alwaysRetrigger === true) {
+      obj.alwaysRetrigger = message.alwaysRetrigger;
+    }
+    if (message.markers?.length) {
       obj.markers = message.markers.map((e) =>
-        e ? Action_MediaType_PlaybackMarker.toJSON(e) : undefined,
+        Action_MediaType_PlaybackMarker.toJSON(e),
       );
-    } else {
-      obj.markers = [];
     }
-    message.image !== undefined &&
-      (obj.image = message.image
-        ? Action_MediaType_Image.toJSON(message.image)
-        : undefined);
-    message.video !== undefined &&
-      (obj.video = message.video
-        ? Action_MediaType_Video.toJSON(message.video)
-        : undefined);
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? Action_MediaType_Audio.toJSON(message.audio)
-        : undefined);
-    message.liveVideo !== undefined &&
-      (obj.liveVideo = message.liveVideo
-        ? Action_MediaType_LiveVideo.toJSON(message.liveVideo)
-        : undefined);
+    if (message.image !== undefined) {
+      obj.image = Action_MediaType_Image.toJSON(message.image);
+    }
+    if (message.video !== undefined) {
+      obj.video = Action_MediaType_Video.toJSON(message.video);
+    }
+    if (message.audio !== undefined) {
+      obj.audio = Action_MediaType_Audio.toJSON(message.audio);
+    }
+    if (message.liveVideo !== undefined) {
+      obj.liveVideo = Action_MediaType_LiveVideo.toJSON(message.liveVideo);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_MediaType>, I>>(
     base?: I,
   ): Action_MediaType {
-    return Action_MediaType.fromPartial(base ?? {});
+    return Action_MediaType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MediaType>, I>>(
     object: I,
   ): Action_MediaType {
@@ -3065,7 +3106,7 @@ export const Action_MediaType_Image = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3085,9 +3126,8 @@ export const Action_MediaType_Image = {
   create<I extends Exact<DeepPartial<Action_MediaType_Image>, I>>(
     base?: I,
   ): Action_MediaType_Image {
-    return Action_MediaType_Image.fromPartial(base ?? {});
+    return Action_MediaType_Image.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MediaType_Image>, I>>(
     _: I,
   ): Action_MediaType_Image {
@@ -3145,49 +3185,49 @@ export const Action_MediaType_Video = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.playbackBehavior = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.endBehavior = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.loopTime = reader.double();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.timesToLoop = reader.uint32();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.softLoop = reader.bool();
           continue;
         case 6:
-          if (tag != 49) {
+          if (tag !== 49) {
             break;
           }
 
           message.softLoopDuration = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3203,40 +3243,49 @@ export const Action_MediaType_Video = {
       endBehavior: isSet(object.endBehavior)
         ? action_MediaType_EndBehaviorFromJSON(object.endBehavior)
         : 0,
-      loopTime: isSet(object.loopTime) ? Number(object.loopTime) : 0,
-      timesToLoop: isSet(object.timesToLoop) ? Number(object.timesToLoop) : 0,
-      softLoop: isSet(object.softLoop) ? Boolean(object.softLoop) : false,
+      loopTime: isSet(object.loopTime) ? globalThis.Number(object.loopTime) : 0,
+      timesToLoop: isSet(object.timesToLoop)
+        ? globalThis.Number(object.timesToLoop)
+        : 0,
+      softLoop: isSet(object.softLoop)
+        ? globalThis.Boolean(object.softLoop)
+        : false,
       softLoopDuration: isSet(object.softLoopDuration)
-        ? Number(object.softLoopDuration)
+        ? globalThis.Number(object.softLoopDuration)
         : 0,
     };
   },
 
   toJSON(message: Action_MediaType_Video): unknown {
     const obj: any = {};
-    message.playbackBehavior !== undefined &&
-      (obj.playbackBehavior = action_MediaType_PlaybackBehaviorToJSON(
+    if (message.playbackBehavior !== 0) {
+      obj.playbackBehavior = action_MediaType_PlaybackBehaviorToJSON(
         message.playbackBehavior,
-      ));
-    message.endBehavior !== undefined &&
-      (obj.endBehavior = action_MediaType_EndBehaviorToJSON(
-        message.endBehavior,
-      ));
-    message.loopTime !== undefined && (obj.loopTime = message.loopTime);
-    message.timesToLoop !== undefined &&
-      (obj.timesToLoop = Math.round(message.timesToLoop));
-    message.softLoop !== undefined && (obj.softLoop = message.softLoop);
-    message.softLoopDuration !== undefined &&
-      (obj.softLoopDuration = message.softLoopDuration);
+      );
+    }
+    if (message.endBehavior !== 0) {
+      obj.endBehavior = action_MediaType_EndBehaviorToJSON(message.endBehavior);
+    }
+    if (message.loopTime !== 0) {
+      obj.loopTime = message.loopTime;
+    }
+    if (message.timesToLoop !== 0) {
+      obj.timesToLoop = Math.round(message.timesToLoop);
+    }
+    if (message.softLoop === true) {
+      obj.softLoop = message.softLoop;
+    }
+    if (message.softLoopDuration !== 0) {
+      obj.softLoopDuration = message.softLoopDuration;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_MediaType_Video>, I>>(
     base?: I,
   ): Action_MediaType_Video {
-    return Action_MediaType_Video.fromPartial(base ?? {});
+    return Action_MediaType_Video.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MediaType_Video>, I>>(
     object: I,
   ): Action_MediaType_Video {
@@ -3287,35 +3336,35 @@ export const Action_MediaType_Audio = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.playbackBehavior = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.loopTime = reader.double();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.timesToLoop = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.audioType = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3328,8 +3377,10 @@ export const Action_MediaType_Audio = {
       playbackBehavior: isSet(object.playbackBehavior)
         ? action_MediaType_PlaybackBehaviorFromJSON(object.playbackBehavior)
         : 0,
-      loopTime: isSet(object.loopTime) ? Number(object.loopTime) : 0,
-      timesToLoop: isSet(object.timesToLoop) ? Number(object.timesToLoop) : 0,
+      loopTime: isSet(object.loopTime) ? globalThis.Number(object.loopTime) : 0,
+      timesToLoop: isSet(object.timesToLoop)
+        ? globalThis.Number(object.timesToLoop)
+        : 0,
       audioType: isSet(object.audioType)
         ? action_MediaType_Audio_MediaActionAudioTypeFromJSON(object.audioType)
         : 0,
@@ -3338,26 +3389,30 @@ export const Action_MediaType_Audio = {
 
   toJSON(message: Action_MediaType_Audio): unknown {
     const obj: any = {};
-    message.playbackBehavior !== undefined &&
-      (obj.playbackBehavior = action_MediaType_PlaybackBehaviorToJSON(
+    if (message.playbackBehavior !== 0) {
+      obj.playbackBehavior = action_MediaType_PlaybackBehaviorToJSON(
         message.playbackBehavior,
-      ));
-    message.loopTime !== undefined && (obj.loopTime = message.loopTime);
-    message.timesToLoop !== undefined &&
-      (obj.timesToLoop = Math.round(message.timesToLoop));
-    message.audioType !== undefined &&
-      (obj.audioType = action_MediaType_Audio_MediaActionAudioTypeToJSON(
+      );
+    }
+    if (message.loopTime !== 0) {
+      obj.loopTime = message.loopTime;
+    }
+    if (message.timesToLoop !== 0) {
+      obj.timesToLoop = Math.round(message.timesToLoop);
+    }
+    if (message.audioType !== 0) {
+      obj.audioType = action_MediaType_Audio_MediaActionAudioTypeToJSON(
         message.audioType,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_MediaType_Audio>, I>>(
     base?: I,
   ): Action_MediaType_Audio {
-    return Action_MediaType_Audio.fromPartial(base ?? {});
+    return Action_MediaType_Audio.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MediaType_Audio>, I>>(
     object: I,
   ): Action_MediaType_Audio {
@@ -3394,7 +3449,7 @@ export const Action_MediaType_LiveVideo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3414,9 +3469,8 @@ export const Action_MediaType_LiveVideo = {
   create<I extends Exact<DeepPartial<Action_MediaType_LiveVideo>, I>>(
     base?: I,
   ): Action_MediaType_LiveVideo {
-    return Action_MediaType_LiveVideo.fromPartial(base ?? {});
+    return Action_MediaType_LiveVideo.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MediaType_LiveVideo>, I>>(
     _: I,
   ): Action_MediaType_LiveVideo {
@@ -3464,42 +3518,42 @@ export const Action_MediaType_PlaybackMarker = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.time = reader.double();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.actions.push(Action.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3510,10 +3564,10 @@ export const Action_MediaType_PlaybackMarker = {
   fromJSON(object: any): Action_MediaType_PlaybackMarker {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      time: isSet(object.time) ? Number(object.time) : 0,
+      time: isSet(object.time) ? globalThis.Number(object.time) : 0,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      actions: Array.isArray(object?.actions)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      actions: globalThis.Array.isArray(object?.actions)
         ? object.actions.map((e: any) => Action.fromJSON(e))
         : [],
     };
@@ -3521,18 +3575,20 @@ export const Action_MediaType_PlaybackMarker = {
 
   toJSON(message: Action_MediaType_PlaybackMarker): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.time !== undefined && (obj.time = message.time);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? Action.toJSON(e) : undefined,
-      );
-    } else {
-      obj.actions = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.time !== 0) {
+      obj.time = message.time;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => Action.toJSON(e));
     }
     return obj;
   },
@@ -3540,9 +3596,8 @@ export const Action_MediaType_PlaybackMarker = {
   create<I extends Exact<DeepPartial<Action_MediaType_PlaybackMarker>, I>>(
     base?: I,
   ): Action_MediaType_PlaybackMarker {
-    return Action_MediaType_PlaybackMarker.fromPartial(base ?? {});
+    return Action_MediaType_PlaybackMarker.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MediaType_PlaybackMarker>, I>>(
     object: I,
   ): Action_MediaType_PlaybackMarker {
@@ -3592,7 +3647,7 @@ export const Action_SlideType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -3602,14 +3657,14 @@ export const Action_SlideType = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.prop = PropSlide.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3628,21 +3683,20 @@ export const Action_SlideType = {
 
   toJSON(message: Action_SlideType): unknown {
     const obj: any = {};
-    message.presentation !== undefined &&
-      (obj.presentation = message.presentation
-        ? PresentationSlide.toJSON(message.presentation)
-        : undefined);
-    message.prop !== undefined &&
-      (obj.prop = message.prop ? PropSlide.toJSON(message.prop) : undefined);
+    if (message.presentation !== undefined) {
+      obj.presentation = PresentationSlide.toJSON(message.presentation);
+    }
+    if (message.prop !== undefined) {
+      obj.prop = PropSlide.toJSON(message.prop);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_SlideType>, I>>(
     base?: I,
   ): Action_SlideType {
-    return Action_SlideType.fromPartial(base ?? {});
+    return Action_SlideType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_SlideType>, I>>(
     object: I,
   ): Action_SlideType {
@@ -3686,14 +3740,14 @@ export const Action_BackgroundType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.element = Background.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3711,19 +3765,17 @@ export const Action_BackgroundType = {
 
   toJSON(message: Action_BackgroundType): unknown {
     const obj: any = {};
-    message.element !== undefined &&
-      (obj.element = message.element
-        ? Background.toJSON(message.element)
-        : undefined);
+    if (message.element !== undefined) {
+      obj.element = Background.toJSON(message.element);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_BackgroundType>, I>>(
     base?: I,
   ): Action_BackgroundType {
-    return Action_BackgroundType.fromPartial(base ?? {});
+    return Action_BackgroundType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_BackgroundType>, I>>(
     object: I,
   ): Action_BackgroundType {
@@ -3780,14 +3832,14 @@ export const Action_TimerType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.actionType = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -3797,7 +3849,7 @@ export const Action_TimerType = {
           );
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -3807,14 +3859,14 @@ export const Action_TimerType = {
           );
           continue;
         case 11:
-          if (tag != 89) {
+          if (tag !== 89) {
             break;
           }
 
           message.incrementAmount = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3834,34 +3886,37 @@ export const Action_TimerType = {
         ? Timer_Configuration.fromJSON(object.timerConfiguration)
         : undefined,
       incrementAmount: isSet(object.incrementAmount)
-        ? Number(object.incrementAmount)
+        ? globalThis.Number(object.incrementAmount)
         : 0,
     };
   },
 
   toJSON(message: Action_TimerType): unknown {
     const obj: any = {};
-    message.actionType !== undefined &&
-      (obj.actionType = action_TimerType_TimerActionToJSON(message.actionType));
-    message.timerIdentification !== undefined &&
-      (obj.timerIdentification = message.timerIdentification
-        ? CollectionElementType.toJSON(message.timerIdentification)
-        : undefined);
-    message.timerConfiguration !== undefined &&
-      (obj.timerConfiguration = message.timerConfiguration
-        ? Timer_Configuration.toJSON(message.timerConfiguration)
-        : undefined);
-    message.incrementAmount !== undefined &&
-      (obj.incrementAmount = message.incrementAmount);
+    if (message.actionType !== 0) {
+      obj.actionType = action_TimerType_TimerActionToJSON(message.actionType);
+    }
+    if (message.timerIdentification !== undefined) {
+      obj.timerIdentification = CollectionElementType.toJSON(
+        message.timerIdentification,
+      );
+    }
+    if (message.timerConfiguration !== undefined) {
+      obj.timerConfiguration = Timer_Configuration.toJSON(
+        message.timerConfiguration,
+      );
+    }
+    if (message.incrementAmount !== 0) {
+      obj.incrementAmount = message.incrementAmount;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_TimerType>, I>>(
     base?: I,
   ): Action_TimerType {
-    return Action_TimerType.fromPartial(base ?? {});
+    return Action_TimerType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_TimerType>, I>>(
     object: I,
   ): Action_TimerType {
@@ -3909,21 +3964,21 @@ export const Action_ClearType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.targetLayer = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.contentDestination = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3944,23 +3999,24 @@ export const Action_ClearType = {
 
   toJSON(message: Action_ClearType): unknown {
     const obj: any = {};
-    message.targetLayer !== undefined &&
-      (obj.targetLayer = action_ClearType_ClearTargetLayerToJSON(
+    if (message.targetLayer !== 0) {
+      obj.targetLayer = action_ClearType_ClearTargetLayerToJSON(
         message.targetLayer,
-      ));
-    message.contentDestination !== undefined &&
-      (obj.contentDestination = action_ContentDestinationToJSON(
+      );
+    }
+    if (message.contentDestination !== 0) {
+      obj.contentDestination = action_ContentDestinationToJSON(
         message.contentDestination,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_ClearType>, I>>(
     base?: I,
   ): Action_ClearType {
-    return Action_ClearType.fromPartial(base ?? {});
+    return Action_ClearType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_ClearType>, I>>(
     object: I,
   ): Action_ClearType {
@@ -4001,7 +4057,7 @@ export const Action_ClearGroupType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4011,7 +4067,7 @@ export const Action_ClearGroupType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4029,19 +4085,17 @@ export const Action_ClearGroupType = {
 
   toJSON(message: Action_ClearGroupType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_ClearGroupType>, I>>(
     base?: I,
   ): Action_ClearGroupType {
-    return Action_ClearGroupType.fromPartial(base ?? {});
+    return Action_ClearGroupType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_ClearGroupType>, I>>(
     object: I,
   ): Action_ClearGroupType {
@@ -4096,7 +4150,7 @@ export const Action_TransportControlType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4106,7 +4160,7 @@ export const Action_TransportControlType = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -4116,7 +4170,7 @@ export const Action_TransportControlType = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4126,7 +4180,7 @@ export const Action_TransportControlType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4150,27 +4204,25 @@ export const Action_TransportControlType = {
 
   toJSON(message: Action_TransportControlType): unknown {
     const obj: any = {};
-    message.play !== undefined &&
-      (obj.play = message.play
-        ? Action_TransportControlType_Play.toJSON(message.play)
-        : undefined);
-    message.pause !== undefined &&
-      (obj.pause = message.pause
-        ? Action_TransportControlType_Pause.toJSON(message.pause)
-        : undefined);
-    message.jumpToTime !== undefined &&
-      (obj.jumpToTime = message.jumpToTime
-        ? Action_TransportControlType_JumpToTime.toJSON(message.jumpToTime)
-        : undefined);
+    if (message.play !== undefined) {
+      obj.play = Action_TransportControlType_Play.toJSON(message.play);
+    }
+    if (message.pause !== undefined) {
+      obj.pause = Action_TransportControlType_Pause.toJSON(message.pause);
+    }
+    if (message.jumpToTime !== undefined) {
+      obj.jumpToTime = Action_TransportControlType_JumpToTime.toJSON(
+        message.jumpToTime,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_TransportControlType>, I>>(
     base?: I,
   ): Action_TransportControlType {
-    return Action_TransportControlType.fromPartial(base ?? {});
+    return Action_TransportControlType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_TransportControlType>, I>>(
     object: I,
   ): Action_TransportControlType {
@@ -4215,7 +4267,7 @@ export const Action_TransportControlType_Play = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4235,9 +4287,8 @@ export const Action_TransportControlType_Play = {
   create<I extends Exact<DeepPartial<Action_TransportControlType_Play>, I>>(
     base?: I,
   ): Action_TransportControlType_Play {
-    return Action_TransportControlType_Play.fromPartial(base ?? {});
+    return Action_TransportControlType_Play.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_TransportControlType_Play>, I>,
   >(_: I): Action_TransportControlType_Play {
@@ -4270,7 +4321,7 @@ export const Action_TransportControlType_Pause = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4290,9 +4341,8 @@ export const Action_TransportControlType_Pause = {
   create<I extends Exact<DeepPartial<Action_TransportControlType_Pause>, I>>(
     base?: I,
   ): Action_TransportControlType_Pause {
-    return Action_TransportControlType_Pause.fromPartial(base ?? {});
+    return Action_TransportControlType_Pause.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_TransportControlType_Pause>, I>,
   >(_: I): Action_TransportControlType_Pause {
@@ -4328,14 +4378,14 @@ export const Action_TransportControlType_JumpToTime = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.time = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4344,21 +4394,24 @@ export const Action_TransportControlType_JumpToTime = {
   },
 
   fromJSON(object: any): Action_TransportControlType_JumpToTime {
-    return { time: isSet(object.time) ? Number(object.time) : 0 };
+    return { time: isSet(object.time) ? globalThis.Number(object.time) : 0 };
   },
 
   toJSON(message: Action_TransportControlType_JumpToTime): unknown {
     const obj: any = {};
-    message.time !== undefined && (obj.time = message.time);
+    if (message.time !== 0) {
+      obj.time = message.time;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Action_TransportControlType_JumpToTime>, I>,
   >(base?: I): Action_TransportControlType_JumpToTime {
-    return Action_TransportControlType_JumpToTime.fromPartial(base ?? {});
+    return Action_TransportControlType_JumpToTime.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_TransportControlType_JumpToTime>, I>,
   >(object: I): Action_TransportControlType_JumpToTime {
@@ -4398,7 +4451,7 @@ export const Action_StageLayoutType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -4407,14 +4460,14 @@ export const Action_StageLayoutType = {
           );
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.slideTarget = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4424,7 +4477,9 @@ export const Action_StageLayoutType = {
 
   fromJSON(object: any): Action_StageLayoutType {
     return {
-      stageScreenAssignments: Array.isArray(object?.stageScreenAssignments)
+      stageScreenAssignments: globalThis.Array.isArray(
+        object?.stageScreenAssignments,
+      )
         ? object.stageScreenAssignments.map((e: any) =>
             Stage_ScreenAssignment.fromJSON(e),
           )
@@ -4437,26 +4492,24 @@ export const Action_StageLayoutType = {
 
   toJSON(message: Action_StageLayoutType): unknown {
     const obj: any = {};
-    if (message.stageScreenAssignments) {
+    if (message.stageScreenAssignments?.length) {
       obj.stageScreenAssignments = message.stageScreenAssignments.map((e) =>
-        e ? Stage_ScreenAssignment.toJSON(e) : undefined,
+        Stage_ScreenAssignment.toJSON(e),
       );
-    } else {
-      obj.stageScreenAssignments = [];
     }
-    message.slideTarget !== undefined &&
-      (obj.slideTarget = action_StageLayoutType_SlideTargetToJSON(
+    if (message.slideTarget !== 0) {
+      obj.slideTarget = action_StageLayoutType_SlideTargetToJSON(
         message.slideTarget,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_StageLayoutType>, I>>(
     base?: I,
   ): Action_StageLayoutType {
-    return Action_StageLayoutType.fromPartial(base ?? {});
+    return Action_StageLayoutType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_StageLayoutType>, I>>(
     object: I,
   ): Action_StageLayoutType {
@@ -4497,14 +4550,14 @@ export const Action_SlideDestinationType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.slideTarget = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4522,19 +4575,19 @@ export const Action_SlideDestinationType = {
 
   toJSON(message: Action_SlideDestinationType): unknown {
     const obj: any = {};
-    message.slideTarget !== undefined &&
-      (obj.slideTarget = action_StageLayoutType_SlideTargetToJSON(
+    if (message.slideTarget !== 0) {
+      obj.slideTarget = action_StageLayoutType_SlideTargetToJSON(
         message.slideTarget,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_SlideDestinationType>, I>>(
     base?: I,
   ): Action_SlideDestinationType {
-    return Action_SlideDestinationType.fromPartial(base ?? {});
+    return Action_SlideDestinationType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_SlideDestinationType>, I>>(
     object: I,
   ): Action_SlideDestinationType {
@@ -4571,7 +4624,7 @@ export const Action_PropType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4581,7 +4634,7 @@ export const Action_PropType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4599,19 +4652,17 @@ export const Action_PropType = {
 
   toJSON(message: Action_PropType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_PropType>, I>>(
     base?: I,
   ): Action_PropType {
-    return Action_PropType.fromPartial(base ?? {});
+    return Action_PropType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_PropType>, I>>(
     object: I,
   ): Action_PropType {
@@ -4651,7 +4702,7 @@ export const Action_MaskType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4661,7 +4712,7 @@ export const Action_MaskType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4679,19 +4730,17 @@ export const Action_MaskType = {
 
   toJSON(message: Action_MaskType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_MaskType>, I>>(
     base?: I,
   ): Action_MaskType {
-    return Action_MaskType.fromPartial(base ?? {});
+    return Action_MaskType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MaskType>, I>>(
     object: I,
   ): Action_MaskType {
@@ -4734,7 +4783,7 @@ export const Action_MessageType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4744,7 +4793,7 @@ export const Action_MessageType = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4753,7 +4802,7 @@ export const Action_MessageType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4766,7 +4815,7 @@ export const Action_MessageType = {
       messageIdentificaton: isSet(object.messageIdentificaton)
         ? CollectionElementType.fromJSON(object.messageIdentificaton)
         : undefined,
-      content: Array.isArray(object?.content)
+      content: globalThis.Array.isArray(object?.content)
         ? object.content.map((e: any) => Message_TokenValue.fromJSON(e))
         : [],
     };
@@ -4774,16 +4823,13 @@ export const Action_MessageType = {
 
   toJSON(message: Action_MessageType): unknown {
     const obj: any = {};
-    message.messageIdentificaton !== undefined &&
-      (obj.messageIdentificaton = message.messageIdentificaton
-        ? CollectionElementType.toJSON(message.messageIdentificaton)
-        : undefined);
-    if (message.content) {
-      obj.content = message.content.map((e) =>
-        e ? Message_TokenValue.toJSON(e) : undefined,
+    if (message.messageIdentificaton !== undefined) {
+      obj.messageIdentificaton = CollectionElementType.toJSON(
+        message.messageIdentificaton,
       );
-    } else {
-      obj.content = [];
+    }
+    if (message.content?.length) {
+      obj.content = message.content.map((e) => Message_TokenValue.toJSON(e));
     }
     return obj;
   },
@@ -4791,9 +4837,8 @@ export const Action_MessageType = {
   create<I extends Exact<DeepPartial<Action_MessageType>, I>>(
     base?: I,
   ): Action_MessageType {
-    return Action_MessageType.fromPartial(base ?? {});
+    return Action_MessageType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MessageType>, I>>(
     object: I,
   ): Action_MessageType {
@@ -4884,7 +4929,7 @@ export const Action_CommunicationType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4894,21 +4939,21 @@ export const Action_CommunicationType = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.format = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.description = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -4917,7 +4962,7 @@ export const Action_CommunicationType = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -4927,7 +4972,7 @@ export const Action_CommunicationType = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -4938,7 +4983,7 @@ export const Action_CommunicationType = {
             );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -4948,7 +4993,7 @@ export const Action_CommunicationType = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -4959,7 +5004,7 @@ export const Action_CommunicationType = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4972,9 +5017,11 @@ export const Action_CommunicationType = {
       deviceIdentification: isSet(object.deviceIdentification)
         ? CollectionElementType.fromJSON(object.deviceIdentification)
         : undefined,
-      format: isSet(object.format) ? String(object.format) : '',
-      description: isSet(object.description) ? String(object.description) : '',
-      commands: Array.isArray(object?.commands)
+      format: isSet(object.format) ? globalThis.String(object.format) : '',
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : '',
+      commands: globalThis.Array.isArray(object?.commands)
         ? object.commands.map((e: any) =>
             Action_CommunicationType_Command.fromJSON(e),
           )
@@ -5000,47 +5047,51 @@ export const Action_CommunicationType = {
 
   toJSON(message: Action_CommunicationType): unknown {
     const obj: any = {};
-    message.deviceIdentification !== undefined &&
-      (obj.deviceIdentification = message.deviceIdentification
-        ? CollectionElementType.toJSON(message.deviceIdentification)
-        : undefined);
-    message.format !== undefined && (obj.format = message.format);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    if (message.commands) {
-      obj.commands = message.commands.map((e) =>
-        e ? Action_CommunicationType_Command.toJSON(e) : undefined,
+    if (message.deviceIdentification !== undefined) {
+      obj.deviceIdentification = CollectionElementType.toJSON(
+        message.deviceIdentification,
       );
-    } else {
-      obj.commands = [];
     }
-    message.midiCommand !== undefined &&
-      (obj.midiCommand = message.midiCommand
-        ? Action_CommunicationType_MIDICommand.toJSON(message.midiCommand)
-        : undefined);
-    message.globalCacheCommand !== undefined &&
-      (obj.globalCacheCommand = message.globalCacheCommand
-        ? Action_CommunicationType_GlobalCacheCommand.toJSON(
-            message.globalCacheCommand,
-          )
-        : undefined);
-    message.gvg100Command !== undefined &&
-      (obj.gvg100Command = message.gvg100Command
-        ? Action_CommunicationType_GVG100Command.toJSON(message.gvg100Command)
-        : undefined);
-    message.sonyBVSCommand !== undefined &&
-      (obj.sonyBVSCommand = message.sonyBVSCommand
-        ? Action_CommunicationType_SonyBVSCommand.toJSON(message.sonyBVSCommand)
-        : undefined);
+    if (message.format !== '') {
+      obj.format = message.format;
+    }
+    if (message.description !== '') {
+      obj.description = message.description;
+    }
+    if (message.commands?.length) {
+      obj.commands = message.commands.map((e) =>
+        Action_CommunicationType_Command.toJSON(e),
+      );
+    }
+    if (message.midiCommand !== undefined) {
+      obj.midiCommand = Action_CommunicationType_MIDICommand.toJSON(
+        message.midiCommand,
+      );
+    }
+    if (message.globalCacheCommand !== undefined) {
+      obj.globalCacheCommand =
+        Action_CommunicationType_GlobalCacheCommand.toJSON(
+          message.globalCacheCommand,
+        );
+    }
+    if (message.gvg100Command !== undefined) {
+      obj.gvg100Command = Action_CommunicationType_GVG100Command.toJSON(
+        message.gvg100Command,
+      );
+    }
+    if (message.sonyBVSCommand !== undefined) {
+      obj.sonyBVSCommand = Action_CommunicationType_SonyBVSCommand.toJSON(
+        message.sonyBVSCommand,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_CommunicationType>, I>>(
     base?: I,
   ): Action_CommunicationType {
-    return Action_CommunicationType.fromPartial(base ?? {});
+    return Action_CommunicationType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_CommunicationType>, I>>(
     object: I,
   ): Action_CommunicationType {
@@ -5127,35 +5178,35 @@ export const Action_CommunicationType_Command = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.value = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.replacementRange = IntRange.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.possibleValues.push(reader.string());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5165,29 +5216,30 @@ export const Action_CommunicationType_Command = {
 
   fromJSON(object: any): Action_CommunicationType_Command {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      value: isSet(object.value) ? String(object.value) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      value: isSet(object.value) ? globalThis.String(object.value) : '',
       replacementRange: isSet(object.replacementRange)
         ? IntRange.fromJSON(object.replacementRange)
         : undefined,
-      possibleValues: Array.isArray(object?.possibleValues)
-        ? object.possibleValues.map((e: any) => String(e))
+      possibleValues: globalThis.Array.isArray(object?.possibleValues)
+        ? object.possibleValues.map((e: any) => globalThis.String(e))
         : [],
     };
   },
 
   toJSON(message: Action_CommunicationType_Command): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.value !== undefined && (obj.value = message.value);
-    message.replacementRange !== undefined &&
-      (obj.replacementRange = message.replacementRange
-        ? IntRange.toJSON(message.replacementRange)
-        : undefined);
-    if (message.possibleValues) {
-      obj.possibleValues = message.possibleValues.map((e) => e);
-    } else {
-      obj.possibleValues = [];
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.value !== '') {
+      obj.value = message.value;
+    }
+    if (message.replacementRange !== undefined) {
+      obj.replacementRange = IntRange.toJSON(message.replacementRange);
+    }
+    if (message.possibleValues?.length) {
+      obj.possibleValues = message.possibleValues;
     }
     return obj;
   },
@@ -5195,9 +5247,8 @@ export const Action_CommunicationType_Command = {
   create<I extends Exact<DeepPartial<Action_CommunicationType_Command>, I>>(
     base?: I,
   ): Action_CommunicationType_Command {
-    return Action_CommunicationType_Command.fromPartial(base ?? {});
+    return Action_CommunicationType_Command.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_CommunicationType_Command>, I>,
   >(object: I): Action_CommunicationType_Command {
@@ -5249,35 +5300,35 @@ export const Action_CommunicationType_MIDICommand = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.state = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.channel = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.note = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.intensity = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5290,32 +5341,40 @@ export const Action_CommunicationType_MIDICommand = {
       state: isSet(object.state)
         ? action_CommunicationType_MIDICommand_StateFromJSON(object.state)
         : 0,
-      channel: isSet(object.channel) ? Number(object.channel) : 0,
-      note: isSet(object.note) ? Number(object.note) : 0,
-      intensity: isSet(object.intensity) ? Number(object.intensity) : 0,
+      channel: isSet(object.channel) ? globalThis.Number(object.channel) : 0,
+      note: isSet(object.note) ? globalThis.Number(object.note) : 0,
+      intensity: isSet(object.intensity)
+        ? globalThis.Number(object.intensity)
+        : 0,
     };
   },
 
   toJSON(message: Action_CommunicationType_MIDICommand): unknown {
     const obj: any = {};
-    message.state !== undefined &&
-      (obj.state = action_CommunicationType_MIDICommand_StateToJSON(
+    if (message.state !== 0) {
+      obj.state = action_CommunicationType_MIDICommand_StateToJSON(
         message.state,
-      ));
-    message.channel !== undefined &&
-      (obj.channel = Math.round(message.channel));
-    message.note !== undefined && (obj.note = Math.round(message.note));
-    message.intensity !== undefined &&
-      (obj.intensity = Math.round(message.intensity));
+      );
+    }
+    if (message.channel !== 0) {
+      obj.channel = Math.round(message.channel);
+    }
+    if (message.note !== 0) {
+      obj.note = Math.round(message.note);
+    }
+    if (message.intensity !== 0) {
+      obj.intensity = Math.round(message.intensity);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_CommunicationType_MIDICommand>, I>>(
     base?: I,
   ): Action_CommunicationType_MIDICommand {
-    return Action_CommunicationType_MIDICommand.fromPartial(base ?? {});
+    return Action_CommunicationType_MIDICommand.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_CommunicationType_MIDICommand>, I>,
   >(object: I): Action_CommunicationType_MIDICommand {
@@ -5361,28 +5420,28 @@ export const Action_CommunicationType_GlobalCacheCommand = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.commandAction = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.output = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.interval = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5397,21 +5456,25 @@ export const Action_CommunicationType_GlobalCacheCommand = {
             object.commandAction,
           )
         : 0,
-      output: isSet(object.output) ? Number(object.output) : 0,
-      interval: isSet(object.interval) ? Number(object.interval) : 0,
+      output: isSet(object.output) ? globalThis.Number(object.output) : 0,
+      interval: isSet(object.interval) ? globalThis.Number(object.interval) : 0,
     };
   },
 
   toJSON(message: Action_CommunicationType_GlobalCacheCommand): unknown {
     const obj: any = {};
-    message.commandAction !== undefined &&
-      (obj.commandAction =
+    if (message.commandAction !== 0) {
+      obj.commandAction =
         action_CommunicationType_GlobalCacheCommand_CommandActionToJSON(
           message.commandAction,
-        ));
-    message.output !== undefined && (obj.output = Math.round(message.output));
-    message.interval !== undefined &&
-      (obj.interval = Math.round(message.interval));
+        );
+    }
+    if (message.output !== 0) {
+      obj.output = Math.round(message.output);
+    }
+    if (message.interval !== 0) {
+      obj.interval = Math.round(message.interval);
+    }
     return obj;
   },
 
@@ -5421,9 +5484,10 @@ export const Action_CommunicationType_GlobalCacheCommand = {
       I
     >,
   >(base?: I): Action_CommunicationType_GlobalCacheCommand {
-    return Action_CommunicationType_GlobalCacheCommand.fromPartial(base ?? {});
+    return Action_CommunicationType_GlobalCacheCommand.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Action_CommunicationType_GlobalCacheCommand>,
@@ -5465,14 +5529,14 @@ export const Action_CommunicationType_GVG100Command = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.commandAction = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5492,20 +5556,22 @@ export const Action_CommunicationType_GVG100Command = {
 
   toJSON(message: Action_CommunicationType_GVG100Command): unknown {
     const obj: any = {};
-    message.commandAction !== undefined &&
-      (obj.commandAction =
+    if (message.commandAction !== 0) {
+      obj.commandAction =
         action_CommunicationType_GVG100Command_CommandActionToJSON(
           message.commandAction,
-        ));
+        );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Action_CommunicationType_GVG100Command>, I>,
   >(base?: I): Action_CommunicationType_GVG100Command {
-    return Action_CommunicationType_GVG100Command.fromPartial(base ?? {});
+    return Action_CommunicationType_GVG100Command.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_CommunicationType_GVG100Command>, I>,
   >(object: I): Action_CommunicationType_GVG100Command {
@@ -5542,14 +5608,14 @@ export const Action_CommunicationType_SonyBVSCommand = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.commandAction = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5569,20 +5635,22 @@ export const Action_CommunicationType_SonyBVSCommand = {
 
   toJSON(message: Action_CommunicationType_SonyBVSCommand): unknown {
     const obj: any = {};
-    message.commandAction !== undefined &&
-      (obj.commandAction =
+    if (message.commandAction !== 0) {
+      obj.commandAction =
         action_CommunicationType_SonyBVSCommand_CommandActionToJSON(
           message.commandAction,
-        ));
+        );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Action_CommunicationType_SonyBVSCommand>, I>,
   >(base?: I): Action_CommunicationType_SonyBVSCommand {
-    return Action_CommunicationType_SonyBVSCommand.fromPartial(base ?? {});
+    return Action_CommunicationType_SonyBVSCommand.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Action_CommunicationType_SonyBVSCommand>, I>,
   >(object: I): Action_CommunicationType_SonyBVSCommand {
@@ -5622,7 +5690,7 @@ export const Action_MultiScreenType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -5632,7 +5700,7 @@ export const Action_MultiScreenType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5650,19 +5718,17 @@ export const Action_MultiScreenType = {
 
   toJSON(message: Action_MultiScreenType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_MultiScreenType>, I>>(
     base?: I,
   ): Action_MultiScreenType {
-    return Action_MultiScreenType.fromPartial(base ?? {});
+    return Action_MultiScreenType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MultiScreenType>, I>>(
     object: I,
   ): Action_MultiScreenType {
@@ -5715,7 +5781,7 @@ export const Action_DocumentType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -5725,21 +5791,21 @@ export const Action_DocumentType = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.selectedArrangement = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.contentDestination = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5763,27 +5829,25 @@ export const Action_DocumentType = {
 
   toJSON(message: Action_DocumentType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
-    message.selectedArrangement !== undefined &&
-      (obj.selectedArrangement = message.selectedArrangement
-        ? UUID.toJSON(message.selectedArrangement)
-        : undefined);
-    message.contentDestination !== undefined &&
-      (obj.contentDestination = action_ContentDestinationToJSON(
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
+    if (message.selectedArrangement !== undefined) {
+      obj.selectedArrangement = UUID.toJSON(message.selectedArrangement);
+    }
+    if (message.contentDestination !== 0) {
+      obj.contentDestination = action_ContentDestinationToJSON(
         message.contentDestination,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_DocumentType>, I>>(
     base?: I,
   ): Action_DocumentType {
-    return Action_DocumentType.fromPartial(base ?? {});
+    return Action_DocumentType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_DocumentType>, I>>(
     object: I,
   ): Action_DocumentType {
@@ -5829,14 +5893,14 @@ export const Action_ExternalPresentationType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5850,17 +5914,17 @@ export const Action_ExternalPresentationType = {
 
   toJSON(message: Action_ExternalPresentationType): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_ExternalPresentationType>, I>>(
     base?: I,
   ): Action_ExternalPresentationType {
-    return Action_ExternalPresentationType.fromPartial(base ?? {});
+    return Action_ExternalPresentationType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_ExternalPresentationType>, I>>(
     object: I,
   ): Action_ExternalPresentationType {
@@ -5903,7 +5967,7 @@ export const Action_AudienceLookType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -5913,7 +5977,7 @@ export const Action_AudienceLookType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5931,19 +5995,17 @@ export const Action_AudienceLookType = {
 
   toJSON(message: Action_AudienceLookType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_AudienceLookType>, I>>(
     base?: I,
   ): Action_AudienceLookType {
-    return Action_AudienceLookType.fromPartial(base ?? {});
+    return Action_AudienceLookType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_AudienceLookType>, I>>(
     object: I,
   ): Action_AudienceLookType {
@@ -6004,21 +6066,21 @@ export const Action_AudioInputType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.index = reader.int32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.overrideMode = reader.bool();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -6028,21 +6090,21 @@ export const Action_AudioInputType = {
           );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.overrideVolume = reader.bool();
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.volume = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6052,41 +6114,45 @@ export const Action_AudioInputType = {
 
   fromJSON(object: any): Action_AudioInputType {
     return {
-      index: isSet(object.index) ? Number(object.index) : 0,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
       overrideMode: isSet(object.overrideMode)
-        ? Boolean(object.overrideMode)
+        ? globalThis.Boolean(object.overrideMode)
         : false,
       behaviorMode: isSet(object.behaviorMode)
         ? AudioInput_BehaviorMode.fromJSON(object.behaviorMode)
         : undefined,
       overrideVolume: isSet(object.overrideVolume)
-        ? Boolean(object.overrideVolume)
+        ? globalThis.Boolean(object.overrideVolume)
         : false,
-      volume: isSet(object.volume) ? Number(object.volume) : 0,
+      volume: isSet(object.volume) ? globalThis.Number(object.volume) : 0,
     };
   },
 
   toJSON(message: Action_AudioInputType): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.overrideMode !== undefined &&
-      (obj.overrideMode = message.overrideMode);
-    message.behaviorMode !== undefined &&
-      (obj.behaviorMode = message.behaviorMode
-        ? AudioInput_BehaviorMode.toJSON(message.behaviorMode)
-        : undefined);
-    message.overrideVolume !== undefined &&
-      (obj.overrideVolume = message.overrideVolume);
-    message.volume !== undefined && (obj.volume = message.volume);
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.overrideMode === true) {
+      obj.overrideMode = message.overrideMode;
+    }
+    if (message.behaviorMode !== undefined) {
+      obj.behaviorMode = AudioInput_BehaviorMode.toJSON(message.behaviorMode);
+    }
+    if (message.overrideVolume === true) {
+      obj.overrideVolume = message.overrideVolume;
+    }
+    if (message.volume !== 0) {
+      obj.volume = message.volume;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_AudioInputType>, I>>(
     base?: I,
   ): Action_AudioInputType {
-    return Action_AudioInputType.fromPartial(base ?? {});
+    return Action_AudioInputType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_AudioInputType>, I>>(
     object: I,
   ): Action_AudioInputType {
@@ -6130,7 +6196,7 @@ export const Action_MacroType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -6140,7 +6206,7 @@ export const Action_MacroType = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6158,19 +6224,17 @@ export const Action_MacroType = {
 
   toJSON(message: Action_MacroType): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Action_MacroType>, I>>(
     base?: I,
   ): Action_MacroType {
-    return Action_MacroType.fromPartial(base ?? {});
+    return Action_MacroType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Action_MacroType>, I>>(
     object: I,
   ): Action_MacroType {
@@ -6179,6 +6243,266 @@ export const Action_MacroType = {
       object.identification !== undefined && object.identification !== null
         ? CollectionElementType.fromPartial(object.identification)
         : undefined;
+    return message;
+  },
+};
+
+function createBaseAction_CaptureType(): Action_CaptureType {
+  return { start: undefined, stop: undefined };
+}
+
+export const Action_CaptureType = {
+  encode(
+    message: Action_CaptureType,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.start !== undefined) {
+      Action_CaptureType_CaptureStart.encode(
+        message.start,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    if (message.stop !== undefined) {
+      Action_CaptureType_CaptureStop.encode(
+        message.stop,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Action_CaptureType {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAction_CaptureType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.start = Action_CaptureType_CaptureStart.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.stop = Action_CaptureType_CaptureStop.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Action_CaptureType {
+    return {
+      start: isSet(object.start)
+        ? Action_CaptureType_CaptureStart.fromJSON(object.start)
+        : undefined,
+      stop: isSet(object.stop)
+        ? Action_CaptureType_CaptureStop.fromJSON(object.stop)
+        : undefined,
+    };
+  },
+
+  toJSON(message: Action_CaptureType): unknown {
+    const obj: any = {};
+    if (message.start !== undefined) {
+      obj.start = Action_CaptureType_CaptureStart.toJSON(message.start);
+    }
+    if (message.stop !== undefined) {
+      obj.stop = Action_CaptureType_CaptureStop.toJSON(message.stop);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Action_CaptureType>, I>>(
+    base?: I,
+  ): Action_CaptureType {
+    return Action_CaptureType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Action_CaptureType>, I>>(
+    object: I,
+  ): Action_CaptureType {
+    const message = createBaseAction_CaptureType();
+    message.start =
+      object.start !== undefined && object.start !== null
+        ? Action_CaptureType_CaptureStart.fromPartial(object.start)
+        : undefined;
+    message.stop =
+      object.stop !== undefined && object.stop !== null
+        ? Action_CaptureType_CaptureStop.fromPartial(object.stop)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseAction_CaptureType_CaptureStart(): Action_CaptureType_CaptureStart {
+  return { presetIdentification: undefined };
+}
+
+export const Action_CaptureType_CaptureStart = {
+  encode(
+    message: Action_CaptureType_CaptureStart,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.presetIdentification !== undefined) {
+      CollectionElementType.encode(
+        message.presetIdentification,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Action_CaptureType_CaptureStart {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAction_CaptureType_CaptureStart();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.presetIdentification = CollectionElementType.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Action_CaptureType_CaptureStart {
+    return {
+      presetIdentification: isSet(object.presetIdentification)
+        ? CollectionElementType.fromJSON(object.presetIdentification)
+        : undefined,
+    };
+  },
+
+  toJSON(message: Action_CaptureType_CaptureStart): unknown {
+    const obj: any = {};
+    if (message.presetIdentification !== undefined) {
+      obj.presetIdentification = CollectionElementType.toJSON(
+        message.presetIdentification,
+      );
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Action_CaptureType_CaptureStart>, I>>(
+    base?: I,
+  ): Action_CaptureType_CaptureStart {
+    return Action_CaptureType_CaptureStart.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Action_CaptureType_CaptureStart>, I>>(
+    object: I,
+  ): Action_CaptureType_CaptureStart {
+    const message = createBaseAction_CaptureType_CaptureStart();
+    message.presetIdentification =
+      object.presetIdentification !== undefined &&
+      object.presetIdentification !== null
+        ? CollectionElementType.fromPartial(object.presetIdentification)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseAction_CaptureType_CaptureStop(): Action_CaptureType_CaptureStop {
+  return { showsAlertBeforeStopping: false };
+}
+
+export const Action_CaptureType_CaptureStop = {
+  encode(
+    message: Action_CaptureType_CaptureStop,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.showsAlertBeforeStopping === true) {
+      writer.uint32(8).bool(message.showsAlertBeforeStopping);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): Action_CaptureType_CaptureStop {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAction_CaptureType_CaptureStop();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.showsAlertBeforeStopping = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Action_CaptureType_CaptureStop {
+    return {
+      showsAlertBeforeStopping: isSet(object.showsAlertBeforeStopping)
+        ? globalThis.Boolean(object.showsAlertBeforeStopping)
+        : false,
+    };
+  },
+
+  toJSON(message: Action_CaptureType_CaptureStop): unknown {
+    const obj: any = {};
+    if (message.showsAlertBeforeStopping === true) {
+      obj.showsAlertBeforeStopping = message.showsAlertBeforeStopping;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Action_CaptureType_CaptureStop>, I>>(
+    base?: I,
+  ): Action_CaptureType_CaptureStop {
+    return Action_CaptureType_CaptureStop.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Action_CaptureType_CaptureStop>, I>>(
+    object: I,
+  ): Action_CaptureType_CaptureStop {
+    const message = createBaseAction_CaptureType_CaptureStop();
+    message.showsAlertBeforeStopping = object.showsAlertBeforeStopping ?? false;
     return message;
   },
 };
@@ -6194,8 +6518,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

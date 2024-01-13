@@ -764,21 +764,21 @@ export const HotKey = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.code = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.controlIdentifier = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -790,23 +790,25 @@ export const HotKey = {
     return {
       code: isSet(object.code) ? keyCodeFromJSON(object.code) : 0,
       controlIdentifier: isSet(object.controlIdentifier)
-        ? String(object.controlIdentifier)
+        ? globalThis.String(object.controlIdentifier)
         : '',
     };
   },
 
   toJSON(message: HotKey): unknown {
     const obj: any = {};
-    message.code !== undefined && (obj.code = keyCodeToJSON(message.code));
-    message.controlIdentifier !== undefined &&
-      (obj.controlIdentifier = message.controlIdentifier);
+    if (message.code !== 0) {
+      obj.code = keyCodeToJSON(message.code);
+    }
+    if (message.controlIdentifier !== '') {
+      obj.controlIdentifier = message.controlIdentifier;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<HotKey>, I>>(base?: I): HotKey {
-    return HotKey.fromPartial(base ?? {});
+    return HotKey.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<HotKey>, I>>(object: I): HotKey {
     const message = createBaseHotKey();
     message.code = object.code ?? 0;
@@ -826,8 +828,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

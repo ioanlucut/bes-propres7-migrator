@@ -1,6 +1,7 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { ApplicationInfo, UUID } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -228,14 +229,14 @@ export const Clock = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.format = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -244,19 +245,22 @@ export const Clock = {
   },
 
   fromJSON(object: any): Clock {
-    return { format: isSet(object.format) ? String(object.format) : '' };
+    return {
+      format: isSet(object.format) ? globalThis.String(object.format) : '',
+    };
   },
 
   toJSON(message: Clock): unknown {
     const obj: any = {};
-    message.format !== undefined && (obj.format = message.format);
+    if (message.format !== '') {
+      obj.format = message.format;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Clock>, I>>(base?: I): Clock {
-    return Clock.fromPartial(base ?? {});
+    return Clock.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Clock>, I>>(object: I): Clock {
     const message = createBaseClock();
     message.format = object.format ?? '';
@@ -294,28 +298,28 @@ export const Clock_Format = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.dateType = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.timeFormat = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.militaryTimeEnabled = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -332,30 +336,32 @@ export const Clock_Format = {
         ? clock_Format_DateFormatterStyleFromJSON(object.timeFormat)
         : 0,
       militaryTimeEnabled: isSet(object.militaryTimeEnabled)
-        ? Boolean(object.militaryTimeEnabled)
+        ? globalThis.Boolean(object.militaryTimeEnabled)
         : false,
     };
   },
 
   toJSON(message: Clock_Format): unknown {
     const obj: any = {};
-    message.dateType !== undefined &&
-      (obj.dateType = clock_Format_DateFormatterStyleToJSON(message.dateType));
-    message.timeFormat !== undefined &&
-      (obj.timeFormat = clock_Format_DateFormatterStyleToJSON(
+    if (message.dateType !== 0) {
+      obj.dateType = clock_Format_DateFormatterStyleToJSON(message.dateType);
+    }
+    if (message.timeFormat !== 0) {
+      obj.timeFormat = clock_Format_DateFormatterStyleToJSON(
         message.timeFormat,
-      ));
-    message.militaryTimeEnabled !== undefined &&
-      (obj.militaryTimeEnabled = message.militaryTimeEnabled);
+      );
+    }
+    if (message.militaryTimeEnabled === true) {
+      obj.militaryTimeEnabled = message.militaryTimeEnabled;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Clock_Format>, I>>(
     base?: I,
   ): Clock_Format {
-    return Clock_Format.fromPartial(base ?? {});
+    return Clock_Format.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Clock_Format>, I>>(
     object: I,
   ): Clock_Format {
@@ -397,21 +403,21 @@ export const Timer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -421,7 +427,7 @@ export const Timer = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -432,7 +438,7 @@ export const Timer = {
   fromJSON(object: any): Timer {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       configuration: isSet(object.configuration)
         ? Timer_Configuration.fromJSON(object.configuration)
         : undefined,
@@ -441,20 +447,21 @@ export const Timer = {
 
   toJSON(message: Timer): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.configuration !== undefined &&
-      (obj.configuration = message.configuration
-        ? Timer_Configuration.toJSON(message.configuration)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.configuration !== undefined) {
+      obj.configuration = Timer_Configuration.toJSON(message.configuration);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Timer>, I>>(base?: I): Timer {
-    return Timer.fromPartial(base ?? {});
+    return Timer.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Timer>, I>>(object: I): Timer {
     const message = createBaseTimer();
     message.uuid =
@@ -520,56 +527,56 @@ export const Timer_Format = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.hour = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.minute = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.second = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.millisecond = reader.int32() as any;
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.isWallClockTime = reader.bool();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.is24HourTime = reader.bool();
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.showMillisecondsUnderMinuteOnly = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -590,45 +597,51 @@ export const Timer_Format = {
         ? timer_Format_StyleFromJSON(object.millisecond)
         : 0,
       isWallClockTime: isSet(object.isWallClockTime)
-        ? Boolean(object.isWallClockTime)
+        ? globalThis.Boolean(object.isWallClockTime)
         : false,
       is24HourTime: isSet(object.is24HourTime)
-        ? Boolean(object.is24HourTime)
+        ? globalThis.Boolean(object.is24HourTime)
         : false,
       showMillisecondsUnderMinuteOnly: isSet(
         object.showMillisecondsUnderMinuteOnly,
       )
-        ? Boolean(object.showMillisecondsUnderMinuteOnly)
+        ? globalThis.Boolean(object.showMillisecondsUnderMinuteOnly)
         : false,
     };
   },
 
   toJSON(message: Timer_Format): unknown {
     const obj: any = {};
-    message.hour !== undefined &&
-      (obj.hour = timer_Format_StyleToJSON(message.hour));
-    message.minute !== undefined &&
-      (obj.minute = timer_Format_StyleToJSON(message.minute));
-    message.second !== undefined &&
-      (obj.second = timer_Format_StyleToJSON(message.second));
-    message.millisecond !== undefined &&
-      (obj.millisecond = timer_Format_StyleToJSON(message.millisecond));
-    message.isWallClockTime !== undefined &&
-      (obj.isWallClockTime = message.isWallClockTime);
-    message.is24HourTime !== undefined &&
-      (obj.is24HourTime = message.is24HourTime);
-    message.showMillisecondsUnderMinuteOnly !== undefined &&
-      (obj.showMillisecondsUnderMinuteOnly =
-        message.showMillisecondsUnderMinuteOnly);
+    if (message.hour !== 0) {
+      obj.hour = timer_Format_StyleToJSON(message.hour);
+    }
+    if (message.minute !== 0) {
+      obj.minute = timer_Format_StyleToJSON(message.minute);
+    }
+    if (message.second !== 0) {
+      obj.second = timer_Format_StyleToJSON(message.second);
+    }
+    if (message.millisecond !== 0) {
+      obj.millisecond = timer_Format_StyleToJSON(message.millisecond);
+    }
+    if (message.isWallClockTime === true) {
+      obj.isWallClockTime = message.isWallClockTime;
+    }
+    if (message.is24HourTime === true) {
+      obj.is24HourTime = message.is24HourTime;
+    }
+    if (message.showMillisecondsUnderMinuteOnly === true) {
+      obj.showMillisecondsUnderMinuteOnly =
+        message.showMillisecondsUnderMinuteOnly;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Timer_Format>, I>>(
     base?: I,
   ): Timer_Format {
-    return Timer_Format.fromPartial(base ?? {});
+    return Timer_Format.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Timer_Format>, I>>(
     object: I,
   ): Timer_Format {
@@ -692,14 +705,14 @@ export const Timer_Configuration = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.allowsOverrun = reader.bool();
           continue;
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -709,7 +722,7 @@ export const Timer_Configuration = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -720,7 +733,7 @@ export const Timer_Configuration = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -730,7 +743,7 @@ export const Timer_Configuration = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -741,7 +754,7 @@ export const Timer_Configuration = {
   fromJSON(object: any): Timer_Configuration {
     return {
       allowsOverrun: isSet(object.allowsOverrun)
-        ? Boolean(object.allowsOverrun)
+        ? globalThis.Boolean(object.allowsOverrun)
         : false,
       countdown: isSet(object.countdown)
         ? Timer_Configuration_TimerTypeCountdown.fromJSON(object.countdown)
@@ -759,31 +772,32 @@ export const Timer_Configuration = {
 
   toJSON(message: Timer_Configuration): unknown {
     const obj: any = {};
-    message.allowsOverrun !== undefined &&
-      (obj.allowsOverrun = message.allowsOverrun);
-    message.countdown !== undefined &&
-      (obj.countdown = message.countdown
-        ? Timer_Configuration_TimerTypeCountdown.toJSON(message.countdown)
-        : undefined);
-    message.countdownToTime !== undefined &&
-      (obj.countdownToTime = message.countdownToTime
-        ? Timer_Configuration_TimerTypeCountdownToTime.toJSON(
-            message.countdownToTime,
-          )
-        : undefined);
-    message.elapsedTime !== undefined &&
-      (obj.elapsedTime = message.elapsedTime
-        ? Timer_Configuration_TimerTypeElapsedTime.toJSON(message.elapsedTime)
-        : undefined);
+    if (message.allowsOverrun === true) {
+      obj.allowsOverrun = message.allowsOverrun;
+    }
+    if (message.countdown !== undefined) {
+      obj.countdown = Timer_Configuration_TimerTypeCountdown.toJSON(
+        message.countdown,
+      );
+    }
+    if (message.countdownToTime !== undefined) {
+      obj.countdownToTime = Timer_Configuration_TimerTypeCountdownToTime.toJSON(
+        message.countdownToTime,
+      );
+    }
+    if (message.elapsedTime !== undefined) {
+      obj.elapsedTime = Timer_Configuration_TimerTypeElapsedTime.toJSON(
+        message.elapsedTime,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Timer_Configuration>, I>>(
     base?: I,
   ): Timer_Configuration {
-    return Timer_Configuration.fromPartial(base ?? {});
+    return Timer_Configuration.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Timer_Configuration>, I>>(
     object: I,
   ): Timer_Configuration {
@@ -836,14 +850,14 @@ export const Timer_Configuration_TimerTypeCountdown = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.duration = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -852,21 +866,26 @@ export const Timer_Configuration_TimerTypeCountdown = {
   },
 
   fromJSON(object: any): Timer_Configuration_TimerTypeCountdown {
-    return { duration: isSet(object.duration) ? Number(object.duration) : 0 };
+    return {
+      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
+    };
   },
 
   toJSON(message: Timer_Configuration_TimerTypeCountdown): unknown {
     const obj: any = {};
-    message.duration !== undefined && (obj.duration = message.duration);
+    if (message.duration !== 0) {
+      obj.duration = message.duration;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Timer_Configuration_TimerTypeCountdown>, I>,
   >(base?: I): Timer_Configuration_TimerTypeCountdown {
-    return Timer_Configuration_TimerTypeCountdown.fromPartial(base ?? {});
+    return Timer_Configuration_TimerTypeCountdown.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Timer_Configuration_TimerTypeCountdown>, I>,
   >(object: I): Timer_Configuration_TimerTypeCountdown {
@@ -906,21 +925,21 @@ export const Timer_Configuration_TimerTypeCountdownToTime = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.timeOfDay = reader.double();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.period = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -930,7 +949,9 @@ export const Timer_Configuration_TimerTypeCountdownToTime = {
 
   fromJSON(object: any): Timer_Configuration_TimerTypeCountdownToTime {
     return {
-      timeOfDay: isSet(object.timeOfDay) ? Number(object.timeOfDay) : 0,
+      timeOfDay: isSet(object.timeOfDay)
+        ? globalThis.Number(object.timeOfDay)
+        : 0,
       period: isSet(object.period)
         ? timer_Configuration_TimerTypeCountdownToTime_TimePeriodFromJSON(
             object.period,
@@ -941,12 +962,15 @@ export const Timer_Configuration_TimerTypeCountdownToTime = {
 
   toJSON(message: Timer_Configuration_TimerTypeCountdownToTime): unknown {
     const obj: any = {};
-    message.timeOfDay !== undefined && (obj.timeOfDay = message.timeOfDay);
-    message.period !== undefined &&
-      (obj.period =
+    if (message.timeOfDay !== 0) {
+      obj.timeOfDay = message.timeOfDay;
+    }
+    if (message.period !== 0) {
+      obj.period =
         timer_Configuration_TimerTypeCountdownToTime_TimePeriodToJSON(
           message.period,
-        ));
+        );
+    }
     return obj;
   },
 
@@ -956,9 +980,10 @@ export const Timer_Configuration_TimerTypeCountdownToTime = {
       I
     >,
   >(base?: I): Timer_Configuration_TimerTypeCountdownToTime {
-    return Timer_Configuration_TimerTypeCountdownToTime.fromPartial(base ?? {});
+    return Timer_Configuration_TimerTypeCountdownToTime.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<Timer_Configuration_TimerTypeCountdownToTime>,
@@ -1005,28 +1030,28 @@ export const Timer_Configuration_TimerTypeElapsedTime = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.startTime = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.endTime = reader.double();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.hasEndTime = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1036,26 +1061,37 @@ export const Timer_Configuration_TimerTypeElapsedTime = {
 
   fromJSON(object: any): Timer_Configuration_TimerTypeElapsedTime {
     return {
-      startTime: isSet(object.startTime) ? Number(object.startTime) : 0,
-      endTime: isSet(object.endTime) ? Number(object.endTime) : 0,
-      hasEndTime: isSet(object.hasEndTime) ? Boolean(object.hasEndTime) : false,
+      startTime: isSet(object.startTime)
+        ? globalThis.Number(object.startTime)
+        : 0,
+      endTime: isSet(object.endTime) ? globalThis.Number(object.endTime) : 0,
+      hasEndTime: isSet(object.hasEndTime)
+        ? globalThis.Boolean(object.hasEndTime)
+        : false,
     };
   },
 
   toJSON(message: Timer_Configuration_TimerTypeElapsedTime): unknown {
     const obj: any = {};
-    message.startTime !== undefined && (obj.startTime = message.startTime);
-    message.endTime !== undefined && (obj.endTime = message.endTime);
-    message.hasEndTime !== undefined && (obj.hasEndTime = message.hasEndTime);
+    if (message.startTime !== 0) {
+      obj.startTime = message.startTime;
+    }
+    if (message.endTime !== 0) {
+      obj.endTime = message.endTime;
+    }
+    if (message.hasEndTime === true) {
+      obj.hasEndTime = message.hasEndTime;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Timer_Configuration_TimerTypeElapsedTime>, I>,
   >(base?: I): Timer_Configuration_TimerTypeElapsedTime {
-    return Timer_Configuration_TimerTypeElapsedTime.fromPartial(base ?? {});
+    return Timer_Configuration_TimerTypeElapsedTime.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Timer_Configuration_TimerTypeElapsedTime>, I>,
   >(object: I): Timer_Configuration_TimerTypeElapsedTime {
@@ -1100,7 +1136,7 @@ export const TimersDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1110,21 +1146,21 @@ export const TimersDocument = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.clock = Clock.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.timers.push(Timer.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1138,7 +1174,7 @@ export const TimersDocument = {
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
       clock: isSet(object.clock) ? Clock.fromJSON(object.clock) : undefined,
-      timers: Array.isArray(object?.timers)
+      timers: globalThis.Array.isArray(object?.timers)
         ? object.timers.map((e: any) => Timer.fromJSON(e))
         : [],
     };
@@ -1146,16 +1182,14 @@ export const TimersDocument = {
 
   toJSON(message: TimersDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    message.clock !== undefined &&
-      (obj.clock = message.clock ? Clock.toJSON(message.clock) : undefined);
-    if (message.timers) {
-      obj.timers = message.timers.map((e) => (e ? Timer.toJSON(e) : undefined));
-    } else {
-      obj.timers = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.clock !== undefined) {
+      obj.clock = Clock.toJSON(message.clock);
+    }
+    if (message.timers?.length) {
+      obj.timers = message.timers.map((e) => Timer.toJSON(e));
     }
     return obj;
   },
@@ -1163,9 +1197,8 @@ export const TimersDocument = {
   create<I extends Exact<DeepPartial<TimersDocument>, I>>(
     base?: I,
   ): TimersDocument {
-    return TimersDocument.fromPartial(base ?? {});
+    return TimersDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<TimersDocument>, I>>(
     object: I,
   ): TimersDocument {
@@ -1194,8 +1227,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

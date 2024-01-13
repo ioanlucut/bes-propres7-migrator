@@ -111,7 +111,7 @@ export const ProPresenterWorkspace = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -120,7 +120,7 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -129,7 +129,7 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -139,21 +139,21 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.masks.push(ProMask.decode(reader, reader.uint32()));
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.videoInputs.push(VideoInput.decode(reader, reader.uint32()));
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -162,7 +162,7 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -172,14 +172,14 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.selectedLibraryName = reader.string();
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -189,7 +189,7 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -199,21 +199,21 @@ export const ProPresenterWorkspace = {
           );
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
           message.audioInputs.push(AudioInput.decode(reader, reader.uint32()));
           continue;
         case 12:
-          if (tag != 97) {
+          if (tag !== 97) {
             break;
           }
 
           message.audioInputTransitionTime = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -223,22 +223,22 @@ export const ProPresenterWorkspace = {
 
   fromJSON(object: any): ProPresenterWorkspace {
     return {
-      proScreens: Array.isArray(object?.proScreens)
+      proScreens: globalThis.Array.isArray(object?.proScreens)
         ? object.proScreens.map((e: any) => ProPresenterScreen.fromJSON(e))
         : [],
-      audienceLooks: Array.isArray(object?.audienceLooks)
+      audienceLooks: globalThis.Array.isArray(object?.audienceLooks)
         ? object.audienceLooks.map((e: any) => ProAudienceLook.fromJSON(e))
         : [],
       liveAudienceLook: isSet(object.liveAudienceLook)
         ? ProAudienceLook.fromJSON(object.liveAudienceLook)
         : undefined,
-      masks: Array.isArray(object?.masks)
+      masks: globalThis.Array.isArray(object?.masks)
         ? object.masks.map((e: any) => ProMask.fromJSON(e))
         : [],
-      videoInputs: Array.isArray(object?.videoInputs)
+      videoInputs: globalThis.Array.isArray(object?.videoInputs)
         ? object.videoInputs.map((e: any) => VideoInput.fromJSON(e))
         : [],
-      stageLayoutMappings: Array.isArray(object?.stageLayoutMappings)
+      stageLayoutMappings: globalThis.Array.isArray(object?.stageLayoutMappings)
         ? object.stageLayoutMappings.map((e: any) =>
             Stage_ScreenAssignment.fromJSON(e),
           )
@@ -247,7 +247,7 @@ export const ProPresenterWorkspace = {
         ? Audio_SettingsDocument.fromJSON(object.audioSettings)
         : undefined,
       selectedLibraryName: isSet(object.selectedLibraryName)
-        ? String(object.selectedLibraryName)
+        ? globalThis.String(object.selectedLibraryName)
         : '',
       recordSettings: isSet(object.recordSettings)
         ? Recording_SettingsDocument.fromJSON(object.recordSettings)
@@ -255,86 +255,71 @@ export const ProPresenterWorkspace = {
       digitalAudioSetup: isSet(object.digitalAudioSetup)
         ? DigitalAudio_Setup.fromJSON(object.digitalAudioSetup)
         : undefined,
-      audioInputs: Array.isArray(object?.audioInputs)
+      audioInputs: globalThis.Array.isArray(object?.audioInputs)
         ? object.audioInputs.map((e: any) => AudioInput.fromJSON(e))
         : [],
       audioInputTransitionTime: isSet(object.audioInputTransitionTime)
-        ? Number(object.audioInputTransitionTime)
+        ? globalThis.Number(object.audioInputTransitionTime)
         : 0,
     };
   },
 
   toJSON(message: ProPresenterWorkspace): unknown {
     const obj: any = {};
-    if (message.proScreens) {
+    if (message.proScreens?.length) {
       obj.proScreens = message.proScreens.map((e) =>
-        e ? ProPresenterScreen.toJSON(e) : undefined,
+        ProPresenterScreen.toJSON(e),
       );
-    } else {
-      obj.proScreens = [];
     }
-    if (message.audienceLooks) {
+    if (message.audienceLooks?.length) {
       obj.audienceLooks = message.audienceLooks.map((e) =>
-        e ? ProAudienceLook.toJSON(e) : undefined,
+        ProAudienceLook.toJSON(e),
       );
-    } else {
-      obj.audienceLooks = [];
     }
-    message.liveAudienceLook !== undefined &&
-      (obj.liveAudienceLook = message.liveAudienceLook
-        ? ProAudienceLook.toJSON(message.liveAudienceLook)
-        : undefined);
-    if (message.masks) {
-      obj.masks = message.masks.map((e) => (e ? ProMask.toJSON(e) : undefined));
-    } else {
-      obj.masks = [];
+    if (message.liveAudienceLook !== undefined) {
+      obj.liveAudienceLook = ProAudienceLook.toJSON(message.liveAudienceLook);
     }
-    if (message.videoInputs) {
-      obj.videoInputs = message.videoInputs.map((e) =>
-        e ? VideoInput.toJSON(e) : undefined,
-      );
-    } else {
-      obj.videoInputs = [];
+    if (message.masks?.length) {
+      obj.masks = message.masks.map((e) => ProMask.toJSON(e));
     }
-    if (message.stageLayoutMappings) {
+    if (message.videoInputs?.length) {
+      obj.videoInputs = message.videoInputs.map((e) => VideoInput.toJSON(e));
+    }
+    if (message.stageLayoutMappings?.length) {
       obj.stageLayoutMappings = message.stageLayoutMappings.map((e) =>
-        e ? Stage_ScreenAssignment.toJSON(e) : undefined,
+        Stage_ScreenAssignment.toJSON(e),
       );
-    } else {
-      obj.stageLayoutMappings = [];
     }
-    message.audioSettings !== undefined &&
-      (obj.audioSettings = message.audioSettings
-        ? Audio_SettingsDocument.toJSON(message.audioSettings)
-        : undefined);
-    message.selectedLibraryName !== undefined &&
-      (obj.selectedLibraryName = message.selectedLibraryName);
-    message.recordSettings !== undefined &&
-      (obj.recordSettings = message.recordSettings
-        ? Recording_SettingsDocument.toJSON(message.recordSettings)
-        : undefined);
-    message.digitalAudioSetup !== undefined &&
-      (obj.digitalAudioSetup = message.digitalAudioSetup
-        ? DigitalAudio_Setup.toJSON(message.digitalAudioSetup)
-        : undefined);
-    if (message.audioInputs) {
-      obj.audioInputs = message.audioInputs.map((e) =>
-        e ? AudioInput.toJSON(e) : undefined,
+    if (message.audioSettings !== undefined) {
+      obj.audioSettings = Audio_SettingsDocument.toJSON(message.audioSettings);
+    }
+    if (message.selectedLibraryName !== '') {
+      obj.selectedLibraryName = message.selectedLibraryName;
+    }
+    if (message.recordSettings !== undefined) {
+      obj.recordSettings = Recording_SettingsDocument.toJSON(
+        message.recordSettings,
       );
-    } else {
-      obj.audioInputs = [];
     }
-    message.audioInputTransitionTime !== undefined &&
-      (obj.audioInputTransitionTime = message.audioInputTransitionTime);
+    if (message.digitalAudioSetup !== undefined) {
+      obj.digitalAudioSetup = DigitalAudio_Setup.toJSON(
+        message.digitalAudioSetup,
+      );
+    }
+    if (message.audioInputs?.length) {
+      obj.audioInputs = message.audioInputs.map((e) => AudioInput.toJSON(e));
+    }
+    if (message.audioInputTransitionTime !== 0) {
+      obj.audioInputTransitionTime = message.audioInputTransitionTime;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProPresenterWorkspace>, I>>(
     base?: I,
   ): ProPresenterWorkspace {
-    return ProPresenterWorkspace.fromPartial(base ?? {});
+    return ProPresenterWorkspace.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProPresenterWorkspace>, I>>(
     object: I,
   ): ProPresenterWorkspace {
@@ -386,8 +371,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

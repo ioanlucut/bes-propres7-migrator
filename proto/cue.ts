@@ -1,8 +1,9 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { Action } from './action';
-import { URLs, UUID } from './basicTypes';
 import { HotKey } from './hotKey';
+import { URLs } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -210,49 +211,49 @@ export const Cue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.completionTargetType = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.completionTargetUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.completionActionType = reader.int32() as any;
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.completionActionUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -262,21 +263,21 @@ export const Cue = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.hotKey = HotKey.decode(reader, reader.uint32());
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.actions.push(Action.decode(reader, reader.uint32()));
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -285,21 +286,21 @@ export const Cue = {
           );
           continue;
         case 12:
-          if (tag != 96) {
+          if (tag !== 96) {
             break;
           }
 
           message.isEnabled = reader.bool();
           continue;
         case 13:
-          if (tag != 105) {
+          if (tag !== 105) {
             break;
           }
 
           message.completionTime = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -310,7 +311,7 @@ export const Cue = {
   fromJSON(object: any): Cue {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       completionTargetType: isSet(object.completionTargetType)
         ? cue_CompletionTargetTypeFromJSON(object.completionTargetType)
         : 0,
@@ -327,72 +328,73 @@ export const Cue = {
         ? Cue_TimecodeTime.fromJSON(object.triggerTime)
         : undefined,
       hotKey: isSet(object.hotKey) ? HotKey.fromJSON(object.hotKey) : undefined,
-      actions: Array.isArray(object?.actions)
+      actions: globalThis.Array.isArray(object?.actions)
         ? object.actions.map((e: any) => Action.fromJSON(e))
         : [],
-      pendingImports: Array.isArray(object?.pendingImports)
+      pendingImports: globalThis.Array.isArray(object?.pendingImports)
         ? object.pendingImports.map((e: any) =>
             Cue_PendingImportsEntry.fromJSON(e),
           )
         : [],
-      isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
+      isEnabled: isSet(object.isEnabled)
+        ? globalThis.Boolean(object.isEnabled)
+        : false,
       completionTime: isSet(object.completionTime)
-        ? Number(object.completionTime)
+        ? globalThis.Number(object.completionTime)
         : 0,
     };
   },
 
   toJSON(message: Cue): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.completionTargetType !== undefined &&
-      (obj.completionTargetType = cue_CompletionTargetTypeToJSON(
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.completionTargetType !== 0) {
+      obj.completionTargetType = cue_CompletionTargetTypeToJSON(
         message.completionTargetType,
-      ));
-    message.completionTargetUuid !== undefined &&
-      (obj.completionTargetUuid = message.completionTargetUuid
-        ? UUID.toJSON(message.completionTargetUuid)
-        : undefined);
-    message.completionActionType !== undefined &&
-      (obj.completionActionType = cue_CompletionActionTypeToJSON(
+      );
+    }
+    if (message.completionTargetUuid !== undefined) {
+      obj.completionTargetUuid = UUID.toJSON(message.completionTargetUuid);
+    }
+    if (message.completionActionType !== 0) {
+      obj.completionActionType = cue_CompletionActionTypeToJSON(
         message.completionActionType,
-      ));
-    message.completionActionUuid !== undefined &&
-      (obj.completionActionUuid = message.completionActionUuid
-        ? UUID.toJSON(message.completionActionUuid)
-        : undefined);
-    message.triggerTime !== undefined &&
-      (obj.triggerTime = message.triggerTime
-        ? Cue_TimecodeTime.toJSON(message.triggerTime)
-        : undefined);
-    message.hotKey !== undefined &&
-      (obj.hotKey = message.hotKey ? HotKey.toJSON(message.hotKey) : undefined);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? Action.toJSON(e) : undefined,
       );
-    } else {
-      obj.actions = [];
     }
-    if (message.pendingImports) {
+    if (message.completionActionUuid !== undefined) {
+      obj.completionActionUuid = UUID.toJSON(message.completionActionUuid);
+    }
+    if (message.triggerTime !== undefined) {
+      obj.triggerTime = Cue_TimecodeTime.toJSON(message.triggerTime);
+    }
+    if (message.hotKey !== undefined) {
+      obj.hotKey = HotKey.toJSON(message.hotKey);
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => Action.toJSON(e));
+    }
+    if (message.pendingImports?.length) {
       obj.pendingImports = message.pendingImports.map((e) =>
-        e ? Cue_PendingImportsEntry.toJSON(e) : undefined,
+        Cue_PendingImportsEntry.toJSON(e),
       );
-    } else {
-      obj.pendingImports = [];
     }
-    message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
-    message.completionTime !== undefined &&
-      (obj.completionTime = message.completionTime);
+    if (message.isEnabled === true) {
+      obj.isEnabled = message.isEnabled;
+    }
+    if (message.completionTime !== 0) {
+      obj.completionTime = message.completionTime;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Cue>, I>>(base?: I): Cue {
-    return Cue.fromPartial(base ?? {});
+    return Cue.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Cue>, I>>(object: I): Cue {
     const message = createBaseCue();
     message.uuid =
@@ -455,14 +457,14 @@ export const Cue_TimecodeTime = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.time = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -471,21 +473,22 @@ export const Cue_TimecodeTime = {
   },
 
   fromJSON(object: any): Cue_TimecodeTime {
-    return { time: isSet(object.time) ? Number(object.time) : 0 };
+    return { time: isSet(object.time) ? globalThis.Number(object.time) : 0 };
   },
 
   toJSON(message: Cue_TimecodeTime): unknown {
     const obj: any = {};
-    message.time !== undefined && (obj.time = message.time);
+    if (message.time !== 0) {
+      obj.time = message.time;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Cue_TimecodeTime>, I>>(
     base?: I,
   ): Cue_TimecodeTime {
-    return Cue_TimecodeTime.fromPartial(base ?? {});
+    return Cue_TimecodeTime.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Cue_TimecodeTime>, I>>(
     object: I,
   ): Cue_TimecodeTime {
@@ -525,21 +528,21 @@ export const Cue_PendingImportsEntry = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.key = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.value = URLs.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -549,25 +552,27 @@ export const Cue_PendingImportsEntry = {
 
   fromJSON(object: any): Cue_PendingImportsEntry {
     return {
-      key: isSet(object.key) ? String(object.key) : '',
+      key: isSet(object.key) ? globalThis.String(object.key) : '',
       value: isSet(object.value) ? URLs.fromJSON(object.value) : undefined,
     };
   },
 
   toJSON(message: Cue_PendingImportsEntry): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined &&
-      (obj.value = message.value ? URLs.toJSON(message.value) : undefined);
+    if (message.key !== '') {
+      obj.key = message.key;
+    }
+    if (message.value !== undefined) {
+      obj.value = URLs.toJSON(message.value);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Cue_PendingImportsEntry>, I>>(
     base?: I,
   ): Cue_PendingImportsEntry {
-    return Cue_PendingImportsEntry.fromPartial(base ?? {});
+    return Cue_PendingImportsEntry.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Cue_PendingImportsEntry>, I>>(
     object: I,
   ): Cue_PendingImportsEntry {
@@ -592,8 +597,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

@@ -6,17 +6,21 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "basicTypes.proto";
-import "layers.proto";
+import "background.proto";
+import "collectionElementType.proto";
+import "color.proto";
 import "effects.proto";
 import "graphicsData.proto";
-import "background.proto";
-import "presentationSlide.proto";
-import "propSlide.proto";
-import "timers.proto";
-import "messages.proto";
-import "stage.proto";
 import "input.proto";
+import "intRange.proto";
+import "layers.proto";
+import "messages.proto";
+import "propSlide.proto";
+import "presentationSlide.proto";
+import "stage.proto";
+import "timers.proto";
+import "url.proto";
+import "uuid.proto";
 
 message Action {
   reserved "social_media";
@@ -71,6 +75,7 @@ message Action {
   }
 
   message MediaType {
+    reserved 13;
     message Image {
     }
 
@@ -349,6 +354,21 @@ message Action {
     .rv.data.CollectionElementType identification = 1;
   }
 
+  message CaptureType {
+    message CaptureStart {
+      .rv.data.CollectionElementType preset_identification = 1;
+    }
+
+    message CaptureStop {
+      bool shows_alert_before_stopping = 1;
+    }
+
+    oneof CaptureAction {
+      .rv.data.Action.CaptureType.CaptureStart start = 1;
+      .rv.data.Action.CaptureType.CaptureStop stop = 2;
+    }
+  }
+
   enum ContentDestination {
     CONTENT_DESTINATION_GLOBAL = 0;
     CONTENT_DESTINATION_ANNOUNCEMENTS = 1;
@@ -386,6 +406,8 @@ message Action {
     ACTION_TYPE_SLIDE_DESTINATION = 22;
     ACTION_TYPE_MACRO = 23;
     ACTION_TYPE_CLEAR_GROUP = 24;
+    ACTION_TYPE_CAPTURE = 25;
+    ACTION_TYPE_LIBRARY_PLAYLIST = 26;
   }
 
   .rv.data.UUID uuid = 1;
@@ -423,6 +445,7 @@ message Action {
     .rv.data.Action.MacroType macro = 40;
     .rv.data.Action.ClearGroupType clear_group = 41;
     .rv.data.Action.TransportControlType transport_control = 42;
+    .rv.data.Action.CaptureType capture = 43;
   }
 }
 

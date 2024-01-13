@@ -143,14 +143,14 @@ export const TestPattern = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -160,7 +160,7 @@ export const TestPattern = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -170,7 +170,7 @@ export const TestPattern = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -180,7 +180,7 @@ export const TestPattern = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -205,27 +205,24 @@ export const TestPattern = {
 
   toJSON(message: TestPattern): unknown {
     const obj: any = {};
-    message.type !== undefined &&
-      (obj.type = testPattern_TypeToJSON(message.type));
-    message.blendGrid !== undefined &&
-      (obj.blendGrid = message.blendGrid
-        ? TestPattern_BlendGrid.toJSON(message.blendGrid)
-        : undefined);
-    message.customColor !== undefined &&
-      (obj.customColor = message.customColor
-        ? TestPattern_CustomColor.toJSON(message.customColor)
-        : undefined);
-    message.intensity !== undefined &&
-      (obj.intensity = message.intensity
-        ? TestPattern_IntensityColor.toJSON(message.intensity)
-        : undefined);
+    if (message.type !== 0) {
+      obj.type = testPattern_TypeToJSON(message.type);
+    }
+    if (message.blendGrid !== undefined) {
+      obj.blendGrid = TestPattern_BlendGrid.toJSON(message.blendGrid);
+    }
+    if (message.customColor !== undefined) {
+      obj.customColor = TestPattern_CustomColor.toJSON(message.customColor);
+    }
+    if (message.intensity !== undefined) {
+      obj.intensity = TestPattern_IntensityColor.toJSON(message.intensity);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TestPattern>, I>>(base?: I): TestPattern {
-    return TestPattern.fromPartial(base ?? {});
+    return TestPattern.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<TestPattern>, I>>(
     object: I,
   ): TestPattern {
@@ -292,42 +289,42 @@ export const TestPattern_BlendGrid = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.drawGrid = reader.bool();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.drawCircles = reader.bool();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.drawLines = reader.bool();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.invertColors = reader.bool();
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.gridSpacing = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -337,37 +334,49 @@ export const TestPattern_BlendGrid = {
 
   fromJSON(object: any): TestPattern_BlendGrid {
     return {
-      drawGrid: isSet(object.drawGrid) ? Boolean(object.drawGrid) : false,
+      drawGrid: isSet(object.drawGrid)
+        ? globalThis.Boolean(object.drawGrid)
+        : false,
       drawCircles: isSet(object.drawCircles)
-        ? Boolean(object.drawCircles)
+        ? globalThis.Boolean(object.drawCircles)
         : false,
-      drawLines: isSet(object.drawLines) ? Boolean(object.drawLines) : false,
+      drawLines: isSet(object.drawLines)
+        ? globalThis.Boolean(object.drawLines)
+        : false,
       invertColors: isSet(object.invertColors)
-        ? Boolean(object.invertColors)
+        ? globalThis.Boolean(object.invertColors)
         : false,
-      gridSpacing: isSet(object.gridSpacing) ? Number(object.gridSpacing) : 0,
+      gridSpacing: isSet(object.gridSpacing)
+        ? globalThis.Number(object.gridSpacing)
+        : 0,
     };
   },
 
   toJSON(message: TestPattern_BlendGrid): unknown {
     const obj: any = {};
-    message.drawGrid !== undefined && (obj.drawGrid = message.drawGrid);
-    message.drawCircles !== undefined &&
-      (obj.drawCircles = message.drawCircles);
-    message.drawLines !== undefined && (obj.drawLines = message.drawLines);
-    message.invertColors !== undefined &&
-      (obj.invertColors = message.invertColors);
-    message.gridSpacing !== undefined &&
-      (obj.gridSpacing = message.gridSpacing);
+    if (message.drawGrid === true) {
+      obj.drawGrid = message.drawGrid;
+    }
+    if (message.drawCircles === true) {
+      obj.drawCircles = message.drawCircles;
+    }
+    if (message.drawLines === true) {
+      obj.drawLines = message.drawLines;
+    }
+    if (message.invertColors === true) {
+      obj.invertColors = message.invertColors;
+    }
+    if (message.gridSpacing !== 0) {
+      obj.gridSpacing = message.gridSpacing;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TestPattern_BlendGrid>, I>>(
     base?: I,
   ): TestPattern_BlendGrid {
-    return TestPattern_BlendGrid.fromPartial(base ?? {});
+    return TestPattern_BlendGrid.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<TestPattern_BlendGrid>, I>>(
     object: I,
   ): TestPattern_BlendGrid {
@@ -408,14 +417,14 @@ export const TestPattern_CustomColor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -431,17 +440,17 @@ export const TestPattern_CustomColor = {
 
   toJSON(message: TestPattern_CustomColor): unknown {
     const obj: any = {};
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TestPattern_CustomColor>, I>>(
     base?: I,
   ): TestPattern_CustomColor {
-    return TestPattern_CustomColor.fromPartial(base ?? {});
+    return TestPattern_CustomColor.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<TestPattern_CustomColor>, I>>(
     object: I,
   ): TestPattern_CustomColor {
@@ -481,14 +490,14 @@ export const TestPattern_IntensityColor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.intensity = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -498,22 +507,25 @@ export const TestPattern_IntensityColor = {
 
   fromJSON(object: any): TestPattern_IntensityColor {
     return {
-      intensity: isSet(object.intensity) ? Number(object.intensity) : 0,
+      intensity: isSet(object.intensity)
+        ? globalThis.Number(object.intensity)
+        : 0,
     };
   },
 
   toJSON(message: TestPattern_IntensityColor): unknown {
     const obj: any = {};
-    message.intensity !== undefined && (obj.intensity = message.intensity);
+    if (message.intensity !== 0) {
+      obj.intensity = message.intensity;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TestPattern_IntensityColor>, I>>(
     base?: I,
   ): TestPattern_IntensityColor {
-    return TestPattern_IntensityColor.fromPartial(base ?? {});
+    return TestPattern_IntensityColor.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<TestPattern_IntensityColor>, I>>(
     object: I,
   ): TestPattern_IntensityColor {
@@ -534,8 +546,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

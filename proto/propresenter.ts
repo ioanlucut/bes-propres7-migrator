@@ -1,7 +1,7 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { Action_Label } from './action';
-import { ApplicationInfo } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
 import { Playlist, Playlist_Tag } from './playlist';
 
 export const protobufPackage = 'rv.data';
@@ -123,7 +123,7 @@ export const PlaylistDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -133,42 +133,42 @@ export const PlaylistDocument = {
           );
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.rootNode = Playlist.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.tags.push(Playlist_Tag.decode(reader, reader.uint32()));
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.liveVideoPlaylist = Playlist.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.downloadsPlaylist = Playlist.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -185,7 +185,7 @@ export const PlaylistDocument = {
       rootNode: isSet(object.rootNode)
         ? Playlist.fromJSON(object.rootNode)
         : undefined,
-      tags: Array.isArray(object?.tags)
+      tags: globalThis.Array.isArray(object?.tags)
         ? object.tags.map((e: any) => Playlist_Tag.fromJSON(e))
         : [],
       liveVideoPlaylist: isSet(object.liveVideoPlaylist)
@@ -199,40 +199,32 @@ export const PlaylistDocument = {
 
   toJSON(message: PlaylistDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    message.type !== undefined &&
-      (obj.type = playlistDocument_TypeToJSON(message.type));
-    message.rootNode !== undefined &&
-      (obj.rootNode = message.rootNode
-        ? Playlist.toJSON(message.rootNode)
-        : undefined);
-    if (message.tags) {
-      obj.tags = message.tags.map((e) =>
-        e ? Playlist_Tag.toJSON(e) : undefined,
-      );
-    } else {
-      obj.tags = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
     }
-    message.liveVideoPlaylist !== undefined &&
-      (obj.liveVideoPlaylist = message.liveVideoPlaylist
-        ? Playlist.toJSON(message.liveVideoPlaylist)
-        : undefined);
-    message.downloadsPlaylist !== undefined &&
-      (obj.downloadsPlaylist = message.downloadsPlaylist
-        ? Playlist.toJSON(message.downloadsPlaylist)
-        : undefined);
+    if (message.type !== 0) {
+      obj.type = playlistDocument_TypeToJSON(message.type);
+    }
+    if (message.rootNode !== undefined) {
+      obj.rootNode = Playlist.toJSON(message.rootNode);
+    }
+    if (message.tags?.length) {
+      obj.tags = message.tags.map((e) => Playlist_Tag.toJSON(e));
+    }
+    if (message.liveVideoPlaylist !== undefined) {
+      obj.liveVideoPlaylist = Playlist.toJSON(message.liveVideoPlaylist);
+    }
+    if (message.downloadsPlaylist !== undefined) {
+      obj.downloadsPlaylist = Playlist.toJSON(message.downloadsPlaylist);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlaylistDocument>, I>>(
     base?: I,
   ): PlaylistDocument {
-    return PlaylistDocument.fromPartial(base ?? {});
+    return PlaylistDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistDocument>, I>>(
     object: I,
   ): PlaylistDocument {
@@ -285,14 +277,14 @@ export const SettingsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.labels.push(Action_Label.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -302,7 +294,7 @@ export const SettingsDocument = {
 
   fromJSON(object: any): SettingsDocument {
     return {
-      labels: Array.isArray(object?.labels)
+      labels: globalThis.Array.isArray(object?.labels)
         ? object.labels.map((e: any) => Action_Label.fromJSON(e))
         : [],
     };
@@ -310,12 +302,8 @@ export const SettingsDocument = {
 
   toJSON(message: SettingsDocument): unknown {
     const obj: any = {};
-    if (message.labels) {
-      obj.labels = message.labels.map((e) =>
-        e ? Action_Label.toJSON(e) : undefined,
-      );
-    } else {
-      obj.labels = [];
+    if (message.labels?.length) {
+      obj.labels = message.labels.map((e) => Action_Label.toJSON(e));
     }
     return obj;
   },
@@ -323,9 +311,8 @@ export const SettingsDocument = {
   create<I extends Exact<DeepPartial<SettingsDocument>, I>>(
     base?: I,
   ): SettingsDocument {
-    return SettingsDocument.fromPartial(base ?? {});
+    return SettingsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<SettingsDocument>, I>>(
     object: I,
   ): SettingsDocument {
@@ -347,8 +334,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

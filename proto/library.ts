@@ -62,14 +62,14 @@ export const Library = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -79,7 +79,7 @@ export const Library = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -89,7 +89,7 @@ export const Library = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -111,23 +111,23 @@ export const Library = {
 
   toJSON(message: Library): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
-    message.libraryChildren !== undefined &&
-      (obj.libraryChildren = message.libraryChildren
-        ? Library_LibraryArray.toJSON(message.libraryChildren)
-        : undefined);
-    message.libraryItems !== undefined &&
-      (obj.libraryItems = message.libraryItems
-        ? Library_LibraryItems.toJSON(message.libraryItems)
-        : undefined);
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
+    if (message.libraryChildren !== undefined) {
+      obj.libraryChildren = Library_LibraryArray.toJSON(
+        message.libraryChildren,
+      );
+    }
+    if (message.libraryItems !== undefined) {
+      obj.libraryItems = Library_LibraryItems.toJSON(message.libraryItems);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Library>, I>>(base?: I): Library {
-    return Library.fromPartial(base ?? {});
+    return Library.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Library>, I>>(object: I): Library {
     const message = createBaseLibrary();
     message.url =
@@ -173,14 +173,14 @@ export const Library_LibraryArray = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.libraries.push(Library.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -190,7 +190,7 @@ export const Library_LibraryArray = {
 
   fromJSON(object: any): Library_LibraryArray {
     return {
-      libraries: Array.isArray(object?.libraries)
+      libraries: globalThis.Array.isArray(object?.libraries)
         ? object.libraries.map((e: any) => Library.fromJSON(e))
         : [],
     };
@@ -198,12 +198,8 @@ export const Library_LibraryArray = {
 
   toJSON(message: Library_LibraryArray): unknown {
     const obj: any = {};
-    if (message.libraries) {
-      obj.libraries = message.libraries.map((e) =>
-        e ? Library.toJSON(e) : undefined,
-      );
-    } else {
-      obj.libraries = [];
+    if (message.libraries?.length) {
+      obj.libraries = message.libraries.map((e) => Library.toJSON(e));
     }
     return obj;
   },
@@ -211,9 +207,8 @@ export const Library_LibraryArray = {
   create<I extends Exact<DeepPartial<Library_LibraryArray>, I>>(
     base?: I,
   ): Library_LibraryArray {
-    return Library_LibraryArray.fromPartial(base ?? {});
+    return Library_LibraryArray.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Library_LibraryArray>, I>>(
     object: I,
   ): Library_LibraryArray {
@@ -251,14 +246,14 @@ export const Library_LibraryItems = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.items.push(LibraryItem.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -268,7 +263,7 @@ export const Library_LibraryItems = {
 
   fromJSON(object: any): Library_LibraryItems {
     return {
-      items: Array.isArray(object?.items)
+      items: globalThis.Array.isArray(object?.items)
         ? object.items.map((e: any) => LibraryItem.fromJSON(e))
         : [],
     };
@@ -276,12 +271,8 @@ export const Library_LibraryItems = {
 
   toJSON(message: Library_LibraryItems): unknown {
     const obj: any = {};
-    if (message.items) {
-      obj.items = message.items.map((e) =>
-        e ? LibraryItem.toJSON(e) : undefined,
-      );
-    } else {
-      obj.items = [];
+    if (message.items?.length) {
+      obj.items = message.items.map((e) => LibraryItem.toJSON(e));
     }
     return obj;
   },
@@ -289,9 +280,8 @@ export const Library_LibraryItems = {
   create<I extends Exact<DeepPartial<Library_LibraryItems>, I>>(
     base?: I,
   ): Library_LibraryItems {
-    return Library_LibraryItems.fromPartial(base ?? {});
+    return Library_LibraryItems.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Library_LibraryItems>, I>>(
     object: I,
   ): Library_LibraryItems {
@@ -325,14 +315,14 @@ export const LibraryItem = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -346,15 +336,15 @@ export const LibraryItem = {
 
   toJSON(message: LibraryItem): unknown {
     const obj: any = {};
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<LibraryItem>, I>>(base?: I): LibraryItem {
-    return LibraryItem.fromPartial(base ?? {});
+    return LibraryItem.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<LibraryItem>, I>>(
     object: I,
   ): LibraryItem {
@@ -378,8 +368,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

@@ -171,7 +171,7 @@ export const KeyMapping = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -181,7 +181,7 @@ export const KeyMapping = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -191,14 +191,14 @@ export const KeyMapping = {
           );
           continue;
         case 100:
-          if (tag != 802) {
+          if (tag !== 802) {
             break;
           }
 
           message.menuItem = reader.string();
           continue;
         case 101:
-          if (tag != 810) {
+          if (tag !== 810) {
             break;
           }
 
@@ -208,7 +208,7 @@ export const KeyMapping = {
           );
           continue;
         case 102:
-          if (tag != 818) {
+          if (tag !== 818) {
             break;
           }
 
@@ -218,7 +218,7 @@ export const KeyMapping = {
           );
           continue;
         case 103:
-          if (tag != 826) {
+          if (tag !== 826) {
             break;
           }
 
@@ -228,7 +228,7 @@ export const KeyMapping = {
           );
           continue;
         case 104:
-          if (tag != 834) {
+          if (tag !== 834) {
             break;
           }
 
@@ -238,7 +238,7 @@ export const KeyMapping = {
           );
           continue;
         case 105:
-          if (tag != 842) {
+          if (tag !== 842) {
             break;
           }
 
@@ -248,7 +248,7 @@ export const KeyMapping = {
           );
           continue;
         case 106:
-          if (tag != 850) {
+          if (tag !== 850) {
             break;
           }
 
@@ -258,7 +258,7 @@ export const KeyMapping = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -274,7 +274,9 @@ export const KeyMapping = {
       midi: isSet(object.midi)
         ? KeyMapping_MIDIKeyboard.fromJSON(object.midi)
         : undefined,
-      menuItem: isSet(object.menuItem) ? String(object.menuItem) : undefined,
+      menuItem: isSet(object.menuItem)
+        ? globalThis.String(object.menuItem)
+        : undefined,
       clearGroupIdentifier: isSet(object.clearGroupIdentifier)
         ? CollectionElementType.fromJSON(object.clearGroupIdentifier)
         : undefined,
@@ -298,46 +300,47 @@ export const KeyMapping = {
 
   toJSON(message: KeyMapping): unknown {
     const obj: any = {};
-    message.keyboard !== undefined &&
-      (obj.keyboard = message.keyboard
-        ? KeyMapping_ComputerKeyboard.toJSON(message.keyboard)
-        : undefined);
-    message.midi !== undefined &&
-      (obj.midi = message.midi
-        ? KeyMapping_MIDIKeyboard.toJSON(message.midi)
-        : undefined);
-    message.menuItem !== undefined && (obj.menuItem = message.menuItem);
-    message.clearGroupIdentifier !== undefined &&
-      (obj.clearGroupIdentifier = message.clearGroupIdentifier
-        ? CollectionElementType.toJSON(message.clearGroupIdentifier)
-        : undefined);
-    message.cueIdentifier !== undefined &&
-      (obj.cueIdentifier = message.cueIdentifier
-        ? CollectionElementType.toJSON(message.cueIdentifier)
-        : undefined);
-    message.groupIdentifier !== undefined &&
-      (obj.groupIdentifier = message.groupIdentifier
-        ? CollectionElementType.toJSON(message.groupIdentifier)
-        : undefined);
-    message.macroIdentifier !== undefined &&
-      (obj.macroIdentifier = message.macroIdentifier
-        ? CollectionElementType.toJSON(message.macroIdentifier)
-        : undefined);
-    message.propIdentifier !== undefined &&
-      (obj.propIdentifier = message.propIdentifier
-        ? CollectionElementType.toJSON(message.propIdentifier)
-        : undefined);
-    message.timerIdentifier !== undefined &&
-      (obj.timerIdentifier = message.timerIdentifier
-        ? CollectionElementType.toJSON(message.timerIdentifier)
-        : undefined);
+    if (message.keyboard !== undefined) {
+      obj.keyboard = KeyMapping_ComputerKeyboard.toJSON(message.keyboard);
+    }
+    if (message.midi !== undefined) {
+      obj.midi = KeyMapping_MIDIKeyboard.toJSON(message.midi);
+    }
+    if (message.menuItem !== undefined) {
+      obj.menuItem = message.menuItem;
+    }
+    if (message.clearGroupIdentifier !== undefined) {
+      obj.clearGroupIdentifier = CollectionElementType.toJSON(
+        message.clearGroupIdentifier,
+      );
+    }
+    if (message.cueIdentifier !== undefined) {
+      obj.cueIdentifier = CollectionElementType.toJSON(message.cueIdentifier);
+    }
+    if (message.groupIdentifier !== undefined) {
+      obj.groupIdentifier = CollectionElementType.toJSON(
+        message.groupIdentifier,
+      );
+    }
+    if (message.macroIdentifier !== undefined) {
+      obj.macroIdentifier = CollectionElementType.toJSON(
+        message.macroIdentifier,
+      );
+    }
+    if (message.propIdentifier !== undefined) {
+      obj.propIdentifier = CollectionElementType.toJSON(message.propIdentifier);
+    }
+    if (message.timerIdentifier !== undefined) {
+      obj.timerIdentifier = CollectionElementType.toJSON(
+        message.timerIdentifier,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<KeyMapping>, I>>(base?: I): KeyMapping {
-    return KeyMapping.fromPartial(base ?? {});
+    return KeyMapping.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<KeyMapping>, I>>(
     object: I,
   ): KeyMapping {
@@ -412,19 +415,20 @@ export const KeyMapping_ComputerKeyboard = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.keyEquivalent = reader.string();
           continue;
         case 2:
-          if (tag == 16) {
+          if (tag === 16) {
             message.keyEquivalentModifierFlags.push(reader.int32() as any);
+
             continue;
           }
 
-          if (tag == 18) {
+          if (tag === 18) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.keyEquivalentModifierFlags.push(reader.int32() as any);
@@ -435,7 +439,7 @@ export const KeyMapping_ComputerKeyboard = {
 
           break;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -446,9 +450,9 @@ export const KeyMapping_ComputerKeyboard = {
   fromJSON(object: any): KeyMapping_ComputerKeyboard {
     return {
       keyEquivalent: isSet(object.keyEquivalent)
-        ? String(object.keyEquivalent)
+        ? globalThis.String(object.keyEquivalent)
         : '',
-      keyEquivalentModifierFlags: Array.isArray(
+      keyEquivalentModifierFlags: globalThis.Array.isArray(
         object?.keyEquivalentModifierFlags,
       )
         ? object.keyEquivalentModifierFlags.map((e: any) =>
@@ -460,14 +464,13 @@ export const KeyMapping_ComputerKeyboard = {
 
   toJSON(message: KeyMapping_ComputerKeyboard): unknown {
     const obj: any = {};
-    message.keyEquivalent !== undefined &&
-      (obj.keyEquivalent = message.keyEquivalent);
-    if (message.keyEquivalentModifierFlags) {
+    if (message.keyEquivalent !== '') {
+      obj.keyEquivalent = message.keyEquivalent;
+    }
+    if (message.keyEquivalentModifierFlags?.length) {
       obj.keyEquivalentModifierFlags = message.keyEquivalentModifierFlags.map(
         (e) => keyMapping_ComputerKeyboard_ModifierFlagsToJSON(e),
       );
-    } else {
-      obj.keyEquivalentModifierFlags = [];
     }
     return obj;
   },
@@ -475,9 +478,8 @@ export const KeyMapping_ComputerKeyboard = {
   create<I extends Exact<DeepPartial<KeyMapping_ComputerKeyboard>, I>>(
     base?: I,
   ): KeyMapping_ComputerKeyboard {
-    return KeyMapping_ComputerKeyboard.fromPartial(base ?? {});
+    return KeyMapping_ComputerKeyboard.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<KeyMapping_ComputerKeyboard>, I>>(
     object: I,
   ): KeyMapping_ComputerKeyboard {
@@ -522,28 +524,28 @@ export const KeyMapping_MIDIKeyboard = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.channel = reader.int32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.pitch = reader.int32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.velocity = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -553,28 +555,31 @@ export const KeyMapping_MIDIKeyboard = {
 
   fromJSON(object: any): KeyMapping_MIDIKeyboard {
     return {
-      channel: isSet(object.channel) ? Number(object.channel) : 0,
-      pitch: isSet(object.pitch) ? Number(object.pitch) : 0,
-      velocity: isSet(object.velocity) ? Number(object.velocity) : 0,
+      channel: isSet(object.channel) ? globalThis.Number(object.channel) : 0,
+      pitch: isSet(object.pitch) ? globalThis.Number(object.pitch) : 0,
+      velocity: isSet(object.velocity) ? globalThis.Number(object.velocity) : 0,
     };
   },
 
   toJSON(message: KeyMapping_MIDIKeyboard): unknown {
     const obj: any = {};
-    message.channel !== undefined &&
-      (obj.channel = Math.round(message.channel));
-    message.pitch !== undefined && (obj.pitch = Math.round(message.pitch));
-    message.velocity !== undefined &&
-      (obj.velocity = Math.round(message.velocity));
+    if (message.channel !== 0) {
+      obj.channel = Math.round(message.channel);
+    }
+    if (message.pitch !== 0) {
+      obj.pitch = Math.round(message.pitch);
+    }
+    if (message.velocity !== 0) {
+      obj.velocity = Math.round(message.velocity);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<KeyMapping_MIDIKeyboard>, I>>(
     base?: I,
   ): KeyMapping_MIDIKeyboard {
-    return KeyMapping_MIDIKeyboard.fromPartial(base ?? {});
+    return KeyMapping_MIDIKeyboard.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<KeyMapping_MIDIKeyboard>, I>>(
     object: I,
   ): KeyMapping_MIDIKeyboard {
@@ -627,7 +632,7 @@ export const KeyMappingDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -637,14 +642,14 @@ export const KeyMappingDocument = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.keymappings.push(KeyMapping.decode(reader, reader.uint32()));
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -653,7 +658,7 @@ export const KeyMappingDocument = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -662,7 +667,7 @@ export const KeyMappingDocument = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -675,13 +680,13 @@ export const KeyMappingDocument = {
       applicationInfo: isSet(object.applicationInfo)
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
-      keymappings: Array.isArray(object?.keymappings)
+      keymappings: globalThis.Array.isArray(object?.keymappings)
         ? object.keymappings.map((e: any) => KeyMapping.fromJSON(e))
         : [],
-      macosKeymappings: Array.isArray(object?.macosKeymappings)
+      macosKeymappings: globalThis.Array.isArray(object?.macosKeymappings)
         ? object.macosKeymappings.map((e: any) => KeyMapping.fromJSON(e))
         : [],
-      windowsKeymappings: Array.isArray(object?.windowsKeymappings)
+      windowsKeymappings: globalThis.Array.isArray(object?.windowsKeymappings)
         ? object.windowsKeymappings.map((e: any) => KeyMapping.fromJSON(e))
         : [],
     };
@@ -689,30 +694,21 @@ export const KeyMappingDocument = {
 
   toJSON(message: KeyMappingDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    if (message.keymappings) {
-      obj.keymappings = message.keymappings.map((e) =>
-        e ? KeyMapping.toJSON(e) : undefined,
-      );
-    } else {
-      obj.keymappings = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
     }
-    if (message.macosKeymappings) {
+    if (message.keymappings?.length) {
+      obj.keymappings = message.keymappings.map((e) => KeyMapping.toJSON(e));
+    }
+    if (message.macosKeymappings?.length) {
       obj.macosKeymappings = message.macosKeymappings.map((e) =>
-        e ? KeyMapping.toJSON(e) : undefined,
+        KeyMapping.toJSON(e),
       );
-    } else {
-      obj.macosKeymappings = [];
     }
-    if (message.windowsKeymappings) {
+    if (message.windowsKeymappings?.length) {
       obj.windowsKeymappings = message.windowsKeymappings.map((e) =>
-        e ? KeyMapping.toJSON(e) : undefined,
+        KeyMapping.toJSON(e),
       );
-    } else {
-      obj.windowsKeymappings = [];
     }
     return obj;
   },
@@ -720,9 +716,8 @@ export const KeyMappingDocument = {
   create<I extends Exact<DeepPartial<KeyMappingDocument>, I>>(
     base?: I,
   ): KeyMappingDocument {
-    return KeyMappingDocument.fromPartial(base ?? {});
+    return KeyMappingDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<KeyMappingDocument>, I>>(
     object: I,
   ): KeyMappingDocument {
@@ -752,8 +747,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

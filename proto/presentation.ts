@@ -7,18 +7,16 @@ import {
   action_ContentDestinationFromJSON,
   action_ContentDestinationToJSON,
 } from './action';
+import { ApplicationInfo } from './applicationInfo';
 import { Background } from './background';
-import {
-  ApplicationInfo,
-  IntRange,
-  MusicKeyScale,
-  URL,
-  UUID,
-} from './basicTypes';
 import { Cue } from './cue';
 import { Transition } from './effects';
 import { Group } from './groups';
+import { IntRange } from './intRange';
+import { MusicKeyScale } from './musicKeyScale';
 import { Timestamp } from './rvtimestamp';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -284,7 +282,7 @@ export const Presentation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -294,70 +292,70 @@ export const Presentation = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.lastDateUsed = Timestamp.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.lastModifiedDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.category = reader.string();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.notes = reader.string();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.background = Background.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.chordChart = URL.decode(reader, reader.uint32());
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.selectedArrangement = UUID.decode(reader, reader.uint32());
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -366,7 +364,7 @@ export const Presentation = {
           );
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -375,21 +373,21 @@ export const Presentation = {
           );
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
           message.cues.push(Cue.decode(reader, reader.uint32()));
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
           message.ccli = Presentation_CCLI.decode(reader, reader.uint32());
           continue;
         case 15:
-          if (tag != 122) {
+          if (tag !== 122) {
             break;
           }
 
@@ -399,7 +397,7 @@ export const Presentation = {
           );
           continue;
         case 17:
-          if (tag != 138) {
+          if (tag !== 138) {
             break;
           }
 
@@ -409,21 +407,21 @@ export const Presentation = {
           );
           continue;
         case 18:
-          if (tag != 146) {
+          if (tag !== 146) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
         case 19:
-          if (tag != 152) {
+          if (tag !== 152) {
             break;
           }
 
           message.contentDestination = reader.int32() as any;
           continue;
         case 21:
-          if (tag != 170) {
+          if (tag !== 170) {
             break;
           }
 
@@ -431,28 +429,28 @@ export const Presentation = {
             Presentation_MultiTracksLicensing.decode(reader, reader.uint32());
           continue;
         case 22:
-          if (tag != 178) {
+          if (tag !== 178) {
             break;
           }
 
           message.musicKey = reader.string();
           continue;
         case 23:
-          if (tag != 186) {
+          if (tag !== 186) {
             break;
           }
 
           message.music = Presentation_Music.decode(reader, reader.uint32());
           continue;
         case 20:
-          if (tag != 161) {
+          if (tag !== 161) {
             break;
           }
 
           message.slideShowDuration = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -466,15 +464,17 @@ export const Presentation = {
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       lastDateUsed: isSet(object.lastDateUsed)
         ? Timestamp.fromJSON(object.lastDateUsed)
         : undefined,
       lastModifiedDate: isSet(object.lastModifiedDate)
         ? Timestamp.fromJSON(object.lastModifiedDate)
         : undefined,
-      category: isSet(object.category) ? String(object.category) : '',
-      notes: isSet(object.notes) ? String(object.notes) : '',
+      category: isSet(object.category)
+        ? globalThis.String(object.category)
+        : '',
+      notes: isSet(object.notes) ? globalThis.String(object.notes) : '',
       background: isSet(object.background)
         ? Background.fromJSON(object.background)
         : undefined,
@@ -484,15 +484,15 @@ export const Presentation = {
       selectedArrangement: isSet(object.selectedArrangement)
         ? UUID.fromJSON(object.selectedArrangement)
         : undefined,
-      arrangements: Array.isArray(object?.arrangements)
+      arrangements: globalThis.Array.isArray(object?.arrangements)
         ? object.arrangements.map((e: any) =>
             Presentation_Arrangement.fromJSON(e),
           )
         : [],
-      cueGroups: Array.isArray(object?.cueGroups)
+      cueGroups: globalThis.Array.isArray(object?.cueGroups)
         ? object.cueGroups.map((e: any) => Presentation_CueGroup.fromJSON(e))
         : [],
-      cues: Array.isArray(object?.cues)
+      cues: globalThis.Array.isArray(object?.cues)
         ? object.cues.map((e: any) => Cue.fromJSON(e))
         : [],
       ccli: isSet(object.ccli)
@@ -515,106 +515,104 @@ export const Presentation = {
             object.multiTracksLicensing,
           )
         : undefined,
-      musicKey: isSet(object.musicKey) ? String(object.musicKey) : '',
+      musicKey: isSet(object.musicKey)
+        ? globalThis.String(object.musicKey)
+        : '',
       music: isSet(object.music)
         ? Presentation_Music.fromJSON(object.music)
         : undefined,
       slideShowDuration: isSet(object.slideShowDuration)
-        ? Number(object.slideShowDuration)
+        ? globalThis.Number(object.slideShowDuration)
         : undefined,
     };
   },
 
   toJSON(message: Presentation): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.lastDateUsed !== undefined &&
-      (obj.lastDateUsed = message.lastDateUsed
-        ? Timestamp.toJSON(message.lastDateUsed)
-        : undefined);
-    message.lastModifiedDate !== undefined &&
-      (obj.lastModifiedDate = message.lastModifiedDate
-        ? Timestamp.toJSON(message.lastModifiedDate)
-        : undefined);
-    message.category !== undefined && (obj.category = message.category);
-    message.notes !== undefined && (obj.notes = message.notes);
-    message.background !== undefined &&
-      (obj.background = message.background
-        ? Background.toJSON(message.background)
-        : undefined);
-    message.chordChart !== undefined &&
-      (obj.chordChart = message.chordChart
-        ? URL.toJSON(message.chordChart)
-        : undefined);
-    message.selectedArrangement !== undefined &&
-      (obj.selectedArrangement = message.selectedArrangement
-        ? UUID.toJSON(message.selectedArrangement)
-        : undefined);
-    if (message.arrangements) {
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.lastDateUsed !== undefined) {
+      obj.lastDateUsed = Timestamp.toJSON(message.lastDateUsed);
+    }
+    if (message.lastModifiedDate !== undefined) {
+      obj.lastModifiedDate = Timestamp.toJSON(message.lastModifiedDate);
+    }
+    if (message.category !== '') {
+      obj.category = message.category;
+    }
+    if (message.notes !== '') {
+      obj.notes = message.notes;
+    }
+    if (message.background !== undefined) {
+      obj.background = Background.toJSON(message.background);
+    }
+    if (message.chordChart !== undefined) {
+      obj.chordChart = URL.toJSON(message.chordChart);
+    }
+    if (message.selectedArrangement !== undefined) {
+      obj.selectedArrangement = UUID.toJSON(message.selectedArrangement);
+    }
+    if (message.arrangements?.length) {
       obj.arrangements = message.arrangements.map((e) =>
-        e ? Presentation_Arrangement.toJSON(e) : undefined,
+        Presentation_Arrangement.toJSON(e),
       );
-    } else {
-      obj.arrangements = [];
     }
-    if (message.cueGroups) {
+    if (message.cueGroups?.length) {
       obj.cueGroups = message.cueGroups.map((e) =>
-        e ? Presentation_CueGroup.toJSON(e) : undefined,
+        Presentation_CueGroup.toJSON(e),
       );
-    } else {
-      obj.cueGroups = [];
     }
-    if (message.cues) {
-      obj.cues = message.cues.map((e) => (e ? Cue.toJSON(e) : undefined));
-    } else {
-      obj.cues = [];
+    if (message.cues?.length) {
+      obj.cues = message.cues.map((e) => Cue.toJSON(e));
     }
-    message.ccli !== undefined &&
-      (obj.ccli = message.ccli
-        ? Presentation_CCLI.toJSON(message.ccli)
-        : undefined);
-    message.bibleReference !== undefined &&
-      (obj.bibleReference = message.bibleReference
-        ? Presentation_BibleReference.toJSON(message.bibleReference)
-        : undefined);
-    message.timeline !== undefined &&
-      (obj.timeline = message.timeline
-        ? Presentation_Timeline.toJSON(message.timeline)
-        : undefined);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
-    message.contentDestination !== undefined &&
-      (obj.contentDestination = action_ContentDestinationToJSON(
+    if (message.ccli !== undefined) {
+      obj.ccli = Presentation_CCLI.toJSON(message.ccli);
+    }
+    if (message.bibleReference !== undefined) {
+      obj.bibleReference = Presentation_BibleReference.toJSON(
+        message.bibleReference,
+      );
+    }
+    if (message.timeline !== undefined) {
+      obj.timeline = Presentation_Timeline.toJSON(message.timeline);
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
+    if (message.contentDestination !== 0) {
+      obj.contentDestination = action_ContentDestinationToJSON(
         message.contentDestination,
-      ));
-    message.multiTracksLicensing !== undefined &&
-      (obj.multiTracksLicensing = message.multiTracksLicensing
-        ? Presentation_MultiTracksLicensing.toJSON(message.multiTracksLicensing)
-        : undefined);
-    message.musicKey !== undefined && (obj.musicKey = message.musicKey);
-    message.music !== undefined &&
-      (obj.music = message.music
-        ? Presentation_Music.toJSON(message.music)
-        : undefined);
-    message.slideShowDuration !== undefined &&
-      (obj.slideShowDuration = message.slideShowDuration);
+      );
+    }
+    if (message.multiTracksLicensing !== undefined) {
+      obj.multiTracksLicensing = Presentation_MultiTracksLicensing.toJSON(
+        message.multiTracksLicensing,
+      );
+    }
+    if (message.musicKey !== '') {
+      obj.musicKey = message.musicKey;
+    }
+    if (message.music !== undefined) {
+      obj.music = Presentation_Music.toJSON(message.music);
+    }
+    if (message.slideShowDuration !== undefined) {
+      obj.slideShowDuration = message.slideShowDuration;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Presentation>, I>>(
     base?: I,
   ): Presentation {
-    return Presentation.fromPartial(base ?? {});
+    return Presentation.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation>, I>>(
     object: I,
   ): Presentation {
@@ -702,7 +700,7 @@ function createBasePresentation_CCLI(): Presentation_CCLI {
     songNumber: 0,
     display: false,
     album: '',
-    artwork: new Uint8Array(),
+    artwork: new Uint8Array(0),
   };
 }
 
@@ -750,70 +748,70 @@ export const Presentation_CCLI = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.author = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.artistCredits = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.songTitle = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.publisher = reader.string();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.copyrightYear = reader.uint32();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.songNumber = reader.uint32();
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.display = reader.bool();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.album = reader.string();
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.artwork = reader.bytes();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -823,50 +821,69 @@ export const Presentation_CCLI = {
 
   fromJSON(object: any): Presentation_CCLI {
     return {
-      author: isSet(object.author) ? String(object.author) : '',
+      author: isSet(object.author) ? globalThis.String(object.author) : '',
       artistCredits: isSet(object.artistCredits)
-        ? String(object.artistCredits)
+        ? globalThis.String(object.artistCredits)
         : '',
-      songTitle: isSet(object.songTitle) ? String(object.songTitle) : '',
-      publisher: isSet(object.publisher) ? String(object.publisher) : '',
+      songTitle: isSet(object.songTitle)
+        ? globalThis.String(object.songTitle)
+        : '',
+      publisher: isSet(object.publisher)
+        ? globalThis.String(object.publisher)
+        : '',
       copyrightYear: isSet(object.copyrightYear)
-        ? Number(object.copyrightYear)
+        ? globalThis.Number(object.copyrightYear)
         : 0,
-      songNumber: isSet(object.songNumber) ? Number(object.songNumber) : 0,
-      display: isSet(object.display) ? Boolean(object.display) : false,
-      album: isSet(object.album) ? String(object.album) : '',
+      songNumber: isSet(object.songNumber)
+        ? globalThis.Number(object.songNumber)
+        : 0,
+      display: isSet(object.display)
+        ? globalThis.Boolean(object.display)
+        : false,
+      album: isSet(object.album) ? globalThis.String(object.album) : '',
       artwork: isSet(object.artwork)
         ? bytesFromBase64(object.artwork)
-        : new Uint8Array(),
+        : new Uint8Array(0),
     };
   },
 
   toJSON(message: Presentation_CCLI): unknown {
     const obj: any = {};
-    message.author !== undefined && (obj.author = message.author);
-    message.artistCredits !== undefined &&
-      (obj.artistCredits = message.artistCredits);
-    message.songTitle !== undefined && (obj.songTitle = message.songTitle);
-    message.publisher !== undefined && (obj.publisher = message.publisher);
-    message.copyrightYear !== undefined &&
-      (obj.copyrightYear = Math.round(message.copyrightYear));
-    message.songNumber !== undefined &&
-      (obj.songNumber = Math.round(message.songNumber));
-    message.display !== undefined && (obj.display = message.display);
-    message.album !== undefined && (obj.album = message.album);
-    message.artwork !== undefined &&
-      (obj.artwork = base64FromBytes(
-        message.artwork !== undefined ? message.artwork : new Uint8Array(),
-      ));
+    if (message.author !== '') {
+      obj.author = message.author;
+    }
+    if (message.artistCredits !== '') {
+      obj.artistCredits = message.artistCredits;
+    }
+    if (message.songTitle !== '') {
+      obj.songTitle = message.songTitle;
+    }
+    if (message.publisher !== '') {
+      obj.publisher = message.publisher;
+    }
+    if (message.copyrightYear !== 0) {
+      obj.copyrightYear = Math.round(message.copyrightYear);
+    }
+    if (message.songNumber !== 0) {
+      obj.songNumber = Math.round(message.songNumber);
+    }
+    if (message.display === true) {
+      obj.display = message.display;
+    }
+    if (message.album !== '') {
+      obj.album = message.album;
+    }
+    if (message.artwork.length !== 0) {
+      obj.artwork = base64FromBytes(message.artwork);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Presentation_CCLI>, I>>(
     base?: I,
   ): Presentation_CCLI {
-    return Presentation_CCLI.fromPartial(base ?? {});
+    return Presentation_CCLI.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_CCLI>, I>>(
     object: I,
   ): Presentation_CCLI {
@@ -879,7 +896,7 @@ export const Presentation_CCLI = {
     message.songNumber = object.songNumber ?? 0;
     message.display = object.display ?? false;
     message.album = object.album ?? '';
-    message.artwork = object.artwork ?? new Uint8Array();
+    message.artwork = object.artwork ?? new Uint8Array(0);
     return message;
   },
 };
@@ -941,63 +958,63 @@ export const Presentation_BibleReference = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.bookIndex = reader.uint32();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.bookName = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.chapterRange = IntRange.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.verseRange = IntRange.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.translationName = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.translationDisplayAbbreviation = reader.string();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.translationInternalAbbreviation = reader.string();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.bookKey = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1007,8 +1024,12 @@ export const Presentation_BibleReference = {
 
   fromJSON(object: any): Presentation_BibleReference {
     return {
-      bookIndex: isSet(object.bookIndex) ? Number(object.bookIndex) : 0,
-      bookName: isSet(object.bookName) ? String(object.bookName) : '',
+      bookIndex: isSet(object.bookIndex)
+        ? globalThis.Number(object.bookIndex)
+        : 0,
+      bookName: isSet(object.bookName)
+        ? globalThis.String(object.bookName)
+        : '',
       chapterRange: isSet(object.chapterRange)
         ? IntRange.fromJSON(object.chapterRange)
         : undefined,
@@ -1016,53 +1037,58 @@ export const Presentation_BibleReference = {
         ? IntRange.fromJSON(object.verseRange)
         : undefined,
       translationName: isSet(object.translationName)
-        ? String(object.translationName)
+        ? globalThis.String(object.translationName)
         : '',
       translationDisplayAbbreviation: isSet(
         object.translationDisplayAbbreviation,
       )
-        ? String(object.translationDisplayAbbreviation)
+        ? globalThis.String(object.translationDisplayAbbreviation)
         : '',
       translationInternalAbbreviation: isSet(
         object.translationInternalAbbreviation,
       )
-        ? String(object.translationInternalAbbreviation)
+        ? globalThis.String(object.translationInternalAbbreviation)
         : '',
-      bookKey: isSet(object.bookKey) ? String(object.bookKey) : '',
+      bookKey: isSet(object.bookKey) ? globalThis.String(object.bookKey) : '',
     };
   },
 
   toJSON(message: Presentation_BibleReference): unknown {
     const obj: any = {};
-    message.bookIndex !== undefined &&
-      (obj.bookIndex = Math.round(message.bookIndex));
-    message.bookName !== undefined && (obj.bookName = message.bookName);
-    message.chapterRange !== undefined &&
-      (obj.chapterRange = message.chapterRange
-        ? IntRange.toJSON(message.chapterRange)
-        : undefined);
-    message.verseRange !== undefined &&
-      (obj.verseRange = message.verseRange
-        ? IntRange.toJSON(message.verseRange)
-        : undefined);
-    message.translationName !== undefined &&
-      (obj.translationName = message.translationName);
-    message.translationDisplayAbbreviation !== undefined &&
-      (obj.translationDisplayAbbreviation =
-        message.translationDisplayAbbreviation);
-    message.translationInternalAbbreviation !== undefined &&
-      (obj.translationInternalAbbreviation =
-        message.translationInternalAbbreviation);
-    message.bookKey !== undefined && (obj.bookKey = message.bookKey);
+    if (message.bookIndex !== 0) {
+      obj.bookIndex = Math.round(message.bookIndex);
+    }
+    if (message.bookName !== '') {
+      obj.bookName = message.bookName;
+    }
+    if (message.chapterRange !== undefined) {
+      obj.chapterRange = IntRange.toJSON(message.chapterRange);
+    }
+    if (message.verseRange !== undefined) {
+      obj.verseRange = IntRange.toJSON(message.verseRange);
+    }
+    if (message.translationName !== '') {
+      obj.translationName = message.translationName;
+    }
+    if (message.translationDisplayAbbreviation !== '') {
+      obj.translationDisplayAbbreviation =
+        message.translationDisplayAbbreviation;
+    }
+    if (message.translationInternalAbbreviation !== '') {
+      obj.translationInternalAbbreviation =
+        message.translationInternalAbbreviation;
+    }
+    if (message.bookKey !== '') {
+      obj.bookKey = message.bookKey;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Presentation_BibleReference>, I>>(
     base?: I,
   ): Presentation_BibleReference {
-    return Presentation_BibleReference.fromPartial(base ?? {});
+    return Presentation_BibleReference.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_BibleReference>, I>>(
     object: I,
   ): Presentation_BibleReference {
@@ -1140,7 +1166,7 @@ export const Presentation_Timeline = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1149,42 +1175,42 @@ export const Presentation_Timeline = {
           );
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.duration = reader.double();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.loop = reader.bool();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.audioAction = Action.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.timecodeEnable = reader.bool();
           continue;
         case 10:
-          if (tag != 81) {
+          if (tag !== 81) {
             break;
           }
 
           message.timecodeOffset = reader.double();
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -1193,7 +1219,7 @@ export const Presentation_Timeline = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1203,21 +1229,21 @@ export const Presentation_Timeline = {
 
   fromJSON(object: any): Presentation_Timeline {
     return {
-      cues: Array.isArray(object?.cues)
+      cues: globalThis.Array.isArray(object?.cues)
         ? object.cues.map((e: any) => Presentation_Timeline_Cue.fromJSON(e))
         : [],
-      duration: isSet(object.duration) ? Number(object.duration) : 0,
-      loop: isSet(object.loop) ? Boolean(object.loop) : false,
+      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
+      loop: isSet(object.loop) ? globalThis.Boolean(object.loop) : false,
       audioAction: isSet(object.audioAction)
         ? Action.fromJSON(object.audioAction)
         : undefined,
       timecodeEnable: isSet(object.timecodeEnable)
-        ? Boolean(object.timecodeEnable)
+        ? globalThis.Boolean(object.timecodeEnable)
         : false,
       timecodeOffset: isSet(object.timecodeOffset)
-        ? Number(object.timecodeOffset)
+        ? globalThis.Number(object.timecodeOffset)
         : 0,
-      cuesV2: Array.isArray(object?.cuesV2)
+      cuesV2: globalThis.Array.isArray(object?.cuesV2)
         ? object.cuesV2.map((e: any) => Presentation_Timeline_Cue.fromJSON(e))
         : [],
     };
@@ -1225,29 +1251,28 @@ export const Presentation_Timeline = {
 
   toJSON(message: Presentation_Timeline): unknown {
     const obj: any = {};
-    if (message.cues) {
-      obj.cues = message.cues.map((e) =>
-        e ? Presentation_Timeline_Cue.toJSON(e) : undefined,
-      );
-    } else {
-      obj.cues = [];
+    if (message.cues?.length) {
+      obj.cues = message.cues.map((e) => Presentation_Timeline_Cue.toJSON(e));
     }
-    message.duration !== undefined && (obj.duration = message.duration);
-    message.loop !== undefined && (obj.loop = message.loop);
-    message.audioAction !== undefined &&
-      (obj.audioAction = message.audioAction
-        ? Action.toJSON(message.audioAction)
-        : undefined);
-    message.timecodeEnable !== undefined &&
-      (obj.timecodeEnable = message.timecodeEnable);
-    message.timecodeOffset !== undefined &&
-      (obj.timecodeOffset = message.timecodeOffset);
-    if (message.cuesV2) {
+    if (message.duration !== 0) {
+      obj.duration = message.duration;
+    }
+    if (message.loop === true) {
+      obj.loop = message.loop;
+    }
+    if (message.audioAction !== undefined) {
+      obj.audioAction = Action.toJSON(message.audioAction);
+    }
+    if (message.timecodeEnable === true) {
+      obj.timecodeEnable = message.timecodeEnable;
+    }
+    if (message.timecodeOffset !== 0) {
+      obj.timecodeOffset = message.timecodeOffset;
+    }
+    if (message.cuesV2?.length) {
       obj.cuesV2 = message.cuesV2.map((e) =>
-        e ? Presentation_Timeline_Cue.toJSON(e) : undefined,
+        Presentation_Timeline_Cue.toJSON(e),
       );
-    } else {
-      obj.cuesV2 = [];
     }
     return obj;
   },
@@ -1255,9 +1280,8 @@ export const Presentation_Timeline = {
   create<I extends Exact<DeepPartial<Presentation_Timeline>, I>>(
     base?: I,
   ): Presentation_Timeline {
-    return Presentation_Timeline.fromPartial(base ?? {});
+    return Presentation_Timeline.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_Timeline>, I>>(
     object: I,
   ): Presentation_Timeline {
@@ -1314,35 +1338,35 @@ export const Presentation_Timeline_Cue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.triggerTime = reader.double();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.cueId = UUID.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.action = Action.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1352,8 +1376,10 @@ export const Presentation_Timeline_Cue = {
 
   fromJSON(object: any): Presentation_Timeline_Cue {
     return {
-      triggerTime: isSet(object.triggerTime) ? Number(object.triggerTime) : 0,
-      name: isSet(object.name) ? String(object.name) : '',
+      triggerTime: isSet(object.triggerTime)
+        ? globalThis.Number(object.triggerTime)
+        : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       cueId: isSet(object.cueId) ? UUID.fromJSON(object.cueId) : undefined,
       action: isSet(object.action) ? Action.fromJSON(object.action) : undefined,
     };
@@ -1361,22 +1387,26 @@ export const Presentation_Timeline_Cue = {
 
   toJSON(message: Presentation_Timeline_Cue): unknown {
     const obj: any = {};
-    message.triggerTime !== undefined &&
-      (obj.triggerTime = message.triggerTime);
-    message.name !== undefined && (obj.name = message.name);
-    message.cueId !== undefined &&
-      (obj.cueId = message.cueId ? UUID.toJSON(message.cueId) : undefined);
-    message.action !== undefined &&
-      (obj.action = message.action ? Action.toJSON(message.action) : undefined);
+    if (message.triggerTime !== 0) {
+      obj.triggerTime = message.triggerTime;
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.cueId !== undefined) {
+      obj.cueId = UUID.toJSON(message.cueId);
+    }
+    if (message.action !== undefined) {
+      obj.action = Action.toJSON(message.action);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Presentation_Timeline_Cue>, I>>(
     base?: I,
   ): Presentation_Timeline_Cue {
-    return Presentation_Timeline_Cue.fromPartial(base ?? {});
+    return Presentation_Timeline_Cue.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_Timeline_Cue>, I>>(
     object: I,
   ): Presentation_Timeline_Cue {
@@ -1428,28 +1458,28 @@ export const Presentation_Arrangement = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.groupIdentifiers.push(UUID.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1460,8 +1490,8 @@ export const Presentation_Arrangement = {
   fromJSON(object: any): Presentation_Arrangement {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      groupIdentifiers: Array.isArray(object?.groupIdentifiers)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      groupIdentifiers: globalThis.Array.isArray(object?.groupIdentifiers)
         ? object.groupIdentifiers.map((e: any) => UUID.fromJSON(e))
         : [],
     };
@@ -1469,15 +1499,16 @@ export const Presentation_Arrangement = {
 
   toJSON(message: Presentation_Arrangement): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.groupIdentifiers) {
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.groupIdentifiers?.length) {
       obj.groupIdentifiers = message.groupIdentifiers.map((e) =>
-        e ? UUID.toJSON(e) : undefined,
+        UUID.toJSON(e),
       );
-    } else {
-      obj.groupIdentifiers = [];
     }
     return obj;
   },
@@ -1485,9 +1516,8 @@ export const Presentation_Arrangement = {
   create<I extends Exact<DeepPartial<Presentation_Arrangement>, I>>(
     base?: I,
   ): Presentation_Arrangement {
-    return Presentation_Arrangement.fromPartial(base ?? {});
+    return Presentation_Arrangement.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_Arrangement>, I>>(
     object: I,
   ): Presentation_Arrangement {
@@ -1533,21 +1563,21 @@ export const Presentation_CueGroup = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.group = Group.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.cueIdentifiers.push(UUID.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1558,7 +1588,7 @@ export const Presentation_CueGroup = {
   fromJSON(object: any): Presentation_CueGroup {
     return {
       group: isSet(object.group) ? Group.fromJSON(object.group) : undefined,
-      cueIdentifiers: Array.isArray(object?.cueIdentifiers)
+      cueIdentifiers: globalThis.Array.isArray(object?.cueIdentifiers)
         ? object.cueIdentifiers.map((e: any) => UUID.fromJSON(e))
         : [],
     };
@@ -1566,14 +1596,11 @@ export const Presentation_CueGroup = {
 
   toJSON(message: Presentation_CueGroup): unknown {
     const obj: any = {};
-    message.group !== undefined &&
-      (obj.group = message.group ? Group.toJSON(message.group) : undefined);
-    if (message.cueIdentifiers) {
-      obj.cueIdentifiers = message.cueIdentifiers.map((e) =>
-        e ? UUID.toJSON(e) : undefined,
-      );
-    } else {
-      obj.cueIdentifiers = [];
+    if (message.group !== undefined) {
+      obj.group = Group.toJSON(message.group);
+    }
+    if (message.cueIdentifiers?.length) {
+      obj.cueIdentifiers = message.cueIdentifiers.map((e) => UUID.toJSON(e));
     }
     return obj;
   },
@@ -1581,9 +1608,8 @@ export const Presentation_CueGroup = {
   create<I extends Exact<DeepPartial<Presentation_CueGroup>, I>>(
     base?: I,
   ): Presentation_CueGroup {
-    return Presentation_CueGroup.fromPartial(base ?? {});
+    return Presentation_CueGroup.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_CueGroup>, I>>(
     object: I,
   ): Presentation_CueGroup {
@@ -1649,42 +1675,42 @@ export const Presentation_MultiTracksLicensing = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.songIdentifier = longToNumber(reader.int64() as Long);
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.customerIdentifier = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.expirationDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.licenseExpiration = Timestamp.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.subscription = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1695,10 +1721,10 @@ export const Presentation_MultiTracksLicensing = {
   fromJSON(object: any): Presentation_MultiTracksLicensing {
     return {
       songIdentifier: isSet(object.songIdentifier)
-        ? Number(object.songIdentifier)
+        ? globalThis.Number(object.songIdentifier)
         : 0,
       customerIdentifier: isSet(object.customerIdentifier)
-        ? String(object.customerIdentifier)
+        ? globalThis.String(object.customerIdentifier)
         : '',
       expirationDate: isSet(object.expirationDate)
         ? Timestamp.fromJSON(object.expirationDate)
@@ -1716,31 +1742,31 @@ export const Presentation_MultiTracksLicensing = {
 
   toJSON(message: Presentation_MultiTracksLicensing): unknown {
     const obj: any = {};
-    message.songIdentifier !== undefined &&
-      (obj.songIdentifier = Math.round(message.songIdentifier));
-    message.customerIdentifier !== undefined &&
-      (obj.customerIdentifier = message.customerIdentifier);
-    message.expirationDate !== undefined &&
-      (obj.expirationDate = message.expirationDate
-        ? Timestamp.toJSON(message.expirationDate)
-        : undefined);
-    message.licenseExpiration !== undefined &&
-      (obj.licenseExpiration = message.licenseExpiration
-        ? Timestamp.toJSON(message.licenseExpiration)
-        : undefined);
-    message.subscription !== undefined &&
-      (obj.subscription = presentation_MultiTracksLicensing_SubscriptionToJSON(
+    if (message.songIdentifier !== 0) {
+      obj.songIdentifier = Math.round(message.songIdentifier);
+    }
+    if (message.customerIdentifier !== '') {
+      obj.customerIdentifier = message.customerIdentifier;
+    }
+    if (message.expirationDate !== undefined) {
+      obj.expirationDate = Timestamp.toJSON(message.expirationDate);
+    }
+    if (message.licenseExpiration !== undefined) {
+      obj.licenseExpiration = Timestamp.toJSON(message.licenseExpiration);
+    }
+    if (message.subscription !== 0) {
+      obj.subscription = presentation_MultiTracksLicensing_SubscriptionToJSON(
         message.subscription,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Presentation_MultiTracksLicensing>, I>>(
     base?: I,
   ): Presentation_MultiTracksLicensing {
-    return Presentation_MultiTracksLicensing.fromPartial(base ?? {});
+    return Presentation_MultiTracksLicensing.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Presentation_MultiTracksLicensing>, I>,
   >(object: I): Presentation_MultiTracksLicensing {
@@ -1799,35 +1825,35 @@ export const Presentation_Music = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.originalMusicKey = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.userMusicKey = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.original = MusicKeyScale.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.user = MusicKeyScale.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1838,10 +1864,10 @@ export const Presentation_Music = {
   fromJSON(object: any): Presentation_Music {
     return {
       originalMusicKey: isSet(object.originalMusicKey)
-        ? String(object.originalMusicKey)
+        ? globalThis.String(object.originalMusicKey)
         : '',
       userMusicKey: isSet(object.userMusicKey)
-        ? String(object.userMusicKey)
+        ? globalThis.String(object.userMusicKey)
         : '',
       original: isSet(object.original)
         ? MusicKeyScale.fromJSON(object.original)
@@ -1854,27 +1880,26 @@ export const Presentation_Music = {
 
   toJSON(message: Presentation_Music): unknown {
     const obj: any = {};
-    message.originalMusicKey !== undefined &&
-      (obj.originalMusicKey = message.originalMusicKey);
-    message.userMusicKey !== undefined &&
-      (obj.userMusicKey = message.userMusicKey);
-    message.original !== undefined &&
-      (obj.original = message.original
-        ? MusicKeyScale.toJSON(message.original)
-        : undefined);
-    message.user !== undefined &&
-      (obj.user = message.user
-        ? MusicKeyScale.toJSON(message.user)
-        : undefined);
+    if (message.originalMusicKey !== '') {
+      obj.originalMusicKey = message.originalMusicKey;
+    }
+    if (message.userMusicKey !== '') {
+      obj.userMusicKey = message.userMusicKey;
+    }
+    if (message.original !== undefined) {
+      obj.original = MusicKeyScale.toJSON(message.original);
+    }
+    if (message.user !== undefined) {
+      obj.user = MusicKeyScale.toJSON(message.user);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Presentation_Music>, I>>(
     base?: I,
   ): Presentation_Music {
-    return Presentation_Music.fromPartial(base ?? {});
+    return Presentation_Music.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Presentation_Music>, I>>(
     object: I,
   ): Presentation_Music {
@@ -1893,30 +1918,11 @@ export const Presentation_Music = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') {
-    return globalThis;
-  }
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-  throw 'Unable to locate global object';
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, 'base64'));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -1926,14 +1932,14 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString('base64');
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(''));
+    return globalThis.btoa(bin.join(''));
   }
 }
 
@@ -1948,8 +1954,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
@@ -1964,10 +1970,8 @@ export type Exact<P, I extends P> = P extends Builtin
     };
 
 function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new tsProtoGlobalThis.Error(
-      'Value is larger than Number.MAX_SAFE_INTEGER',
-    );
+  if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
   }
   return long.toNumber();
 }

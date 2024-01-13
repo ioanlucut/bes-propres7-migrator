@@ -213,7 +213,7 @@ export const DMXProfiles = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -223,7 +223,7 @@ export const DMXProfiles = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -232,7 +232,7 @@ export const DMXProfiles = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -245,7 +245,7 @@ export const DMXProfiles = {
       workspaceProfile: isSet(object.workspaceProfile)
         ? DMXProfiles_DMXProfile.fromJSON(object.workspaceProfile)
         : undefined,
-      layerProfiles: Array.isArray(object?.layerProfiles)
+      layerProfiles: globalThis.Array.isArray(object?.layerProfiles)
         ? object.layerProfiles.map((e: any) =>
             DMXProfiles_DMXProfile.fromJSON(e),
           )
@@ -255,24 +255,22 @@ export const DMXProfiles = {
 
   toJSON(message: DMXProfiles): unknown {
     const obj: any = {};
-    message.workspaceProfile !== undefined &&
-      (obj.workspaceProfile = message.workspaceProfile
-        ? DMXProfiles_DMXProfile.toJSON(message.workspaceProfile)
-        : undefined);
-    if (message.layerProfiles) {
-      obj.layerProfiles = message.layerProfiles.map((e) =>
-        e ? DMXProfiles_DMXProfile.toJSON(e) : undefined,
+    if (message.workspaceProfile !== undefined) {
+      obj.workspaceProfile = DMXProfiles_DMXProfile.toJSON(
+        message.workspaceProfile,
       );
-    } else {
-      obj.layerProfiles = [];
+    }
+    if (message.layerProfiles?.length) {
+      obj.layerProfiles = message.layerProfiles.map((e) =>
+        DMXProfiles_DMXProfile.toJSON(e),
+      );
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DMXProfiles>, I>>(base?: I): DMXProfiles {
-    return DMXProfiles.fromPartial(base ?? {});
+    return DMXProfiles.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DMXProfiles>, I>>(
     object: I,
   ): DMXProfiles {
@@ -338,7 +336,7 @@ export const DMXProfiles_DMXProfile = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -348,7 +346,7 @@ export const DMXProfiles_DMXProfile = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -358,14 +356,14 @@ export const DMXProfiles_DMXProfile = {
           );
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.isEnabled = reader.bool();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -377,7 +375,7 @@ export const DMXProfiles_DMXProfile = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -393,8 +391,10 @@ export const DMXProfiles_DMXProfile = {
       fixture: isSet(object.fixture)
         ? DMXProfiles_DMXProfile_Fixture.fromJSON(object.fixture)
         : undefined,
-      isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
-      customMappings: Array.isArray(object?.customMappings)
+      isEnabled: isSet(object.isEnabled)
+        ? globalThis.Boolean(object.isEnabled)
+        : false,
+      customMappings: globalThis.Array.isArray(object?.customMappings)
         ? object.customMappings.map((e: any) =>
             DMXProfiles_DMXProfile_ChannelMapping.fromJSON(e),
           )
@@ -404,21 +404,19 @@ export const DMXProfiles_DMXProfile = {
 
   toJSON(message: DMXProfiles_DMXProfile): unknown {
     const obj: any = {};
-    message.profile !== undefined &&
-      (obj.profile = message.profile
-        ? DMXProfiles_DMXProfile_Profile.toJSON(message.profile)
-        : undefined);
-    message.fixture !== undefined &&
-      (obj.fixture = message.fixture
-        ? DMXProfiles_DMXProfile_Fixture.toJSON(message.fixture)
-        : undefined);
-    message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
-    if (message.customMappings) {
+    if (message.profile !== undefined) {
+      obj.profile = DMXProfiles_DMXProfile_Profile.toJSON(message.profile);
+    }
+    if (message.fixture !== undefined) {
+      obj.fixture = DMXProfiles_DMXProfile_Fixture.toJSON(message.fixture);
+    }
+    if (message.isEnabled === true) {
+      obj.isEnabled = message.isEnabled;
+    }
+    if (message.customMappings?.length) {
       obj.customMappings = message.customMappings.map((e) =>
-        e ? DMXProfiles_DMXProfile_ChannelMapping.toJSON(e) : undefined,
+        DMXProfiles_DMXProfile_ChannelMapping.toJSON(e),
       );
-    } else {
-      obj.customMappings = [];
     }
     return obj;
   },
@@ -426,9 +424,8 @@ export const DMXProfiles_DMXProfile = {
   create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile>, I>>(
     base?: I,
   ): DMXProfiles_DMXProfile {
-    return DMXProfiles_DMXProfile.fromPartial(base ?? {});
+    return DMXProfiles_DMXProfile.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DMXProfiles_DMXProfile>, I>>(
     object: I,
   ): DMXProfiles_DMXProfile {
@@ -480,21 +477,21 @@ export const DMXProfiles_DMXProfile_Profile = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.profileType = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.startingChannel = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -508,28 +505,29 @@ export const DMXProfiles_DMXProfile_Profile = {
         ? dMXProfiles_DMXProfile_ProfileTypeFromJSON(object.profileType)
         : 0,
       startingChannel: isSet(object.startingChannel)
-        ? Number(object.startingChannel)
+        ? globalThis.Number(object.startingChannel)
         : undefined,
     };
   },
 
   toJSON(message: DMXProfiles_DMXProfile_Profile): unknown {
     const obj: any = {};
-    message.profileType !== undefined &&
-      (obj.profileType = dMXProfiles_DMXProfile_ProfileTypeToJSON(
+    if (message.profileType !== 0) {
+      obj.profileType = dMXProfiles_DMXProfile_ProfileTypeToJSON(
         message.profileType,
-      ));
-    message.startingChannel !== undefined &&
-      (obj.startingChannel = Math.round(message.startingChannel));
+      );
+    }
+    if (message.startingChannel !== undefined) {
+      obj.startingChannel = Math.round(message.startingChannel);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Profile>, I>>(
     base?: I,
   ): DMXProfiles_DMXProfile_Profile {
-    return DMXProfiles_DMXProfile_Profile.fromPartial(base ?? {});
+    return DMXProfiles_DMXProfile_Profile.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Profile>, I>>(
     object: I,
   ): DMXProfiles_DMXProfile_Profile {
@@ -570,21 +568,21 @@ export const DMXProfiles_DMXProfile_ChannelMapping = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.channelIndex = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.command = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -595,7 +593,7 @@ export const DMXProfiles_DMXProfile_ChannelMapping = {
   fromJSON(object: any): DMXProfiles_DMXProfile_ChannelMapping {
     return {
       channelIndex: isSet(object.channelIndex)
-        ? Number(object.channelIndex)
+        ? globalThis.Number(object.channelIndex)
         : 0,
       command: isSet(object.command)
         ? dMXProfiles_DMXProfile_CommandTypeFromJSON(object.command)
@@ -605,19 +603,22 @@ export const DMXProfiles_DMXProfile_ChannelMapping = {
 
   toJSON(message: DMXProfiles_DMXProfile_ChannelMapping): unknown {
     const obj: any = {};
-    message.channelIndex !== undefined &&
-      (obj.channelIndex = Math.round(message.channelIndex));
-    message.command !== undefined &&
-      (obj.command = dMXProfiles_DMXProfile_CommandTypeToJSON(message.command));
+    if (message.channelIndex !== 0) {
+      obj.channelIndex = Math.round(message.channelIndex);
+    }
+    if (message.command !== 0) {
+      obj.command = dMXProfiles_DMXProfile_CommandTypeToJSON(message.command);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<DMXProfiles_DMXProfile_ChannelMapping>, I>,
   >(base?: I): DMXProfiles_DMXProfile_ChannelMapping {
-    return DMXProfiles_DMXProfile_ChannelMapping.fromPartial(base ?? {});
+    return DMXProfiles_DMXProfile_ChannelMapping.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<DMXProfiles_DMXProfile_ChannelMapping>, I>,
   >(object: I): DMXProfiles_DMXProfile_ChannelMapping {
@@ -658,21 +659,21 @@ export const DMXProfiles_DMXProfile_Fixture = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.fixtureType = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.layerIndex = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -686,28 +687,29 @@ export const DMXProfiles_DMXProfile_Fixture = {
         ? dMXProfiles_DMXProfile_FixtureTypeFromJSON(object.fixtureType)
         : 0,
       layerIndex: isSet(object.layerIndex)
-        ? Number(object.layerIndex)
+        ? globalThis.Number(object.layerIndex)
         : undefined,
     };
   },
 
   toJSON(message: DMXProfiles_DMXProfile_Fixture): unknown {
     const obj: any = {};
-    message.fixtureType !== undefined &&
-      (obj.fixtureType = dMXProfiles_DMXProfile_FixtureTypeToJSON(
+    if (message.fixtureType !== 0) {
+      obj.fixtureType = dMXProfiles_DMXProfile_FixtureTypeToJSON(
         message.fixtureType,
-      ));
-    message.layerIndex !== undefined &&
-      (obj.layerIndex = Math.round(message.layerIndex));
+      );
+    }
+    if (message.layerIndex !== undefined) {
+      obj.layerIndex = Math.round(message.layerIndex);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Fixture>, I>>(
     base?: I,
   ): DMXProfiles_DMXProfile_Fixture {
-    return DMXProfiles_DMXProfile_Fixture.fromPartial(base ?? {});
+    return DMXProfiles_DMXProfile_Fixture.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<DMXProfiles_DMXProfile_Fixture>, I>>(
     object: I,
   ): DMXProfiles_DMXProfile_Fixture {
@@ -729,8 +731,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

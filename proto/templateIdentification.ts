@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { UUID } from './basicTypes';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -57,42 +57,42 @@ export const TemplateIdentification = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.slideUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.slideName = reader.string();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.slideIndex = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -103,36 +103,44 @@ export const TemplateIdentification = {
   fromJSON(object: any): TemplateIdentification {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       slideUuid: isSet(object.slideUuid)
         ? UUID.fromJSON(object.slideUuid)
         : undefined,
-      slideName: isSet(object.slideName) ? String(object.slideName) : '',
-      slideIndex: isSet(object.slideIndex) ? Number(object.slideIndex) : 0,
+      slideName: isSet(object.slideName)
+        ? globalThis.String(object.slideName)
+        : '',
+      slideIndex: isSet(object.slideIndex)
+        ? globalThis.Number(object.slideIndex)
+        : 0,
     };
   },
 
   toJSON(message: TemplateIdentification): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.slideUuid !== undefined &&
-      (obj.slideUuid = message.slideUuid
-        ? UUID.toJSON(message.slideUuid)
-        : undefined);
-    message.slideName !== undefined && (obj.slideName = message.slideName);
-    message.slideIndex !== undefined &&
-      (obj.slideIndex = Math.round(message.slideIndex));
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.slideUuid !== undefined) {
+      obj.slideUuid = UUID.toJSON(message.slideUuid);
+    }
+    if (message.slideName !== '') {
+      obj.slideName = message.slideName;
+    }
+    if (message.slideIndex !== 0) {
+      obj.slideIndex = Math.round(message.slideIndex);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TemplateIdentification>, I>>(
     base?: I,
   ): TemplateIdentification {
-    return TemplateIdentification.fromPartial(base ?? {});
+    return TemplateIdentification.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<TemplateIdentification>, I>>(
     object: I,
   ): TemplateIdentification {
@@ -163,8 +171,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { URL } from './basicTypes';
 import { Presentation_CCLI } from './presentation';
 import { Timestamp } from './rvtimestamp';
+import { URL } from './url';
 
 export const protobufPackage = 'rv.data';
 
@@ -174,56 +174,56 @@ export const PlanningCenterPlan = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.planIdNum = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.parentIdNum = reader.uint32();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.seriesTitle = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.planTitle = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.dateList = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.createdDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.updateDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -233,21 +233,21 @@ export const PlanningCenterPlan = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.planIdStr = reader.string();
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.parentIdStr = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -257,11 +257,21 @@ export const PlanningCenterPlan = {
 
   fromJSON(object: any): PlanningCenterPlan {
     return {
-      planIdNum: isSet(object.planIdNum) ? Number(object.planIdNum) : 0,
-      parentIdNum: isSet(object.parentIdNum) ? Number(object.parentIdNum) : 0,
-      seriesTitle: isSet(object.seriesTitle) ? String(object.seriesTitle) : '',
-      planTitle: isSet(object.planTitle) ? String(object.planTitle) : '',
-      dateList: isSet(object.dateList) ? String(object.dateList) : '',
+      planIdNum: isSet(object.planIdNum)
+        ? globalThis.Number(object.planIdNum)
+        : 0,
+      parentIdNum: isSet(object.parentIdNum)
+        ? globalThis.Number(object.parentIdNum)
+        : 0,
+      seriesTitle: isSet(object.seriesTitle)
+        ? globalThis.String(object.seriesTitle)
+        : '',
+      planTitle: isSet(object.planTitle)
+        ? globalThis.String(object.planTitle)
+        : '',
+      dateList: isSet(object.dateList)
+        ? globalThis.String(object.dateList)
+        : '',
       createdDate: isSet(object.createdDate)
         ? Timestamp.fromJSON(object.createdDate)
         : undefined,
@@ -271,45 +281,55 @@ export const PlanningCenterPlan = {
       lastUpdateCheckDate: isSet(object.lastUpdateCheckDate)
         ? Timestamp.fromJSON(object.lastUpdateCheckDate)
         : undefined,
-      planIdStr: isSet(object.planIdStr) ? String(object.planIdStr) : '',
-      parentIdStr: isSet(object.parentIdStr) ? String(object.parentIdStr) : '',
+      planIdStr: isSet(object.planIdStr)
+        ? globalThis.String(object.planIdStr)
+        : '',
+      parentIdStr: isSet(object.parentIdStr)
+        ? globalThis.String(object.parentIdStr)
+        : '',
     };
   },
 
   toJSON(message: PlanningCenterPlan): unknown {
     const obj: any = {};
-    message.planIdNum !== undefined &&
-      (obj.planIdNum = Math.round(message.planIdNum));
-    message.parentIdNum !== undefined &&
-      (obj.parentIdNum = Math.round(message.parentIdNum));
-    message.seriesTitle !== undefined &&
-      (obj.seriesTitle = message.seriesTitle);
-    message.planTitle !== undefined && (obj.planTitle = message.planTitle);
-    message.dateList !== undefined && (obj.dateList = message.dateList);
-    message.createdDate !== undefined &&
-      (obj.createdDate = message.createdDate
-        ? Timestamp.toJSON(message.createdDate)
-        : undefined);
-    message.updateDate !== undefined &&
-      (obj.updateDate = message.updateDate
-        ? Timestamp.toJSON(message.updateDate)
-        : undefined);
-    message.lastUpdateCheckDate !== undefined &&
-      (obj.lastUpdateCheckDate = message.lastUpdateCheckDate
-        ? Timestamp.toJSON(message.lastUpdateCheckDate)
-        : undefined);
-    message.planIdStr !== undefined && (obj.planIdStr = message.planIdStr);
-    message.parentIdStr !== undefined &&
-      (obj.parentIdStr = message.parentIdStr);
+    if (message.planIdNum !== 0) {
+      obj.planIdNum = Math.round(message.planIdNum);
+    }
+    if (message.parentIdNum !== 0) {
+      obj.parentIdNum = Math.round(message.parentIdNum);
+    }
+    if (message.seriesTitle !== '') {
+      obj.seriesTitle = message.seriesTitle;
+    }
+    if (message.planTitle !== '') {
+      obj.planTitle = message.planTitle;
+    }
+    if (message.dateList !== '') {
+      obj.dateList = message.dateList;
+    }
+    if (message.createdDate !== undefined) {
+      obj.createdDate = Timestamp.toJSON(message.createdDate);
+    }
+    if (message.updateDate !== undefined) {
+      obj.updateDate = Timestamp.toJSON(message.updateDate);
+    }
+    if (message.lastUpdateCheckDate !== undefined) {
+      obj.lastUpdateCheckDate = Timestamp.toJSON(message.lastUpdateCheckDate);
+    }
+    if (message.planIdStr !== '') {
+      obj.planIdStr = message.planIdStr;
+    }
+    if (message.parentIdStr !== '') {
+      obj.parentIdStr = message.parentIdStr;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlanningCenterPlan>, I>>(
     base?: I,
   ): PlanningCenterPlan {
-    return PlanningCenterPlan.fromPartial(base ?? {});
+    return PlanningCenterPlan.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlanningCenterPlan>, I>>(
     object: I,
   ): PlanningCenterPlan {
@@ -413,42 +433,42 @@ export const PlanningCenterPlan_PlanItem = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.itemType = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.pcoIdNum = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.serviceIdNum = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.parentIdNum = reader.uint32();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -460,14 +480,14 @@ export const PlanningCenterPlan_PlanItem = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.updateDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -477,28 +497,28 @@ export const PlanningCenterPlan_PlanItem = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.pcoIdStr = reader.string();
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.serviceIdStr = reader.string();
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
           message.parentIdStr = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -511,13 +531,15 @@ export const PlanningCenterPlan_PlanItem = {
       itemType: isSet(object.itemType)
         ? planningCenterPlan_PlanItem_PlanItemTypeFromJSON(object.itemType)
         : 0,
-      pcoIdNum: isSet(object.pcoIdNum) ? Number(object.pcoIdNum) : 0,
+      pcoIdNum: isSet(object.pcoIdNum) ? globalThis.Number(object.pcoIdNum) : 0,
       serviceIdNum: isSet(object.serviceIdNum)
-        ? Number(object.serviceIdNum)
+        ? globalThis.Number(object.serviceIdNum)
         : 0,
-      parentIdNum: isSet(object.parentIdNum) ? Number(object.parentIdNum) : 0,
-      name: isSet(object.name) ? String(object.name) : '',
-      attachments: Array.isArray(object?.attachments)
+      parentIdNum: isSet(object.parentIdNum)
+        ? globalThis.Number(object.parentIdNum)
+        : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      attachments: globalThis.Array.isArray(object?.attachments)
         ? object.attachments.map((e: any) =>
             PlanningCenterPlan_PlanItem_Attachment.fromJSON(e),
           )
@@ -528,56 +550,67 @@ export const PlanningCenterPlan_PlanItem = {
       linkedSong: isSet(object.linkedSong)
         ? PlanningCenterPlan_PlanItem_SongItem.fromJSON(object.linkedSong)
         : undefined,
-      pcoIdStr: isSet(object.pcoIdStr) ? String(object.pcoIdStr) : '',
-      serviceIdStr: isSet(object.serviceIdStr)
-        ? String(object.serviceIdStr)
+      pcoIdStr: isSet(object.pcoIdStr)
+        ? globalThis.String(object.pcoIdStr)
         : '',
-      parentIdStr: isSet(object.parentIdStr) ? String(object.parentIdStr) : '',
+      serviceIdStr: isSet(object.serviceIdStr)
+        ? globalThis.String(object.serviceIdStr)
+        : '',
+      parentIdStr: isSet(object.parentIdStr)
+        ? globalThis.String(object.parentIdStr)
+        : '',
     };
   },
 
   toJSON(message: PlanningCenterPlan_PlanItem): unknown {
     const obj: any = {};
-    message.itemType !== undefined &&
-      (obj.itemType = planningCenterPlan_PlanItem_PlanItemTypeToJSON(
+    if (message.itemType !== 0) {
+      obj.itemType = planningCenterPlan_PlanItem_PlanItemTypeToJSON(
         message.itemType,
-      ));
-    message.pcoIdNum !== undefined &&
-      (obj.pcoIdNum = Math.round(message.pcoIdNum));
-    message.serviceIdNum !== undefined &&
-      (obj.serviceIdNum = Math.round(message.serviceIdNum));
-    message.parentIdNum !== undefined &&
-      (obj.parentIdNum = Math.round(message.parentIdNum));
-    message.name !== undefined && (obj.name = message.name);
-    if (message.attachments) {
-      obj.attachments = message.attachments.map((e) =>
-        e ? PlanningCenterPlan_PlanItem_Attachment.toJSON(e) : undefined,
       );
-    } else {
-      obj.attachments = [];
     }
-    message.updateDate !== undefined &&
-      (obj.updateDate = message.updateDate
-        ? Timestamp.toJSON(message.updateDate)
-        : undefined);
-    message.linkedSong !== undefined &&
-      (obj.linkedSong = message.linkedSong
-        ? PlanningCenterPlan_PlanItem_SongItem.toJSON(message.linkedSong)
-        : undefined);
-    message.pcoIdStr !== undefined && (obj.pcoIdStr = message.pcoIdStr);
-    message.serviceIdStr !== undefined &&
-      (obj.serviceIdStr = message.serviceIdStr);
-    message.parentIdStr !== undefined &&
-      (obj.parentIdStr = message.parentIdStr);
+    if (message.pcoIdNum !== 0) {
+      obj.pcoIdNum = Math.round(message.pcoIdNum);
+    }
+    if (message.serviceIdNum !== 0) {
+      obj.serviceIdNum = Math.round(message.serviceIdNum);
+    }
+    if (message.parentIdNum !== 0) {
+      obj.parentIdNum = Math.round(message.parentIdNum);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.attachments?.length) {
+      obj.attachments = message.attachments.map((e) =>
+        PlanningCenterPlan_PlanItem_Attachment.toJSON(e),
+      );
+    }
+    if (message.updateDate !== undefined) {
+      obj.updateDate = Timestamp.toJSON(message.updateDate);
+    }
+    if (message.linkedSong !== undefined) {
+      obj.linkedSong = PlanningCenterPlan_PlanItem_SongItem.toJSON(
+        message.linkedSong,
+      );
+    }
+    if (message.pcoIdStr !== '') {
+      obj.pcoIdStr = message.pcoIdStr;
+    }
+    if (message.serviceIdStr !== '') {
+      obj.serviceIdStr = message.serviceIdStr;
+    }
+    if (message.parentIdStr !== '') {
+      obj.parentIdStr = message.parentIdStr;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlanningCenterPlan_PlanItem>, I>>(
     base?: I,
   ): PlanningCenterPlan_PlanItem {
-    return PlanningCenterPlan_PlanItem.fromPartial(base ?? {});
+    return PlanningCenterPlan_PlanItem.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlanningCenterPlan_PlanItem>, I>>(
     object: I,
   ): PlanningCenterPlan_PlanItem {
@@ -663,63 +696,63 @@ export const PlanningCenterPlan_PlanItem_Attachment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.url = URL.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.createdDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.linkedPath = URL.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.pcoIdNum = reader.uint32();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.needsUpdate = reader.bool();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.updateDate = Timestamp.decode(reader, reader.uint32());
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.pcoIdStr = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -729,7 +762,7 @@ export const PlanningCenterPlan_PlanItem_Attachment = {
 
   fromJSON(object: any): PlanningCenterPlan_PlanItem_Attachment {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       url: isSet(object.url) ? URL.fromJSON(object.url) : undefined,
       createdDate: isSet(object.createdDate)
         ? Timestamp.fromJSON(object.createdDate)
@@ -737,48 +770,55 @@ export const PlanningCenterPlan_PlanItem_Attachment = {
       linkedPath: isSet(object.linkedPath)
         ? URL.fromJSON(object.linkedPath)
         : undefined,
-      pcoIdNum: isSet(object.pcoIdNum) ? Number(object.pcoIdNum) : 0,
+      pcoIdNum: isSet(object.pcoIdNum) ? globalThis.Number(object.pcoIdNum) : 0,
       needsUpdate: isSet(object.needsUpdate)
-        ? Boolean(object.needsUpdate)
+        ? globalThis.Boolean(object.needsUpdate)
         : false,
       updateDate: isSet(object.updateDate)
         ? Timestamp.fromJSON(object.updateDate)
         : undefined,
-      pcoIdStr: isSet(object.pcoIdStr) ? String(object.pcoIdStr) : '',
+      pcoIdStr: isSet(object.pcoIdStr)
+        ? globalThis.String(object.pcoIdStr)
+        : '',
     };
   },
 
   toJSON(message: PlanningCenterPlan_PlanItem_Attachment): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.url !== undefined &&
-      (obj.url = message.url ? URL.toJSON(message.url) : undefined);
-    message.createdDate !== undefined &&
-      (obj.createdDate = message.createdDate
-        ? Timestamp.toJSON(message.createdDate)
-        : undefined);
-    message.linkedPath !== undefined &&
-      (obj.linkedPath = message.linkedPath
-        ? URL.toJSON(message.linkedPath)
-        : undefined);
-    message.pcoIdNum !== undefined &&
-      (obj.pcoIdNum = Math.round(message.pcoIdNum));
-    message.needsUpdate !== undefined &&
-      (obj.needsUpdate = message.needsUpdate);
-    message.updateDate !== undefined &&
-      (obj.updateDate = message.updateDate
-        ? Timestamp.toJSON(message.updateDate)
-        : undefined);
-    message.pcoIdStr !== undefined && (obj.pcoIdStr = message.pcoIdStr);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.url !== undefined) {
+      obj.url = URL.toJSON(message.url);
+    }
+    if (message.createdDate !== undefined) {
+      obj.createdDate = Timestamp.toJSON(message.createdDate);
+    }
+    if (message.linkedPath !== undefined) {
+      obj.linkedPath = URL.toJSON(message.linkedPath);
+    }
+    if (message.pcoIdNum !== 0) {
+      obj.pcoIdNum = Math.round(message.pcoIdNum);
+    }
+    if (message.needsUpdate === true) {
+      obj.needsUpdate = message.needsUpdate;
+    }
+    if (message.updateDate !== undefined) {
+      obj.updateDate = Timestamp.toJSON(message.updateDate);
+    }
+    if (message.pcoIdStr !== '') {
+      obj.pcoIdStr = message.pcoIdStr;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<PlanningCenterPlan_PlanItem_Attachment>, I>,
   >(base?: I): PlanningCenterPlan_PlanItem_Attachment {
-    return PlanningCenterPlan_PlanItem_Attachment.fromPartial(base ?? {});
+    return PlanningCenterPlan_PlanItem_Attachment.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<PlanningCenterPlan_PlanItem_Attachment>, I>,
   >(object: I): PlanningCenterPlan_PlanItem_Attachment {
@@ -859,28 +899,28 @@ export const PlanningCenterPlan_PlanItem_SongItem = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.pcoIdNum = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.arrangementIdNum = reader.uint32();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.ccli = Presentation_CCLI.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -891,21 +931,21 @@ export const PlanningCenterPlan_PlanItem_SongItem = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.pcoIdStr = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.arrangementIdStr = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -915,9 +955,9 @@ export const PlanningCenterPlan_PlanItem_SongItem = {
 
   fromJSON(object: any): PlanningCenterPlan_PlanItem_SongItem {
     return {
-      pcoIdNum: isSet(object.pcoIdNum) ? Number(object.pcoIdNum) : 0,
+      pcoIdNum: isSet(object.pcoIdNum) ? globalThis.Number(object.pcoIdNum) : 0,
       arrangementIdNum: isSet(object.arrangementIdNum)
-        ? Number(object.arrangementIdNum)
+        ? globalThis.Number(object.arrangementIdNum)
         : 0,
       ccli: isSet(object.ccli)
         ? Presentation_CCLI.fromJSON(object.ccli)
@@ -927,39 +967,47 @@ export const PlanningCenterPlan_PlanItem_SongItem = {
             object.sequence,
           )
         : undefined,
-      pcoIdStr: isSet(object.pcoIdStr) ? String(object.pcoIdStr) : '',
+      pcoIdStr: isSet(object.pcoIdStr)
+        ? globalThis.String(object.pcoIdStr)
+        : '',
       arrangementIdStr: isSet(object.arrangementIdStr)
-        ? String(object.arrangementIdStr)
+        ? globalThis.String(object.arrangementIdStr)
         : '',
     };
   },
 
   toJSON(message: PlanningCenterPlan_PlanItem_SongItem): unknown {
     const obj: any = {};
-    message.pcoIdNum !== undefined &&
-      (obj.pcoIdNum = Math.round(message.pcoIdNum));
-    message.arrangementIdNum !== undefined &&
-      (obj.arrangementIdNum = Math.round(message.arrangementIdNum));
-    message.ccli !== undefined &&
-      (obj.ccli = message.ccli
-        ? Presentation_CCLI.toJSON(message.ccli)
-        : undefined);
-    message.sequence !== undefined &&
-      (obj.sequence = message.sequence
-        ? PlanningCenterPlan_PlanItem_SongItem_Sequence.toJSON(message.sequence)
-        : undefined);
-    message.pcoIdStr !== undefined && (obj.pcoIdStr = message.pcoIdStr);
-    message.arrangementIdStr !== undefined &&
-      (obj.arrangementIdStr = message.arrangementIdStr);
+    if (message.pcoIdNum !== 0) {
+      obj.pcoIdNum = Math.round(message.pcoIdNum);
+    }
+    if (message.arrangementIdNum !== 0) {
+      obj.arrangementIdNum = Math.round(message.arrangementIdNum);
+    }
+    if (message.ccli !== undefined) {
+      obj.ccli = Presentation_CCLI.toJSON(message.ccli);
+    }
+    if (message.sequence !== undefined) {
+      obj.sequence = PlanningCenterPlan_PlanItem_SongItem_Sequence.toJSON(
+        message.sequence,
+      );
+    }
+    if (message.pcoIdStr !== '') {
+      obj.pcoIdStr = message.pcoIdStr;
+    }
+    if (message.arrangementIdStr !== '') {
+      obj.arrangementIdStr = message.arrangementIdStr;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlanningCenterPlan_PlanItem_SongItem>, I>>(
     base?: I,
   ): PlanningCenterPlan_PlanItem_SongItem {
-    return PlanningCenterPlan_PlanItem_SongItem.fromPartial(base ?? {});
+    return PlanningCenterPlan_PlanItem_SongItem.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<PlanningCenterPlan_PlanItem_SongItem>, I>,
   >(object: I): PlanningCenterPlan_PlanItem_SongItem {
@@ -1018,35 +1066,35 @@ export const PlanningCenterPlan_PlanItem_SongItem_Sequence = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.pcoIdNum = reader.uint32();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.groupNames.push(reader.string());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.pcoIdStr = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1056,26 +1104,31 @@ export const PlanningCenterPlan_PlanItem_SongItem_Sequence = {
 
   fromJSON(object: any): PlanningCenterPlan_PlanItem_SongItem_Sequence {
     return {
-      pcoIdNum: isSet(object.pcoIdNum) ? Number(object.pcoIdNum) : 0,
-      name: isSet(object.name) ? String(object.name) : '',
-      groupNames: Array.isArray(object?.groupNames)
-        ? object.groupNames.map((e: any) => String(e))
+      pcoIdNum: isSet(object.pcoIdNum) ? globalThis.Number(object.pcoIdNum) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      groupNames: globalThis.Array.isArray(object?.groupNames)
+        ? object.groupNames.map((e: any) => globalThis.String(e))
         : [],
-      pcoIdStr: isSet(object.pcoIdStr) ? String(object.pcoIdStr) : '',
+      pcoIdStr: isSet(object.pcoIdStr)
+        ? globalThis.String(object.pcoIdStr)
+        : '',
     };
   },
 
   toJSON(message: PlanningCenterPlan_PlanItem_SongItem_Sequence): unknown {
     const obj: any = {};
-    message.pcoIdNum !== undefined &&
-      (obj.pcoIdNum = Math.round(message.pcoIdNum));
-    message.name !== undefined && (obj.name = message.name);
-    if (message.groupNames) {
-      obj.groupNames = message.groupNames.map((e) => e);
-    } else {
-      obj.groupNames = [];
+    if (message.pcoIdNum !== 0) {
+      obj.pcoIdNum = Math.round(message.pcoIdNum);
     }
-    message.pcoIdStr !== undefined && (obj.pcoIdStr = message.pcoIdStr);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.groupNames?.length) {
+      obj.groupNames = message.groupNames;
+    }
+    if (message.pcoIdStr !== '') {
+      obj.pcoIdStr = message.pcoIdStr;
+    }
     return obj;
   },
 
@@ -1086,10 +1139,9 @@ export const PlanningCenterPlan_PlanItem_SongItem_Sequence = {
     >,
   >(base?: I): PlanningCenterPlan_PlanItem_SongItem_Sequence {
     return PlanningCenterPlan_PlanItem_SongItem_Sequence.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<PlanningCenterPlan_PlanItem_SongItem_Sequence>,
@@ -1116,8 +1168,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

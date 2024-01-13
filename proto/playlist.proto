@@ -6,11 +6,14 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "hotKey.proto";
-import "cue.proto";
-import "basicTypes.proto";
 import "action.proto";
+import "color.proto";
+import "cue.proto";
+import "hotKey.proto";
+import "musicKeyScale.proto";
 import "planningCenter.proto";
+import "url.proto";
+import "uuid.proto";
 
 message Playlist {
   message PlaylistArray {

@@ -6,14 +6,14 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "proscreen.proto";
-import "proAudienceLook.proto";
-import "proMask.proto";
-import "input.proto";
 import "audio.proto";
 import "digitalAudio.proto";
-import "stage.proto";
+import "input.proto";
+import "proAudienceLook.proto";
+import "proscreen.proto";
+import "proMask.proto";
 import "recording.proto";
+import "stage.proto";
 
 message ProPresenterWorkspace {
   repeated .rv.data.ProPresenterScreen pro_screens = 1;

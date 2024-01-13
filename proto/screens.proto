@@ -6,8 +6,9 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "basicTypes.proto";
+import "color.proto";
 import "graphicsData.proto";
+import "uuid.proto";
 
 message Screen {
   message ColorAdjustment {
@@ -22,6 +23,23 @@ message Screen {
 
   message BlendCompensation {
     double black_level = 1;
+  }
+
+  message AlphaSettings {
+    message AlphaDevice {
+      .rv.data.OutputDisplay display = 1;
+      .rv.data.Graphics.Rect subscreen_unit_rect = 2;
+    }
+
+    enum Mode {
+      MODE_UNKNOWN = 0;
+      MODE_DISABLED = 1;
+      MODE_PREMULTIPLIED = 2;
+      MODE_STRAIGHT = 3;
+    }
+
+    .rv.data.Screen.AlphaSettings.Mode mode = 1;
+    .rv.data.Screen.AlphaSettings.AlphaDevice alpha_device = 2;
   }
 
   .rv.data.UUID uuid = 1;
@@ -41,6 +59,7 @@ message Screen {
   bool color_enabled = 15;
   .rv.data.Screen.ColorAdjustment color_adjustment = 16;
   .rv.data.Screen.BlendCompensation blend_compensation = 17;
+  .rv.data.Screen.AlphaSettings alpha_settings = 18;
 }
 
 message CornerValues {
@@ -59,14 +78,14 @@ message DisplayMode {
 }
 
 message OutputDisplay {
-  message BlackmagicAlphaKeySettings {
+  message Blackmagic {
     enum KeyMode {
       KEY_MODE_INTERNAL = 0;
       KEY_MODE_EXTERNAL = 1;
     }
 
     bool enabled = 1;
-    .rv.data.OutputDisplay.BlackmagicAlphaKeySettings.KeyMode key_mode = 2;
+    .rv.data.OutputDisplay.Blackmagic.KeyMode key_mode = 2;
     double blend_value = 3;
   }
 
@@ -89,8 +108,8 @@ message OutputDisplay {
   .rv.data.OutputDisplay.Type type = 8;
   .rv.data.DisplayMode mode = 9;
   string render_id = 10;
-  oneof AlphaKeySettings {
-    .rv.data.OutputDisplay.BlackmagicAlphaKeySettings black_magic_alpha_key_settings = 11;
+  oneof HardwareOptions {
+    .rv.data.OutputDisplay.Blackmagic blackmagic = 11;
   }
 }
 

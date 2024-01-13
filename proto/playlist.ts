@@ -6,13 +6,16 @@ import {
   action_ContentDestinationFromJSON,
   action_ContentDestinationToJSON,
 } from './action';
-import { Color, MusicKeyScale, URL, UUID } from './basicTypes';
+import { Color } from './color';
 import { Cue } from './cue';
 import { HotKey } from './hotKey';
+import { MusicKeyScale } from './musicKeyScale';
 import {
   PlanningCenterPlan,
   PlanningCenterPlan_PlanItem,
 } from './planningCenter';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -319,84 +322,84 @@ export const Playlist = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.expanded = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.targetedLayerUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.smartDirectoryPath = URL.decode(reader, reader.uint32());
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.hotKey = HotKey.decode(reader, reader.uint32());
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.cues.push(Cue.decode(reader, reader.uint32()));
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
           message.children.push(Playlist.decode(reader, reader.uint32()));
           continue;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.timecodeEnabled = reader.bool();
           continue;
         case 11:
-          if (tag != 88) {
+          if (tag !== 88) {
             break;
           }
 
           message.timing = reader.int32() as any;
           continue;
         case 16:
-          if (tag != 130) {
+          if (tag !== 130) {
             break;
           }
 
@@ -406,7 +409,7 @@ export const Playlist = {
           );
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -416,7 +419,7 @@ export const Playlist = {
           );
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
@@ -426,7 +429,7 @@ export const Playlist = {
           );
           continue;
         case 14:
-          if (tag != 114) {
+          if (tag !== 114) {
             break;
           }
 
@@ -436,14 +439,14 @@ export const Playlist = {
           );
           continue;
         case 15:
-          if (tag != 122) {
+          if (tag !== 122) {
             break;
           }
 
           message.pcoPlan = PlanningCenterPlan.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -454,9 +457,11 @@ export const Playlist = {
   fromJSON(object: any): Playlist {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       type: isSet(object.type) ? playlist_TypeFromJSON(object.type) : 0,
-      expanded: isSet(object.expanded) ? Boolean(object.expanded) : false,
+      expanded: isSet(object.expanded)
+        ? globalThis.Boolean(object.expanded)
+        : false,
       targetedLayerUuid: isSet(object.targetedLayerUuid)
         ? UUID.fromJSON(object.targetedLayerUuid)
         : undefined,
@@ -464,14 +469,14 @@ export const Playlist = {
         ? URL.fromJSON(object.smartDirectoryPath)
         : undefined,
       hotKey: isSet(object.hotKey) ? HotKey.fromJSON(object.hotKey) : undefined,
-      cues: Array.isArray(object?.cues)
+      cues: globalThis.Array.isArray(object?.cues)
         ? object.cues.map((e: any) => Cue.fromJSON(e))
         : [],
-      children: Array.isArray(object?.children)
+      children: globalThis.Array.isArray(object?.children)
         ? object.children.map((e: any) => Playlist.fromJSON(e))
         : [],
       timecodeEnabled: isSet(object.timecodeEnabled)
-        ? Boolean(object.timecodeEnabled)
+        ? globalThis.Boolean(object.timecodeEnabled)
         : false,
       timing: isSet(object.timing)
         ? playlist_TimingTypeFromJSON(object.timing)
@@ -496,65 +501,62 @@ export const Playlist = {
 
   toJSON(message: Playlist): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined &&
-      (obj.type = playlist_TypeToJSON(message.type));
-    message.expanded !== undefined && (obj.expanded = message.expanded);
-    message.targetedLayerUuid !== undefined &&
-      (obj.targetedLayerUuid = message.targetedLayerUuid
-        ? UUID.toJSON(message.targetedLayerUuid)
-        : undefined);
-    message.smartDirectoryPath !== undefined &&
-      (obj.smartDirectoryPath = message.smartDirectoryPath
-        ? URL.toJSON(message.smartDirectoryPath)
-        : undefined);
-    message.hotKey !== undefined &&
-      (obj.hotKey = message.hotKey ? HotKey.toJSON(message.hotKey) : undefined);
-    if (message.cues) {
-      obj.cues = message.cues.map((e) => (e ? Cue.toJSON(e) : undefined));
-    } else {
-      obj.cues = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    if (message.children) {
-      obj.children = message.children.map((e) =>
-        e ? Playlist.toJSON(e) : undefined,
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.type !== 0) {
+      obj.type = playlist_TypeToJSON(message.type);
+    }
+    if (message.expanded === true) {
+      obj.expanded = message.expanded;
+    }
+    if (message.targetedLayerUuid !== undefined) {
+      obj.targetedLayerUuid = UUID.toJSON(message.targetedLayerUuid);
+    }
+    if (message.smartDirectoryPath !== undefined) {
+      obj.smartDirectoryPath = URL.toJSON(message.smartDirectoryPath);
+    }
+    if (message.hotKey !== undefined) {
+      obj.hotKey = HotKey.toJSON(message.hotKey);
+    }
+    if (message.cues?.length) {
+      obj.cues = message.cues.map((e) => Cue.toJSON(e));
+    }
+    if (message.children?.length) {
+      obj.children = message.children.map((e) => Playlist.toJSON(e));
+    }
+    if (message.timecodeEnabled === true) {
+      obj.timecodeEnabled = message.timecodeEnabled;
+    }
+    if (message.timing !== 0) {
+      obj.timing = playlist_TimingTypeToJSON(message.timing);
+    }
+    if (message.startupInfo !== undefined) {
+      obj.startupInfo = Playlist_StartupInfo.toJSON(message.startupInfo);
+    }
+    if (message.playlists !== undefined) {
+      obj.playlists = Playlist_PlaylistArray.toJSON(message.playlists);
+    }
+    if (message.items !== undefined) {
+      obj.items = Playlist_PlaylistItems.toJSON(message.items);
+    }
+    if (message.smartDirectory !== undefined) {
+      obj.smartDirectory = Playlist_FolderDirectory.toJSON(
+        message.smartDirectory,
       );
-    } else {
-      obj.children = [];
     }
-    message.timecodeEnabled !== undefined &&
-      (obj.timecodeEnabled = message.timecodeEnabled);
-    message.timing !== undefined &&
-      (obj.timing = playlist_TimingTypeToJSON(message.timing));
-    message.startupInfo !== undefined &&
-      (obj.startupInfo = message.startupInfo
-        ? Playlist_StartupInfo.toJSON(message.startupInfo)
-        : undefined);
-    message.playlists !== undefined &&
-      (obj.playlists = message.playlists
-        ? Playlist_PlaylistArray.toJSON(message.playlists)
-        : undefined);
-    message.items !== undefined &&
-      (obj.items = message.items
-        ? Playlist_PlaylistItems.toJSON(message.items)
-        : undefined);
-    message.smartDirectory !== undefined &&
-      (obj.smartDirectory = message.smartDirectory
-        ? Playlist_FolderDirectory.toJSON(message.smartDirectory)
-        : undefined);
-    message.pcoPlan !== undefined &&
-      (obj.pcoPlan = message.pcoPlan
-        ? PlanningCenterPlan.toJSON(message.pcoPlan)
-        : undefined);
+    if (message.pcoPlan !== undefined) {
+      obj.pcoPlan = PlanningCenterPlan.toJSON(message.pcoPlan);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Playlist>, I>>(base?: I): Playlist {
-    return Playlist.fromPartial(base ?? {});
+    return Playlist.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Playlist>, I>>(object: I): Playlist {
     const message = createBasePlaylist();
     message.uuid =
@@ -634,14 +636,14 @@ export const Playlist_PlaylistArray = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.playlists.push(Playlist.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -651,7 +653,7 @@ export const Playlist_PlaylistArray = {
 
   fromJSON(object: any): Playlist_PlaylistArray {
     return {
-      playlists: Array.isArray(object?.playlists)
+      playlists: globalThis.Array.isArray(object?.playlists)
         ? object.playlists.map((e: any) => Playlist.fromJSON(e))
         : [],
     };
@@ -659,12 +661,8 @@ export const Playlist_PlaylistArray = {
 
   toJSON(message: Playlist_PlaylistArray): unknown {
     const obj: any = {};
-    if (message.playlists) {
-      obj.playlists = message.playlists.map((e) =>
-        e ? Playlist.toJSON(e) : undefined,
-      );
-    } else {
-      obj.playlists = [];
+    if (message.playlists?.length) {
+      obj.playlists = message.playlists.map((e) => Playlist.toJSON(e));
     }
     return obj;
   },
@@ -672,9 +670,8 @@ export const Playlist_PlaylistArray = {
   create<I extends Exact<DeepPartial<Playlist_PlaylistArray>, I>>(
     base?: I,
   ): Playlist_PlaylistArray {
-    return Playlist_PlaylistArray.fromPartial(base ?? {});
+    return Playlist_PlaylistArray.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Playlist_PlaylistArray>, I>>(
     object: I,
   ): Playlist_PlaylistArray {
@@ -712,14 +709,14 @@ export const Playlist_PlaylistItems = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.items.push(PlaylistItem.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -729,7 +726,7 @@ export const Playlist_PlaylistItems = {
 
   fromJSON(object: any): Playlist_PlaylistItems {
     return {
-      items: Array.isArray(object?.items)
+      items: globalThis.Array.isArray(object?.items)
         ? object.items.map((e: any) => PlaylistItem.fromJSON(e))
         : [],
     };
@@ -737,12 +734,8 @@ export const Playlist_PlaylistItems = {
 
   toJSON(message: Playlist_PlaylistItems): unknown {
     const obj: any = {};
-    if (message.items) {
-      obj.items = message.items.map((e) =>
-        e ? PlaylistItem.toJSON(e) : undefined,
-      );
-    } else {
-      obj.items = [];
+    if (message.items?.length) {
+      obj.items = message.items.map((e) => PlaylistItem.toJSON(e));
     }
     return obj;
   },
@@ -750,9 +743,8 @@ export const Playlist_PlaylistItems = {
   create<I extends Exact<DeepPartial<Playlist_PlaylistItems>, I>>(
     base?: I,
   ): Playlist_PlaylistItems {
-    return Playlist_PlaylistItems.fromPartial(base ?? {});
+    return Playlist_PlaylistItems.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Playlist_PlaylistItems>, I>>(
     object: I,
   ): Playlist_PlaylistItems {
@@ -792,21 +784,21 @@ export const Playlist_FolderDirectory = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.smartDirectory = URL.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.importBehavior = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -827,23 +819,22 @@ export const Playlist_FolderDirectory = {
 
   toJSON(message: Playlist_FolderDirectory): unknown {
     const obj: any = {};
-    message.smartDirectory !== undefined &&
-      (obj.smartDirectory = message.smartDirectory
-        ? URL.toJSON(message.smartDirectory)
-        : undefined);
-    message.importBehavior !== undefined &&
-      (obj.importBehavior = playlist_FolderDirectory_ImportBehaviorToJSON(
+    if (message.smartDirectory !== undefined) {
+      obj.smartDirectory = URL.toJSON(message.smartDirectory);
+    }
+    if (message.importBehavior !== 0) {
+      obj.importBehavior = playlist_FolderDirectory_ImportBehaviorToJSON(
         message.importBehavior,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Playlist_FolderDirectory>, I>>(
     base?: I,
   ): Playlist_FolderDirectory {
-    return Playlist_FolderDirectory.fromPartial(base ?? {});
+    return Playlist_FolderDirectory.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Playlist_FolderDirectory>, I>>(
     object: I,
   ): Playlist_FolderDirectory {
@@ -887,28 +878,28 @@ export const Playlist_Tag = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -919,27 +910,30 @@ export const Playlist_Tag = {
   fromJSON(object: any): Playlist_Tag {
     return {
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
     };
   },
 
   toJSON(message: Playlist_Tag): unknown {
     const obj: any = {};
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Playlist_Tag>, I>>(
     base?: I,
   ): Playlist_Tag {
-    return Playlist_Tag.fromPartial(base ?? {});
+    return Playlist_Tag.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Playlist_Tag>, I>>(
     object: I,
   ): Playlist_Tag {
@@ -984,14 +978,14 @@ export const Playlist_StartupInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.triggerOnStartup = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1002,24 +996,24 @@ export const Playlist_StartupInfo = {
   fromJSON(object: any): Playlist_StartupInfo {
     return {
       triggerOnStartup: isSet(object.triggerOnStartup)
-        ? Boolean(object.triggerOnStartup)
+        ? globalThis.Boolean(object.triggerOnStartup)
         : false,
     };
   },
 
   toJSON(message: Playlist_StartupInfo): unknown {
     const obj: any = {};
-    message.triggerOnStartup !== undefined &&
-      (obj.triggerOnStartup = message.triggerOnStartup);
+    if (message.triggerOnStartup === true) {
+      obj.triggerOnStartup = message.triggerOnStartup;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Playlist_StartupInfo>, I>>(
     base?: I,
   ): Playlist_StartupInfo {
-    return Playlist_StartupInfo.fromPartial(base ?? {});
+    return Playlist_StartupInfo.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Playlist_StartupInfo>, I>>(
     object: I,
   ): Playlist_StartupInfo {
@@ -1099,42 +1093,42 @@ export const PlaylistItem = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.tags.push(UUID.decode(reader, reader.uint32()));
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.isHidden = reader.bool();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.header = PlaylistItem_Header.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -1144,14 +1138,14 @@ export const PlaylistItem = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.cue = Cue.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -1161,7 +1155,7 @@ export const PlaylistItem = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -1171,7 +1165,7 @@ export const PlaylistItem = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1182,11 +1176,13 @@ export const PlaylistItem = {
   fromJSON(object: any): PlaylistItem {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      tags: Array.isArray(object?.tags)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      tags: globalThis.Array.isArray(object?.tags)
         ? object.tags.map((e: any) => UUID.fromJSON(e))
         : [],
-      isHidden: isSet(object.isHidden) ? Boolean(object.isHidden) : false,
+      isHidden: isSet(object.isHidden)
+        ? globalThis.Boolean(object.isHidden)
+        : false,
       header: isSet(object.header)
         ? PlaylistItem_Header.fromJSON(object.header)
         : undefined,
@@ -1205,42 +1201,43 @@ export const PlaylistItem = {
 
   toJSON(message: PlaylistItem): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.tags) {
-      obj.tags = message.tags.map((e) => (e ? UUID.toJSON(e) : undefined));
-    } else {
-      obj.tags = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.isHidden !== undefined && (obj.isHidden = message.isHidden);
-    message.header !== undefined &&
-      (obj.header = message.header
-        ? PlaylistItem_Header.toJSON(message.header)
-        : undefined);
-    message.presentation !== undefined &&
-      (obj.presentation = message.presentation
-        ? PlaylistItem_Presentation.toJSON(message.presentation)
-        : undefined);
-    message.cue !== undefined &&
-      (obj.cue = message.cue ? Cue.toJSON(message.cue) : undefined);
-    message.planningCenter !== undefined &&
-      (obj.planningCenter = message.planningCenter
-        ? PlaylistItem_PlanningCenter.toJSON(message.planningCenter)
-        : undefined);
-    message.placeholder !== undefined &&
-      (obj.placeholder = message.placeholder
-        ? PlaylistItem_Placeholder.toJSON(message.placeholder)
-        : undefined);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.tags?.length) {
+      obj.tags = message.tags.map((e) => UUID.toJSON(e));
+    }
+    if (message.isHidden === true) {
+      obj.isHidden = message.isHidden;
+    }
+    if (message.header !== undefined) {
+      obj.header = PlaylistItem_Header.toJSON(message.header);
+    }
+    if (message.presentation !== undefined) {
+      obj.presentation = PlaylistItem_Presentation.toJSON(message.presentation);
+    }
+    if (message.cue !== undefined) {
+      obj.cue = Cue.toJSON(message.cue);
+    }
+    if (message.planningCenter !== undefined) {
+      obj.planningCenter = PlaylistItem_PlanningCenter.toJSON(
+        message.planningCenter,
+      );
+    }
+    if (message.placeholder !== undefined) {
+      obj.placeholder = PlaylistItem_Placeholder.toJSON(message.placeholder);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlaylistItem>, I>>(
     base?: I,
   ): PlaylistItem {
-    return PlaylistItem.fromPartial(base ?? {});
+    return PlaylistItem.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistItem>, I>>(
     object: I,
   ): PlaylistItem {
@@ -1303,21 +1300,21 @@ export const PlaylistItem_Header = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.actions.push(Action.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1328,7 +1325,7 @@ export const PlaylistItem_Header = {
   fromJSON(object: any): PlaylistItem_Header {
     return {
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      actions: Array.isArray(object?.actions)
+      actions: globalThis.Array.isArray(object?.actions)
         ? object.actions.map((e: any) => Action.fromJSON(e))
         : [],
     };
@@ -1336,14 +1333,11 @@ export const PlaylistItem_Header = {
 
   toJSON(message: PlaylistItem_Header): unknown {
     const obj: any = {};
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? Action.toJSON(e) : undefined,
-      );
-    } else {
-      obj.actions = [];
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => Action.toJSON(e));
     }
     return obj;
   },
@@ -1351,9 +1345,8 @@ export const PlaylistItem_Header = {
   create<I extends Exact<DeepPartial<PlaylistItem_Header>, I>>(
     base?: I,
   ): PlaylistItem_Header {
-    return PlaylistItem_Header.fromPartial(base ?? {});
+    return PlaylistItem_Header.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistItem_Header>, I>>(
     object: I,
   ): PlaylistItem_Header {
@@ -1411,35 +1404,35 @@ export const PlaylistItem_Presentation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.documentPath = URL.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.arrangement = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.contentDestination = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.userMusicKey = MusicKeyScale.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1466,31 +1459,28 @@ export const PlaylistItem_Presentation = {
 
   toJSON(message: PlaylistItem_Presentation): unknown {
     const obj: any = {};
-    message.documentPath !== undefined &&
-      (obj.documentPath = message.documentPath
-        ? URL.toJSON(message.documentPath)
-        : undefined);
-    message.arrangement !== undefined &&
-      (obj.arrangement = message.arrangement
-        ? UUID.toJSON(message.arrangement)
-        : undefined);
-    message.contentDestination !== undefined &&
-      (obj.contentDestination = action_ContentDestinationToJSON(
+    if (message.documentPath !== undefined) {
+      obj.documentPath = URL.toJSON(message.documentPath);
+    }
+    if (message.arrangement !== undefined) {
+      obj.arrangement = UUID.toJSON(message.arrangement);
+    }
+    if (message.contentDestination !== 0) {
+      obj.contentDestination = action_ContentDestinationToJSON(
         message.contentDestination,
-      ));
-    message.userMusicKey !== undefined &&
-      (obj.userMusicKey = message.userMusicKey
-        ? MusicKeyScale.toJSON(message.userMusicKey)
-        : undefined);
+      );
+    }
+    if (message.userMusicKey !== undefined) {
+      obj.userMusicKey = MusicKeyScale.toJSON(message.userMusicKey);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlaylistItem_Presentation>, I>>(
     base?: I,
   ): PlaylistItem_Presentation {
-    return PlaylistItem_Presentation.fromPartial(base ?? {});
+    return PlaylistItem_Presentation.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistItem_Presentation>, I>>(
     object: I,
   ): PlaylistItem_Presentation {
@@ -1548,7 +1538,7 @@ export const PlaylistItem_PlanningCenter = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1558,14 +1548,14 @@ export const PlaylistItem_PlanningCenter = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.linkedData = PlaylistItem.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1586,23 +1576,20 @@ export const PlaylistItem_PlanningCenter = {
 
   toJSON(message: PlaylistItem_PlanningCenter): unknown {
     const obj: any = {};
-    message.item !== undefined &&
-      (obj.item = message.item
-        ? PlanningCenterPlan_PlanItem.toJSON(message.item)
-        : undefined);
-    message.linkedData !== undefined &&
-      (obj.linkedData = message.linkedData
-        ? PlaylistItem.toJSON(message.linkedData)
-        : undefined);
+    if (message.item !== undefined) {
+      obj.item = PlanningCenterPlan_PlanItem.toJSON(message.item);
+    }
+    if (message.linkedData !== undefined) {
+      obj.linkedData = PlaylistItem.toJSON(message.linkedData);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlaylistItem_PlanningCenter>, I>>(
     base?: I,
   ): PlaylistItem_PlanningCenter {
-    return PlaylistItem_PlanningCenter.fromPartial(base ?? {});
+    return PlaylistItem_PlanningCenter.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistItem_PlanningCenter>, I>>(
     object: I,
   ): PlaylistItem_PlanningCenter {
@@ -1649,14 +1636,14 @@ export const PlaylistItem_Placeholder = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.linkedData = PlaylistItem.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1674,19 +1661,17 @@ export const PlaylistItem_Placeholder = {
 
   toJSON(message: PlaylistItem_Placeholder): unknown {
     const obj: any = {};
-    message.linkedData !== undefined &&
-      (obj.linkedData = message.linkedData
-        ? PlaylistItem.toJSON(message.linkedData)
-        : undefined);
+    if (message.linkedData !== undefined) {
+      obj.linkedData = PlaylistItem.toJSON(message.linkedData);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PlaylistItem_Placeholder>, I>>(
     base?: I,
   ): PlaylistItem_Placeholder {
-    return PlaylistItem_Placeholder.fromPartial(base ?? {});
+    return PlaylistItem_Placeholder.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistItem_Placeholder>, I>>(
     object: I,
   ): PlaylistItem_Placeholder {
@@ -1710,8 +1695,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

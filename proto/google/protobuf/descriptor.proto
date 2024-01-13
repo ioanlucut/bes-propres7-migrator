@@ -132,8 +132,8 @@ message MethodDescriptorProto {
   optional string input_type = 2;
   optional string output_type = 3;
   optional .google.protobuf.MethodOptions options = 4;
-  optional bool client_streaming = 5;
-  optional bool server_streaming = 6;
+  optional bool client_streaming = 5 [default = false];
+  optional bool server_streaming = 6 [default = false];
 }
 
 message FileOptions {
@@ -146,17 +146,17 @@ message FileOptions {
 
   optional string java_package = 1;
   optional string java_outer_classname = 8;
-  optional bool java_multiple_files = 10;
+  optional bool java_multiple_files = 10 [default = false];
   optional bool java_generate_equals_and_hash = 20;
-  optional bool java_string_check_utf8 = 27;
-  optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9;
+  optional bool java_string_check_utf8 = 27 [default = false];
+  optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
   optional string go_package = 11;
-  optional bool cc_generic_services = 16;
-  optional bool java_generic_services = 17;
-  optional bool py_generic_services = 18;
-  optional bool php_generic_services = 42;
-  optional bool deprecated = 23;
-  optional bool cc_enable_arenas = 31;
+  optional bool cc_generic_services = 16 [default = false];
+  optional bool java_generic_services = 17 [default = false];
+  optional bool py_generic_services = 18 [default = false];
+  optional bool php_generic_services = 42 [default = false];
+  optional bool deprecated = 23 [default = false];
+  optional bool cc_enable_arenas = 31 [default = true];
   optional string objc_class_prefix = 36;
   optional string csharp_namespace = 37;
   optional string swift_prefix = 39;
@@ -170,9 +170,9 @@ message FileOptions {
 message MessageOptions {
   reserved 8;
   reserved 9;
-  optional bool message_set_wire_format = 1;
-  optional bool no_standard_descriptor_accessor = 2;
-  optional bool deprecated = 3;
+  optional bool message_set_wire_format = 1 [default = false];
+  optional bool no_standard_descriptor_accessor = 2 [default = false];
+  optional bool deprecated = 3 [default = false];
   optional bool map_entry = 7;
   repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
 }
@@ -191,12 +191,12 @@ message FieldOptions {
     JS_NUMBER = 2;
   }
 
-  optional .google.protobuf.FieldOptions.CType ctype = 1;
+  optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];
   optional bool packed = 2;
-  optional .google.protobuf.FieldOptions.JSType jstype = 6;
-  optional bool lazy = 5;
-  optional bool deprecated = 3;
-  optional bool weak = 10;
+  optional .google.protobuf.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
+  optional bool lazy = 5 [default = false];
+  optional bool deprecated = 3 [default = false];
+  optional bool weak = 10 [default = false];
   repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
 }
 
@@ -207,17 +207,17 @@ message OneofOptions {
 message EnumOptions {
   reserved 5;
   optional bool allow_alias = 2;
-  optional bool deprecated = 3;
+  optional bool deprecated = 3 [default = false];
   repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
 }
 
 message EnumValueOptions {
-  optional bool deprecated = 1;
+  optional bool deprecated = 1 [default = false];
   repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
 }
 
 message ServiceOptions {
-  optional bool deprecated = 33;
+  optional bool deprecated = 33 [default = false];
   repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
 }
 
@@ -228,8 +228,8 @@ message MethodOptions {
     IDEMPOTENT = 2;
   }
 
-  optional bool deprecated = 33;
-  optional .google.protobuf.MethodOptions.IdempotencyLevel idempotency_level = 34;
+  optional bool deprecated = 33 [default = false];
+  optional .google.protobuf.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
   repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
 }
 

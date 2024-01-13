@@ -6,7 +6,9 @@ import {
   action_ContentDestinationFromJSON,
   action_ContentDestinationToJSON,
 } from './action';
-import { ApplicationInfo, Color, UUID } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
+import { Color } from './color';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -284,7 +286,7 @@ export const ClearGroupsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -294,7 +296,7 @@ export const ClearGroupsDocument = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -303,7 +305,7 @@ export const ClearGroupsDocument = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -316,7 +318,7 @@ export const ClearGroupsDocument = {
       applicationInfo: isSet(object.applicationInfo)
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
-      groups: Array.isArray(object?.groups)
+      groups: globalThis.Array.isArray(object?.groups)
         ? object.groups.map((e: any) =>
             ClearGroupsDocument_ClearGroup.fromJSON(e),
           )
@@ -326,16 +328,13 @@ export const ClearGroupsDocument = {
 
   toJSON(message: ClearGroupsDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    if (message.groups) {
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.groups?.length) {
       obj.groups = message.groups.map((e) =>
-        e ? ClearGroupsDocument_ClearGroup.toJSON(e) : undefined,
+        ClearGroupsDocument_ClearGroup.toJSON(e),
       );
-    } else {
-      obj.groups = [];
     }
     return obj;
   },
@@ -343,9 +342,8 @@ export const ClearGroupsDocument = {
   create<I extends Exact<DeepPartial<ClearGroupsDocument>, I>>(
     base?: I,
   ): ClearGroupsDocument {
-    return ClearGroupsDocument.fromPartial(base ?? {});
+    return ClearGroupsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ClearGroupsDocument>, I>>(
     object: I,
   ): ClearGroupsDocument {
@@ -368,7 +366,7 @@ function createBaseClearGroupsDocument_ClearGroup(): ClearGroupsDocument_ClearGr
     name: '',
     layerTargets: [],
     isHiddenInPreview: false,
-    imageData: new Uint8Array(),
+    imageData: new Uint8Array(0),
     imageType: 0,
     isIconTinted: false,
     iconTintColor: undefined,
@@ -429,21 +427,21 @@ export const ClearGroupsDocument_ClearGroup = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -452,47 +450,48 @@ export const ClearGroupsDocument_ClearGroup = {
           );
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.isHiddenInPreview = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.imageData = reader.bytes();
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.imageType = reader.int32() as any;
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.isIconTinted = reader.bool();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.iconTintColor = Color.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag == 72) {
+          if (tag === 72) {
             message.timelineTargets.push(reader.int32() as any);
+
             continue;
           }
 
-          if (tag == 74) {
+          if (tag === 74) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.timelineTargets.push(reader.int32() as any);
@@ -503,14 +502,14 @@ export const ClearGroupsDocument_ClearGroup = {
 
           break;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.clearPresentationNextSlide = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -521,82 +520,82 @@ export const ClearGroupsDocument_ClearGroup = {
   fromJSON(object: any): ClearGroupsDocument_ClearGroup {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      layerTargets: Array.isArray(object?.layerTargets)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      layerTargets: globalThis.Array.isArray(object?.layerTargets)
         ? object.layerTargets.map((e: any) => Action_ClearType.fromJSON(e))
         : [],
       isHiddenInPreview: isSet(object.isHiddenInPreview)
-        ? Boolean(object.isHiddenInPreview)
+        ? globalThis.Boolean(object.isHiddenInPreview)
         : false,
       imageData: isSet(object.imageData)
         ? bytesFromBase64(object.imageData)
-        : new Uint8Array(),
+        : new Uint8Array(0),
       imageType: isSet(object.imageType)
         ? clearGroupsDocument_ClearGroup_ImageTypeFromJSON(object.imageType)
         : 0,
       isIconTinted: isSet(object.isIconTinted)
-        ? Boolean(object.isIconTinted)
+        ? globalThis.Boolean(object.isIconTinted)
         : false,
       iconTintColor: isSet(object.iconTintColor)
         ? Color.fromJSON(object.iconTintColor)
         : undefined,
-      timelineTargets: Array.isArray(object?.timelineTargets)
+      timelineTargets: globalThis.Array.isArray(object?.timelineTargets)
         ? object.timelineTargets.map((e: any) =>
             action_ContentDestinationFromJSON(e),
           )
         : [],
       clearPresentationNextSlide: isSet(object.clearPresentationNextSlide)
-        ? Boolean(object.clearPresentationNextSlide)
+        ? globalThis.Boolean(object.clearPresentationNextSlide)
         : false,
     };
   },
 
   toJSON(message: ClearGroupsDocument_ClearGroup): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.layerTargets) {
-      obj.layerTargets = message.layerTargets.map((e) =>
-        e ? Action_ClearType.toJSON(e) : undefined,
-      );
-    } else {
-      obj.layerTargets = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.isHiddenInPreview !== undefined &&
-      (obj.isHiddenInPreview = message.isHiddenInPreview);
-    message.imageData !== undefined &&
-      (obj.imageData = base64FromBytes(
-        message.imageData !== undefined ? message.imageData : new Uint8Array(),
-      ));
-    message.imageType !== undefined &&
-      (obj.imageType = clearGroupsDocument_ClearGroup_ImageTypeToJSON(
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.layerTargets?.length) {
+      obj.layerTargets = message.layerTargets.map((e) =>
+        Action_ClearType.toJSON(e),
+      );
+    }
+    if (message.isHiddenInPreview === true) {
+      obj.isHiddenInPreview = message.isHiddenInPreview;
+    }
+    if (message.imageData.length !== 0) {
+      obj.imageData = base64FromBytes(message.imageData);
+    }
+    if (message.imageType !== 0) {
+      obj.imageType = clearGroupsDocument_ClearGroup_ImageTypeToJSON(
         message.imageType,
-      ));
-    message.isIconTinted !== undefined &&
-      (obj.isIconTinted = message.isIconTinted);
-    message.iconTintColor !== undefined &&
-      (obj.iconTintColor = message.iconTintColor
-        ? Color.toJSON(message.iconTintColor)
-        : undefined);
-    if (message.timelineTargets) {
+      );
+    }
+    if (message.isIconTinted === true) {
+      obj.isIconTinted = message.isIconTinted;
+    }
+    if (message.iconTintColor !== undefined) {
+      obj.iconTintColor = Color.toJSON(message.iconTintColor);
+    }
+    if (message.timelineTargets?.length) {
       obj.timelineTargets = message.timelineTargets.map((e) =>
         action_ContentDestinationToJSON(e),
       );
-    } else {
-      obj.timelineTargets = [];
     }
-    message.clearPresentationNextSlide !== undefined &&
-      (obj.clearPresentationNextSlide = message.clearPresentationNextSlide);
+    if (message.clearPresentationNextSlide === true) {
+      obj.clearPresentationNextSlide = message.clearPresentationNextSlide;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ClearGroupsDocument_ClearGroup>, I>>(
     base?: I,
   ): ClearGroupsDocument_ClearGroup {
-    return ClearGroupsDocument_ClearGroup.fromPartial(base ?? {});
+    return ClearGroupsDocument_ClearGroup.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ClearGroupsDocument_ClearGroup>, I>>(
     object: I,
   ): ClearGroupsDocument_ClearGroup {
@@ -609,7 +608,7 @@ export const ClearGroupsDocument_ClearGroup = {
     message.layerTargets =
       object.layerTargets?.map((e) => Action_ClearType.fromPartial(e)) || [];
     message.isHiddenInPreview = object.isHiddenInPreview ?? false;
-    message.imageData = object.imageData ?? new Uint8Array();
+    message.imageData = object.imageData ?? new Uint8Array(0);
     message.imageType = object.imageType ?? 0;
     message.isIconTinted = object.isIconTinted ?? false;
     message.iconTintColor =
@@ -623,30 +622,11 @@ export const ClearGroupsDocument_ClearGroup = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') {
-    return globalThis;
-  }
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-  throw 'Unable to locate global object';
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, 'base64'));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -656,14 +636,14 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString('base64');
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(''));
+    return globalThis.btoa(bin.join(''));
   }
 }
 
@@ -678,8 +658,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

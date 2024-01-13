@@ -555,35 +555,35 @@ export const URL = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.platform = reader.int32() as any;
           continue;
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.absoluteString = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.relativePath = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.local = URL_LocalRelativePath.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -593,7 +593,7 @@ export const URL = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -607,10 +607,10 @@ export const URL = {
         ? uRL_PlatformFromJSON(object.platform)
         : 0,
       absoluteString: isSet(object.absoluteString)
-        ? String(object.absoluteString)
+        ? globalThis.String(object.absoluteString)
         : undefined,
       relativePath: isSet(object.relativePath)
-        ? String(object.relativePath)
+        ? globalThis.String(object.relativePath)
         : undefined,
       local: isSet(object.local)
         ? URL_LocalRelativePath.fromJSON(object.local)
@@ -623,27 +623,27 @@ export const URL = {
 
   toJSON(message: URL): unknown {
     const obj: any = {};
-    message.platform !== undefined &&
-      (obj.platform = uRL_PlatformToJSON(message.platform));
-    message.absoluteString !== undefined &&
-      (obj.absoluteString = message.absoluteString);
-    message.relativePath !== undefined &&
-      (obj.relativePath = message.relativePath);
-    message.local !== undefined &&
-      (obj.local = message.local
-        ? URL_LocalRelativePath.toJSON(message.local)
-        : undefined);
-    message.external !== undefined &&
-      (obj.external = message.external
-        ? URL_ExternalRelativePath.toJSON(message.external)
-        : undefined);
+    if (message.platform !== 0) {
+      obj.platform = uRL_PlatformToJSON(message.platform);
+    }
+    if (message.absoluteString !== undefined) {
+      obj.absoluteString = message.absoluteString;
+    }
+    if (message.relativePath !== undefined) {
+      obj.relativePath = message.relativePath;
+    }
+    if (message.local !== undefined) {
+      obj.local = URL_LocalRelativePath.toJSON(message.local);
+    }
+    if (message.external !== undefined) {
+      obj.external = URL_ExternalRelativePath.toJSON(message.external);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<URL>, I>>(base?: I): URL {
-    return URL.fromPartial(base ?? {});
+    return URL.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<URL>, I>>(object: I): URL {
     const message = createBaseURL();
     message.platform = object.platform ?? 0;
@@ -691,21 +691,21 @@ export const URL_LocalRelativePath = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.root = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.path = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -718,24 +718,26 @@ export const URL_LocalRelativePath = {
       root: isSet(object.root)
         ? uRL_LocalRelativePath_RootFromJSON(object.root)
         : 0,
-      path: isSet(object.path) ? String(object.path) : '',
+      path: isSet(object.path) ? globalThis.String(object.path) : '',
     };
   },
 
   toJSON(message: URL_LocalRelativePath): unknown {
     const obj: any = {};
-    message.root !== undefined &&
-      (obj.root = uRL_LocalRelativePath_RootToJSON(message.root));
-    message.path !== undefined && (obj.path = message.path);
+    if (message.root !== 0) {
+      obj.root = uRL_LocalRelativePath_RootToJSON(message.root);
+    }
+    if (message.path !== '') {
+      obj.path = message.path;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<URL_LocalRelativePath>, I>>(
     base?: I,
   ): URL_LocalRelativePath {
-    return URL_LocalRelativePath.fromPartial(base ?? {});
+    return URL_LocalRelativePath.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<URL_LocalRelativePath>, I>>(
     object: I,
   ): URL_LocalRelativePath {
@@ -785,7 +787,7 @@ export const URL_ExternalRelativePath = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -795,7 +797,7 @@ export const URL_ExternalRelativePath = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -805,14 +807,14 @@ export const URL_ExternalRelativePath = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.path = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -828,30 +830,33 @@ export const URL_ExternalRelativePath = {
       win32: isSet(object.win32)
         ? URL_ExternalRelativePath_Win32ExternalVolume.fromJSON(object.win32)
         : undefined,
-      path: isSet(object.path) ? String(object.path) : '',
+      path: isSet(object.path) ? globalThis.String(object.path) : '',
     };
   },
 
   toJSON(message: URL_ExternalRelativePath): unknown {
     const obj: any = {};
-    message.macos !== undefined &&
-      (obj.macos = message.macos
-        ? URL_ExternalRelativePath_MacOSExternalVolume.toJSON(message.macos)
-        : undefined);
-    message.win32 !== undefined &&
-      (obj.win32 = message.win32
-        ? URL_ExternalRelativePath_Win32ExternalVolume.toJSON(message.win32)
-        : undefined);
-    message.path !== undefined && (obj.path = message.path);
+    if (message.macos !== undefined) {
+      obj.macos = URL_ExternalRelativePath_MacOSExternalVolume.toJSON(
+        message.macos,
+      );
+    }
+    if (message.win32 !== undefined) {
+      obj.win32 = URL_ExternalRelativePath_Win32ExternalVolume.toJSON(
+        message.win32,
+      );
+    }
+    if (message.path !== '') {
+      obj.path = message.path;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<URL_ExternalRelativePath>, I>>(
     base?: I,
   ): URL_ExternalRelativePath {
-    return URL_ExternalRelativePath.fromPartial(base ?? {});
+    return URL_ExternalRelativePath.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<URL_ExternalRelativePath>, I>>(
     object: I,
   ): URL_ExternalRelativePath {
@@ -896,14 +901,14 @@ export const URL_ExternalRelativePath_MacOSExternalVolume = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.volumeName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -913,13 +918,17 @@ export const URL_ExternalRelativePath_MacOSExternalVolume = {
 
   fromJSON(object: any): URL_ExternalRelativePath_MacOSExternalVolume {
     return {
-      volumeName: isSet(object.volumeName) ? String(object.volumeName) : '',
+      volumeName: isSet(object.volumeName)
+        ? globalThis.String(object.volumeName)
+        : '',
     };
   },
 
   toJSON(message: URL_ExternalRelativePath_MacOSExternalVolume): unknown {
     const obj: any = {};
-    message.volumeName !== undefined && (obj.volumeName = message.volumeName);
+    if (message.volumeName !== '') {
+      obj.volumeName = message.volumeName;
+    }
     return obj;
   },
 
@@ -929,9 +938,10 @@ export const URL_ExternalRelativePath_MacOSExternalVolume = {
       I
     >,
   >(base?: I): URL_ExternalRelativePath_MacOSExternalVolume {
-    return URL_ExternalRelativePath_MacOSExternalVolume.fromPartial(base ?? {});
+    return URL_ExternalRelativePath_MacOSExternalVolume.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<URL_ExternalRelativePath_MacOSExternalVolume>,
@@ -977,28 +987,28 @@ export const URL_ExternalRelativePath_Win32ExternalVolume = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.driveLetter = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.volumeName = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.networkShare = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1008,21 +1018,29 @@ export const URL_ExternalRelativePath_Win32ExternalVolume = {
 
   fromJSON(object: any): URL_ExternalRelativePath_Win32ExternalVolume {
     return {
-      driveLetter: isSet(object.driveLetter) ? String(object.driveLetter) : '',
-      volumeName: isSet(object.volumeName) ? String(object.volumeName) : '',
+      driveLetter: isSet(object.driveLetter)
+        ? globalThis.String(object.driveLetter)
+        : '',
+      volumeName: isSet(object.volumeName)
+        ? globalThis.String(object.volumeName)
+        : '',
       networkShare: isSet(object.networkShare)
-        ? Boolean(object.networkShare)
+        ? globalThis.Boolean(object.networkShare)
         : false,
     };
   },
 
   toJSON(message: URL_ExternalRelativePath_Win32ExternalVolume): unknown {
     const obj: any = {};
-    message.driveLetter !== undefined &&
-      (obj.driveLetter = message.driveLetter);
-    message.volumeName !== undefined && (obj.volumeName = message.volumeName);
-    message.networkShare !== undefined &&
-      (obj.networkShare = message.networkShare);
+    if (message.driveLetter !== '') {
+      obj.driveLetter = message.driveLetter;
+    }
+    if (message.volumeName !== '') {
+      obj.volumeName = message.volumeName;
+    }
+    if (message.networkShare === true) {
+      obj.networkShare = message.networkShare;
+    }
     return obj;
   },
 
@@ -1032,9 +1050,10 @@ export const URL_ExternalRelativePath_Win32ExternalVolume = {
       I
     >,
   >(base?: I): URL_ExternalRelativePath_Win32ExternalVolume {
-    return URL_ExternalRelativePath_Win32ExternalVolume.fromPartial(base ?? {});
+    return URL_ExternalRelativePath_Win32ExternalVolume.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<URL_ExternalRelativePath_Win32ExternalVolume>,
@@ -1070,14 +1089,14 @@ export const URLs = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.urls.push(URL.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1087,7 +1106,7 @@ export const URLs = {
 
   fromJSON(object: any): URLs {
     return {
-      urls: Array.isArray(object?.urls)
+      urls: globalThis.Array.isArray(object?.urls)
         ? object.urls.map((e: any) => URL.fromJSON(e))
         : [],
     };
@@ -1095,18 +1114,15 @@ export const URLs = {
 
   toJSON(message: URLs): unknown {
     const obj: any = {};
-    if (message.urls) {
-      obj.urls = message.urls.map((e) => (e ? URL.toJSON(e) : undefined));
-    } else {
-      obj.urls = [];
+    if (message.urls?.length) {
+      obj.urls = message.urls.map((e) => URL.toJSON(e));
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<URLs>, I>>(base?: I): URLs {
-    return URLs.fromPartial(base ?? {});
+    return URLs.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<URLs>, I>>(object: I): URLs {
     const message = createBaseURLs();
     message.urls = object.urls?.map((e) => URL.fromPartial(e)) || [];
@@ -1135,14 +1151,14 @@ export const UUID = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.string = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1151,19 +1167,22 @@ export const UUID = {
   },
 
   fromJSON(object: any): UUID {
-    return { string: isSet(object.string) ? String(object.string) : '' };
+    return {
+      string: isSet(object.string) ? globalThis.String(object.string) : '',
+    };
   },
 
   toJSON(message: UUID): unknown {
     const obj: any = {};
-    message.string !== undefined && (obj.string = message.string);
+    if (message.string !== '') {
+      obj.string = message.string;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<UUID>, I>>(base?: I): UUID {
-    return UUID.fromPartial(base ?? {});
+    return UUID.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<UUID>, I>>(object: I): UUID {
     const message = createBaseUUID();
     message.string = object.string ?? '';
@@ -1198,21 +1217,21 @@ export const IntRange = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.start = reader.int32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.end = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1222,22 +1241,25 @@ export const IntRange = {
 
   fromJSON(object: any): IntRange {
     return {
-      start: isSet(object.start) ? Number(object.start) : 0,
-      end: isSet(object.end) ? Number(object.end) : 0,
+      start: isSet(object.start) ? globalThis.Number(object.start) : 0,
+      end: isSet(object.end) ? globalThis.Number(object.end) : 0,
     };
   },
 
   toJSON(message: IntRange): unknown {
     const obj: any = {};
-    message.start !== undefined && (obj.start = Math.round(message.start));
-    message.end !== undefined && (obj.end = Math.round(message.end));
+    if (message.start !== 0) {
+      obj.start = Math.round(message.start);
+    }
+    if (message.end !== 0) {
+      obj.end = Math.round(message.end);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<IntRange>, I>>(base?: I): IntRange {
-    return IntRange.fromPartial(base ?? {});
+    return IntRange.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<IntRange>, I>>(object: I): IntRange {
     const message = createBaseIntRange();
     message.start = object.start ?? 0;
@@ -1276,35 +1298,35 @@ export const Color = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 13) {
+          if (tag !== 13) {
             break;
           }
 
           message.red = reader.float();
           continue;
         case 2:
-          if (tag != 21) {
+          if (tag !== 21) {
             break;
           }
 
           message.green = reader.float();
           continue;
         case 3:
-          if (tag != 29) {
+          if (tag !== 29) {
             break;
           }
 
           message.blue = reader.float();
           continue;
         case 4:
-          if (tag != 37) {
+          if (tag !== 37) {
             break;
           }
 
           message.alpha = reader.float();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1314,26 +1336,33 @@ export const Color = {
 
   fromJSON(object: any): Color {
     return {
-      red: isSet(object.red) ? Number(object.red) : 0,
-      green: isSet(object.green) ? Number(object.green) : 0,
-      blue: isSet(object.blue) ? Number(object.blue) : 0,
-      alpha: isSet(object.alpha) ? Number(object.alpha) : 0,
+      red: isSet(object.red) ? globalThis.Number(object.red) : 0,
+      green: isSet(object.green) ? globalThis.Number(object.green) : 0,
+      blue: isSet(object.blue) ? globalThis.Number(object.blue) : 0,
+      alpha: isSet(object.alpha) ? globalThis.Number(object.alpha) : 0,
     };
   },
 
   toJSON(message: Color): unknown {
     const obj: any = {};
-    message.red !== undefined && (obj.red = message.red);
-    message.green !== undefined && (obj.green = message.green);
-    message.blue !== undefined && (obj.blue = message.blue);
-    message.alpha !== undefined && (obj.alpha = message.alpha);
+    if (message.red !== 0) {
+      obj.red = message.red;
+    }
+    if (message.green !== 0) {
+      obj.green = message.green;
+    }
+    if (message.blue !== 0) {
+      obj.blue = message.blue;
+    }
+    if (message.alpha !== 0) {
+      obj.alpha = message.alpha;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Color>, I>>(base?: I): Color {
-    return Color.fromPartial(base ?? {});
+    return Color.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Color>, I>>(object: I): Color {
     const message = createBaseColor();
     message.red = object.red ?? 0;
@@ -1377,35 +1406,35 @@ export const Version = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.majorVersion = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.minorVersion = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.patchVersion = reader.uint32();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.build = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1416,34 +1445,38 @@ export const Version = {
   fromJSON(object: any): Version {
     return {
       majorVersion: isSet(object.majorVersion)
-        ? Number(object.majorVersion)
+        ? globalThis.Number(object.majorVersion)
         : 0,
       minorVersion: isSet(object.minorVersion)
-        ? Number(object.minorVersion)
+        ? globalThis.Number(object.minorVersion)
         : 0,
       patchVersion: isSet(object.patchVersion)
-        ? Number(object.patchVersion)
+        ? globalThis.Number(object.patchVersion)
         : 0,
-      build: isSet(object.build) ? String(object.build) : '',
+      build: isSet(object.build) ? globalThis.String(object.build) : '',
     };
   },
 
   toJSON(message: Version): unknown {
     const obj: any = {};
-    message.majorVersion !== undefined &&
-      (obj.majorVersion = Math.round(message.majorVersion));
-    message.minorVersion !== undefined &&
-      (obj.minorVersion = Math.round(message.minorVersion));
-    message.patchVersion !== undefined &&
-      (obj.patchVersion = Math.round(message.patchVersion));
-    message.build !== undefined && (obj.build = message.build);
+    if (message.majorVersion !== 0) {
+      obj.majorVersion = Math.round(message.majorVersion);
+    }
+    if (message.minorVersion !== 0) {
+      obj.minorVersion = Math.round(message.minorVersion);
+    }
+    if (message.patchVersion !== 0) {
+      obj.patchVersion = Math.round(message.patchVersion);
+    }
+    if (message.build !== '') {
+      obj.build = message.build;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Version>, I>>(base?: I): Version {
-    return Version.fromPartial(base ?? {});
+    return Version.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Version>, I>>(object: I): Version {
     const message = createBaseVersion();
     message.majorVersion = object.majorVersion ?? 0;
@@ -1498,35 +1531,35 @@ export const ApplicationInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.platform = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.platformVersion = Version.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.application = reader.int32() as any;
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.applicationVersion = Version.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1553,29 +1586,26 @@ export const ApplicationInfo = {
 
   toJSON(message: ApplicationInfo): unknown {
     const obj: any = {};
-    message.platform !== undefined &&
-      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
-    message.platformVersion !== undefined &&
-      (obj.platformVersion = message.platformVersion
-        ? Version.toJSON(message.platformVersion)
-        : undefined);
-    message.application !== undefined &&
-      (obj.application = applicationInfo_ApplicationToJSON(
-        message.application,
-      ));
-    message.applicationVersion !== undefined &&
-      (obj.applicationVersion = message.applicationVersion
-        ? Version.toJSON(message.applicationVersion)
-        : undefined);
+    if (message.platform !== 0) {
+      obj.platform = applicationInfo_PlatformToJSON(message.platform);
+    }
+    if (message.platformVersion !== undefined) {
+      obj.platformVersion = Version.toJSON(message.platformVersion);
+    }
+    if (message.application !== 0) {
+      obj.application = applicationInfo_ApplicationToJSON(message.application);
+    }
+    if (message.applicationVersion !== undefined) {
+      obj.applicationVersion = Version.toJSON(message.applicationVersion);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ApplicationInfo>, I>>(
     base?: I,
   ): ApplicationInfo {
-    return ApplicationInfo.fromPartial(base ?? {});
+    return ApplicationInfo.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ApplicationInfo>, I>>(
     object: I,
   ): ApplicationInfo {
@@ -1625,21 +1655,21 @@ export const CollectionElementType = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.parameterUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.parameterName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1653,28 +1683,27 @@ export const CollectionElementType = {
         ? UUID.fromJSON(object.parameterUuid)
         : undefined,
       parameterName: isSet(object.parameterName)
-        ? String(object.parameterName)
+        ? globalThis.String(object.parameterName)
         : '',
     };
   },
 
   toJSON(message: CollectionElementType): unknown {
     const obj: any = {};
-    message.parameterUuid !== undefined &&
-      (obj.parameterUuid = message.parameterUuid
-        ? UUID.toJSON(message.parameterUuid)
-        : undefined);
-    message.parameterName !== undefined &&
-      (obj.parameterName = message.parameterName);
+    if (message.parameterUuid !== undefined) {
+      obj.parameterUuid = UUID.toJSON(message.parameterUuid);
+    }
+    if (message.parameterName !== '') {
+      obj.parameterName = message.parameterName;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<CollectionElementType>, I>>(
     base?: I,
   ): CollectionElementType {
-    return CollectionElementType.fromPartial(base ?? {});
+    return CollectionElementType.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<CollectionElementType>, I>>(
     object: I,
   ): CollectionElementType {
@@ -1715,21 +1744,21 @@ export const MusicKeyScale = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.musicKey = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.musicScale = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1750,19 +1779,20 @@ export const MusicKeyScale = {
 
   toJSON(message: MusicKeyScale): unknown {
     const obj: any = {};
-    message.musicKey !== undefined &&
-      (obj.musicKey = musicKeyScale_MusicKeyToJSON(message.musicKey));
-    message.musicScale !== undefined &&
-      (obj.musicScale = musicKeyScale_MusicScaleToJSON(message.musicScale));
+    if (message.musicKey !== 0) {
+      obj.musicKey = musicKeyScale_MusicKeyToJSON(message.musicKey);
+    }
+    if (message.musicScale !== 0) {
+      obj.musicScale = musicKeyScale_MusicScaleToJSON(message.musicScale);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<MusicKeyScale>, I>>(
     base?: I,
   ): MusicKeyScale {
-    return MusicKeyScale.fromPartial(base ?? {});
+    return MusicKeyScale.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MusicKeyScale>, I>>(
     object: I,
   ): MusicKeyScale {
@@ -1784,8 +1814,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

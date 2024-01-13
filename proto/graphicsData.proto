@@ -6,10 +6,14 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "basicTypes.proto";
-import "effects.proto";
+import "alphaType.proto";
+import "color.proto";
 import "digitalAudio.proto";
+import "effects.proto";
 import "fileProperties.proto";
+import "intRange.proto";
+import "url.proto";
+import "uuid.proto";
 
 message Graphics {
   message Element {
@@ -488,6 +492,13 @@ message Media {
       PLAYBACK_BEHAVIOR_LOOP_FOR_TIME = 3;
     }
 
+    enum RetriggerSetting {
+      RETRIGGER_SETTING_UNSET = 0;
+      RETRIGGER_SETTING_ALWAYS = 1;
+      RETRIGGER_SETTING_NEVER = 2;
+      RETRIGGER_SETTING_AUTOMATIC = 3;
+    }
+
     double play_rate = 1;
     double in_point = 2;
     double out_point = 3;
@@ -499,6 +510,7 @@ message Media {
     .rv.data.Media.TransportProperties.PlaybackBehavior playback_behavior = 12;
     double loop_time = 13;
     uint32 times_to_loop = 14;
+    .rv.data.Media.TransportProperties.RetriggerSetting retrigger = 15;
   }
 
   message DrawingProperties {
@@ -523,6 +535,7 @@ message Media {
     repeated .rv.data.Effect effects = 12;
     bool crop_enable = 13;
     .rv.data.Graphics.EdgeInsets crop_insets = 14;
+    .rv.data.AlphaType alpha_type = 15;
   }
 
   message VideoProperties {

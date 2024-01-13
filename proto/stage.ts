@@ -1,7 +1,9 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { ApplicationInfo, CollectionElementType, UUID } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
+import { CollectionElementType } from './collectionElementType';
 import { Slide } from './slide';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -41,7 +43,7 @@ export const Stage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -59,9 +61,8 @@ export const Stage = {
   },
 
   create<I extends Exact<DeepPartial<Stage>, I>>(base?: I): Stage {
-    return Stage.fromPartial(base ?? {});
+    return Stage.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Stage>, I>>(_: I): Stage {
     const message = createBaseStage();
     return message;
@@ -98,28 +99,28 @@ export const Stage_Layout = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.slide = Slide.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -130,27 +131,30 @@ export const Stage_Layout = {
   fromJSON(object: any): Stage_Layout {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       slide: isSet(object.slide) ? Slide.fromJSON(object.slide) : undefined,
     };
   },
 
   toJSON(message: Stage_Layout): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.slide !== undefined &&
-      (obj.slide = message.slide ? Slide.toJSON(message.slide) : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.slide !== undefined) {
+      obj.slide = Slide.toJSON(message.slide);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Stage_Layout>, I>>(
     base?: I,
   ): Stage_Layout {
-    return Stage_Layout.fromPartial(base ?? {});
+    return Stage_Layout.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Stage_Layout>, I>>(
     object: I,
   ): Stage_Layout {
@@ -198,7 +202,7 @@ export const Stage_Document = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -208,14 +212,14 @@ export const Stage_Document = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.layouts.push(Stage_Layout.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -228,7 +232,7 @@ export const Stage_Document = {
       applicationInfo: isSet(object.applicationInfo)
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
-      layouts: Array.isArray(object?.layouts)
+      layouts: globalThis.Array.isArray(object?.layouts)
         ? object.layouts.map((e: any) => Stage_Layout.fromJSON(e))
         : [],
     };
@@ -236,16 +240,11 @@ export const Stage_Document = {
 
   toJSON(message: Stage_Document): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    if (message.layouts) {
-      obj.layouts = message.layouts.map((e) =>
-        e ? Stage_Layout.toJSON(e) : undefined,
-      );
-    } else {
-      obj.layouts = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.layouts?.length) {
+      obj.layouts = message.layouts.map((e) => Stage_Layout.toJSON(e));
     }
     return obj;
   },
@@ -253,9 +252,8 @@ export const Stage_Document = {
   create<I extends Exact<DeepPartial<Stage_Document>, I>>(
     base?: I,
   ): Stage_Document {
-    return Stage_Document.fromPartial(base ?? {});
+    return Stage_Document.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Stage_Document>, I>>(
     object: I,
   ): Stage_Document {
@@ -306,7 +304,7 @@ export const Stage_ScreenAssignment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -316,7 +314,7 @@ export const Stage_ScreenAssignment = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -326,7 +324,7 @@ export const Stage_ScreenAssignment = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -347,23 +345,20 @@ export const Stage_ScreenAssignment = {
 
   toJSON(message: Stage_ScreenAssignment): unknown {
     const obj: any = {};
-    message.screen !== undefined &&
-      (obj.screen = message.screen
-        ? CollectionElementType.toJSON(message.screen)
-        : undefined);
-    message.layout !== undefined &&
-      (obj.layout = message.layout
-        ? CollectionElementType.toJSON(message.layout)
-        : undefined);
+    if (message.screen !== undefined) {
+      obj.screen = CollectionElementType.toJSON(message.screen);
+    }
+    if (message.layout !== undefined) {
+      obj.layout = CollectionElementType.toJSON(message.layout);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Stage_ScreenAssignment>, I>>(
     base?: I,
   ): Stage_ScreenAssignment {
-    return Stage_ScreenAssignment.fromPartial(base ?? {});
+    return Stage_ScreenAssignment.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Stage_ScreenAssignment>, I>>(
     object: I,
   ): Stage_ScreenAssignment {
@@ -391,8 +386,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
