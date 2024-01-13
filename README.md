@@ -99,6 +99,10 @@ convertSongsToPP7FormatLocally({
 This repo is doing a reverse engineering from the pro presenter protobuf format to a known format, and then it encodes
 back presentation files by using the https://github.com/arkadiyt/protodump utility.
 
+To use that, simply run the following commands:
+`git clone https://github.com/arkadiyt/protodump.git`
+`go build -o protodump cmd/protodump/main.go`
+
 #### Find proto files from PP7
 
 > Assuming that `protodump` is a sibling of this dir:
@@ -112,7 +116,7 @@ find /Applications/ProPresenter.app/ -type f -perm +111 -print -exec ../protodum
 ```unix
 cd proto
 
-for f in ./proto/*; do protoc --plugin=../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./proto --ts_proto_opt=esModuleInterop=true ./$f ; done
+for f in ./*; do protoc --plugin=../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=esModuleInterop=true ./$f ; done
 ```
 
 #### Decode a single presentation file called `TEMP.pro` to `TS`
