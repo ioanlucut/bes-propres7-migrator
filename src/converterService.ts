@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { isEqual } from 'lodash';
+import { isEmpty, isEqual } from 'lodash';
 import recursive from 'recursive-readdir';
 import { Presentation } from '../proto/presentation';
 import {
@@ -142,6 +142,15 @@ export const getBasicDeploymentInfo = async (
   // ---
   // Current deployment
   const deployableSongs = await getDeployableSongs(sourceDir);
+
+  const problematicSongs = deployableSongs.filter(({ song }) => !song.id);
+  if (!isEmpty(problematicSongs)) {
+    throw new Error(
+      `The following songs are missing an ID: ${JSON.stringify(
+        problematicSongs.map(({ fileName }) => fileName),
+      )}`,
+    );
+  }
 
   const currentManifest = {
     inventory: await generateManifest(deployableSongs),
