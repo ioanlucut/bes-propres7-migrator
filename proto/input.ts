@@ -1,8 +1,11 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color, URL, UUID } from './basicTypes';
+import { AlphaType, alphaTypeFromJSON, alphaTypeToJSON } from './alphaType';
+import { Color } from './color';
 import { DigitalAudio_Device } from './digitalAudio';
 import { Media_VideoDevice } from './graphicsData';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -13,6 +16,7 @@ export interface VideoInput {
   displayColor: Color | undefined;
   thumbnailPath: URL | undefined;
   audioType: VideoInput_AudioDeviceType;
+  alphaType: AlphaType;
   audioDevice?: DigitalAudio_Device | undefined;
   videoDevice?: Media_VideoDevice | undefined;
 }
@@ -97,6 +101,7 @@ function createBaseVideoInput(): VideoInput {
     displayColor: undefined,
     thumbnailPath: undefined,
     audioType: 0,
+    alphaType: 0,
     audioDevice: undefined,
     videoDevice: undefined,
   };
@@ -128,6 +133,9 @@ export const VideoInput = {
     if (message.audioType !== 0) {
       writer.uint32(64).int32(message.audioType);
     }
+    if (message.alphaType !== 0) {
+      writer.uint32(72).int32(message.alphaType);
+    }
     if (message.audioDevice !== undefined) {
       DigitalAudio_Device.encode(
         message.audioDevice,
@@ -152,21 +160,21 @@ export const VideoInput = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.userDescription = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -176,28 +184,35 @@ export const VideoInput = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.displayColor = Color.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.thumbnailPath = URL.decode(reader, reader.uint32());
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.audioType = reader.int32() as any;
           continue;
+        case 9:
+          if (tag !== 72) {
+            break;
+          }
+
+          message.alphaType = reader.int32() as any;
+          continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -207,7 +222,7 @@ export const VideoInput = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -217,7 +232,7 @@ export const VideoInput = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -229,7 +244,7 @@ export const VideoInput = {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       userDescription: isSet(object.userDescription)
-        ? String(object.userDescription)
+        ? globalThis.String(object.userDescription)
         : '',
       videoInputDevice: isSet(object.videoInputDevice)
         ? Media_VideoDevice.fromJSON(object.videoInputDevice)
@@ -243,6 +258,9 @@ export const VideoInput = {
       audioType: isSet(object.audioType)
         ? videoInput_AudioDeviceTypeFromJSON(object.audioType)
         : 0,
+      alphaType: isSet(object.alphaType)
+        ? alphaTypeFromJSON(object.alphaType)
+        : 0,
       audioDevice: isSet(object.audioDevice)
         ? DigitalAudio_Device.fromJSON(object.audioDevice)
         : undefined,
@@ -254,39 +272,39 @@ export const VideoInput = {
 
   toJSON(message: VideoInput): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.userDescription !== undefined &&
-      (obj.userDescription = message.userDescription);
-    message.videoInputDevice !== undefined &&
-      (obj.videoInputDevice = message.videoInputDevice
-        ? Media_VideoDevice.toJSON(message.videoInputDevice)
-        : undefined);
-    message.displayColor !== undefined &&
-      (obj.displayColor = message.displayColor
-        ? Color.toJSON(message.displayColor)
-        : undefined);
-    message.thumbnailPath !== undefined &&
-      (obj.thumbnailPath = message.thumbnailPath
-        ? URL.toJSON(message.thumbnailPath)
-        : undefined);
-    message.audioType !== undefined &&
-      (obj.audioType = videoInput_AudioDeviceTypeToJSON(message.audioType));
-    message.audioDevice !== undefined &&
-      (obj.audioDevice = message.audioDevice
-        ? DigitalAudio_Device.toJSON(message.audioDevice)
-        : undefined);
-    message.videoDevice !== undefined &&
-      (obj.videoDevice = message.videoDevice
-        ? Media_VideoDevice.toJSON(message.videoDevice)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.userDescription !== '') {
+      obj.userDescription = message.userDescription;
+    }
+    if (message.videoInputDevice !== undefined) {
+      obj.videoInputDevice = Media_VideoDevice.toJSON(message.videoInputDevice);
+    }
+    if (message.displayColor !== undefined) {
+      obj.displayColor = Color.toJSON(message.displayColor);
+    }
+    if (message.thumbnailPath !== undefined) {
+      obj.thumbnailPath = URL.toJSON(message.thumbnailPath);
+    }
+    if (message.audioType !== 0) {
+      obj.audioType = videoInput_AudioDeviceTypeToJSON(message.audioType);
+    }
+    if (message.alphaType !== 0) {
+      obj.alphaType = alphaTypeToJSON(message.alphaType);
+    }
+    if (message.audioDevice !== undefined) {
+      obj.audioDevice = DigitalAudio_Device.toJSON(message.audioDevice);
+    }
+    if (message.videoDevice !== undefined) {
+      obj.videoDevice = Media_VideoDevice.toJSON(message.videoDevice);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<VideoInput>, I>>(base?: I): VideoInput {
-    return VideoInput.fromPartial(base ?? {});
+    return VideoInput.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<VideoInput>, I>>(
     object: I,
   ): VideoInput {
@@ -309,6 +327,7 @@ export const VideoInput = {
         ? URL.fromPartial(object.thumbnailPath)
         : undefined;
     message.audioType = object.audioType ?? 0;
+    message.alphaType = object.alphaType ?? 0;
     message.audioDevice =
       object.audioDevice !== undefined && object.audioDevice !== null
         ? DigitalAudio_Device.fromPartial(object.audioDevice)
@@ -348,14 +367,14 @@ export const VideoInput_SettingsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.inputs.push(VideoInput.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -365,7 +384,7 @@ export const VideoInput_SettingsDocument = {
 
   fromJSON(object: any): VideoInput_SettingsDocument {
     return {
-      inputs: Array.isArray(object?.inputs)
+      inputs: globalThis.Array.isArray(object?.inputs)
         ? object.inputs.map((e: any) => VideoInput.fromJSON(e))
         : [],
     };
@@ -373,12 +392,8 @@ export const VideoInput_SettingsDocument = {
 
   toJSON(message: VideoInput_SettingsDocument): unknown {
     const obj: any = {};
-    if (message.inputs) {
-      obj.inputs = message.inputs.map((e) =>
-        e ? VideoInput.toJSON(e) : undefined,
-      );
-    } else {
-      obj.inputs = [];
+    if (message.inputs?.length) {
+      obj.inputs = message.inputs.map((e) => VideoInput.toJSON(e));
     }
     return obj;
   },
@@ -386,9 +401,8 @@ export const VideoInput_SettingsDocument = {
   create<I extends Exact<DeepPartial<VideoInput_SettingsDocument>, I>>(
     base?: I,
   ): VideoInput_SettingsDocument {
-    return VideoInput_SettingsDocument.fromPartial(base ?? {});
+    return VideoInput_SettingsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<VideoInput_SettingsDocument>, I>>(
     object: I,
   ): VideoInput_SettingsDocument {
@@ -449,21 +463,21 @@ export const AudioInput = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.userDescription = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -473,7 +487,7 @@ export const AudioInput = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -483,7 +497,7 @@ export const AudioInput = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -493,7 +507,7 @@ export const AudioInput = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -505,7 +519,7 @@ export const AudioInput = {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       userDescription: isSet(object.userDescription)
-        ? String(object.userDescription)
+        ? globalThis.String(object.userDescription)
         : '',
       behaviorMode: isSet(object.behaviorMode)
         ? AudioInput_BehaviorMode.fromJSON(object.behaviorMode)
@@ -521,29 +535,27 @@ export const AudioInput = {
 
   toJSON(message: AudioInput): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.userDescription !== undefined &&
-      (obj.userDescription = message.userDescription);
-    message.behaviorMode !== undefined &&
-      (obj.behaviorMode = message.behaviorMode
-        ? AudioInput_BehaviorMode.toJSON(message.behaviorMode)
-        : undefined);
-    message.audioDevice !== undefined &&
-      (obj.audioDevice = message.audioDevice
-        ? DigitalAudio_Device.toJSON(message.audioDevice)
-        : undefined);
-    message.videoDevice !== undefined &&
-      (obj.videoDevice = message.videoDevice
-        ? Media_VideoDevice.toJSON(message.videoDevice)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.userDescription !== '') {
+      obj.userDescription = message.userDescription;
+    }
+    if (message.behaviorMode !== undefined) {
+      obj.behaviorMode = AudioInput_BehaviorMode.toJSON(message.behaviorMode);
+    }
+    if (message.audioDevice !== undefined) {
+      obj.audioDevice = DigitalAudio_Device.toJSON(message.audioDevice);
+    }
+    if (message.videoDevice !== undefined) {
+      obj.videoDevice = Media_VideoDevice.toJSON(message.videoDevice);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AudioInput>, I>>(base?: I): AudioInput {
-    return AudioInput.fromPartial(base ?? {});
+    return AudioInput.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AudioInput>, I>>(
     object: I,
   ): AudioInput {
@@ -622,7 +634,7 @@ export const AudioInput_BehaviorMode = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -632,7 +644,7 @@ export const AudioInput_BehaviorMode = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -642,7 +654,7 @@ export const AudioInput_BehaviorMode = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -652,7 +664,7 @@ export const AudioInput_BehaviorMode = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -662,7 +674,7 @@ export const AudioInput_BehaviorMode = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -689,31 +701,26 @@ export const AudioInput_BehaviorMode = {
 
   toJSON(message: AudioInput_BehaviorMode): unknown {
     const obj: any = {};
-    message.on !== undefined &&
-      (obj.on = message.on
-        ? AudioInput_BehaviorMode_On.toJSON(message.on)
-        : undefined);
-    message.off !== undefined &&
-      (obj.off = message.off
-        ? AudioInput_BehaviorMode_Off.toJSON(message.off)
-        : undefined);
-    message.autoOn !== undefined &&
-      (obj.autoOn = message.autoOn
-        ? AudioInput_BehaviorMode_AutoOn.toJSON(message.autoOn)
-        : undefined);
-    message.autoOff !== undefined &&
-      (obj.autoOff = message.autoOff
-        ? AudioInput_BehaviorMode_AutoOff.toJSON(message.autoOff)
-        : undefined);
+    if (message.on !== undefined) {
+      obj.on = AudioInput_BehaviorMode_On.toJSON(message.on);
+    }
+    if (message.off !== undefined) {
+      obj.off = AudioInput_BehaviorMode_Off.toJSON(message.off);
+    }
+    if (message.autoOn !== undefined) {
+      obj.autoOn = AudioInput_BehaviorMode_AutoOn.toJSON(message.autoOn);
+    }
+    if (message.autoOff !== undefined) {
+      obj.autoOff = AudioInput_BehaviorMode_AutoOff.toJSON(message.autoOff);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AudioInput_BehaviorMode>, I>>(
     base?: I,
   ): AudioInput_BehaviorMode {
-    return AudioInput_BehaviorMode.fromPartial(base ?? {});
+    return AudioInput_BehaviorMode.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AudioInput_BehaviorMode>, I>>(
     object: I,
   ): AudioInput_BehaviorMode {
@@ -762,7 +769,7 @@ export const AudioInput_BehaviorMode_On = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -782,9 +789,8 @@ export const AudioInput_BehaviorMode_On = {
   create<I extends Exact<DeepPartial<AudioInput_BehaviorMode_On>, I>>(
     base?: I,
   ): AudioInput_BehaviorMode_On {
-    return AudioInput_BehaviorMode_On.fromPartial(base ?? {});
+    return AudioInput_BehaviorMode_On.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AudioInput_BehaviorMode_On>, I>>(
     _: I,
   ): AudioInput_BehaviorMode_On {
@@ -817,7 +823,7 @@ export const AudioInput_BehaviorMode_Off = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -837,9 +843,8 @@ export const AudioInput_BehaviorMode_Off = {
   create<I extends Exact<DeepPartial<AudioInput_BehaviorMode_Off>, I>>(
     base?: I,
   ): AudioInput_BehaviorMode_Off {
-    return AudioInput_BehaviorMode_Off.fromPartial(base ?? {});
+    return AudioInput_BehaviorMode_Off.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AudioInput_BehaviorMode_Off>, I>>(
     _: I,
   ): AudioInput_BehaviorMode_Off {
@@ -872,7 +877,7 @@ export const AudioInput_BehaviorMode_AutoOff = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -892,9 +897,8 @@ export const AudioInput_BehaviorMode_AutoOff = {
   create<I extends Exact<DeepPartial<AudioInput_BehaviorMode_AutoOff>, I>>(
     base?: I,
   ): AudioInput_BehaviorMode_AutoOff {
-    return AudioInput_BehaviorMode_AutoOff.fromPartial(base ?? {});
+    return AudioInput_BehaviorMode_AutoOff.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AudioInput_BehaviorMode_AutoOff>, I>>(
     _: I,
   ): AudioInput_BehaviorMode_AutoOff {
@@ -932,12 +936,13 @@ export const AudioInput_BehaviorMode_AutoOn = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag == 8) {
+          if (tag === 8) {
             message.linkedVideoInputs.push(reader.uint32());
+
             continue;
           }
 
-          if (tag == 10) {
+          if (tag === 10) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.linkedVideoInputs.push(reader.uint32());
@@ -948,7 +953,7 @@ export const AudioInput_BehaviorMode_AutoOn = {
 
           break;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -958,20 +963,18 @@ export const AudioInput_BehaviorMode_AutoOn = {
 
   fromJSON(object: any): AudioInput_BehaviorMode_AutoOn {
     return {
-      linkedVideoInputs: Array.isArray(object?.linkedVideoInputs)
-        ? object.linkedVideoInputs.map((e: any) => Number(e))
+      linkedVideoInputs: globalThis.Array.isArray(object?.linkedVideoInputs)
+        ? object.linkedVideoInputs.map((e: any) => globalThis.Number(e))
         : [],
     };
   },
 
   toJSON(message: AudioInput_BehaviorMode_AutoOn): unknown {
     const obj: any = {};
-    if (message.linkedVideoInputs) {
+    if (message.linkedVideoInputs?.length) {
       obj.linkedVideoInputs = message.linkedVideoInputs.map((e) =>
         Math.round(e),
       );
-    } else {
-      obj.linkedVideoInputs = [];
     }
     return obj;
   },
@@ -979,9 +982,8 @@ export const AudioInput_BehaviorMode_AutoOn = {
   create<I extends Exact<DeepPartial<AudioInput_BehaviorMode_AutoOn>, I>>(
     base?: I,
   ): AudioInput_BehaviorMode_AutoOn {
-    return AudioInput_BehaviorMode_AutoOn.fromPartial(base ?? {});
+    return AudioInput_BehaviorMode_AutoOn.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AudioInput_BehaviorMode_AutoOn>, I>>(
     object: I,
   ): AudioInput_BehaviorMode_AutoOn {
@@ -1002,8 +1004,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

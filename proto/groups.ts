@@ -1,7 +1,8 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color, UUID } from './basicTypes';
+import { Color } from './color';
 import { HotKey } from './hotKey';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -64,35 +65,35 @@ export const Group = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.hotKey = HotKey.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -102,14 +103,14 @@ export const Group = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.applicationGroupName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -120,40 +121,46 @@ export const Group = {
   fromJSON(object: any): Group {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
       hotKey: isSet(object.hotKey) ? HotKey.fromJSON(object.hotKey) : undefined,
       applicationGroupIdentifier: isSet(object.applicationGroupIdentifier)
         ? UUID.fromJSON(object.applicationGroupIdentifier)
         : undefined,
       applicationGroupName: isSet(object.applicationGroupName)
-        ? String(object.applicationGroupName)
+        ? globalThis.String(object.applicationGroupName)
         : '',
     };
   },
 
   toJSON(message: Group): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.hotKey !== undefined &&
-      (obj.hotKey = message.hotKey ? HotKey.toJSON(message.hotKey) : undefined);
-    message.applicationGroupIdentifier !== undefined &&
-      (obj.applicationGroupIdentifier = message.applicationGroupIdentifier
-        ? UUID.toJSON(message.applicationGroupIdentifier)
-        : undefined);
-    message.applicationGroupName !== undefined &&
-      (obj.applicationGroupName = message.applicationGroupName);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.hotKey !== undefined) {
+      obj.hotKey = HotKey.toJSON(message.hotKey);
+    }
+    if (message.applicationGroupIdentifier !== undefined) {
+      obj.applicationGroupIdentifier = UUID.toJSON(
+        message.applicationGroupIdentifier,
+      );
+    }
+    if (message.applicationGroupName !== '') {
+      obj.applicationGroupName = message.applicationGroupName;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Group>, I>>(base?: I): Group {
-    return Group.fromPartial(base ?? {});
+    return Group.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Group>, I>>(object: I): Group {
     const message = createBaseGroup();
     message.uuid =
@@ -203,14 +210,14 @@ export const ProGroupsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.groups.push(Group.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -220,7 +227,7 @@ export const ProGroupsDocument = {
 
   fromJSON(object: any): ProGroupsDocument {
     return {
-      groups: Array.isArray(object?.groups)
+      groups: globalThis.Array.isArray(object?.groups)
         ? object.groups.map((e: any) => Group.fromJSON(e))
         : [],
     };
@@ -228,10 +235,8 @@ export const ProGroupsDocument = {
 
   toJSON(message: ProGroupsDocument): unknown {
     const obj: any = {};
-    if (message.groups) {
-      obj.groups = message.groups.map((e) => (e ? Group.toJSON(e) : undefined));
-    } else {
-      obj.groups = [];
+    if (message.groups?.length) {
+      obj.groups = message.groups.map((e) => Group.toJSON(e));
     }
     return obj;
   },
@@ -239,9 +244,8 @@ export const ProGroupsDocument = {
   create<I extends Exact<DeepPartial<ProGroupsDocument>, I>>(
     base?: I,
   ): ProGroupsDocument {
-    return ProGroupsDocument.fromPartial(base ?? {});
+    return ProGroupsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProGroupsDocument>, I>>(
     object: I,
   ): ProGroupsDocument {
@@ -262,8 +266,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

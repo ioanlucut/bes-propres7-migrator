@@ -6,9 +6,10 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "hotKey.proto";
+import "color.proto";
 import "effects.proto";
-import "basicTypes.proto";
+import "hotKey.proto";
+import "uuid.proto";
 
 message Layer {
   message Preset {

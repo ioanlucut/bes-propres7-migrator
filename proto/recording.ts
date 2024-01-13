@@ -1,13 +1,22 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { URL, UUID } from './basicTypes';
 import { DigitalAudio_Device_Map } from './digitalAudio';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
 export interface Recording {}
 
 export interface Recording_SettingsDocument {
+  streams: Recording_Stream[];
+  presets: Recording_Preset[];
+  activePreset: Recording_Preset | undefined;
+}
+
+export interface Recording_Preset {
+  id: UUID | undefined;
+  name: string;
   streams: Recording_Stream[];
 }
 
@@ -264,6 +273,7 @@ export interface Recording_Stream_Encoder {
   isInterlaced: boolean;
   frameRate: Recording_Stream_FrameRate;
   videoBitrate: number;
+  audioBitrate: number;
 }
 
 export interface Recording_Stream_OutputScreenSource {
@@ -310,7 +320,7 @@ export const Recording = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -328,9 +338,8 @@ export const Recording = {
   },
 
   create<I extends Exact<DeepPartial<Recording>, I>>(base?: I): Recording {
-    return Recording.fromPartial(base ?? {});
+    return Recording.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Recording>, I>>(_: I): Recording {
     const message = createBaseRecording();
     return message;
@@ -338,7 +347,7 @@ export const Recording = {
 };
 
 function createBaseRecording_SettingsDocument(): Recording_SettingsDocument {
-  return { streams: [] };
+  return { streams: [], presets: [], activePreset: undefined };
 }
 
 export const Recording_SettingsDocument = {
@@ -348,6 +357,15 @@ export const Recording_SettingsDocument = {
   ): _m0.Writer {
     for (const v of message.streams) {
       Recording_Stream.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    for (const v of message.presets) {
+      Recording_Preset.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.activePreset !== undefined) {
+      Recording_Preset.encode(
+        message.activePreset,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -364,7 +382,7 @@ export const Recording_SettingsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -372,8 +390,27 @@ export const Recording_SettingsDocument = {
             Recording_Stream.decode(reader, reader.uint32()),
           );
           continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.presets.push(
+            Recording_Preset.decode(reader, reader.uint32()),
+          );
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.activePreset = Recording_Preset.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -383,20 +420,28 @@ export const Recording_SettingsDocument = {
 
   fromJSON(object: any): Recording_SettingsDocument {
     return {
-      streams: Array.isArray(object?.streams)
+      streams: globalThis.Array.isArray(object?.streams)
         ? object.streams.map((e: any) => Recording_Stream.fromJSON(e))
         : [],
+      presets: globalThis.Array.isArray(object?.presets)
+        ? object.presets.map((e: any) => Recording_Preset.fromJSON(e))
+        : [],
+      activePreset: isSet(object.activePreset)
+        ? Recording_Preset.fromJSON(object.activePreset)
+        : undefined,
     };
   },
 
   toJSON(message: Recording_SettingsDocument): unknown {
     const obj: any = {};
-    if (message.streams) {
-      obj.streams = message.streams.map((e) =>
-        e ? Recording_Stream.toJSON(e) : undefined,
-      );
-    } else {
-      obj.streams = [];
+    if (message.streams?.length) {
+      obj.streams = message.streams.map((e) => Recording_Stream.toJSON(e));
+    }
+    if (message.presets?.length) {
+      obj.presets = message.presets.map((e) => Recording_Preset.toJSON(e));
+    }
+    if (message.activePreset !== undefined) {
+      obj.activePreset = Recording_Preset.toJSON(message.activePreset);
     }
     return obj;
   },
@@ -404,13 +449,123 @@ export const Recording_SettingsDocument = {
   create<I extends Exact<DeepPartial<Recording_SettingsDocument>, I>>(
     base?: I,
   ): Recording_SettingsDocument {
-    return Recording_SettingsDocument.fromPartial(base ?? {});
+    return Recording_SettingsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Recording_SettingsDocument>, I>>(
     object: I,
   ): Recording_SettingsDocument {
     const message = createBaseRecording_SettingsDocument();
+    message.streams =
+      object.streams?.map((e) => Recording_Stream.fromPartial(e)) || [];
+    message.presets =
+      object.presets?.map((e) => Recording_Preset.fromPartial(e)) || [];
+    message.activePreset =
+      object.activePreset !== undefined && object.activePreset !== null
+        ? Recording_Preset.fromPartial(object.activePreset)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseRecording_Preset(): Recording_Preset {
+  return { id: undefined, name: '', streams: [] };
+}
+
+export const Recording_Preset = {
+  encode(
+    message: Recording_Preset,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.id !== undefined) {
+      UUID.encode(message.id, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.name !== '') {
+      writer.uint32(18).string(message.name);
+    }
+    for (const v of message.streams) {
+      Recording_Stream.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Recording_Preset {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRecording_Preset();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.id = UUID.decode(reader, reader.uint32());
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.streams.push(
+            Recording_Stream.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Recording_Preset {
+    return {
+      id: isSet(object.id) ? UUID.fromJSON(object.id) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      streams: globalThis.Array.isArray(object?.streams)
+        ? object.streams.map((e: any) => Recording_Stream.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: Recording_Preset): unknown {
+    const obj: any = {};
+    if (message.id !== undefined) {
+      obj.id = UUID.toJSON(message.id);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.streams?.length) {
+      obj.streams = message.streams.map((e) => Recording_Stream.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Recording_Preset>, I>>(
+    base?: I,
+  ): Recording_Preset {
+    return Recording_Preset.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Recording_Preset>, I>>(
+    object: I,
+  ): Recording_Preset {
+    const message = createBaseRecording_Preset();
+    message.id =
+      object.id !== undefined && object.id !== null
+        ? UUID.fromPartial(object.id)
+        : undefined;
+    message.name = object.name ?? '';
     message.streams =
       object.streams?.map((e) => Recording_Stream.fromPartial(e)) || [];
     return message;
@@ -472,14 +627,14 @@ export const Recording_Stream = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.id = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -489,7 +644,7 @@ export const Recording_Stream = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -498,7 +653,7 @@ export const Recording_Stream = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -507,14 +662,14 @@ export const Recording_Stream = {
           );
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.isAudioCustomMapped = reader.bool();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -524,7 +679,7 @@ export const Recording_Stream = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -538,16 +693,16 @@ export const Recording_Stream = {
       encoder: isSet(object.encoder)
         ? Recording_Stream_Encoder.fromJSON(object.encoder)
         : undefined,
-      destinations: Array.isArray(object?.destinations)
+      destinations: globalThis.Array.isArray(object?.destinations)
         ? object.destinations.map((e: any) =>
             Recording_Stream_Destination.fromJSON(e),
           )
         : [],
-      audioMap: Array.isArray(object?.audioMap)
+      audioMap: globalThis.Array.isArray(object?.audioMap)
         ? object.audioMap.map((e: any) => DigitalAudio_Device_Map.fromJSON(e))
         : [],
       isAudioCustomMapped: isSet(object.isAudioCustomMapped)
-        ? Boolean(object.isAudioCustomMapped)
+        ? globalThis.Boolean(object.isAudioCustomMapped)
         : false,
       outputScreen: isSet(object.outputScreen)
         ? Recording_Stream_OutputScreenSource.fromJSON(object.outputScreen)
@@ -557,41 +712,38 @@ export const Recording_Stream = {
 
   toJSON(message: Recording_Stream): unknown {
     const obj: any = {};
-    message.id !== undefined &&
-      (obj.id = message.id ? UUID.toJSON(message.id) : undefined);
-    message.encoder !== undefined &&
-      (obj.encoder = message.encoder
-        ? Recording_Stream_Encoder.toJSON(message.encoder)
-        : undefined);
-    if (message.destinations) {
+    if (message.id !== undefined) {
+      obj.id = UUID.toJSON(message.id);
+    }
+    if (message.encoder !== undefined) {
+      obj.encoder = Recording_Stream_Encoder.toJSON(message.encoder);
+    }
+    if (message.destinations?.length) {
       obj.destinations = message.destinations.map((e) =>
-        e ? Recording_Stream_Destination.toJSON(e) : undefined,
+        Recording_Stream_Destination.toJSON(e),
       );
-    } else {
-      obj.destinations = [];
     }
-    if (message.audioMap) {
+    if (message.audioMap?.length) {
       obj.audioMap = message.audioMap.map((e) =>
-        e ? DigitalAudio_Device_Map.toJSON(e) : undefined,
+        DigitalAudio_Device_Map.toJSON(e),
       );
-    } else {
-      obj.audioMap = [];
     }
-    message.isAudioCustomMapped !== undefined &&
-      (obj.isAudioCustomMapped = message.isAudioCustomMapped);
-    message.outputScreen !== undefined &&
-      (obj.outputScreen = message.outputScreen
-        ? Recording_Stream_OutputScreenSource.toJSON(message.outputScreen)
-        : undefined);
+    if (message.isAudioCustomMapped === true) {
+      obj.isAudioCustomMapped = message.isAudioCustomMapped;
+    }
+    if (message.outputScreen !== undefined) {
+      obj.outputScreen = Recording_Stream_OutputScreenSource.toJSON(
+        message.outputScreen,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream>, I>>(
     base?: I,
   ): Recording_Stream {
-    return Recording_Stream.fromPartial(base ?? {});
+    return Recording_Stream.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Recording_Stream>, I>>(
     object: I,
   ): Recording_Stream {
@@ -627,6 +779,7 @@ function createBaseRecording_Stream_Encoder(): Recording_Stream_Encoder {
     isInterlaced: false,
     frameRate: 0,
     videoBitrate: 0,
+    audioBitrate: 0,
   };
 }
 
@@ -653,6 +806,9 @@ export const Recording_Stream_Encoder = {
     if (message.videoBitrate !== 0) {
       writer.uint32(48).uint32(message.videoBitrate);
     }
+    if (message.audioBitrate !== 0) {
+      writer.uint32(56).uint32(message.audioBitrate);
+    }
     return writer;
   },
 
@@ -668,49 +824,56 @@ export const Recording_Stream_Encoder = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.codec = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.videoWidth = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.videoHeight = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.isInterlaced = reader.bool();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.frameRate = reader.int32() as any;
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.videoBitrate = reader.uint32();
           continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.audioBitrate = reader.uint32();
+          continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -723,43 +886,58 @@ export const Recording_Stream_Encoder = {
       codec: isSet(object.codec)
         ? recording_Stream_CodecFromJSON(object.codec)
         : 0,
-      videoWidth: isSet(object.videoWidth) ? Number(object.videoWidth) : 0,
-      videoHeight: isSet(object.videoHeight) ? Number(object.videoHeight) : 0,
+      videoWidth: isSet(object.videoWidth)
+        ? globalThis.Number(object.videoWidth)
+        : 0,
+      videoHeight: isSet(object.videoHeight)
+        ? globalThis.Number(object.videoHeight)
+        : 0,
       isInterlaced: isSet(object.isInterlaced)
-        ? Boolean(object.isInterlaced)
+        ? globalThis.Boolean(object.isInterlaced)
         : false,
       frameRate: isSet(object.frameRate)
         ? recording_Stream_FrameRateFromJSON(object.frameRate)
         : 0,
       videoBitrate: isSet(object.videoBitrate)
-        ? Number(object.videoBitrate)
+        ? globalThis.Number(object.videoBitrate)
+        : 0,
+      audioBitrate: isSet(object.audioBitrate)
+        ? globalThis.Number(object.audioBitrate)
         : 0,
     };
   },
 
   toJSON(message: Recording_Stream_Encoder): unknown {
     const obj: any = {};
-    message.codec !== undefined &&
-      (obj.codec = recording_Stream_CodecToJSON(message.codec));
-    message.videoWidth !== undefined &&
-      (obj.videoWidth = Math.round(message.videoWidth));
-    message.videoHeight !== undefined &&
-      (obj.videoHeight = Math.round(message.videoHeight));
-    message.isInterlaced !== undefined &&
-      (obj.isInterlaced = message.isInterlaced);
-    message.frameRate !== undefined &&
-      (obj.frameRate = recording_Stream_FrameRateToJSON(message.frameRate));
-    message.videoBitrate !== undefined &&
-      (obj.videoBitrate = Math.round(message.videoBitrate));
+    if (message.codec !== 0) {
+      obj.codec = recording_Stream_CodecToJSON(message.codec);
+    }
+    if (message.videoWidth !== 0) {
+      obj.videoWidth = Math.round(message.videoWidth);
+    }
+    if (message.videoHeight !== 0) {
+      obj.videoHeight = Math.round(message.videoHeight);
+    }
+    if (message.isInterlaced === true) {
+      obj.isInterlaced = message.isInterlaced;
+    }
+    if (message.frameRate !== 0) {
+      obj.frameRate = recording_Stream_FrameRateToJSON(message.frameRate);
+    }
+    if (message.videoBitrate !== 0) {
+      obj.videoBitrate = Math.round(message.videoBitrate);
+    }
+    if (message.audioBitrate !== 0) {
+      obj.audioBitrate = Math.round(message.audioBitrate);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream_Encoder>, I>>(
     base?: I,
   ): Recording_Stream_Encoder {
-    return Recording_Stream_Encoder.fromPartial(base ?? {});
+    return Recording_Stream_Encoder.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Recording_Stream_Encoder>, I>>(
     object: I,
   ): Recording_Stream_Encoder {
@@ -770,6 +948,7 @@ export const Recording_Stream_Encoder = {
     message.isInterlaced = object.isInterlaced ?? false;
     message.frameRate = object.frameRate ?? 0;
     message.videoBitrate = object.videoBitrate ?? 0;
+    message.audioBitrate = object.audioBitrate ?? 0;
     return message;
   },
 };
@@ -804,21 +983,21 @@ export const Recording_Stream_OutputScreenSource = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.screenId = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.screenName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -831,26 +1010,28 @@ export const Recording_Stream_OutputScreenSource = {
       screenId: isSet(object.screenId)
         ? UUID.fromJSON(object.screenId)
         : undefined,
-      screenName: isSet(object.screenName) ? String(object.screenName) : '',
+      screenName: isSet(object.screenName)
+        ? globalThis.String(object.screenName)
+        : '',
     };
   },
 
   toJSON(message: Recording_Stream_OutputScreenSource): unknown {
     const obj: any = {};
-    message.screenId !== undefined &&
-      (obj.screenId = message.screenId
-        ? UUID.toJSON(message.screenId)
-        : undefined);
-    message.screenName !== undefined && (obj.screenName = message.screenName);
+    if (message.screenId !== undefined) {
+      obj.screenId = UUID.toJSON(message.screenId);
+    }
+    if (message.screenName !== '') {
+      obj.screenName = message.screenName;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream_OutputScreenSource>, I>>(
     base?: I,
   ): Recording_Stream_OutputScreenSource {
-    return Recording_Stream_OutputScreenSource.fromPartial(base ?? {});
+    return Recording_Stream_OutputScreenSource.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Recording_Stream_OutputScreenSource>, I>,
   >(object: I): Recording_Stream_OutputScreenSource {
@@ -894,21 +1075,21 @@ export const Recording_Stream_DiskDestination = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.location = URL.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.container = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -929,21 +1110,20 @@ export const Recording_Stream_DiskDestination = {
 
   toJSON(message: Recording_Stream_DiskDestination): unknown {
     const obj: any = {};
-    message.location !== undefined &&
-      (obj.location = message.location
-        ? URL.toJSON(message.location)
-        : undefined);
-    message.container !== undefined &&
-      (obj.container = recording_Stream_ContainerToJSON(message.container));
+    if (message.location !== undefined) {
+      obj.location = URL.toJSON(message.location);
+    }
+    if (message.container !== 0) {
+      obj.container = recording_Stream_ContainerToJSON(message.container);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream_DiskDestination>, I>>(
     base?: I,
   ): Recording_Stream_DiskDestination {
-    return Recording_Stream_DiskDestination.fromPartial(base ?? {});
+    return Recording_Stream_DiskDestination.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Recording_Stream_DiskDestination>, I>,
   >(object: I): Recording_Stream_DiskDestination {
@@ -987,21 +1167,21 @@ export const Recording_Stream_RTMPDestination = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.address = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.key = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1011,24 +1191,27 @@ export const Recording_Stream_RTMPDestination = {
 
   fromJSON(object: any): Recording_Stream_RTMPDestination {
     return {
-      address: isSet(object.address) ? String(object.address) : '',
-      key: isSet(object.key) ? String(object.key) : '',
+      address: isSet(object.address) ? globalThis.String(object.address) : '',
+      key: isSet(object.key) ? globalThis.String(object.key) : '',
     };
   },
 
   toJSON(message: Recording_Stream_RTMPDestination): unknown {
     const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.key !== undefined && (obj.key = message.key);
+    if (message.address !== '') {
+      obj.address = message.address;
+    }
+    if (message.key !== '') {
+      obj.key = message.key;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream_RTMPDestination>, I>>(
     base?: I,
   ): Recording_Stream_RTMPDestination {
-    return Recording_Stream_RTMPDestination.fromPartial(base ?? {});
+    return Recording_Stream_RTMPDestination.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Recording_Stream_RTMPDestination>, I>,
   >(object: I): Recording_Stream_RTMPDestination {
@@ -1081,7 +1264,7 @@ export const Recording_Stream_Destination = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1091,7 +1274,7 @@ export const Recording_Stream_Destination = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -1101,7 +1284,7 @@ export const Recording_Stream_Destination = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -1111,7 +1294,7 @@ export const Recording_Stream_Destination = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1135,27 +1318,23 @@ export const Recording_Stream_Destination = {
 
   toJSON(message: Recording_Stream_Destination): unknown {
     const obj: any = {};
-    message.disk !== undefined &&
-      (obj.disk = message.disk
-        ? Recording_Stream_DiskDestination.toJSON(message.disk)
-        : undefined);
-    message.rtmp !== undefined &&
-      (obj.rtmp = message.rtmp
-        ? Recording_Stream_RTMPDestination.toJSON(message.rtmp)
-        : undefined);
-    message.resi !== undefined &&
-      (obj.resi = message.resi
-        ? Recording_Stream_Destination_Resi.toJSON(message.resi)
-        : undefined);
+    if (message.disk !== undefined) {
+      obj.disk = Recording_Stream_DiskDestination.toJSON(message.disk);
+    }
+    if (message.rtmp !== undefined) {
+      obj.rtmp = Recording_Stream_RTMPDestination.toJSON(message.rtmp);
+    }
+    if (message.resi !== undefined) {
+      obj.resi = Recording_Stream_Destination_Resi.toJSON(message.resi);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream_Destination>, I>>(
     base?: I,
   ): Recording_Stream_Destination {
-    return Recording_Stream_Destination.fromPartial(base ?? {});
+    return Recording_Stream_Destination.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Recording_Stream_Destination>, I>>(
     object: I,
   ): Recording_Stream_Destination {
@@ -1209,21 +1388,21 @@ export const Recording_Stream_Destination_Resi = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.destinationGroupId = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.encoderProfileId = UUID.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1244,23 +1423,20 @@ export const Recording_Stream_Destination_Resi = {
 
   toJSON(message: Recording_Stream_Destination_Resi): unknown {
     const obj: any = {};
-    message.destinationGroupId !== undefined &&
-      (obj.destinationGroupId = message.destinationGroupId
-        ? UUID.toJSON(message.destinationGroupId)
-        : undefined);
-    message.encoderProfileId !== undefined &&
-      (obj.encoderProfileId = message.encoderProfileId
-        ? UUID.toJSON(message.encoderProfileId)
-        : undefined);
+    if (message.destinationGroupId !== undefined) {
+      obj.destinationGroupId = UUID.toJSON(message.destinationGroupId);
+    }
+    if (message.encoderProfileId !== undefined) {
+      obj.encoderProfileId = UUID.toJSON(message.encoderProfileId);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Recording_Stream_Destination_Resi>, I>>(
     base?: I,
   ): Recording_Stream_Destination_Resi {
-    return Recording_Stream_Destination_Resi.fromPartial(base ?? {});
+    return Recording_Stream_Destination_Resi.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Recording_Stream_Destination_Resi>, I>,
   >(object: I): Recording_Stream_Destination_Resi {
@@ -1289,8 +1465,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

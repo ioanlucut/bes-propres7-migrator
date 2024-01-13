@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { ApplicationInfo } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
 import { Cue } from './cue';
 import { Transition } from './effects';
 
@@ -45,7 +45,7 @@ export const PropDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -55,21 +55,21 @@ export const PropDocument = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.cues.push(Cue.decode(reader, reader.uint32()));
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -82,7 +82,7 @@ export const PropDocument = {
       applicationInfo: isSet(object.applicationInfo)
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
-      cues: Array.isArray(object?.cues)
+      cues: globalThis.Array.isArray(object?.cues)
         ? object.cues.map((e: any) => Cue.fromJSON(e))
         : [],
       transition: isSet(object.transition)
@@ -93,28 +93,23 @@ export const PropDocument = {
 
   toJSON(message: PropDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    if (message.cues) {
-      obj.cues = message.cues.map((e) => (e ? Cue.toJSON(e) : undefined));
-    } else {
-      obj.cues = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
     }
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
+    if (message.cues?.length) {
+      obj.cues = message.cues.map((e) => Cue.toJSON(e));
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PropDocument>, I>>(
     base?: I,
   ): PropDocument {
-    return PropDocument.fromPartial(base ?? {});
+    return PropDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PropDocument>, I>>(
     object: I,
   ): PropDocument {
@@ -143,8 +138,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

@@ -32,14 +32,14 @@ export const ProLabelsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.labels.push(Action_Label.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -49,7 +49,7 @@ export const ProLabelsDocument = {
 
   fromJSON(object: any): ProLabelsDocument {
     return {
-      labels: Array.isArray(object?.labels)
+      labels: globalThis.Array.isArray(object?.labels)
         ? object.labels.map((e: any) => Action_Label.fromJSON(e))
         : [],
     };
@@ -57,12 +57,8 @@ export const ProLabelsDocument = {
 
   toJSON(message: ProLabelsDocument): unknown {
     const obj: any = {};
-    if (message.labels) {
-      obj.labels = message.labels.map((e) =>
-        e ? Action_Label.toJSON(e) : undefined,
-      );
-    } else {
-      obj.labels = [];
+    if (message.labels?.length) {
+      obj.labels = message.labels.map((e) => Action_Label.toJSON(e));
     }
     return obj;
   },
@@ -70,9 +66,8 @@ export const ProLabelsDocument = {
   create<I extends Exact<DeepPartial<ProLabelsDocument>, I>>(
     base?: I,
   ): ProLabelsDocument {
-    return ProLabelsDocument.fromPartial(base ?? {});
+    return ProLabelsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLabelsDocument>, I>>(
     object: I,
   ): ProLabelsDocument {
@@ -94,8 +89,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

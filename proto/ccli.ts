@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { ApplicationInfo } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
 import { Template_Slide } from './template';
 
 export const protobufPackage = 'rv.data';
@@ -62,6 +62,88 @@ export function cCLIDocument_DisplayTypeToJSON(
   }
 }
 
+export interface CopyrightLayout {
+  tokens: CopyrightLayout_Token[];
+}
+
+export enum CopyrightLayout_TokenType {
+  Text = 0,
+  Artist = 1,
+  Author = 2,
+  Publisher = 3,
+  Title = 4,
+  CopyrightYear = 5,
+  LicenseNumber = 6,
+  SongNumber = 7,
+  UNRECOGNIZED = -1,
+}
+
+export function copyrightLayout_TokenTypeFromJSON(
+  object: any,
+): CopyrightLayout_TokenType {
+  switch (object) {
+    case 0:
+    case 'Text':
+      return CopyrightLayout_TokenType.Text;
+    case 1:
+    case 'Artist':
+      return CopyrightLayout_TokenType.Artist;
+    case 2:
+    case 'Author':
+      return CopyrightLayout_TokenType.Author;
+    case 3:
+    case 'Publisher':
+      return CopyrightLayout_TokenType.Publisher;
+    case 4:
+    case 'Title':
+      return CopyrightLayout_TokenType.Title;
+    case 5:
+    case 'CopyrightYear':
+      return CopyrightLayout_TokenType.CopyrightYear;
+    case 6:
+    case 'LicenseNumber':
+      return CopyrightLayout_TokenType.LicenseNumber;
+    case 7:
+    case 'SongNumber':
+      return CopyrightLayout_TokenType.SongNumber;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return CopyrightLayout_TokenType.UNRECOGNIZED;
+  }
+}
+
+export function copyrightLayout_TokenTypeToJSON(
+  object: CopyrightLayout_TokenType,
+): string {
+  switch (object) {
+    case CopyrightLayout_TokenType.Text:
+      return 'Text';
+    case CopyrightLayout_TokenType.Artist:
+      return 'Artist';
+    case CopyrightLayout_TokenType.Author:
+      return 'Author';
+    case CopyrightLayout_TokenType.Publisher:
+      return 'Publisher';
+    case CopyrightLayout_TokenType.Title:
+      return 'Title';
+    case CopyrightLayout_TokenType.CopyrightYear:
+      return 'CopyrightYear';
+    case CopyrightLayout_TokenType.LicenseNumber:
+      return 'LicenseNumber';
+    case CopyrightLayout_TokenType.SongNumber:
+      return 'SongNumber';
+    case CopyrightLayout_TokenType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export interface CopyrightLayout_Token {
+  tokenType: CopyrightLayout_TokenType;
+  text: string;
+}
+
 function createBaseCCLIDocument(): CCLIDocument {
   return {
     applicationInfo: undefined,
@@ -110,7 +192,7 @@ export const CCLIDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -120,35 +202,35 @@ export const CCLIDocument = {
           );
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.enableCcliDisplay = reader.bool();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.ccliLicense = reader.string();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.displayType = reader.int32() as any;
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.template = Template_Slide.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -162,9 +244,11 @@ export const CCLIDocument = {
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
       enableCcliDisplay: isSet(object.enableCcliDisplay)
-        ? Boolean(object.enableCcliDisplay)
+        ? globalThis.Boolean(object.enableCcliDisplay)
         : false,
-      ccliLicense: isSet(object.ccliLicense) ? String(object.ccliLicense) : '',
+      ccliLicense: isSet(object.ccliLicense)
+        ? globalThis.String(object.ccliLicense)
+        : '',
       displayType: isSet(object.displayType)
         ? cCLIDocument_DisplayTypeFromJSON(object.displayType)
         : 0,
@@ -176,29 +260,29 @@ export const CCLIDocument = {
 
   toJSON(message: CCLIDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    message.enableCcliDisplay !== undefined &&
-      (obj.enableCcliDisplay = message.enableCcliDisplay);
-    message.ccliLicense !== undefined &&
-      (obj.ccliLicense = message.ccliLicense);
-    message.displayType !== undefined &&
-      (obj.displayType = cCLIDocument_DisplayTypeToJSON(message.displayType));
-    message.template !== undefined &&
-      (obj.template = message.template
-        ? Template_Slide.toJSON(message.template)
-        : undefined);
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.enableCcliDisplay === true) {
+      obj.enableCcliDisplay = message.enableCcliDisplay;
+    }
+    if (message.ccliLicense !== '') {
+      obj.ccliLicense = message.ccliLicense;
+    }
+    if (message.displayType !== 0) {
+      obj.displayType = cCLIDocument_DisplayTypeToJSON(message.displayType);
+    }
+    if (message.template !== undefined) {
+      obj.template = Template_Slide.toJSON(message.template);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<CCLIDocument>, I>>(
     base?: I,
   ): CCLIDocument {
-    return CCLIDocument.fromPartial(base ?? {});
+    return CCLIDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<CCLIDocument>, I>>(
     object: I,
   ): CCLIDocument {
@@ -218,6 +302,165 @@ export const CCLIDocument = {
   },
 };
 
+function createBaseCopyrightLayout(): CopyrightLayout {
+  return { tokens: [] };
+}
+
+export const CopyrightLayout = {
+  encode(
+    message: CopyrightLayout,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.tokens) {
+      CopyrightLayout_Token.encode(v!, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CopyrightLayout {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCopyrightLayout();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.tokens.push(
+            CopyrightLayout_Token.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CopyrightLayout {
+    return {
+      tokens: globalThis.Array.isArray(object?.tokens)
+        ? object.tokens.map((e: any) => CopyrightLayout_Token.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: CopyrightLayout): unknown {
+    const obj: any = {};
+    if (message.tokens?.length) {
+      obj.tokens = message.tokens.map((e) => CopyrightLayout_Token.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CopyrightLayout>, I>>(
+    base?: I,
+  ): CopyrightLayout {
+    return CopyrightLayout.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CopyrightLayout>, I>>(
+    object: I,
+  ): CopyrightLayout {
+    const message = createBaseCopyrightLayout();
+    message.tokens =
+      object.tokens?.map((e) => CopyrightLayout_Token.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseCopyrightLayout_Token(): CopyrightLayout_Token {
+  return { tokenType: 0, text: '' };
+}
+
+export const CopyrightLayout_Token = {
+  encode(
+    message: CopyrightLayout_Token,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.tokenType !== 0) {
+      writer.uint32(8).int32(message.tokenType);
+    }
+    if (message.text !== '') {
+      writer.uint32(18).string(message.text);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): CopyrightLayout_Token {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCopyrightLayout_Token();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.tokenType = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.text = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CopyrightLayout_Token {
+    return {
+      tokenType: isSet(object.tokenType)
+        ? copyrightLayout_TokenTypeFromJSON(object.tokenType)
+        : 0,
+      text: isSet(object.text) ? globalThis.String(object.text) : '',
+    };
+  },
+
+  toJSON(message: CopyrightLayout_Token): unknown {
+    const obj: any = {};
+    if (message.tokenType !== 0) {
+      obj.tokenType = copyrightLayout_TokenTypeToJSON(message.tokenType);
+    }
+    if (message.text !== '') {
+      obj.text = message.text;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CopyrightLayout_Token>, I>>(
+    base?: I,
+  ): CopyrightLayout_Token {
+    return CopyrightLayout_Token.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CopyrightLayout_Token>, I>>(
+    object: I,
+  ): CopyrightLayout_Token {
+    const message = createBaseCopyrightLayout_Token();
+    message.tokenType = object.tokenType ?? 0;
+    message.text = object.text ?? '';
+    return message;
+  },
+};
+
 type Builtin =
   | Date
   | Function
@@ -229,8 +472,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

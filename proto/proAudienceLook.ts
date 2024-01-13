@@ -1,6 +1,7 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { URL, UUID } from './basicTypes';
+import { URL } from './url';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -23,6 +24,10 @@ export interface ProAudienceLook_ProScreenLook {
   announcementsEnabled: boolean;
   propsLayerEnabled: boolean;
   messagesLayerEnabled: boolean;
+}
+
+export interface AudienceLookCollection {
+  collection: ProAudienceLook[];
 }
 
 function createBaseProAudienceLook(): ProAudienceLook {
@@ -66,21 +71,21 @@ export const ProAudienceLook = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -89,14 +94,14 @@ export const ProAudienceLook = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.originalLookUuid = UUID.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -107,8 +112,8 @@ export const ProAudienceLook = {
   fromJSON(object: any): ProAudienceLook {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      screenLooks: Array.isArray(object?.screenLooks)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      screenLooks: globalThis.Array.isArray(object?.screenLooks)
         ? object.screenLooks.map((e: any) =>
             ProAudienceLook_ProScreenLook.fromJSON(e),
           )
@@ -121,29 +126,28 @@ export const ProAudienceLook = {
 
   toJSON(message: ProAudienceLook): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.screenLooks) {
-      obj.screenLooks = message.screenLooks.map((e) =>
-        e ? ProAudienceLook_ProScreenLook.toJSON(e) : undefined,
-      );
-    } else {
-      obj.screenLooks = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.originalLookUuid !== undefined &&
-      (obj.originalLookUuid = message.originalLookUuid
-        ? UUID.toJSON(message.originalLookUuid)
-        : undefined);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.screenLooks?.length) {
+      obj.screenLooks = message.screenLooks.map((e) =>
+        ProAudienceLook_ProScreenLook.toJSON(e),
+      );
+    }
+    if (message.originalLookUuid !== undefined) {
+      obj.originalLookUuid = UUID.toJSON(message.originalLookUuid);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProAudienceLook>, I>>(
     base?: I,
   ): ProAudienceLook {
-    return ProAudienceLook.fromPartial(base ?? {});
+    return ProAudienceLook.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProAudienceLook>, I>>(
     object: I,
   ): ProAudienceLook {
@@ -237,35 +241,35 @@ export const ProAudienceLook_ProScreenLook = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.proScreenUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.propsEnabled = reader.bool();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.liveVideoEnabled = reader.bool();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.presentationBackgroundEnabled = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -275,49 +279,49 @@ export const ProAudienceLook_ProScreenLook = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.templateSlideUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.presentationForegroundEnabled = reader.bool();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.maskUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.announcementsEnabled = reader.bool();
           continue;
         case 10:
-          if (tag != 80) {
+          if (tag !== 80) {
             break;
           }
 
           message.propsLayerEnabled = reader.bool();
           continue;
         case 11:
-          if (tag != 88) {
+          if (tag !== 88) {
             break;
           }
 
           message.messagesLayerEnabled = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -331,13 +335,13 @@ export const ProAudienceLook_ProScreenLook = {
         ? UUID.fromJSON(object.proScreenUuid)
         : undefined,
       propsEnabled: isSet(object.propsEnabled)
-        ? Boolean(object.propsEnabled)
+        ? globalThis.Boolean(object.propsEnabled)
         : false,
       liveVideoEnabled: isSet(object.liveVideoEnabled)
-        ? Boolean(object.liveVideoEnabled)
+        ? globalThis.Boolean(object.liveVideoEnabled)
         : false,
       presentationBackgroundEnabled: isSet(object.presentationBackgroundEnabled)
-        ? Boolean(object.presentationBackgroundEnabled)
+        ? globalThis.Boolean(object.presentationBackgroundEnabled)
         : false,
       templateDocumentFilePath: isSet(object.templateDocumentFilePath)
         ? URL.fromJSON(object.templateDocumentFilePath)
@@ -346,66 +350,68 @@ export const ProAudienceLook_ProScreenLook = {
         ? UUID.fromJSON(object.templateSlideUuid)
         : undefined,
       presentationForegroundEnabled: isSet(object.presentationForegroundEnabled)
-        ? Boolean(object.presentationForegroundEnabled)
+        ? globalThis.Boolean(object.presentationForegroundEnabled)
         : false,
       maskUuid: isSet(object.maskUuid)
         ? UUID.fromJSON(object.maskUuid)
         : undefined,
       announcementsEnabled: isSet(object.announcementsEnabled)
-        ? Boolean(object.announcementsEnabled)
+        ? globalThis.Boolean(object.announcementsEnabled)
         : false,
       propsLayerEnabled: isSet(object.propsLayerEnabled)
-        ? Boolean(object.propsLayerEnabled)
+        ? globalThis.Boolean(object.propsLayerEnabled)
         : false,
       messagesLayerEnabled: isSet(object.messagesLayerEnabled)
-        ? Boolean(object.messagesLayerEnabled)
+        ? globalThis.Boolean(object.messagesLayerEnabled)
         : false,
     };
   },
 
   toJSON(message: ProAudienceLook_ProScreenLook): unknown {
     const obj: any = {};
-    message.proScreenUuid !== undefined &&
-      (obj.proScreenUuid = message.proScreenUuid
-        ? UUID.toJSON(message.proScreenUuid)
-        : undefined);
-    message.propsEnabled !== undefined &&
-      (obj.propsEnabled = message.propsEnabled);
-    message.liveVideoEnabled !== undefined &&
-      (obj.liveVideoEnabled = message.liveVideoEnabled);
-    message.presentationBackgroundEnabled !== undefined &&
-      (obj.presentationBackgroundEnabled =
-        message.presentationBackgroundEnabled);
-    message.templateDocumentFilePath !== undefined &&
-      (obj.templateDocumentFilePath = message.templateDocumentFilePath
-        ? URL.toJSON(message.templateDocumentFilePath)
-        : undefined);
-    message.templateSlideUuid !== undefined &&
-      (obj.templateSlideUuid = message.templateSlideUuid
-        ? UUID.toJSON(message.templateSlideUuid)
-        : undefined);
-    message.presentationForegroundEnabled !== undefined &&
-      (obj.presentationForegroundEnabled =
-        message.presentationForegroundEnabled);
-    message.maskUuid !== undefined &&
-      (obj.maskUuid = message.maskUuid
-        ? UUID.toJSON(message.maskUuid)
-        : undefined);
-    message.announcementsEnabled !== undefined &&
-      (obj.announcementsEnabled = message.announcementsEnabled);
-    message.propsLayerEnabled !== undefined &&
-      (obj.propsLayerEnabled = message.propsLayerEnabled);
-    message.messagesLayerEnabled !== undefined &&
-      (obj.messagesLayerEnabled = message.messagesLayerEnabled);
+    if (message.proScreenUuid !== undefined) {
+      obj.proScreenUuid = UUID.toJSON(message.proScreenUuid);
+    }
+    if (message.propsEnabled === true) {
+      obj.propsEnabled = message.propsEnabled;
+    }
+    if (message.liveVideoEnabled === true) {
+      obj.liveVideoEnabled = message.liveVideoEnabled;
+    }
+    if (message.presentationBackgroundEnabled === true) {
+      obj.presentationBackgroundEnabled = message.presentationBackgroundEnabled;
+    }
+    if (message.templateDocumentFilePath !== undefined) {
+      obj.templateDocumentFilePath = URL.toJSON(
+        message.templateDocumentFilePath,
+      );
+    }
+    if (message.templateSlideUuid !== undefined) {
+      obj.templateSlideUuid = UUID.toJSON(message.templateSlideUuid);
+    }
+    if (message.presentationForegroundEnabled === true) {
+      obj.presentationForegroundEnabled = message.presentationForegroundEnabled;
+    }
+    if (message.maskUuid !== undefined) {
+      obj.maskUuid = UUID.toJSON(message.maskUuid);
+    }
+    if (message.announcementsEnabled === true) {
+      obj.announcementsEnabled = message.announcementsEnabled;
+    }
+    if (message.propsLayerEnabled === true) {
+      obj.propsLayerEnabled = message.propsLayerEnabled;
+    }
+    if (message.messagesLayerEnabled === true) {
+      obj.messagesLayerEnabled = message.messagesLayerEnabled;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProAudienceLook_ProScreenLook>, I>>(
     base?: I,
   ): ProAudienceLook_ProScreenLook {
-    return ProAudienceLook_ProScreenLook.fromPartial(base ?? {});
+    return ProAudienceLook_ProScreenLook.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProAudienceLook_ProScreenLook>, I>>(
     object: I,
   ): ProAudienceLook_ProScreenLook {
@@ -441,6 +447,81 @@ export const ProAudienceLook_ProScreenLook = {
   },
 };
 
+function createBaseAudienceLookCollection(): AudienceLookCollection {
+  return { collection: [] };
+}
+
+export const AudienceLookCollection = {
+  encode(
+    message: AudienceLookCollection,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.collection) {
+      ProAudienceLook.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): AudienceLookCollection {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAudienceLookCollection();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.collection.push(
+            ProAudienceLook.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AudienceLookCollection {
+    return {
+      collection: globalThis.Array.isArray(object?.collection)
+        ? object.collection.map((e: any) => ProAudienceLook.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: AudienceLookCollection): unknown {
+    const obj: any = {};
+    if (message.collection?.length) {
+      obj.collection = message.collection.map((e) => ProAudienceLook.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AudienceLookCollection>, I>>(
+    base?: I,
+  ): AudienceLookCollection {
+    return AudienceLookCollection.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AudienceLookCollection>, I>>(
+    object: I,
+  ): AudienceLookCollection {
+    const message = createBaseAudienceLookCollection();
+    message.collection =
+      object.collection?.map((e) => ProAudienceLook.fromPartial(e)) || [];
+    return message;
+  },
+};
+
 type Builtin =
   | Date
   | Function
@@ -452,8 +533,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

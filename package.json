@@ -21,7 +21,6 @@
     "p-map": "^4.0.0",
     "protobufjs": "^7.2.5",
     "recursive-readdir": "^2.2.3",
-    "ts-proto": "^1.158.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -40,6 +39,7 @@
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
+    "ts-proto": "^1.165.2",
     "tslib": "^2.6.2",
     "typescript": "5.1.6"
   }

@@ -6,9 +6,12 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
-import "basicTypes.proto";
-import "graphicsData.proto";
+import "alphaType.proto";
+import "color.proto";
 import "digitalAudio.proto";
+import "graphicsData.proto";
+import "url.proto";
+import "uuid.proto";
 
 message VideoInput {
   message SettingsDocument {
@@ -27,6 +30,7 @@ message VideoInput {
   .rv.data.Color display_color = 4;
   .rv.data.URL thumbnail_path = 5;
   .rv.data.VideoInput.AudioDeviceType audio_type = 8;
+  .rv.data.AlphaType alpha_type = 9;
   oneof AltAudioSource {
     .rv.data.DigitalAudio.Device audio_device = 6;
     .rv.data.Media.VideoDevice video_device = 7;

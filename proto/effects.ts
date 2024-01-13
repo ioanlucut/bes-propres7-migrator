@@ -1,6 +1,7 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color, UUID } from './basicTypes';
+import { Color } from './color';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -209,49 +210,49 @@ export const Effect = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.enabled = reader.bool();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.renderId = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.behaviorDescription = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.category = reader.string();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -260,7 +261,7 @@ export const Effect = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -271,14 +272,20 @@ export const Effect = {
   fromJSON(object: any): Effect {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-      name: isSet(object.name) ? String(object.name) : '',
-      renderId: isSet(object.renderId) ? String(object.renderId) : '',
-      behaviorDescription: isSet(object.behaviorDescription)
-        ? String(object.behaviorDescription)
+      enabled: isSet(object.enabled)
+        ? globalThis.Boolean(object.enabled)
+        : false,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      renderId: isSet(object.renderId)
+        ? globalThis.String(object.renderId)
         : '',
-      category: isSet(object.category) ? String(object.category) : '',
-      variables: Array.isArray(object?.variables)
+      behaviorDescription: isSet(object.behaviorDescription)
+        ? globalThis.String(object.behaviorDescription)
+        : '',
+      category: isSet(object.category)
+        ? globalThis.String(object.category)
+        : '',
+      variables: globalThis.Array.isArray(object?.variables)
         ? object.variables.map((e: any) => Effect_EffectVariable.fromJSON(e))
         : [],
     };
@@ -286,28 +293,35 @@ export const Effect = {
 
   toJSON(message: Effect): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.name !== undefined && (obj.name = message.name);
-    message.renderId !== undefined && (obj.renderId = message.renderId);
-    message.behaviorDescription !== undefined &&
-      (obj.behaviorDescription = message.behaviorDescription);
-    message.category !== undefined && (obj.category = message.category);
-    if (message.variables) {
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.enabled === true) {
+      obj.enabled = message.enabled;
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.renderId !== '') {
+      obj.renderId = message.renderId;
+    }
+    if (message.behaviorDescription !== '') {
+      obj.behaviorDescription = message.behaviorDescription;
+    }
+    if (message.category !== '') {
+      obj.category = message.category;
+    }
+    if (message.variables?.length) {
       obj.variables = message.variables.map((e) =>
-        e ? Effect_EffectVariable.toJSON(e) : undefined,
+        Effect_EffectVariable.toJSON(e),
       );
-    } else {
-      obj.variables = [];
     }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Effect>, I>>(base?: I): Effect {
-    return Effect.fromPartial(base ?? {});
+    return Effect.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Effect>, I>>(object: I): Effect {
     const message = createBaseEffect();
     message.uuid =
@@ -393,21 +407,21 @@ export const Effect_EffectVariable = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.description = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -417,7 +431,7 @@ export const Effect_EffectVariable = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -427,7 +441,7 @@ export const Effect_EffectVariable = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -437,7 +451,7 @@ export const Effect_EffectVariable = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -447,7 +461,7 @@ export const Effect_EffectVariable = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -457,7 +471,7 @@ export const Effect_EffectVariable = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -467,8 +481,10 @@ export const Effect_EffectVariable = {
 
   fromJSON(object: any): Effect_EffectVariable {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      description: isSet(object.description) ? String(object.description) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : '',
       int: isSet(object.int)
         ? Effect_EffectVariable_EffectInt.fromJSON(object.int)
         : undefined,
@@ -489,38 +505,37 @@ export const Effect_EffectVariable = {
 
   toJSON(message: Effect_EffectVariable): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.int !== undefined &&
-      (obj.int = message.int
-        ? Effect_EffectVariable_EffectInt.toJSON(message.int)
-        : undefined);
-    message.float !== undefined &&
-      (obj.float = message.float
-        ? Effect_EffectVariable_EffectFloat.toJSON(message.float)
-        : undefined);
-    message.color !== undefined &&
-      (obj.color = message.color
-        ? Effect_EffectVariable_EffectColor.toJSON(message.color)
-        : undefined);
-    message.direction !== undefined &&
-      (obj.direction = message.direction
-        ? Effect_EffectVariable_EffectDirection.toJSON(message.direction)
-        : undefined);
-    message.double !== undefined &&
-      (obj.double = message.double
-        ? Effect_EffectVariable_EffectDouble.toJSON(message.double)
-        : undefined);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.description !== '') {
+      obj.description = message.description;
+    }
+    if (message.int !== undefined) {
+      obj.int = Effect_EffectVariable_EffectInt.toJSON(message.int);
+    }
+    if (message.float !== undefined) {
+      obj.float = Effect_EffectVariable_EffectFloat.toJSON(message.float);
+    }
+    if (message.color !== undefined) {
+      obj.color = Effect_EffectVariable_EffectColor.toJSON(message.color);
+    }
+    if (message.direction !== undefined) {
+      obj.direction = Effect_EffectVariable_EffectDirection.toJSON(
+        message.direction,
+      );
+    }
+    if (message.double !== undefined) {
+      obj.double = Effect_EffectVariable_EffectDouble.toJSON(message.double);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Effect_EffectVariable>, I>>(
     base?: I,
   ): Effect_EffectVariable {
-    return Effect_EffectVariable.fromPartial(base ?? {});
+    return Effect_EffectVariable.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable>, I>>(
     object: I,
   ): Effect_EffectVariable {
@@ -587,35 +602,35 @@ export const Effect_EffectVariable_EffectInt = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.value = reader.int32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.defaultValue = reader.int32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.min = reader.int32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.max = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -625,31 +640,37 @@ export const Effect_EffectVariable_EffectInt = {
 
   fromJSON(object: any): Effect_EffectVariable_EffectInt {
     return {
-      value: isSet(object.value) ? Number(object.value) : 0,
+      value: isSet(object.value) ? globalThis.Number(object.value) : 0,
       defaultValue: isSet(object.defaultValue)
-        ? Number(object.defaultValue)
+        ? globalThis.Number(object.defaultValue)
         : 0,
-      min: isSet(object.min) ? Number(object.min) : 0,
-      max: isSet(object.max) ? Number(object.max) : 0,
+      min: isSet(object.min) ? globalThis.Number(object.min) : 0,
+      max: isSet(object.max) ? globalThis.Number(object.max) : 0,
     };
   },
 
   toJSON(message: Effect_EffectVariable_EffectInt): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    message.defaultValue !== undefined &&
-      (obj.defaultValue = Math.round(message.defaultValue));
-    message.min !== undefined && (obj.min = Math.round(message.min));
-    message.max !== undefined && (obj.max = Math.round(message.max));
+    if (message.value !== 0) {
+      obj.value = Math.round(message.value);
+    }
+    if (message.defaultValue !== 0) {
+      obj.defaultValue = Math.round(message.defaultValue);
+    }
+    if (message.min !== 0) {
+      obj.min = Math.round(message.min);
+    }
+    if (message.max !== 0) {
+      obj.max = Math.round(message.max);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectInt>, I>>(
     base?: I,
   ): Effect_EffectVariable_EffectInt {
-    return Effect_EffectVariable_EffectInt.fromPartial(base ?? {});
+    return Effect_EffectVariable_EffectInt.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Effect_EffectVariable_EffectInt>, I>>(
     object: I,
   ): Effect_EffectVariable_EffectInt {
@@ -698,35 +719,35 @@ export const Effect_EffectVariable_EffectFloat = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 13) {
+          if (tag !== 13) {
             break;
           }
 
           message.value = reader.float();
           continue;
         case 2:
-          if (tag != 21) {
+          if (tag !== 21) {
             break;
           }
 
           message.defaultValue = reader.float();
           continue;
         case 3:
-          if (tag != 29) {
+          if (tag !== 29) {
             break;
           }
 
           message.min = reader.float();
           continue;
         case 4:
-          if (tag != 37) {
+          if (tag !== 37) {
             break;
           }
 
           message.max = reader.float();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -736,31 +757,37 @@ export const Effect_EffectVariable_EffectFloat = {
 
   fromJSON(object: any): Effect_EffectVariable_EffectFloat {
     return {
-      value: isSet(object.value) ? Number(object.value) : 0,
+      value: isSet(object.value) ? globalThis.Number(object.value) : 0,
       defaultValue: isSet(object.defaultValue)
-        ? Number(object.defaultValue)
+        ? globalThis.Number(object.defaultValue)
         : 0,
-      min: isSet(object.min) ? Number(object.min) : 0,
-      max: isSet(object.max) ? Number(object.max) : 0,
+      min: isSet(object.min) ? globalThis.Number(object.min) : 0,
+      max: isSet(object.max) ? globalThis.Number(object.max) : 0,
     };
   },
 
   toJSON(message: Effect_EffectVariable_EffectFloat): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    message.defaultValue !== undefined &&
-      (obj.defaultValue = message.defaultValue);
-    message.min !== undefined && (obj.min = message.min);
-    message.max !== undefined && (obj.max = message.max);
+    if (message.value !== 0) {
+      obj.value = message.value;
+    }
+    if (message.defaultValue !== 0) {
+      obj.defaultValue = message.defaultValue;
+    }
+    if (message.min !== 0) {
+      obj.min = message.min;
+    }
+    if (message.max !== 0) {
+      obj.max = message.max;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectFloat>, I>>(
     base?: I,
   ): Effect_EffectVariable_EffectFloat {
-    return Effect_EffectVariable_EffectFloat.fromPartial(base ?? {});
+    return Effect_EffectVariable_EffectFloat.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Effect_EffectVariable_EffectFloat>, I>,
   >(object: I): Effect_EffectVariable_EffectFloat {
@@ -809,35 +836,35 @@ export const Effect_EffectVariable_EffectDouble = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.value = reader.double();
           continue;
         case 2:
-          if (tag != 17) {
+          if (tag !== 17) {
             break;
           }
 
           message.defaultValue = reader.double();
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.min = reader.double();
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.max = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -847,31 +874,37 @@ export const Effect_EffectVariable_EffectDouble = {
 
   fromJSON(object: any): Effect_EffectVariable_EffectDouble {
     return {
-      value: isSet(object.value) ? Number(object.value) : 0,
+      value: isSet(object.value) ? globalThis.Number(object.value) : 0,
       defaultValue: isSet(object.defaultValue)
-        ? Number(object.defaultValue)
+        ? globalThis.Number(object.defaultValue)
         : 0,
-      min: isSet(object.min) ? Number(object.min) : 0,
-      max: isSet(object.max) ? Number(object.max) : 0,
+      min: isSet(object.min) ? globalThis.Number(object.min) : 0,
+      max: isSet(object.max) ? globalThis.Number(object.max) : 0,
     };
   },
 
   toJSON(message: Effect_EffectVariable_EffectDouble): unknown {
     const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    message.defaultValue !== undefined &&
-      (obj.defaultValue = message.defaultValue);
-    message.min !== undefined && (obj.min = message.min);
-    message.max !== undefined && (obj.max = message.max);
+    if (message.value !== 0) {
+      obj.value = message.value;
+    }
+    if (message.defaultValue !== 0) {
+      obj.defaultValue = message.defaultValue;
+    }
+    if (message.min !== 0) {
+      obj.min = message.min;
+    }
+    if (message.max !== 0) {
+      obj.max = message.max;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectDouble>, I>>(
     base?: I,
   ): Effect_EffectVariable_EffectDouble {
-    return Effect_EffectVariable_EffectDouble.fromPartial(base ?? {});
+    return Effect_EffectVariable_EffectDouble.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Effect_EffectVariable_EffectDouble>, I>,
   >(object: I): Effect_EffectVariable_EffectDouble {
@@ -914,21 +947,21 @@ export const Effect_EffectVariable_EffectColor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.defaultColor = Color.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -947,21 +980,20 @@ export const Effect_EffectVariable_EffectColor = {
 
   toJSON(message: Effect_EffectVariable_EffectColor): unknown {
     const obj: any = {};
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.defaultColor !== undefined &&
-      (obj.defaultColor = message.defaultColor
-        ? Color.toJSON(message.defaultColor)
-        : undefined);
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.defaultColor !== undefined) {
+      obj.defaultColor = Color.toJSON(message.defaultColor);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Effect_EffectVariable_EffectColor>, I>>(
     base?: I,
   ): Effect_EffectVariable_EffectColor {
-    return Effect_EffectVariable_EffectColor.fromPartial(base ?? {});
+    return Effect_EffectVariable_EffectColor.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Effect_EffectVariable_EffectColor>, I>,
   >(object: I): Effect_EffectVariable_EffectColor {
@@ -1011,28 +1043,28 @@ export const Effect_EffectVariable_EffectDirection = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.direction = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.defaultDirection = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.availableDirections = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1053,34 +1085,38 @@ export const Effect_EffectVariable_EffectDirection = {
           )
         : 0,
       availableDirections: isSet(object.availableDirections)
-        ? Number(object.availableDirections)
+        ? globalThis.Number(object.availableDirections)
         : 0,
     };
   },
 
   toJSON(message: Effect_EffectVariable_EffectDirection): unknown {
     const obj: any = {};
-    message.direction !== undefined &&
-      (obj.direction =
+    if (message.direction !== 0) {
+      obj.direction =
         effect_EffectVariable_EffectDirection_EffectDirectionToJSON(
           message.direction,
-        ));
-    message.defaultDirection !== undefined &&
-      (obj.defaultDirection =
+        );
+    }
+    if (message.defaultDirection !== 0) {
+      obj.defaultDirection =
         effect_EffectVariable_EffectDirection_EffectDirectionToJSON(
           message.defaultDirection,
-        ));
-    message.availableDirections !== undefined &&
-      (obj.availableDirections = Math.round(message.availableDirections));
+        );
+    }
+    if (message.availableDirections !== 0) {
+      obj.availableDirections = Math.round(message.availableDirections);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<Effect_EffectVariable_EffectDirection>, I>,
   >(base?: I): Effect_EffectVariable_EffectDirection {
-    return Effect_EffectVariable_EffectDirection.fromPartial(base ?? {});
+    return Effect_EffectVariable_EffectDirection.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Effect_EffectVariable_EffectDirection>, I>,
   >(object: I): Effect_EffectVariable_EffectDirection {
@@ -1122,28 +1158,28 @@ export const Effect_Preset = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.effects.push(Effect.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1154,8 +1190,8 @@ export const Effect_Preset = {
   fromJSON(object: any): Effect_Preset {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      effects: Array.isArray(object?.effects)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      effects: globalThis.Array.isArray(object?.effects)
         ? object.effects.map((e: any) => Effect.fromJSON(e))
         : [],
     };
@@ -1163,15 +1199,14 @@ export const Effect_Preset = {
 
   toJSON(message: Effect_Preset): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.effects) {
-      obj.effects = message.effects.map((e) =>
-        e ? Effect.toJSON(e) : undefined,
-      );
-    } else {
-      obj.effects = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.effects?.length) {
+      obj.effects = message.effects.map((e) => Effect.toJSON(e));
     }
     return obj;
   },
@@ -1179,9 +1214,8 @@ export const Effect_Preset = {
   create<I extends Exact<DeepPartial<Effect_Preset>, I>>(
     base?: I,
   ): Effect_Preset {
-    return Effect_Preset.fromPartial(base ?? {});
+    return Effect_Preset.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Effect_Preset>, I>>(
     object: I,
   ): Effect_Preset {
@@ -1226,28 +1260,28 @@ export const Transition = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 9) {
+          if (tag !== 9) {
             break;
           }
 
           message.duration = reader.double();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.favoriteUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.effect = Effect.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1257,7 +1291,7 @@ export const Transition = {
 
   fromJSON(object: any): Transition {
     return {
-      duration: isSet(object.duration) ? Number(object.duration) : 0,
+      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
       favoriteUuid: isSet(object.favoriteUuid)
         ? UUID.fromJSON(object.favoriteUuid)
         : undefined,
@@ -1267,20 +1301,21 @@ export const Transition = {
 
   toJSON(message: Transition): unknown {
     const obj: any = {};
-    message.duration !== undefined && (obj.duration = message.duration);
-    message.favoriteUuid !== undefined &&
-      (obj.favoriteUuid = message.favoriteUuid
-        ? UUID.toJSON(message.favoriteUuid)
-        : undefined);
-    message.effect !== undefined &&
-      (obj.effect = message.effect ? Effect.toJSON(message.effect) : undefined);
+    if (message.duration !== 0) {
+      obj.duration = message.duration;
+    }
+    if (message.favoriteUuid !== undefined) {
+      obj.favoriteUuid = UUID.toJSON(message.favoriteUuid);
+    }
+    if (message.effect !== undefined) {
+      obj.effect = Effect.toJSON(message.effect);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Transition>, I>>(base?: I): Transition {
-    return Transition.fromPartial(base ?? {});
+    return Transition.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Transition>, I>>(
     object: I,
   ): Transition {
@@ -1328,28 +1363,28 @@ export const Transition_Preset = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1360,7 +1395,7 @@ export const Transition_Preset = {
   fromJSON(object: any): Transition_Preset {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       transition: isSet(object.transition)
         ? Transition.fromJSON(object.transition)
         : undefined,
@@ -1369,22 +1404,23 @@ export const Transition_Preset = {
 
   toJSON(message: Transition_Preset): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Transition_Preset>, I>>(
     base?: I,
   ): Transition_Preset {
-    return Transition_Preset.fromPartial(base ?? {});
+    return Transition_Preset.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Transition_Preset>, I>>(
     object: I,
   ): Transition_Preset {
@@ -1413,8 +1449,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

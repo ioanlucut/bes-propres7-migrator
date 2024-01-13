@@ -37,7 +37,7 @@ export const PlaylistTemplate = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -46,7 +46,7 @@ export const PlaylistTemplate = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -56,7 +56,7 @@ export const PlaylistTemplate = {
 
   fromJSON(object: any): PlaylistTemplate {
     return {
-      templates: Array.isArray(object?.templates)
+      templates: globalThis.Array.isArray(object?.templates)
         ? object.templates.map((e: any) =>
             PlaylistTemplate_Template.fromJSON(e),
           )
@@ -66,12 +66,10 @@ export const PlaylistTemplate = {
 
   toJSON(message: PlaylistTemplate): unknown {
     const obj: any = {};
-    if (message.templates) {
+    if (message.templates?.length) {
       obj.templates = message.templates.map((e) =>
-        e ? PlaylistTemplate_Template.toJSON(e) : undefined,
+        PlaylistTemplate_Template.toJSON(e),
       );
-    } else {
-      obj.templates = [];
     }
     return obj;
   },
@@ -79,9 +77,8 @@ export const PlaylistTemplate = {
   create<I extends Exact<DeepPartial<PlaylistTemplate>, I>>(
     base?: I,
   ): PlaylistTemplate {
-    return PlaylistTemplate.fromPartial(base ?? {});
+    return PlaylistTemplate.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistTemplate>, I>>(
     object: I,
   ): PlaylistTemplate {
@@ -123,14 +120,14 @@ export const PlaylistTemplate_Template = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -139,7 +136,7 @@ export const PlaylistTemplate_Template = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -149,8 +146,8 @@ export const PlaylistTemplate_Template = {
 
   fromJSON(object: any): PlaylistTemplate_Template {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      playlistItems: Array.isArray(object?.playlistItems)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      playlistItems: globalThis.Array.isArray(object?.playlistItems)
         ? object.playlistItems.map((e: any) => PlaylistItem.fromJSON(e))
         : [],
     };
@@ -158,13 +155,13 @@ export const PlaylistTemplate_Template = {
 
   toJSON(message: PlaylistTemplate_Template): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.playlistItems) {
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.playlistItems?.length) {
       obj.playlistItems = message.playlistItems.map((e) =>
-        e ? PlaylistItem.toJSON(e) : undefined,
+        PlaylistItem.toJSON(e),
       );
-    } else {
-      obj.playlistItems = [];
     }
     return obj;
   },
@@ -172,9 +169,8 @@ export const PlaylistTemplate_Template = {
   create<I extends Exact<DeepPartial<PlaylistTemplate_Template>, I>>(
     base?: I,
   ): PlaylistTemplate_Template {
-    return PlaylistTemplate_Template.fromPartial(base ?? {});
+    return PlaylistTemplate_Template.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PlaylistTemplate_Template>, I>>(
     object: I,
   ): PlaylistTemplate_Template {
@@ -197,8 +193,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

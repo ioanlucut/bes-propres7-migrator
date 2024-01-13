@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { UUID } from './basicTypes';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -114,7 +114,7 @@ export const Audio = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -132,9 +132,8 @@ export const Audio = {
   },
 
   create<I extends Exact<DeepPartial<Audio>, I>>(base?: I): Audio {
-    return Audio.fromPartial(base ?? {});
+    return Audio.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio>, I>>(_: I): Audio {
     const message = createBaseAudio();
     return message;
@@ -184,7 +183,7 @@ export const Audio_SettingsDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -194,21 +193,21 @@ export const Audio_SettingsDocument = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.monitorDevice = Audio_Device.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.monitorOnMains = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -225,32 +224,30 @@ export const Audio_SettingsDocument = {
         ? Audio_Device.fromJSON(object.monitorDevice)
         : undefined,
       monitorOnMains: isSet(object.monitorOnMains)
-        ? Boolean(object.monitorOnMains)
+        ? globalThis.Boolean(object.monitorOnMains)
         : false,
     };
   },
 
   toJSON(message: Audio_SettingsDocument): unknown {
     const obj: any = {};
-    message.outputSetup !== undefined &&
-      (obj.outputSetup = message.outputSetup
-        ? Audio_OutputSetup.toJSON(message.outputSetup)
-        : undefined);
-    message.monitorDevice !== undefined &&
-      (obj.monitorDevice = message.monitorDevice
-        ? Audio_Device.toJSON(message.monitorDevice)
-        : undefined);
-    message.monitorOnMains !== undefined &&
-      (obj.monitorOnMains = message.monitorOnMains);
+    if (message.outputSetup !== undefined) {
+      obj.outputSetup = Audio_OutputSetup.toJSON(message.outputSetup);
+    }
+    if (message.monitorDevice !== undefined) {
+      obj.monitorDevice = Audio_Device.toJSON(message.monitorDevice);
+    }
+    if (message.monitorOnMains === true) {
+      obj.monitorOnMains = message.monitorOnMains;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Audio_SettingsDocument>, I>>(
     base?: I,
   ): Audio_SettingsDocument {
-    return Audio_SettingsDocument.fromPartial(base ?? {});
+    return Audio_SettingsDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio_SettingsDocument>, I>>(
     object: I,
   ): Audio_SettingsDocument {
@@ -317,21 +314,21 @@ export const Audio_OutputSetup = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.audioDevice = Audio_Device.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -340,21 +337,21 @@ export const Audio_OutputSetup = {
           );
           continue;
         case 4:
-          if (tag != 33) {
+          if (tag !== 33) {
             break;
           }
 
           message.audioDelay = reader.double();
           continue;
         case 5:
-          if (tag != 41) {
+          if (tag !== 41) {
             break;
           }
 
           message.masterLevel = reader.double();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -363,7 +360,7 @@ export const Audio_OutputSetup = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -377,14 +374,18 @@ export const Audio_OutputSetup = {
       audioDevice: isSet(object.audioDevice)
         ? Audio_Device.fromJSON(object.audioDevice)
         : undefined,
-      logicalChannels: Array.isArray(object?.logicalChannels)
+      logicalChannels: globalThis.Array.isArray(object?.logicalChannels)
         ? object.logicalChannels.map((e: any) =>
             Audio_LogicalChannel.fromJSON(e),
           )
         : [],
-      audioDelay: isSet(object.audioDelay) ? Number(object.audioDelay) : 0,
-      masterLevel: isSet(object.masterLevel) ? Number(object.masterLevel) : 0,
-      physicalChanels: Array.isArray(object?.physicalChanels)
+      audioDelay: isSet(object.audioDelay)
+        ? globalThis.Number(object.audioDelay)
+        : 0,
+      masterLevel: isSet(object.masterLevel)
+        ? globalThis.Number(object.masterLevel)
+        : 0,
+      physicalChanels: globalThis.Array.isArray(object?.physicalChanels)
         ? object.physicalChanels.map((e: any) =>
             Audio_PhysicalChannel.fromJSON(e),
           )
@@ -394,28 +395,27 @@ export const Audio_OutputSetup = {
 
   toJSON(message: Audio_OutputSetup): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.audioDevice !== undefined &&
-      (obj.audioDevice = message.audioDevice
-        ? Audio_Device.toJSON(message.audioDevice)
-        : undefined);
-    if (message.logicalChannels) {
-      obj.logicalChannels = message.logicalChannels.map((e) =>
-        e ? Audio_LogicalChannel.toJSON(e) : undefined,
-      );
-    } else {
-      obj.logicalChannels = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.audioDelay !== undefined && (obj.audioDelay = message.audioDelay);
-    message.masterLevel !== undefined &&
-      (obj.masterLevel = message.masterLevel);
-    if (message.physicalChanels) {
-      obj.physicalChanels = message.physicalChanels.map((e) =>
-        e ? Audio_PhysicalChannel.toJSON(e) : undefined,
+    if (message.audioDevice !== undefined) {
+      obj.audioDevice = Audio_Device.toJSON(message.audioDevice);
+    }
+    if (message.logicalChannels?.length) {
+      obj.logicalChannels = message.logicalChannels.map((e) =>
+        Audio_LogicalChannel.toJSON(e),
       );
-    } else {
-      obj.physicalChanels = [];
+    }
+    if (message.audioDelay !== 0) {
+      obj.audioDelay = message.audioDelay;
+    }
+    if (message.masterLevel !== 0) {
+      obj.masterLevel = message.masterLevel;
+    }
+    if (message.physicalChanels?.length) {
+      obj.physicalChanels = message.physicalChanels.map((e) =>
+        Audio_PhysicalChannel.toJSON(e),
+      );
     }
     return obj;
   },
@@ -423,9 +423,8 @@ export const Audio_OutputSetup = {
   create<I extends Exact<DeepPartial<Audio_OutputSetup>, I>>(
     base?: I,
   ): Audio_OutputSetup {
-    return Audio_OutputSetup.fromPartial(base ?? {});
+    return Audio_OutputSetup.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio_OutputSetup>, I>>(
     object: I,
   ): Audio_OutputSetup {
@@ -493,35 +492,35 @@ export const Audio_Device = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.renderID = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.inputChannelCount = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.outputChannelCount = reader.uint32();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -530,7 +529,7 @@ export const Audio_Device = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -540,15 +539,17 @@ export const Audio_Device = {
 
   fromJSON(object: any): Audio_Device {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      renderID: isSet(object.renderID) ? String(object.renderID) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      renderID: isSet(object.renderID)
+        ? globalThis.String(object.renderID)
+        : '',
       inputChannelCount: isSet(object.inputChannelCount)
-        ? Number(object.inputChannelCount)
+        ? globalThis.Number(object.inputChannelCount)
         : 0,
       outputChannelCount: isSet(object.outputChannelCount)
-        ? Number(object.outputChannelCount)
+        ? globalThis.Number(object.outputChannelCount)
         : 0,
-      formats: Array.isArray(object?.formats)
+      formats: globalThis.Array.isArray(object?.formats)
         ? object.formats.map((e: any) => Audio_Device_Format.fromJSON(e))
         : [],
     };
@@ -556,18 +557,20 @@ export const Audio_Device = {
 
   toJSON(message: Audio_Device): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.renderID !== undefined && (obj.renderID = message.renderID);
-    message.inputChannelCount !== undefined &&
-      (obj.inputChannelCount = Math.round(message.inputChannelCount));
-    message.outputChannelCount !== undefined &&
-      (obj.outputChannelCount = Math.round(message.outputChannelCount));
-    if (message.formats) {
-      obj.formats = message.formats.map((e) =>
-        e ? Audio_Device_Format.toJSON(e) : undefined,
-      );
-    } else {
-      obj.formats = [];
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.renderID !== '') {
+      obj.renderID = message.renderID;
+    }
+    if (message.inputChannelCount !== 0) {
+      obj.inputChannelCount = Math.round(message.inputChannelCount);
+    }
+    if (message.outputChannelCount !== 0) {
+      obj.outputChannelCount = Math.round(message.outputChannelCount);
+    }
+    if (message.formats?.length) {
+      obj.formats = message.formats.map((e) => Audio_Device_Format.toJSON(e));
     }
     return obj;
   },
@@ -575,9 +578,8 @@ export const Audio_Device = {
   create<I extends Exact<DeepPartial<Audio_Device>, I>>(
     base?: I,
   ): Audio_Device {
-    return Audio_Device.fromPartial(base ?? {});
+    return Audio_Device.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio_Device>, I>>(
     object: I,
   ): Audio_Device {
@@ -622,28 +624,28 @@ export const Audio_Device_Format = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.sampleRate = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.bitDepth = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.type = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -653,8 +655,10 @@ export const Audio_Device_Format = {
 
   fromJSON(object: any): Audio_Device_Format {
     return {
-      sampleRate: isSet(object.sampleRate) ? Number(object.sampleRate) : 0,
-      bitDepth: isSet(object.bitDepth) ? Number(object.bitDepth) : 0,
+      sampleRate: isSet(object.sampleRate)
+        ? globalThis.Number(object.sampleRate)
+        : 0,
+      bitDepth: isSet(object.bitDepth) ? globalThis.Number(object.bitDepth) : 0,
       type: isSet(object.type)
         ? audio_Device_Format_TypeFromJSON(object.type)
         : 0,
@@ -663,21 +667,23 @@ export const Audio_Device_Format = {
 
   toJSON(message: Audio_Device_Format): unknown {
     const obj: any = {};
-    message.sampleRate !== undefined &&
-      (obj.sampleRate = Math.round(message.sampleRate));
-    message.bitDepth !== undefined &&
-      (obj.bitDepth = Math.round(message.bitDepth));
-    message.type !== undefined &&
-      (obj.type = audio_Device_Format_TypeToJSON(message.type));
+    if (message.sampleRate !== 0) {
+      obj.sampleRate = Math.round(message.sampleRate);
+    }
+    if (message.bitDepth !== 0) {
+      obj.bitDepth = Math.round(message.bitDepth);
+    }
+    if (message.type !== 0) {
+      obj.type = audio_Device_Format_TypeToJSON(message.type);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Audio_Device_Format>, I>>(
     base?: I,
   ): Audio_Device_Format {
-    return Audio_Device_Format.fromPartial(base ?? {});
+    return Audio_Device_Format.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio_Device_Format>, I>>(
     object: I,
   ): Audio_Device_Format {
@@ -745,35 +751,35 @@ export const Audio_LogicalChannel = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.index = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.muted = reader.bool();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -782,21 +788,21 @@ export const Audio_LogicalChannel = {
           );
           continue;
         case 6:
-          if (tag != 48) {
+          if (tag !== 48) {
             break;
           }
 
           message.solo = reader.bool();
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.testTone = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -807,44 +813,56 @@ export const Audio_LogicalChannel = {
   fromJSON(object: any): Audio_LogicalChannel {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      index: isSet(object.index) ? Number(object.index) : 0,
-      muted: isSet(object.muted) ? Boolean(object.muted) : false,
-      physicalAudioChannels: Array.isArray(object?.physicalAudioChannels)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
+      muted: isSet(object.muted) ? globalThis.Boolean(object.muted) : false,
+      physicalAudioChannels: globalThis.Array.isArray(
+        object?.physicalAudioChannels,
+      )
         ? object.physicalAudioChannels.map((e: any) =>
             Audio_LogicalChannel_OutputChannel.fromJSON(e),
           )
         : [],
-      solo: isSet(object.solo) ? Boolean(object.solo) : false,
-      testTone: isSet(object.testTone) ? Boolean(object.testTone) : false,
+      solo: isSet(object.solo) ? globalThis.Boolean(object.solo) : false,
+      testTone: isSet(object.testTone)
+        ? globalThis.Boolean(object.testTone)
+        : false,
     };
   },
 
   toJSON(message: Audio_LogicalChannel): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.muted !== undefined && (obj.muted = message.muted);
-    if (message.physicalAudioChannels) {
-      obj.physicalAudioChannels = message.physicalAudioChannels.map((e) =>
-        e ? Audio_LogicalChannel_OutputChannel.toJSON(e) : undefined,
-      );
-    } else {
-      obj.physicalAudioChannels = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.solo !== undefined && (obj.solo = message.solo);
-    message.testTone !== undefined && (obj.testTone = message.testTone);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.muted === true) {
+      obj.muted = message.muted;
+    }
+    if (message.physicalAudioChannels?.length) {
+      obj.physicalAudioChannels = message.physicalAudioChannels.map((e) =>
+        Audio_LogicalChannel_OutputChannel.toJSON(e),
+      );
+    }
+    if (message.solo === true) {
+      obj.solo = message.solo;
+    }
+    if (message.testTone === true) {
+      obj.testTone = message.testTone;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Audio_LogicalChannel>, I>>(
     base?: I,
   ): Audio_LogicalChannel {
-    return Audio_LogicalChannel.fromPartial(base ?? {});
+    return Audio_LogicalChannel.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio_LogicalChannel>, I>>(
     object: I,
   ): Audio_LogicalChannel {
@@ -902,35 +920,35 @@ export const Audio_LogicalChannel_OutputChannel = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.index = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.muted = reader.bool();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.solo = reader.bool();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.testTone = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -940,28 +958,37 @@ export const Audio_LogicalChannel_OutputChannel = {
 
   fromJSON(object: any): Audio_LogicalChannel_OutputChannel {
     return {
-      index: isSet(object.index) ? Number(object.index) : 0,
-      muted: isSet(object.muted) ? Boolean(object.muted) : false,
-      solo: isSet(object.solo) ? Boolean(object.solo) : false,
-      testTone: isSet(object.testTone) ? Boolean(object.testTone) : false,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
+      muted: isSet(object.muted) ? globalThis.Boolean(object.muted) : false,
+      solo: isSet(object.solo) ? globalThis.Boolean(object.solo) : false,
+      testTone: isSet(object.testTone)
+        ? globalThis.Boolean(object.testTone)
+        : false,
     };
   },
 
   toJSON(message: Audio_LogicalChannel_OutputChannel): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.muted !== undefined && (obj.muted = message.muted);
-    message.solo !== undefined && (obj.solo = message.solo);
-    message.testTone !== undefined && (obj.testTone = message.testTone);
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.muted === true) {
+      obj.muted = message.muted;
+    }
+    if (message.solo === true) {
+      obj.solo = message.solo;
+    }
+    if (message.testTone === true) {
+      obj.testTone = message.testTone;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Audio_LogicalChannel_OutputChannel>, I>>(
     base?: I,
   ): Audio_LogicalChannel_OutputChannel {
-    return Audio_LogicalChannel_OutputChannel.fromPartial(base ?? {});
+    return Audio_LogicalChannel_OutputChannel.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<Audio_LogicalChannel_OutputChannel>, I>,
   >(object: I): Audio_LogicalChannel_OutputChannel {
@@ -1010,35 +1037,35 @@ export const Audio_PhysicalChannel = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.index = reader.uint32();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.muteEnable = reader.bool();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.soloEnable = reader.bool();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.toneEnable = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1048,28 +1075,41 @@ export const Audio_PhysicalChannel = {
 
   fromJSON(object: any): Audio_PhysicalChannel {
     return {
-      index: isSet(object.index) ? Number(object.index) : 0,
-      muteEnable: isSet(object.muteEnable) ? Boolean(object.muteEnable) : false,
-      soloEnable: isSet(object.soloEnable) ? Boolean(object.soloEnable) : false,
-      toneEnable: isSet(object.toneEnable) ? Boolean(object.toneEnable) : false,
+      index: isSet(object.index) ? globalThis.Number(object.index) : 0,
+      muteEnable: isSet(object.muteEnable)
+        ? globalThis.Boolean(object.muteEnable)
+        : false,
+      soloEnable: isSet(object.soloEnable)
+        ? globalThis.Boolean(object.soloEnable)
+        : false,
+      toneEnable: isSet(object.toneEnable)
+        ? globalThis.Boolean(object.toneEnable)
+        : false,
     };
   },
 
   toJSON(message: Audio_PhysicalChannel): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.muteEnable !== undefined && (obj.muteEnable = message.muteEnable);
-    message.soloEnable !== undefined && (obj.soloEnable = message.soloEnable);
-    message.toneEnable !== undefined && (obj.toneEnable = message.toneEnable);
+    if (message.index !== 0) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.muteEnable === true) {
+      obj.muteEnable = message.muteEnable;
+    }
+    if (message.soloEnable === true) {
+      obj.soloEnable = message.soloEnable;
+    }
+    if (message.toneEnable === true) {
+      obj.toneEnable = message.toneEnable;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Audio_PhysicalChannel>, I>>(
     base?: I,
   ): Audio_PhysicalChannel {
-    return Audio_PhysicalChannel.fromPartial(base ?? {});
+    return Audio_PhysicalChannel.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Audio_PhysicalChannel>, I>>(
     object: I,
   ): Audio_PhysicalChannel {
@@ -1093,8 +1133,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

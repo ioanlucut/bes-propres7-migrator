@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { UUID } from './basicTypes';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -77,28 +77,28 @@ export const AlignmentGuide = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.orientation = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 25) {
+          if (tag !== 25) {
             break;
           }
 
           message.location = reader.double();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -112,28 +112,31 @@ export const AlignmentGuide = {
       orientation: isSet(object.orientation)
         ? alignmentGuide_GuidelineOrientationFromJSON(object.orientation)
         : 0,
-      location: isSet(object.location) ? Number(object.location) : 0,
+      location: isSet(object.location) ? globalThis.Number(object.location) : 0,
     };
   },
 
   toJSON(message: AlignmentGuide): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.orientation !== undefined &&
-      (obj.orientation = alignmentGuide_GuidelineOrientationToJSON(
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.orientation !== 0) {
+      obj.orientation = alignmentGuide_GuidelineOrientationToJSON(
         message.orientation,
-      ));
-    message.location !== undefined && (obj.location = message.location);
+      );
+    }
+    if (message.location !== 0) {
+      obj.location = message.location;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AlignmentGuide>, I>>(
     base?: I,
   ): AlignmentGuide {
-    return AlignmentGuide.fromPartial(base ?? {});
+    return AlignmentGuide.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<AlignmentGuide>, I>>(
     object: I,
   ): AlignmentGuide {
@@ -159,8 +162,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

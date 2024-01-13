@@ -1,7 +1,9 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { Action } from './action';
-import { ApplicationInfo, Color, UUID } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
+import { Color } from './color';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -48,7 +50,7 @@ export const MacrosDocument = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -58,7 +60,7 @@ export const MacrosDocument = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -67,7 +69,7 @@ export const MacrosDocument = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -80,7 +82,7 @@ export const MacrosDocument = {
       applicationInfo: isSet(object.applicationInfo)
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
-      macros: Array.isArray(object?.macros)
+      macros: globalThis.Array.isArray(object?.macros)
         ? object.macros.map((e: any) => MacrosDocument_Macro.fromJSON(e))
         : [],
     };
@@ -88,16 +90,11 @@ export const MacrosDocument = {
 
   toJSON(message: MacrosDocument): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    if (message.macros) {
-      obj.macros = message.macros.map((e) =>
-        e ? MacrosDocument_Macro.toJSON(e) : undefined,
-      );
-    } else {
-      obj.macros = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.macros?.length) {
+      obj.macros = message.macros.map((e) => MacrosDocument_Macro.toJSON(e));
     }
     return obj;
   },
@@ -105,9 +102,8 @@ export const MacrosDocument = {
   create<I extends Exact<DeepPartial<MacrosDocument>, I>>(
     base?: I,
   ): MacrosDocument {
-    return MacrosDocument.fromPartial(base ?? {});
+    return MacrosDocument.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MacrosDocument>, I>>(
     object: I,
   ): MacrosDocument {
@@ -167,42 +163,42 @@ export const MacrosDocument_Macro = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.actions.push(Action.decode(reader, reader.uint32()));
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.triggerOnStartup = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -213,42 +209,42 @@ export const MacrosDocument_Macro = {
   fromJSON(object: any): MacrosDocument_Macro {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
-      actions: Array.isArray(object?.actions)
+      actions: globalThis.Array.isArray(object?.actions)
         ? object.actions.map((e: any) => Action.fromJSON(e))
         : [],
       triggerOnStartup: isSet(object.triggerOnStartup)
-        ? Boolean(object.triggerOnStartup)
+        ? globalThis.Boolean(object.triggerOnStartup)
         : false,
     };
   },
 
   toJSON(message: MacrosDocument_Macro): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? Action.toJSON(e) : undefined,
-      );
-    } else {
-      obj.actions = [];
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
     }
-    message.triggerOnStartup !== undefined &&
-      (obj.triggerOnStartup = message.triggerOnStartup);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => Action.toJSON(e));
+    }
+    if (message.triggerOnStartup === true) {
+      obj.triggerOnStartup = message.triggerOnStartup;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<MacrosDocument_Macro>, I>>(
     base?: I,
   ): MacrosDocument_Macro {
-    return MacrosDocument_Macro.fromPartial(base ?? {});
+    return MacrosDocument_Macro.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<MacrosDocument_Macro>, I>>(
     object: I,
   ): MacrosDocument_Macro {
@@ -279,8 +275,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

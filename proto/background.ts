@@ -1,6 +1,6 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color } from './basicTypes';
+import { Color } from './color';
 import { Graphics_Gradient } from './graphicsData';
 
 export const protobufPackage = 'rv.data';
@@ -44,28 +44,28 @@ export const Background = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.isEnabled = reader.bool();
           continue;
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.color = Color.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.gradient = Graphics_Gradient.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -75,7 +75,9 @@ export const Background = {
 
   fromJSON(object: any): Background {
     return {
-      isEnabled: isSet(object.isEnabled) ? Boolean(object.isEnabled) : false,
+      isEnabled: isSet(object.isEnabled)
+        ? globalThis.Boolean(object.isEnabled)
+        : false,
       color: isSet(object.color) ? Color.fromJSON(object.color) : undefined,
       gradient: isSet(object.gradient)
         ? Graphics_Gradient.fromJSON(object.gradient)
@@ -85,20 +87,21 @@ export const Background = {
 
   toJSON(message: Background): unknown {
     const obj: any = {};
-    message.isEnabled !== undefined && (obj.isEnabled = message.isEnabled);
-    message.color !== undefined &&
-      (obj.color = message.color ? Color.toJSON(message.color) : undefined);
-    message.gradient !== undefined &&
-      (obj.gradient = message.gradient
-        ? Graphics_Gradient.toJSON(message.gradient)
-        : undefined);
+    if (message.isEnabled === true) {
+      obj.isEnabled = message.isEnabled;
+    }
+    if (message.color !== undefined) {
+      obj.color = Color.toJSON(message.color);
+    }
+    if (message.gradient !== undefined) {
+      obj.gradient = Graphics_Gradient.toJSON(message.gradient);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Background>, I>>(base?: I): Background {
-    return Background.fromPartial(base ?? {});
+    return Background.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Background>, I>>(
     object: I,
   ): Background {
@@ -127,8 +130,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

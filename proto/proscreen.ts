@@ -1,7 +1,8 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
-import { Color, UUID } from './basicTypes';
+import { Color } from './color';
 import { EdgeBlend, Screen } from './screens';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -138,42 +139,42 @@ export const ProPresenterScreen = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.screenType = reader.int32() as any;
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.backgroundColor = Color.decode(reader, reader.uint32());
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.backgroundColorEnabled = reader.bool();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -184,7 +185,7 @@ export const ProPresenterScreen = {
             );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -195,7 +196,7 @@ export const ProPresenterScreen = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -206,7 +207,7 @@ export const ProPresenterScreen = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -216,7 +217,7 @@ export const ProPresenterScreen = {
 
   fromJSON(object: any): ProPresenterScreen {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       screenType: isSet(object.screenType)
         ? proPresenterScreen_ScreenTypeFromJSON(object.screenType)
         : 0,
@@ -225,7 +226,7 @@ export const ProPresenterScreen = {
         : undefined,
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       backgroundColorEnabled: isSet(object.backgroundColorEnabled)
-        ? Boolean(object.backgroundColorEnabled)
+        ? globalThis.Boolean(object.backgroundColorEnabled)
         : false,
       arrangementSingle: isSet(object.arrangementSingle)
         ? ProPresenterScreen_SingleArrangement.fromJSON(
@@ -247,44 +248,44 @@ export const ProPresenterScreen = {
 
   toJSON(message: ProPresenterScreen): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.screenType !== undefined &&
-      (obj.screenType = proPresenterScreen_ScreenTypeToJSON(
-        message.screenType,
-      ));
-    message.backgroundColor !== undefined &&
-      (obj.backgroundColor = message.backgroundColor
-        ? Color.toJSON(message.backgroundColor)
-        : undefined);
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.backgroundColorEnabled !== undefined &&
-      (obj.backgroundColorEnabled = message.backgroundColorEnabled);
-    message.arrangementSingle !== undefined &&
-      (obj.arrangementSingle = message.arrangementSingle
-        ? ProPresenterScreen_SingleArrangement.toJSON(message.arrangementSingle)
-        : undefined);
-    message.arrangementCombined !== undefined &&
-      (obj.arrangementCombined = message.arrangementCombined
-        ? ProPresenterScreen_CombinedArrangement.toJSON(
-            message.arrangementCombined,
-          )
-        : undefined);
-    message.arrangementEdgeBlend !== undefined &&
-      (obj.arrangementEdgeBlend = message.arrangementEdgeBlend
-        ? ProPresenterScreen_EdgeBlendArrangement.toJSON(
-            message.arrangementEdgeBlend,
-          )
-        : undefined);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.screenType !== 0) {
+      obj.screenType = proPresenterScreen_ScreenTypeToJSON(message.screenType);
+    }
+    if (message.backgroundColor !== undefined) {
+      obj.backgroundColor = Color.toJSON(message.backgroundColor);
+    }
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.backgroundColorEnabled === true) {
+      obj.backgroundColorEnabled = message.backgroundColorEnabled;
+    }
+    if (message.arrangementSingle !== undefined) {
+      obj.arrangementSingle = ProPresenterScreen_SingleArrangement.toJSON(
+        message.arrangementSingle,
+      );
+    }
+    if (message.arrangementCombined !== undefined) {
+      obj.arrangementCombined = ProPresenterScreen_CombinedArrangement.toJSON(
+        message.arrangementCombined,
+      );
+    }
+    if (message.arrangementEdgeBlend !== undefined) {
+      obj.arrangementEdgeBlend = ProPresenterScreen_EdgeBlendArrangement.toJSON(
+        message.arrangementEdgeBlend,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProPresenterScreen>, I>>(
     base?: I,
   ): ProPresenterScreen {
-    return ProPresenterScreen.fromPartial(base ?? {});
+    return ProPresenterScreen.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProPresenterScreen>, I>>(
     object: I,
   ): ProPresenterScreen {
@@ -352,14 +353,14 @@ export const ProPresenterScreen_SingleArrangement = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.screens.push(Screen.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -369,7 +370,7 @@ export const ProPresenterScreen_SingleArrangement = {
 
   fromJSON(object: any): ProPresenterScreen_SingleArrangement {
     return {
-      screens: Array.isArray(object?.screens)
+      screens: globalThis.Array.isArray(object?.screens)
         ? object.screens.map((e: any) => Screen.fromJSON(e))
         : [],
     };
@@ -377,12 +378,8 @@ export const ProPresenterScreen_SingleArrangement = {
 
   toJSON(message: ProPresenterScreen_SingleArrangement): unknown {
     const obj: any = {};
-    if (message.screens) {
-      obj.screens = message.screens.map((e) =>
-        e ? Screen.toJSON(e) : undefined,
-      );
-    } else {
-      obj.screens = [];
+    if (message.screens?.length) {
+      obj.screens = message.screens.map((e) => Screen.toJSON(e));
     }
     return obj;
   },
@@ -390,9 +387,10 @@ export const ProPresenterScreen_SingleArrangement = {
   create<I extends Exact<DeepPartial<ProPresenterScreen_SingleArrangement>, I>>(
     base?: I,
   ): ProPresenterScreen_SingleArrangement {
-    return ProPresenterScreen_SingleArrangement.fromPartial(base ?? {});
+    return ProPresenterScreen_SingleArrangement.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProPresenterScreen_SingleArrangement>, I>,
   >(object: I): ProPresenterScreen_SingleArrangement {
@@ -435,28 +433,28 @@ export const ProPresenterScreen_CombinedArrangement = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.screens.push(Screen.decode(reader, reader.uint32()));
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.rows = reader.uint32();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.columns = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -466,35 +464,35 @@ export const ProPresenterScreen_CombinedArrangement = {
 
   fromJSON(object: any): ProPresenterScreen_CombinedArrangement {
     return {
-      screens: Array.isArray(object?.screens)
+      screens: globalThis.Array.isArray(object?.screens)
         ? object.screens.map((e: any) => Screen.fromJSON(e))
         : [],
-      rows: isSet(object.rows) ? Number(object.rows) : 0,
-      columns: isSet(object.columns) ? Number(object.columns) : 0,
+      rows: isSet(object.rows) ? globalThis.Number(object.rows) : 0,
+      columns: isSet(object.columns) ? globalThis.Number(object.columns) : 0,
     };
   },
 
   toJSON(message: ProPresenterScreen_CombinedArrangement): unknown {
     const obj: any = {};
-    if (message.screens) {
-      obj.screens = message.screens.map((e) =>
-        e ? Screen.toJSON(e) : undefined,
-      );
-    } else {
-      obj.screens = [];
+    if (message.screens?.length) {
+      obj.screens = message.screens.map((e) => Screen.toJSON(e));
     }
-    message.rows !== undefined && (obj.rows = Math.round(message.rows));
-    message.columns !== undefined &&
-      (obj.columns = Math.round(message.columns));
+    if (message.rows !== 0) {
+      obj.rows = Math.round(message.rows);
+    }
+    if (message.columns !== 0) {
+      obj.columns = Math.round(message.columns);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProPresenterScreen_CombinedArrangement>, I>,
   >(base?: I): ProPresenterScreen_CombinedArrangement {
-    return ProPresenterScreen_CombinedArrangement.fromPartial(base ?? {});
+    return ProPresenterScreen_CombinedArrangement.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProPresenterScreen_CombinedArrangement>, I>,
   >(object: I): ProPresenterScreen_CombinedArrangement {
@@ -539,28 +537,28 @@ export const ProPresenterScreen_EdgeBlendArrangement = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.screenCount = reader.uint32();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.screens.push(Screen.decode(reader, reader.uint32()));
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.edgeBlends.push(EdgeBlend.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -570,11 +568,13 @@ export const ProPresenterScreen_EdgeBlendArrangement = {
 
   fromJSON(object: any): ProPresenterScreen_EdgeBlendArrangement {
     return {
-      screenCount: isSet(object.screenCount) ? Number(object.screenCount) : 0,
-      screens: Array.isArray(object?.screens)
+      screenCount: isSet(object.screenCount)
+        ? globalThis.Number(object.screenCount)
+        : 0,
+      screens: globalThis.Array.isArray(object?.screens)
         ? object.screens.map((e: any) => Screen.fromJSON(e))
         : [],
-      edgeBlends: Array.isArray(object?.edgeBlends)
+      edgeBlends: globalThis.Array.isArray(object?.edgeBlends)
         ? object.edgeBlends.map((e: any) => EdgeBlend.fromJSON(e))
         : [],
     };
@@ -582,21 +582,14 @@ export const ProPresenterScreen_EdgeBlendArrangement = {
 
   toJSON(message: ProPresenterScreen_EdgeBlendArrangement): unknown {
     const obj: any = {};
-    message.screenCount !== undefined &&
-      (obj.screenCount = Math.round(message.screenCount));
-    if (message.screens) {
-      obj.screens = message.screens.map((e) =>
-        e ? Screen.toJSON(e) : undefined,
-      );
-    } else {
-      obj.screens = [];
+    if (message.screenCount !== 0) {
+      obj.screenCount = Math.round(message.screenCount);
     }
-    if (message.edgeBlends) {
-      obj.edgeBlends = message.edgeBlends.map((e) =>
-        e ? EdgeBlend.toJSON(e) : undefined,
-      );
-    } else {
-      obj.edgeBlends = [];
+    if (message.screens?.length) {
+      obj.screens = message.screens.map((e) => Screen.toJSON(e));
+    }
+    if (message.edgeBlends?.length) {
+      obj.edgeBlends = message.edgeBlends.map((e) => EdgeBlend.toJSON(e));
     }
     return obj;
   },
@@ -604,9 +597,10 @@ export const ProPresenterScreen_EdgeBlendArrangement = {
   create<
     I extends Exact<DeepPartial<ProPresenterScreen_EdgeBlendArrangement>, I>,
   >(base?: I): ProPresenterScreen_EdgeBlendArrangement {
-    return ProPresenterScreen_EdgeBlendArrangement.fromPartial(base ?? {});
+    return ProPresenterScreen_EdgeBlendArrangement.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProPresenterScreen_EdgeBlendArrangement>, I>,
   >(object: I): ProPresenterScreen_EdgeBlendArrangement {
@@ -630,8 +624,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

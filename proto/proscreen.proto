@@ -6,8 +6,9 @@ option cc_enable_arenas = true;
 option csharp_namespace = "Pro.SerializationInterop.RVProtoData";
 option swift_prefix = "RVData_";
 
+import "color.proto";
 import "screens.proto";
-import "basicTypes.proto";
+import "uuid.proto";
 
 message ProPresenterScreen {
   message SingleArrangement {

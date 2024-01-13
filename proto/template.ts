@@ -1,7 +1,7 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { Action } from './action';
-import { ApplicationInfo } from './basicTypes';
+import { ApplicationInfo } from './applicationInfo';
 import { Slide } from './slide';
 
 export const protobufPackage = 'rv.data';
@@ -37,7 +37,7 @@ export const Template = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -55,9 +55,8 @@ export const Template = {
   },
 
   create<I extends Exact<DeepPartial<Template>, I>>(base?: I): Template {
-    return Template.fromPartial(base ?? {});
+    return Template.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Template>, I>>(_: I): Template {
     const message = createBaseTemplate();
     return message;
@@ -94,28 +93,28 @@ export const Template_Slide = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.baseSlide = Slide.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.actions.push(Action.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -128,8 +127,8 @@ export const Template_Slide = {
       baseSlide: isSet(object.baseSlide)
         ? Slide.fromJSON(object.baseSlide)
         : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      actions: Array.isArray(object?.actions)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      actions: globalThis.Array.isArray(object?.actions)
         ? object.actions.map((e: any) => Action.fromJSON(e))
         : [],
     };
@@ -137,17 +136,14 @@ export const Template_Slide = {
 
   toJSON(message: Template_Slide): unknown {
     const obj: any = {};
-    message.baseSlide !== undefined &&
-      (obj.baseSlide = message.baseSlide
-        ? Slide.toJSON(message.baseSlide)
-        : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.actions) {
-      obj.actions = message.actions.map((e) =>
-        e ? Action.toJSON(e) : undefined,
-      );
-    } else {
-      obj.actions = [];
+    if (message.baseSlide !== undefined) {
+      obj.baseSlide = Slide.toJSON(message.baseSlide);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.actions?.length) {
+      obj.actions = message.actions.map((e) => Action.toJSON(e));
     }
     return obj;
   },
@@ -155,9 +151,8 @@ export const Template_Slide = {
   create<I extends Exact<DeepPartial<Template_Slide>, I>>(
     base?: I,
   ): Template_Slide {
-    return Template_Slide.fromPartial(base ?? {});
+    return Template_Slide.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Template_Slide>, I>>(
     object: I,
   ): Template_Slide {
@@ -202,7 +197,7 @@ export const Template_Document = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -212,14 +207,14 @@ export const Template_Document = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.slides.push(Template_Slide.decode(reader, reader.uint32()));
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -232,7 +227,7 @@ export const Template_Document = {
       applicationInfo: isSet(object.applicationInfo)
         ? ApplicationInfo.fromJSON(object.applicationInfo)
         : undefined,
-      slides: Array.isArray(object?.slides)
+      slides: globalThis.Array.isArray(object?.slides)
         ? object.slides.map((e: any) => Template_Slide.fromJSON(e))
         : [],
     };
@@ -240,16 +235,11 @@ export const Template_Document = {
 
   toJSON(message: Template_Document): unknown {
     const obj: any = {};
-    message.applicationInfo !== undefined &&
-      (obj.applicationInfo = message.applicationInfo
-        ? ApplicationInfo.toJSON(message.applicationInfo)
-        : undefined);
-    if (message.slides) {
-      obj.slides = message.slides.map((e) =>
-        e ? Template_Slide.toJSON(e) : undefined,
-      );
-    } else {
-      obj.slides = [];
+    if (message.applicationInfo !== undefined) {
+      obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
+    }
+    if (message.slides?.length) {
+      obj.slides = message.slides.map((e) => Template_Slide.toJSON(e));
     }
     return obj;
   },
@@ -257,9 +247,8 @@ export const Template_Document = {
   create<I extends Exact<DeepPartial<Template_Document>, I>>(
     base?: I,
   ): Template_Document {
-    return Template_Document.fromPartial(base ?? {});
+    return Template_Document.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Template_Document>, I>>(
     object: I,
   ): Template_Document {
@@ -285,8 +274,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

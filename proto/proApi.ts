@@ -5,12 +5,12 @@ import {
   ApplicationInfo_Platform,
   applicationInfo_PlatformFromJSON,
   applicationInfo_PlatformToJSON,
-  UUID,
-} from './basicTypes';
+} from './applicationInfo';
 import { Message_TokenValue } from './messages';
 import { NetworkAPIV1 } from './proApiV1';
 import { Timestamp } from './rvtimestamp';
 import { Timer_Configuration } from './timers';
+import { UUID } from './uuid';
 
 export const protobufPackage = 'rv.data';
 
@@ -892,28 +892,28 @@ export const ProApiIn = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.handlerIn = ProLink_HandlerIn.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.networkApi = NetworkAPI.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.networkApiV1 = NetworkAPIV1.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -937,25 +937,21 @@ export const ProApiIn = {
 
   toJSON(message: ProApiIn): unknown {
     const obj: any = {};
-    message.handlerIn !== undefined &&
-      (obj.handlerIn = message.handlerIn
-        ? ProLink_HandlerIn.toJSON(message.handlerIn)
-        : undefined);
-    message.networkApi !== undefined &&
-      (obj.networkApi = message.networkApi
-        ? NetworkAPI.toJSON(message.networkApi)
-        : undefined);
-    message.networkApiV1 !== undefined &&
-      (obj.networkApiV1 = message.networkApiV1
-        ? NetworkAPIV1.toJSON(message.networkApiV1)
-        : undefined);
+    if (message.handlerIn !== undefined) {
+      obj.handlerIn = ProLink_HandlerIn.toJSON(message.handlerIn);
+    }
+    if (message.networkApi !== undefined) {
+      obj.networkApi = NetworkAPI.toJSON(message.networkApi);
+    }
+    if (message.networkApiV1 !== undefined) {
+      obj.networkApiV1 = NetworkAPIV1.toJSON(message.networkApiV1);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProApiIn>, I>>(base?: I): ProApiIn {
-    return ProApiIn.fromPartial(base ?? {});
+    return ProApiIn.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProApiIn>, I>>(object: I): ProApiIn {
     const message = createBaseProApiIn();
     message.handlerIn =
@@ -1021,7 +1017,7 @@ export const ProApiOut = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1031,7 +1027,7 @@ export const ProApiOut = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -1041,21 +1037,21 @@ export const ProApiOut = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.networkApi = NetworkAPI.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.networkApiV1 = NetworkAPIV1.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1082,29 +1078,24 @@ export const ProApiOut = {
 
   toJSON(message: ProApiOut): unknown {
     const obj: any = {};
-    message.handlerOut !== undefined &&
-      (obj.handlerOut = message.handlerOut
-        ? ProLink_HandlerOut.toJSON(message.handlerOut)
-        : undefined);
-    message.clientAction !== undefined &&
-      (obj.clientAction = message.clientAction
-        ? ProLink_ClientAction.toJSON(message.clientAction)
-        : undefined);
-    message.networkApi !== undefined &&
-      (obj.networkApi = message.networkApi
-        ? NetworkAPI.toJSON(message.networkApi)
-        : undefined);
-    message.networkApiV1 !== undefined &&
-      (obj.networkApiV1 = message.networkApiV1
-        ? NetworkAPIV1.toJSON(message.networkApiV1)
-        : undefined);
+    if (message.handlerOut !== undefined) {
+      obj.handlerOut = ProLink_HandlerOut.toJSON(message.handlerOut);
+    }
+    if (message.clientAction !== undefined) {
+      obj.clientAction = ProLink_ClientAction.toJSON(message.clientAction);
+    }
+    if (message.networkApi !== undefined) {
+      obj.networkApi = NetworkAPI.toJSON(message.networkApi);
+    }
+    if (message.networkApiV1 !== undefined) {
+      obj.networkApiV1 = NetworkAPIV1.toJSON(message.networkApiV1);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProApiOut>, I>>(base?: I): ProApiOut {
-    return ProApiOut.fromPartial(base ?? {});
+    return ProApiOut.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProApiOut>, I>>(
     object: I,
   ): ProApiOut {
@@ -1202,91 +1193,91 @@ export const ProApiNetworkConfiguration = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.enableNetwork = reader.bool();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.port = reader.uint32();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.networkName = reader.string();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.remoteEnable = reader.bool();
           continue;
         case 5:
-          if (tag != 40) {
+          if (tag !== 40) {
             break;
           }
 
           message.remoteControlEnable = reader.bool();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.remoteControlPassword = reader.string();
           continue;
         case 7:
-          if (tag != 56) {
+          if (tag !== 56) {
             break;
           }
 
           message.remoteObserveEnable = reader.bool();
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
           message.remoteObservePassword = reader.string();
           continue;
         case 9:
-          if (tag != 72) {
+          if (tag !== 72) {
             break;
           }
 
           message.stageEnable = reader.bool();
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
           message.stagePassword = reader.string();
           continue;
         case 11:
-          if (tag != 88) {
+          if (tag !== 88) {
             break;
           }
 
           message.linkEnable = reader.bool();
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
           message.webResourceRoot = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1297,71 +1288,88 @@ export const ProApiNetworkConfiguration = {
   fromJSON(object: any): ProApiNetworkConfiguration {
     return {
       enableNetwork: isSet(object.enableNetwork)
-        ? Boolean(object.enableNetwork)
+        ? globalThis.Boolean(object.enableNetwork)
         : false,
-      port: isSet(object.port) ? Number(object.port) : 0,
-      networkName: isSet(object.networkName) ? String(object.networkName) : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
+      networkName: isSet(object.networkName)
+        ? globalThis.String(object.networkName)
+        : '',
       remoteEnable: isSet(object.remoteEnable)
-        ? Boolean(object.remoteEnable)
+        ? globalThis.Boolean(object.remoteEnable)
         : false,
       remoteControlEnable: isSet(object.remoteControlEnable)
-        ? Boolean(object.remoteControlEnable)
+        ? globalThis.Boolean(object.remoteControlEnable)
         : false,
       remoteControlPassword: isSet(object.remoteControlPassword)
-        ? String(object.remoteControlPassword)
+        ? globalThis.String(object.remoteControlPassword)
         : '',
       remoteObserveEnable: isSet(object.remoteObserveEnable)
-        ? Boolean(object.remoteObserveEnable)
+        ? globalThis.Boolean(object.remoteObserveEnable)
         : false,
       remoteObservePassword: isSet(object.remoteObservePassword)
-        ? String(object.remoteObservePassword)
+        ? globalThis.String(object.remoteObservePassword)
         : '',
       stageEnable: isSet(object.stageEnable)
-        ? Boolean(object.stageEnable)
+        ? globalThis.Boolean(object.stageEnable)
         : false,
       stagePassword: isSet(object.stagePassword)
-        ? String(object.stagePassword)
+        ? globalThis.String(object.stagePassword)
         : '',
-      linkEnable: isSet(object.linkEnable) ? Boolean(object.linkEnable) : false,
+      linkEnable: isSet(object.linkEnable)
+        ? globalThis.Boolean(object.linkEnable)
+        : false,
       webResourceRoot: isSet(object.webResourceRoot)
-        ? String(object.webResourceRoot)
+        ? globalThis.String(object.webResourceRoot)
         : '',
     };
   },
 
   toJSON(message: ProApiNetworkConfiguration): unknown {
     const obj: any = {};
-    message.enableNetwork !== undefined &&
-      (obj.enableNetwork = message.enableNetwork);
-    message.port !== undefined && (obj.port = Math.round(message.port));
-    message.networkName !== undefined &&
-      (obj.networkName = message.networkName);
-    message.remoteEnable !== undefined &&
-      (obj.remoteEnable = message.remoteEnable);
-    message.remoteControlEnable !== undefined &&
-      (obj.remoteControlEnable = message.remoteControlEnable);
-    message.remoteControlPassword !== undefined &&
-      (obj.remoteControlPassword = message.remoteControlPassword);
-    message.remoteObserveEnable !== undefined &&
-      (obj.remoteObserveEnable = message.remoteObserveEnable);
-    message.remoteObservePassword !== undefined &&
-      (obj.remoteObservePassword = message.remoteObservePassword);
-    message.stageEnable !== undefined &&
-      (obj.stageEnable = message.stageEnable);
-    message.stagePassword !== undefined &&
-      (obj.stagePassword = message.stagePassword);
-    message.linkEnable !== undefined && (obj.linkEnable = message.linkEnable);
-    message.webResourceRoot !== undefined &&
-      (obj.webResourceRoot = message.webResourceRoot);
+    if (message.enableNetwork === true) {
+      obj.enableNetwork = message.enableNetwork;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
+    if (message.networkName !== '') {
+      obj.networkName = message.networkName;
+    }
+    if (message.remoteEnable === true) {
+      obj.remoteEnable = message.remoteEnable;
+    }
+    if (message.remoteControlEnable === true) {
+      obj.remoteControlEnable = message.remoteControlEnable;
+    }
+    if (message.remoteControlPassword !== '') {
+      obj.remoteControlPassword = message.remoteControlPassword;
+    }
+    if (message.remoteObserveEnable === true) {
+      obj.remoteObserveEnable = message.remoteObserveEnable;
+    }
+    if (message.remoteObservePassword !== '') {
+      obj.remoteObservePassword = message.remoteObservePassword;
+    }
+    if (message.stageEnable === true) {
+      obj.stageEnable = message.stageEnable;
+    }
+    if (message.stagePassword !== '') {
+      obj.stagePassword = message.stagePassword;
+    }
+    if (message.linkEnable === true) {
+      obj.linkEnable = message.linkEnable;
+    }
+    if (message.webResourceRoot !== '') {
+      obj.webResourceRoot = message.webResourceRoot;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProApiNetworkConfiguration>, I>>(
     base?: I,
   ): ProApiNetworkConfiguration {
-    return ProApiNetworkConfiguration.fromPartial(base ?? {});
+    return ProApiNetworkConfiguration.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProApiNetworkConfiguration>, I>>(
     object: I,
   ): ProApiNetworkConfiguration {
@@ -1400,7 +1408,7 @@ export const ProLink = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1418,9 +1426,8 @@ export const ProLink = {
   },
 
   create<I extends Exact<DeepPartial<ProLink>, I>>(base?: I): ProLink {
-    return ProLink.fromPartial(base ?? {});
+    return ProLink.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink>, I>>(_: I): ProLink {
     const message = createBaseProLink();
     return message;
@@ -1475,28 +1482,28 @@ export const ProLink_GroupDefinition = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.timestamp = Timestamp.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.secret = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -1505,14 +1512,14 @@ export const ProLink_GroupDefinition = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.groupIdentifier = UUID.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1525,9 +1532,9 @@ export const ProLink_GroupDefinition = {
       timestamp: isSet(object.timestamp)
         ? Timestamp.fromJSON(object.timestamp)
         : undefined,
-      secret: isSet(object.secret) ? String(object.secret) : '',
-      name: isSet(object.name) ? String(object.name) : '',
-      members: Array.isArray(object?.members)
+      secret: isSet(object.secret) ? globalThis.String(object.secret) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      members: globalThis.Array.isArray(object?.members)
         ? object.members.map((e: any) =>
             ProLink_GroupDefinition_Member.fromJSON(e),
           )
@@ -1540,32 +1547,31 @@ export const ProLink_GroupDefinition = {
 
   toJSON(message: ProLink_GroupDefinition): unknown {
     const obj: any = {};
-    message.timestamp !== undefined &&
-      (obj.timestamp = message.timestamp
-        ? Timestamp.toJSON(message.timestamp)
-        : undefined);
-    message.secret !== undefined && (obj.secret = message.secret);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.members) {
-      obj.members = message.members.map((e) =>
-        e ? ProLink_GroupDefinition_Member.toJSON(e) : undefined,
-      );
-    } else {
-      obj.members = [];
+    if (message.timestamp !== undefined) {
+      obj.timestamp = Timestamp.toJSON(message.timestamp);
     }
-    message.groupIdentifier !== undefined &&
-      (obj.groupIdentifier = message.groupIdentifier
-        ? UUID.toJSON(message.groupIdentifier)
-        : undefined);
+    if (message.secret !== '') {
+      obj.secret = message.secret;
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.members?.length) {
+      obj.members = message.members.map((e) =>
+        ProLink_GroupDefinition_Member.toJSON(e),
+      );
+    }
+    if (message.groupIdentifier !== undefined) {
+      obj.groupIdentifier = UUID.toJSON(message.groupIdentifier);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_GroupDefinition>, I>>(
     base?: I,
   ): ProLink_GroupDefinition {
-    return ProLink_GroupDefinition.fromPartial(base ?? {});
+    return ProLink_GroupDefinition.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_GroupDefinition>, I>>(
     object: I,
   ): ProLink_GroupDefinition {
@@ -1618,21 +1624,21 @@ export const ProLink_GroupDefinition_Member = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.ip = reader.string();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.port = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1642,24 +1648,27 @@ export const ProLink_GroupDefinition_Member = {
 
   fromJSON(object: any): ProLink_GroupDefinition_Member {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
+      ip: isSet(object.ip) ? globalThis.String(object.ip) : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
     };
   },
 
   toJSON(message: ProLink_GroupDefinition_Member): unknown {
     const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = Math.round(message.port));
+    if (message.ip !== '') {
+      obj.ip = message.ip;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_GroupDefinition_Member>, I>>(
     base?: I,
   ): ProLink_GroupDefinition_Member {
-    return ProLink_GroupDefinition_Member.fromPartial(base ?? {});
+    return ProLink_GroupDefinition_Member.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_GroupDefinition_Member>, I>>(
     object: I,
   ): ProLink_GroupDefinition_Member {
@@ -1691,7 +1700,7 @@ export const ProLink_ZeroConfig = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1711,9 +1720,8 @@ export const ProLink_ZeroConfig = {
   create<I extends Exact<DeepPartial<ProLink_ZeroConfig>, I>>(
     base?: I,
   ): ProLink_ZeroConfig {
-    return ProLink_ZeroConfig.fromPartial(base ?? {});
+    return ProLink_ZeroConfig.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_ZeroConfig>, I>>(
     _: I,
   ): ProLink_ZeroConfig {
@@ -1752,7 +1760,7 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1761,7 +1769,7 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -1770,7 +1778,7 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1780,12 +1788,12 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
 
   fromJSON(object: any): ProLink_ZeroConfig_NetworkEnvironment {
     return {
-      availableGroups: Array.isArray(object?.availableGroups)
+      availableGroups: globalThis.Array.isArray(object?.availableGroups)
         ? object.availableGroups.map((e: any) =>
             ProLink_GroupDefinition.fromJSON(e),
           )
         : [],
-      availableDevices: Array.isArray(object?.availableDevices)
+      availableDevices: globalThis.Array.isArray(object?.availableDevices)
         ? object.availableDevices.map((e: any) =>
             ProLink_MemberStatus.fromJSON(e),
           )
@@ -1795,19 +1803,15 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
 
   toJSON(message: ProLink_ZeroConfig_NetworkEnvironment): unknown {
     const obj: any = {};
-    if (message.availableGroups) {
+    if (message.availableGroups?.length) {
       obj.availableGroups = message.availableGroups.map((e) =>
-        e ? ProLink_GroupDefinition.toJSON(e) : undefined,
+        ProLink_GroupDefinition.toJSON(e),
       );
-    } else {
-      obj.availableGroups = [];
     }
-    if (message.availableDevices) {
+    if (message.availableDevices?.length) {
       obj.availableDevices = message.availableDevices.map((e) =>
-        e ? ProLink_MemberStatus.toJSON(e) : undefined,
+        ProLink_MemberStatus.toJSON(e),
       );
-    } else {
-      obj.availableDevices = [];
     }
     return obj;
   },
@@ -1815,9 +1819,10 @@ export const ProLink_ZeroConfig_NetworkEnvironment = {
   create<
     I extends Exact<DeepPartial<ProLink_ZeroConfig_NetworkEnvironment>, I>,
   >(base?: I): ProLink_ZeroConfig_NetworkEnvironment {
-    return ProLink_ZeroConfig_NetworkEnvironment.fromPartial(base ?? {});
+    return ProLink_ZeroConfig_NetworkEnvironment.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_ZeroConfig_NetworkEnvironment>, I>,
   >(object: I): ProLink_ZeroConfig_NetworkEnvironment {
@@ -1870,7 +1875,7 @@ export const ProLink_ZeroConfig_MulticastPacket = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -1880,14 +1885,14 @@ export const ProLink_ZeroConfig_MulticastPacket = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.device = ProLink_MemberStatus.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1908,23 +1913,20 @@ export const ProLink_ZeroConfig_MulticastPacket = {
 
   toJSON(message: ProLink_ZeroConfig_MulticastPacket): unknown {
     const obj: any = {};
-    message.group !== undefined &&
-      (obj.group = message.group
-        ? ProLink_GroupDefinition.toJSON(message.group)
-        : undefined);
-    message.device !== undefined &&
-      (obj.device = message.device
-        ? ProLink_MemberStatus.toJSON(message.device)
-        : undefined);
+    if (message.group !== undefined) {
+      obj.group = ProLink_GroupDefinition.toJSON(message.group);
+    }
+    if (message.device !== undefined) {
+      obj.device = ProLink_MemberStatus.toJSON(message.device);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_ZeroConfig_MulticastPacket>, I>>(
     base?: I,
   ): ProLink_ZeroConfig_MulticastPacket {
-    return ProLink_ZeroConfig_MulticastPacket.fromPartial(base ?? {});
+    return ProLink_ZeroConfig_MulticastPacket.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_ZeroConfig_MulticastPacket>, I>,
   >(object: I): ProLink_ZeroConfig_MulticastPacket {
@@ -1965,7 +1967,7 @@ export const ProLink_TowerMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -1985,9 +1987,8 @@ export const ProLink_TowerMessage = {
   create<I extends Exact<DeepPartial<ProLink_TowerMessage>, I>>(
     base?: I,
   ): ProLink_TowerMessage {
-    return ProLink_TowerMessage.fromPartial(base ?? {});
+    return ProLink_TowerMessage.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_TowerMessage>, I>>(
     _: I,
   ): ProLink_TowerMessage {
@@ -2020,7 +2021,7 @@ export const ProLink_TowerMessage_TowerStatusRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2040,9 +2041,10 @@ export const ProLink_TowerMessage_TowerStatusRequest = {
   create<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusRequest>, I>,
   >(base?: I): ProLink_TowerMessage_TowerStatusRequest {
-    return ProLink_TowerMessage_TowerStatusRequest.fromPartial(base ?? {});
+    return ProLink_TowerMessage_TowerStatusRequest.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusRequest>, I>,
   >(_: I): ProLink_TowerMessage_TowerStatusRequest {
@@ -2084,14 +2086,14 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.memberName = reader.string();
           continue;
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2101,7 +2103,7 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2111,7 +2113,9 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
 
   fromJSON(object: any): ProLink_TowerMessage_TowerStatusResponse {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : '',
+      memberName: isSet(object.memberName)
+        ? globalThis.String(object.memberName)
+        : '',
       groupDefinition: isSet(object.groupDefinition)
         ? ProLink_GroupDefinition.fromJSON(object.groupDefinition)
         : undefined,
@@ -2120,20 +2124,24 @@ export const ProLink_TowerMessage_TowerStatusResponse = {
 
   toJSON(message: ProLink_TowerMessage_TowerStatusResponse): unknown {
     const obj: any = {};
-    message.memberName !== undefined && (obj.memberName = message.memberName);
-    message.groupDefinition !== undefined &&
-      (obj.groupDefinition = message.groupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-        : undefined);
+    if (message.memberName !== '') {
+      obj.memberName = message.memberName;
+    }
+    if (message.groupDefinition !== undefined) {
+      obj.groupDefinition = ProLink_GroupDefinition.toJSON(
+        message.groupDefinition,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusResponse>, I>,
   >(base?: I): ProLink_TowerMessage_TowerStatusResponse {
-    return ProLink_TowerMessage_TowerStatusResponse.fromPartial(base ?? {});
+    return ProLink_TowerMessage_TowerStatusResponse.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerStatusResponse>, I>,
   >(object: I): ProLink_TowerMessage_TowerStatusResponse {
@@ -2183,7 +2191,7 @@ export const ProLink_TowerMessage_TowerAddMemberRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2193,7 +2201,7 @@ export const ProLink_TowerMessage_TowerAddMemberRequest = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2203,7 +2211,7 @@ export const ProLink_TowerMessage_TowerAddMemberRequest = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2224,23 +2232,26 @@ export const ProLink_TowerMessage_TowerAddMemberRequest = {
 
   toJSON(message: ProLink_TowerMessage_TowerAddMemberRequest): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined &&
-      (obj.groupDefinition = message.groupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-        : undefined);
-    message.joiningMember !== undefined &&
-      (obj.joiningMember = message.joiningMember
-        ? ProLink_GroupDefinition_Member.toJSON(message.joiningMember)
-        : undefined);
+    if (message.groupDefinition !== undefined) {
+      obj.groupDefinition = ProLink_GroupDefinition.toJSON(
+        message.groupDefinition,
+      );
+    }
+    if (message.joiningMember !== undefined) {
+      obj.joiningMember = ProLink_GroupDefinition_Member.toJSON(
+        message.joiningMember,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberRequest>, I>,
   >(base?: I): ProLink_TowerMessage_TowerAddMemberRequest {
-    return ProLink_TowerMessage_TowerAddMemberRequest.fromPartial(base ?? {});
+    return ProLink_TowerMessage_TowerAddMemberRequest.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerAddMemberRequest>, I>,
   >(object: I): ProLink_TowerMessage_TowerAddMemberRequest {
@@ -2287,7 +2298,7 @@ export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2297,7 +2308,7 @@ export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2315,10 +2326,11 @@ export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
 
   toJSON(message: ProLink_TowerMessage_TowerRemoveMemberRequest): unknown {
     const obj: any = {};
-    message.removingMember !== undefined &&
-      (obj.removingMember = message.removingMember
-        ? ProLink_GroupDefinition_Member.toJSON(message.removingMember)
-        : undefined);
+    if (message.removingMember !== undefined) {
+      obj.removingMember = ProLink_GroupDefinition_Member.toJSON(
+        message.removingMember,
+      );
+    }
     return obj;
   },
 
@@ -2329,10 +2341,9 @@ export const ProLink_TowerMessage_TowerRemoveMemberRequest = {
     >,
   >(base?: I): ProLink_TowerMessage_TowerRemoveMemberRequest {
     return ProLink_TowerMessage_TowerRemoveMemberRequest.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_TowerMessage_TowerRemoveMemberRequest>,
@@ -2391,7 +2402,7 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2401,7 +2412,7 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2412,14 +2423,14 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
             );
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.declineReason = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2447,23 +2458,22 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
 
   toJSON(message: ProLink_TowerMessage_TowerAddMemberResponse): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined &&
-      (obj.groupDefinition = message.groupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-        : undefined);
-    message.accept !== undefined &&
-      (obj.accept = message.accept
-        ? ProLink_TowerMessage_TowerAddMemberResponse_Accept.toJSON(
-            message.accept,
-          )
-        : undefined);
-    message.declineReason !== undefined &&
-      (obj.declineReason =
-        message.declineReason !== undefined
-          ? proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonToJSON(
-              message.declineReason,
-            )
-          : undefined);
+    if (message.groupDefinition !== undefined) {
+      obj.groupDefinition = ProLink_GroupDefinition.toJSON(
+        message.groupDefinition,
+      );
+    }
+    if (message.accept !== undefined) {
+      obj.accept = ProLink_TowerMessage_TowerAddMemberResponse_Accept.toJSON(
+        message.accept,
+      );
+    }
+    if (message.declineReason !== undefined) {
+      obj.declineReason =
+        proLink_TowerMessage_TowerAddMemberResponse_DeclineReasonToJSON(
+          message.declineReason,
+        );
+    }
     return obj;
   },
 
@@ -2473,9 +2483,10 @@ export const ProLink_TowerMessage_TowerAddMemberResponse = {
       I
     >,
   >(base?: I): ProLink_TowerMessage_TowerAddMemberResponse {
-    return ProLink_TowerMessage_TowerAddMemberResponse.fromPartial(base ?? {});
+    return ProLink_TowerMessage_TowerAddMemberResponse.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse>,
@@ -2523,7 +2534,7 @@ export const ProLink_TowerMessage_TowerAddMemberResponse_Accept = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2547,10 +2558,9 @@ export const ProLink_TowerMessage_TowerAddMemberResponse_Accept = {
     >,
   >(base?: I): ProLink_TowerMessage_TowerAddMemberResponse_Accept {
     return ProLink_TowerMessage_TowerAddMemberResponse_Accept.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_TowerMessage_TowerAddMemberResponse_Accept>,
@@ -2587,7 +2597,7 @@ export const ProLink_TowerMessage_TowerHeartbeatRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2607,9 +2617,10 @@ export const ProLink_TowerMessage_TowerHeartbeatRequest = {
   create<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatRequest>, I>,
   >(base?: I): ProLink_TowerMessage_TowerHeartbeatRequest {
-    return ProLink_TowerMessage_TowerHeartbeatRequest.fromPartial(base ?? {});
+    return ProLink_TowerMessage_TowerHeartbeatRequest.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_TowerMessage_TowerHeartbeatRequest>, I>,
   >(_: I): ProLink_TowerMessage_TowerHeartbeatRequest {
@@ -2648,7 +2659,7 @@ export const ProLink_TowerMessage_TowerHeartbeatResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2658,7 +2669,7 @@ export const ProLink_TowerMessage_TowerHeartbeatResponse = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2676,10 +2687,11 @@ export const ProLink_TowerMessage_TowerHeartbeatResponse = {
 
   toJSON(message: ProLink_TowerMessage_TowerHeartbeatResponse): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined &&
-      (obj.groupDefinition = message.groupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-        : undefined);
+    if (message.groupDefinition !== undefined) {
+      obj.groupDefinition = ProLink_GroupDefinition.toJSON(
+        message.groupDefinition,
+      );
+    }
     return obj;
   },
 
@@ -2689,9 +2701,10 @@ export const ProLink_TowerMessage_TowerHeartbeatResponse = {
       I
     >,
   >(base?: I): ProLink_TowerMessage_TowerHeartbeatResponse {
-    return ProLink_TowerMessage_TowerHeartbeatResponse.fromPartial(base ?? {});
+    return ProLink_TowerMessage_TowerHeartbeatResponse.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_TowerMessage_TowerHeartbeatResponse>,
@@ -2764,63 +2777,63 @@ export const ProLink_MemberStatus = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.ip = reader.string();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.port = reader.uint32();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.platform = reader.int32() as any;
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.osVersion = reader.string();
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
           message.hostDescription = reader.string();
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
           message.apiVersion = reader.string();
           continue;
         case 8:
-          if (tag != 64) {
+          if (tag !== 64) {
             break;
           }
 
           message.connectionStatus = reader.int32() as any;
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -2830,17 +2843,21 @@ export const ProLink_MemberStatus = {
 
   fromJSON(object: any): ProLink_MemberStatus {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
-      name: isSet(object.name) ? String(object.name) : '',
+      ip: isSet(object.ip) ? globalThis.String(object.ip) : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
       platform: isSet(object.platform)
         ? applicationInfo_PlatformFromJSON(object.platform)
         : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
-      hostDescription: isSet(object.hostDescription)
-        ? String(object.hostDescription)
+      osVersion: isSet(object.osVersion)
+        ? globalThis.String(object.osVersion)
         : '',
-      apiVersion: isSet(object.apiVersion) ? String(object.apiVersion) : '',
+      hostDescription: isSet(object.hostDescription)
+        ? globalThis.String(object.hostDescription)
+        : '',
+      apiVersion: isSet(object.apiVersion)
+        ? globalThis.String(object.apiVersion)
+        : '',
       connectionStatus: isSet(object.connectionStatus)
         ? proLink_MemberStatus_ConnectionStatusFromJSON(object.connectionStatus)
         : 0,
@@ -2849,28 +2866,40 @@ export const ProLink_MemberStatus = {
 
   toJSON(message: ProLink_MemberStatus): unknown {
     const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = Math.round(message.port));
-    message.name !== undefined && (obj.name = message.name);
-    message.platform !== undefined &&
-      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
-    message.osVersion !== undefined && (obj.osVersion = message.osVersion);
-    message.hostDescription !== undefined &&
-      (obj.hostDescription = message.hostDescription);
-    message.apiVersion !== undefined && (obj.apiVersion = message.apiVersion);
-    message.connectionStatus !== undefined &&
-      (obj.connectionStatus = proLink_MemberStatus_ConnectionStatusToJSON(
+    if (message.ip !== '') {
+      obj.ip = message.ip;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.platform !== 0) {
+      obj.platform = applicationInfo_PlatformToJSON(message.platform);
+    }
+    if (message.osVersion !== '') {
+      obj.osVersion = message.osVersion;
+    }
+    if (message.hostDescription !== '') {
+      obj.hostDescription = message.hostDescription;
+    }
+    if (message.apiVersion !== '') {
+      obj.apiVersion = message.apiVersion;
+    }
+    if (message.connectionStatus !== 0) {
+      obj.connectionStatus = proLink_MemberStatus_ConnectionStatusToJSON(
         message.connectionStatus,
-      ));
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_MemberStatus>, I>>(
     base?: I,
   ): ProLink_MemberStatus {
-    return ProLink_MemberStatus.fromPartial(base ?? {});
+    return ProLink_MemberStatus.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_MemberStatus>, I>>(
     object: I,
   ): ProLink_MemberStatus {
@@ -2940,7 +2969,7 @@ export const ProLink_ClientAction = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -2950,7 +2979,7 @@ export const ProLink_ClientAction = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -2961,7 +2990,7 @@ export const ProLink_ClientAction = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -2971,7 +3000,7 @@ export const ProLink_ClientAction = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -2981,7 +3010,7 @@ export const ProLink_ClientAction = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3010,31 +3039,34 @@ export const ProLink_ClientAction = {
 
   toJSON(message: ProLink_ClientAction): unknown {
     const obj: any = {};
-    message.addConnection !== undefined &&
-      (obj.addConnection = message.addConnection
-        ? ProLink_ClientAction_AddConnection.toJSON(message.addConnection)
-        : undefined);
-    message.removeConnection !== undefined &&
-      (obj.removeConnection = message.removeConnection
-        ? ProLink_ClientAction_RemoveConnection.toJSON(message.removeConnection)
-        : undefined);
-    message.cancelAction !== undefined &&
-      (obj.cancelAction = message.cancelAction
-        ? ProLink_ClientAction_CancelAction.toJSON(message.cancelAction)
-        : undefined);
-    message.renderTime !== undefined &&
-      (obj.renderTime = message.renderTime
-        ? ProLink_ClientAction_RenderTime.toJSON(message.renderTime)
-        : undefined);
+    if (message.addConnection !== undefined) {
+      obj.addConnection = ProLink_ClientAction_AddConnection.toJSON(
+        message.addConnection,
+      );
+    }
+    if (message.removeConnection !== undefined) {
+      obj.removeConnection = ProLink_ClientAction_RemoveConnection.toJSON(
+        message.removeConnection,
+      );
+    }
+    if (message.cancelAction !== undefined) {
+      obj.cancelAction = ProLink_ClientAction_CancelAction.toJSON(
+        message.cancelAction,
+      );
+    }
+    if (message.renderTime !== undefined) {
+      obj.renderTime = ProLink_ClientAction_RenderTime.toJSON(
+        message.renderTime,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_ClientAction>, I>>(
     base?: I,
   ): ProLink_ClientAction {
-    return ProLink_ClientAction.fromPartial(base ?? {});
+    return ProLink_ClientAction.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction>, I>>(
     object: I,
   ): ProLink_ClientAction {
@@ -3094,28 +3126,28 @@ export const ProLink_ClientAction_AddConnection = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.ip = reader.string();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.port = reader.uint32();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.groupName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3125,26 +3157,33 @@ export const ProLink_ClientAction_AddConnection = {
 
   fromJSON(object: any): ProLink_ClientAction_AddConnection {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
-      groupName: isSet(object.groupName) ? String(object.groupName) : '',
+      ip: isSet(object.ip) ? globalThis.String(object.ip) : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
+      groupName: isSet(object.groupName)
+        ? globalThis.String(object.groupName)
+        : '',
     };
   },
 
   toJSON(message: ProLink_ClientAction_AddConnection): unknown {
     const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = Math.round(message.port));
-    message.groupName !== undefined && (obj.groupName = message.groupName);
+    if (message.ip !== '') {
+      obj.ip = message.ip;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
+    if (message.groupName !== '') {
+      obj.groupName = message.groupName;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_ClientAction_AddConnection>, I>>(
     base?: I,
   ): ProLink_ClientAction_AddConnection {
-    return ProLink_ClientAction_AddConnection.fromPartial(base ?? {});
+    return ProLink_ClientAction_AddConnection.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_ClientAction_AddConnection>, I>,
   >(object: I): ProLink_ClientAction_AddConnection {
@@ -3186,21 +3225,21 @@ export const ProLink_ClientAction_RemoveConnection = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.ip = reader.string();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.port = reader.uint32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3210,24 +3249,29 @@ export const ProLink_ClientAction_RemoveConnection = {
 
   fromJSON(object: any): ProLink_ClientAction_RemoveConnection {
     return {
-      ip: isSet(object.ip) ? String(object.ip) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
+      ip: isSet(object.ip) ? globalThis.String(object.ip) : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
     };
   },
 
   toJSON(message: ProLink_ClientAction_RemoveConnection): unknown {
     const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = Math.round(message.port));
+    if (message.ip !== '') {
+      obj.ip = message.ip;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProLink_ClientAction_RemoveConnection>, I>,
   >(base?: I): ProLink_ClientAction_RemoveConnection {
-    return ProLink_ClientAction_RemoveConnection.fromPartial(base ?? {});
+    return ProLink_ClientAction_RemoveConnection.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_ClientAction_RemoveConnection>, I>,
   >(object: I): ProLink_ClientAction_RemoveConnection {
@@ -3262,7 +3306,7 @@ export const ProLink_ClientAction_CancelAction = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3282,9 +3326,8 @@ export const ProLink_ClientAction_CancelAction = {
   create<I extends Exact<DeepPartial<ProLink_ClientAction_CancelAction>, I>>(
     base?: I,
   ): ProLink_ClientAction_CancelAction {
-    return ProLink_ClientAction_CancelAction.fromPartial(base ?? {});
+    return ProLink_ClientAction_CancelAction.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_ClientAction_CancelAction>, I>,
   >(_: I): ProLink_ClientAction_CancelAction {
@@ -3323,21 +3366,21 @@ export const ProLink_ClientAction_RenderTime = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.latency = longToNumber(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.renderTime = longToNumber(reader.uint64() as Long);
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3347,26 +3390,29 @@ export const ProLink_ClientAction_RenderTime = {
 
   fromJSON(object: any): ProLink_ClientAction_RenderTime {
     return {
-      latency: isSet(object.latency) ? Number(object.latency) : 0,
-      renderTime: isSet(object.renderTime) ? Number(object.renderTime) : 0,
+      latency: isSet(object.latency) ? globalThis.Number(object.latency) : 0,
+      renderTime: isSet(object.renderTime)
+        ? globalThis.Number(object.renderTime)
+        : 0,
     };
   },
 
   toJSON(message: ProLink_ClientAction_RenderTime): unknown {
     const obj: any = {};
-    message.latency !== undefined &&
-      (obj.latency = Math.round(message.latency));
-    message.renderTime !== undefined &&
-      (obj.renderTime = Math.round(message.renderTime));
+    if (message.latency !== 0) {
+      obj.latency = Math.round(message.latency);
+    }
+    if (message.renderTime !== 0) {
+      obj.renderTime = Math.round(message.renderTime);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_ClientAction_RenderTime>, I>>(
     base?: I,
   ): ProLink_ClientAction_RenderTime {
-    return ProLink_ClientAction_RenderTime.fromPartial(base ?? {});
+    return ProLink_ClientAction_RenderTime.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_ClientAction_RenderTime>, I>>(
     object: I,
   ): ProLink_ClientAction_RenderTime {
@@ -3483,7 +3529,7 @@ export const ProLink_HandlerIn = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -3493,7 +3539,7 @@ export const ProLink_HandlerIn = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -3504,7 +3550,7 @@ export const ProLink_HandlerIn = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -3515,7 +3561,7 @@ export const ProLink_HandlerIn = {
             );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -3523,7 +3569,7 @@ export const ProLink_HandlerIn = {
             ProLink_HandlerIn_GroupJoinPassword.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -3534,7 +3580,7 @@ export const ProLink_HandlerIn = {
             );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -3544,7 +3590,7 @@ export const ProLink_HandlerIn = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -3555,7 +3601,7 @@ export const ProLink_HandlerIn = {
             );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -3565,7 +3611,7 @@ export const ProLink_HandlerIn = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -3575,7 +3621,7 @@ export const ProLink_HandlerIn = {
           );
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -3586,7 +3632,7 @@ export const ProLink_HandlerIn = {
             );
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -3597,7 +3643,7 @@ export const ProLink_HandlerIn = {
             );
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -3607,7 +3653,7 @@ export const ProLink_HandlerIn = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3672,76 +3718,71 @@ export const ProLink_HandlerIn = {
 
   toJSON(message: ProLink_HandlerIn): unknown {
     const obj: any = {};
-    message.groupName !== undefined &&
-      (obj.groupName = message.groupName
-        ? ProLink_HandlerIn_GroupName.toJSON(message.groupName)
-        : undefined);
-    message.groupDefinitionRequest !== undefined &&
-      (obj.groupDefinitionRequest = message.groupDefinitionRequest
-        ? ProLink_HandlerIn_GroupDefinitionRequest.toJSON(
-            message.groupDefinitionRequest,
-          )
-        : undefined);
-    message.groupJoinConfirmation !== undefined &&
-      (obj.groupJoinConfirmation = message.groupJoinConfirmation
-        ? ProLink_HandlerIn_GroupJoinConfirmation.toJSON(
-            message.groupJoinConfirmation,
-          )
-        : undefined);
-    message.groupJoinPassword !== undefined &&
-      (obj.groupJoinPassword = message.groupJoinPassword
-        ? ProLink_HandlerIn_GroupJoinPassword.toJSON(message.groupJoinPassword)
-        : undefined);
-    message.addConnectionResult !== undefined &&
-      (obj.addConnectionResult = message.addConnectionResult
-        ? ProLink_HandlerIn_AddConnectionResult.toJSON(
-            message.addConnectionResult,
-          )
-        : undefined);
-    message.groupUpdate !== undefined &&
-      (obj.groupUpdate = message.groupUpdate
-        ? ProLink_GroupDefinition.toJSON(message.groupUpdate)
-        : undefined);
-    message.memberStatusChange !== undefined &&
-      (obj.memberStatusChange = message.memberStatusChange
-        ? ProLink_HandlerIn_MemberStatusChange.toJSON(
-            message.memberStatusChange,
-          )
-        : undefined);
-    message.propresenterInfo !== undefined &&
-      (obj.propresenterInfo = message.propresenterInfo
-        ? ProLink_HandlerIn_ProPresenterInfo.toJSON(message.propresenterInfo)
-        : undefined);
-    message.serverState !== undefined &&
-      (obj.serverState = message.serverState
-        ? ProLink_HandlerIn_ServerState.toJSON(message.serverState)
-        : undefined);
-    message.configurationRequest !== undefined &&
-      (obj.configurationRequest = message.configurationRequest
-        ? ProLink_HandlerIn_ConfigurationRequest.toJSON(
-            message.configurationRequest,
-          )
-        : undefined);
-    message.zeroconfigNetworkEnvironmentChange !== undefined &&
-      (obj.zeroconfigNetworkEnvironmentChange =
-        message.zeroconfigNetworkEnvironmentChange
-          ? ProLink_ZeroConfig_NetworkEnvironment.toJSON(
-              message.zeroconfigNetworkEnvironmentChange,
-            )
-          : undefined);
-    message.logRequest !== undefined &&
-      (obj.logRequest = message.logRequest
-        ? ProLink_HandlerIn_LogRequest.toJSON(message.logRequest)
-        : undefined);
+    if (message.groupName !== undefined) {
+      obj.groupName = ProLink_HandlerIn_GroupName.toJSON(message.groupName);
+    }
+    if (message.groupDefinitionRequest !== undefined) {
+      obj.groupDefinitionRequest =
+        ProLink_HandlerIn_GroupDefinitionRequest.toJSON(
+          message.groupDefinitionRequest,
+        );
+    }
+    if (message.groupJoinConfirmation !== undefined) {
+      obj.groupJoinConfirmation =
+        ProLink_HandlerIn_GroupJoinConfirmation.toJSON(
+          message.groupJoinConfirmation,
+        );
+    }
+    if (message.groupJoinPassword !== undefined) {
+      obj.groupJoinPassword = ProLink_HandlerIn_GroupJoinPassword.toJSON(
+        message.groupJoinPassword,
+      );
+    }
+    if (message.addConnectionResult !== undefined) {
+      obj.addConnectionResult = ProLink_HandlerIn_AddConnectionResult.toJSON(
+        message.addConnectionResult,
+      );
+    }
+    if (message.groupUpdate !== undefined) {
+      obj.groupUpdate = ProLink_GroupDefinition.toJSON(message.groupUpdate);
+    }
+    if (message.memberStatusChange !== undefined) {
+      obj.memberStatusChange = ProLink_HandlerIn_MemberStatusChange.toJSON(
+        message.memberStatusChange,
+      );
+    }
+    if (message.propresenterInfo !== undefined) {
+      obj.propresenterInfo = ProLink_HandlerIn_ProPresenterInfo.toJSON(
+        message.propresenterInfo,
+      );
+    }
+    if (message.serverState !== undefined) {
+      obj.serverState = ProLink_HandlerIn_ServerState.toJSON(
+        message.serverState,
+      );
+    }
+    if (message.configurationRequest !== undefined) {
+      obj.configurationRequest = ProLink_HandlerIn_ConfigurationRequest.toJSON(
+        message.configurationRequest,
+      );
+    }
+    if (message.zeroconfigNetworkEnvironmentChange !== undefined) {
+      obj.zeroconfigNetworkEnvironmentChange =
+        ProLink_ZeroConfig_NetworkEnvironment.toJSON(
+          message.zeroconfigNetworkEnvironmentChange,
+        );
+    }
+    if (message.logRequest !== undefined) {
+      obj.logRequest = ProLink_HandlerIn_LogRequest.toJSON(message.logRequest);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerIn>, I>>(
     base?: I,
   ): ProLink_HandlerIn {
-    return ProLink_HandlerIn.fromPartial(base ?? {});
+    return ProLink_HandlerIn.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn>, I>>(
     object: I,
   ): ProLink_HandlerIn {
@@ -3845,7 +3886,7 @@ export const ProLink_HandlerIn_GroupName = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3865,9 +3906,8 @@ export const ProLink_HandlerIn_GroupName = {
   create<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupName>, I>>(
     base?: I,
   ): ProLink_HandlerIn_GroupName {
-    return ProLink_HandlerIn_GroupName.fromPartial(base ?? {});
+    return ProLink_HandlerIn_GroupName.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupName>, I>>(
     _: I,
   ): ProLink_HandlerIn_GroupName {
@@ -3900,7 +3940,7 @@ export const ProLink_HandlerIn_GroupDefinitionRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3920,9 +3960,10 @@ export const ProLink_HandlerIn_GroupDefinitionRequest = {
   create<
     I extends Exact<DeepPartial<ProLink_HandlerIn_GroupDefinitionRequest>, I>,
   >(base?: I): ProLink_HandlerIn_GroupDefinitionRequest {
-    return ProLink_HandlerIn_GroupDefinitionRequest.fromPartial(base ?? {});
+    return ProLink_HandlerIn_GroupDefinitionRequest.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_GroupDefinitionRequest>, I>,
   >(_: I): ProLink_HandlerIn_GroupDefinitionRequest {
@@ -3958,14 +3999,14 @@ export const ProLink_HandlerIn_GroupJoinConfirmation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -3974,21 +4015,24 @@ export const ProLink_HandlerIn_GroupJoinConfirmation = {
   },
 
   fromJSON(object: any): ProLink_HandlerIn_GroupJoinConfirmation {
-    return { name: isSet(object.name) ? String(object.name) : '' };
+    return { name: isSet(object.name) ? globalThis.String(object.name) : '' };
   },
 
   toJSON(message: ProLink_HandlerIn_GroupJoinConfirmation): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinConfirmation>, I>,
   >(base?: I): ProLink_HandlerIn_GroupJoinConfirmation {
-    return ProLink_HandlerIn_GroupJoinConfirmation.fromPartial(base ?? {});
+    return ProLink_HandlerIn_GroupJoinConfirmation.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinConfirmation>, I>,
   >(object: I): ProLink_HandlerIn_GroupJoinConfirmation {
@@ -4025,14 +4069,14 @@ export const ProLink_HandlerIn_GroupJoinPassword = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4041,21 +4085,22 @@ export const ProLink_HandlerIn_GroupJoinPassword = {
   },
 
   fromJSON(object: any): ProLink_HandlerIn_GroupJoinPassword {
-    return { name: isSet(object.name) ? String(object.name) : '' };
+    return { name: isSet(object.name) ? globalThis.String(object.name) : '' };
   },
 
   toJSON(message: ProLink_HandlerIn_GroupJoinPassword): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinPassword>, I>>(
     base?: I,
   ): ProLink_HandlerIn_GroupJoinPassword {
-    return ProLink_HandlerIn_GroupJoinPassword.fromPartial(base ?? {});
+    return ProLink_HandlerIn_GroupJoinPassword.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_GroupJoinPassword>, I>,
   >(object: I): ProLink_HandlerIn_GroupJoinPassword {
@@ -4101,7 +4146,7 @@ export const ProLink_HandlerIn_AddConnectionResult = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4112,7 +4157,7 @@ export const ProLink_HandlerIn_AddConnectionResult = {
             );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -4123,7 +4168,7 @@ export const ProLink_HandlerIn_AddConnectionResult = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4144,23 +4189,26 @@ export const ProLink_HandlerIn_AddConnectionResult = {
 
   toJSON(message: ProLink_HandlerIn_AddConnectionResult): unknown {
     const obj: any = {};
-    message.success !== undefined &&
-      (obj.success = message.success
-        ? ProLink_HandlerIn_AddConnectionResult_Success.toJSON(message.success)
-        : undefined);
-    message.failure !== undefined &&
-      (obj.failure = message.failure
-        ? ProLink_HandlerIn_AddConnectionResult_Failure.toJSON(message.failure)
-        : undefined);
+    if (message.success !== undefined) {
+      obj.success = ProLink_HandlerIn_AddConnectionResult_Success.toJSON(
+        message.success,
+      );
+    }
+    if (message.failure !== undefined) {
+      obj.failure = ProLink_HandlerIn_AddConnectionResult_Failure.toJSON(
+        message.failure,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult>, I>,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult {
-    return ProLink_HandlerIn_AddConnectionResult.fromPartial(base ?? {});
+    return ProLink_HandlerIn_AddConnectionResult.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_AddConnectionResult>, I>,
   >(object: I): ProLink_HandlerIn_AddConnectionResult {
@@ -4211,7 +4259,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Success = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4221,7 +4269,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Success = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4239,10 +4287,11 @@ export const ProLink_HandlerIn_AddConnectionResult_Success = {
 
   toJSON(message: ProLink_HandlerIn_AddConnectionResult_Success): unknown {
     const obj: any = {};
-    message.newGroupDefinition !== undefined &&
-      (obj.newGroupDefinition = message.newGroupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.newGroupDefinition)
-        : undefined);
+    if (message.newGroupDefinition !== undefined) {
+      obj.newGroupDefinition = ProLink_GroupDefinition.toJSON(
+        message.newGroupDefinition,
+      );
+    }
     return obj;
   },
 
@@ -4253,10 +4302,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Success = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Success {
     return ProLink_HandlerIn_AddConnectionResult_Success.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Success>,
@@ -4361,7 +4409,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -4372,7 +4420,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -4383,7 +4431,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -4394,7 +4442,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -4405,7 +4453,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -4416,7 +4464,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -4427,7 +4475,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -4438,7 +4486,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -4449,7 +4497,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -4460,7 +4508,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4520,60 +4568,60 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
 
   toJSON(message: ProLink_HandlerIn_AddConnectionResult_Failure): unknown {
     const obj: any = {};
-    message.unexpected !== undefined &&
-      (obj.unexpected = message.unexpected
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.toJSON(
-            message.unexpected,
-          )
-        : undefined);
-    message.declined !== undefined &&
-      (obj.declined = message.declined
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_Declined.toJSON(
-            message.declined,
-          )
-        : undefined);
-    message.timeout !== undefined &&
-      (obj.timeout = message.timeout
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.toJSON(
-            message.timeout,
-          )
-        : undefined);
-    message.linkDisabled !== undefined &&
-      (obj.linkDisabled = message.linkDisabled
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.toJSON(
-            message.linkDisabled,
-          )
-        : undefined);
-    message.inOtherGroup !== undefined &&
-      (obj.inOtherGroup = message.inOtherGroup
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.toJSON(
-            message.inOtherGroup,
-          )
-        : undefined);
-    message.invalidIpAddress !== undefined &&
-      (obj.invalidIpAddress = message.invalidIpAddress
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.toJSON(
-            message.invalidIpAddress,
-          )
-        : undefined);
-    message.alreadyInGroup !== undefined &&
-      (obj.alreadyInGroup = message.alreadyInGroup
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.toJSON(
-            message.alreadyInGroup,
-          )
-        : undefined);
-    message.couldNotAdd !== undefined &&
-      (obj.couldNotAdd = message.couldNotAdd
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.toJSON(
-            message.couldNotAdd,
-          )
-        : undefined);
-    message.couldNotJoin !== undefined &&
-      (obj.couldNotJoin = message.couldNotJoin
-        ? ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.toJSON(
-            message.couldNotJoin,
-          )
-        : undefined);
+    if (message.unexpected !== undefined) {
+      obj.unexpected =
+        ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.toJSON(
+          message.unexpected,
+        );
+    }
+    if (message.declined !== undefined) {
+      obj.declined =
+        ProLink_HandlerIn_AddConnectionResult_Failure_Declined.toJSON(
+          message.declined,
+        );
+    }
+    if (message.timeout !== undefined) {
+      obj.timeout =
+        ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.toJSON(
+          message.timeout,
+        );
+    }
+    if (message.linkDisabled !== undefined) {
+      obj.linkDisabled =
+        ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.toJSON(
+          message.linkDisabled,
+        );
+    }
+    if (message.inOtherGroup !== undefined) {
+      obj.inOtherGroup =
+        ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.toJSON(
+          message.inOtherGroup,
+        );
+    }
+    if (message.invalidIpAddress !== undefined) {
+      obj.invalidIpAddress =
+        ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.toJSON(
+          message.invalidIpAddress,
+        );
+    }
+    if (message.alreadyInGroup !== undefined) {
+      obj.alreadyInGroup =
+        ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.toJSON(
+          message.alreadyInGroup,
+        );
+    }
+    if (message.couldNotAdd !== undefined) {
+      obj.couldNotAdd =
+        ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.toJSON(
+          message.couldNotAdd,
+        );
+    }
+    if (message.couldNotJoin !== undefined) {
+      obj.couldNotJoin =
+        ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.toJSON(
+          message.couldNotJoin,
+        );
+    }
     return obj;
   },
 
@@ -4584,10 +4632,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure {
     return ProLink_HandlerIn_AddConnectionResult_Failure.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure>,
@@ -4678,7 +4725,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4702,10 +4749,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected {
     return ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Unexpected>,
@@ -4743,7 +4789,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Declined = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4767,10 +4813,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Declined = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_Declined {
     return ProLink_HandlerIn_AddConnectionResult_Failure_Declined.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Declined>,
@@ -4808,7 +4853,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Timeout = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4832,10 +4877,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_Timeout = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_Timeout {
     return ProLink_HandlerIn_AddConnectionResult_Failure_Timeout.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_Timeout>,
@@ -4873,7 +4917,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4899,10 +4943,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled {
     return ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_LinkDisabled>,
@@ -4946,21 +4989,21 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.memberName = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.groupName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -4972,8 +5015,12 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
     object: any,
   ): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : '',
-      groupName: isSet(object.groupName) ? String(object.groupName) : '',
+      memberName: isSet(object.memberName)
+        ? globalThis.String(object.memberName)
+        : '',
+      groupName: isSet(object.groupName)
+        ? globalThis.String(object.groupName)
+        : '',
     };
   },
 
@@ -4981,8 +5028,12 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup,
   ): unknown {
     const obj: any = {};
-    message.memberName !== undefined && (obj.memberName = message.memberName);
-    message.groupName !== undefined && (obj.groupName = message.groupName);
+    if (message.memberName !== '') {
+      obj.memberName = message.memberName;
+    }
+    if (message.groupName !== '') {
+      obj.groupName = message.groupName;
+    }
     return obj;
   },
 
@@ -4993,10 +5044,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup {
     return ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InOtherGroup>,
@@ -5036,7 +5086,7 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5064,10 +5114,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress {
     return ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_InvalidIpAddress>,
@@ -5111,21 +5160,21 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.memberName = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.groupName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5137,8 +5186,12 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
     object: any,
   ): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : '',
-      groupName: isSet(object.groupName) ? String(object.groupName) : '',
+      memberName: isSet(object.memberName)
+        ? globalThis.String(object.memberName)
+        : '',
+      groupName: isSet(object.groupName)
+        ? globalThis.String(object.groupName)
+        : '',
     };
   },
 
@@ -5146,8 +5199,12 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup,
   ): unknown {
     const obj: any = {};
-    message.memberName !== undefined && (obj.memberName = message.memberName);
-    message.groupName !== undefined && (obj.groupName = message.groupName);
+    if (message.memberName !== '') {
+      obj.memberName = message.memberName;
+    }
+    if (message.groupName !== '') {
+      obj.groupName = message.groupName;
+    }
     return obj;
   },
 
@@ -5158,10 +5215,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup {
     return ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_AlreadyInGroup>,
@@ -5204,14 +5260,14 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.memberName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5223,7 +5279,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
     object: any,
   ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : '',
+      memberName: isSet(object.memberName)
+        ? globalThis.String(object.memberName)
+        : '',
     };
   },
 
@@ -5231,7 +5289,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd,
   ): unknown {
     const obj: any = {};
-    message.memberName !== undefined && (obj.memberName = message.memberName);
+    if (message.memberName !== '') {
+      obj.memberName = message.memberName;
+    }
     return obj;
   },
 
@@ -5242,10 +5302,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd {
     return ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotAdd>,
@@ -5287,14 +5346,14 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.groupName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5306,7 +5365,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
     object: any,
   ): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
     return {
-      groupName: isSet(object.groupName) ? String(object.groupName) : '',
+      groupName: isSet(object.groupName)
+        ? globalThis.String(object.groupName)
+        : '',
     };
   },
 
@@ -5314,7 +5375,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
     message: ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin,
   ): unknown {
     const obj: any = {};
-    message.groupName !== undefined && (obj.groupName = message.groupName);
+    if (message.groupName !== '') {
+      obj.groupName = message.groupName;
+    }
     return obj;
   },
 
@@ -5325,10 +5388,9 @@ export const ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin = {
     >,
   >(base?: I): ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin {
     return ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<ProLink_HandlerIn_AddConnectionResult_Failure_CouldNotJoin>,
@@ -5369,7 +5431,7 @@ export const ProLink_HandlerIn_MemberStatusChange = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -5378,7 +5440,7 @@ export const ProLink_HandlerIn_MemberStatusChange = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5388,7 +5450,7 @@ export const ProLink_HandlerIn_MemberStatusChange = {
 
   fromJSON(object: any): ProLink_HandlerIn_MemberStatusChange {
     return {
-      members: Array.isArray(object?.members)
+      members: globalThis.Array.isArray(object?.members)
         ? object.members.map((e: any) => ProLink_MemberStatus.fromJSON(e))
         : [],
     };
@@ -5396,12 +5458,8 @@ export const ProLink_HandlerIn_MemberStatusChange = {
 
   toJSON(message: ProLink_HandlerIn_MemberStatusChange): unknown {
     const obj: any = {};
-    if (message.members) {
-      obj.members = message.members.map((e) =>
-        e ? ProLink_MemberStatus.toJSON(e) : undefined,
-      );
-    } else {
-      obj.members = [];
+    if (message.members?.length) {
+      obj.members = message.members.map((e) => ProLink_MemberStatus.toJSON(e));
     }
     return obj;
   },
@@ -5409,9 +5467,10 @@ export const ProLink_HandlerIn_MemberStatusChange = {
   create<I extends Exact<DeepPartial<ProLink_HandlerIn_MemberStatusChange>, I>>(
     base?: I,
   ): ProLink_HandlerIn_MemberStatusChange {
-    return ProLink_HandlerIn_MemberStatusChange.fromPartial(base ?? {});
+    return ProLink_HandlerIn_MemberStatusChange.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_MemberStatusChange>, I>,
   >(object: I): ProLink_HandlerIn_MemberStatusChange {
@@ -5446,7 +5505,7 @@ export const ProLink_HandlerIn_ProPresenterInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5466,9 +5525,8 @@ export const ProLink_HandlerIn_ProPresenterInfo = {
   create<I extends Exact<DeepPartial<ProLink_HandlerIn_ProPresenterInfo>, I>>(
     base?: I,
   ): ProLink_HandlerIn_ProPresenterInfo {
-    return ProLink_HandlerIn_ProPresenterInfo.fromPartial(base ?? {});
+    return ProLink_HandlerIn_ProPresenterInfo.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_ProPresenterInfo>, I>,
   >(_: I): ProLink_HandlerIn_ProPresenterInfo {
@@ -5513,35 +5571,35 @@ export const ProLink_HandlerIn_ServerState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.localIp = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.publicIp = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.port = reader.uint32();
           continue;
         case 4:
-          if (tag != 32) {
+          if (tag !== 32) {
             break;
           }
 
           message.success = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5551,28 +5609,39 @@ export const ProLink_HandlerIn_ServerState = {
 
   fromJSON(object: any): ProLink_HandlerIn_ServerState {
     return {
-      localIp: isSet(object.localIp) ? String(object.localIp) : '',
-      publicIp: isSet(object.publicIp) ? String(object.publicIp) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
-      success: isSet(object.success) ? Boolean(object.success) : false,
+      localIp: isSet(object.localIp) ? globalThis.String(object.localIp) : '',
+      publicIp: isSet(object.publicIp)
+        ? globalThis.String(object.publicIp)
+        : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
+      success: isSet(object.success)
+        ? globalThis.Boolean(object.success)
+        : false,
     };
   },
 
   toJSON(message: ProLink_HandlerIn_ServerState): unknown {
     const obj: any = {};
-    message.localIp !== undefined && (obj.localIp = message.localIp);
-    message.publicIp !== undefined && (obj.publicIp = message.publicIp);
-    message.port !== undefined && (obj.port = Math.round(message.port));
-    message.success !== undefined && (obj.success = message.success);
+    if (message.localIp !== '') {
+      obj.localIp = message.localIp;
+    }
+    if (message.publicIp !== '') {
+      obj.publicIp = message.publicIp;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
+    if (message.success === true) {
+      obj.success = message.success;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerIn_ServerState>, I>>(
     base?: I,
   ): ProLink_HandlerIn_ServerState {
-    return ProLink_HandlerIn_ServerState.fromPartial(base ?? {});
+    return ProLink_HandlerIn_ServerState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_ServerState>, I>>(
     object: I,
   ): ProLink_HandlerIn_ServerState {
@@ -5609,7 +5678,7 @@ export const ProLink_HandlerIn_ConfigurationRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5629,9 +5698,10 @@ export const ProLink_HandlerIn_ConfigurationRequest = {
   create<
     I extends Exact<DeepPartial<ProLink_HandlerIn_ConfigurationRequest>, I>,
   >(base?: I): ProLink_HandlerIn_ConfigurationRequest {
-    return ProLink_HandlerIn_ConfigurationRequest.fromPartial(base ?? {});
+    return ProLink_HandlerIn_ConfigurationRequest.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerIn_ConfigurationRequest>, I>,
   >(_: I): ProLink_HandlerIn_ConfigurationRequest {
@@ -5670,21 +5740,21 @@ export const ProLink_HandlerIn_LogRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.severity = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.message = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5697,26 +5767,28 @@ export const ProLink_HandlerIn_LogRequest = {
       severity: isSet(object.severity)
         ? proLink_HandlerIn_LogRequest_SeverityFromJSON(object.severity)
         : 0,
-      message: isSet(object.message) ? String(object.message) : '',
+      message: isSet(object.message) ? globalThis.String(object.message) : '',
     };
   },
 
   toJSON(message: ProLink_HandlerIn_LogRequest): unknown {
     const obj: any = {};
-    message.severity !== undefined &&
-      (obj.severity = proLink_HandlerIn_LogRequest_SeverityToJSON(
+    if (message.severity !== 0) {
+      obj.severity = proLink_HandlerIn_LogRequest_SeverityToJSON(
         message.severity,
-      ));
-    message.message !== undefined && (obj.message = message.message);
+      );
+    }
+    if (message.message !== '') {
+      obj.message = message.message;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerIn_LogRequest>, I>>(
     base?: I,
   ): ProLink_HandlerIn_LogRequest {
-    return ProLink_HandlerIn_LogRequest.fromPartial(base ?? {});
+    return ProLink_HandlerIn_LogRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_HandlerIn_LogRequest>, I>>(
     object: I,
   ): ProLink_HandlerIn_LogRequest {
@@ -5791,7 +5863,7 @@ export const ProLink_HandlerOut = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -5801,7 +5873,7 @@ export const ProLink_HandlerOut = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -5811,7 +5883,7 @@ export const ProLink_HandlerOut = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -5822,7 +5894,7 @@ export const ProLink_HandlerOut = {
             );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -5833,7 +5905,7 @@ export const ProLink_HandlerOut = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -5843,7 +5915,7 @@ export const ProLink_HandlerOut = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -5853,7 +5925,7 @@ export const ProLink_HandlerOut = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -5890,41 +5962,43 @@ export const ProLink_HandlerOut = {
 
   toJSON(message: ProLink_HandlerOut): unknown {
     const obj: any = {};
-    message.groupName !== undefined &&
-      (obj.groupName = message.groupName
-        ? ProLink_HandlerOut_GroupName.toJSON(message.groupName)
-        : undefined);
-    message.groupDefinition !== undefined &&
-      (obj.groupDefinition = message.groupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-        : undefined);
-    message.groupJoinConfirmation !== undefined &&
-      (obj.groupJoinConfirmation = message.groupJoinConfirmation
-        ? ProLink_HandlerOut_GroupJoinConfirmation.toJSON(
-            message.groupJoinConfirmation,
-          )
-        : undefined);
-    message.groupJoinPassword !== undefined &&
-      (obj.groupJoinPassword = message.groupJoinPassword
-        ? ProLink_HandlerOut_GroupJoinPassword.toJSON(message.groupJoinPassword)
-        : undefined);
-    message.propresenterInfo !== undefined &&
-      (obj.propresenterInfo = message.propresenterInfo
-        ? ProLink_HandlerOut_ProPresenterInfo.toJSON(message.propresenterInfo)
-        : undefined);
-    message.configuration !== undefined &&
-      (obj.configuration = message.configuration
-        ? ProApiNetworkConfiguration.toJSON(message.configuration)
-        : undefined);
+    if (message.groupName !== undefined) {
+      obj.groupName = ProLink_HandlerOut_GroupName.toJSON(message.groupName);
+    }
+    if (message.groupDefinition !== undefined) {
+      obj.groupDefinition = ProLink_GroupDefinition.toJSON(
+        message.groupDefinition,
+      );
+    }
+    if (message.groupJoinConfirmation !== undefined) {
+      obj.groupJoinConfirmation =
+        ProLink_HandlerOut_GroupJoinConfirmation.toJSON(
+          message.groupJoinConfirmation,
+        );
+    }
+    if (message.groupJoinPassword !== undefined) {
+      obj.groupJoinPassword = ProLink_HandlerOut_GroupJoinPassword.toJSON(
+        message.groupJoinPassword,
+      );
+    }
+    if (message.propresenterInfo !== undefined) {
+      obj.propresenterInfo = ProLink_HandlerOut_ProPresenterInfo.toJSON(
+        message.propresenterInfo,
+      );
+    }
+    if (message.configuration !== undefined) {
+      obj.configuration = ProApiNetworkConfiguration.toJSON(
+        message.configuration,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerOut>, I>>(
     base?: I,
   ): ProLink_HandlerOut {
-    return ProLink_HandlerOut.fromPartial(base ?? {});
+    return ProLink_HandlerOut.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut>, I>>(
     object: I,
   ): ProLink_HandlerOut {
@@ -5992,14 +6066,14 @@ export const ProLink_HandlerOut_GroupName = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6008,21 +6082,22 @@ export const ProLink_HandlerOut_GroupName = {
   },
 
   fromJSON(object: any): ProLink_HandlerOut_GroupName {
-    return { name: isSet(object.name) ? String(object.name) : '' };
+    return { name: isSet(object.name) ? globalThis.String(object.name) : '' };
   },
 
   toJSON(message: ProLink_HandlerOut_GroupName): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupName>, I>>(
     base?: I,
   ): ProLink_HandlerOut_GroupName {
-    return ProLink_HandlerOut_GroupName.fromPartial(base ?? {});
+    return ProLink_HandlerOut_GroupName.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupName>, I>>(
     object: I,
   ): ProLink_HandlerOut_GroupName {
@@ -6059,14 +6134,14 @@ export const ProLink_HandlerOut_GroupJoinConfirmation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.accept = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6075,21 +6150,26 @@ export const ProLink_HandlerOut_GroupJoinConfirmation = {
   },
 
   fromJSON(object: any): ProLink_HandlerOut_GroupJoinConfirmation {
-    return { accept: isSet(object.accept) ? Boolean(object.accept) : false };
+    return {
+      accept: isSet(object.accept) ? globalThis.Boolean(object.accept) : false,
+    };
   },
 
   toJSON(message: ProLink_HandlerOut_GroupJoinConfirmation): unknown {
     const obj: any = {};
-    message.accept !== undefined && (obj.accept = message.accept);
+    if (message.accept === true) {
+      obj.accept = message.accept;
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinConfirmation>, I>,
   >(base?: I): ProLink_HandlerOut_GroupJoinConfirmation {
-    return ProLink_HandlerOut_GroupJoinConfirmation.fromPartial(base ?? {});
+    return ProLink_HandlerOut_GroupJoinConfirmation.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinConfirmation>, I>,
   >(object: I): ProLink_HandlerOut_GroupJoinConfirmation {
@@ -6126,14 +6206,14 @@ export const ProLink_HandlerOut_GroupJoinPassword = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.password = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6142,21 +6222,28 @@ export const ProLink_HandlerOut_GroupJoinPassword = {
   },
 
   fromJSON(object: any): ProLink_HandlerOut_GroupJoinPassword {
-    return { password: isSet(object.password) ? String(object.password) : '' };
+    return {
+      password: isSet(object.password)
+        ? globalThis.String(object.password)
+        : '',
+    };
   },
 
   toJSON(message: ProLink_HandlerOut_GroupJoinPassword): unknown {
     const obj: any = {};
-    message.password !== undefined && (obj.password = message.password);
+    if (message.password !== '') {
+      obj.password = message.password;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinPassword>, I>>(
     base?: I,
   ): ProLink_HandlerOut_GroupJoinPassword {
-    return ProLink_HandlerOut_GroupJoinPassword.fromPartial(base ?? {});
+    return ProLink_HandlerOut_GroupJoinPassword.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerOut_GroupJoinPassword>, I>,
   >(object: I): ProLink_HandlerOut_GroupJoinPassword {
@@ -6199,28 +6286,28 @@ export const ProLink_HandlerOut_ProPresenterInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.platform = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.osVersion = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.hostDescription = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6233,29 +6320,34 @@ export const ProLink_HandlerOut_ProPresenterInfo = {
       platform: isSet(object.platform)
         ? applicationInfo_PlatformFromJSON(object.platform)
         : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
+      osVersion: isSet(object.osVersion)
+        ? globalThis.String(object.osVersion)
+        : '',
       hostDescription: isSet(object.hostDescription)
-        ? String(object.hostDescription)
+        ? globalThis.String(object.hostDescription)
         : '',
     };
   },
 
   toJSON(message: ProLink_HandlerOut_ProPresenterInfo): unknown {
     const obj: any = {};
-    message.platform !== undefined &&
-      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
-    message.osVersion !== undefined && (obj.osVersion = message.osVersion);
-    message.hostDescription !== undefined &&
-      (obj.hostDescription = message.hostDescription);
+    if (message.platform !== 0) {
+      obj.platform = applicationInfo_PlatformToJSON(message.platform);
+    }
+    if (message.osVersion !== '') {
+      obj.osVersion = message.osVersion;
+    }
+    if (message.hostDescription !== '') {
+      obj.hostDescription = message.hostDescription;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<ProLink_HandlerOut_ProPresenterInfo>, I>>(
     base?: I,
   ): ProLink_HandlerOut_ProPresenterInfo {
-    return ProLink_HandlerOut_ProPresenterInfo.fromPartial(base ?? {});
+    return ProLink_HandlerOut_ProPresenterInfo.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<ProLink_HandlerOut_ProPresenterInfo>, I>,
   >(object: I): ProLink_HandlerOut_ProPresenterInfo {
@@ -6317,14 +6409,14 @@ export const NetworkAPI = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.action = NetworkAPI_Action.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -6334,7 +6426,7 @@ export const NetworkAPI = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -6344,7 +6436,7 @@ export const NetworkAPI = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -6354,7 +6446,7 @@ export const NetworkAPI = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6381,29 +6473,26 @@ export const NetworkAPI = {
 
   toJSON(message: NetworkAPI): unknown {
     const obj: any = {};
-    message.action !== undefined &&
-      (obj.action = message.action
-        ? NetworkAPI_Action.toJSON(message.action)
-        : undefined);
-    message.serverState !== undefined &&
-      (obj.serverState = message.serverState
-        ? NetworkAPI_ServerState.toJSON(message.serverState)
-        : undefined);
-    message.groupChange !== undefined &&
-      (obj.groupChange = message.groupChange
-        ? NetworkAPI_GroupChange.toJSON(message.groupChange)
-        : undefined);
-    message.groupResponse !== undefined &&
-      (obj.groupResponse = message.groupResponse
-        ? NetworkAPI_GroupResponse.toJSON(message.groupResponse)
-        : undefined);
+    if (message.action !== undefined) {
+      obj.action = NetworkAPI_Action.toJSON(message.action);
+    }
+    if (message.serverState !== undefined) {
+      obj.serverState = NetworkAPI_ServerState.toJSON(message.serverState);
+    }
+    if (message.groupChange !== undefined) {
+      obj.groupChange = NetworkAPI_GroupChange.toJSON(message.groupChange);
+    }
+    if (message.groupResponse !== undefined) {
+      obj.groupResponse = NetworkAPI_GroupResponse.toJSON(
+        message.groupResponse,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI>, I>>(base?: I): NetworkAPI {
-    return NetworkAPI.fromPartial(base ?? {});
+    return NetworkAPI.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI>, I>>(
     object: I,
   ): NetworkAPI {
@@ -6476,42 +6565,42 @@ export const NetworkAPI_LinkStatus = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.platform = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.osVersion = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.version = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.description = reader.string();
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.groupInfo = NetworkAPI_Group.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6524,9 +6613,13 @@ export const NetworkAPI_LinkStatus = {
       platform: isSet(object.platform)
         ? applicationInfo_PlatformFromJSON(object.platform)
         : 0,
-      osVersion: isSet(object.osVersion) ? String(object.osVersion) : '',
-      version: isSet(object.version) ? String(object.version) : '',
-      description: isSet(object.description) ? String(object.description) : '',
+      osVersion: isSet(object.osVersion)
+        ? globalThis.String(object.osVersion)
+        : '',
+      version: isSet(object.version) ? globalThis.String(object.version) : '',
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : '',
       groupInfo: isSet(object.groupInfo)
         ? NetworkAPI_Group.fromJSON(object.groupInfo)
         : undefined,
@@ -6535,25 +6628,29 @@ export const NetworkAPI_LinkStatus = {
 
   toJSON(message: NetworkAPI_LinkStatus): unknown {
     const obj: any = {};
-    message.platform !== undefined &&
-      (obj.platform = applicationInfo_PlatformToJSON(message.platform));
-    message.osVersion !== undefined && (obj.osVersion = message.osVersion);
-    message.version !== undefined && (obj.version = message.version);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.groupInfo !== undefined &&
-      (obj.groupInfo = message.groupInfo
-        ? NetworkAPI_Group.toJSON(message.groupInfo)
-        : undefined);
+    if (message.platform !== 0) {
+      obj.platform = applicationInfo_PlatformToJSON(message.platform);
+    }
+    if (message.osVersion !== '') {
+      obj.osVersion = message.osVersion;
+    }
+    if (message.version !== '') {
+      obj.version = message.version;
+    }
+    if (message.description !== '') {
+      obj.description = message.description;
+    }
+    if (message.groupInfo !== undefined) {
+      obj.groupInfo = NetworkAPI_Group.toJSON(message.groupInfo);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_LinkStatus>, I>>(
     base?: I,
   ): NetworkAPI_LinkStatus {
-    return NetworkAPI_LinkStatus.fromPartial(base ?? {});
+    return NetworkAPI_LinkStatus.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_LinkStatus>, I>>(
     object: I,
   ): NetworkAPI_LinkStatus {
@@ -6597,14 +6694,14 @@ export const NetworkAPI_Group = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -6613,7 +6710,7 @@ export const NetworkAPI_Group = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6623,8 +6720,8 @@ export const NetworkAPI_Group = {
 
   fromJSON(object: any): NetworkAPI_Group {
     return {
-      name: isSet(object.name) ? String(object.name) : '',
-      members: Array.isArray(object?.members)
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      members: globalThis.Array.isArray(object?.members)
         ? object.members.map((e: any) => NetworkAPI_Group_Member.fromJSON(e))
         : [],
     };
@@ -6632,13 +6729,13 @@ export const NetworkAPI_Group = {
 
   toJSON(message: NetworkAPI_Group): unknown {
     const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.members) {
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.members?.length) {
       obj.members = message.members.map((e) =>
-        e ? NetworkAPI_Group_Member.toJSON(e) : undefined,
+        NetworkAPI_Group_Member.toJSON(e),
       );
-    } else {
-      obj.members = [];
     }
     return obj;
   },
@@ -6646,9 +6743,8 @@ export const NetworkAPI_Group = {
   create<I extends Exact<DeepPartial<NetworkAPI_Group>, I>>(
     base?: I,
   ): NetworkAPI_Group {
-    return NetworkAPI_Group.fromPartial(base ?? {});
+    return NetworkAPI_Group.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Group>, I>>(
     object: I,
   ): NetworkAPI_Group {
@@ -6690,21 +6786,21 @@ export const NetworkAPI_Group_Member = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.ipAddress = reader.string();
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.port = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6714,24 +6810,29 @@ export const NetworkAPI_Group_Member = {
 
   fromJSON(object: any): NetworkAPI_Group_Member {
     return {
-      ipAddress: isSet(object.ipAddress) ? String(object.ipAddress) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
+      ipAddress: isSet(object.ipAddress)
+        ? globalThis.String(object.ipAddress)
+        : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
     };
   },
 
   toJSON(message: NetworkAPI_Group_Member): unknown {
     const obj: any = {};
-    message.ipAddress !== undefined && (obj.ipAddress = message.ipAddress);
-    message.port !== undefined && (obj.port = Math.round(message.port));
+    if (message.ipAddress !== '') {
+      obj.ipAddress = message.ipAddress;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Group_Member>, I>>(
     base?: I,
   ): NetworkAPI_Group_Member {
-    return NetworkAPI_Group_Member.fromPartial(base ?? {});
+    return NetworkAPI_Group_Member.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Group_Member>, I>>(
     object: I,
   ): NetworkAPI_Group_Member {
@@ -6795,7 +6896,7 @@ export const NetworkAPI_GroupChange = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -6805,21 +6906,21 @@ export const NetworkAPI_GroupChange = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.join = NetworkAPI_GroupJoin.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.kick = NetworkAPI_GroupKick.decode(reader, reader.uint32());
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -6829,7 +6930,7 @@ export const NetworkAPI_GroupChange = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6856,31 +6957,26 @@ export const NetworkAPI_GroupChange = {
 
   toJSON(message: NetworkAPI_GroupChange): unknown {
     const obj: any = {};
-    message.invite !== undefined &&
-      (obj.invite = message.invite
-        ? NetworkAPI_GroupInvite.toJSON(message.invite)
-        : undefined);
-    message.join !== undefined &&
-      (obj.join = message.join
-        ? NetworkAPI_GroupJoin.toJSON(message.join)
-        : undefined);
-    message.kick !== undefined &&
-      (obj.kick = message.kick
-        ? NetworkAPI_GroupKick.toJSON(message.kick)
-        : undefined);
-    message.status !== undefined &&
-      (obj.status = message.status
-        ? NetworkAPI_GroupStatus.toJSON(message.status)
-        : undefined);
+    if (message.invite !== undefined) {
+      obj.invite = NetworkAPI_GroupInvite.toJSON(message.invite);
+    }
+    if (message.join !== undefined) {
+      obj.join = NetworkAPI_GroupJoin.toJSON(message.join);
+    }
+    if (message.kick !== undefined) {
+      obj.kick = NetworkAPI_GroupKick.toJSON(message.kick);
+    }
+    if (message.status !== undefined) {
+      obj.status = NetworkAPI_GroupStatus.toJSON(message.status);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupChange>, I>>(
     base?: I,
   ): NetworkAPI_GroupChange {
-    return NetworkAPI_GroupChange.fromPartial(base ?? {});
+    return NetworkAPI_GroupChange.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupChange>, I>>(
     object: I,
   ): NetworkAPI_GroupChange {
@@ -6941,7 +7037,7 @@ export const NetworkAPI_GroupResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -6951,7 +7047,7 @@ export const NetworkAPI_GroupResponse = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -6961,7 +7057,7 @@ export const NetworkAPI_GroupResponse = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -6982,23 +7078,20 @@ export const NetworkAPI_GroupResponse = {
 
   toJSON(message: NetworkAPI_GroupResponse): unknown {
     const obj: any = {};
-    message.success !== undefined &&
-      (obj.success = message.success
-        ? NetworkAPI_GroupResponse_Success.toJSON(message.success)
-        : undefined);
-    message.status !== undefined &&
-      (obj.status = message.status
-        ? NetworkAPI_GroupResponse_Status.toJSON(message.status)
-        : undefined);
+    if (message.success !== undefined) {
+      obj.success = NetworkAPI_GroupResponse_Success.toJSON(message.success);
+    }
+    if (message.status !== undefined) {
+      obj.status = NetworkAPI_GroupResponse_Status.toJSON(message.status);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse>, I>>(
     base?: I,
   ): NetworkAPI_GroupResponse {
-    return NetworkAPI_GroupResponse.fromPartial(base ?? {});
+    return NetworkAPI_GroupResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupResponse>, I>>(
     object: I,
   ): NetworkAPI_GroupResponse {
@@ -7039,7 +7132,7 @@ export const NetworkAPI_GroupResponse_Success = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7059,9 +7152,8 @@ export const NetworkAPI_GroupResponse_Success = {
   create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Success>, I>>(
     base?: I,
   ): NetworkAPI_GroupResponse_Success {
-    return NetworkAPI_GroupResponse_Success.fromPartial(base ?? {});
+    return NetworkAPI_GroupResponse_Success.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Success>, I>,
   >(_: I): NetworkAPI_GroupResponse_Success {
@@ -7100,21 +7192,21 @@ export const NetworkAPI_GroupResponse_Status = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.memberName = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.groupName = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7124,24 +7216,31 @@ export const NetworkAPI_GroupResponse_Status = {
 
   fromJSON(object: any): NetworkAPI_GroupResponse_Status {
     return {
-      memberName: isSet(object.memberName) ? String(object.memberName) : '',
-      groupName: isSet(object.groupName) ? String(object.groupName) : '',
+      memberName: isSet(object.memberName)
+        ? globalThis.String(object.memberName)
+        : '',
+      groupName: isSet(object.groupName)
+        ? globalThis.String(object.groupName)
+        : '',
     };
   },
 
   toJSON(message: NetworkAPI_GroupResponse_Status): unknown {
     const obj: any = {};
-    message.memberName !== undefined && (obj.memberName = message.memberName);
-    message.groupName !== undefined && (obj.groupName = message.groupName);
+    if (message.memberName !== '') {
+      obj.memberName = message.memberName;
+    }
+    if (message.groupName !== '') {
+      obj.groupName = message.groupName;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Status>, I>>(
     base?: I,
   ): NetworkAPI_GroupResponse_Status {
-    return NetworkAPI_GroupResponse_Status.fromPartial(base ?? {});
+    return NetworkAPI_GroupResponse_Status.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupResponse_Status>, I>>(
     object: I,
   ): NetworkAPI_GroupResponse_Status {
@@ -7182,7 +7281,7 @@ export const NetworkAPI_GroupStatus = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -7192,7 +7291,7 @@ export const NetworkAPI_GroupStatus = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7210,19 +7309,17 @@ export const NetworkAPI_GroupStatus = {
 
   toJSON(message: NetworkAPI_GroupStatus): unknown {
     const obj: any = {};
-    message.member !== undefined &&
-      (obj.member = message.member
-        ? NetworkAPI_Group_Member.toJSON(message.member)
-        : undefined);
+    if (message.member !== undefined) {
+      obj.member = NetworkAPI_Group_Member.toJSON(message.member);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupStatus>, I>>(
     base?: I,
   ): NetworkAPI_GroupStatus {
-    return NetworkAPI_GroupStatus.fromPartial(base ?? {});
+    return NetworkAPI_GroupStatus.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupStatus>, I>>(
     object: I,
   ): NetworkAPI_GroupStatus {
@@ -7274,21 +7371,21 @@ export const NetworkAPI_GroupInvite = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.groupInfo = NetworkAPI_Group.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.secret = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -7298,7 +7395,7 @@ export const NetworkAPI_GroupInvite = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7311,7 +7408,7 @@ export const NetworkAPI_GroupInvite = {
       groupInfo: isSet(object.groupInfo)
         ? NetworkAPI_Group.fromJSON(object.groupInfo)
         : undefined,
-      secret: isSet(object.secret) ? String(object.secret) : '',
+      secret: isSet(object.secret) ? globalThis.String(object.secret) : '',
       prospect: isSet(object.prospect)
         ? NetworkAPI_Group_Member.fromJSON(object.prospect)
         : undefined,
@@ -7320,24 +7417,23 @@ export const NetworkAPI_GroupInvite = {
 
   toJSON(message: NetworkAPI_GroupInvite): unknown {
     const obj: any = {};
-    message.groupInfo !== undefined &&
-      (obj.groupInfo = message.groupInfo
-        ? NetworkAPI_Group.toJSON(message.groupInfo)
-        : undefined);
-    message.secret !== undefined && (obj.secret = message.secret);
-    message.prospect !== undefined &&
-      (obj.prospect = message.prospect
-        ? NetworkAPI_Group_Member.toJSON(message.prospect)
-        : undefined);
+    if (message.groupInfo !== undefined) {
+      obj.groupInfo = NetworkAPI_Group.toJSON(message.groupInfo);
+    }
+    if (message.secret !== '') {
+      obj.secret = message.secret;
+    }
+    if (message.prospect !== undefined) {
+      obj.prospect = NetworkAPI_Group_Member.toJSON(message.prospect);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupInvite>, I>>(
     base?: I,
   ): NetworkAPI_GroupInvite {
-    return NetworkAPI_GroupInvite.fromPartial(base ?? {});
+    return NetworkAPI_GroupInvite.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupInvite>, I>>(
     object: I,
   ): NetworkAPI_GroupInvite {
@@ -7391,7 +7487,7 @@ export const NetworkAPI_GroupJoin = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -7401,7 +7497,7 @@ export const NetworkAPI_GroupJoin = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -7411,7 +7507,7 @@ export const NetworkAPI_GroupJoin = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7432,23 +7528,20 @@ export const NetworkAPI_GroupJoin = {
 
   toJSON(message: NetworkAPI_GroupJoin): unknown {
     const obj: any = {};
-    message.sponsor !== undefined &&
-      (obj.sponsor = message.sponsor
-        ? NetworkAPI_Group_Member.toJSON(message.sponsor)
-        : undefined);
-    message.prospect !== undefined &&
-      (obj.prospect = message.prospect
-        ? NetworkAPI_Group_Member.toJSON(message.prospect)
-        : undefined);
+    if (message.sponsor !== undefined) {
+      obj.sponsor = NetworkAPI_Group_Member.toJSON(message.sponsor);
+    }
+    if (message.prospect !== undefined) {
+      obj.prospect = NetworkAPI_Group_Member.toJSON(message.prospect);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupJoin>, I>>(
     base?: I,
   ): NetworkAPI_GroupJoin {
-    return NetworkAPI_GroupJoin.fromPartial(base ?? {});
+    return NetworkAPI_GroupJoin.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupJoin>, I>>(
     object: I,
   ): NetworkAPI_GroupJoin {
@@ -7495,7 +7588,7 @@ export const NetworkAPI_GroupKick = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -7505,7 +7598,7 @@ export const NetworkAPI_GroupKick = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7523,19 +7616,17 @@ export const NetworkAPI_GroupKick = {
 
   toJSON(message: NetworkAPI_GroupKick): unknown {
     const obj: any = {};
-    message.member !== undefined &&
-      (obj.member = message.member
-        ? NetworkAPI_Group_Member.toJSON(message.member)
-        : undefined);
+    if (message.member !== undefined) {
+      obj.member = NetworkAPI_Group_Member.toJSON(message.member);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_GroupKick>, I>>(
     base?: I,
   ): NetworkAPI_GroupKick {
-    return NetworkAPI_GroupKick.fromPartial(base ?? {});
+    return NetworkAPI_GroupKick.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_GroupKick>, I>>(
     object: I,
   ): NetworkAPI_GroupKick {
@@ -7581,28 +7672,28 @@ export const NetworkAPI_ServerState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.localIp = reader.string();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.publicIp = reader.string();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.port = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7612,26 +7703,33 @@ export const NetworkAPI_ServerState = {
 
   fromJSON(object: any): NetworkAPI_ServerState {
     return {
-      localIp: isSet(object.localIp) ? String(object.localIp) : '',
-      publicIp: isSet(object.publicIp) ? String(object.publicIp) : '',
-      port: isSet(object.port) ? Number(object.port) : 0,
+      localIp: isSet(object.localIp) ? globalThis.String(object.localIp) : '',
+      publicIp: isSet(object.publicIp)
+        ? globalThis.String(object.publicIp)
+        : '',
+      port: isSet(object.port) ? globalThis.Number(object.port) : 0,
     };
   },
 
   toJSON(message: NetworkAPI_ServerState): unknown {
     const obj: any = {};
-    message.localIp !== undefined && (obj.localIp = message.localIp);
-    message.publicIp !== undefined && (obj.publicIp = message.publicIp);
-    message.port !== undefined && (obj.port = Math.round(message.port));
+    if (message.localIp !== '') {
+      obj.localIp = message.localIp;
+    }
+    if (message.publicIp !== '') {
+      obj.publicIp = message.publicIp;
+    }
+    if (message.port !== 0) {
+      obj.port = Math.round(message.port);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_ServerState>, I>>(
     base?: I,
   ): NetworkAPI_ServerState {
-    return NetworkAPI_ServerState.fromPartial(base ?? {});
+    return NetworkAPI_ServerState.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_ServerState>, I>>(
     object: I,
   ): NetworkAPI_ServerState {
@@ -7756,7 +7854,7 @@ export const NetworkAPI_Action = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -7766,7 +7864,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -7776,7 +7874,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -7786,7 +7884,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -7796,7 +7894,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -7806,7 +7904,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -7816,7 +7914,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -7826,7 +7924,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -7836,7 +7934,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -7846,7 +7944,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 10:
-          if (tag != 82) {
+          if (tag !== 82) {
             break;
           }
 
@@ -7856,7 +7954,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 11:
-          if (tag != 90) {
+          if (tag !== 90) {
             break;
           }
 
@@ -7866,7 +7964,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 12:
-          if (tag != 98) {
+          if (tag !== 98) {
             break;
           }
 
@@ -7876,7 +7974,7 @@ export const NetworkAPI_Action = {
           );
           continue;
         case 13:
-          if (tag != 106) {
+          if (tag !== 106) {
             break;
           }
 
@@ -7886,7 +7984,7 @@ export const NetworkAPI_Action = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -7940,67 +8038,59 @@ export const NetworkAPI_Action = {
 
   toJSON(message: NetworkAPI_Action): unknown {
     const obj: any = {};
-    message.clear !== undefined &&
-      (obj.clear = message.clear
-        ? NetworkAPI_Action_APIClear.toJSON(message.clear)
-        : undefined);
-    message.trigger !== undefined &&
-      (obj.trigger = message.trigger
-        ? NetworkAPI_Action_APITrigger.toJSON(message.trigger)
-        : undefined);
-    message.transport !== undefined &&
-      (obj.transport = message.transport
-        ? NetworkAPI_Action_APITransport.toJSON(message.transport)
-        : undefined);
-    message.prop !== undefined &&
-      (obj.prop = message.prop
-        ? NetworkAPI_Action_APIProp.toJSON(message.prop)
-        : undefined);
-    message.timer !== undefined &&
-      (obj.timer = message.timer
-        ? NetworkAPI_Action_APITimer.toJSON(message.timer)
-        : undefined);
-    message.message !== undefined &&
-      (obj.message = message.message
-        ? NetworkAPI_Action_APIMessage.toJSON(message.message)
-        : undefined);
-    message.macro !== undefined &&
-      (obj.macro = message.macro
-        ? NetworkAPI_Action_APIMacro.toJSON(message.macro)
-        : undefined);
-    message.look !== undefined &&
-      (obj.look = message.look
-        ? NetworkAPI_Action_APILook.toJSON(message.look)
-        : undefined);
-    message.stage !== undefined &&
-      (obj.stage = message.stage
-        ? NetworkAPI_Action_APIStage.toJSON(message.stage)
-        : undefined);
-    message.status !== undefined &&
-      (obj.status = message.status
-        ? NetworkAPI_Action_APIStatus.toJSON(message.status)
-        : undefined);
-    message.statusResponse !== undefined &&
-      (obj.statusResponse = message.statusResponse
-        ? NetworkAPI_Action_APIStatusResponse.toJSON(message.statusResponse)
-        : undefined);
-    message.twoStepTrigger !== undefined &&
-      (obj.twoStepTrigger = message.twoStepTrigger
-        ? NetworkAPI_Action_APITwoStepTrigger.toJSON(message.twoStepTrigger)
-        : undefined);
-    message.prerollComplete !== undefined &&
-      (obj.prerollComplete = message.prerollComplete
-        ? NetworkAPI_Action_APIPrerollComplete.toJSON(message.prerollComplete)
-        : undefined);
+    if (message.clear !== undefined) {
+      obj.clear = NetworkAPI_Action_APIClear.toJSON(message.clear);
+    }
+    if (message.trigger !== undefined) {
+      obj.trigger = NetworkAPI_Action_APITrigger.toJSON(message.trigger);
+    }
+    if (message.transport !== undefined) {
+      obj.transport = NetworkAPI_Action_APITransport.toJSON(message.transport);
+    }
+    if (message.prop !== undefined) {
+      obj.prop = NetworkAPI_Action_APIProp.toJSON(message.prop);
+    }
+    if (message.timer !== undefined) {
+      obj.timer = NetworkAPI_Action_APITimer.toJSON(message.timer);
+    }
+    if (message.message !== undefined) {
+      obj.message = NetworkAPI_Action_APIMessage.toJSON(message.message);
+    }
+    if (message.macro !== undefined) {
+      obj.macro = NetworkAPI_Action_APIMacro.toJSON(message.macro);
+    }
+    if (message.look !== undefined) {
+      obj.look = NetworkAPI_Action_APILook.toJSON(message.look);
+    }
+    if (message.stage !== undefined) {
+      obj.stage = NetworkAPI_Action_APIStage.toJSON(message.stage);
+    }
+    if (message.status !== undefined) {
+      obj.status = NetworkAPI_Action_APIStatus.toJSON(message.status);
+    }
+    if (message.statusResponse !== undefined) {
+      obj.statusResponse = NetworkAPI_Action_APIStatusResponse.toJSON(
+        message.statusResponse,
+      );
+    }
+    if (message.twoStepTrigger !== undefined) {
+      obj.twoStepTrigger = NetworkAPI_Action_APITwoStepTrigger.toJSON(
+        message.twoStepTrigger,
+      );
+    }
+    if (message.prerollComplete !== undefined) {
+      obj.prerollComplete = NetworkAPI_Action_APIPrerollComplete.toJSON(
+        message.prerollComplete,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action>, I>>(
     base?: I,
   ): NetworkAPI_Action {
-    return NetworkAPI_Action.fromPartial(base ?? {});
+    return NetworkAPI_Action.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action>, I>>(
     object: I,
   ): NetworkAPI_Action {
@@ -8096,14 +8186,14 @@ export const NetworkAPI_Action_APIClear = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.layer = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -8113,7 +8203,7 @@ export const NetworkAPI_Action_APIClear = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8134,24 +8224,22 @@ export const NetworkAPI_Action_APIClear = {
 
   toJSON(message: NetworkAPI_Action_APIClear): unknown {
     const obj: any = {};
-    message.layer !== undefined &&
-      (obj.layer =
-        message.layer !== undefined
-          ? networkAPI_Action_APIClear_LayerToJSON(message.layer)
-          : undefined);
-    message.groupIdentifier !== undefined &&
-      (obj.groupIdentifier = message.groupIdentifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.groupIdentifier)
-        : undefined);
+    if (message.layer !== undefined) {
+      obj.layer = networkAPI_Action_APIClear_LayerToJSON(message.layer);
+    }
+    if (message.groupIdentifier !== undefined) {
+      obj.groupIdentifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.groupIdentifier,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIClear>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIClear {
-    return NetworkAPI_Action_APIClear.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIClear.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIClear>, I>>(
     object: I,
   ): NetworkAPI_Action_APIClear {
@@ -8244,28 +8332,28 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.id = longToNumber(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.operation = reader.int32() as any;
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.renderTime = longToNumber(reader.uint64() as Long);
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -8276,7 +8364,7 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -8286,7 +8374,7 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
           );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -8296,7 +8384,7 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -8306,7 +8394,7 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -8316,7 +8404,7 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
           );
           continue;
         case 9:
-          if (tag != 74) {
+          if (tag !== 74) {
             break;
           }
 
@@ -8326,7 +8414,7 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8336,13 +8424,15 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
 
   fromJSON(object: any): NetworkAPI_Action_APITwoStepTrigger {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0,
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       operation: isSet(object.operation)
         ? networkAPI_Action_APITwoStepTrigger_OperationFromJSON(
             object.operation,
           )
         : 0,
-      renderTime: isSet(object.renderTime) ? Number(object.renderTime) : 0,
+      renderTime: isSet(object.renderTime)
+        ? globalThis.Number(object.renderTime)
+        : 0,
       presentation: isSet(object.presentation)
         ? NetworkAPI_Action_APITrigger_Presentation.fromJSON(
             object.presentation,
@@ -8368,46 +8458,49 @@ export const NetworkAPI_Action_APITwoStepTrigger = {
 
   toJSON(message: NetworkAPI_Action_APITwoStepTrigger): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.operation !== undefined &&
-      (obj.operation = networkAPI_Action_APITwoStepTrigger_OperationToJSON(
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.operation !== 0) {
+      obj.operation = networkAPI_Action_APITwoStepTrigger_OperationToJSON(
         message.operation,
-      ));
-    message.renderTime !== undefined &&
-      (obj.renderTime = Math.round(message.renderTime));
-    message.presentation !== undefined &&
-      (obj.presentation = message.presentation
-        ? NetworkAPI_Action_APITrigger_Presentation.toJSON(message.presentation)
-        : undefined);
-    message.media !== undefined &&
-      (obj.media = message.media
-        ? NetworkAPI_Action_APITrigger_Media.toJSON(message.media)
-        : undefined);
-    message.videoInput !== undefined &&
-      (obj.videoInput = message.videoInput
-        ? NetworkAPI_Action_APITrigger_VideoInput.toJSON(message.videoInput)
-        : undefined);
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio)
-        : undefined);
-    message.prop !== undefined &&
-      (obj.prop = message.prop
-        ? NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.prop)
-        : undefined);
-    message.message !== undefined &&
-      (obj.message = message.message
-        ? NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(message.message)
-        : undefined);
+      );
+    }
+    if (message.renderTime !== 0) {
+      obj.renderTime = Math.round(message.renderTime);
+    }
+    if (message.presentation !== undefined) {
+      obj.presentation = NetworkAPI_Action_APITrigger_Presentation.toJSON(
+        message.presentation,
+      );
+    }
+    if (message.media !== undefined) {
+      obj.media = NetworkAPI_Action_APITrigger_Media.toJSON(message.media);
+    }
+    if (message.videoInput !== undefined) {
+      obj.videoInput = NetworkAPI_Action_APITrigger_VideoInput.toJSON(
+        message.videoInput,
+      );
+    }
+    if (message.audio !== undefined) {
+      obj.audio = NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio);
+    }
+    if (message.prop !== undefined) {
+      obj.prop = NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.prop);
+    }
+    if (message.message !== undefined) {
+      obj.message = NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(
+        message.message,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITwoStepTrigger>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITwoStepTrigger {
-    return NetworkAPI_Action_APITwoStepTrigger.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITwoStepTrigger.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITwoStepTrigger>, I>,
   >(object: I): NetworkAPI_Action_APITwoStepTrigger {
@@ -8480,28 +8573,28 @@ export const NetworkAPI_Action_APIPrerollComplete = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.id = longToNumber(reader.uint64() as Long);
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.failed = reader.bool();
           continue;
         case 3:
-          if (tag != 24) {
+          if (tag !== 24) {
             break;
           }
 
           message.latency = longToNumber(reader.uint64() as Long);
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8511,27 +8604,33 @@ export const NetworkAPI_Action_APIPrerollComplete = {
 
   fromJSON(object: any): NetworkAPI_Action_APIPrerollComplete {
     return {
-      id: isSet(object.id) ? Number(object.id) : 0,
-      failed: isSet(object.failed) ? Boolean(object.failed) : false,
-      latency: isSet(object.latency) ? Number(object.latency) : 0,
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      failed: isSet(object.failed) ? globalThis.Boolean(object.failed) : false,
+      latency: isSet(object.latency) ? globalThis.Number(object.latency) : 0,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APIPrerollComplete): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.failed !== undefined && (obj.failed = message.failed);
-    message.latency !== undefined &&
-      (obj.latency = Math.round(message.latency));
+    if (message.id !== 0) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.failed === true) {
+      obj.failed = message.failed;
+    }
+    if (message.latency !== 0) {
+      obj.latency = Math.round(message.latency);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIPrerollComplete>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIPrerollComplete {
-    return NetworkAPI_Action_APIPrerollComplete.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIPrerollComplete.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIPrerollComplete>, I>,
   >(object: I): NetworkAPI_Action_APIPrerollComplete {
@@ -8596,7 +8695,7 @@ export const NetworkAPI_Action_APITrigger = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -8607,7 +8706,7 @@ export const NetworkAPI_Action_APITrigger = {
             );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -8617,7 +8716,7 @@ export const NetworkAPI_Action_APITrigger = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -8627,7 +8726,7 @@ export const NetworkAPI_Action_APITrigger = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -8637,7 +8736,7 @@ export const NetworkAPI_Action_APITrigger = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8666,31 +8765,30 @@ export const NetworkAPI_Action_APITrigger = {
 
   toJSON(message: NetworkAPI_Action_APITrigger): unknown {
     const obj: any = {};
-    message.presentation !== undefined &&
-      (obj.presentation = message.presentation
-        ? NetworkAPI_Action_APITrigger_Presentation.toJSON(message.presentation)
-        : undefined);
-    message.media !== undefined &&
-      (obj.media = message.media
-        ? NetworkAPI_Action_APITrigger_Media.toJSON(message.media)
-        : undefined);
-    message.videoInput !== undefined &&
-      (obj.videoInput = message.videoInput
-        ? NetworkAPI_Action_APITrigger_VideoInput.toJSON(message.videoInput)
-        : undefined);
-    message.audio !== undefined &&
-      (obj.audio = message.audio
-        ? NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio)
-        : undefined);
+    if (message.presentation !== undefined) {
+      obj.presentation = NetworkAPI_Action_APITrigger_Presentation.toJSON(
+        message.presentation,
+      );
+    }
+    if (message.media !== undefined) {
+      obj.media = NetworkAPI_Action_APITrigger_Media.toJSON(message.media);
+    }
+    if (message.videoInput !== undefined) {
+      obj.videoInput = NetworkAPI_Action_APITrigger_VideoInput.toJSON(
+        message.videoInput,
+      );
+    }
+    if (message.audio !== undefined) {
+      obj.audio = NetworkAPI_Action_APITrigger_Audio.toJSON(message.audio);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITrigger {
-    return NetworkAPI_Action_APITrigger.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITrigger.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger>, I>>(
     object: I,
   ): NetworkAPI_Action_APITrigger {
@@ -8753,7 +8851,7 @@ export const NetworkAPI_Action_APITrigger_Presentation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -8764,7 +8862,7 @@ export const NetworkAPI_Action_APITrigger_Presentation = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -8775,7 +8873,7 @@ export const NetworkAPI_Action_APITrigger_Presentation = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8800,27 +8898,28 @@ export const NetworkAPI_Action_APITrigger_Presentation = {
 
   toJSON(message: NetworkAPI_Action_APITrigger_Presentation): unknown {
     const obj: any = {};
-    message.playlistIndexPath !== undefined &&
-      (obj.playlistIndexPath = message.playlistIndexPath
-        ? NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.toJSON(
-            message.playlistIndexPath,
-          )
-        : undefined);
-    message.libraryIndexPath !== undefined &&
-      (obj.libraryIndexPath = message.libraryIndexPath
-        ? NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.toJSON(
-            message.libraryIndexPath,
-          )
-        : undefined);
+    if (message.playlistIndexPath !== undefined) {
+      obj.playlistIndexPath =
+        NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.toJSON(
+          message.playlistIndexPath,
+        );
+    }
+    if (message.libraryIndexPath !== undefined) {
+      obj.libraryIndexPath =
+        NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.toJSON(
+          message.libraryIndexPath,
+        );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation>, I>,
   >(base?: I): NetworkAPI_Action_APITrigger_Presentation {
-    return NetworkAPI_Action_APITrigger_Presentation.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITrigger_Presentation.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Presentation>, I>,
   >(object: I): NetworkAPI_Action_APITrigger_Presentation {
@@ -8873,7 +8972,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -8882,7 +8981,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -8894,7 +8993,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     object: any,
   ): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
     return {
-      indexPathComponents: Array.isArray(object?.indexPathComponents)
+      indexPathComponents: globalThis.Array.isArray(object?.indexPathComponents)
         ? object.indexPathComponents.map((e: any) =>
             NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
           )
@@ -8906,12 +9005,10 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     message: NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation,
   ): unknown {
     const obj: any = {};
-    if (message.indexPathComponents) {
+    if (message.indexPathComponents?.length) {
       obj.indexPathComponents = message.indexPathComponents.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined,
+        NetworkAPI_IndexOrNameIdentifier.toJSON(e),
       );
-    } else {
-      obj.indexPathComponents = [];
     }
     return obj;
   },
@@ -8923,10 +9020,9 @@ export const NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation = {
     >,
   >(base?: I): NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation {
     return NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APITrigger_Presentation_PlaylistPresentation>,
@@ -8990,7 +9086,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -9000,7 +9096,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -9008,7 +9104,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
             NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -9018,7 +9114,7 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9048,18 +9144,21 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
     message: NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation,
   ): unknown {
     const obj: any = {};
-    message.libraryComponent !== undefined &&
-      (obj.libraryComponent = message.libraryComponent
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.libraryComponent)
-        : undefined);
-    message.presentationComponent !== undefined &&
-      (obj.presentationComponent = message.presentationComponent
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.presentationComponent)
-        : undefined);
-    message.cueComponent !== undefined &&
-      (obj.cueComponent = message.cueComponent
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.cueComponent)
-        : undefined);
+    if (message.libraryComponent !== undefined) {
+      obj.libraryComponent = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.libraryComponent,
+      );
+    }
+    if (message.presentationComponent !== undefined) {
+      obj.presentationComponent = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.presentationComponent,
+      );
+    }
+    if (message.cueComponent !== undefined) {
+      obj.cueComponent = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.cueComponent,
+      );
+    }
     return obj;
   },
 
@@ -9070,10 +9169,9 @@ export const NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation = {
     >,
   >(base?: I): NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation {
     return NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APITrigger_Presentation_LibraryPresentation>,
@@ -9131,7 +9229,7 @@ export const NetworkAPI_Action_APITrigger_Media = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -9140,7 +9238,7 @@ export const NetworkAPI_Action_APITrigger_Media = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9150,7 +9248,7 @@ export const NetworkAPI_Action_APITrigger_Media = {
 
   fromJSON(object: any): NetworkAPI_Action_APITrigger_Media {
     return {
-      indexPathComponents: Array.isArray(object?.indexPathComponents)
+      indexPathComponents: globalThis.Array.isArray(object?.indexPathComponents)
         ? object.indexPathComponents.map((e: any) =>
             NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
           )
@@ -9160,12 +9258,10 @@ export const NetworkAPI_Action_APITrigger_Media = {
 
   toJSON(message: NetworkAPI_Action_APITrigger_Media): unknown {
     const obj: any = {};
-    if (message.indexPathComponents) {
+    if (message.indexPathComponents?.length) {
       obj.indexPathComponents = message.indexPathComponents.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined,
+        NetworkAPI_IndexOrNameIdentifier.toJSON(e),
       );
-    } else {
-      obj.indexPathComponents = [];
     }
     return obj;
   },
@@ -9173,9 +9269,8 @@ export const NetworkAPI_Action_APITrigger_Media = {
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Media>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITrigger_Media {
-    return NetworkAPI_Action_APITrigger_Media.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITrigger_Media.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Media>, I>,
   >(object: I): NetworkAPI_Action_APITrigger_Media {
@@ -9218,7 +9313,7 @@ export const NetworkAPI_Action_APITrigger_VideoInput = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -9228,7 +9323,7 @@ export const NetworkAPI_Action_APITrigger_VideoInput = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9246,19 +9341,21 @@ export const NetworkAPI_Action_APITrigger_VideoInput = {
 
   toJSON(message: NetworkAPI_Action_APITrigger_VideoInput): unknown {
     const obj: any = {};
-    message.videoInputId !== undefined &&
-      (obj.videoInputId = message.videoInputId
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.videoInputId)
-        : undefined);
+    if (message.videoInputId !== undefined) {
+      obj.videoInputId = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.videoInputId,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_VideoInput>, I>,
   >(base?: I): NetworkAPI_Action_APITrigger_VideoInput {
-    return NetworkAPI_Action_APITrigger_VideoInput.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITrigger_VideoInput.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_VideoInput>, I>,
   >(object: I): NetworkAPI_Action_APITrigger_VideoInput {
@@ -9301,7 +9398,7 @@ export const NetworkAPI_Action_APITrigger_Audio = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -9310,7 +9407,7 @@ export const NetworkAPI_Action_APITrigger_Audio = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9320,7 +9417,7 @@ export const NetworkAPI_Action_APITrigger_Audio = {
 
   fromJSON(object: any): NetworkAPI_Action_APITrigger_Audio {
     return {
-      indexPathComponents: Array.isArray(object?.indexPathComponents)
+      indexPathComponents: globalThis.Array.isArray(object?.indexPathComponents)
         ? object.indexPathComponents.map((e: any) =>
             NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
           )
@@ -9330,12 +9427,10 @@ export const NetworkAPI_Action_APITrigger_Audio = {
 
   toJSON(message: NetworkAPI_Action_APITrigger_Audio): unknown {
     const obj: any = {};
-    if (message.indexPathComponents) {
+    if (message.indexPathComponents?.length) {
       obj.indexPathComponents = message.indexPathComponents.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifier.toJSON(e) : undefined,
+        NetworkAPI_IndexOrNameIdentifier.toJSON(e),
       );
-    } else {
-      obj.indexPathComponents = [];
     }
     return obj;
   },
@@ -9343,9 +9438,8 @@ export const NetworkAPI_Action_APITrigger_Audio = {
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Audio>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITrigger_Audio {
-    return NetworkAPI_Action_APITrigger_Audio.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITrigger_Audio.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITrigger_Audio>, I>,
   >(object: I): NetworkAPI_Action_APITrigger_Audio {
@@ -9422,14 +9516,14 @@ export const NetworkAPI_Action_APITransport = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.layer = reader.int32() as any;
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -9439,7 +9533,7 @@ export const NetworkAPI_Action_APITransport = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -9449,7 +9543,7 @@ export const NetworkAPI_Action_APITransport = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -9460,7 +9554,7 @@ export const NetworkAPI_Action_APITransport = {
             );
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
@@ -9471,7 +9565,7 @@ export const NetworkAPI_Action_APITransport = {
             );
           continue;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -9481,7 +9575,7 @@ export const NetworkAPI_Action_APITransport = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9518,41 +9612,40 @@ export const NetworkAPI_Action_APITransport = {
 
   toJSON(message: NetworkAPI_Action_APITransport): unknown {
     const obj: any = {};
-    message.layer !== undefined &&
-      (obj.layer = networkAPI_Action_APITransport_TransportLayerToJSON(
+    if (message.layer !== 0) {
+      obj.layer = networkAPI_Action_APITransport_TransportLayerToJSON(
         message.layer,
-      ));
-    message.play !== undefined &&
-      (obj.play = message.play
-        ? NetworkAPI_Action_APITransport_Play.toJSON(message.play)
-        : undefined);
-    message.pause !== undefined &&
-      (obj.pause = message.pause
-        ? NetworkAPI_Action_APITransport_Pause.toJSON(message.pause)
-        : undefined);
-    message.skipBackward !== undefined &&
-      (obj.skipBackward = message.skipBackward
-        ? NetworkAPI_Action_APITransport_SkipBackward.toJSON(
-            message.skipBackward,
-          )
-        : undefined);
-    message.skipForward !== undefined &&
-      (obj.skipForward = message.skipForward
-        ? NetworkAPI_Action_APITransport_SkipForward.toJSON(message.skipForward)
-        : undefined);
-    message.goToEnd !== undefined &&
-      (obj.goToEnd = message.goToEnd
-        ? NetworkAPI_Action_APITransport_GoToEnd.toJSON(message.goToEnd)
-        : undefined);
+      );
+    }
+    if (message.play !== undefined) {
+      obj.play = NetworkAPI_Action_APITransport_Play.toJSON(message.play);
+    }
+    if (message.pause !== undefined) {
+      obj.pause = NetworkAPI_Action_APITransport_Pause.toJSON(message.pause);
+    }
+    if (message.skipBackward !== undefined) {
+      obj.skipBackward = NetworkAPI_Action_APITransport_SkipBackward.toJSON(
+        message.skipBackward,
+      );
+    }
+    if (message.skipForward !== undefined) {
+      obj.skipForward = NetworkAPI_Action_APITransport_SkipForward.toJSON(
+        message.skipForward,
+      );
+    }
+    if (message.goToEnd !== undefined) {
+      obj.goToEnd = NetworkAPI_Action_APITransport_GoToEnd.toJSON(
+        message.goToEnd,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITransport {
-    return NetworkAPI_Action_APITransport.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITransport.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport>, I>>(
     object: I,
   ): NetworkAPI_Action_APITransport {
@@ -9610,7 +9703,7 @@ export const NetworkAPI_Action_APITransport_Play = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9630,9 +9723,8 @@ export const NetworkAPI_Action_APITransport_Play = {
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Play>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITransport_Play {
-    return NetworkAPI_Action_APITransport_Play.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITransport_Play.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Play>, I>,
   >(_: I): NetworkAPI_Action_APITransport_Play {
@@ -9665,7 +9757,7 @@ export const NetworkAPI_Action_APITransport_Pause = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9685,9 +9777,10 @@ export const NetworkAPI_Action_APITransport_Pause = {
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Pause>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITransport_Pause {
-    return NetworkAPI_Action_APITransport_Pause.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITransport_Pause.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_Pause>, I>,
   >(_: I): NetworkAPI_Action_APITransport_Pause {
@@ -9723,14 +9816,14 @@ export const NetworkAPI_Action_APITransport_SkipBackward = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.seconds = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9739,13 +9832,16 @@ export const NetworkAPI_Action_APITransport_SkipBackward = {
   },
 
   fromJSON(object: any): NetworkAPI_Action_APITransport_SkipBackward {
-    return { seconds: isSet(object.seconds) ? Number(object.seconds) : 0 };
+    return {
+      seconds: isSet(object.seconds) ? globalThis.Number(object.seconds) : 0,
+    };
   },
 
   toJSON(message: NetworkAPI_Action_APITransport_SkipBackward): unknown {
     const obj: any = {};
-    message.seconds !== undefined &&
-      (obj.seconds = Math.round(message.seconds));
+    if (message.seconds !== 0) {
+      obj.seconds = Math.round(message.seconds);
+    }
     return obj;
   },
 
@@ -9755,9 +9851,10 @@ export const NetworkAPI_Action_APITransport_SkipBackward = {
       I
     >,
   >(base?: I): NetworkAPI_Action_APITransport_SkipBackward {
-    return NetworkAPI_Action_APITransport_SkipBackward.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITransport_SkipBackward.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APITransport_SkipBackward>,
@@ -9797,14 +9894,14 @@ export const NetworkAPI_Action_APITransport_SkipForward = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.seconds = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9813,22 +9910,26 @@ export const NetworkAPI_Action_APITransport_SkipForward = {
   },
 
   fromJSON(object: any): NetworkAPI_Action_APITransport_SkipForward {
-    return { seconds: isSet(object.seconds) ? Number(object.seconds) : 0 };
+    return {
+      seconds: isSet(object.seconds) ? globalThis.Number(object.seconds) : 0,
+    };
   },
 
   toJSON(message: NetworkAPI_Action_APITransport_SkipForward): unknown {
     const obj: any = {};
-    message.seconds !== undefined &&
-      (obj.seconds = Math.round(message.seconds));
+    if (message.seconds !== 0) {
+      obj.seconds = Math.round(message.seconds);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipForward>, I>,
   >(base?: I): NetworkAPI_Action_APITransport_SkipForward {
-    return NetworkAPI_Action_APITransport_SkipForward.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITransport_SkipForward.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_SkipForward>, I>,
   >(object: I): NetworkAPI_Action_APITransport_SkipForward {
@@ -9865,14 +9966,14 @@ export const NetworkAPI_Action_APITransport_GoToEnd = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.secondsToEnd = reader.int32();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9883,24 +9984,26 @@ export const NetworkAPI_Action_APITransport_GoToEnd = {
   fromJSON(object: any): NetworkAPI_Action_APITransport_GoToEnd {
     return {
       secondsToEnd: isSet(object.secondsToEnd)
-        ? Number(object.secondsToEnd)
+        ? globalThis.Number(object.secondsToEnd)
         : 0,
     };
   },
 
   toJSON(message: NetworkAPI_Action_APITransport_GoToEnd): unknown {
     const obj: any = {};
-    message.secondsToEnd !== undefined &&
-      (obj.secondsToEnd = Math.round(message.secondsToEnd));
+    if (message.secondsToEnd !== 0) {
+      obj.secondsToEnd = Math.round(message.secondsToEnd);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_GoToEnd>, I>,
   >(base?: I): NetworkAPI_Action_APITransport_GoToEnd {
-    return NetworkAPI_Action_APITransport_GoToEnd.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITransport_GoToEnd.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITransport_GoToEnd>, I>,
   >(object: I): NetworkAPI_Action_APITransport_GoToEnd {
@@ -9946,7 +10049,7 @@ export const NetworkAPI_Action_APIProp = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -9956,7 +10059,7 @@ export const NetworkAPI_Action_APIProp = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -9966,7 +10069,7 @@ export const NetworkAPI_Action_APIProp = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -9987,23 +10090,22 @@ export const NetworkAPI_Action_APIProp = {
 
   toJSON(message: NetworkAPI_Action_APIProp): unknown {
     const obj: any = {};
-    message.trigger !== undefined &&
-      (obj.trigger = message.trigger
-        ? NetworkAPI_Action_APIProp_TriggerProp.toJSON(message.trigger)
-        : undefined);
-    message.clear !== undefined &&
-      (obj.clear = message.clear
-        ? NetworkAPI_Action_APIProp_ClearProp.toJSON(message.clear)
-        : undefined);
+    if (message.trigger !== undefined) {
+      obj.trigger = NetworkAPI_Action_APIProp_TriggerProp.toJSON(
+        message.trigger,
+      );
+    }
+    if (message.clear !== undefined) {
+      obj.clear = NetworkAPI_Action_APIProp_ClearProp.toJSON(message.clear);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIProp {
-    return NetworkAPI_Action_APIProp.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIProp.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp>, I>>(
     object: I,
   ): NetworkAPI_Action_APIProp {
@@ -10050,7 +10152,7 @@ export const NetworkAPI_Action_APIProp_TriggerProp = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10060,7 +10162,7 @@ export const NetworkAPI_Action_APIProp_TriggerProp = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10078,19 +10180,21 @@ export const NetworkAPI_Action_APIProp_TriggerProp = {
 
   toJSON(message: NetworkAPI_Action_APIProp_TriggerProp): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_TriggerProp>, I>,
   >(base?: I): NetworkAPI_Action_APIProp_TriggerProp {
-    return NetworkAPI_Action_APIProp_TriggerProp.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIProp_TriggerProp.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_TriggerProp>, I>,
   >(object: I): NetworkAPI_Action_APIProp_TriggerProp {
@@ -10133,7 +10237,7 @@ export const NetworkAPI_Action_APIProp_ClearProp = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10143,7 +10247,7 @@ export const NetworkAPI_Action_APIProp_ClearProp = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10161,19 +10265,19 @@ export const NetworkAPI_Action_APIProp_ClearProp = {
 
   toJSON(message: NetworkAPI_Action_APIProp_ClearProp): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_ClearProp>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIProp_ClearProp {
-    return NetworkAPI_Action_APIProp_ClearProp.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIProp_ClearProp.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIProp_ClearProp>, I>,
   >(object: I): NetworkAPI_Action_APIProp_ClearProp {
@@ -10239,7 +10343,7 @@ export const NetworkAPI_Action_APITimer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10249,7 +10353,7 @@ export const NetworkAPI_Action_APITimer = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -10259,7 +10363,7 @@ export const NetworkAPI_Action_APITimer = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -10269,7 +10373,7 @@ export const NetworkAPI_Action_APITimer = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -10279,7 +10383,7 @@ export const NetworkAPI_Action_APITimer = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10306,31 +10410,28 @@ export const NetworkAPI_Action_APITimer = {
 
   toJSON(message: NetworkAPI_Action_APITimer): unknown {
     const obj: any = {};
-    message.start !== undefined &&
-      (obj.start = message.start
-        ? NetworkAPI_Action_APITimer_StartTimer.toJSON(message.start)
-        : undefined);
-    message.stop !== undefined &&
-      (obj.stop = message.stop
-        ? NetworkAPI_Action_APITimer_StopTimer.toJSON(message.stop)
-        : undefined);
-    message.reset !== undefined &&
-      (obj.reset = message.reset
-        ? NetworkAPI_Action_APITimer_ResetTimer.toJSON(message.reset)
-        : undefined);
-    message.configure !== undefined &&
-      (obj.configure = message.configure
-        ? NetworkAPI_Action_APITimer_ConfigureTimer.toJSON(message.configure)
-        : undefined);
+    if (message.start !== undefined) {
+      obj.start = NetworkAPI_Action_APITimer_StartTimer.toJSON(message.start);
+    }
+    if (message.stop !== undefined) {
+      obj.stop = NetworkAPI_Action_APITimer_StopTimer.toJSON(message.stop);
+    }
+    if (message.reset !== undefined) {
+      obj.reset = NetworkAPI_Action_APITimer_ResetTimer.toJSON(message.reset);
+    }
+    if (message.configure !== undefined) {
+      obj.configure = NetworkAPI_Action_APITimer_ConfigureTimer.toJSON(
+        message.configure,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITimer {
-    return NetworkAPI_Action_APITimer.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITimer.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer>, I>>(
     object: I,
   ): NetworkAPI_Action_APITimer {
@@ -10387,7 +10488,7 @@ export const NetworkAPI_Action_APITimer_StartTimer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10397,7 +10498,7 @@ export const NetworkAPI_Action_APITimer_StartTimer = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10415,19 +10516,21 @@ export const NetworkAPI_Action_APITimer_StartTimer = {
 
   toJSON(message: NetworkAPI_Action_APITimer_StartTimer): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StartTimer>, I>,
   >(base?: I): NetworkAPI_Action_APITimer_StartTimer {
-    return NetworkAPI_Action_APITimer_StartTimer.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITimer_StartTimer.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StartTimer>, I>,
   >(object: I): NetworkAPI_Action_APITimer_StartTimer {
@@ -10470,7 +10573,7 @@ export const NetworkAPI_Action_APITimer_StopTimer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10480,7 +10583,7 @@ export const NetworkAPI_Action_APITimer_StopTimer = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10498,19 +10601,21 @@ export const NetworkAPI_Action_APITimer_StopTimer = {
 
   toJSON(message: NetworkAPI_Action_APITimer_StopTimer): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StopTimer>, I>>(
     base?: I,
   ): NetworkAPI_Action_APITimer_StopTimer {
-    return NetworkAPI_Action_APITimer_StopTimer.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITimer_StopTimer.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_StopTimer>, I>,
   >(object: I): NetworkAPI_Action_APITimer_StopTimer {
@@ -10553,7 +10658,7 @@ export const NetworkAPI_Action_APITimer_ResetTimer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10563,7 +10668,7 @@ export const NetworkAPI_Action_APITimer_ResetTimer = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10581,19 +10686,21 @@ export const NetworkAPI_Action_APITimer_ResetTimer = {
 
   toJSON(message: NetworkAPI_Action_APITimer_ResetTimer): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ResetTimer>, I>,
   >(base?: I): NetworkAPI_Action_APITimer_ResetTimer {
-    return NetworkAPI_Action_APITimer_ResetTimer.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITimer_ResetTimer.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ResetTimer>, I>,
   >(object: I): NetworkAPI_Action_APITimer_ResetTimer {
@@ -10642,7 +10749,7 @@ export const NetworkAPI_Action_APITimer_ConfigureTimer = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10652,7 +10759,7 @@ export const NetworkAPI_Action_APITimer_ConfigureTimer = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -10662,7 +10769,7 @@ export const NetworkAPI_Action_APITimer_ConfigureTimer = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10683,23 +10790,24 @@ export const NetworkAPI_Action_APITimer_ConfigureTimer = {
 
   toJSON(message: NetworkAPI_Action_APITimer_ConfigureTimer): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
-    message.configuration !== undefined &&
-      (obj.configuration = message.configuration
-        ? Timer_Configuration.toJSON(message.configuration)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
+    if (message.configuration !== undefined) {
+      obj.configuration = Timer_Configuration.toJSON(message.configuration);
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ConfigureTimer>, I>,
   >(base?: I): NetworkAPI_Action_APITimer_ConfigureTimer {
-    return NetworkAPI_Action_APITimer_ConfigureTimer.fromPartial(base ?? {});
+    return NetworkAPI_Action_APITimer_ConfigureTimer.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APITimer_ConfigureTimer>, I>,
   >(object: I): NetworkAPI_Action_APITimer_ConfigureTimer {
@@ -10752,7 +10860,7 @@ export const NetworkAPI_Action_APIMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10762,7 +10870,7 @@ export const NetworkAPI_Action_APIMessage = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -10772,7 +10880,7 @@ export const NetworkAPI_Action_APIMessage = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10793,23 +10901,24 @@ export const NetworkAPI_Action_APIMessage = {
 
   toJSON(message: NetworkAPI_Action_APIMessage): unknown {
     const obj: any = {};
-    message.trigger !== undefined &&
-      (obj.trigger = message.trigger
-        ? NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(message.trigger)
-        : undefined);
-    message.clear !== undefined &&
-      (obj.clear = message.clear
-        ? NetworkAPI_Action_APIMessage_ClearMessage.toJSON(message.clear)
-        : undefined);
+    if (message.trigger !== undefined) {
+      obj.trigger = NetworkAPI_Action_APIMessage_TriggerMessage.toJSON(
+        message.trigger,
+      );
+    }
+    if (message.clear !== undefined) {
+      obj.clear = NetworkAPI_Action_APIMessage_ClearMessage.toJSON(
+        message.clear,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIMessage {
-    return NetworkAPI_Action_APIMessage.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIMessage.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage>, I>>(
     object: I,
   ): NetworkAPI_Action_APIMessage {
@@ -10861,7 +10970,7 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10871,7 +10980,7 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -10880,7 +10989,7 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10893,7 +11002,7 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
       identifier: isSet(object.identifier)
         ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
         : undefined,
-      tokenValues: Array.isArray(object?.tokenValues)
+      tokenValues: globalThis.Array.isArray(object?.tokenValues)
         ? object.tokenValues.map((e: any) => Message_TokenValue.fromJSON(e))
         : [],
     };
@@ -10901,16 +11010,15 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
 
   toJSON(message: NetworkAPI_Action_APIMessage_TriggerMessage): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
-    if (message.tokenValues) {
-      obj.tokenValues = message.tokenValues.map((e) =>
-        e ? Message_TokenValue.toJSON(e) : undefined,
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
       );
-    } else {
-      obj.tokenValues = [];
+    }
+    if (message.tokenValues?.length) {
+      obj.tokenValues = message.tokenValues.map((e) =>
+        Message_TokenValue.toJSON(e),
+      );
     }
     return obj;
   },
@@ -10921,9 +11029,10 @@ export const NetworkAPI_Action_APIMessage_TriggerMessage = {
       I
     >,
   >(base?: I): NetworkAPI_Action_APIMessage_TriggerMessage {
-    return NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIMessage_TriggerMessage.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APIMessage_TriggerMessage>,
@@ -10971,7 +11080,7 @@ export const NetworkAPI_Action_APIMessage_ClearMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -10981,7 +11090,7 @@ export const NetworkAPI_Action_APIMessage_ClearMessage = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -10999,19 +11108,21 @@ export const NetworkAPI_Action_APIMessage_ClearMessage = {
 
   toJSON(message: NetworkAPI_Action_APIMessage_ClearMessage): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_ClearMessage>, I>,
   >(base?: I): NetworkAPI_Action_APIMessage_ClearMessage {
-    return NetworkAPI_Action_APIMessage_ClearMessage.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIMessage_ClearMessage.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIMessage_ClearMessage>, I>,
   >(object: I): NetworkAPI_Action_APIMessage_ClearMessage {
@@ -11054,7 +11165,7 @@ export const NetworkAPI_Action_APIMacro = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -11064,7 +11175,7 @@ export const NetworkAPI_Action_APIMacro = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11082,19 +11193,19 @@ export const NetworkAPI_Action_APIMacro = {
 
   toJSON(message: NetworkAPI_Action_APIMacro): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIMacro>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIMacro {
-    return NetworkAPI_Action_APIMacro.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIMacro.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIMacro>, I>>(
     object: I,
   ): NetworkAPI_Action_APIMacro {
@@ -11137,7 +11248,7 @@ export const NetworkAPI_Action_APILook = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -11147,7 +11258,7 @@ export const NetworkAPI_Action_APILook = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11165,19 +11276,19 @@ export const NetworkAPI_Action_APILook = {
 
   toJSON(message: NetworkAPI_Action_APILook): unknown {
     const obj: any = {};
-    message.identifier !== undefined &&
-      (obj.identifier = message.identifier
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.identifier)
-        : undefined);
+    if (message.identifier !== undefined) {
+      obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
+        message.identifier,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APILook>, I>>(
     base?: I,
   ): NetworkAPI_Action_APILook {
-    return NetworkAPI_Action_APILook.fromPartial(base ?? {});
+    return NetworkAPI_Action_APILook.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APILook>, I>>(
     object: I,
   ): NetworkAPI_Action_APILook {
@@ -11226,7 +11337,7 @@ export const NetworkAPI_Action_APIStage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -11236,7 +11347,7 @@ export const NetworkAPI_Action_APIStage = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -11246,7 +11357,7 @@ export const NetworkAPI_Action_APIStage = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11267,23 +11378,24 @@ export const NetworkAPI_Action_APIStage = {
 
   toJSON(message: NetworkAPI_Action_APIStage): unknown {
     const obj: any = {};
-    message.layouts !== undefined &&
-      (obj.layouts = message.layouts
-        ? NetworkAPI_Action_APIStage_StageLayouts.toJSON(message.layouts)
-        : undefined);
-    message.message !== undefined &&
-      (obj.message = message.message
-        ? NetworkAPI_Action_APIStage_StageMessage.toJSON(message.message)
-        : undefined);
+    if (message.layouts !== undefined) {
+      obj.layouts = NetworkAPI_Action_APIStage_StageLayouts.toJSON(
+        message.layouts,
+      );
+    }
+    if (message.message !== undefined) {
+      obj.message = NetworkAPI_Action_APIStage_StageMessage.toJSON(
+        message.message,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIStage {
-    return NetworkAPI_Action_APIStage.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIStage.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStage>, I>>(
     object: I,
   ): NetworkAPI_Action_APIStage {
@@ -11330,7 +11442,7 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -11342,7 +11454,7 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11352,7 +11464,7 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
 
   fromJSON(object: any): NetworkAPI_Action_APIStage_StageLayouts {
     return {
-      layouts: Array.isArray(object?.layouts)
+      layouts: globalThis.Array.isArray(object?.layouts)
         ? object.layouts.map((e: any) =>
             NetworkAPI_IndexOrNameIdentifierPair.fromJSON(e),
           )
@@ -11362,12 +11474,10 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
 
   toJSON(message: NetworkAPI_Action_APIStage_StageLayouts): unknown {
     const obj: any = {};
-    if (message.layouts) {
+    if (message.layouts?.length) {
       obj.layouts = message.layouts.map((e) =>
-        e ? NetworkAPI_IndexOrNameIdentifierPair.toJSON(e) : undefined,
+        NetworkAPI_IndexOrNameIdentifierPair.toJSON(e),
       );
-    } else {
-      obj.layouts = [];
     }
     return obj;
   },
@@ -11375,9 +11485,10 @@ export const NetworkAPI_Action_APIStage_StageLayouts = {
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageLayouts>, I>,
   >(base?: I): NetworkAPI_Action_APIStage_StageLayouts {
-    return NetworkAPI_Action_APIStage_StageLayouts.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIStage_StageLayouts.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageLayouts>, I>,
   >(object: I): NetworkAPI_Action_APIStage_StageLayouts {
@@ -11436,7 +11547,7 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -11447,7 +11558,7 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
             );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -11458,7 +11569,7 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
             );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -11469,7 +11580,7 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
             );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11499,33 +11610,34 @@ export const NetworkAPI_Action_APIStage_StageMessage = {
 
   toJSON(message: NetworkAPI_Action_APIStage_StageMessage): unknown {
     const obj: any = {};
-    message.showMessage !== undefined &&
-      (obj.showMessage = message.showMessage
-        ? NetworkAPI_Action_APIStage_StageMessage_ShowMessage.toJSON(
-            message.showMessage,
-          )
-        : undefined);
-    message.clearMessage !== undefined &&
-      (obj.clearMessage = message.clearMessage
-        ? NetworkAPI_Action_APIStage_StageMessage_ClearMessage.toJSON(
-            message.clearMessage,
-          )
-        : undefined);
-    message.hideMessage !== undefined &&
-      (obj.hideMessage = message.hideMessage
-        ? NetworkAPI_Action_APIStage_StageMessage_HideMessage.toJSON(
-            message.hideMessage,
-          )
-        : undefined);
+    if (message.showMessage !== undefined) {
+      obj.showMessage =
+        NetworkAPI_Action_APIStage_StageMessage_ShowMessage.toJSON(
+          message.showMessage,
+        );
+    }
+    if (message.clearMessage !== undefined) {
+      obj.clearMessage =
+        NetworkAPI_Action_APIStage_StageMessage_ClearMessage.toJSON(
+          message.clearMessage,
+        );
+    }
+    if (message.hideMessage !== undefined) {
+      obj.hideMessage =
+        NetworkAPI_Action_APIStage_StageMessage_HideMessage.toJSON(
+          message.hideMessage,
+        );
+    }
     return obj;
   },
 
   create<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage>, I>,
   >(base?: I): NetworkAPI_Action_APIStage_StageMessage {
-    return NetworkAPI_Action_APIStage_StageMessage.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIStage_StageMessage.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIStage_StageMessage>, I>,
   >(object: I): NetworkAPI_Action_APIStage_StageMessage {
@@ -11580,14 +11692,14 @@ export const NetworkAPI_Action_APIStage_StageMessage_ShowMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.message = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11596,14 +11708,18 @@ export const NetworkAPI_Action_APIStage_StageMessage_ShowMessage = {
   },
 
   fromJSON(object: any): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
-    return { message: isSet(object.message) ? String(object.message) : '' };
+    return {
+      message: isSet(object.message) ? globalThis.String(object.message) : '',
+    };
   },
 
   toJSON(
     message: NetworkAPI_Action_APIStage_StageMessage_ShowMessage,
   ): unknown {
     const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
+    if (message.message !== '') {
+      obj.message = message.message;
+    }
     return obj;
   },
 
@@ -11614,10 +11730,9 @@ export const NetworkAPI_Action_APIStage_StageMessage_ShowMessage = {
     >,
   >(base?: I): NetworkAPI_Action_APIStage_StageMessage_ShowMessage {
     return NetworkAPI_Action_APIStage_StageMessage_ShowMessage.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ShowMessage>,
@@ -11656,7 +11771,7 @@ export const NetworkAPI_Action_APIStage_StageMessage_ClearMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11680,10 +11795,9 @@ export const NetworkAPI_Action_APIStage_StageMessage_ClearMessage = {
     >,
   >(base?: I): NetworkAPI_Action_APIStage_StageMessage_ClearMessage {
     return NetworkAPI_Action_APIStage_StageMessage_ClearMessage.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APIStage_StageMessage_ClearMessage>,
@@ -11721,7 +11835,7 @@ export const NetworkAPI_Action_APIStage_StageMessage_HideMessage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11745,10 +11859,9 @@ export const NetworkAPI_Action_APIStage_StageMessage_HideMessage = {
     >,
   >(base?: I): NetworkAPI_Action_APIStage_StageMessage_HideMessage {
     return NetworkAPI_Action_APIStage_StageMessage_HideMessage.fromPartial(
-      base ?? {},
+      base ?? ({} as any),
     );
   },
-
   fromPartial<
     I extends Exact<
       DeepPartial<NetworkAPI_Action_APIStage_StageMessage_HideMessage>,
@@ -11785,7 +11898,7 @@ export const NetworkAPI_Action_StatusRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11805,9 +11918,8 @@ export const NetworkAPI_Action_StatusRequest = {
   create<I extends Exact<DeepPartial<NetworkAPI_Action_StatusRequest>, I>>(
     base?: I,
   ): NetworkAPI_Action_StatusRequest {
-    return NetworkAPI_Action_StatusRequest.fromPartial(base ?? {});
+    return NetworkAPI_Action_StatusRequest.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_StatusRequest>, I>>(
     _: I,
   ): NetworkAPI_Action_StatusRequest {
@@ -11840,7 +11952,7 @@ export const NetworkAPI_Action_APIStatus = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11860,9 +11972,8 @@ export const NetworkAPI_Action_APIStatus = {
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatus>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIStatus {
-    return NetworkAPI_Action_APIStatus.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIStatus.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatus>, I>>(
     _: I,
   ): NetworkAPI_Action_APIStatus {
@@ -11907,7 +12018,7 @@ export const NetworkAPI_Action_APIStatusResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -11917,14 +12028,14 @@ export const NetworkAPI_Action_APIStatusResponse = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.status = ProLink_MemberStatus.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -11945,23 +12056,22 @@ export const NetworkAPI_Action_APIStatusResponse = {
 
   toJSON(message: NetworkAPI_Action_APIStatusResponse): unknown {
     const obj: any = {};
-    message.groupDefinition !== undefined &&
-      (obj.groupDefinition = message.groupDefinition
-        ? ProLink_GroupDefinition.toJSON(message.groupDefinition)
-        : undefined);
-    message.status !== undefined &&
-      (obj.status = message.status
-        ? ProLink_MemberStatus.toJSON(message.status)
-        : undefined);
+    if (message.groupDefinition !== undefined) {
+      obj.groupDefinition = ProLink_GroupDefinition.toJSON(
+        message.groupDefinition,
+      );
+    }
+    if (message.status !== undefined) {
+      obj.status = ProLink_MemberStatus.toJSON(message.status);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_Action_APIStatusResponse>, I>>(
     base?: I,
   ): NetworkAPI_Action_APIStatusResponse {
-    return NetworkAPI_Action_APIStatusResponse.fromPartial(base ?? {});
+    return NetworkAPI_Action_APIStatusResponse.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_Action_APIStatusResponse>, I>,
   >(object: I): NetworkAPI_Action_APIStatusResponse {
@@ -12008,21 +12118,21 @@ export const NetworkAPI_IndexOrNameIdentifier = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.index = reader.int32();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -12032,24 +12142,27 @@ export const NetworkAPI_IndexOrNameIdentifier = {
 
   fromJSON(object: any): NetworkAPI_IndexOrNameIdentifier {
     return {
-      index: isSet(object.index) ? Number(object.index) : undefined,
-      name: isSet(object.name) ? String(object.name) : undefined,
+      index: isSet(object.index) ? globalThis.Number(object.index) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : undefined,
     };
   },
 
   toJSON(message: NetworkAPI_IndexOrNameIdentifier): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.name !== undefined && (obj.name = message.name);
+    if (message.index !== undefined) {
+      obj.index = Math.round(message.index);
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifier>, I>>(
     base?: I,
   ): NetworkAPI_IndexOrNameIdentifier {
-    return NetworkAPI_IndexOrNameIdentifier.fromPartial(base ?? {});
+    return NetworkAPI_IndexOrNameIdentifier.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifier>, I>,
   >(object: I): NetworkAPI_IndexOrNameIdentifier {
@@ -12096,7 +12209,7 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -12106,7 +12219,7 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
           );
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -12116,7 +12229,7 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -12137,23 +12250,22 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
 
   toJSON(message: NetworkAPI_IndexOrNameIdentifierPair): unknown {
     const obj: any = {};
-    message.key !== undefined &&
-      (obj.key = message.key
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.key)
-        : undefined);
-    message.value !== undefined &&
-      (obj.value = message.value
-        ? NetworkAPI_IndexOrNameIdentifier.toJSON(message.value)
-        : undefined);
+    if (message.key !== undefined) {
+      obj.key = NetworkAPI_IndexOrNameIdentifier.toJSON(message.key);
+    }
+    if (message.value !== undefined) {
+      obj.value = NetworkAPI_IndexOrNameIdentifier.toJSON(message.value);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifierPair>, I>>(
     base?: I,
   ): NetworkAPI_IndexOrNameIdentifierPair {
-    return NetworkAPI_IndexOrNameIdentifierPair.fromPartial(base ?? {});
+    return NetworkAPI_IndexOrNameIdentifierPair.fromPartial(
+      base ?? ({} as any),
+    );
   },
-
   fromPartial<
     I extends Exact<DeepPartial<NetworkAPI_IndexOrNameIdentifierPair>, I>,
   >(object: I): NetworkAPI_IndexOrNameIdentifierPair {
@@ -12170,25 +12282,6 @@ export const NetworkAPI_IndexOrNameIdentifierPair = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') {
-    return globalThis;
-  }
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-  throw 'Unable to locate global object';
-})();
-
 type Builtin =
   | Date
   | Function
@@ -12200,8 +12293,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
@@ -12216,10 +12309,8 @@ export type Exact<P, I extends P> = P extends Builtin
     };
 
 function longToNumber(long: Long): number {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new tsProtoGlobalThis.Error(
-      'Value is larger than Number.MAX_SAFE_INTEGER',
-    );
+  if (long.gt(globalThis.Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error('Value is larger than Number.MAX_SAFE_INTEGER');
   }
   return long.toNumber();
 }

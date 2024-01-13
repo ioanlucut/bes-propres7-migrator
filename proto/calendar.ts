@@ -137,21 +137,21 @@ export const Calendar = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.events.push(Calendar_Event.decode(reader, reader.uint32()));
           continue;
         case 2:
-          if (tag != 16) {
+          if (tag !== 16) {
             break;
           }
 
           message.active = reader.bool();
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -161,30 +161,27 @@ export const Calendar = {
 
   fromJSON(object: any): Calendar {
     return {
-      events: Array.isArray(object?.events)
+      events: globalThis.Array.isArray(object?.events)
         ? object.events.map((e: any) => Calendar_Event.fromJSON(e))
         : [],
-      active: isSet(object.active) ? Boolean(object.active) : false,
+      active: isSet(object.active) ? globalThis.Boolean(object.active) : false,
     };
   },
 
   toJSON(message: Calendar): unknown {
     const obj: any = {};
-    if (message.events) {
-      obj.events = message.events.map((e) =>
-        e ? Calendar_Event.toJSON(e) : undefined,
-      );
-    } else {
-      obj.events = [];
+    if (message.events?.length) {
+      obj.events = message.events.map((e) => Calendar_Event.toJSON(e));
     }
-    message.active !== undefined && (obj.active = message.active);
+    if (message.active === true) {
+      obj.active = message.active;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Calendar>, I>>(base?: I): Calendar {
-    return Calendar.fromPartial(base ?? {});
+    return Calendar.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Calendar>, I>>(object: I): Calendar {
     const message = createBaseCalendar();
     message.events =
@@ -256,40 +253,41 @@ export const Calendar_Event = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.name = reader.string();
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
           message.description = reader.string();
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.date = Timestamp.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag == 40) {
+          if (tag === 40) {
             message.recurrenceDays.push(reader.int32() as any);
+
             continue;
           }
 
-          if (tag == 42) {
+          if (tag === 42) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
               message.recurrenceDays.push(reader.int32() as any);
@@ -300,7 +298,7 @@ export const Calendar_Event = {
 
           break;
         case 6:
-          if (tag != 50) {
+          if (tag !== 50) {
             break;
           }
 
@@ -310,7 +308,7 @@ export const Calendar_Event = {
           );
           continue;
         case 7:
-          if (tag != 58) {
+          if (tag !== 58) {
             break;
           }
 
@@ -319,7 +317,7 @@ export const Calendar_Event = {
           );
           continue;
         case 8:
-          if (tag != 66) {
+          if (tag !== 66) {
             break;
           }
 
@@ -329,7 +327,7 @@ export const Calendar_Event = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -340,10 +338,12 @@ export const Calendar_Event = {
   fromJSON(object: any): Calendar_Event {
     return {
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
-      name: isSet(object.name) ? String(object.name) : '',
-      description: isSet(object.description) ? String(object.description) : '',
+      name: isSet(object.name) ? globalThis.String(object.name) : '',
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : '',
       date: isSet(object.date) ? Timestamp.fromJSON(object.date) : undefined,
-      recurrenceDays: Array.isArray(object?.recurrenceDays)
+      recurrenceDays: globalThis.Array.isArray(object?.recurrenceDays)
         ? object.recurrenceDays.map((e: any) =>
             calendar_Event_DayOfWeekFromJSON(e),
           )
@@ -351,7 +351,9 @@ export const Calendar_Event = {
       recurrenceLimitDate: isSet(object.recurrenceLimitDate)
         ? Timestamp.fromJSON(object.recurrenceLimitDate)
         : undefined,
-      recurrenceExcludedDates: Array.isArray(object?.recurrenceExcludedDates)
+      recurrenceExcludedDates: globalThis.Array.isArray(
+        object?.recurrenceExcludedDates,
+      )
         ? object.recurrenceExcludedDates.map((e: any) => Timestamp.fromJSON(e))
         : [],
       action: isSet(object.action)
@@ -362,44 +364,42 @@ export const Calendar_Event = {
 
   toJSON(message: Calendar_Event): unknown {
     const obj: any = {};
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.date !== undefined &&
-      (obj.date = message.date ? Timestamp.toJSON(message.date) : undefined);
-    if (message.recurrenceDays) {
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.name !== '') {
+      obj.name = message.name;
+    }
+    if (message.description !== '') {
+      obj.description = message.description;
+    }
+    if (message.date !== undefined) {
+      obj.date = Timestamp.toJSON(message.date);
+    }
+    if (message.recurrenceDays?.length) {
       obj.recurrenceDays = message.recurrenceDays.map((e) =>
         calendar_Event_DayOfWeekToJSON(e),
       );
-    } else {
-      obj.recurrenceDays = [];
     }
-    message.recurrenceLimitDate !== undefined &&
-      (obj.recurrenceLimitDate = message.recurrenceLimitDate
-        ? Timestamp.toJSON(message.recurrenceLimitDate)
-        : undefined);
-    if (message.recurrenceExcludedDates) {
+    if (message.recurrenceLimitDate !== undefined) {
+      obj.recurrenceLimitDate = Timestamp.toJSON(message.recurrenceLimitDate);
+    }
+    if (message.recurrenceExcludedDates?.length) {
       obj.recurrenceExcludedDates = message.recurrenceExcludedDates.map((e) =>
-        e ? Timestamp.toJSON(e) : undefined,
+        Timestamp.toJSON(e),
       );
-    } else {
-      obj.recurrenceExcludedDates = [];
     }
-    message.action !== undefined &&
-      (obj.action = message.action
-        ? Calendar_Event_Action.toJSON(message.action)
-        : undefined);
+    if (message.action !== undefined) {
+      obj.action = Calendar_Event_Action.toJSON(message.action);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Calendar_Event>, I>>(
     base?: I,
   ): Calendar_Event {
-    return Calendar_Event.fromPartial(base ?? {});
+    return Calendar_Event.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Calendar_Event>, I>>(
     object: I,
   ): Calendar_Event {
@@ -473,21 +473,21 @@ export const Calendar_Event_Action = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 8) {
+          if (tag !== 8) {
             break;
           }
 
           message.type = reader.uint32();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.uuid = UUID.decode(reader, reader.uint32());
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -497,7 +497,7 @@ export const Calendar_Event_Action = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
@@ -507,7 +507,7 @@ export const Calendar_Event_Action = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -517,7 +517,7 @@ export const Calendar_Event_Action = {
 
   fromJSON(object: any): Calendar_Event_Action {
     return {
-      type: isSet(object.type) ? Number(object.type) : 0,
+      type: isSet(object.type) ? globalThis.Number(object.type) : 0,
       uuid: isSet(object.uuid) ? UUID.fromJSON(object.uuid) : undefined,
       playlist: isSet(object.playlist)
         ? Calendar_Event_Action_Playlist.fromJSON(object.playlist)
@@ -530,26 +530,26 @@ export const Calendar_Event_Action = {
 
   toJSON(message: Calendar_Event_Action): unknown {
     const obj: any = {};
-    message.type !== undefined && (obj.type = Math.round(message.type));
-    message.uuid !== undefined &&
-      (obj.uuid = message.uuid ? UUID.toJSON(message.uuid) : undefined);
-    message.playlist !== undefined &&
-      (obj.playlist = message.playlist
-        ? Calendar_Event_Action_Playlist.toJSON(message.playlist)
-        : undefined);
-    message.macro !== undefined &&
-      (obj.macro = message.macro
-        ? Calendar_Event_Action_Macro.toJSON(message.macro)
-        : undefined);
+    if (message.type !== 0) {
+      obj.type = Math.round(message.type);
+    }
+    if (message.uuid !== undefined) {
+      obj.uuid = UUID.toJSON(message.uuid);
+    }
+    if (message.playlist !== undefined) {
+      obj.playlist = Calendar_Event_Action_Playlist.toJSON(message.playlist);
+    }
+    if (message.macro !== undefined) {
+      obj.macro = Calendar_Event_Action_Macro.toJSON(message.macro);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Calendar_Event_Action>, I>>(
     base?: I,
   ): Calendar_Event_Action {
-    return Calendar_Event_Action.fromPartial(base ?? {});
+    return Calendar_Event_Action.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Calendar_Event_Action>, I>>(
     object: I,
   ): Calendar_Event_Action {
@@ -601,21 +601,21 @@ export const Calendar_Event_Action_Playlist = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.playlistUuid = UUID.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
           message.playlistItemUuid = UUID.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -636,23 +636,20 @@ export const Calendar_Event_Action_Playlist = {
 
   toJSON(message: Calendar_Event_Action_Playlist): unknown {
     const obj: any = {};
-    message.playlistUuid !== undefined &&
-      (obj.playlistUuid = message.playlistUuid
-        ? UUID.toJSON(message.playlistUuid)
-        : undefined);
-    message.playlistItemUuid !== undefined &&
-      (obj.playlistItemUuid = message.playlistItemUuid
-        ? UUID.toJSON(message.playlistItemUuid)
-        : undefined);
+    if (message.playlistUuid !== undefined) {
+      obj.playlistUuid = UUID.toJSON(message.playlistUuid);
+    }
+    if (message.playlistItemUuid !== undefined) {
+      obj.playlistItemUuid = UUID.toJSON(message.playlistItemUuid);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Calendar_Event_Action_Playlist>, I>>(
     base?: I,
   ): Calendar_Event_Action_Playlist {
-    return Calendar_Event_Action_Playlist.fromPartial(base ?? {});
+    return Calendar_Event_Action_Playlist.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Calendar_Event_Action_Playlist>, I>>(
     object: I,
   ): Calendar_Event_Action_Playlist {
@@ -699,7 +696,7 @@ export const Calendar_Event_Action_Macro = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
@@ -709,7 +706,7 @@ export const Calendar_Event_Action_Macro = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -727,19 +724,17 @@ export const Calendar_Event_Action_Macro = {
 
   toJSON(message: Calendar_Event_Action_Macro): unknown {
     const obj: any = {};
-    message.identification !== undefined &&
-      (obj.identification = message.identification
-        ? CollectionElementType.toJSON(message.identification)
-        : undefined);
+    if (message.identification !== undefined) {
+      obj.identification = CollectionElementType.toJSON(message.identification);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<Calendar_Event_Action_Macro>, I>>(
     base?: I,
   ): Calendar_Event_Action_Macro {
-    return Calendar_Event_Action_Macro.fromPartial(base ?? {});
+    return Calendar_Event_Action_Macro.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<Calendar_Event_Action_Macro>, I>>(
     object: I,
   ): Calendar_Event_Action_Macro {
@@ -763,8 +758,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

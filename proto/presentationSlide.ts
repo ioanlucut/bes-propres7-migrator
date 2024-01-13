@@ -1,10 +1,10 @@
 /* eslint-disable */
 import _m0 from 'protobufjs/minimal';
 import { AlignmentGuide } from './alignmentGuide';
-import { URL } from './basicTypes';
 import { Transition } from './effects';
 import { Graphics_Text_Attributes } from './graphicsData';
 import { Slide } from './slide';
+import { URL } from './url';
 
 export const protobufPackage = 'rv.data';
 
@@ -66,14 +66,14 @@ export const PresentationSlide = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.baseSlide = Slide.decode(reader, reader.uint32());
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -83,7 +83,7 @@ export const PresentationSlide = {
           );
           continue;
         case 3:
-          if (tag != 26) {
+          if (tag !== 26) {
             break;
           }
 
@@ -92,21 +92,21 @@ export const PresentationSlide = {
           );
           continue;
         case 4:
-          if (tag != 34) {
+          if (tag !== 34) {
             break;
           }
 
           message.chordChart = URL.decode(reader, reader.uint32());
           continue;
         case 5:
-          if (tag != 42) {
+          if (tag !== 42) {
             break;
           }
 
           message.transition = Transition.decode(reader, reader.uint32());
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -122,7 +122,7 @@ export const PresentationSlide = {
       notes: isSet(object.notes)
         ? PresentationSlide_Notes.fromJSON(object.notes)
         : undefined,
-      templateGuidelines: Array.isArray(object?.templateGuidelines)
+      templateGuidelines: globalThis.Array.isArray(object?.templateGuidelines)
         ? object.templateGuidelines.map((e: any) => AlignmentGuide.fromJSON(e))
         : [],
       chordChart: isSet(object.chordChart)
@@ -136,38 +136,31 @@ export const PresentationSlide = {
 
   toJSON(message: PresentationSlide): unknown {
     const obj: any = {};
-    message.baseSlide !== undefined &&
-      (obj.baseSlide = message.baseSlide
-        ? Slide.toJSON(message.baseSlide)
-        : undefined);
-    message.notes !== undefined &&
-      (obj.notes = message.notes
-        ? PresentationSlide_Notes.toJSON(message.notes)
-        : undefined);
-    if (message.templateGuidelines) {
-      obj.templateGuidelines = message.templateGuidelines.map((e) =>
-        e ? AlignmentGuide.toJSON(e) : undefined,
-      );
-    } else {
-      obj.templateGuidelines = [];
+    if (message.baseSlide !== undefined) {
+      obj.baseSlide = Slide.toJSON(message.baseSlide);
     }
-    message.chordChart !== undefined &&
-      (obj.chordChart = message.chordChart
-        ? URL.toJSON(message.chordChart)
-        : undefined);
-    message.transition !== undefined &&
-      (obj.transition = message.transition
-        ? Transition.toJSON(message.transition)
-        : undefined);
+    if (message.notes !== undefined) {
+      obj.notes = PresentationSlide_Notes.toJSON(message.notes);
+    }
+    if (message.templateGuidelines?.length) {
+      obj.templateGuidelines = message.templateGuidelines.map((e) =>
+        AlignmentGuide.toJSON(e),
+      );
+    }
+    if (message.chordChart !== undefined) {
+      obj.chordChart = URL.toJSON(message.chordChart);
+    }
+    if (message.transition !== undefined) {
+      obj.transition = Transition.toJSON(message.transition);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PresentationSlide>, I>>(
     base?: I,
   ): PresentationSlide {
-    return PresentationSlide.fromPartial(base ?? {});
+    return PresentationSlide.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PresentationSlide>, I>>(
     object: I,
   ): PresentationSlide {
@@ -196,7 +189,7 @@ export const PresentationSlide = {
 };
 
 function createBasePresentationSlide_Notes(): PresentationSlide_Notes {
-  return { rtfData: new Uint8Array(), attributes: undefined };
+  return { rtfData: new Uint8Array(0), attributes: undefined };
 }
 
 export const PresentationSlide_Notes = {
@@ -228,14 +221,14 @@ export const PresentationSlide_Notes = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
           message.rtfData = reader.bytes();
           continue;
         case 2:
-          if (tag != 18) {
+          if (tag !== 18) {
             break;
           }
 
@@ -245,7 +238,7 @@ export const PresentationSlide_Notes = {
           );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -257,7 +250,7 @@ export const PresentationSlide_Notes = {
     return {
       rtfData: isSet(object.rtfData)
         ? bytesFromBase64(object.rtfData)
-        : new Uint8Array(),
+        : new Uint8Array(0),
       attributes: isSet(object.attributes)
         ? Graphics_Text_Attributes.fromJSON(object.attributes)
         : undefined,
@@ -266,28 +259,25 @@ export const PresentationSlide_Notes = {
 
   toJSON(message: PresentationSlide_Notes): unknown {
     const obj: any = {};
-    message.rtfData !== undefined &&
-      (obj.rtfData = base64FromBytes(
-        message.rtfData !== undefined ? message.rtfData : new Uint8Array(),
-      ));
-    message.attributes !== undefined &&
-      (obj.attributes = message.attributes
-        ? Graphics_Text_Attributes.toJSON(message.attributes)
-        : undefined);
+    if (message.rtfData.length !== 0) {
+      obj.rtfData = base64FromBytes(message.rtfData);
+    }
+    if (message.attributes !== undefined) {
+      obj.attributes = Graphics_Text_Attributes.toJSON(message.attributes);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<PresentationSlide_Notes>, I>>(
     base?: I,
   ): PresentationSlide_Notes {
-    return PresentationSlide_Notes.fromPartial(base ?? {});
+    return PresentationSlide_Notes.fromPartial(base ?? ({} as any));
   },
-
   fromPartial<I extends Exact<DeepPartial<PresentationSlide_Notes>, I>>(
     object: I,
   ): PresentationSlide_Notes {
     const message = createBasePresentationSlide_Notes();
-    message.rtfData = object.rtfData ?? new Uint8Array();
+    message.rtfData = object.rtfData ?? new Uint8Array(0);
     message.attributes =
       object.attributes !== undefined && object.attributes !== null
         ? Graphics_Text_Attributes.fromPartial(object.attributes)
@@ -296,30 +286,11 @@ export const PresentationSlide_Notes = {
   },
 };
 
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var tsProtoGlobalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') {
-    return globalThis;
-  }
-  if (typeof self !== 'undefined') {
-    return self;
-  }
-  if (typeof window !== 'undefined') {
-    return window;
-  }
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-  throw 'Unable to locate global object';
-})();
-
 function bytesFromBase64(b64: string): Uint8Array {
-  if (tsProtoGlobalThis.Buffer) {
-    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, 'base64'));
+  if (globalThis.Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
-    const bin = tsProtoGlobalThis.atob(b64);
+    const bin = globalThis.atob(b64);
     const arr = new Uint8Array(bin.length);
     for (let i = 0; i < bin.length; ++i) {
       arr[i] = bin.charCodeAt(i);
@@ -329,14 +300,14 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (tsProtoGlobalThis.Buffer) {
-    return tsProtoGlobalThis.Buffer.from(arr).toString('base64');
+  if (globalThis.Buffer) {
+    return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];
     arr.forEach((byte) => {
-      bin.push(String.fromCharCode(byte));
+      bin.push(globalThis.String.fromCharCode(byte));
     });
-    return tsProtoGlobalThis.btoa(bin.join(''));
+    return globalThis.btoa(bin.join(''));
   }
 }
 
@@ -351,8 +322,8 @@ type Builtin =
 
 export type DeepPartial<T> = T extends Builtin
   ? T
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}

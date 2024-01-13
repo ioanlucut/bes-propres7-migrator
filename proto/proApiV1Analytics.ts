@@ -1,43 +1,52 @@
 /* eslint-disable */
-import _m0 from "protobufjs/minimal";
+import _m0 from 'protobufjs/minimal';
 
-export const protobufPackage = "rv.data";
+export const protobufPackage = 'rv.data';
 
 export interface APIAnalytics {
   messageReceived?: APIAnalytics_MessageReceived | undefined;
 }
 
-export interface APIAnalytics_MessageReceived {
-}
+export interface APIAnalytics_MessageReceived {}
 
 function createBaseAPIAnalytics(): APIAnalytics {
   return { messageReceived: undefined };
 }
 
 export const APIAnalytics = {
-  encode(message: APIAnalytics, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    message: APIAnalytics,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     if (message.messageReceived !== undefined) {
-      APIAnalytics_MessageReceived.encode(message.messageReceived, writer.uint32(10).fork()).ldelim();
+      APIAnalytics_MessageReceived.encode(
+        message.messageReceived,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
     return writer;
   },
 
   decode(input: _m0.Reader | Uint8Array, length?: number): APIAnalytics {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIAnalytics();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag != 10) {
+          if (tag !== 10) {
             break;
           }
 
-          message.messageReceived = APIAnalytics_MessageReceived.decode(reader, reader.uint32());
+          message.messageReceived = APIAnalytics_MessageReceived.decode(
+            reader,
+            reader.uint32(),
+          );
           continue;
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -55,21 +64,27 @@ export const APIAnalytics = {
 
   toJSON(message: APIAnalytics): unknown {
     const obj: any = {};
-    message.messageReceived !== undefined && (obj.messageReceived = message.messageReceived
-      ? APIAnalytics_MessageReceived.toJSON(message.messageReceived)
-      : undefined);
+    if (message.messageReceived !== undefined) {
+      obj.messageReceived = APIAnalytics_MessageReceived.toJSON(
+        message.messageReceived,
+      );
+    }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIAnalytics>, I>>(base?: I): APIAnalytics {
-    return APIAnalytics.fromPartial(base ?? {});
+  create<I extends Exact<DeepPartial<APIAnalytics>, I>>(
+    base?: I,
+  ): APIAnalytics {
+    return APIAnalytics.fromPartial(base ?? ({} as any));
   },
-
-  fromPartial<I extends Exact<DeepPartial<APIAnalytics>, I>>(object: I): APIAnalytics {
+  fromPartial<I extends Exact<DeepPartial<APIAnalytics>, I>>(
+    object: I,
+  ): APIAnalytics {
     const message = createBaseAPIAnalytics();
-    message.messageReceived = (object.messageReceived !== undefined && object.messageReceived !== null)
-      ? APIAnalytics_MessageReceived.fromPartial(object.messageReceived)
-      : undefined;
+    message.messageReceived =
+      object.messageReceived !== undefined && object.messageReceived !== null
+        ? APIAnalytics_MessageReceived.fromPartial(object.messageReceived)
+        : undefined;
     return message;
   },
 };
@@ -79,19 +94,26 @@ function createBaseAPIAnalytics_MessageReceived(): APIAnalytics_MessageReceived 
 }
 
 export const APIAnalytics_MessageReceived = {
-  encode(_: APIAnalytics_MessageReceived, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  encode(
+    _: APIAnalytics_MessageReceived,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): APIAnalytics_MessageReceived {
-    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): APIAnalytics_MessageReceived {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAPIAnalytics_MessageReceived();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
       }
-      if ((tag & 7) == 4 || tag == 0) {
+      if ((tag & 7) === 4 || tag === 0) {
         break;
       }
       reader.skipType(tag & 7);
@@ -108,26 +130,44 @@ export const APIAnalytics_MessageReceived = {
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<APIAnalytics_MessageReceived>, I>>(base?: I): APIAnalytics_MessageReceived {
-    return APIAnalytics_MessageReceived.fromPartial(base ?? {});
+  create<I extends Exact<DeepPartial<APIAnalytics_MessageReceived>, I>>(
+    base?: I,
+  ): APIAnalytics_MessageReceived {
+    return APIAnalytics_MessageReceived.fromPartial(base ?? ({} as any));
   },
-
-  fromPartial<I extends Exact<DeepPartial<APIAnalytics_MessageReceived>, I>>(_: I): APIAnalytics_MessageReceived {
+  fromPartial<I extends Exact<DeepPartial<APIAnalytics_MessageReceived>, I>>(
+    _: I,
+  ): APIAnalytics_MessageReceived {
     const message = createBaseAPIAnalytics_MessageReceived();
     return message;
   },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Array<infer U> ? Array<DeepPartial<U>> : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends globalThis.Array<infer U>
+  ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U>
+  ? ReadonlyArray<DeepPartial<U>>
+  : T extends {}
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
 
 type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & {
+      [K in Exclude<keyof I, KeysOfUnion<P>>]: never;
+    };
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;
