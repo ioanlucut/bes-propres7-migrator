@@ -256,7 +256,7 @@ export const Playlist = {
     if (message.type !== 0) {
       writer.uint32(24).int32(message.type);
     }
-    if (message.expanded === true) {
+    if (message.expanded !== false) {
       writer.uint32(32).bool(message.expanded);
     }
     if (message.targetedLayerUuid !== undefined) {
@@ -274,7 +274,7 @@ export const Playlist = {
     for (const v of message.children) {
       Playlist.encode(v!, writer.uint32(74).fork()).ldelim();
     }
-    if (message.timecodeEnabled === true) {
+    if (message.timecodeEnabled !== false) {
       writer.uint32(80).bool(message.timecodeEnabled);
     }
     if (message.timing !== 0) {
@@ -510,7 +510,7 @@ export const Playlist = {
     if (message.type !== 0) {
       obj.type = playlist_TypeToJSON(message.type);
     }
-    if (message.expanded === true) {
+    if (message.expanded !== false) {
       obj.expanded = message.expanded;
     }
     if (message.targetedLayerUuid !== undefined) {
@@ -528,7 +528,7 @@ export const Playlist = {
     if (message.children?.length) {
       obj.children = message.children.map((e) => Playlist.toJSON(e));
     }
-    if (message.timecodeEnabled === true) {
+    if (message.timecodeEnabled !== false) {
       obj.timecodeEnabled = message.timecodeEnabled;
     }
     if (message.timing !== 0) {
@@ -960,7 +960,7 @@ export const Playlist_StartupInfo = {
     message: Playlist_StartupInfo,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.triggerOnStartup === true) {
+    if (message.triggerOnStartup !== false) {
       writer.uint32(8).bool(message.triggerOnStartup);
     }
     return writer;
@@ -1003,7 +1003,7 @@ export const Playlist_StartupInfo = {
 
   toJSON(message: Playlist_StartupInfo): unknown {
     const obj: any = {};
-    if (message.triggerOnStartup === true) {
+    if (message.triggerOnStartup !== false) {
       obj.triggerOnStartup = message.triggerOnStartup;
     }
     return obj;
@@ -1051,7 +1051,7 @@ export const PlaylistItem = {
     for (const v of message.tags) {
       UUID.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.isHidden === true) {
+    if (message.isHidden !== false) {
       writer.uint32(72).bool(message.isHidden);
     }
     if (message.header !== undefined) {
@@ -1210,7 +1210,7 @@ export const PlaylistItem = {
     if (message.tags?.length) {
       obj.tags = message.tags.map((e) => UUID.toJSON(e));
     }
-    if (message.isHidden === true) {
+    if (message.isHidden !== false) {
       obj.isHidden = message.isHidden;
     }
     if (message.header !== undefined) {

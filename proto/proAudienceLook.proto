@@ -28,6 +28,7 @@ message ProAudienceLook {
   string name = 2;
   repeated .rv.data.ProAudienceLook.ProScreenLook screen_looks = 3;
   .rv.data.UUID original_look_uuid = 4;
+  double transition_duration = 5;
 }
 
 message AudienceLookCollection {

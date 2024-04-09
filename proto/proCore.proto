@@ -16,8 +16,11 @@ import "input.proto";
 import "macros.proto";
 import "messages.proto";
 import "playlist.proto";
+import "preferences.proto";
 import "presentation.proto";
+import "proCoreTestPatterns.proto";
 import "propDocument.proto";
+import "propresenter.proto";
 import "slide.proto";
 import "recording.proto";
 import "stage.proto";
@@ -28,6 +31,7 @@ import "proworkspace.proto";
 import "digitalAudio.proto";
 import "proAudienceLook.proto";
 import "proMask.proto";
+import "timedPlayback.proto";
 
 message MediaMetadataRequestInfo {
   string file_path = 1;
@@ -73,23 +77,6 @@ message MediaMetadataRequestResponse {
   .rv.data.MediaMetadataRequestResponse.BitmapInfo generated_bitmap_info = 2;
 }
 
-message TriggerSource {
-  message Library {
-    string path = 1;
-    string presentation_name = 2;
-  }
-
-  message Playlist {
-    .rv.data.UUID identifier = 1;
-    .rv.data.UUID item_identifier = 2;
-  }
-
-  oneof Location {
-    .rv.data.TriggerSource.Library library_location = 1;
-    .rv.data.TriggerSource.Playlist playlist_location = 2;
-  }
-}
-
 message NetworkIdentifier {
   message IndexOrName {
     oneof Component {
@@ -113,6 +100,7 @@ message TriggerOptions {
   double start_position = 9;
   .rv.data.TriggerSource trigger_source = 10;
   .rv.data.NetworkIdentifier network_identifier = 11;
+  bool request_client_context = 12;
 }
 
 message ControlTransport {
@@ -168,6 +156,7 @@ message ControlTransport {
 
   message SetScaleModeControlType {
     .rv.data.Media.ScaleBehavior mode = 1;
+    bool is_blurred = 3;
     .rv.data.Media.ScaleAlignment alignment = 2;
   }
 
@@ -295,129 +284,24 @@ message TextSegmentRequest {
   double start_position = 2;
 }
 
-message ProClockSource {
-  enum Type {
-    TYPE_UNKOWN = 0;
-    TYPE_INPUT = 1;
-    TYPE_OUTPUT = 2;
+message TriggerCue {
+  message PresentationCue {
+    .rv.data.Presentation presentation = 1;
+    .rv.data.UUID arrangement_id = 2;
+    int32 cue_index = 3;
   }
 
-  string uuid = 1;
-  string name = 2;
-  bool connected = 3;
-  bool active = 4;
-  .rv.data.ProClockSource.Type type = 5;
-}
-
-message TimedPlayback {
-  message Sequence {
-    message SequenceItem {
-      .rv.data.UUID identifier = 1;
-      double time = 2;
-      .rv.data.TriggerSource trigger_source = 3;
-      .rv.data.Action.ContentDestination content_destination = 4;
-      double end_time = 7;
-      oneof Item {
-        .rv.data.Cue cue = 5;
-        .rv.data.Action action = 6;
-      }
-    }
-
-    repeated .rv.data.TimedPlayback.Sequence.SequenceItem sequence = 1;
-    .rv.data.Action.ContentDestination content_destination = 2;
-    .rv.data.Presentation presentation = 3;
-  }
-
-  message Timing {
-    message LayerTransport {
-      int32 layer = 1;
-    }
-
-    message SMPTETimecode {
-      enum Format {
-        FORMAT_24_FPS = 0;
-        FORMAT_25_FPS = 1;
-        FORMAT_29_97_FPS = 2;
-        FORMAT_30_FPS = 3;
-      }
-
-      string device_identifier = 1;
-      int32 channel = 2;
-      .rv.data.TimedPlayback.Timing.SMPTETimecode.Format format = 3;
-      double offset = 4;
-    }
-
-    message Internal {
-      double duration = 1;
-      bool should_loop = 2;
-    }
-
-    oneof Source {
-      .rv.data.TimedPlayback.Timing.LayerTransport layer_transport = 1;
-      .rv.data.TimedPlayback.Timing.SMPTETimecode smpte_timecode = 2;
-      .rv.data.TimedPlayback.Timing.Internal internal = 3;
-    }
-  }
-
-  message Update {
-    message Play {
-    }
-
-    message Record {
-      bool is_recording = 1;
-    }
-
-    message Pause {
-    }
-
-    message Reset {
-    }
-
-    message JumpToTime {
-      double time = 1;
-    }
-
-    message StartScrub {
-      double time = 1;
-    }
-
-    message EndScrub {
-      double time = 2;
-    }
-
-    message Duration {
-      double duration = 1;
-    }
-
-    message Loop {
-      bool loop = 1;
-    }
-
-    message MonitorSource {
-      bool enable = 1;
-    }
-
-    oneof ActionType {
-      .rv.data.TimedPlayback.Update.Play play = 1;
-      .rv.data.TimedPlayback.Update.Record record = 2;
-      .rv.data.TimedPlayback.Update.Pause pause = 3;
-      .rv.data.TimedPlayback.Update.Reset reset = 4;
-      .rv.data.TimedPlayback.Update.JumpToTime jump_to_time = 5;
-      .rv.data.TimedPlayback.Update.StartScrub start_scrub = 6;
-      .rv.data.TimedPlayback.Update.EndScrub end_scrub = 7;
-      .rv.data.TimedPlayback.Update.Duration duration = 8;
-      .rv.data.TimedPlayback.Update.Loop loop = 9;
-      .rv.data.TimedPlayback.Sequence update_sequence = 10;
-      .rv.data.TimedPlayback.Update.MonitorSource monitor_source = 11;
-    }
-  }
-
-  .rv.data.TimedPlayback.Sequence sequence = 1;
-  .rv.data.TimedPlayback.Timing timing = 2;
+  uint64 trigger_handle = 1;
+  .rv.data.TriggerOptions trigger_options = 2;
+  .rv.data.Cue cue = 3;
+  .rv.data.TriggerCue.PresentationCue presentation = 4;
+  .rv.data.Playlist playlist = 5;
+  uint64 client_data = 6;
 }
 
 message NetworkTriggerDataItem {
   .rv.data.TriggerOptions trigger_options = 3;
+  .rv.data.TriggerCue trigger_cue = 4;
   oneof Type {
     .rv.data.Action action = 1;
     .rv.data.Cue cue = 2;
@@ -451,21 +335,6 @@ message ValidateEncoderRequest {
 
 message ValidateEncoderResponse {
   bool is_valid = 1;
-}
-
-message TriggerCue {
-  message PresentationCue {
-    .rv.data.Presentation presentation = 1;
-    .rv.data.UUID arrangement_id = 2;
-    int32 cue_index = 3;
-  }
-
-  uint64 trigger_handle = 1;
-  .rv.data.TriggerOptions trigger_options = 2;
-  .rv.data.Cue cue = 3;
-  .rv.data.TriggerCue.PresentationCue presentation = 4;
-  .rv.data.Playlist playlist = 5;
-  uint64 client_data = 6;
 }
 
 message CaptureActionRequest {
@@ -507,6 +376,18 @@ message CaptureActionResponse {
   }
 }
 
+message MacroIcons {
+  message MacroIcon {
+    .rv.data.MacrosDocument.Macro.ImageType image_type = 1;
+    bytes image_data = 2;
+  }
+
+  repeated .rv.data.MacroIcons.MacroIcon icons = 1;
+}
+
+message GenericEvent {
+}
+
 message SendData {
   int32 message_id = 1;
   oneof MessageType {
@@ -526,6 +407,22 @@ message SendData {
     .rv.data.Recording.SettingsDocument recording_settings_document = 15;
     .rv.data.CaptureActionResponse capture_action_response = 16;
     .rv.data.CopyrightLayout copyright_layout = 17;
+    .rv.data.Transition global_background_transition = 18;
+    .rv.data.Transition global_messages_transition = 19;
+    .rv.data.Transition global_foreground_transition = 20;
+    .rv.data.Transition global_bible_transition = 21;
+    .rv.data.Transition global_props_transition = 22;
+    .rv.data.Transition global_audio_transition = 23;
+    .rv.data.Preferences preferences = 24;
+    .rv.data.TestPatternRequest test_pattern = 25;
+    .rv.data.GenericEvent startup_complete = 26;
+    .rv.data.PlaylistDocument visual_playlist_doc = 27;
+    .rv.data.PlaylistDocument audio_playlist_doc = 28;
+    .rv.data.GenericEvent kill_watchdog = 29;
+    .rv.data.MacroIcons macro_icons = 30;
+    .rv.data.GenericEvent debug_trigger_data_dump = 31;
+    .rv.data.PlaylistDocument library_playlist_doc = 32;
+    .rv.data.UUID audio_playlist_focus_uuid = 33;
   }
 }
 
@@ -544,11 +441,20 @@ message TimerRuntimeState {
   bool is_running = 4;
   bool has_overrun = 5;
   .rv.data.TimerRuntimeState.ResourceState state = 6;
+  double current_time = 7;
 }
 
 message TimerStateUpdate {
   .rv.data.Timer timer = 1;
   .rv.data.TimerRuntimeState state = 2;
+}
+
+message HandledException {
+  string description = 1;
+}
+
+message CoreDataStateDump {
+  .rv.data.MacrosDocument macros = 1;
 }
 
 message SendDataResponse {
@@ -557,6 +463,11 @@ message SendDataResponse {
     .rv.data.ValidateEncoderResponse validate_encoder_response = 2;
     .rv.data.TimerStateUpdate timer_state = 3;
     .rv.data.CaptureActionRequest capture_action_request = 4;
+    .rv.data.TestPatternResponse test_pattern = 5;
+    .rv.data.HandledException handled_exception = 6;
+    .rv.data.CoreDataStateDump test_state_dump = 7;
+    .rv.data.UUID audio_playlist_focus_uuid = 8;
+    .rv.data.UUID audio_playlist_item_triggered_uuid = 9;
   }
 }
 
@@ -604,13 +515,13 @@ message TriggerTransferRenderState {
 
   message SlideState {
     .rv.data.Presentation presentation = 1;
-    .rv.data.UUID playlist_uuid = 2;
-    string playlist_name = 3;
-    .rv.data.UUID current_cue = 4;
-    .rv.data.UUID next_cue = 5;
-    .rv.data.TriggerTransferRenderState.AutoAdvanceState auto_advance = 6;
-    .rv.data.TriggerTransferRenderState.TimelineState timeline_state = 7;
-    int32 current_cue_index = 8;
+    .rv.data.Playlist playlist = 2;
+    .rv.data.UUID current_cue = 3;
+    .rv.data.UUID next_cue = 4;
+    .rv.data.TriggerTransferRenderState.AutoAdvanceState auto_advance = 5;
+    .rv.data.TriggerTransferRenderState.TimelineState timeline_state = 6;
+    int32 current_cue_index = 7;
+    int32 current_playlist_index = 8;
   }
 
   message TimecodeState {

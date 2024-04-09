@@ -15,6 +15,7 @@ export interface APIV1Message {
   message: string;
   tokens: APIV1Message_APIV1MessageToken[];
   theme: APIV1Identifier | undefined;
+  visibleOnNetwork: boolean;
 }
 
 export interface APIV1Message_APIV1MessageToken {
@@ -169,7 +170,13 @@ export interface APIV1MessageResponse_TriggerMessage {}
 export interface APIV1MessageResponse_ClearMessage {}
 
 function createBaseAPIV1Message(): APIV1Message {
-  return { id: undefined, message: '', tokens: [], theme: undefined };
+  return {
+    id: undefined,
+    message: '',
+    tokens: [],
+    theme: undefined,
+    visibleOnNetwork: false,
+  };
 }
 
 export const APIV1Message = {
@@ -191,6 +198,9 @@ export const APIV1Message = {
     }
     if (message.theme !== undefined) {
       APIV1Identifier.encode(message.theme, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.visibleOnNetwork !== false) {
+      writer.uint32(40).bool(message.visibleOnNetwork);
     }
     return writer;
   },
@@ -233,6 +243,13 @@ export const APIV1Message = {
 
           message.theme = APIV1Identifier.decode(reader, reader.uint32());
           continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.visibleOnNetwork = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -254,6 +271,9 @@ export const APIV1Message = {
       theme: isSet(object.theme)
         ? APIV1Identifier.fromJSON(object.theme)
         : undefined,
+      visibleOnNetwork: isSet(object.visibleOnNetwork)
+        ? globalThis.Boolean(object.visibleOnNetwork)
+        : false,
     };
   },
 
@@ -272,6 +292,9 @@ export const APIV1Message = {
     }
     if (message.theme !== undefined) {
       obj.theme = APIV1Identifier.toJSON(message.theme);
+    }
+    if (message.visibleOnNetwork !== false) {
+      obj.visibleOnNetwork = message.visibleOnNetwork;
     }
     return obj;
   },
@@ -298,6 +321,7 @@ export const APIV1Message = {
       object.theme !== undefined && object.theme !== null
         ? APIV1Identifier.fromPartial(object.theme)
         : undefined;
+    message.visibleOnNetwork = object.visibleOnNetwork ?? false;
     return message;
   },
 };
@@ -555,7 +579,7 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.format !== undefined) {
@@ -682,7 +706,7 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
     if (message.id !== undefined) {
       obj.id = APIV1Identifier.toJSON(message.id);
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       obj.allowsOverrun = message.allowsOverrun;
     }
     if (message.format !== undefined) {
@@ -761,7 +785,7 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
     if (message.time !== 0) {
       writer.uint32(16).int32(message.time);
     }
-    if (message.is24Hours === true) {
+    if (message.is24Hours !== false) {
       writer.uint32(24).bool(message.is24Hours);
     }
     return writer;
@@ -840,7 +864,7 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
           message.time,
         );
     }
-    if (message.is24Hours === true) {
+    if (message.is24Hours !== false) {
       obj.is24Hours = message.is24Hours;
     }
     return obj;

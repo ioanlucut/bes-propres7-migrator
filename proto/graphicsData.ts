@@ -5,6 +5,7 @@ import { Color } from './color';
 import { DigitalAudio_Device_Routing } from './digitalAudio';
 import { Effect } from './effects';
 import { FileProperties } from './fileProperties';
+import { Font } from './font';
 import { IntRange } from './intRange';
 import { URL } from './url';
 import { UUID } from './uuid';
@@ -748,7 +749,7 @@ export function graphics_Text_ChordPro_NotationToJSON(
 }
 
 export interface Graphics_Text_Attributes {
-  font: Graphics_Text_Attributes_Font | undefined;
+  font: Font | undefined;
   capitalization: Graphics_Text_Attributes_Capitalization;
   underlineStyle: Graphics_Text_Attributes_Underline | undefined;
   underlineColor: Color | undefined;
@@ -876,15 +877,6 @@ export function graphics_Text_Attributes_AlignmentToJSON(
     default:
       return 'UNRECOGNIZED';
   }
-}
-
-export interface Graphics_Text_Attributes_Font {
-  name: string;
-  size: number;
-  italic: boolean;
-  bold: boolean;
-  family: string;
-  face: string;
 }
 
 export interface Graphics_Text_Attributes_Underline {
@@ -1504,6 +1496,7 @@ export function media_TransportProperties_RetriggerSettingToJSON(
 
 export interface Media_DrawingProperties {
   scaleBehavior: Media_ScaleBehavior;
+  isBlurred: boolean;
   scaleAlignment: Media_ScaleAlignment;
   flippedHorizontally: boolean;
   flippedVertically: boolean;
@@ -1803,10 +1796,10 @@ export const Graphics_Element = {
     if (message.opacity !== 0) {
       writer.uint32(41).double(message.opacity);
     }
-    if (message.locked === true) {
+    if (message.locked !== false) {
       writer.uint32(48).bool(message.locked);
     }
-    if (message.aspectRatioLocked === true) {
+    if (message.aspectRatioLocked !== false) {
       writer.uint32(56).bool(message.aspectRatioLocked);
     }
     if (message.path !== undefined) {
@@ -1833,7 +1826,7 @@ export const Graphics_Element = {
     if (message.flipMode !== 0) {
       writer.uint32(120).int32(message.flipMode);
     }
-    if (message.hidden === true) {
+    if (message.hidden !== false) {
       writer.uint32(128).bool(message.hidden);
     }
     if (message.textLineMask !== undefined) {
@@ -2035,10 +2028,10 @@ export const Graphics_Element = {
     if (message.opacity !== 0) {
       obj.opacity = message.opacity;
     }
-    if (message.locked === true) {
+    if (message.locked !== false) {
       obj.locked = message.locked;
     }
-    if (message.aspectRatioLocked === true) {
+    if (message.aspectRatioLocked !== false) {
       obj.aspectRatioLocked = message.aspectRatioLocked;
     }
     if (message.path !== undefined) {
@@ -2062,7 +2055,7 @@ export const Graphics_Element = {
     if (message.flipMode !== 0) {
       obj.flipMode = graphics_Element_FlipModeToJSON(message.flipMode);
     }
-    if (message.hidden === true) {
+    if (message.hidden !== false) {
       obj.hidden = message.hidden;
     }
     if (message.textLineMask !== undefined) {
@@ -2506,7 +2499,7 @@ export const Graphics_Path = {
     message: Graphics_Path,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.closed === true) {
+    if (message.closed !== false) {
       writer.uint32(8).bool(message.closed);
     }
     for (const v of message.points) {
@@ -2575,7 +2568,7 @@ export const Graphics_Path = {
 
   toJSON(message: Graphics_Path): unknown {
     const obj: any = {};
-    if (message.closed === true) {
+    if (message.closed !== false) {
       obj.closed = message.closed;
     }
     if (message.points?.length) {
@@ -2627,7 +2620,7 @@ export const Graphics_Path_BezierPoint = {
     if (message.q1 !== undefined) {
       Graphics_Point.encode(message.q1, writer.uint32(26).fork()).ldelim();
     }
-    if (message.curved === true) {
+    if (message.curved !== false) {
       writer.uint32(32).bool(message.curved);
     }
     return writer;
@@ -2703,7 +2696,7 @@ export const Graphics_Path_BezierPoint = {
     if (message.q1 !== undefined) {
       obj.q1 = Graphics_Point.toJSON(message.q1);
     }
-    if (message.curved === true) {
+    if (message.curved !== false) {
       obj.curved = message.curved;
     }
     return obj;
@@ -3244,7 +3237,7 @@ export const Graphics_Fill = {
     message: Graphics_Fill,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enable === true) {
+    if (message.enable !== false) {
       writer.uint32(32).bool(message.enable);
     }
     if (message.color !== undefined) {
@@ -3339,7 +3332,7 @@ export const Graphics_Fill = {
 
   toJSON(message: Graphics_Fill): unknown {
     const obj: any = {};
-    if (message.enable === true) {
+    if (message.enable !== false) {
       obj.enable = message.enable;
     }
     if (message.color !== undefined) {
@@ -3935,7 +3928,7 @@ export const Graphics_Shadow = {
     if (message.opacity !== 0) {
       writer.uint32(49).double(message.opacity);
     }
-    if (message.enable === true) {
+    if (message.enable !== false) {
       writer.uint32(56).bool(message.enable);
     }
     return writer;
@@ -4041,7 +4034,7 @@ export const Graphics_Shadow = {
     if (message.opacity !== 0) {
       obj.opacity = message.opacity;
     }
-    if (message.enable === true) {
+    if (message.enable !== false) {
       obj.enable = message.enable;
     }
     return obj;
@@ -4093,7 +4086,7 @@ export const Graphics_Stroke = {
       writer.double(v);
     }
     writer.ldelim();
-    if (message.enable === true) {
+    if (message.enable !== false) {
       writer.uint32(40).bool(message.enable);
     }
     return writer;
@@ -4189,7 +4182,7 @@ export const Graphics_Stroke = {
     if (message.pattern?.length) {
       obj.pattern = message.pattern;
     }
-    if (message.enable === true) {
+    if (message.enable !== false) {
       obj.enable = message.enable;
     }
     return obj;
@@ -4231,7 +4224,7 @@ export const Graphics_Feather = {
     if (message.radius !== 0) {
       writer.uint32(17).double(message.radius);
     }
-    if (message.enable === true) {
+    if (message.enable !== false) {
       writer.uint32(24).bool(message.enable);
     }
     return writer;
@@ -4293,7 +4286,7 @@ export const Graphics_Feather = {
     if (message.radius !== 0) {
       obj.radius = message.radius;
     }
-    if (message.enable === true) {
+    if (message.enable !== false) {
       obj.enable = message.enable;
     }
     return obj;
@@ -4359,7 +4352,7 @@ export const Graphics_Text = {
         writer.uint32(66).fork(),
       ).ldelim();
     }
-    if (message.isSuperscriptStandardized === true) {
+    if (message.isSuperscriptStandardized !== false) {
       writer.uint32(72).bool(message.isSuperscriptStandardized);
     }
     if (message.transform !== 0) {
@@ -4529,7 +4522,7 @@ export const Graphics_Text = {
     if (message.margins !== undefined) {
       obj.margins = Graphics_EdgeInsets.toJSON(message.margins);
     }
-    if (message.isSuperscriptStandardized === true) {
+    if (message.isSuperscriptStandardized !== false) {
       obj.isSuperscriptStandardized = message.isSuperscriptStandardized;
     }
     if (message.transform !== 0) {
@@ -4596,7 +4589,7 @@ export const Graphics_Text_LineFillMask = {
     message: Graphics_Text_LineFillMask,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.heightOffset !== 0) {
@@ -4704,7 +4697,7 @@ export const Graphics_Text_LineFillMask = {
 
   toJSON(message: Graphics_Text_LineFillMask): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.heightOffset !== 0) {
@@ -4761,7 +4754,7 @@ export const Graphics_Text_GradientFill = {
         writer.uint32(10).fork(),
       ).ldelim();
     }
-    if (message.stretchToDocumentBounds === true) {
+    if (message.stretchToDocumentBounds !== false) {
       writer.uint32(16).bool(message.stretchToDocumentBounds);
     }
     return writer;
@@ -4817,7 +4810,7 @@ export const Graphics_Text_GradientFill = {
     if (message.gradient !== undefined) {
       obj.gradient = Graphics_Gradient.toJSON(message.gradient);
     }
-    if (message.stretchToDocumentBounds === true) {
+    if (message.stretchToDocumentBounds !== false) {
       obj.stretchToDocumentBounds = message.stretchToDocumentBounds;
     }
     return obj;
@@ -4977,7 +4970,7 @@ export const Graphics_Text_ChordPro = {
     message: Graphics_Text_ChordPro,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.notation !== 0) {
@@ -5044,7 +5037,7 @@ export const Graphics_Text_ChordPro = {
 
   toJSON(message: Graphics_Text_ChordPro): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.notation !== 0) {
@@ -5104,10 +5097,7 @@ export const Graphics_Text_Attributes = {
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.font !== undefined) {
-      Graphics_Text_Attributes_Font.encode(
-        message.font,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      Font.encode(message.font, writer.uint32(10).fork()).ldelim();
     }
     if (message.capitalization !== 0) {
       writer.uint32(16).int32(message.capitalization);
@@ -5206,10 +5196,7 @@ export const Graphics_Text_Attributes = {
             break;
           }
 
-          message.font = Graphics_Text_Attributes_Font.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.font = Font.decode(reader, reader.uint32());
           continue;
         case 2:
           if (tag !== 16) {
@@ -5365,9 +5352,7 @@ export const Graphics_Text_Attributes = {
 
   fromJSON(object: any): Graphics_Text_Attributes {
     return {
-      font: isSet(object.font)
-        ? Graphics_Text_Attributes_Font.fromJSON(object.font)
-        : undefined,
+      font: isSet(object.font) ? Font.fromJSON(object.font) : undefined,
       capitalization: isSet(object.capitalization)
         ? graphics_Text_Attributes_CapitalizationFromJSON(object.capitalization)
         : 0,
@@ -5425,7 +5410,7 @@ export const Graphics_Text_Attributes = {
   toJSON(message: Graphics_Text_Attributes): unknown {
     const obj: any = {};
     if (message.font !== undefined) {
-      obj.font = Graphics_Text_Attributes_Font.toJSON(message.font);
+      obj.font = Font.toJSON(message.font);
     }
     if (message.capitalization !== 0) {
       obj.capitalization = graphics_Text_Attributes_CapitalizationToJSON(
@@ -5506,7 +5491,7 @@ export const Graphics_Text_Attributes = {
     const message = createBaseGraphics_Text_Attributes();
     message.font =
       object.font !== undefined && object.font !== null
-        ? Graphics_Text_Attributes_Font.fromPartial(object.font)
+        ? Font.fromPartial(object.font)
         : undefined;
     message.capitalization = object.capitalization ?? 0;
     message.underlineStyle =
@@ -5572,158 +5557,6 @@ export const Graphics_Text_Attributes = {
   },
 };
 
-function createBaseGraphics_Text_Attributes_Font(): Graphics_Text_Attributes_Font {
-  return {
-    name: '',
-    size: 0,
-    italic: false,
-    bold: false,
-    family: '',
-    face: '',
-  };
-}
-
-export const Graphics_Text_Attributes_Font = {
-  encode(
-    message: Graphics_Text_Attributes_Font,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
-      writer.uint32(10).string(message.name);
-    }
-    if (message.size !== 0) {
-      writer.uint32(17).double(message.size);
-    }
-    if (message.italic === true) {
-      writer.uint32(32).bool(message.italic);
-    }
-    if (message.bold === true) {
-      writer.uint32(64).bool(message.bold);
-    }
-    if (message.family !== '') {
-      writer.uint32(74).string(message.family);
-    }
-    if (message.face !== '') {
-      writer.uint32(82).string(message.face);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): Graphics_Text_Attributes_Font {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGraphics_Text_Attributes_Font();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.name = reader.string();
-          continue;
-        case 2:
-          if (tag !== 17) {
-            break;
-          }
-
-          message.size = reader.double();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.italic = reader.bool();
-          continue;
-        case 8:
-          if (tag !== 64) {
-            break;
-          }
-
-          message.bold = reader.bool();
-          continue;
-        case 9:
-          if (tag !== 74) {
-            break;
-          }
-
-          message.family = reader.string();
-          continue;
-        case 10:
-          if (tag !== 82) {
-            break;
-          }
-
-          message.face = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): Graphics_Text_Attributes_Font {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : '',
-      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
-      italic: isSet(object.italic) ? globalThis.Boolean(object.italic) : false,
-      bold: isSet(object.bold) ? globalThis.Boolean(object.bold) : false,
-      family: isSet(object.family) ? globalThis.String(object.family) : '',
-      face: isSet(object.face) ? globalThis.String(object.face) : '',
-    };
-  },
-
-  toJSON(message: Graphics_Text_Attributes_Font): unknown {
-    const obj: any = {};
-    if (message.name !== '') {
-      obj.name = message.name;
-    }
-    if (message.size !== 0) {
-      obj.size = message.size;
-    }
-    if (message.italic === true) {
-      obj.italic = message.italic;
-    }
-    if (message.bold === true) {
-      obj.bold = message.bold;
-    }
-    if (message.family !== '') {
-      obj.family = message.family;
-    }
-    if (message.face !== '') {
-      obj.face = message.face;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<Graphics_Text_Attributes_Font>, I>>(
-    base?: I,
-  ): Graphics_Text_Attributes_Font {
-    return Graphics_Text_Attributes_Font.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<Graphics_Text_Attributes_Font>, I>>(
-    object: I,
-  ): Graphics_Text_Attributes_Font {
-    const message = createBaseGraphics_Text_Attributes_Font();
-    message.name = object.name ?? '';
-    message.size = object.size ?? 0;
-    message.italic = object.italic ?? false;
-    message.bold = object.bold ?? false;
-    message.family = object.family ?? '';
-    message.face = object.face ?? '';
-    return message;
-  },
-};
-
 function createBaseGraphics_Text_Attributes_Underline(): Graphics_Text_Attributes_Underline {
   return { style: 0, pattern: 0, byWord: false };
 }
@@ -5739,7 +5572,7 @@ export const Graphics_Text_Attributes_Underline = {
     if (message.pattern !== 0) {
       writer.uint32(16).int32(message.pattern);
     }
-    if (message.byWord === true) {
+    if (message.byWord !== false) {
       writer.uint32(24).bool(message.byWord);
     }
     return writer;
@@ -5808,7 +5641,7 @@ export const Graphics_Text_Attributes_Underline = {
         message.pattern,
       );
     }
-    if (message.byWord === true) {
+    if (message.byWord !== false) {
       obj.byWord = message.byWord;
     }
     return obj;
@@ -6289,7 +6122,7 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
     message: Graphics_Text_Attributes_Paragraph_TextList,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(8).bool(message.isEnabled);
     }
     if (message.numberType !== 0) {
@@ -6382,7 +6215,7 @@ export const Graphics_Text_Attributes_Paragraph_TextList = {
 
   toJSON(message: Graphics_Text_Attributes_Paragraph_TextList): unknown {
     const obj: any = {};
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.numberType !== 0) {
@@ -7442,13 +7275,13 @@ export const Media_Audio_Channel = {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       writer.uint32(16).bool(message.muted);
     }
     if (message.volume !== 0) {
       writer.uint32(25).double(message.volume);
     }
-    if (message.compressLimit === true) {
+    if (message.compressLimit !== false) {
       writer.uint32(32).bool(message.compressLimit);
     }
     for (const v of message.outputs) {
@@ -7530,13 +7363,13 @@ export const Media_Audio_Channel = {
     if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       obj.muted = message.muted;
     }
     if (message.volume !== 0) {
       obj.volume = message.volume;
     }
-    if (message.compressLimit === true) {
+    if (message.compressLimit !== false) {
       obj.compressLimit = message.compressLimit;
     }
     if (message.outputs?.length) {
@@ -7654,7 +7487,7 @@ export const Media_AudioProperties = {
     for (const v of message.audioChannels) {
       Media_Audio_Channel.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.isCustomMapping === true) {
+    if (message.isCustomMapping !== false) {
       writer.uint32(24).bool(message.isCustomMapping);
     }
     return writer;
@@ -7725,7 +7558,7 @@ export const Media_AudioProperties = {
         Media_Audio_Channel.toJSON(e),
       );
     }
-    if (message.isCustomMapping === true) {
+    if (message.isCustomMapping !== false) {
       obj.isCustomMapping = message.isCustomMapping;
     }
     return obj;
@@ -7786,10 +7619,10 @@ export const Media_TransportProperties = {
     if (message.fadeOutDuration !== 0) {
       writer.uint32(65).double(message.fadeOutDuration);
     }
-    if (message.shouldFadeIn === true) {
+    if (message.shouldFadeIn !== false) {
       writer.uint32(72).bool(message.shouldFadeIn);
     }
-    if (message.shouldFadeOut === true) {
+    if (message.shouldFadeOut !== false) {
       writer.uint32(80).bool(message.shouldFadeOut);
     }
     if (message.endPoint !== 0) {
@@ -7964,10 +7797,10 @@ export const Media_TransportProperties = {
     if (message.fadeOutDuration !== 0) {
       obj.fadeOutDuration = message.fadeOutDuration;
     }
-    if (message.shouldFadeIn === true) {
+    if (message.shouldFadeIn !== false) {
       obj.shouldFadeIn = message.shouldFadeIn;
     }
-    if (message.shouldFadeOut === true) {
+    if (message.shouldFadeOut !== false) {
       obj.shouldFadeOut = message.shouldFadeOut;
     }
     if (message.endPoint !== 0) {
@@ -8020,6 +7853,7 @@ export const Media_TransportProperties = {
 function createBaseMedia_DrawingProperties(): Media_DrawingProperties {
   return {
     scaleBehavior: 0,
+    isBlurred: false,
     scaleAlignment: 0,
     flippedHorizontally: false,
     flippedVertically: false,
@@ -8045,13 +7879,16 @@ export const Media_DrawingProperties = {
     if (message.scaleBehavior !== 0) {
       writer.uint32(8).int32(message.scaleBehavior);
     }
+    if (message.isBlurred !== false) {
+      writer.uint32(128).bool(message.isBlurred);
+    }
     if (message.scaleAlignment !== 0) {
       writer.uint32(16).int32(message.scaleAlignment);
     }
-    if (message.flippedHorizontally === true) {
+    if (message.flippedHorizontally !== false) {
       writer.uint32(24).bool(message.flippedHorizontally);
     }
-    if (message.flippedVertically === true) {
+    if (message.flippedVertically !== false) {
       writer.uint32(32).bool(message.flippedVertically);
     }
     if (message.naturalSize !== undefined) {
@@ -8069,10 +7906,10 @@ export const Media_DrawingProperties = {
         writer.uint32(58).fork(),
       ).ldelim();
     }
-    if (message.customImageAspectLocked === true) {
+    if (message.customImageAspectLocked !== false) {
       writer.uint32(64).bool(message.customImageAspectLocked);
     }
-    if (message.alphaInverted === true) {
+    if (message.alphaInverted !== false) {
       writer.uint32(72).bool(message.alphaInverted);
     }
     if (message.nativeRotation !== 0) {
@@ -8087,7 +7924,7 @@ export const Media_DrawingProperties = {
     for (const v of message.effects) {
       Effect.encode(v!, writer.uint32(98).fork()).ldelim();
     }
-    if (message.cropEnable === true) {
+    if (message.cropEnable !== false) {
       writer.uint32(104).bool(message.cropEnable);
     }
     if (message.cropInsets !== undefined) {
@@ -8119,6 +7956,13 @@ export const Media_DrawingProperties = {
           }
 
           message.scaleBehavior = reader.int32() as any;
+          continue;
+        case 16:
+          if (tag !== 128) {
+            break;
+          }
+
+          message.isBlurred = reader.bool();
           continue;
         case 2:
           if (tag !== 16) {
@@ -8241,6 +8085,9 @@ export const Media_DrawingProperties = {
       scaleBehavior: isSet(object.scaleBehavior)
         ? media_ScaleBehaviorFromJSON(object.scaleBehavior)
         : 0,
+      isBlurred: isSet(object.isBlurred)
+        ? globalThis.Boolean(object.isBlurred)
+        : false,
       scaleAlignment: isSet(object.scaleAlignment)
         ? media_ScaleAlignmentFromJSON(object.scaleAlignment)
         : 0,
@@ -8293,13 +8140,16 @@ export const Media_DrawingProperties = {
     if (message.scaleBehavior !== 0) {
       obj.scaleBehavior = media_ScaleBehaviorToJSON(message.scaleBehavior);
     }
+    if (message.isBlurred !== false) {
+      obj.isBlurred = message.isBlurred;
+    }
     if (message.scaleAlignment !== 0) {
       obj.scaleAlignment = media_ScaleAlignmentToJSON(message.scaleAlignment);
     }
-    if (message.flippedHorizontally === true) {
+    if (message.flippedHorizontally !== false) {
       obj.flippedHorizontally = message.flippedHorizontally;
     }
-    if (message.flippedVertically === true) {
+    if (message.flippedVertically !== false) {
       obj.flippedVertically = message.flippedVertically;
     }
     if (message.naturalSize !== undefined) {
@@ -8311,10 +8161,10 @@ export const Media_DrawingProperties = {
     if (message.customImageBounds !== undefined) {
       obj.customImageBounds = Graphics_Rect.toJSON(message.customImageBounds);
     }
-    if (message.customImageAspectLocked === true) {
+    if (message.customImageAspectLocked !== false) {
       obj.customImageAspectLocked = message.customImageAspectLocked;
     }
-    if (message.alphaInverted === true) {
+    if (message.alphaInverted !== false) {
       obj.alphaInverted = message.alphaInverted;
     }
     if (message.nativeRotation !== 0) {
@@ -8330,7 +8180,7 @@ export const Media_DrawingProperties = {
     if (message.effects?.length) {
       obj.effects = message.effects.map((e) => Effect.toJSON(e));
     }
-    if (message.cropEnable === true) {
+    if (message.cropEnable !== false) {
       obj.cropEnable = message.cropEnable;
     }
     if (message.cropInsets !== undefined) {
@@ -8352,6 +8202,7 @@ export const Media_DrawingProperties = {
   ): Media_DrawingProperties {
     const message = createBaseMedia_DrawingProperties();
     message.scaleBehavior = object.scaleBehavior ?? 0;
+    message.isBlurred = object.isBlurred ?? false;
     message.scaleAlignment = object.scaleAlignment ?? 0;
     message.flippedHorizontally = object.flippedHorizontally ?? false;
     message.flippedVertically = object.flippedVertically ?? false;
@@ -8412,7 +8263,7 @@ export const Media_VideoProperties = {
     if (message.endBehavior !== 0) {
       writer.uint32(32).int32(message.endBehavior);
     }
-    if (message.softLoop === true) {
+    if (message.softLoop !== false) {
       writer.uint32(40).bool(message.softLoop);
     }
     if (message.softLoopDuration !== 0) {
@@ -8522,7 +8373,7 @@ export const Media_VideoProperties = {
         message.endBehavior,
       );
     }
-    if (message.softLoop === true) {
+    if (message.softLoop !== false) {
       obj.softLoop = message.softLoop;
     }
     if (message.softLoopDuration !== 0) {
@@ -9308,7 +9159,7 @@ export const Media_WebContentTypeProperties = {
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
@@ -9321,7 +9172,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];

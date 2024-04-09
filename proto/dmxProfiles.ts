@@ -312,7 +312,7 @@ export const DMXProfiles_DMXProfile = {
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(24).bool(message.isEnabled);
     }
     for (const v of message.customMappings) {
@@ -410,7 +410,7 @@ export const DMXProfiles_DMXProfile = {
     if (message.fixture !== undefined) {
       obj.fixture = DMXProfiles_DMXProfile_Fixture.toJSON(message.fixture);
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.customMappings?.length) {

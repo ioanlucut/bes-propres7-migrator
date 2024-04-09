@@ -180,7 +180,7 @@ export const Effect = {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(16).bool(message.enabled);
     }
     if (message.name !== '') {
@@ -296,7 +296,7 @@ export const Effect = {
     if (message.uuid !== undefined) {
       obj.uuid = UUID.toJSON(message.uuid);
     }
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.name !== '') {

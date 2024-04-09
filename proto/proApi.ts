@@ -40,6 +40,8 @@ export interface ProApiNetworkConfiguration {
   stagePassword: string;
   linkEnable: boolean;
   webResourceRoot: string;
+  tcpStreamPort: number;
+  tcpStreamEnable: boolean;
 }
 
 export interface ProLink {}
@@ -322,6 +324,8 @@ export interface ProLink_HandlerIn_ServerState {
   publicIp: string;
   port: number;
   success: boolean;
+  tcpStreamPort: number;
+  tcpStreamSuccess: boolean;
 }
 
 export interface ProLink_HandlerIn_ConfigurationRequest {}
@@ -802,6 +806,7 @@ export interface NetworkAPI_Action_APIMessage_ClearMessage {
 
 export interface NetworkAPI_Action_APIMacro {
   identifier: NetworkAPI_IndexOrNameIdentifier | undefined;
+  indexPathComponents: NetworkAPI_IndexOrNameIdentifier[];
 }
 
 export interface NetworkAPI_Action_APILook {
@@ -1134,6 +1139,8 @@ function createBaseProApiNetworkConfiguration(): ProApiNetworkConfiguration {
     stagePassword: '',
     linkEnable: false,
     webResourceRoot: '',
+    tcpStreamPort: 0,
+    tcpStreamEnable: false,
   };
 }
 
@@ -1142,7 +1149,7 @@ export const ProApiNetworkConfiguration = {
     message: ProApiNetworkConfiguration,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enableNetwork === true) {
+    if (message.enableNetwork !== false) {
       writer.uint32(8).bool(message.enableNetwork);
     }
     if (message.port !== 0) {
@@ -1151,32 +1158,38 @@ export const ProApiNetworkConfiguration = {
     if (message.networkName !== '') {
       writer.uint32(26).string(message.networkName);
     }
-    if (message.remoteEnable === true) {
+    if (message.remoteEnable !== false) {
       writer.uint32(32).bool(message.remoteEnable);
     }
-    if (message.remoteControlEnable === true) {
+    if (message.remoteControlEnable !== false) {
       writer.uint32(40).bool(message.remoteControlEnable);
     }
     if (message.remoteControlPassword !== '') {
       writer.uint32(50).string(message.remoteControlPassword);
     }
-    if (message.remoteObserveEnable === true) {
+    if (message.remoteObserveEnable !== false) {
       writer.uint32(56).bool(message.remoteObserveEnable);
     }
     if (message.remoteObservePassword !== '') {
       writer.uint32(66).string(message.remoteObservePassword);
     }
-    if (message.stageEnable === true) {
+    if (message.stageEnable !== false) {
       writer.uint32(72).bool(message.stageEnable);
     }
     if (message.stagePassword !== '') {
       writer.uint32(82).string(message.stagePassword);
     }
-    if (message.linkEnable === true) {
+    if (message.linkEnable !== false) {
       writer.uint32(88).bool(message.linkEnable);
     }
     if (message.webResourceRoot !== '') {
       writer.uint32(98).string(message.webResourceRoot);
+    }
+    if (message.tcpStreamPort !== 0) {
+      writer.uint32(104).uint32(message.tcpStreamPort);
+    }
+    if (message.tcpStreamEnable !== false) {
+      writer.uint32(112).bool(message.tcpStreamEnable);
     }
     return writer;
   },
@@ -1276,6 +1289,20 @@ export const ProApiNetworkConfiguration = {
 
           message.webResourceRoot = reader.string();
           continue;
+        case 13:
+          if (tag !== 104) {
+            break;
+          }
+
+          message.tcpStreamPort = reader.uint32();
+          continue;
+        case 14:
+          if (tag !== 112) {
+            break;
+          }
+
+          message.tcpStreamEnable = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1321,12 +1348,18 @@ export const ProApiNetworkConfiguration = {
       webResourceRoot: isSet(object.webResourceRoot)
         ? globalThis.String(object.webResourceRoot)
         : '',
+      tcpStreamPort: isSet(object.tcpStreamPort)
+        ? globalThis.Number(object.tcpStreamPort)
+        : 0,
+      tcpStreamEnable: isSet(object.tcpStreamEnable)
+        ? globalThis.Boolean(object.tcpStreamEnable)
+        : false,
     };
   },
 
   toJSON(message: ProApiNetworkConfiguration): unknown {
     const obj: any = {};
-    if (message.enableNetwork === true) {
+    if (message.enableNetwork !== false) {
       obj.enableNetwork = message.enableNetwork;
     }
     if (message.port !== 0) {
@@ -1335,32 +1368,38 @@ export const ProApiNetworkConfiguration = {
     if (message.networkName !== '') {
       obj.networkName = message.networkName;
     }
-    if (message.remoteEnable === true) {
+    if (message.remoteEnable !== false) {
       obj.remoteEnable = message.remoteEnable;
     }
-    if (message.remoteControlEnable === true) {
+    if (message.remoteControlEnable !== false) {
       obj.remoteControlEnable = message.remoteControlEnable;
     }
     if (message.remoteControlPassword !== '') {
       obj.remoteControlPassword = message.remoteControlPassword;
     }
-    if (message.remoteObserveEnable === true) {
+    if (message.remoteObserveEnable !== false) {
       obj.remoteObserveEnable = message.remoteObserveEnable;
     }
     if (message.remoteObservePassword !== '') {
       obj.remoteObservePassword = message.remoteObservePassword;
     }
-    if (message.stageEnable === true) {
+    if (message.stageEnable !== false) {
       obj.stageEnable = message.stageEnable;
     }
     if (message.stagePassword !== '') {
       obj.stagePassword = message.stagePassword;
     }
-    if (message.linkEnable === true) {
+    if (message.linkEnable !== false) {
       obj.linkEnable = message.linkEnable;
     }
     if (message.webResourceRoot !== '') {
       obj.webResourceRoot = message.webResourceRoot;
+    }
+    if (message.tcpStreamPort !== 0) {
+      obj.tcpStreamPort = Math.round(message.tcpStreamPort);
+    }
+    if (message.tcpStreamEnable !== false) {
+      obj.tcpStreamEnable = message.tcpStreamEnable;
     }
     return obj;
   },
@@ -1386,6 +1425,8 @@ export const ProApiNetworkConfiguration = {
     message.stagePassword = object.stagePassword ?? '';
     message.linkEnable = object.linkEnable ?? false;
     message.webResourceRoot = object.webResourceRoot ?? '';
+    message.tcpStreamPort = object.tcpStreamPort ?? 0;
+    message.tcpStreamEnable = object.tcpStreamEnable ?? false;
     return message;
   },
 };
@@ -5536,7 +5577,14 @@ export const ProLink_HandlerIn_ProPresenterInfo = {
 };
 
 function createBaseProLink_HandlerIn_ServerState(): ProLink_HandlerIn_ServerState {
-  return { localIp: '', publicIp: '', port: 0, success: false };
+  return {
+    localIp: '',
+    publicIp: '',
+    port: 0,
+    success: false,
+    tcpStreamPort: 0,
+    tcpStreamSuccess: false,
+  };
 }
 
 export const ProLink_HandlerIn_ServerState = {
@@ -5553,8 +5601,14 @@ export const ProLink_HandlerIn_ServerState = {
     if (message.port !== 0) {
       writer.uint32(24).uint32(message.port);
     }
-    if (message.success === true) {
+    if (message.success !== false) {
       writer.uint32(32).bool(message.success);
+    }
+    if (message.tcpStreamPort !== 0) {
+      writer.uint32(40).uint32(message.tcpStreamPort);
+    }
+    if (message.tcpStreamSuccess !== false) {
+      writer.uint32(48).bool(message.tcpStreamSuccess);
     }
     return writer;
   },
@@ -5598,6 +5652,20 @@ export const ProLink_HandlerIn_ServerState = {
 
           message.success = reader.bool();
           continue;
+        case 5:
+          if (tag !== 40) {
+            break;
+          }
+
+          message.tcpStreamPort = reader.uint32();
+          continue;
+        case 6:
+          if (tag !== 48) {
+            break;
+          }
+
+          message.tcpStreamSuccess = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -5617,6 +5685,12 @@ export const ProLink_HandlerIn_ServerState = {
       success: isSet(object.success)
         ? globalThis.Boolean(object.success)
         : false,
+      tcpStreamPort: isSet(object.tcpStreamPort)
+        ? globalThis.Number(object.tcpStreamPort)
+        : 0,
+      tcpStreamSuccess: isSet(object.tcpStreamSuccess)
+        ? globalThis.Boolean(object.tcpStreamSuccess)
+        : false,
     };
   },
 
@@ -5631,8 +5705,14 @@ export const ProLink_HandlerIn_ServerState = {
     if (message.port !== 0) {
       obj.port = Math.round(message.port);
     }
-    if (message.success === true) {
+    if (message.success !== false) {
       obj.success = message.success;
+    }
+    if (message.tcpStreamPort !== 0) {
+      obj.tcpStreamPort = Math.round(message.tcpStreamPort);
+    }
+    if (message.tcpStreamSuccess !== false) {
+      obj.tcpStreamSuccess = message.tcpStreamSuccess;
     }
     return obj;
   },
@@ -5650,6 +5730,8 @@ export const ProLink_HandlerIn_ServerState = {
     message.publicIp = object.publicIp ?? '';
     message.port = object.port ?? 0;
     message.success = object.success ?? false;
+    message.tcpStreamPort = object.tcpStreamPort ?? 0;
+    message.tcpStreamSuccess = object.tcpStreamSuccess ?? false;
     return message;
   },
 };
@@ -6116,7 +6198,7 @@ export const ProLink_HandlerOut_GroupJoinConfirmation = {
     message: ProLink_HandlerOut_GroupJoinConfirmation,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.accept === true) {
+    if (message.accept !== false) {
       writer.uint32(8).bool(message.accept);
     }
     return writer;
@@ -6157,7 +6239,7 @@ export const ProLink_HandlerOut_GroupJoinConfirmation = {
 
   toJSON(message: ProLink_HandlerOut_GroupJoinConfirmation): unknown {
     const obj: any = {};
-    if (message.accept === true) {
+    if (message.accept !== false) {
       obj.accept = message.accept;
     }
     return obj;
@@ -8552,7 +8634,7 @@ export const NetworkAPI_Action_APIPrerollComplete = {
     if (message.id !== 0) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.failed === true) {
+    if (message.failed !== false) {
       writer.uint32(16).bool(message.failed);
     }
     if (message.latency !== 0) {
@@ -8615,7 +8697,7 @@ export const NetworkAPI_Action_APIPrerollComplete = {
     if (message.id !== 0) {
       obj.id = Math.round(message.id);
     }
-    if (message.failed === true) {
+    if (message.failed !== false) {
       obj.failed = message.failed;
     }
     if (message.latency !== 0) {
@@ -11136,7 +11218,7 @@ export const NetworkAPI_Action_APIMessage_ClearMessage = {
 };
 
 function createBaseNetworkAPI_Action_APIMacro(): NetworkAPI_Action_APIMacro {
-  return { identifier: undefined };
+  return { identifier: undefined, indexPathComponents: [] };
 }
 
 export const NetworkAPI_Action_APIMacro = {
@@ -11148,6 +11230,12 @@ export const NetworkAPI_Action_APIMacro = {
       NetworkAPI_IndexOrNameIdentifier.encode(
         message.identifier,
         writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    for (const v of message.indexPathComponents) {
+      NetworkAPI_IndexOrNameIdentifier.encode(
+        v!,
+        writer.uint32(18).fork(),
       ).ldelim();
     }
     return writer;
@@ -11174,6 +11262,15 @@ export const NetworkAPI_Action_APIMacro = {
             reader.uint32(),
           );
           continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.indexPathComponents.push(
+            NetworkAPI_IndexOrNameIdentifier.decode(reader, reader.uint32()),
+          );
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -11188,6 +11285,11 @@ export const NetworkAPI_Action_APIMacro = {
       identifier: isSet(object.identifier)
         ? NetworkAPI_IndexOrNameIdentifier.fromJSON(object.identifier)
         : undefined,
+      indexPathComponents: globalThis.Array.isArray(object?.indexPathComponents)
+        ? object.indexPathComponents.map((e: any) =>
+            NetworkAPI_IndexOrNameIdentifier.fromJSON(e),
+          )
+        : [],
     };
   },
 
@@ -11196,6 +11298,11 @@ export const NetworkAPI_Action_APIMacro = {
     if (message.identifier !== undefined) {
       obj.identifier = NetworkAPI_IndexOrNameIdentifier.toJSON(
         message.identifier,
+      );
+    }
+    if (message.indexPathComponents?.length) {
+      obj.indexPathComponents = message.indexPathComponents.map((e) =>
+        NetworkAPI_IndexOrNameIdentifier.toJSON(e),
       );
     }
     return obj;
@@ -11214,6 +11321,10 @@ export const NetworkAPI_Action_APIMacro = {
       object.identifier !== undefined && object.identifier !== null
         ? NetworkAPI_IndexOrNameIdentifier.fromPartial(object.identifier)
         : undefined;
+    message.indexPathComponents =
+      object.indexPathComponents?.map((e) =>
+        NetworkAPI_IndexOrNameIdentifier.fromPartial(e),
+      ) || [];
     return message;
   },
 };

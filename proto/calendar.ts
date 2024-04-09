@@ -122,7 +122,7 @@ export const Calendar = {
     for (const v of message.events) {
       Calendar_Event.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.active === true) {
+    if (message.active !== false) {
       writer.uint32(16).bool(message.active);
     }
     return writer;
@@ -173,7 +173,7 @@ export const Calendar = {
     if (message.events?.length) {
       obj.events = message.events.map((e) => Calendar_Event.toJSON(e));
     }
-    if (message.active === true) {
+    if (message.active !== false) {
       obj.active = message.active;
     }
     return obj;

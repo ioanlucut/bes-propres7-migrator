@@ -2,9 +2,9 @@ import { convertSongToProPresenter7 } from './proPresenter7SongConverter';
 import { SequenceChar, Song, SongSection } from './types';
 import { getMatchingGroup } from './proPresenterMatchingGroupDeriver';
 import { Presentation_CCLI } from '../proto/presentation';
-import { Graphics_Text_Attributes_Font } from '../proto/graphicsData';
 import { parseSong } from './songsParser';
 import { SONG_WITH_SUBSECTIONS_MOCK_FILE_CONTENT } from '../mocks';
+import { Font } from '../proto/font';
 
 jest.mock('crypto', () => {
   let index = 1;
@@ -28,7 +28,7 @@ const ANY_CONFIG = {
     size: 58,
     family: 'CMG Sans Cn CAPS',
     bold: true,
-  } as Graphics_Text_Attributes_Font,
+  } as Font,
   graphicSize: {
     width: 1920,
     height: 1080,

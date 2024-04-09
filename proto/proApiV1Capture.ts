@@ -601,7 +601,7 @@ export const APIV1RTMPCapture = {
     if (message.encoding !== '') {
       writer.uint32(26).string(message.encoding);
     }
-    if (message.saveLocal === true) {
+    if (message.saveLocal !== false) {
       writer.uint32(32).bool(message.saveLocal);
     }
     if (message.fileLocation !== '') {
@@ -689,7 +689,7 @@ export const APIV1RTMPCapture = {
     if (message.encoding !== '') {
       obj.encoding = message.encoding;
     }
-    if (message.saveLocal === true) {
+    if (message.saveLocal !== false) {
       obj.saveLocal = message.saveLocal;
     }
     if (message.fileLocation !== '') {

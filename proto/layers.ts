@@ -271,10 +271,10 @@ export const Layer = {
     if (message.color !== undefined) {
       Color.encode(message.color, writer.uint32(26).fork()).ldelim();
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       writer.uint32(32).bool(message.muted);
     }
-    if (message.hidden === true) {
+    if (message.hidden !== false) {
       writer.uint32(40).bool(message.hidden);
     }
     if (message.blendMode !== 0) {
@@ -482,10 +482,10 @@ export const Layer = {
     if (message.color !== undefined) {
       obj.color = Color.toJSON(message.color);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       obj.muted = message.muted;
     }
-    if (message.hidden === true) {
+    if (message.hidden !== false) {
       obj.hidden = message.hidden;
     }
     if (message.blendMode !== 0) {
@@ -1002,7 +1002,7 @@ export const Layer_Blending_Matte_Alpha = {
     message: Layer_Blending_Matte_Alpha,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.inverted === true) {
+    if (message.inverted !== false) {
       writer.uint32(8).bool(message.inverted);
     }
     return writer;
@@ -1045,7 +1045,7 @@ export const Layer_Blending_Matte_Alpha = {
 
   toJSON(message: Layer_Blending_Matte_Alpha): unknown {
     const obj: any = {};
-    if (message.inverted === true) {
+    if (message.inverted !== false) {
       obj.inverted = message.inverted;
     }
     return obj;
@@ -1074,7 +1074,7 @@ export const Layer_Blending_Matte_Luma = {
     message: Layer_Blending_Matte_Luma,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.inverted === true) {
+    if (message.inverted !== false) {
       writer.uint32(8).bool(message.inverted);
     }
     return writer;
@@ -1117,7 +1117,7 @@ export const Layer_Blending_Matte_Luma = {
 
   toJSON(message: Layer_Blending_Matte_Luma): unknown {
     const obj: any = {};
-    if (message.inverted === true) {
+    if (message.inverted !== false) {
       obj.inverted = message.inverted;
     }
     return obj;

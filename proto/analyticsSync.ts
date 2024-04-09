@@ -135,22 +135,22 @@ export const Sync_Local = {
     if (message.syncType !== 0) {
       writer.uint32(8).int32(message.syncType);
     }
-    if (message.includeLibrary === true) {
+    if (message.includeLibrary !== false) {
       writer.uint32(16).bool(message.includeLibrary);
     }
-    if (message.includeMedia === true) {
+    if (message.includeMedia !== false) {
       writer.uint32(24).bool(message.includeMedia);
     }
-    if (message.includePlaylists === true) {
+    if (message.includePlaylists !== false) {
       writer.uint32(32).bool(message.includePlaylists);
     }
-    if (message.includeThemes === true) {
+    if (message.includeThemes !== false) {
       writer.uint32(40).bool(message.includeThemes);
     }
-    if (message.includeSupportFiles === true) {
+    if (message.includeSupportFiles !== false) {
       writer.uint32(48).bool(message.includeSupportFiles);
     }
-    if (message.replaceFiles === true) {
+    if (message.replaceFiles !== false) {
       writer.uint32(56).bool(message.replaceFiles);
     }
     return writer;
@@ -253,22 +253,22 @@ export const Sync_Local = {
     if (message.syncType !== 0) {
       obj.syncType = sync_Local_SyncTypeToJSON(message.syncType);
     }
-    if (message.includeLibrary === true) {
+    if (message.includeLibrary !== false) {
       obj.includeLibrary = message.includeLibrary;
     }
-    if (message.includeMedia === true) {
+    if (message.includeMedia !== false) {
       obj.includeMedia = message.includeMedia;
     }
-    if (message.includePlaylists === true) {
+    if (message.includePlaylists !== false) {
       obj.includePlaylists = message.includePlaylists;
     }
-    if (message.includeThemes === true) {
+    if (message.includeThemes !== false) {
       obj.includeThemes = message.includeThemes;
     }
-    if (message.includeSupportFiles === true) {
+    if (message.includeSupportFiles !== false) {
       obj.includeSupportFiles = message.includeSupportFiles;
     }
-    if (message.replaceFiles === true) {
+    if (message.replaceFiles !== false) {
       obj.replaceFiles = message.replaceFiles;
     }
     return obj;

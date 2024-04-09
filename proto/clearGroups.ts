@@ -389,7 +389,7 @@ export const ClearGroupsDocument_ClearGroup = {
     for (const v of message.layerTargets) {
       Action_ClearType.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.isHiddenInPreview === true) {
+    if (message.isHiddenInPreview !== false) {
       writer.uint32(32).bool(message.isHiddenInPreview);
     }
     if (message.imageData.length !== 0) {
@@ -398,7 +398,7 @@ export const ClearGroupsDocument_ClearGroup = {
     if (message.imageType !== 0) {
       writer.uint32(48).int32(message.imageType);
     }
-    if (message.isIconTinted === true) {
+    if (message.isIconTinted !== false) {
       writer.uint32(56).bool(message.isIconTinted);
     }
     if (message.iconTintColor !== undefined) {
@@ -409,7 +409,7 @@ export const ClearGroupsDocument_ClearGroup = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.clearPresentationNextSlide === true) {
+    if (message.clearPresentationNextSlide !== false) {
       writer.uint32(80).bool(message.clearPresentationNextSlide);
     }
     return writer;
@@ -563,7 +563,7 @@ export const ClearGroupsDocument_ClearGroup = {
         Action_ClearType.toJSON(e),
       );
     }
-    if (message.isHiddenInPreview === true) {
+    if (message.isHiddenInPreview !== false) {
       obj.isHiddenInPreview = message.isHiddenInPreview;
     }
     if (message.imageData.length !== 0) {
@@ -574,7 +574,7 @@ export const ClearGroupsDocument_ClearGroup = {
         message.imageType,
       );
     }
-    if (message.isIconTinted === true) {
+    if (message.isIconTinted !== false) {
       obj.isIconTinted = message.isIconTinted;
     }
     if (message.iconTintColor !== undefined) {
@@ -585,7 +585,7 @@ export const ClearGroupsDocument_ClearGroup = {
         action_ContentDestinationToJSON(e),
       );
     }
-    if (message.clearPresentationNextSlide === true) {
+    if (message.clearPresentationNextSlide !== false) {
       obj.clearPresentationNextSlide = message.clearPresentationNextSlide;
     }
     return obj;
@@ -623,7 +623,7 @@ export const ClearGroupsDocument_ClearGroup = {
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
@@ -636,7 +636,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];

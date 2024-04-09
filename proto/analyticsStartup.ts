@@ -909,6 +909,9 @@ export interface Startup_Content {
   propsCount: number;
   stageLayoutCount: number;
   macrosCount: number;
+  macrosCollectionsCount: number;
+  macrosCustomIcons: number;
+  ubiquitousShowDirectory: boolean;
 }
 
 export interface Startup_Themes {
@@ -1870,10 +1873,10 @@ export const Startup_ScreenConfiguration_Output = {
     if (message.outputType !== 0) {
       writer.uint32(16).int32(message.outputType);
     }
-    if (message.colorCorrectionEnabled === true) {
+    if (message.colorCorrectionEnabled !== false) {
       writer.uint32(24).bool(message.colorCorrectionEnabled);
     }
-    if (message.cornerPinEnabled === true) {
+    if (message.cornerPinEnabled !== false) {
       writer.uint32(32).bool(message.cornerPinEnabled);
     }
     if (message.alignment !== 0) {
@@ -2015,10 +2018,10 @@ export const Startup_ScreenConfiguration_Output = {
         message.outputType,
       );
     }
-    if (message.colorCorrectionEnabled === true) {
+    if (message.colorCorrectionEnabled !== false) {
       obj.colorCorrectionEnabled = message.colorCorrectionEnabled;
     }
-    if (message.cornerPinEnabled === true) {
+    if (message.cornerPinEnabled !== false) {
       obj.cornerPinEnabled = message.cornerPinEnabled;
     }
     if (message.alignment !== 0) {
@@ -2074,7 +2077,7 @@ export const Startup_ScreenConfiguration_Single = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     return writer;
@@ -2132,7 +2135,7 @@ export const Startup_ScreenConfiguration_Single = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     return obj;
@@ -2165,7 +2168,7 @@ export const Startup_ScreenConfiguration_Mirrored = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     if (message.count !== 0) {
@@ -2234,7 +2237,7 @@ export const Startup_ScreenConfiguration_Mirrored = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     if (message.count !== 0) {
@@ -2273,7 +2276,7 @@ export const Startup_ScreenConfiguration_EdgeBlend = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     if (message.count !== 0) {
@@ -2342,7 +2345,7 @@ export const Startup_ScreenConfiguration_EdgeBlend = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     if (message.count !== 0) {
@@ -2381,7 +2384,7 @@ export const Startup_ScreenConfiguration_Grouped = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     if (message.columns !== 0) {
@@ -2461,7 +2464,7 @@ export const Startup_ScreenConfiguration_Grouped = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     if (message.columns !== 0) {
@@ -2607,31 +2610,31 @@ export const Startup_Preferences = {
     message: Startup_Preferences,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.houseOfWorship === true) {
+    if (message.houseOfWorship !== false) {
       writer.uint32(8).bool(message.houseOfWorship);
     }
-    if (message.hasCustomLogo === true) {
+    if (message.hasCustomLogo !== false) {
       writer.uint32(16).bool(message.hasCustomLogo);
     }
-    if (message.copyrightEnabled === true) {
+    if (message.copyrightEnabled !== false) {
       writer.uint32(24).bool(message.copyrightEnabled);
     }
     if (message.copyrightStyle !== 0) {
       writer.uint32(32).int32(message.copyrightStyle);
     }
-    if (message.copyrightHasLicense === true) {
+    if (message.copyrightHasLicense !== false) {
       writer.uint32(40).bool(message.copyrightHasLicense);
     }
     if (message.renderMode !== 0) {
       writer.uint32(48).int32(message.renderMode);
     }
-    if (message.suppressAutoStart === true) {
+    if (message.suppressAutoStart !== false) {
       writer.uint32(56).bool(message.suppressAutoStart);
     }
-    if (message.manageMediaAutomatically === true) {
+    if (message.manageMediaAutomatically !== false) {
       writer.uint32(64).bool(message.manageMediaAutomatically);
     }
-    if (message.searchPathsRelink === true) {
+    if (message.searchPathsRelink !== false) {
       writer.uint32(72).bool(message.searchPathsRelink);
     }
     if (message.updateChannel !== 0) {
@@ -2764,13 +2767,13 @@ export const Startup_Preferences = {
 
   toJSON(message: Startup_Preferences): unknown {
     const obj: any = {};
-    if (message.houseOfWorship === true) {
+    if (message.houseOfWorship !== false) {
       obj.houseOfWorship = message.houseOfWorship;
     }
-    if (message.hasCustomLogo === true) {
+    if (message.hasCustomLogo !== false) {
       obj.hasCustomLogo = message.hasCustomLogo;
     }
-    if (message.copyrightEnabled === true) {
+    if (message.copyrightEnabled !== false) {
       obj.copyrightEnabled = message.copyrightEnabled;
     }
     if (message.copyrightStyle !== 0) {
@@ -2778,19 +2781,19 @@ export const Startup_Preferences = {
         message.copyrightStyle,
       );
     }
-    if (message.copyrightHasLicense === true) {
+    if (message.copyrightHasLicense !== false) {
       obj.copyrightHasLicense = message.copyrightHasLicense;
     }
     if (message.renderMode !== 0) {
       obj.renderMode = startup_Preferences_RenderModeToJSON(message.renderMode);
     }
-    if (message.suppressAutoStart === true) {
+    if (message.suppressAutoStart !== false) {
       obj.suppressAutoStart = message.suppressAutoStart;
     }
-    if (message.manageMediaAutomatically === true) {
+    if (message.manageMediaAutomatically !== false) {
       obj.manageMediaAutomatically = message.manageMediaAutomatically;
     }
-    if (message.searchPathsRelink === true) {
+    if (message.searchPathsRelink !== false) {
       obj.searchPathsRelink = message.searchPathsRelink;
     }
     if (message.updateChannel !== 0) {
@@ -2838,16 +2841,16 @@ export const Startup_Screens = {
     message: Startup_Screens,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.showScreensLaunch === true) {
+    if (message.showScreensLaunch !== false) {
       writer.uint32(8).bool(message.showScreensLaunch);
     }
-    if (message.showPerformanceOnScreen === true) {
+    if (message.showPerformanceOnScreen !== false) {
       writer.uint32(16).bool(message.showPerformanceOnScreen);
     }
-    if (message.ignoreBackgroundColors === true) {
+    if (message.ignoreBackgroundColors !== false) {
       writer.uint32(24).bool(message.ignoreBackgroundColors);
     }
-    if (message.showKeynotePptScreens === true) {
+    if (message.showKeynotePptScreens !== false) {
       writer.uint32(32).bool(message.showKeynotePptScreens);
     }
     return writer;
@@ -2917,16 +2920,16 @@ export const Startup_Screens = {
 
   toJSON(message: Startup_Screens): unknown {
     const obj: any = {};
-    if (message.showScreensLaunch === true) {
+    if (message.showScreensLaunch !== false) {
       obj.showScreensLaunch = message.showScreensLaunch;
     }
-    if (message.showPerformanceOnScreen === true) {
+    if (message.showPerformanceOnScreen !== false) {
       obj.showPerformanceOnScreen = message.showPerformanceOnScreen;
     }
-    if (message.ignoreBackgroundColors === true) {
+    if (message.ignoreBackgroundColors !== false) {
       obj.ignoreBackgroundColors = message.ignoreBackgroundColors;
     }
-    if (message.showKeynotePptScreens === true) {
+    if (message.showKeynotePptScreens !== false) {
       obj.showKeynotePptScreens = message.showKeynotePptScreens;
     }
     return obj;
@@ -2966,25 +2969,25 @@ export const Startup_PlanningCenter = {
     message: Startup_PlanningCenter,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       writer.uint32(8).bool(message.loggedIn);
     }
-    if (message.autoUpdate === true) {
+    if (message.autoUpdate !== false) {
       writer.uint32(16).bool(message.autoUpdate);
     }
-    if (message.matchSongs === true) {
+    if (message.matchSongs !== false) {
       writer.uint32(24).bool(message.matchSongs);
     }
-    if (message.showHistory === true) {
+    if (message.showHistory !== false) {
       writer.uint32(32).bool(message.showHistory);
     }
-    if (message.makeArrangements === true) {
+    if (message.makeArrangements !== false) {
       writer.uint32(40).bool(message.makeArrangements);
     }
-    if (message.autoUpload === true) {
+    if (message.autoUpload !== false) {
       writer.uint32(48).bool(message.autoUpload);
     }
-    if (message.autoDownload === true) {
+    if (message.autoDownload !== false) {
       writer.uint32(56).bool(message.autoDownload);
     }
     return writer;
@@ -3087,25 +3090,25 @@ export const Startup_PlanningCenter = {
 
   toJSON(message: Startup_PlanningCenter): unknown {
     const obj: any = {};
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       obj.loggedIn = message.loggedIn;
     }
-    if (message.autoUpdate === true) {
+    if (message.autoUpdate !== false) {
       obj.autoUpdate = message.autoUpdate;
     }
-    if (message.matchSongs === true) {
+    if (message.matchSongs !== false) {
       obj.matchSongs = message.matchSongs;
     }
-    if (message.showHistory === true) {
+    if (message.showHistory !== false) {
       obj.showHistory = message.showHistory;
     }
-    if (message.makeArrangements === true) {
+    if (message.makeArrangements !== false) {
       obj.makeArrangements = message.makeArrangements;
     }
-    if (message.autoUpload === true) {
+    if (message.autoUpload !== false) {
       obj.autoUpload = message.autoUpload;
     }
-    if (message.autoDownload === true) {
+    if (message.autoDownload !== false) {
       obj.autoDownload = message.autoDownload;
     }
     return obj;
@@ -3140,7 +3143,7 @@ export const Startup_SongSelect = {
     message: Startup_SongSelect,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       writer.uint32(8).bool(message.loggedIn);
     }
     return writer;
@@ -3180,7 +3183,7 @@ export const Startup_SongSelect = {
 
   toJSON(message: Startup_SongSelect): unknown {
     const obj: any = {};
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       obj.loggedIn = message.loggedIn;
     }
     return obj;
@@ -3237,7 +3240,7 @@ export const Startup_Audio = {
     if (message.mainDelay !== 0) {
       writer.uint32(48).int32(message.mainDelay);
     }
-    if (message.sdiNdi === true) {
+    if (message.sdiNdi !== false) {
       writer.uint32(56).bool(message.sdiNdi);
     }
     if (message.sdiNdiRouting !== 0) {
@@ -3381,7 +3384,7 @@ export const Startup_Audio = {
     if (message.mainDelay !== 0) {
       obj.mainDelay = Math.round(message.mainDelay);
     }
-    if (message.sdiNdi === true) {
+    if (message.sdiNdi !== false) {
       obj.sdiNdi = message.sdiNdi;
     }
     if (message.sdiNdiRouting !== 0) {
@@ -3498,7 +3501,7 @@ export const Startup_Resi = {
     message: Startup_Resi,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       writer.uint32(8).bool(message.loggedIn);
     }
     return writer;
@@ -3538,7 +3541,7 @@ export const Startup_Resi = {
 
   toJSON(message: Startup_Resi): unknown {
     const obj: any = {};
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       obj.loggedIn = message.loggedIn;
     }
     return obj;
@@ -3591,7 +3594,7 @@ export const Startup_Interface = {
     if (message.audioOutline !== 0) {
       writer.uint32(24).int32(message.audioOutline);
     }
-    if (message.continuousPlaylist === true) {
+    if (message.continuousPlaylist !== false) {
       writer.uint32(32).bool(message.continuousPlaylist);
     }
     if (message.mediaBin !== 0) {
@@ -3621,7 +3624,7 @@ export const Startup_Interface = {
     if (message.mediaTransition !== '') {
       writer.uint32(106).string(message.mediaTransition);
     }
-    if (message.audioShuffle === true) {
+    if (message.audioShuffle !== false) {
       writer.uint32(112).bool(message.audioShuffle);
     }
     return writer;
@@ -3808,7 +3811,7 @@ export const Startup_Interface = {
         message.audioOutline,
       );
     }
-    if (message.continuousPlaylist === true) {
+    if (message.continuousPlaylist !== false) {
       obj.continuousPlaylist = message.continuousPlaylist;
     }
     if (message.mediaBin !== 0) {
@@ -3848,7 +3851,7 @@ export const Startup_Interface = {
     if (message.mediaTransition !== '') {
       obj.mediaTransition = message.mediaTransition;
     }
-    if (message.audioShuffle === true) {
+    if (message.audioShuffle !== false) {
       obj.audioShuffle = message.audioShuffle;
     }
     return obj;
@@ -3903,6 +3906,9 @@ function createBaseStartup_Content(): Startup_Content {
     propsCount: 0,
     stageLayoutCount: 0,
     macrosCount: 0,
+    macrosCollectionsCount: 0,
+    macrosCustomIcons: 0,
+    ubiquitousShowDirectory: false,
   };
 }
 
@@ -3964,6 +3970,15 @@ export const Startup_Content = {
     }
     if (message.macrosCount !== 0) {
       writer.uint32(144).int32(message.macrosCount);
+    }
+    if (message.macrosCollectionsCount !== 0) {
+      writer.uint32(152).int32(message.macrosCollectionsCount);
+    }
+    if (message.macrosCustomIcons !== 0) {
+      writer.uint32(160).int32(message.macrosCustomIcons);
+    }
+    if (message.ubiquitousShowDirectory !== false) {
+      writer.uint32(168).bool(message.ubiquitousShowDirectory);
     }
     return writer;
   },
@@ -4102,6 +4117,27 @@ export const Startup_Content = {
 
           message.macrosCount = reader.int32();
           continue;
+        case 19:
+          if (tag !== 152) {
+            break;
+          }
+
+          message.macrosCollectionsCount = reader.int32();
+          continue;
+        case 20:
+          if (tag !== 160) {
+            break;
+          }
+
+          message.macrosCustomIcons = reader.int32();
+          continue;
+        case 21:
+          if (tag !== 168) {
+            break;
+          }
+
+          message.ubiquitousShowDirectory = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4167,6 +4203,15 @@ export const Startup_Content = {
       macrosCount: isSet(object.macrosCount)
         ? globalThis.Number(object.macrosCount)
         : 0,
+      macrosCollectionsCount: isSet(object.macrosCollectionsCount)
+        ? globalThis.Number(object.macrosCollectionsCount)
+        : 0,
+      macrosCustomIcons: isSet(object.macrosCustomIcons)
+        ? globalThis.Number(object.macrosCustomIcons)
+        : 0,
+      ubiquitousShowDirectory: isSet(object.ubiquitousShowDirectory)
+        ? globalThis.Boolean(object.ubiquitousShowDirectory)
+        : false,
     };
   },
 
@@ -4242,6 +4287,15 @@ export const Startup_Content = {
     if (message.macrosCount !== 0) {
       obj.macrosCount = Math.round(message.macrosCount);
     }
+    if (message.macrosCollectionsCount !== 0) {
+      obj.macrosCollectionsCount = Math.round(message.macrosCollectionsCount);
+    }
+    if (message.macrosCustomIcons !== 0) {
+      obj.macrosCustomIcons = Math.round(message.macrosCustomIcons);
+    }
+    if (message.ubiquitousShowDirectory !== false) {
+      obj.ubiquitousShowDirectory = message.ubiquitousShowDirectory;
+    }
     return obj;
   },
 
@@ -4275,6 +4329,9 @@ export const Startup_Content = {
     message.propsCount = object.propsCount ?? 0;
     message.stageLayoutCount = object.stageLayoutCount ?? 0;
     message.macrosCount = object.macrosCount ?? 0;
+    message.macrosCollectionsCount = object.macrosCollectionsCount ?? 0;
+    message.macrosCustomIcons = object.macrosCustomIcons ?? 0;
+    message.ubiquitousShowDirectory = object.ubiquitousShowDirectory ?? false;
     return message;
   },
 };
@@ -4778,7 +4835,7 @@ export const Startup_NetworkLink = {
     message: Startup_NetworkLink,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.memberCount !== 0) {
@@ -4831,7 +4888,7 @@ export const Startup_NetworkLink = {
 
   toJSON(message: Startup_NetworkLink): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.memberCount !== 0) {

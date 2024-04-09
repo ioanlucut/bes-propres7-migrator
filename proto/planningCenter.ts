@@ -672,7 +672,7 @@ export const PlanningCenterPlan_PlanItem_Attachment = {
     if (message.pcoIdNum !== 0) {
       writer.uint32(40).uint32(message.pcoIdNum);
     }
-    if (message.needsUpdate === true) {
+    if (message.needsUpdate !== false) {
       writer.uint32(48).bool(message.needsUpdate);
     }
     if (message.updateDate !== undefined) {
@@ -800,7 +800,7 @@ export const PlanningCenterPlan_PlanItem_Attachment = {
     if (message.pcoIdNum !== 0) {
       obj.pcoIdNum = Math.round(message.pcoIdNum);
     }
-    if (message.needsUpdate === true) {
+    if (message.needsUpdate !== false) {
       obj.needsUpdate = message.needsUpdate;
     }
     if (message.updateDate !== undefined) {

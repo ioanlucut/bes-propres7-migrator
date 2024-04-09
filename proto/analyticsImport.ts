@@ -178,7 +178,7 @@ export const Import_SongSelect = {
     if (message.templateSlideTextElementCount !== 0) {
       writer.uint32(8).int32(message.templateSlideTextElementCount);
     }
-    if (message.importIntoPlaylist === true) {
+    if (message.importIntoPlaylist !== false) {
       writer.uint32(16).bool(message.importIntoPlaylist);
     }
     if (message.lineDelimiter !== 0) {
@@ -187,7 +187,7 @@ export const Import_SongSelect = {
     if (message.lineDelimiterCount !== 0) {
       writer.uint32(32).int32(message.lineDelimiterCount);
     }
-    if (message.didOpenEditView === true) {
+    if (message.didOpenEditView !== false) {
       writer.uint32(40).bool(message.didOpenEditView);
     }
     return writer;
@@ -272,7 +272,7 @@ export const Import_SongSelect = {
         message.templateSlideTextElementCount,
       );
     }
-    if (message.importIntoPlaylist === true) {
+    if (message.importIntoPlaylist !== false) {
       obj.importIntoPlaylist = message.importIntoPlaylist;
     }
     if (message.lineDelimiter !== 0) {
@@ -283,7 +283,7 @@ export const Import_SongSelect = {
     if (message.lineDelimiterCount !== 0) {
       obj.lineDelimiterCount = Math.round(message.lineDelimiterCount);
     }
-    if (message.didOpenEditView === true) {
+    if (message.didOpenEditView !== false) {
       obj.didOpenEditView = message.didOpenEditView;
     }
     return obj;

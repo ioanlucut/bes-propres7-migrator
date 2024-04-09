@@ -8,6 +8,7 @@ import {
   aPIV1ContentTypeToJSON,
 } from './proApiV1ContentType';
 import { APIV1Identifier } from './proApiV1Identifier';
+import { APIV1PlaylistPresentationItem } from './proApiV1PresentationPlaylistItem';
 
 export const protobufPackage = 'rv.data';
 
@@ -66,6 +67,7 @@ export interface APIV1PlaylistItem {
   isPco: boolean;
   headerColor: APIV1Color | undefined;
   duration: number | undefined;
+  presentationInfo: APIV1PlaylistPresentationItem | undefined;
 }
 
 export enum APIV1PlaylistItem_APIV1PlaylistItemType {
@@ -502,6 +504,7 @@ function createBaseAPIV1PlaylistItem(): APIV1PlaylistItem {
     isPco: false,
     headerColor: undefined,
     duration: undefined,
+    presentationInfo: undefined,
   };
 }
 
@@ -516,10 +519,10 @@ export const APIV1PlaylistItem = {
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.isHidden === true) {
+    if (message.isHidden !== false) {
       writer.uint32(24).bool(message.isHidden);
     }
-    if (message.isPco === true) {
+    if (message.isPco !== false) {
       writer.uint32(32).bool(message.isPco);
     }
     if (message.headerColor !== undefined) {
@@ -529,6 +532,12 @@ export const APIV1PlaylistItem = {
       UInt32Value.encode(
         { value: message.duration! },
         writer.uint32(50).fork(),
+      ).ldelim();
+    }
+    if (message.presentationInfo !== undefined) {
+      APIV1PlaylistPresentationItem.encode(
+        message.presentationInfo,
+        writer.uint32(58).fork(),
       ).ldelim();
     }
     return writer;
@@ -584,6 +593,16 @@ export const APIV1PlaylistItem = {
 
           message.duration = UInt32Value.decode(reader, reader.uint32()).value;
           continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.presentationInfo = APIV1PlaylistPresentationItem.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -607,6 +626,9 @@ export const APIV1PlaylistItem = {
         ? APIV1Color.fromJSON(object.headerColor)
         : undefined,
       duration: isSet(object.duration) ? Number(object.duration) : undefined,
+      presentationInfo: isSet(object.presentationInfo)
+        ? APIV1PlaylistPresentationItem.fromJSON(object.presentationInfo)
+        : undefined,
     };
   },
 
@@ -618,10 +640,10 @@ export const APIV1PlaylistItem = {
     if (message.type !== 0) {
       obj.type = aPIV1PlaylistItem_APIV1PlaylistItemTypeToJSON(message.type);
     }
-    if (message.isHidden === true) {
+    if (message.isHidden !== false) {
       obj.isHidden = message.isHidden;
     }
-    if (message.isPco === true) {
+    if (message.isPco !== false) {
       obj.isPco = message.isPco;
     }
     if (message.headerColor !== undefined) {
@@ -629,6 +651,11 @@ export const APIV1PlaylistItem = {
     }
     if (message.duration !== undefined) {
       obj.duration = message.duration;
+    }
+    if (message.presentationInfo !== undefined) {
+      obj.presentationInfo = APIV1PlaylistPresentationItem.toJSON(
+        message.presentationInfo,
+      );
     }
     return obj;
   },
@@ -654,6 +681,10 @@ export const APIV1PlaylistItem = {
         ? APIV1Color.fromPartial(object.headerColor)
         : undefined;
     message.duration = object.duration ?? undefined;
+    message.presentationInfo =
+      object.presentationInfo !== undefined && object.presentationInfo !== null
+        ? APIV1PlaylistPresentationItem.fromPartial(object.presentationInfo)
+        : undefined;
     return message;
   },
 };
@@ -4098,7 +4129,7 @@ export const APIV1PlaylistResponse_EmptyMessage = {
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
@@ -4111,7 +4142,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];

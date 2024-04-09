@@ -108,6 +108,7 @@ message OutputDisplay {
   .rv.data.OutputDisplay.Type type = 8;
   .rv.data.DisplayMode mode = 9;
   string render_id = 10;
+  int32 video_delay = 12;
   oneof HardwareOptions {
     .rv.data.OutputDisplay.Blackmagic blackmagic = 11;
   }

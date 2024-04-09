@@ -596,7 +596,7 @@ export const APIV1Timer = {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.countdown !== undefined) {
@@ -704,7 +704,7 @@ export const APIV1Timer = {
     if (message.id !== undefined) {
       obj.id = APIV1Identifier.toJSON(message.id);
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       obj.allowsOverrun = message.allowsOverrun;
     }
     if (message.countdown !== undefined) {
@@ -927,7 +927,7 @@ export const APIV1Timer_APIV1TimerElapsed = {
     if (message.endTime !== 0) {
       writer.uint32(16).int32(message.endTime);
     }
-    if (message.hasEndTime === true) {
+    if (message.hasEndTime !== false) {
       writer.uint32(24).bool(message.hasEndTime);
     }
     return writer;
@@ -994,7 +994,7 @@ export const APIV1Timer_APIV1TimerElapsed = {
     if (message.endTime !== 0) {
       obj.endTime = Math.round(message.endTime);
     }
-    if (message.hasEndTime === true) {
+    if (message.hasEndTime !== false) {
       obj.hasEndTime = message.hasEndTime;
     }
     return obj;
@@ -1488,7 +1488,7 @@ export const APIV1TimerRequest_CreateTimer = {
     if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.countdown !== undefined) {
@@ -1599,7 +1599,7 @@ export const APIV1TimerRequest_CreateTimer = {
     if (message.name !== '') {
       obj.name = message.name;
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       obj.allowsOverrun = message.allowsOverrun;
     }
     if (message.countdown !== undefined) {

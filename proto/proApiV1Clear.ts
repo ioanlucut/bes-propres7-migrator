@@ -214,13 +214,13 @@ export const APIV1ClearGroup = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.stopTimelineAnnouncements === true) {
+    if (message.stopTimelineAnnouncements !== false) {
       writer.uint32(40).bool(message.stopTimelineAnnouncements);
     }
-    if (message.stopTimelinePresentation === true) {
+    if (message.stopTimelinePresentation !== false) {
       writer.uint32(48).bool(message.stopTimelinePresentation);
     }
-    if (message.clearNextPresentation === true) {
+    if (message.clearNextPresentation !== false) {
       writer.uint32(56).bool(message.clearNextPresentation);
     }
     return writer;
@@ -340,13 +340,13 @@ export const APIV1ClearGroup = {
         aPIV1ClearGroup_APIV1ClearGroupLayerTypeToJSON(e),
       );
     }
-    if (message.stopTimelineAnnouncements === true) {
+    if (message.stopTimelineAnnouncements !== false) {
       obj.stopTimelineAnnouncements = message.stopTimelineAnnouncements;
     }
-    if (message.stopTimelinePresentation === true) {
+    if (message.stopTimelinePresentation !== false) {
       obj.stopTimelinePresentation = message.stopTimelinePresentation;
     }
-    if (message.clearNextPresentation === true) {
+    if (message.clearNextPresentation !== false) {
       obj.clearNextPresentation = message.clearNextPresentation;
     }
     return obj;
@@ -2260,7 +2260,7 @@ export const APIV1ClearResponse_PutGroupIcon = {
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
@@ -2273,7 +2273,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];

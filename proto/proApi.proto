@@ -43,6 +43,8 @@ message ProApiNetworkConfiguration {
   string stage_password = 10;
   bool link_enable = 11;
   string web_resource_root = 12;
+  uint32 tcp_stream_port = 13;
+  bool tcp_stream_enable = 14;
 }
 
 message ProLink {
@@ -249,6 +251,8 @@ message ProLink {
       string public_ip = 2;
       uint32 port = 3;
       bool success = 4;
+      uint32 tcp_stream_port = 5;
+      bool tcp_stream_success = 6;
     }
 
     message ConfigurationRequest {
@@ -561,6 +565,7 @@ message NetworkAPI {
 
     message API_Macro {
       .rv.data.NetworkAPI.IndexOrNameIdentifier identifier = 1;
+      repeated .rv.data.NetworkAPI.IndexOrNameIdentifier index_path_components = 2;
     }
 
     message API_Look {

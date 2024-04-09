@@ -727,7 +727,7 @@ export const Presentation_CCLI = {
     if (message.songNumber !== 0) {
       writer.uint32(48).uint32(message.songNumber);
     }
-    if (message.display === true) {
+    if (message.display !== false) {
       writer.uint32(56).bool(message.display);
     }
     if (message.album !== '') {
@@ -867,7 +867,7 @@ export const Presentation_CCLI = {
     if (message.songNumber !== 0) {
       obj.songNumber = Math.round(message.songNumber);
     }
-    if (message.display === true) {
+    if (message.display !== false) {
       obj.display = message.display;
     }
     if (message.album !== '') {
@@ -1136,13 +1136,13 @@ export const Presentation_Timeline = {
     if (message.duration !== 0) {
       writer.uint32(41).double(message.duration);
     }
-    if (message.loop === true) {
+    if (message.loop !== false) {
       writer.uint32(48).bool(message.loop);
     }
     if (message.audioAction !== undefined) {
       Action.encode(message.audioAction, writer.uint32(66).fork()).ldelim();
     }
-    if (message.timecodeEnable === true) {
+    if (message.timecodeEnable !== false) {
       writer.uint32(72).bool(message.timecodeEnable);
     }
     if (message.timecodeOffset !== 0) {
@@ -1257,13 +1257,13 @@ export const Presentation_Timeline = {
     if (message.duration !== 0) {
       obj.duration = message.duration;
     }
-    if (message.loop === true) {
+    if (message.loop !== false) {
       obj.loop = message.loop;
     }
     if (message.audioAction !== undefined) {
       obj.audioAction = Action.toJSON(message.audioAction);
     }
-    if (message.timecodeEnable === true) {
+    if (message.timecodeEnable !== false) {
       obj.timecodeEnable = message.timecodeEnable;
     }
     if (message.timecodeOffset !== 0) {
@@ -1919,7 +1919,7 @@ export const Presentation_Music = {
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
@@ -1932,7 +1932,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];

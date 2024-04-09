@@ -1542,7 +1542,7 @@ export const Slide = {
     for (const v of message.guidelines) {
       AlignmentGuide.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.drawsBackgroundColor === true) {
+    if (message.drawsBackgroundColor !== false) {
       writer.uint32(32).bool(message.drawsBackgroundColor);
     }
     if (message.backgroundColor !== undefined) {
@@ -1662,7 +1662,7 @@ export const Slide = {
     if (message.guidelines?.length) {
       obj.guidelines = message.guidelines.map((e) => AlignmentGuide.toJSON(e));
     }
-    if (message.drawsBackgroundColor === true) {
+    if (message.drawsBackgroundColor !== false) {
       obj.drawsBackgroundColor = message.drawsBackgroundColor;
     }
     if (message.backgroundColor !== undefined) {
@@ -3501,7 +3501,7 @@ export const Slide_Element_DataLink_Ticker = {
     if (message.playRate !== 0) {
       writer.uint32(33).double(message.playRate);
     }
-    if (message.shouldLoop === true) {
+    if (message.shouldLoop !== false) {
       writer.uint32(40).bool(message.shouldLoop);
     }
     if (message.loopDelay !== 0) {
@@ -3638,7 +3638,7 @@ export const Slide_Element_DataLink_Ticker = {
     if (message.playRate !== 0) {
       obj.playRate = message.playRate;
     }
-    if (message.shouldLoop === true) {
+    if (message.shouldLoop !== false) {
       obj.shouldLoop = message.shouldLoop;
     }
     if (message.loopDelay !== 0) {
@@ -5900,7 +5900,7 @@ export const Slide_Element_DataLink_SlideText = {
     if (message.sourceOption !== 0) {
       writer.uint32(16).int32(message.sourceOption);
     }
-    if (message.preserveNotesFormat === true) {
+    if (message.preserveNotesFormat !== false) {
       writer.uint32(24).bool(message.preserveNotesFormat);
     }
     if (message.nameToMatch !== '') {
@@ -6004,7 +6004,7 @@ export const Slide_Element_DataLink_SlideText = {
           message.sourceOption,
         );
     }
-    if (message.preserveNotesFormat === true) {
+    if (message.preserveNotesFormat !== false) {
       obj.preserveNotesFormat = message.preserveNotesFormat;
     }
     if (message.nameToMatch !== '') {
@@ -6120,7 +6120,7 @@ export const Slide_Element_DataLink_StageMessage = {
     message: Slide_Element_DataLink_StageMessage,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.shouldFlash === true) {
+    if (message.shouldFlash !== false) {
       writer.uint32(8).bool(message.shouldFlash);
     }
     if (message.flashColor !== undefined) {
@@ -6176,7 +6176,7 @@ export const Slide_Element_DataLink_StageMessage = {
 
   toJSON(message: Slide_Element_DataLink_StageMessage): unknown {
     const obj: any = {};
-    if (message.shouldFlash === true) {
+    if (message.shouldFlash !== false) {
       obj.shouldFlash = message.shouldFlash;
     }
     if (message.flashColor !== undefined) {
@@ -6233,7 +6233,7 @@ export const Slide_Element_DataLink_VideoCountdown = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.ignoreLoopingVideos === true) {
+    if (message.ignoreLoopingVideos !== false) {
       writer.uint32(32).bool(message.ignoreLoopingVideos);
     }
     if (message.videoCountdownSource !== 0) {
@@ -6336,7 +6336,7 @@ export const Slide_Element_DataLink_VideoCountdown = {
         Slide_Element_DataLink_ColorTrigger.toJSON(e),
       );
     }
-    if (message.ignoreLoopingVideos === true) {
+    if (message.ignoreLoopingVideos !== false) {
       obj.ignoreLoopingVideos = message.ignoreLoopingVideos;
     }
     if (message.videoCountdownSource !== 0) {
@@ -6403,7 +6403,7 @@ export const Slide_Element_DataLink_AudioCountdown = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.ignoreLoopingAudio === true) {
+    if (message.ignoreLoopingAudio !== false) {
       writer.uint32(32).bool(message.ignoreLoopingAudio);
     }
     return writer;
@@ -6491,7 +6491,7 @@ export const Slide_Element_DataLink_AudioCountdown = {
         Slide_Element_DataLink_ColorTrigger.toJSON(e),
       );
     }
-    if (message.ignoreLoopingAudio === true) {
+    if (message.ignoreLoopingAudio !== false) {
       obj.ignoreLoopingAudio = message.ignoreLoopingAudio;
     }
     return obj;
@@ -6971,7 +6971,7 @@ export const Slide_Element_DataLink_PlaylistItem = {
     if (message.playlistItemSource !== 0) {
       writer.uint32(8).int32(message.playlistItemSource);
     }
-    if (message.showArrangement === true) {
+    if (message.showArrangement !== false) {
       writer.uint32(16).bool(message.showArrangement);
     }
     return writer;
@@ -7032,7 +7032,7 @@ export const Slide_Element_DataLink_PlaylistItem = {
           message.playlistItemSource,
         );
     }
-    if (message.showArrangement === true) {
+    if (message.showArrangement !== false) {
       obj.showArrangement = message.showArrangement;
     }
     return obj;
@@ -7714,7 +7714,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
         writer.uint32(10).fork(),
       ).ldelim();
     }
-    if (message.shouldUseMarkerColor === true) {
+    if (message.shouldUseMarkerColor !== false) {
       writer.uint32(32).bool(message.shouldUseMarkerColor);
     }
     if (message.name !== undefined) {
@@ -7816,7 +7816,7 @@ export const Slide_Element_DataLink_PlaybackMarkerText = {
         message.identifier,
       );
     }
-    if (message.shouldUseMarkerColor === true) {
+    if (message.shouldUseMarkerColor !== false) {
       obj.shouldUseMarkerColor = message.shouldUseMarkerColor;
     }
     if (message.name !== undefined) {
@@ -8195,13 +8195,13 @@ export const Slide_Element_TextScroller = {
     message: Slide_Element_TextScroller,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.shouldScroll === true) {
+    if (message.shouldScroll !== false) {
       writer.uint32(8).bool(message.shouldScroll);
     }
     if (message.scrollRate !== 0) {
       writer.uint32(17).double(message.scrollRate);
     }
-    if (message.shouldRepeat === true) {
+    if (message.shouldRepeat !== false) {
       writer.uint32(24).bool(message.shouldRepeat);
     }
     if (message.repeatDistance !== 0) {
@@ -8210,7 +8210,7 @@ export const Slide_Element_TextScroller = {
     if (message.scrollingDirection !== 0) {
       writer.uint32(40).int32(message.scrollingDirection);
     }
-    if (message.startsOffScreen === true) {
+    if (message.startsOffScreen !== false) {
       writer.uint32(48).bool(message.startsOffScreen);
     }
     if (message.fadeLeft !== 0) {
@@ -8329,13 +8329,13 @@ export const Slide_Element_TextScroller = {
 
   toJSON(message: Slide_Element_TextScroller): unknown {
     const obj: any = {};
-    if (message.shouldScroll === true) {
+    if (message.shouldScroll !== false) {
       obj.shouldScroll = message.shouldScroll;
     }
     if (message.scrollRate !== 0) {
       obj.scrollRate = message.scrollRate;
     }
-    if (message.shouldRepeat === true) {
+    if (message.shouldRepeat !== false) {
       obj.shouldRepeat = message.shouldRepeat;
     }
     if (message.repeatDistance !== 0) {
@@ -8346,7 +8346,7 @@ export const Slide_Element_TextScroller = {
         message.scrollingDirection,
       );
     }
-    if (message.startsOffScreen === true) {
+    if (message.startsOffScreen !== false) {
       obj.startsOffScreen = message.startsOffScreen;
     }
     if (message.fadeLeft !== 0) {

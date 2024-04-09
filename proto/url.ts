@@ -643,7 +643,7 @@ export const URL_ExternalRelativePath_Win32ExternalVolume = {
     if (message.volumeName !== '') {
       writer.uint32(18).string(message.volumeName);
     }
-    if (message.networkShare === true) {
+    if (message.networkShare !== false) {
       writer.uint32(24).bool(message.networkShare);
     }
     return writer;
@@ -712,7 +712,7 @@ export const URL_ExternalRelativePath_Win32ExternalVolume = {
     if (message.volumeName !== '') {
       obj.volumeName = message.volumeName;
     }
-    if (message.networkShare === true) {
+    if (message.networkShare !== false) {
       obj.networkShare = message.networkShare;
     }
     return obj;

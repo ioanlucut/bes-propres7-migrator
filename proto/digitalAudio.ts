@@ -176,7 +176,7 @@ export const DigitalAudio_Setup = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.enableSdiNdiDevice === true) {
+    if (message.enableSdiNdiDevice !== false) {
       writer.uint32(32).bool(message.enableSdiNdiDevice);
     }
     if (message.sdiNdiDevice !== undefined) {
@@ -185,10 +185,10 @@ export const DigitalAudio_Setup = {
         writer.uint32(42).fork(),
       ).ldelim();
     }
-    if (message.monitorOnMains === true) {
+    if (message.monitorOnMains !== false) {
       writer.uint32(48).bool(message.monitorOnMains);
     }
-    if (message.disableMainOutputDevice === true) {
+    if (message.disableMainOutputDevice !== false) {
       writer.uint32(56).bool(message.disableMainOutputDevice);
     }
     return writer;
@@ -308,16 +308,16 @@ export const DigitalAudio_Setup = {
         message.mainOutputDevice,
       );
     }
-    if (message.enableSdiNdiDevice === true) {
+    if (message.enableSdiNdiDevice !== false) {
       obj.enableSdiNdiDevice = message.enableSdiNdiDevice;
     }
     if (message.sdiNdiDevice !== undefined) {
       obj.sdiNdiDevice = DigitalAudio_Device.toJSON(message.sdiNdiDevice);
     }
-    if (message.monitorOnMains === true) {
+    if (message.monitorOnMains !== false) {
       obj.monitorOnMains = message.monitorOnMains;
     }
-    if (message.disableMainOutputDevice === true) {
+    if (message.disableMainOutputDevice !== false) {
       obj.disableMainOutputDevice = message.disableMainOutputDevice;
     }
     return obj;
@@ -371,13 +371,13 @@ export const DigitalAudio_Bus = {
     if (message.name !== '') {
       writer.uint32(10).string(message.name);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       writer.uint32(16).bool(message.muted);
     }
-    if (message.solo === true) {
+    if (message.solo !== false) {
       writer.uint32(24).bool(message.solo);
     }
-    if (message.testTone === true) {
+    if (message.testTone !== false) {
       writer.uint32(32).bool(message.testTone);
     }
     if (message.masterLevel !== 0) {
@@ -457,13 +457,13 @@ export const DigitalAudio_Bus = {
     if (message.name !== '') {
       obj.name = message.name;
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       obj.muted = message.muted;
     }
-    if (message.solo === true) {
+    if (message.solo !== false) {
       obj.solo = message.solo;
     }
-    if (message.testTone === true) {
+    if (message.testTone !== false) {
       obj.testTone = message.testTone;
     }
     if (message.masterLevel !== 0) {
@@ -843,13 +843,13 @@ export const DigitalAudio_Device_Channel = {
     message: DigitalAudio_Device_Channel,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.muteEnable === true) {
+    if (message.muteEnable !== false) {
       writer.uint32(8).bool(message.muteEnable);
     }
-    if (message.soloEnable === true) {
+    if (message.soloEnable !== false) {
       writer.uint32(16).bool(message.soloEnable);
     }
-    if (message.toneEnable === true) {
+    if (message.toneEnable !== false) {
       writer.uint32(24).bool(message.toneEnable);
     }
     if (message.audioDelay !== 0) {
@@ -936,13 +936,13 @@ export const DigitalAudio_Device_Channel = {
 
   toJSON(message: DigitalAudio_Device_Channel): unknown {
     const obj: any = {};
-    if (message.muteEnable === true) {
+    if (message.muteEnable !== false) {
       obj.muteEnable = message.muteEnable;
     }
-    if (message.soloEnable === true) {
+    if (message.soloEnable !== false) {
       obj.soloEnable = message.soloEnable;
     }
-    if (message.toneEnable === true) {
+    if (message.toneEnable !== false) {
       obj.toneEnable = message.toneEnable;
     }
     if (message.audioDelay !== 0) {
@@ -992,7 +992,7 @@ export const DigitalAudio_Device_Routing = {
     for (const v of message.map) {
       DigitalAudio_Device_Map.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.isCustomMap === true) {
+    if (message.isCustomMap !== false) {
       writer.uint32(24).bool(message.isCustomMap);
     }
     if (message.masterChannel !== undefined) {
@@ -1088,7 +1088,7 @@ export const DigitalAudio_Device_Routing = {
     if (message.map?.length) {
       obj.map = message.map.map((e) => DigitalAudio_Device_Map.toJSON(e));
     }
-    if (message.isCustomMap === true) {
+    if (message.isCustomMap !== false) {
       obj.isCustomMap = message.isCustomMap;
     }
     if (message.masterChannel !== undefined) {

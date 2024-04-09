@@ -165,7 +165,7 @@ export const CCLIDocument = {
         writer.uint32(10).fork(),
       ).ldelim();
     }
-    if (message.enableCcliDisplay === true) {
+    if (message.enableCcliDisplay !== false) {
       writer.uint32(16).bool(message.enableCcliDisplay);
     }
     if (message.ccliLicense !== '') {
@@ -263,7 +263,7 @@ export const CCLIDocument = {
     if (message.applicationInfo !== undefined) {
       obj.applicationInfo = ApplicationInfo.toJSON(message.applicationInfo);
     }
-    if (message.enableCcliDisplay === true) {
+    if (message.enableCcliDisplay !== false) {
       obj.enableCcliDisplay = message.enableCcliDisplay;
     }
     if (message.ccliLicense !== '') {

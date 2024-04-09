@@ -606,7 +606,7 @@ export const Recording_Stream = {
     for (const v of message.audioMap) {
       DigitalAudio_Device_Map.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-    if (message.isAudioCustomMapped === true) {
+    if (message.isAudioCustomMapped !== false) {
       writer.uint32(48).bool(message.isAudioCustomMapped);
     }
     if (message.outputScreen !== undefined) {
@@ -728,7 +728,7 @@ export const Recording_Stream = {
         DigitalAudio_Device_Map.toJSON(e),
       );
     }
-    if (message.isAudioCustomMapped === true) {
+    if (message.isAudioCustomMapped !== false) {
       obj.isAudioCustomMapped = message.isAudioCustomMapped;
     }
     if (message.outputScreen !== undefined) {
@@ -797,7 +797,7 @@ export const Recording_Stream_Encoder = {
     if (message.videoHeight !== 0) {
       writer.uint32(24).uint32(message.videoHeight);
     }
-    if (message.isInterlaced === true) {
+    if (message.isInterlaced !== false) {
       writer.uint32(32).bool(message.isInterlaced);
     }
     if (message.frameRate !== 0) {
@@ -918,7 +918,7 @@ export const Recording_Stream_Encoder = {
     if (message.videoHeight !== 0) {
       obj.videoHeight = Math.round(message.videoHeight);
     }
-    if (message.isInterlaced === true) {
+    if (message.isInterlaced !== false) {
       obj.isInterlaced = message.isInterlaced;
     }
     if (message.frameRate !== 0) {
