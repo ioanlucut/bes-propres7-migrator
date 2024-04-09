@@ -1,7 +1,7 @@
 {
-  "name": "migrator_propres7-node",
+  "name": "bes-propres7-migrator",
   "version": "1.0.0",
-  "description": "A converter from .txt song lyrics to PP7 pro format.",
+  "description": "A converter from .txt song lyrics to ProPresenter7 .pro format.",
   "main": "index.ts",
   "scripts": {
     "test:ci": "NODE_ENV=test TZ='Europe/Bucharest' jest --runInBand --no-cache",

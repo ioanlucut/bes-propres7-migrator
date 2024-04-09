@@ -5,11 +5,11 @@ import {
   convertSongsToPP7FormatRemotely,
 } from './';
 import { Presentation_CCLI } from './proto/presentation';
-import { Graphics_Text_Attributes_Font } from './proto/graphicsData';
+import { Font } from './proto/font';
 
 dotenv.config();
 
-const CONFIG = {
+const BES_CONFIG = {
   arrangementName: 'BES',
   ccliSettings: {
     publisher: 'Biserica Emanuel Sibiu',
@@ -24,7 +24,7 @@ const CONFIG = {
     bold: true,
     family: 'CMG Sans Cn CAPS',
     face: 'Bold',
-  } as Graphics_Text_Attributes_Font,
+  } as Font,
   graphicSize: {
     width: 1920,
     height: 1080,
@@ -38,7 +38,7 @@ const CONFIG = {
   const deploymentArgs = {
     sourceDir: process.env.LOCAL_SOURCE_DIR as string,
     baseLocalDir: process.env.LOCAL_OUT_DIR as string,
-    config: CONFIG,
+    config: BES_CONFIG,
   };
 
   if (process.env.CONNECT_TO_G_DRIVE !== 'true') {
