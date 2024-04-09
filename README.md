@@ -4,12 +4,26 @@ The `bes-propres7-migrator` is a utility designed to facilitate the conversion o
 using a special markup, to the `ProPresenter7` format (`.pro` files). This tool is particularly useful for those
 transitioning their song libraries to `ProPresenter7` and ensures a smooth conversion process.
 
+Right now, I am using it to convert the songs from our church that are written and maintained in a different repository.
+
 ## Features
 
 - **Simple Conversion**: Easily convert `.txt` song files to `.pro` format for `ProPresenter7`.
 - **Custom Configuration**: Flexible configuration options to suit your specific conversion needs.
 - **Advanced Sequencing with `BES` Sequence**: Automates song sequencing for efficient live presentation.
 - **Initial Setup Slide with `Macro` Reference**: Automates presentation environment setup for each song.
+
+## Why I made it?
+
+I noticed a gap in the process of converting and managing song files efficiently in `ProPresenter7`, especially for
+those transitioning from other formats or systems. My goal was to create something that would not only address this need
+but also enhance the presentation experience for operators and audiences alike.
+
+## How can you help?
+
+I'd love for you to check out the project on GitHub. If you find it useful, giving it a star would mean the world to me!
+Your feedback is invaluable, and I’m open to any suggestions, issues, or contributions you might have to make the tool
+even better.
 
 ## Installation
 
