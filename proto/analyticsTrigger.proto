@@ -95,6 +95,20 @@ message Trigger {
 
   message Action {
     message ClearLayer {
+      enum ClearLayerType {
+        CLEAR_LAYER_TYPE_UNKNOWN = 0;
+        CLEAR_LAYER_TYPE_AUDIO = 1;
+        CLEAR_LAYER_TYPE_MESSAGES = 2;
+        CLEAR_LAYER_TYPE_PROPS = 3;
+        CLEAR_LAYER_TYPE_ANNOUNCEMENTS = 4;
+        CLEAR_LAYER_TYPE_SLIDE = 5;
+        CLEAR_LAYER_TYPE_MEDIA = 6;
+        CLEAR_LAYER_TYPE_VIDEO_INPUT = 7;
+        CLEAR_LAYER_TYPE_CLEAR_TO_LOGO = 8;
+        CLEAR_LAYER_TYPE_CLEAR_GROUP = 9;
+      }
+
+      .rv.analytics.Trigger.Action.ClearLayer.ClearLayerType type = 1;
     }
 
     message MediaBinPlaylist {
@@ -221,11 +235,36 @@ message Trigger {
   message AudioBin {
   }
 
+  message TestPattern {
+    enum TestPatternType {
+      TEST_PATTERN_TYPE_AUDIO_VIDEO_SYNC = 0;
+      TEST_PATTERN_TYPE_BLEND_GRID = 1;
+      TEST_PATTERN_TYPE_COLOR_BARS = 2;
+      TEST_PATTERN_TYPE_CUSTOM_COLORS = 3;
+      TEST_PATTERN_TYPE_FOCUS = 4;
+      TEST_PATTERN_TYPE_GRAY_SCALE = 5;
+      TEST_PATTERN_TYPE_LINES = 6;
+      TEST_PATTERN_TYPE_LOGO_BOUNCE = 7;
+      TEST_PATTERN_TYPE_RADAR = 8;
+      TEST_PATTERN_TYPE_TEXT = 9;
+    }
+
+    enum LogoType {
+      LOGO_TYPE_NONE = 0;
+      LOGO_TYPE_PROPRESENTER = 1;
+      LOGO_TYPE_CUSTOM = 2;
+    }
+
+    .rv.analytics.Trigger.TestPattern.TestPatternType test_pattern_type = 1;
+    .rv.analytics.Trigger.TestPattern.LogoType logo = 2;
+  }
+
   oneof Component {
     .rv.analytics.Trigger.Cue cue = 1;
     .rv.analytics.Trigger.Action action = 2;
     .rv.analytics.Trigger.MediaBin media_bin = 3;
     .rv.analytics.Trigger.AudioBin audio_bin = 4;
+    .rv.analytics.Trigger.TestPattern test_pattern = 5;
   }
 }
 

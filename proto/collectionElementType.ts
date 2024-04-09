@@ -7,10 +7,15 @@ export const protobufPackage = 'rv.data';
 export interface CollectionElementType {
   parameterUuid: UUID | undefined;
   parameterName: string;
+  parentCollection: CollectionElementType | undefined;
 }
 
 function createBaseCollectionElementType(): CollectionElementType {
-  return { parameterUuid: undefined, parameterName: '' };
+  return {
+    parameterUuid: undefined,
+    parameterName: '',
+    parentCollection: undefined,
+  };
 }
 
 export const CollectionElementType = {
@@ -23,6 +28,12 @@ export const CollectionElementType = {
     }
     if (message.parameterName !== '') {
       writer.uint32(18).string(message.parameterName);
+    }
+    if (message.parentCollection !== undefined) {
+      CollectionElementType.encode(
+        message.parentCollection,
+        writer.uint32(26).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -52,6 +63,16 @@ export const CollectionElementType = {
 
           message.parameterName = reader.string();
           continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.parentCollection = CollectionElementType.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -69,6 +90,9 @@ export const CollectionElementType = {
       parameterName: isSet(object.parameterName)
         ? globalThis.String(object.parameterName)
         : '',
+      parentCollection: isSet(object.parentCollection)
+        ? CollectionElementType.fromJSON(object.parentCollection)
+        : undefined,
     };
   },
 
@@ -79,6 +103,11 @@ export const CollectionElementType = {
     }
     if (message.parameterName !== '') {
       obj.parameterName = message.parameterName;
+    }
+    if (message.parentCollection !== undefined) {
+      obj.parentCollection = CollectionElementType.toJSON(
+        message.parentCollection,
+      );
     }
     return obj;
   },
@@ -97,6 +126,10 @@ export const CollectionElementType = {
         ? UUID.fromPartial(object.parameterUuid)
         : undefined;
     message.parameterName = object.parameterName ?? '';
+    message.parentCollection =
+      object.parentCollection !== undefined && object.parentCollection !== null
+        ? CollectionElementType.fromPartial(object.parentCollection)
+        : undefined;
     return message;
   },
 };

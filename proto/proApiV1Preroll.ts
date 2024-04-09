@@ -1575,7 +1575,7 @@ export const APIV1PrerollResponse_ActivatePrerollItem = {
     message: APIV1PrerollResponse_ActivatePrerollItem,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.success === true) {
+    if (message.success !== false) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -1618,7 +1618,7 @@ export const APIV1PrerollResponse_ActivatePrerollItem = {
 
   toJSON(message: APIV1PrerollResponse_ActivatePrerollItem): unknown {
     const obj: any = {};
-    if (message.success === true) {
+    if (message.success !== false) {
       obj.success = message.success;
     }
     return obj;
@@ -1649,7 +1649,7 @@ export const APIV1PrerollResponse_CancelPrerollItem = {
     message: APIV1PrerollResponse_CancelPrerollItem,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.success === true) {
+    if (message.success !== false) {
       writer.uint32(8).bool(message.success);
     }
     return writer;
@@ -1692,7 +1692,7 @@ export const APIV1PrerollResponse_CancelPrerollItem = {
 
   toJSON(message: APIV1PrerollResponse_CancelPrerollItem): unknown {
     const obj: any = {};
-    if (message.success === true) {
+    if (message.success !== false) {
       obj.success = message.success;
     }
     return obj;

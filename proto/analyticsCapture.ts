@@ -537,7 +537,7 @@ export const Capture_Start_RTMP = {
         writer.uint32(34).fork(),
       ).ldelim();
     }
-    if (message.streamStarted === true) {
+    if (message.streamStarted !== false) {
       writer.uint32(40).bool(message.streamStarted);
     }
     if (message.videoBitrate !== 0) {
@@ -641,7 +641,7 @@ export const Capture_Start_RTMP = {
     if (message.resolution !== undefined) {
       obj.resolution = Capture_Resolution.toJSON(message.resolution);
     }
-    if (message.streamStarted === true) {
+    if (message.streamStarted !== false) {
       obj.streamStarted = message.streamStarted;
     }
     if (message.videoBitrate !== 0) {
@@ -699,7 +699,7 @@ export const Capture_Start_Disk = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.streamStarted === true) {
+    if (message.streamStarted !== false) {
       writer.uint32(32).bool(message.streamStarted);
     }
     if (message.videoBitrate !== 0) {
@@ -792,7 +792,7 @@ export const Capture_Start_Disk = {
     if (message.resolution !== undefined) {
       obj.resolution = Capture_Resolution.toJSON(message.resolution);
     }
-    if (message.streamStarted === true) {
+    if (message.streamStarted !== false) {
       obj.streamStarted = message.streamStarted;
     }
     if (message.videoBitrate !== 0) {
@@ -849,7 +849,7 @@ export const Capture_Start_Resi = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.streamStarted === true) {
+    if (message.streamStarted !== false) {
       writer.uint32(32).bool(message.streamStarted);
     }
     if (message.videoBitrate !== 0) {
@@ -942,7 +942,7 @@ export const Capture_Start_Resi = {
     if (message.resolution !== undefined) {
       obj.resolution = Capture_Resolution.toJSON(message.resolution);
     }
-    if (message.streamStarted === true) {
+    if (message.streamStarted !== false) {
       obj.streamStarted = message.streamStarted;
     }
     if (message.videoBitrate !== 0) {

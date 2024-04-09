@@ -285,7 +285,7 @@ export const MultiTracks_Import = {
         writer.uint32(10).fork(),
       ).ldelim();
     }
-    if (message.chartsAutomation === true) {
+    if (message.chartsAutomation !== false) {
       writer.uint32(16).bool(message.chartsAutomation);
     }
     if (message.lines !== 0) {
@@ -349,7 +349,7 @@ export const MultiTracks_Import = {
     if (message.account !== undefined) {
       obj.account = MultiTracks_Account.toJSON(message.account);
     }
-    if (message.chartsAutomation === true) {
+    if (message.chartsAutomation !== false) {
       obj.chartsAutomation = message.chartsAutomation;
     }
     if (message.lines !== 0) {

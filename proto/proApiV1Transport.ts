@@ -1975,7 +1975,7 @@ export const APIV1TransportResponse_GetAutoAdvance = {
     message: APIV1TransportResponse_GetAutoAdvance,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.autoAdvance === true) {
+    if (message.autoAdvance !== false) {
       writer.uint32(8).bool(message.autoAdvance);
     }
     return writer;
@@ -2018,7 +2018,7 @@ export const APIV1TransportResponse_GetAutoAdvance = {
 
   toJSON(message: APIV1TransportResponse_GetAutoAdvance): unknown {
     const obj: any = {};
-    if (message.autoAdvance === true) {
+    if (message.autoAdvance !== false) {
       obj.autoAdvance = message.autoAdvance;
     }
     return obj;
@@ -2112,7 +2112,7 @@ export const APIV1TransportResponse_GetCurrentMedia = {
     message: APIV1TransportResponse_GetCurrentMedia,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isPlaying === true) {
+    if (message.isPlaying !== false) {
       writer.uint32(8).bool(message.isPlaying);
     }
     if (message.uuid !== undefined) {
@@ -2124,7 +2124,7 @@ export const APIV1TransportResponse_GetCurrentMedia = {
     if (message.artist !== '') {
       writer.uint32(34).string(message.artist);
     }
-    if (message.audioOnly === true) {
+    if (message.audioOnly !== false) {
       writer.uint32(40).bool(message.audioOnly);
     }
     if (message.duration !== 0) {
@@ -2212,7 +2212,7 @@ export const APIV1TransportResponse_GetCurrentMedia = {
 
   toJSON(message: APIV1TransportResponse_GetCurrentMedia): unknown {
     const obj: any = {};
-    if (message.isPlaying === true) {
+    if (message.isPlaying !== false) {
       obj.isPlaying = message.isPlaying;
     }
     if (message.uuid !== undefined) {
@@ -2224,7 +2224,7 @@ export const APIV1TransportResponse_GetCurrentMedia = {
     if (message.artist !== '') {
       obj.artist = message.artist;
     }
-    if (message.audioOnly === true) {
+    if (message.audioOnly !== false) {
       obj.audioOnly = message.audioOnly;
     }
     if (message.duration !== 0) {

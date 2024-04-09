@@ -283,7 +283,7 @@ export const Clock_Format = {
     if (message.timeFormat !== 0) {
       writer.uint32(24).int32(message.timeFormat);
     }
-    if (message.militaryTimeEnabled === true) {
+    if (message.militaryTimeEnabled !== false) {
       writer.uint32(32).bool(message.militaryTimeEnabled);
     }
     return writer;
@@ -351,7 +351,7 @@ export const Clock_Format = {
         message.timeFormat,
       );
     }
-    if (message.militaryTimeEnabled === true) {
+    if (message.militaryTimeEnabled !== false) {
       obj.militaryTimeEnabled = message.militaryTimeEnabled;
     }
     return obj;
@@ -506,13 +506,13 @@ export const Timer_Format = {
     if (message.millisecond !== 0) {
       writer.uint32(32).int32(message.millisecond);
     }
-    if (message.isWallClockTime === true) {
+    if (message.isWallClockTime !== false) {
       writer.uint32(40).bool(message.isWallClockTime);
     }
-    if (message.is24HourTime === true) {
+    if (message.is24HourTime !== false) {
       writer.uint32(48).bool(message.is24HourTime);
     }
-    if (message.showMillisecondsUnderMinuteOnly === true) {
+    if (message.showMillisecondsUnderMinuteOnly !== false) {
       writer.uint32(56).bool(message.showMillisecondsUnderMinuteOnly);
     }
     return writer;
@@ -624,13 +624,13 @@ export const Timer_Format = {
     if (message.millisecond !== 0) {
       obj.millisecond = timer_Format_StyleToJSON(message.millisecond);
     }
-    if (message.isWallClockTime === true) {
+    if (message.isWallClockTime !== false) {
       obj.isWallClockTime = message.isWallClockTime;
     }
-    if (message.is24HourTime === true) {
+    if (message.is24HourTime !== false) {
       obj.is24HourTime = message.is24HourTime;
     }
-    if (message.showMillisecondsUnderMinuteOnly === true) {
+    if (message.showMillisecondsUnderMinuteOnly !== false) {
       obj.showMillisecondsUnderMinuteOnly =
         message.showMillisecondsUnderMinuteOnly;
     }
@@ -672,7 +672,7 @@ export const Timer_Configuration = {
     message: Timer_Configuration,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       writer.uint32(32).bool(message.allowsOverrun);
     }
     if (message.countdown !== undefined) {
@@ -772,7 +772,7 @@ export const Timer_Configuration = {
 
   toJSON(message: Timer_Configuration): unknown {
     const obj: any = {};
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       obj.allowsOverrun = message.allowsOverrun;
     }
     if (message.countdown !== undefined) {
@@ -1012,7 +1012,7 @@ export const Timer_Configuration_TimerTypeElapsedTime = {
     if (message.endTime !== 0) {
       writer.uint32(17).double(message.endTime);
     }
-    if (message.hasEndTime === true) {
+    if (message.hasEndTime !== false) {
       writer.uint32(24).bool(message.hasEndTime);
     }
     return writer;
@@ -1079,7 +1079,7 @@ export const Timer_Configuration_TimerTypeElapsedTime = {
     if (message.endTime !== 0) {
       obj.endTime = message.endTime;
     }
-    if (message.hasEndTime === true) {
+    if (message.hasEndTime !== false) {
       obj.hasEndTime = message.hasEndTime;
     }
     return obj;

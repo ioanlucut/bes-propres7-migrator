@@ -10,6 +10,7 @@ export interface ProAudienceLook {
   name: string;
   screenLooks: ProAudienceLook_ProScreenLook[];
   originalLookUuid: UUID | undefined;
+  transitionDuration: number;
 }
 
 export interface ProAudienceLook_ProScreenLook {
@@ -36,6 +37,7 @@ function createBaseProAudienceLook(): ProAudienceLook {
     name: '',
     screenLooks: [],
     originalLookUuid: undefined,
+    transitionDuration: 0,
   };
 }
 
@@ -58,6 +60,9 @@ export const ProAudienceLook = {
     }
     if (message.originalLookUuid !== undefined) {
       UUID.encode(message.originalLookUuid, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.transitionDuration !== 0) {
+      writer.uint32(41).double(message.transitionDuration);
     }
     return writer;
   },
@@ -100,6 +105,13 @@ export const ProAudienceLook = {
 
           message.originalLookUuid = UUID.decode(reader, reader.uint32());
           continue;
+        case 5:
+          if (tag !== 41) {
+            break;
+          }
+
+          message.transitionDuration = reader.double();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -121,6 +133,9 @@ export const ProAudienceLook = {
       originalLookUuid: isSet(object.originalLookUuid)
         ? UUID.fromJSON(object.originalLookUuid)
         : undefined,
+      transitionDuration: isSet(object.transitionDuration)
+        ? globalThis.Number(object.transitionDuration)
+        : 0,
     };
   },
 
@@ -139,6 +154,9 @@ export const ProAudienceLook = {
     }
     if (message.originalLookUuid !== undefined) {
       obj.originalLookUuid = UUID.toJSON(message.originalLookUuid);
+    }
+    if (message.transitionDuration !== 0) {
+      obj.transitionDuration = message.transitionDuration;
     }
     return obj;
   },
@@ -165,6 +183,7 @@ export const ProAudienceLook = {
       object.originalLookUuid !== undefined && object.originalLookUuid !== null
         ? UUID.fromPartial(object.originalLookUuid)
         : undefined;
+    message.transitionDuration = object.transitionDuration ?? 0;
     return message;
   },
 };
@@ -193,13 +212,13 @@ export const ProAudienceLook_ProScreenLook = {
     if (message.proScreenUuid !== undefined) {
       UUID.encode(message.proScreenUuid, writer.uint32(10).fork()).ldelim();
     }
-    if (message.propsEnabled === true) {
+    if (message.propsEnabled !== false) {
       writer.uint32(16).bool(message.propsEnabled);
     }
-    if (message.liveVideoEnabled === true) {
+    if (message.liveVideoEnabled !== false) {
       writer.uint32(24).bool(message.liveVideoEnabled);
     }
-    if (message.presentationBackgroundEnabled === true) {
+    if (message.presentationBackgroundEnabled !== false) {
       writer.uint32(32).bool(message.presentationBackgroundEnabled);
     }
     if (message.templateDocumentFilePath !== undefined) {
@@ -211,19 +230,19 @@ export const ProAudienceLook_ProScreenLook = {
     if (message.templateSlideUuid !== undefined) {
       UUID.encode(message.templateSlideUuid, writer.uint32(50).fork()).ldelim();
     }
-    if (message.presentationForegroundEnabled === true) {
+    if (message.presentationForegroundEnabled !== false) {
       writer.uint32(56).bool(message.presentationForegroundEnabled);
     }
     if (message.maskUuid !== undefined) {
       UUID.encode(message.maskUuid, writer.uint32(66).fork()).ldelim();
     }
-    if (message.announcementsEnabled === true) {
+    if (message.announcementsEnabled !== false) {
       writer.uint32(72).bool(message.announcementsEnabled);
     }
-    if (message.propsLayerEnabled === true) {
+    if (message.propsLayerEnabled !== false) {
       writer.uint32(80).bool(message.propsLayerEnabled);
     }
-    if (message.messagesLayerEnabled === true) {
+    if (message.messagesLayerEnabled !== false) {
       writer.uint32(88).bool(message.messagesLayerEnabled);
     }
     return writer;
@@ -372,13 +391,13 @@ export const ProAudienceLook_ProScreenLook = {
     if (message.proScreenUuid !== undefined) {
       obj.proScreenUuid = UUID.toJSON(message.proScreenUuid);
     }
-    if (message.propsEnabled === true) {
+    if (message.propsEnabled !== false) {
       obj.propsEnabled = message.propsEnabled;
     }
-    if (message.liveVideoEnabled === true) {
+    if (message.liveVideoEnabled !== false) {
       obj.liveVideoEnabled = message.liveVideoEnabled;
     }
-    if (message.presentationBackgroundEnabled === true) {
+    if (message.presentationBackgroundEnabled !== false) {
       obj.presentationBackgroundEnabled = message.presentationBackgroundEnabled;
     }
     if (message.templateDocumentFilePath !== undefined) {
@@ -389,19 +408,19 @@ export const ProAudienceLook_ProScreenLook = {
     if (message.templateSlideUuid !== undefined) {
       obj.templateSlideUuid = UUID.toJSON(message.templateSlideUuid);
     }
-    if (message.presentationForegroundEnabled === true) {
+    if (message.presentationForegroundEnabled !== false) {
       obj.presentationForegroundEnabled = message.presentationForegroundEnabled;
     }
     if (message.maskUuid !== undefined) {
       obj.maskUuid = UUID.toJSON(message.maskUuid);
     }
-    if (message.announcementsEnabled === true) {
+    if (message.announcementsEnabled !== false) {
       obj.announcementsEnabled = message.announcementsEnabled;
     }
-    if (message.propsLayerEnabled === true) {
+    if (message.propsLayerEnabled !== false) {
       obj.propsLayerEnabled = message.propsLayerEnabled;
     }
-    if (message.messagesLayerEnabled === true) {
+    if (message.messagesLayerEnabled !== false) {
       obj.messagesLayerEnabled = message.messagesLayerEnabled;
     }
     return obj;

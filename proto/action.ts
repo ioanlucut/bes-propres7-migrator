@@ -1153,7 +1153,7 @@ export const Action = {
     if (message.oldType !== undefined) {
       Action_OldType.encode(message.oldType, writer.uint32(42).fork()).ldelim();
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(48).bool(message.isEnabled);
     }
     if (message.layerIdentification !== undefined) {
@@ -1753,7 +1753,7 @@ export const Action = {
     if (message.oldType !== undefined) {
       obj.oldType = Action_OldType.toJSON(message.oldType);
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.layerIdentification !== undefined) {
@@ -2287,10 +2287,10 @@ export const Action_PlaylistItemType = {
     if (message.itemName !== '') {
       writer.uint32(34).string(message.itemName);
     }
-    if (message.selectPlaylist === true) {
+    if (message.selectPlaylist !== false) {
       writer.uint32(40).bool(message.selectPlaylist);
     }
-    if (message.alwaysRetrigger === true) {
+    if (message.alwaysRetrigger !== false) {
       writer.uint32(48).bool(message.alwaysRetrigger);
     }
     return writer;
@@ -2395,10 +2395,10 @@ export const Action_PlaylistItemType = {
     if (message.itemName !== '') {
       obj.itemName = message.itemName;
     }
-    if (message.selectPlaylist === true) {
+    if (message.selectPlaylist !== false) {
       obj.selectPlaylist = message.selectPlaylist;
     }
-    if (message.alwaysRetrigger === true) {
+    if (message.alwaysRetrigger !== false) {
       obj.alwaysRetrigger = message.alwaysRetrigger;
     }
     return obj;
@@ -2790,7 +2790,7 @@ export const Action_MediaType = {
     if (message.layerType !== 0) {
       writer.uint32(80).int32(message.layerType);
     }
-    if (message.alwaysRetrigger === true) {
+    if (message.alwaysRetrigger !== false) {
       writer.uint32(88).bool(message.alwaysRetrigger);
     }
     for (const v of message.markers) {
@@ -3009,7 +3009,7 @@ export const Action_MediaType = {
     if (message.layerType !== 0) {
       obj.layerType = action_LayerTypeToJSON(message.layerType);
     }
-    if (message.alwaysRetrigger === true) {
+    if (message.alwaysRetrigger !== false) {
       obj.alwaysRetrigger = message.alwaysRetrigger;
     }
     if (message.markers?.length) {
@@ -3164,7 +3164,7 @@ export const Action_MediaType_Video = {
     if (message.timesToLoop !== 0) {
       writer.uint32(32).uint32(message.timesToLoop);
     }
-    if (message.softLoop === true) {
+    if (message.softLoop !== false) {
       writer.uint32(40).bool(message.softLoop);
     }
     if (message.softLoopDuration !== 0) {
@@ -3272,7 +3272,7 @@ export const Action_MediaType_Video = {
     if (message.timesToLoop !== 0) {
       obj.timesToLoop = Math.round(message.timesToLoop);
     }
-    if (message.softLoop === true) {
+    if (message.softLoop !== false) {
       obj.softLoop = message.softLoop;
     }
     if (message.softLoopDuration !== 0) {
@@ -6036,7 +6036,7 @@ export const Action_AudioInputType = {
     if (message.index !== 0) {
       writer.uint32(8).int32(message.index);
     }
-    if (message.overrideMode === true) {
+    if (message.overrideMode !== false) {
       writer.uint32(16).bool(message.overrideMode);
     }
     if (message.behaviorMode !== undefined) {
@@ -6045,7 +6045,7 @@ export const Action_AudioInputType = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.overrideVolume === true) {
+    if (message.overrideVolume !== false) {
       writer.uint32(32).bool(message.overrideVolume);
     }
     if (message.volume !== 0) {
@@ -6133,13 +6133,13 @@ export const Action_AudioInputType = {
     if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.overrideMode === true) {
+    if (message.overrideMode !== false) {
       obj.overrideMode = message.overrideMode;
     }
     if (message.behaviorMode !== undefined) {
       obj.behaviorMode = AudioInput_BehaviorMode.toJSON(message.behaviorMode);
     }
-    if (message.overrideVolume === true) {
+    if (message.overrideVolume !== false) {
       obj.overrideVolume = message.overrideVolume;
     }
     if (message.volume !== 0) {
@@ -6444,7 +6444,7 @@ export const Action_CaptureType_CaptureStop = {
     message: Action_CaptureType_CaptureStop,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.showsAlertBeforeStopping === true) {
+    if (message.showsAlertBeforeStopping !== false) {
       writer.uint32(8).bool(message.showsAlertBeforeStopping);
     }
     return writer;
@@ -6487,7 +6487,7 @@ export const Action_CaptureType_CaptureStop = {
 
   toJSON(message: Action_CaptureType_CaptureStop): unknown {
     const obj: any = {};
-    if (message.showsAlertBeforeStopping === true) {
+    if (message.showsAlertBeforeStopping !== false) {
       obj.showsAlertBeforeStopping = message.showsAlertBeforeStopping;
     }
     return obj;

@@ -10,6 +10,7 @@ import "google/protobuf/wrappers.proto";
 import "proApiV1Color.proto";
 import "proApiV1ContentType.proto";
 import "proApiV1Identifier.proto";
+import "proApiV1PresentationPlaylistItem.proto";
 
 message API_v1_Playlist {
   enum API_v1_PlaylistType {
@@ -43,6 +44,7 @@ message API_v1_PlaylistItem {
   bool is_pco = 4;
   .rv.data.API_v1_Color header_color = 5;
   .google.protobuf.UInt32Value duration = 6;
+  .rv.data.API_v1_PlaylistPresentationItem presentation_info = 7;
 }
 
 message API_v1_Playlist_Request {

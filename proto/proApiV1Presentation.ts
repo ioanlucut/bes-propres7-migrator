@@ -368,7 +368,7 @@ export const APIV1Presentation = {
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.hasTimeline === true) {
+    if (message.hasTimeline !== false) {
       writer.uint32(24).bool(message.hasTimeline);
     }
     if (message.presentationPath !== '') {
@@ -464,7 +464,7 @@ export const APIV1Presentation = {
         APIV1Presentation_SlideGroup.toJSON(e),
       );
     }
-    if (message.hasTimeline === true) {
+    if (message.hasTimeline !== false) {
       obj.hasTimeline = message.hasTimeline;
     }
     if (message.presentationPath !== '') {
@@ -629,7 +629,7 @@ export const APIV1Presentation_SlideGroup_Slide = {
     message: APIV1Presentation_SlideGroup_Slide,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.notes !== '') {
@@ -716,7 +716,7 @@ export const APIV1Presentation_SlideGroup_Slide = {
 
   toJSON(message: APIV1Presentation_SlideGroup_Slide): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.notes !== '') {
@@ -4048,7 +4048,7 @@ export const APIV1PresentationResponse_ActivePresentationTimelineStatus = {
     message: APIV1PresentationResponse_ActivePresentationTimelineStatus,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       writer.uint32(8).bool(message.isRunning);
     }
     if (message.currentTime !== 0) {
@@ -4109,7 +4109,7 @@ export const APIV1PresentationResponse_ActivePresentationTimelineStatus = {
     message: APIV1PresentationResponse_ActivePresentationTimelineStatus,
   ): unknown {
     const obj: any = {};
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       obj.isRunning = message.isRunning;
     }
     if (message.currentTime !== 0) {
@@ -4151,7 +4151,7 @@ export const APIV1PresentationResponse_FocusedPresentationTimelineStatus = {
     message: APIV1PresentationResponse_FocusedPresentationTimelineStatus,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       writer.uint32(8).bool(message.isRunning);
     }
     if (message.currentTime !== 0) {
@@ -4212,7 +4212,7 @@ export const APIV1PresentationResponse_FocusedPresentationTimelineStatus = {
     message: APIV1PresentationResponse_FocusedPresentationTimelineStatus,
   ): unknown {
     const obj: any = {};
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       obj.isRunning = message.isRunning;
     }
     if (message.currentTime !== 0) {
@@ -4464,7 +4464,7 @@ export const APIV1PresentationResponse_EmptyMessage = {
 };
 
 function bytesFromBase64(b64: string): Uint8Array {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
   } else {
     const bin = globalThis.atob(b64);
@@ -4477,7 +4477,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 function base64FromBytes(arr: Uint8Array): string {
-  if (globalThis.Buffer) {
+  if ((globalThis as any).Buffer) {
     return globalThis.Buffer.from(arr).toString('base64');
   } else {
     const bin: string[] = [];

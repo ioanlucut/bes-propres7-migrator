@@ -960,6 +960,82 @@ message UI {
     }
   }
 
+  message WelcomeToProPresenter {
+    message Shown {
+      enum Source {
+        SOURCE_FIRST_LAUNCH = 0;
+        SOURCE_APPLICATION_MENU = 1;
+      }
+
+      .rv.analytics.UI.WelcomeToProPresenter.Shown.Source source = 1;
+    }
+
+    message Migration {
+    }
+
+    message ScreenConfigurationHelp {
+    }
+
+    message DownloadSampleContent {
+    }
+
+    message UserGroup {
+    }
+
+    message Tutorials {
+    }
+
+    message KnowledgeBase {
+    }
+
+    message Blog {
+    }
+
+    message Instagram {
+    }
+
+    message Facebook {
+    }
+
+    oneof Component {
+      .rv.analytics.UI.WelcomeToProPresenter.Shown shown = 1;
+      .rv.analytics.UI.WelcomeToProPresenter.Migration migration = 2;
+      .rv.analytics.UI.WelcomeToProPresenter.ScreenConfigurationHelp screen_configuration_help = 3;
+      .rv.analytics.UI.WelcomeToProPresenter.DownloadSampleContent download_sample_content = 4;
+      .rv.analytics.UI.WelcomeToProPresenter.UserGroup user_group = 5;
+      .rv.analytics.UI.WelcomeToProPresenter.Tutorials tutorials = 6;
+      .rv.analytics.UI.WelcomeToProPresenter.KnowledgeBase knowledge_base = 7;
+      .rv.analytics.UI.WelcomeToProPresenter.Blog blog = 8;
+      .rv.analytics.UI.WelcomeToProPresenter.Instagram instagram = 9;
+      .rv.analytics.UI.WelcomeToProPresenter.Facebook facebook = 10;
+    }
+  }
+
+  message TestPattern {
+    message Shown {
+      enum Source {
+        SOURCE_APPLICATION_MENU = 0;
+        SOURCE_SCREEN_CONFIGURATION = 1;
+      }
+
+      .rv.analytics.UI.TestPattern.Shown.Source source = 1;
+    }
+
+    oneof Component {
+      .rv.analytics.UI.TestPattern.Shown shown = 1;
+    }
+  }
+
+  message Preferences {
+    message CustomLogo {
+      bool has_logo = 1;
+    }
+
+    oneof Component {
+      .rv.analytics.UI.Preferences.CustomLogo custom_logo = 1;
+    }
+  }
+
   oneof Component {
     .rv.analytics.UI.QuickSearch quick_search = 1;
     .rv.analytics.UI.Toolbar toolbar = 2;
@@ -979,6 +1055,9 @@ message UI {
     .rv.analytics.UI.NetworkGroup network_group = 16;
     .rv.analytics.UI.CCLI ccli = 17;
     .rv.analytics.UI.Capture capture = 18;
+    .rv.analytics.UI.WelcomeToProPresenter welcomeToProPresenter = 19;
+    .rv.analytics.UI.TestPattern test_pattern = 20;
+    .rv.analytics.UI.Preferences preferences = 21;
   }
 }
 

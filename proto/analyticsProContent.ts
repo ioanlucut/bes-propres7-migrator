@@ -179,7 +179,7 @@ export const ProContent_Download = {
     message: ProContent_Download,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isRetry === true) {
+    if (message.isRetry !== false) {
       writer.uint32(8).bool(message.isRetry);
     }
     return writer;
@@ -219,7 +219,7 @@ export const ProContent_Download = {
 
   toJSON(message: ProContent_Download): unknown {
     const obj: any = {};
-    if (message.isRetry === true) {
+    if (message.isRetry !== false) {
       obj.isRetry = message.isRetry;
     }
     return obj;

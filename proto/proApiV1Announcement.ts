@@ -1432,7 +1432,7 @@ export const APIV1AnnouncementResponse_ActiveTimelineStatus = {
     message: APIV1AnnouncementResponse_ActiveTimelineStatus,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       writer.uint32(8).bool(message.isRunning);
     }
     if (message.currentTime !== 0) {
@@ -1488,7 +1488,7 @@ export const APIV1AnnouncementResponse_ActiveTimelineStatus = {
 
   toJSON(message: APIV1AnnouncementResponse_ActiveTimelineStatus): unknown {
     const obj: any = {};
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       obj.isRunning = message.isRunning;
     }
     if (message.currentTime !== 0) {

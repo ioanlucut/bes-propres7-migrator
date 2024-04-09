@@ -193,7 +193,7 @@ export const Cue = {
     for (const v of message.pendingImports) {
       Cue_PendingImportsEntry.encode(v!, writer.uint32(90).fork()).ldelim();
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(96).bool(message.isEnabled);
     }
     if (message.completionTime !== 0) {
@@ -383,7 +383,7 @@ export const Cue = {
         Cue_PendingImportsEntry.toJSON(e),
       );
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.completionTime !== 0) {

@@ -203,22 +203,22 @@ export const APIV1Screen = {
     message: APIV1Screen,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.videoInput === true) {
+    if (message.videoInput !== false) {
       writer.uint32(8).bool(message.videoInput);
     }
-    if (message.media === true) {
+    if (message.media !== false) {
       writer.uint32(16).bool(message.media);
     }
-    if (message.slide === true) {
+    if (message.slide !== false) {
       writer.uint32(24).bool(message.slide);
     }
-    if (message.announcements === true) {
+    if (message.announcements !== false) {
       writer.uint32(32).bool(message.announcements);
     }
-    if (message.props === true) {
+    if (message.props !== false) {
       writer.uint32(40).bool(message.props);
     }
-    if (message.messages === true) {
+    if (message.messages !== false) {
       writer.uint32(48).bool(message.messages);
     }
     if (message.presentation !== '') {
@@ -326,22 +326,22 @@ export const APIV1Screen = {
 
   toJSON(message: APIV1Screen): unknown {
     const obj: any = {};
-    if (message.videoInput === true) {
+    if (message.videoInput !== false) {
       obj.videoInput = message.videoInput;
     }
-    if (message.media === true) {
+    if (message.media !== false) {
       obj.media = message.media;
     }
-    if (message.slide === true) {
+    if (message.slide !== false) {
       obj.slide = message.slide;
     }
-    if (message.announcements === true) {
+    if (message.announcements !== false) {
       obj.announcements = message.announcements;
     }
-    if (message.props === true) {
+    if (message.props !== false) {
       obj.props = message.props;
     }
-    if (message.messages === true) {
+    if (message.messages !== false) {
       obj.messages = message.messages;
     }
     if (message.presentation !== '') {

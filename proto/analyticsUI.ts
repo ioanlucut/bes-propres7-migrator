@@ -22,6 +22,9 @@ export interface UI {
   networkGroup?: UI_NetworkGroup | undefined;
   ccli?: UI_CCLI | undefined;
   capture?: UI_Capture | undefined;
+  welcomeToProPresenter?: UI_WelcomeToProPresenter | undefined;
+  testPattern?: UI_TestPattern | undefined;
+  preferences?: UI_Preferences | undefined;
 }
 
 export interface UI_QuickSearch {
@@ -2781,6 +2784,135 @@ export function uI_Capture_Shown_SourceToJSON(
   }
 }
 
+export interface UI_WelcomeToProPresenter {
+  shown?: UI_WelcomeToProPresenter_Shown | undefined;
+  migration?: UI_WelcomeToProPresenter_Migration | undefined;
+  screenConfigurationHelp?:
+    | UI_WelcomeToProPresenter_ScreenConfigurationHelp
+    | undefined;
+  downloadSampleContent?:
+    | UI_WelcomeToProPresenter_DownloadSampleContent
+    | undefined;
+  userGroup?: UI_WelcomeToProPresenter_UserGroup | undefined;
+  tutorials?: UI_WelcomeToProPresenter_Tutorials | undefined;
+  knowledgeBase?: UI_WelcomeToProPresenter_KnowledgeBase | undefined;
+  blog?: UI_WelcomeToProPresenter_Blog | undefined;
+  instagram?: UI_WelcomeToProPresenter_Instagram | undefined;
+  facebook?: UI_WelcomeToProPresenter_Facebook | undefined;
+}
+
+export interface UI_WelcomeToProPresenter_Shown {
+  source: UI_WelcomeToProPresenter_Shown_Source;
+}
+
+export enum UI_WelcomeToProPresenter_Shown_Source {
+  SOURCE_FIRST_LAUNCH = 0,
+  SOURCE_APPLICATION_MENU = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function uI_WelcomeToProPresenter_Shown_SourceFromJSON(
+  object: any,
+): UI_WelcomeToProPresenter_Shown_Source {
+  switch (object) {
+    case 0:
+    case 'SOURCE_FIRST_LAUNCH':
+      return UI_WelcomeToProPresenter_Shown_Source.SOURCE_FIRST_LAUNCH;
+    case 1:
+    case 'SOURCE_APPLICATION_MENU':
+      return UI_WelcomeToProPresenter_Shown_Source.SOURCE_APPLICATION_MENU;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return UI_WelcomeToProPresenter_Shown_Source.UNRECOGNIZED;
+  }
+}
+
+export function uI_WelcomeToProPresenter_Shown_SourceToJSON(
+  object: UI_WelcomeToProPresenter_Shown_Source,
+): string {
+  switch (object) {
+    case UI_WelcomeToProPresenter_Shown_Source.SOURCE_FIRST_LAUNCH:
+      return 'SOURCE_FIRST_LAUNCH';
+    case UI_WelcomeToProPresenter_Shown_Source.SOURCE_APPLICATION_MENU:
+      return 'SOURCE_APPLICATION_MENU';
+    case UI_WelcomeToProPresenter_Shown_Source.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export interface UI_WelcomeToProPresenter_Migration {}
+
+export interface UI_WelcomeToProPresenter_ScreenConfigurationHelp {}
+
+export interface UI_WelcomeToProPresenter_DownloadSampleContent {}
+
+export interface UI_WelcomeToProPresenter_UserGroup {}
+
+export interface UI_WelcomeToProPresenter_Tutorials {}
+
+export interface UI_WelcomeToProPresenter_KnowledgeBase {}
+
+export interface UI_WelcomeToProPresenter_Blog {}
+
+export interface UI_WelcomeToProPresenter_Instagram {}
+
+export interface UI_WelcomeToProPresenter_Facebook {}
+
+export interface UI_TestPattern {
+  shown?: UI_TestPattern_Shown | undefined;
+}
+
+export interface UI_TestPattern_Shown {
+  source: UI_TestPattern_Shown_Source;
+}
+
+export enum UI_TestPattern_Shown_Source {
+  SOURCE_APPLICATION_MENU = 0,
+  SOURCE_SCREEN_CONFIGURATION = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function uI_TestPattern_Shown_SourceFromJSON(
+  object: any,
+): UI_TestPattern_Shown_Source {
+  switch (object) {
+    case 0:
+    case 'SOURCE_APPLICATION_MENU':
+      return UI_TestPattern_Shown_Source.SOURCE_APPLICATION_MENU;
+    case 1:
+    case 'SOURCE_SCREEN_CONFIGURATION':
+      return UI_TestPattern_Shown_Source.SOURCE_SCREEN_CONFIGURATION;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return UI_TestPattern_Shown_Source.UNRECOGNIZED;
+  }
+}
+
+export function uI_TestPattern_Shown_SourceToJSON(
+  object: UI_TestPattern_Shown_Source,
+): string {
+  switch (object) {
+    case UI_TestPattern_Shown_Source.SOURCE_APPLICATION_MENU:
+      return 'SOURCE_APPLICATION_MENU';
+    case UI_TestPattern_Shown_Source.SOURCE_SCREEN_CONFIGURATION:
+      return 'SOURCE_SCREEN_CONFIGURATION';
+    case UI_TestPattern_Shown_Source.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export interface UI_Preferences {
+  customLogo?: UI_Preferences_CustomLogo | undefined;
+}
+
+export interface UI_Preferences_CustomLogo {
+  hasLogo: boolean;
+}
+
 function createBaseUI(): UI {
   return {
     quickSearch: undefined,
@@ -2801,6 +2933,9 @@ function createBaseUI(): UI {
     networkGroup: undefined,
     ccli: undefined,
     capture: undefined,
+    welcomeToProPresenter: undefined,
+    testPattern: undefined,
+    preferences: undefined,
   };
 }
 
@@ -2889,6 +3024,24 @@ export const UI = {
     }
     if (message.capture !== undefined) {
       UI_Capture.encode(message.capture, writer.uint32(146).fork()).ldelim();
+    }
+    if (message.welcomeToProPresenter !== undefined) {
+      UI_WelcomeToProPresenter.encode(
+        message.welcomeToProPresenter,
+        writer.uint32(154).fork(),
+      ).ldelim();
+    }
+    if (message.testPattern !== undefined) {
+      UI_TestPattern.encode(
+        message.testPattern,
+        writer.uint32(162).fork(),
+      ).ldelim();
+    }
+    if (message.preferences !== undefined) {
+      UI_Preferences.encode(
+        message.preferences,
+        writer.uint32(170).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -3039,6 +3192,30 @@ export const UI = {
 
           message.capture = UI_Capture.decode(reader, reader.uint32());
           continue;
+        case 19:
+          if (tag !== 154) {
+            break;
+          }
+
+          message.welcomeToProPresenter = UI_WelcomeToProPresenter.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 20:
+          if (tag !== 162) {
+            break;
+          }
+
+          message.testPattern = UI_TestPattern.decode(reader, reader.uint32());
+          continue;
+        case 21:
+          if (tag !== 170) {
+            break;
+          }
+
+          message.preferences = UI_Preferences.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3097,6 +3274,15 @@ export const UI = {
       ccli: isSet(object.ccli) ? UI_CCLI.fromJSON(object.ccli) : undefined,
       capture: isSet(object.capture)
         ? UI_Capture.fromJSON(object.capture)
+        : undefined,
+      welcomeToProPresenter: isSet(object.welcomeToProPresenter)
+        ? UI_WelcomeToProPresenter.fromJSON(object.welcomeToProPresenter)
+        : undefined,
+      testPattern: isSet(object.testPattern)
+        ? UI_TestPattern.fromJSON(object.testPattern)
+        : undefined,
+      preferences: isSet(object.preferences)
+        ? UI_Preferences.fromJSON(object.preferences)
         : undefined,
     };
   },
@@ -3160,6 +3346,17 @@ export const UI = {
     }
     if (message.capture !== undefined) {
       obj.capture = UI_Capture.toJSON(message.capture);
+    }
+    if (message.welcomeToProPresenter !== undefined) {
+      obj.welcomeToProPresenter = UI_WelcomeToProPresenter.toJSON(
+        message.welcomeToProPresenter,
+      );
+    }
+    if (message.testPattern !== undefined) {
+      obj.testPattern = UI_TestPattern.toJSON(message.testPattern);
+    }
+    if (message.preferences !== undefined) {
+      obj.preferences = UI_Preferences.toJSON(message.preferences);
     }
     return obj;
   },
@@ -3242,6 +3439,19 @@ export const UI = {
     message.capture =
       object.capture !== undefined && object.capture !== null
         ? UI_Capture.fromPartial(object.capture)
+        : undefined;
+    message.welcomeToProPresenter =
+      object.welcomeToProPresenter !== undefined &&
+      object.welcomeToProPresenter !== null
+        ? UI_WelcomeToProPresenter.fromPartial(object.welcomeToProPresenter)
+        : undefined;
+    message.testPattern =
+      object.testPattern !== undefined && object.testPattern !== null
+        ? UI_TestPattern.fromPartial(object.testPattern)
+        : undefined;
+    message.preferences =
+      object.preferences !== undefined && object.preferences !== null
+        ? UI_Preferences.fromPartial(object.preferences)
         : undefined;
     return message;
   },
@@ -5456,16 +5666,16 @@ export const UI_MainView_Bible_GenerateSlides = {
     if (message.referenceLocation !== 0) {
       writer.uint32(32).int32(message.referenceLocation);
     }
-    if (message.showVerseNumbers === true) {
+    if (message.showVerseNumbers !== false) {
       writer.uint32(40).bool(message.showVerseNumbers);
     }
-    if (message.breakNewVerse === true) {
+    if (message.breakNewVerse !== false) {
       writer.uint32(48).bool(message.breakNewVerse);
     }
-    if (message.displayTranslation === true) {
+    if (message.displayTranslation !== false) {
       writer.uint32(56).bool(message.displayTranslation);
     }
-    if (message.preserveFontColor === true) {
+    if (message.preserveFontColor !== false) {
       writer.uint32(64).bool(message.preserveFontColor);
     }
     if (message.referenceStyle !== 0) {
@@ -5615,16 +5825,16 @@ export const UI_MainView_Bible_GenerateSlides = {
           message.referenceLocation,
         );
     }
-    if (message.showVerseNumbers === true) {
+    if (message.showVerseNumbers !== false) {
       obj.showVerseNumbers = message.showVerseNumbers;
     }
-    if (message.breakNewVerse === true) {
+    if (message.breakNewVerse !== false) {
       obj.breakNewVerse = message.breakNewVerse;
     }
-    if (message.displayTranslation === true) {
+    if (message.displayTranslation !== false) {
       obj.displayTranslation = message.displayTranslation;
     }
-    if (message.preserveFontColor === true) {
+    if (message.preserveFontColor !== false) {
       obj.preserveFontColor = message.preserveFontColor;
     }
     if (message.referenceStyle !== 0) {
@@ -10173,7 +10383,7 @@ export const UI_TextInspector_UnderlineColor = {
     message: UI_TextInspector_UnderlineColor,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(8).bool(message.isEnabled);
     }
     if (message.selectionMode !== 0) {
@@ -10229,7 +10439,7 @@ export const UI_TextInspector_UnderlineColor = {
 
   toJSON(message: UI_TextInspector_UnderlineColor): unknown {
     const obj: any = {};
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.selectionMode !== 0) {
@@ -10438,7 +10648,7 @@ export const UI_TextInspector_ScrollingText_Enable = {
     message: UI_TextInspector_ScrollingText_Enable,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
@@ -10481,7 +10691,7 @@ export const UI_TextInspector_ScrollingText_Enable = {
 
   toJSON(message: UI_TextInspector_ScrollingText_Enable): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     return obj;
@@ -12239,7 +12449,7 @@ export const UI_ClearGroups_Group_ChangeIcon = {
     if (message.iconType !== 0) {
       writer.uint32(8).int32(message.iconType);
     }
-    if (message.isTinted === true) {
+    if (message.isTinted !== false) {
       writer.uint32(16).bool(message.isTinted);
     }
     return writer;
@@ -12297,7 +12507,7 @@ export const UI_ClearGroups_Group_ChangeIcon = {
         message.iconType,
       );
     }
-    if (message.isTinted === true) {
+    if (message.isTinted !== false) {
       obj.isTinted = message.isTinted;
     }
     return obj;
@@ -13395,7 +13605,7 @@ export const UI_NetworkGroup_Invite = {
     message: UI_NetworkGroup_Invite,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.didAccept === true) {
+    if (message.didAccept !== false) {
       writer.uint32(8).bool(message.didAccept);
     }
     return writer;
@@ -13438,7 +13648,7 @@ export const UI_NetworkGroup_Invite = {
 
   toJSON(message: UI_NetworkGroup_Invite): unknown {
     const obj: any = {};
-    if (message.didAccept === true) {
+    if (message.didAccept !== false) {
       obj.didAccept = message.didAccept;
     }
     return obj;
@@ -14055,6 +14265,1237 @@ export const UI_Capture_Shown = {
   ): UI_Capture_Shown {
     const message = createBaseUI_Capture_Shown();
     message.source = object.source ?? 0;
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter(): UI_WelcomeToProPresenter {
+  return {
+    shown: undefined,
+    migration: undefined,
+    screenConfigurationHelp: undefined,
+    downloadSampleContent: undefined,
+    userGroup: undefined,
+    tutorials: undefined,
+    knowledgeBase: undefined,
+    blog: undefined,
+    instagram: undefined,
+    facebook: undefined,
+  };
+}
+
+export const UI_WelcomeToProPresenter = {
+  encode(
+    message: UI_WelcomeToProPresenter,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.shown !== undefined) {
+      UI_WelcomeToProPresenter_Shown.encode(
+        message.shown,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    if (message.migration !== undefined) {
+      UI_WelcomeToProPresenter_Migration.encode(
+        message.migration,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    if (message.screenConfigurationHelp !== undefined) {
+      UI_WelcomeToProPresenter_ScreenConfigurationHelp.encode(
+        message.screenConfigurationHelp,
+        writer.uint32(26).fork(),
+      ).ldelim();
+    }
+    if (message.downloadSampleContent !== undefined) {
+      UI_WelcomeToProPresenter_DownloadSampleContent.encode(
+        message.downloadSampleContent,
+        writer.uint32(34).fork(),
+      ).ldelim();
+    }
+    if (message.userGroup !== undefined) {
+      UI_WelcomeToProPresenter_UserGroup.encode(
+        message.userGroup,
+        writer.uint32(42).fork(),
+      ).ldelim();
+    }
+    if (message.tutorials !== undefined) {
+      UI_WelcomeToProPresenter_Tutorials.encode(
+        message.tutorials,
+        writer.uint32(50).fork(),
+      ).ldelim();
+    }
+    if (message.knowledgeBase !== undefined) {
+      UI_WelcomeToProPresenter_KnowledgeBase.encode(
+        message.knowledgeBase,
+        writer.uint32(58).fork(),
+      ).ldelim();
+    }
+    if (message.blog !== undefined) {
+      UI_WelcomeToProPresenter_Blog.encode(
+        message.blog,
+        writer.uint32(66).fork(),
+      ).ldelim();
+    }
+    if (message.instagram !== undefined) {
+      UI_WelcomeToProPresenter_Instagram.encode(
+        message.instagram,
+        writer.uint32(74).fork(),
+      ).ldelim();
+    }
+    if (message.facebook !== undefined) {
+      UI_WelcomeToProPresenter_Facebook.encode(
+        message.facebook,
+        writer.uint32(82).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.shown = UI_WelcomeToProPresenter_Shown.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.migration = UI_WelcomeToProPresenter_Migration.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 3:
+          if (tag !== 26) {
+            break;
+          }
+
+          message.screenConfigurationHelp =
+            UI_WelcomeToProPresenter_ScreenConfigurationHelp.decode(
+              reader,
+              reader.uint32(),
+            );
+          continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.downloadSampleContent =
+            UI_WelcomeToProPresenter_DownloadSampleContent.decode(
+              reader,
+              reader.uint32(),
+            );
+          continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.userGroup = UI_WelcomeToProPresenter_UserGroup.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.tutorials = UI_WelcomeToProPresenter_Tutorials.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.knowledgeBase = UI_WelcomeToProPresenter_KnowledgeBase.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.blog = UI_WelcomeToProPresenter_Blog.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.instagram = UI_WelcomeToProPresenter_Instagram.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 10:
+          if (tag !== 82) {
+            break;
+          }
+
+          message.facebook = UI_WelcomeToProPresenter_Facebook.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UI_WelcomeToProPresenter {
+    return {
+      shown: isSet(object.shown)
+        ? UI_WelcomeToProPresenter_Shown.fromJSON(object.shown)
+        : undefined,
+      migration: isSet(object.migration)
+        ? UI_WelcomeToProPresenter_Migration.fromJSON(object.migration)
+        : undefined,
+      screenConfigurationHelp: isSet(object.screenConfigurationHelp)
+        ? UI_WelcomeToProPresenter_ScreenConfigurationHelp.fromJSON(
+            object.screenConfigurationHelp,
+          )
+        : undefined,
+      downloadSampleContent: isSet(object.downloadSampleContent)
+        ? UI_WelcomeToProPresenter_DownloadSampleContent.fromJSON(
+            object.downloadSampleContent,
+          )
+        : undefined,
+      userGroup: isSet(object.userGroup)
+        ? UI_WelcomeToProPresenter_UserGroup.fromJSON(object.userGroup)
+        : undefined,
+      tutorials: isSet(object.tutorials)
+        ? UI_WelcomeToProPresenter_Tutorials.fromJSON(object.tutorials)
+        : undefined,
+      knowledgeBase: isSet(object.knowledgeBase)
+        ? UI_WelcomeToProPresenter_KnowledgeBase.fromJSON(object.knowledgeBase)
+        : undefined,
+      blog: isSet(object.blog)
+        ? UI_WelcomeToProPresenter_Blog.fromJSON(object.blog)
+        : undefined,
+      instagram: isSet(object.instagram)
+        ? UI_WelcomeToProPresenter_Instagram.fromJSON(object.instagram)
+        : undefined,
+      facebook: isSet(object.facebook)
+        ? UI_WelcomeToProPresenter_Facebook.fromJSON(object.facebook)
+        : undefined,
+    };
+  },
+
+  toJSON(message: UI_WelcomeToProPresenter): unknown {
+    const obj: any = {};
+    if (message.shown !== undefined) {
+      obj.shown = UI_WelcomeToProPresenter_Shown.toJSON(message.shown);
+    }
+    if (message.migration !== undefined) {
+      obj.migration = UI_WelcomeToProPresenter_Migration.toJSON(
+        message.migration,
+      );
+    }
+    if (message.screenConfigurationHelp !== undefined) {
+      obj.screenConfigurationHelp =
+        UI_WelcomeToProPresenter_ScreenConfigurationHelp.toJSON(
+          message.screenConfigurationHelp,
+        );
+    }
+    if (message.downloadSampleContent !== undefined) {
+      obj.downloadSampleContent =
+        UI_WelcomeToProPresenter_DownloadSampleContent.toJSON(
+          message.downloadSampleContent,
+        );
+    }
+    if (message.userGroup !== undefined) {
+      obj.userGroup = UI_WelcomeToProPresenter_UserGroup.toJSON(
+        message.userGroup,
+      );
+    }
+    if (message.tutorials !== undefined) {
+      obj.tutorials = UI_WelcomeToProPresenter_Tutorials.toJSON(
+        message.tutorials,
+      );
+    }
+    if (message.knowledgeBase !== undefined) {
+      obj.knowledgeBase = UI_WelcomeToProPresenter_KnowledgeBase.toJSON(
+        message.knowledgeBase,
+      );
+    }
+    if (message.blog !== undefined) {
+      obj.blog = UI_WelcomeToProPresenter_Blog.toJSON(message.blog);
+    }
+    if (message.instagram !== undefined) {
+      obj.instagram = UI_WelcomeToProPresenter_Instagram.toJSON(
+        message.instagram,
+      );
+    }
+    if (message.facebook !== undefined) {
+      obj.facebook = UI_WelcomeToProPresenter_Facebook.toJSON(message.facebook);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter {
+    return UI_WelcomeToProPresenter.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_WelcomeToProPresenter>, I>>(
+    object: I,
+  ): UI_WelcomeToProPresenter {
+    const message = createBaseUI_WelcomeToProPresenter();
+    message.shown =
+      object.shown !== undefined && object.shown !== null
+        ? UI_WelcomeToProPresenter_Shown.fromPartial(object.shown)
+        : undefined;
+    message.migration =
+      object.migration !== undefined && object.migration !== null
+        ? UI_WelcomeToProPresenter_Migration.fromPartial(object.migration)
+        : undefined;
+    message.screenConfigurationHelp =
+      object.screenConfigurationHelp !== undefined &&
+      object.screenConfigurationHelp !== null
+        ? UI_WelcomeToProPresenter_ScreenConfigurationHelp.fromPartial(
+            object.screenConfigurationHelp,
+          )
+        : undefined;
+    message.downloadSampleContent =
+      object.downloadSampleContent !== undefined &&
+      object.downloadSampleContent !== null
+        ? UI_WelcomeToProPresenter_DownloadSampleContent.fromPartial(
+            object.downloadSampleContent,
+          )
+        : undefined;
+    message.userGroup =
+      object.userGroup !== undefined && object.userGroup !== null
+        ? UI_WelcomeToProPresenter_UserGroup.fromPartial(object.userGroup)
+        : undefined;
+    message.tutorials =
+      object.tutorials !== undefined && object.tutorials !== null
+        ? UI_WelcomeToProPresenter_Tutorials.fromPartial(object.tutorials)
+        : undefined;
+    message.knowledgeBase =
+      object.knowledgeBase !== undefined && object.knowledgeBase !== null
+        ? UI_WelcomeToProPresenter_KnowledgeBase.fromPartial(
+            object.knowledgeBase,
+          )
+        : undefined;
+    message.blog =
+      object.blog !== undefined && object.blog !== null
+        ? UI_WelcomeToProPresenter_Blog.fromPartial(object.blog)
+        : undefined;
+    message.instagram =
+      object.instagram !== undefined && object.instagram !== null
+        ? UI_WelcomeToProPresenter_Instagram.fromPartial(object.instagram)
+        : undefined;
+    message.facebook =
+      object.facebook !== undefined && object.facebook !== null
+        ? UI_WelcomeToProPresenter_Facebook.fromPartial(object.facebook)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_Shown(): UI_WelcomeToProPresenter_Shown {
+  return { source: 0 };
+}
+
+export const UI_WelcomeToProPresenter_Shown = {
+  encode(
+    message: UI_WelcomeToProPresenter_Shown,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.source !== 0) {
+      writer.uint32(8).int32(message.source);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_Shown {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_Shown();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.source = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UI_WelcomeToProPresenter_Shown {
+    return {
+      source: isSet(object.source)
+        ? uI_WelcomeToProPresenter_Shown_SourceFromJSON(object.source)
+        : 0,
+    };
+  },
+
+  toJSON(message: UI_WelcomeToProPresenter_Shown): unknown {
+    const obj: any = {};
+    if (message.source !== 0) {
+      obj.source = uI_WelcomeToProPresenter_Shown_SourceToJSON(message.source);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Shown>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_Shown {
+    return UI_WelcomeToProPresenter_Shown.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Shown>, I>>(
+    object: I,
+  ): UI_WelcomeToProPresenter_Shown {
+    const message = createBaseUI_WelcomeToProPresenter_Shown();
+    message.source = object.source ?? 0;
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_Migration(): UI_WelcomeToProPresenter_Migration {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_Migration = {
+  encode(
+    _: UI_WelcomeToProPresenter_Migration,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_Migration {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_Migration();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_Migration {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_Migration): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Migration>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_Migration {
+    return UI_WelcomeToProPresenter_Migration.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Migration>, I>,
+  >(_: I): UI_WelcomeToProPresenter_Migration {
+    const message = createBaseUI_WelcomeToProPresenter_Migration();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_ScreenConfigurationHelp(): UI_WelcomeToProPresenter_ScreenConfigurationHelp {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_ScreenConfigurationHelp = {
+  encode(
+    _: UI_WelcomeToProPresenter_ScreenConfigurationHelp,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_ScreenConfigurationHelp {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message =
+      createBaseUI_WelcomeToProPresenter_ScreenConfigurationHelp();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_ScreenConfigurationHelp {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_ScreenConfigurationHelp): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<
+    I extends Exact<
+      DeepPartial<UI_WelcomeToProPresenter_ScreenConfigurationHelp>,
+      I
+    >,
+  >(base?: I): UI_WelcomeToProPresenter_ScreenConfigurationHelp {
+    return UI_WelcomeToProPresenter_ScreenConfigurationHelp.fromPartial(
+      base ?? ({} as any),
+    );
+  },
+  fromPartial<
+    I extends Exact<
+      DeepPartial<UI_WelcomeToProPresenter_ScreenConfigurationHelp>,
+      I
+    >,
+  >(_: I): UI_WelcomeToProPresenter_ScreenConfigurationHelp {
+    const message =
+      createBaseUI_WelcomeToProPresenter_ScreenConfigurationHelp();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_DownloadSampleContent(): UI_WelcomeToProPresenter_DownloadSampleContent {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_DownloadSampleContent = {
+  encode(
+    _: UI_WelcomeToProPresenter_DownloadSampleContent,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_DownloadSampleContent {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_DownloadSampleContent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_DownloadSampleContent {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_DownloadSampleContent): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<
+    I extends Exact<
+      DeepPartial<UI_WelcomeToProPresenter_DownloadSampleContent>,
+      I
+    >,
+  >(base?: I): UI_WelcomeToProPresenter_DownloadSampleContent {
+    return UI_WelcomeToProPresenter_DownloadSampleContent.fromPartial(
+      base ?? ({} as any),
+    );
+  },
+  fromPartial<
+    I extends Exact<
+      DeepPartial<UI_WelcomeToProPresenter_DownloadSampleContent>,
+      I
+    >,
+  >(_: I): UI_WelcomeToProPresenter_DownloadSampleContent {
+    const message = createBaseUI_WelcomeToProPresenter_DownloadSampleContent();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_UserGroup(): UI_WelcomeToProPresenter_UserGroup {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_UserGroup = {
+  encode(
+    _: UI_WelcomeToProPresenter_UserGroup,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_UserGroup {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_UserGroup();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_UserGroup {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_UserGroup): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_UserGroup>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_UserGroup {
+    return UI_WelcomeToProPresenter_UserGroup.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_UserGroup>, I>,
+  >(_: I): UI_WelcomeToProPresenter_UserGroup {
+    const message = createBaseUI_WelcomeToProPresenter_UserGroup();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_Tutorials(): UI_WelcomeToProPresenter_Tutorials {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_Tutorials = {
+  encode(
+    _: UI_WelcomeToProPresenter_Tutorials,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_Tutorials {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_Tutorials();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_Tutorials {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_Tutorials): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Tutorials>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_Tutorials {
+    return UI_WelcomeToProPresenter_Tutorials.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Tutorials>, I>,
+  >(_: I): UI_WelcomeToProPresenter_Tutorials {
+    const message = createBaseUI_WelcomeToProPresenter_Tutorials();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_KnowledgeBase(): UI_WelcomeToProPresenter_KnowledgeBase {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_KnowledgeBase = {
+  encode(
+    _: UI_WelcomeToProPresenter_KnowledgeBase,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_KnowledgeBase {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_KnowledgeBase();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_KnowledgeBase {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_KnowledgeBase): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_KnowledgeBase>, I>,
+  >(base?: I): UI_WelcomeToProPresenter_KnowledgeBase {
+    return UI_WelcomeToProPresenter_KnowledgeBase.fromPartial(
+      base ?? ({} as any),
+    );
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_KnowledgeBase>, I>,
+  >(_: I): UI_WelcomeToProPresenter_KnowledgeBase {
+    const message = createBaseUI_WelcomeToProPresenter_KnowledgeBase();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_Blog(): UI_WelcomeToProPresenter_Blog {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_Blog = {
+  encode(
+    _: UI_WelcomeToProPresenter_Blog,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_Blog {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_Blog();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_Blog {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_Blog): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Blog>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_Blog {
+    return UI_WelcomeToProPresenter_Blog.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Blog>, I>>(
+    _: I,
+  ): UI_WelcomeToProPresenter_Blog {
+    const message = createBaseUI_WelcomeToProPresenter_Blog();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_Instagram(): UI_WelcomeToProPresenter_Instagram {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_Instagram = {
+  encode(
+    _: UI_WelcomeToProPresenter_Instagram,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_Instagram {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_Instagram();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_Instagram {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_Instagram): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Instagram>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_Instagram {
+    return UI_WelcomeToProPresenter_Instagram.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Instagram>, I>,
+  >(_: I): UI_WelcomeToProPresenter_Instagram {
+    const message = createBaseUI_WelcomeToProPresenter_Instagram();
+    return message;
+  },
+};
+
+function createBaseUI_WelcomeToProPresenter_Facebook(): UI_WelcomeToProPresenter_Facebook {
+  return {};
+}
+
+export const UI_WelcomeToProPresenter_Facebook = {
+  encode(
+    _: UI_WelcomeToProPresenter_Facebook,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_WelcomeToProPresenter_Facebook {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_WelcomeToProPresenter_Facebook();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): UI_WelcomeToProPresenter_Facebook {
+    return {};
+  },
+
+  toJSON(_: UI_WelcomeToProPresenter_Facebook): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Facebook>, I>>(
+    base?: I,
+  ): UI_WelcomeToProPresenter_Facebook {
+    return UI_WelcomeToProPresenter_Facebook.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<
+    I extends Exact<DeepPartial<UI_WelcomeToProPresenter_Facebook>, I>,
+  >(_: I): UI_WelcomeToProPresenter_Facebook {
+    const message = createBaseUI_WelcomeToProPresenter_Facebook();
+    return message;
+  },
+};
+
+function createBaseUI_TestPattern(): UI_TestPattern {
+  return { shown: undefined };
+}
+
+export const UI_TestPattern = {
+  encode(
+    message: UI_TestPattern,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.shown !== undefined) {
+      UI_TestPattern_Shown.encode(
+        message.shown,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UI_TestPattern {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_TestPattern();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.shown = UI_TestPattern_Shown.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UI_TestPattern {
+    return {
+      shown: isSet(object.shown)
+        ? UI_TestPattern_Shown.fromJSON(object.shown)
+        : undefined,
+    };
+  },
+
+  toJSON(message: UI_TestPattern): unknown {
+    const obj: any = {};
+    if (message.shown !== undefined) {
+      obj.shown = UI_TestPattern_Shown.toJSON(message.shown);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_TestPattern>, I>>(
+    base?: I,
+  ): UI_TestPattern {
+    return UI_TestPattern.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_TestPattern>, I>>(
+    object: I,
+  ): UI_TestPattern {
+    const message = createBaseUI_TestPattern();
+    message.shown =
+      object.shown !== undefined && object.shown !== null
+        ? UI_TestPattern_Shown.fromPartial(object.shown)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseUI_TestPattern_Shown(): UI_TestPattern_Shown {
+  return { source: 0 };
+}
+
+export const UI_TestPattern_Shown = {
+  encode(
+    message: UI_TestPattern_Shown,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.source !== 0) {
+      writer.uint32(8).int32(message.source);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_TestPattern_Shown {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_TestPattern_Shown();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.source = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UI_TestPattern_Shown {
+    return {
+      source: isSet(object.source)
+        ? uI_TestPattern_Shown_SourceFromJSON(object.source)
+        : 0,
+    };
+  },
+
+  toJSON(message: UI_TestPattern_Shown): unknown {
+    const obj: any = {};
+    if (message.source !== 0) {
+      obj.source = uI_TestPattern_Shown_SourceToJSON(message.source);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_TestPattern_Shown>, I>>(
+    base?: I,
+  ): UI_TestPattern_Shown {
+    return UI_TestPattern_Shown.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_TestPattern_Shown>, I>>(
+    object: I,
+  ): UI_TestPattern_Shown {
+    const message = createBaseUI_TestPattern_Shown();
+    message.source = object.source ?? 0;
+    return message;
+  },
+};
+
+function createBaseUI_Preferences(): UI_Preferences {
+  return { customLogo: undefined };
+}
+
+export const UI_Preferences = {
+  encode(
+    message: UI_Preferences,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.customLogo !== undefined) {
+      UI_Preferences_CustomLogo.encode(
+        message.customLogo,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): UI_Preferences {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_Preferences();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.customLogo = UI_Preferences_CustomLogo.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UI_Preferences {
+    return {
+      customLogo: isSet(object.customLogo)
+        ? UI_Preferences_CustomLogo.fromJSON(object.customLogo)
+        : undefined,
+    };
+  },
+
+  toJSON(message: UI_Preferences): unknown {
+    const obj: any = {};
+    if (message.customLogo !== undefined) {
+      obj.customLogo = UI_Preferences_CustomLogo.toJSON(message.customLogo);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_Preferences>, I>>(
+    base?: I,
+  ): UI_Preferences {
+    return UI_Preferences.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_Preferences>, I>>(
+    object: I,
+  ): UI_Preferences {
+    const message = createBaseUI_Preferences();
+    message.customLogo =
+      object.customLogo !== undefined && object.customLogo !== null
+        ? UI_Preferences_CustomLogo.fromPartial(object.customLogo)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseUI_Preferences_CustomLogo(): UI_Preferences_CustomLogo {
+  return { hasLogo: false };
+}
+
+export const UI_Preferences_CustomLogo = {
+  encode(
+    message: UI_Preferences_CustomLogo,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.hasLogo !== false) {
+      writer.uint32(8).bool(message.hasLogo);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): UI_Preferences_CustomLogo {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUI_Preferences_CustomLogo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.hasLogo = reader.bool();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UI_Preferences_CustomLogo {
+    return {
+      hasLogo: isSet(object.hasLogo)
+        ? globalThis.Boolean(object.hasLogo)
+        : false,
+    };
+  },
+
+  toJSON(message: UI_Preferences_CustomLogo): unknown {
+    const obj: any = {};
+    if (message.hasLogo !== false) {
+      obj.hasLogo = message.hasLogo;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UI_Preferences_CustomLogo>, I>>(
+    base?: I,
+  ): UI_Preferences_CustomLogo {
+    return UI_Preferences_CustomLogo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UI_Preferences_CustomLogo>, I>>(
+    object: I,
+  ): UI_Preferences_CustomLogo {
+    const message = createBaseUI_Preferences_CustomLogo();
+    message.hasLogo = object.hasLogo ?? false;
     return message;
   },
 };

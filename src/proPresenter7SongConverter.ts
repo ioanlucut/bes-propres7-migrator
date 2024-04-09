@@ -40,7 +40,6 @@ import {
   Graphics_Text_Attributes_Alignment,
   Graphics_Text_Attributes_Capitalization,
   Graphics_Text_Attributes_CustomAttribute,
-  Graphics_Text_Attributes_Font,
   Graphics_Text_Attributes_Paragraph,
   Graphics_Text_ScaleBehavior,
   Graphics_Text_Transform,
@@ -49,11 +48,12 @@ import {
 import { Group } from '../proto/groups';
 import { Section, Song } from './types';
 import { convertToRtf } from './txtToRtfConverter';
+import { Font } from '../proto/font';
 
 export type Config = {
   arrangementName: string;
   ccliSettings: Presentation_CCLI;
-  fontConfig: Graphics_Text_Attributes_Font;
+  fontConfig: Font;
   graphicSize: Graphics_Size;
   presentationCategory: string;
   refMacroId: string;
@@ -119,7 +119,7 @@ const FULL_SIZE_PATH_OBJECT = Graphics_Path.create({
 const createTextFromSection = (verse: string, config: Config) =>
   Graphics_Text.create({
     attributes: Graphics_Text_Attributes.create({
-      font: Graphics_Text_Attributes_Font.create(config.fontConfig),
+      font: Font.create(config.fontConfig),
       customAttributes: [
         Graphics_Text_Attributes_CustomAttribute.create({
           originalFontSize: config.fontConfig.size,

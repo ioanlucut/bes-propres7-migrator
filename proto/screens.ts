@@ -126,6 +126,7 @@ export interface OutputDisplay {
   type: OutputDisplay_Type;
   mode: DisplayMode | undefined;
   renderId: string;
+  videoDelay: number;
   blackmagic?: OutputDisplay_Blackmagic | undefined;
 }
 
@@ -386,13 +387,13 @@ export const Screen = {
     if (message.bounds !== undefined) {
       Graphics_Rect.encode(message.bounds, writer.uint32(34).fork()).ldelim();
     }
-    if (message.aspectRatioLocked === true) {
+    if (message.aspectRatioLocked !== false) {
       writer.uint32(40).bool(message.aspectRatioLocked);
     }
-    if (message.outputBoundsAspectRatioLocked === true) {
+    if (message.outputBoundsAspectRatioLocked !== false) {
       writer.uint32(48).bool(message.outputBoundsAspectRatioLocked);
     }
-    if (message.cornerPinningEnabled === true) {
+    if (message.cornerPinningEnabled !== false) {
       writer.uint32(56).bool(message.cornerPinningEnabled);
     }
     if (message.subscreenUnitRect !== undefined) {
@@ -425,7 +426,7 @@ export const Screen = {
         writer.uint32(114).fork(),
       ).ldelim();
     }
-    if (message.colorEnabled === true) {
+    if (message.colorEnabled !== false) {
       writer.uint32(120).bool(message.colorEnabled);
     }
     if (message.colorAdjustment !== undefined) {
@@ -667,13 +668,13 @@ export const Screen = {
     if (message.bounds !== undefined) {
       obj.bounds = Graphics_Rect.toJSON(message.bounds);
     }
-    if (message.aspectRatioLocked === true) {
+    if (message.aspectRatioLocked !== false) {
       obj.aspectRatioLocked = message.aspectRatioLocked;
     }
-    if (message.outputBoundsAspectRatioLocked === true) {
+    if (message.outputBoundsAspectRatioLocked !== false) {
       obj.outputBoundsAspectRatioLocked = message.outputBoundsAspectRatioLocked;
     }
-    if (message.cornerPinningEnabled === true) {
+    if (message.cornerPinningEnabled !== false) {
       obj.cornerPinningEnabled = message.cornerPinningEnabled;
     }
     if (message.subscreenUnitRect !== undefined) {
@@ -697,7 +698,7 @@ export const Screen = {
     if (message.outputDisplay !== undefined) {
       obj.outputDisplay = OutputDisplay.toJSON(message.outputDisplay);
     }
-    if (message.colorEnabled === true) {
+    if (message.colorEnabled !== false) {
       obj.colorEnabled = message.colorEnabled;
     }
     if (message.colorAdjustment !== undefined) {
@@ -1390,7 +1391,7 @@ export const DisplayMode = {
     if (message.refreshRate !== 0) {
       writer.uint32(33).double(message.refreshRate);
     }
-    if (message.interlaced === true) {
+    if (message.interlaced !== false) {
       writer.uint32(40).bool(message.interlaced);
     }
     return writer;
@@ -1476,7 +1477,7 @@ export const DisplayMode = {
     if (message.refreshRate !== 0) {
       obj.refreshRate = message.refreshRate;
     }
-    if (message.interlaced === true) {
+    if (message.interlaced !== false) {
       obj.interlaced = message.interlaced;
     }
     return obj;
@@ -1510,6 +1511,7 @@ function createBaseOutputDisplay(): OutputDisplay {
     type: 0,
     mode: undefined,
     renderId: '',
+    videoDelay: 0,
     blackmagic: undefined,
   };
 }
@@ -1548,6 +1550,9 @@ export const OutputDisplay = {
     }
     if (message.renderId !== '') {
       writer.uint32(82).string(message.renderId);
+    }
+    if (message.videoDelay !== 0) {
+      writer.uint32(96).int32(message.videoDelay);
     }
     if (message.blackmagic !== undefined) {
       OutputDisplay_Blackmagic.encode(
@@ -1636,6 +1641,13 @@ export const OutputDisplay = {
 
           message.renderId = reader.string();
           continue;
+        case 12:
+          if (tag !== 96) {
+            break;
+          }
+
+          message.videoDelay = reader.int32();
+          continue;
         case 11:
           if (tag !== 90) {
             break;
@@ -1675,6 +1687,9 @@ export const OutputDisplay = {
       renderId: isSet(object.renderId)
         ? globalThis.String(object.renderId)
         : '',
+      videoDelay: isSet(object.videoDelay)
+        ? globalThis.Number(object.videoDelay)
+        : 0,
       blackmagic: isSet(object.blackmagic)
         ? OutputDisplay_Blackmagic.fromJSON(object.blackmagic)
         : undefined,
@@ -1713,6 +1728,9 @@ export const OutputDisplay = {
     if (message.renderId !== '') {
       obj.renderId = message.renderId;
     }
+    if (message.videoDelay !== 0) {
+      obj.videoDelay = Math.round(message.videoDelay);
+    }
     if (message.blackmagic !== undefined) {
       obj.blackmagic = OutputDisplay_Blackmagic.toJSON(message.blackmagic);
     }
@@ -1744,6 +1762,7 @@ export const OutputDisplay = {
         ? DisplayMode.fromPartial(object.mode)
         : undefined;
     message.renderId = object.renderId ?? '';
+    message.videoDelay = object.videoDelay ?? 0;
     message.blackmagic =
       object.blackmagic !== undefined && object.blackmagic !== null
         ? OutputDisplay_Blackmagic.fromPartial(object.blackmagic)
@@ -1761,7 +1780,7 @@ export const OutputDisplay_Blackmagic = {
     message: OutputDisplay_Blackmagic,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.keyMode !== 0) {
@@ -1830,7 +1849,7 @@ export const OutputDisplay_Blackmagic = {
 
   toJSON(message: OutputDisplay_Blackmagic): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.keyMode !== 0) {

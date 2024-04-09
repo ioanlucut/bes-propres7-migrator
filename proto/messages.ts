@@ -130,7 +130,7 @@ export const Message = {
     if (message.timeToRemove !== 0) {
       writer.uint32(25).double(message.timeToRemove);
     }
-    if (message.visibleOnNetwork === true) {
+    if (message.visibleOnNetwork !== false) {
       writer.uint32(32).bool(message.visibleOnNetwork);
     }
     if (message.template !== undefined) {
@@ -278,7 +278,7 @@ export const Message = {
     if (message.timeToRemove !== 0) {
       obj.timeToRemove = message.timeToRemove;
     }
-    if (message.visibleOnNetwork === true) {
+    if (message.visibleOnNetwork !== false) {
       obj.visibleOnNetwork = message.visibleOnNetwork;
     }
     if (message.template !== undefined) {

@@ -14,7 +14,7 @@ import { AlphaType, alphaTypeFromJSON, alphaTypeToJSON } from './alphaType';
 import { CCLIDocument, CopyrightLayout } from './ccli';
 import { Cue } from './cue';
 import { DigitalAudio_Setup } from './digitalAudio';
-import { Effect } from './effects';
+import { Effect, Transition } from './effects';
 import {
   Graphics_BackgroundEffect,
   Graphics_EdgeInsets,
@@ -33,13 +33,21 @@ import {
   media_ScaleBehaviorToJSON,
 } from './graphicsData';
 import { AudioInput, VideoInput } from './input';
-import { MacrosDocument } from './macros';
+import {
+  MacrosDocument,
+  MacrosDocument_Macro_ImageType,
+  macrosDocument_Macro_ImageTypeFromJSON,
+  macrosDocument_Macro_ImageTypeToJSON,
+} from './macros';
 import { MessageDocument } from './messages';
 import { Playlist } from './playlist';
+import { Preferences } from './preferences';
 import { Presentation } from './presentation';
 import { AudienceLookCollection, ProAudienceLook } from './proAudienceLook';
+import { TestPatternRequest, TestPatternResponse } from './proCoreTestPatterns';
 import { MaskCollection } from './proMask';
 import { PropDocument } from './propDocument';
+import { PlaylistDocument } from './propresenter';
 import { ProPresenterWorkspace } from './proworkspace';
 import {
   Recording_SettingsDocument,
@@ -48,6 +56,7 @@ import {
 } from './recording';
 import { Slide } from './slide';
 import { Stage_Document } from './stage';
+import { TriggerSource } from './timedPlayback';
 import { Timer, TimersDocument } from './timers';
 import { URL } from './url';
 import { UUID } from './uuid';
@@ -140,21 +149,6 @@ export interface MediaMetadataRequestResponse_BitmapInfo {
   height: number;
 }
 
-export interface TriggerSource {
-  libraryLocation?: TriggerSource_Library | undefined;
-  playlistLocation?: TriggerSource_Playlist | undefined;
-}
-
-export interface TriggerSource_Library {
-  path: string;
-  presentationName: string;
-}
-
-export interface TriggerSource_Playlist {
-  identifier: UUID | undefined;
-  itemIdentifier: UUID | undefined;
-}
-
 export interface NetworkIdentifier {
   identifiers: NetworkIdentifier_IndexOrName[];
 }
@@ -176,6 +170,7 @@ export interface TriggerOptions {
   startPosition: number;
   triggerSource: TriggerSource | undefined;
   networkIdentifier: NetworkIdentifier | undefined;
+  requestClientContext: boolean;
 }
 
 export interface ControlTransport {
@@ -255,6 +250,7 @@ export interface ControlTransport_MarkOutPointControlType {
 
 export interface ControlTransport_SetScaleModeControlType {
   mode: Media_ScaleBehavior;
+  isBlurred: boolean;
   alignment: Media_ScaleAlignment;
 }
 
@@ -349,195 +345,24 @@ export interface TextSegmentRequest_Segment {
   size: number;
 }
 
-export interface ProClockSource {
-  uuid: string;
-  name: string;
-  connected: boolean;
-  active: boolean;
-  type: ProClockSource_Type;
+export interface TriggerCue {
+  triggerHandle: number;
+  triggerOptions: TriggerOptions | undefined;
+  cue: Cue | undefined;
+  presentation: TriggerCue_PresentationCue | undefined;
+  playlist: Playlist | undefined;
+  clientData: number;
 }
 
-export enum ProClockSource_Type {
-  TYPE_UNKOWN = 0,
-  TYPE_INPUT = 1,
-  TYPE_OUTPUT = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function proClockSource_TypeFromJSON(object: any): ProClockSource_Type {
-  switch (object) {
-    case 0:
-    case 'TYPE_UNKOWN':
-      return ProClockSource_Type.TYPE_UNKOWN;
-    case 1:
-    case 'TYPE_INPUT':
-      return ProClockSource_Type.TYPE_INPUT;
-    case 2:
-    case 'TYPE_OUTPUT':
-      return ProClockSource_Type.TYPE_OUTPUT;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return ProClockSource_Type.UNRECOGNIZED;
-  }
-}
-
-export function proClockSource_TypeToJSON(object: ProClockSource_Type): string {
-  switch (object) {
-    case ProClockSource_Type.TYPE_UNKOWN:
-      return 'TYPE_UNKOWN';
-    case ProClockSource_Type.TYPE_INPUT:
-      return 'TYPE_INPUT';
-    case ProClockSource_Type.TYPE_OUTPUT:
-      return 'TYPE_OUTPUT';
-    case ProClockSource_Type.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
-}
-
-export interface TimedPlayback {
-  sequence: TimedPlayback_Sequence | undefined;
-  timing: TimedPlayback_Timing | undefined;
-}
-
-export interface TimedPlayback_Sequence {
-  sequence: TimedPlayback_Sequence_SequenceItem[];
-  contentDestination: Action_ContentDestination;
+export interface TriggerCue_PresentationCue {
   presentation: Presentation | undefined;
-}
-
-export interface TimedPlayback_Sequence_SequenceItem {
-  identifier: UUID | undefined;
-  time: number;
-  triggerSource: TriggerSource | undefined;
-  contentDestination: Action_ContentDestination;
-  endTime: number;
-  cue?: Cue | undefined;
-  action?: Action | undefined;
-}
-
-export interface TimedPlayback_Timing {
-  layerTransport?: TimedPlayback_Timing_LayerTransport | undefined;
-  smpteTimecode?: TimedPlayback_Timing_SMPTETimecode | undefined;
-  internal?: TimedPlayback_Timing_Internal | undefined;
-}
-
-export interface TimedPlayback_Timing_LayerTransport {
-  layer: number;
-}
-
-export interface TimedPlayback_Timing_SMPTETimecode {
-  deviceIdentifier: string;
-  channel: number;
-  format: TimedPlayback_Timing_SMPTETimecode_Format;
-  offset: number;
-}
-
-export enum TimedPlayback_Timing_SMPTETimecode_Format {
-  FORMAT_24_FPS = 0,
-  FORMAT_25_FPS = 1,
-  FORMAT_29_97_FPS = 2,
-  FORMAT_30_FPS = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function timedPlayback_Timing_SMPTETimecode_FormatFromJSON(
-  object: any,
-): TimedPlayback_Timing_SMPTETimecode_Format {
-  switch (object) {
-    case 0:
-    case 'FORMAT_24_FPS':
-      return TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_24_FPS;
-    case 1:
-    case 'FORMAT_25_FPS':
-      return TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_25_FPS;
-    case 2:
-    case 'FORMAT_29_97_FPS':
-      return TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_29_97_FPS;
-    case 3:
-    case 'FORMAT_30_FPS':
-      return TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_30_FPS;
-    case -1:
-    case 'UNRECOGNIZED':
-    default:
-      return TimedPlayback_Timing_SMPTETimecode_Format.UNRECOGNIZED;
-  }
-}
-
-export function timedPlayback_Timing_SMPTETimecode_FormatToJSON(
-  object: TimedPlayback_Timing_SMPTETimecode_Format,
-): string {
-  switch (object) {
-    case TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_24_FPS:
-      return 'FORMAT_24_FPS';
-    case TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_25_FPS:
-      return 'FORMAT_25_FPS';
-    case TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_29_97_FPS:
-      return 'FORMAT_29_97_FPS';
-    case TimedPlayback_Timing_SMPTETimecode_Format.FORMAT_30_FPS:
-      return 'FORMAT_30_FPS';
-    case TimedPlayback_Timing_SMPTETimecode_Format.UNRECOGNIZED:
-    default:
-      return 'UNRECOGNIZED';
-  }
-}
-
-export interface TimedPlayback_Timing_Internal {
-  duration: number;
-  shouldLoop: boolean;
-}
-
-export interface TimedPlayback_Update {
-  play?: TimedPlayback_Update_Play | undefined;
-  record?: TimedPlayback_Update_Record | undefined;
-  pause?: TimedPlayback_Update_Pause | undefined;
-  reset?: TimedPlayback_Update_Reset | undefined;
-  jumpToTime?: TimedPlayback_Update_JumpToTime | undefined;
-  startScrub?: TimedPlayback_Update_StartScrub | undefined;
-  endScrub?: TimedPlayback_Update_EndScrub | undefined;
-  duration?: TimedPlayback_Update_Duration | undefined;
-  loop?: TimedPlayback_Update_Loop | undefined;
-  updateSequence?: TimedPlayback_Sequence | undefined;
-  monitorSource?: TimedPlayback_Update_MonitorSource | undefined;
-}
-
-export interface TimedPlayback_Update_Play {}
-
-export interface TimedPlayback_Update_Record {
-  isRecording: boolean;
-}
-
-export interface TimedPlayback_Update_Pause {}
-
-export interface TimedPlayback_Update_Reset {}
-
-export interface TimedPlayback_Update_JumpToTime {
-  time: number;
-}
-
-export interface TimedPlayback_Update_StartScrub {
-  time: number;
-}
-
-export interface TimedPlayback_Update_EndScrub {
-  time: number;
-}
-
-export interface TimedPlayback_Update_Duration {
-  duration: number;
-}
-
-export interface TimedPlayback_Update_Loop {
-  loop: boolean;
-}
-
-export interface TimedPlayback_Update_MonitorSource {
-  enable: boolean;
+  arrangementId: UUID | undefined;
+  cueIndex: number;
 }
 
 export interface NetworkTriggerDataItem {
   triggerOptions: TriggerOptions | undefined;
+  triggerCue: TriggerCue | undefined;
   action?: Action | undefined;
   cue?: Cue | undefined;
 }
@@ -611,21 +436,6 @@ export interface ValidateEncoderResponse {
   isValid: boolean;
 }
 
-export interface TriggerCue {
-  triggerHandle: number;
-  triggerOptions: TriggerOptions | undefined;
-  cue: Cue | undefined;
-  presentation: TriggerCue_PresentationCue | undefined;
-  playlist: Playlist | undefined;
-  clientData: number;
-}
-
-export interface TriggerCue_PresentationCue {
-  presentation: Presentation | undefined;
-  arrangementId: UUID | undefined;
-  cueIndex: number;
-}
-
 export interface CaptureActionRequest {
   startResi?: CaptureActionRequest_StartResi | undefined;
   stopCapture?: CaptureActionRequest_StopCapture | undefined;
@@ -658,6 +468,17 @@ export interface CaptureActionResponse_StopCapture {
   stopCapture: boolean;
 }
 
+export interface MacroIcons {
+  icons: MacroIcons_MacroIcon[];
+}
+
+export interface MacroIcons_MacroIcon {
+  imageType: MacrosDocument_Macro_ImageType;
+  imageData: Uint8Array;
+}
+
+export interface GenericEvent {}
+
 export interface SendData {
   messageId: number;
   workspace?: ProPresenterWorkspace | undefined;
@@ -676,6 +497,22 @@ export interface SendData {
   recordingSettingsDocument?: Recording_SettingsDocument | undefined;
   captureActionResponse?: CaptureActionResponse | undefined;
   copyrightLayout?: CopyrightLayout | undefined;
+  globalBackgroundTransition?: Transition | undefined;
+  globalMessagesTransition?: Transition | undefined;
+  globalForegroundTransition?: Transition | undefined;
+  globalBibleTransition?: Transition | undefined;
+  globalPropsTransition?: Transition | undefined;
+  globalAudioTransition?: Transition | undefined;
+  preferences?: Preferences | undefined;
+  testPattern?: TestPatternRequest | undefined;
+  startupComplete?: GenericEvent | undefined;
+  visualPlaylistDoc?: PlaylistDocument | undefined;
+  audioPlaylistDoc?: PlaylistDocument | undefined;
+  killWatchdog?: GenericEvent | undefined;
+  macroIcons?: MacroIcons | undefined;
+  debugTriggerDataDump?: GenericEvent | undefined;
+  libraryPlaylistDoc?: PlaylistDocument | undefined;
+  audioPlaylistFocusUuid?: UUID | undefined;
 }
 
 export interface TimerRuntimeState {
@@ -685,6 +522,7 @@ export interface TimerRuntimeState {
   isRunning: boolean;
   hasOverrun: boolean;
   state: TimerRuntimeState_ResourceState;
+  currentTime: number;
 }
 
 export enum TimerRuntimeState_ResourceState {
@@ -747,11 +585,24 @@ export interface TimerStateUpdate {
   state: TimerRuntimeState | undefined;
 }
 
+export interface HandledException {
+  description: string;
+}
+
+export interface CoreDataStateDump {
+  macros: MacrosDocument | undefined;
+}
+
 export interface SendDataResponse {
   messageId: number;
   validateEncoderResponse?: ValidateEncoderResponse | undefined;
   timerState?: TimerStateUpdate | undefined;
   captureActionRequest?: CaptureActionRequest | undefined;
+  testPattern?: TestPatternResponse | undefined;
+  handledException?: HandledException | undefined;
+  testStateDump?: CoreDataStateDump | undefined;
+  audioPlaylistFocusUuid?: UUID | undefined;
+  audioPlaylistItemTriggeredUuid?: UUID | undefined;
 }
 
 export interface TriggerTransferRenderState {
@@ -854,13 +705,13 @@ export interface TriggerTransferRenderState_TimelineState {
 
 export interface TriggerTransferRenderState_SlideState {
   presentation: Presentation | undefined;
-  playlistUuid: UUID | undefined;
-  playlistName: string;
+  playlist: Playlist | undefined;
   currentCue: UUID | undefined;
   nextCue: UUID | undefined;
   autoAdvance: TriggerTransferRenderState_AutoAdvanceState | undefined;
   timelineState: TriggerTransferRenderState_TimelineState | undefined;
   currentCueIndex: number;
+  currentPlaylistIndex: number;
 }
 
 export interface TriggerTransferRenderState_TimecodeState {
@@ -955,10 +806,10 @@ export const MediaMetadataRequestInfo = {
     if (message.nativeRotation !== 0) {
       writer.uint32(56).int32(message.nativeRotation);
     }
-    if (message.flippedHorizontally === true) {
+    if (message.flippedHorizontally !== false) {
       writer.uint32(64).bool(message.flippedHorizontally);
     }
-    if (message.flippedVertically === true) {
+    if (message.flippedVertically !== false) {
       writer.uint32(72).bool(message.flippedVertically);
     }
     if (message.alphaType !== 0) {
@@ -1116,10 +967,10 @@ export const MediaMetadataRequestInfo = {
         message.nativeRotation,
       );
     }
-    if (message.flippedHorizontally === true) {
+    if (message.flippedHorizontally !== false) {
       obj.flippedHorizontally = message.flippedHorizontally;
     }
-    if (message.flippedVertically === true) {
+    if (message.flippedVertically !== false) {
       obj.flippedVertically = message.flippedVertically;
     }
     if (message.alphaType !== 0) {
@@ -1322,7 +1173,7 @@ export const MediaMetadataRequestResponse_Metadata = {
     if (message.contentType !== 0) {
       writer.uint32(80).int32(message.contentType);
     }
-    if (message.hasAlphaChannel === true) {
+    if (message.hasAlphaChannel !== false) {
       writer.uint32(88).bool(message.hasAlphaChannel);
     }
     return writer;
@@ -1483,7 +1334,7 @@ export const MediaMetadataRequestResponse_Metadata = {
         message.contentType,
       );
     }
-    if (message.hasAlphaChannel === true) {
+    if (message.hasAlphaChannel !== false) {
       obj.hasAlphaChannel = message.hasAlphaChannel;
     }
     return obj;
@@ -1598,296 +1449,6 @@ export const MediaMetadataRequestResponse_BitmapInfo = {
     const message = createBaseMediaMetadataRequestResponse_BitmapInfo();
     message.width = object.width ?? 0;
     message.height = object.height ?? 0;
-    return message;
-  },
-};
-
-function createBaseTriggerSource(): TriggerSource {
-  return { libraryLocation: undefined, playlistLocation: undefined };
-}
-
-export const TriggerSource = {
-  encode(
-    message: TriggerSource,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.libraryLocation !== undefined) {
-      TriggerSource_Library.encode(
-        message.libraryLocation,
-        writer.uint32(10).fork(),
-      ).ldelim();
-    }
-    if (message.playlistLocation !== undefined) {
-      TriggerSource_Playlist.encode(
-        message.playlistLocation,
-        writer.uint32(18).fork(),
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): TriggerSource {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTriggerSource();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.libraryLocation = TriggerSource_Library.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.playlistLocation = TriggerSource_Playlist.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TriggerSource {
-    return {
-      libraryLocation: isSet(object.libraryLocation)
-        ? TriggerSource_Library.fromJSON(object.libraryLocation)
-        : undefined,
-      playlistLocation: isSet(object.playlistLocation)
-        ? TriggerSource_Playlist.fromJSON(object.playlistLocation)
-        : undefined,
-    };
-  },
-
-  toJSON(message: TriggerSource): unknown {
-    const obj: any = {};
-    if (message.libraryLocation !== undefined) {
-      obj.libraryLocation = TriggerSource_Library.toJSON(
-        message.libraryLocation,
-      );
-    }
-    if (message.playlistLocation !== undefined) {
-      obj.playlistLocation = TriggerSource_Playlist.toJSON(
-        message.playlistLocation,
-      );
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TriggerSource>, I>>(
-    base?: I,
-  ): TriggerSource {
-    return TriggerSource.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TriggerSource>, I>>(
-    object: I,
-  ): TriggerSource {
-    const message = createBaseTriggerSource();
-    message.libraryLocation =
-      object.libraryLocation !== undefined && object.libraryLocation !== null
-        ? TriggerSource_Library.fromPartial(object.libraryLocation)
-        : undefined;
-    message.playlistLocation =
-      object.playlistLocation !== undefined && object.playlistLocation !== null
-        ? TriggerSource_Playlist.fromPartial(object.playlistLocation)
-        : undefined;
-    return message;
-  },
-};
-
-function createBaseTriggerSource_Library(): TriggerSource_Library {
-  return { path: '', presentationName: '' };
-}
-
-export const TriggerSource_Library = {
-  encode(
-    message: TriggerSource_Library,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.path !== '') {
-      writer.uint32(10).string(message.path);
-    }
-    if (message.presentationName !== '') {
-      writer.uint32(18).string(message.presentationName);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TriggerSource_Library {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTriggerSource_Library();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.path = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.presentationName = reader.string();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TriggerSource_Library {
-    return {
-      path: isSet(object.path) ? globalThis.String(object.path) : '',
-      presentationName: isSet(object.presentationName)
-        ? globalThis.String(object.presentationName)
-        : '',
-    };
-  },
-
-  toJSON(message: TriggerSource_Library): unknown {
-    const obj: any = {};
-    if (message.path !== '') {
-      obj.path = message.path;
-    }
-    if (message.presentationName !== '') {
-      obj.presentationName = message.presentationName;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TriggerSource_Library>, I>>(
-    base?: I,
-  ): TriggerSource_Library {
-    return TriggerSource_Library.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TriggerSource_Library>, I>>(
-    object: I,
-  ): TriggerSource_Library {
-    const message = createBaseTriggerSource_Library();
-    message.path = object.path ?? '';
-    message.presentationName = object.presentationName ?? '';
-    return message;
-  },
-};
-
-function createBaseTriggerSource_Playlist(): TriggerSource_Playlist {
-  return { identifier: undefined, itemIdentifier: undefined };
-}
-
-export const TriggerSource_Playlist = {
-  encode(
-    message: TriggerSource_Playlist,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.identifier !== undefined) {
-      UUID.encode(message.identifier, writer.uint32(10).fork()).ldelim();
-    }
-    if (message.itemIdentifier !== undefined) {
-      UUID.encode(message.itemIdentifier, writer.uint32(18).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TriggerSource_Playlist {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTriggerSource_Playlist();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.identifier = UUID.decode(reader, reader.uint32());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.itemIdentifier = UUID.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TriggerSource_Playlist {
-    return {
-      identifier: isSet(object.identifier)
-        ? UUID.fromJSON(object.identifier)
-        : undefined,
-      itemIdentifier: isSet(object.itemIdentifier)
-        ? UUID.fromJSON(object.itemIdentifier)
-        : undefined,
-    };
-  },
-
-  toJSON(message: TriggerSource_Playlist): unknown {
-    const obj: any = {};
-    if (message.identifier !== undefined) {
-      obj.identifier = UUID.toJSON(message.identifier);
-    }
-    if (message.itemIdentifier !== undefined) {
-      obj.itemIdentifier = UUID.toJSON(message.itemIdentifier);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TriggerSource_Playlist>, I>>(
-    base?: I,
-  ): TriggerSource_Playlist {
-    return TriggerSource_Playlist.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TriggerSource_Playlist>, I>>(
-    object: I,
-  ): TriggerSource_Playlist {
-    const message = createBaseTriggerSource_Playlist();
-    message.identifier =
-      object.identifier !== undefined && object.identifier !== null
-        ? UUID.fromPartial(object.identifier)
-        : undefined;
-    message.itemIdentifier =
-      object.itemIdentifier !== undefined && object.itemIdentifier !== null
-        ? UUID.fromPartial(object.itemIdentifier)
-        : undefined;
     return message;
   },
 };
@@ -2071,6 +1632,7 @@ function createBaseTriggerOptions(): TriggerOptions {
     startPosition: 0,
     triggerSource: undefined,
     networkIdentifier: undefined,
+    requestClientContext: false,
   };
 }
 
@@ -2082,25 +1644,25 @@ export const TriggerOptions = {
     if (message.contentDestination !== 0) {
       writer.uint32(8).int32(message.contentDestination);
     }
-    if (message.suppressAutoStartVideo === true) {
+    if (message.suppressAutoStartVideo !== false) {
       writer.uint32(16).bool(message.suppressAutoStartVideo);
     }
-    if (message.suppressMediaBackground === true) {
+    if (message.suppressMediaBackground !== false) {
       writer.uint32(24).bool(message.suppressMediaBackground);
     }
-    if (message.forceRetrigger === true) {
+    if (message.forceRetrigger !== false) {
       writer.uint32(32).bool(message.forceRetrigger);
     }
-    if (message.resetChordChart === true) {
+    if (message.resetChordChart !== false) {
       writer.uint32(40).bool(message.resetChordChart);
     }
-    if (message.fromPlaylistLibrary === true) {
+    if (message.fromPlaylistLibrary !== false) {
       writer.uint32(48).bool(message.fromPlaylistLibrary);
     }
-    if (message.fromTimeline === true) {
+    if (message.fromTimeline !== false) {
       writer.uint32(56).bool(message.fromTimeline);
     }
-    if (message.ignoreAnalytics === true) {
+    if (message.ignoreAnalytics !== false) {
       writer.uint32(64).bool(message.ignoreAnalytics);
     }
     if (message.startPosition !== 0) {
@@ -2117,6 +1679,9 @@ export const TriggerOptions = {
         message.networkIdentifier,
         writer.uint32(90).fork(),
       ).ldelim();
+    }
+    if (message.requestClientContext !== false) {
+      writer.uint32(96).bool(message.requestClientContext);
     }
     return writer;
   },
@@ -2209,6 +1774,13 @@ export const TriggerOptions = {
             reader.uint32(),
           );
           continue;
+        case 12:
+          if (tag !== 96) {
+            break;
+          }
+
+          message.requestClientContext = reader.bool();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2253,6 +1825,9 @@ export const TriggerOptions = {
       networkIdentifier: isSet(object.networkIdentifier)
         ? NetworkIdentifier.fromJSON(object.networkIdentifier)
         : undefined,
+      requestClientContext: isSet(object.requestClientContext)
+        ? globalThis.Boolean(object.requestClientContext)
+        : false,
     };
   },
 
@@ -2263,25 +1838,25 @@ export const TriggerOptions = {
         message.contentDestination,
       );
     }
-    if (message.suppressAutoStartVideo === true) {
+    if (message.suppressAutoStartVideo !== false) {
       obj.suppressAutoStartVideo = message.suppressAutoStartVideo;
     }
-    if (message.suppressMediaBackground === true) {
+    if (message.suppressMediaBackground !== false) {
       obj.suppressMediaBackground = message.suppressMediaBackground;
     }
-    if (message.forceRetrigger === true) {
+    if (message.forceRetrigger !== false) {
       obj.forceRetrigger = message.forceRetrigger;
     }
-    if (message.resetChordChart === true) {
+    if (message.resetChordChart !== false) {
       obj.resetChordChart = message.resetChordChart;
     }
-    if (message.fromPlaylistLibrary === true) {
+    if (message.fromPlaylistLibrary !== false) {
       obj.fromPlaylistLibrary = message.fromPlaylistLibrary;
     }
-    if (message.fromTimeline === true) {
+    if (message.fromTimeline !== false) {
       obj.fromTimeline = message.fromTimeline;
     }
-    if (message.ignoreAnalytics === true) {
+    if (message.ignoreAnalytics !== false) {
       obj.ignoreAnalytics = message.ignoreAnalytics;
     }
     if (message.startPosition !== 0) {
@@ -2294,6 +1869,9 @@ export const TriggerOptions = {
       obj.networkIdentifier = NetworkIdentifier.toJSON(
         message.networkIdentifier,
       );
+    }
+    if (message.requestClientContext !== false) {
+      obj.requestClientContext = message.requestClientContext;
     }
     return obj;
   },
@@ -2325,6 +1903,7 @@ export const TriggerOptions = {
       object.networkIdentifier !== null
         ? NetworkIdentifier.fromPartial(object.networkIdentifier)
         : undefined;
+    message.requestClientContext = object.requestClientContext ?? false;
     return message;
   },
 };
@@ -4135,7 +3714,7 @@ export const ControlTransport_MarkOutPointControlType = {
 };
 
 function createBaseControlTransport_SetScaleModeControlType(): ControlTransport_SetScaleModeControlType {
-  return { mode: 0, alignment: 0 };
+  return { mode: 0, isBlurred: false, alignment: 0 };
 }
 
 export const ControlTransport_SetScaleModeControlType = {
@@ -4145,6 +3724,9 @@ export const ControlTransport_SetScaleModeControlType = {
   ): _m0.Writer {
     if (message.mode !== 0) {
       writer.uint32(8).int32(message.mode);
+    }
+    if (message.isBlurred !== false) {
+      writer.uint32(24).bool(message.isBlurred);
     }
     if (message.alignment !== 0) {
       writer.uint32(16).int32(message.alignment);
@@ -4170,6 +3752,13 @@ export const ControlTransport_SetScaleModeControlType = {
 
           message.mode = reader.int32() as any;
           continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.isBlurred = reader.bool();
+          continue;
         case 2:
           if (tag !== 16) {
             break;
@@ -4189,6 +3778,9 @@ export const ControlTransport_SetScaleModeControlType = {
   fromJSON(object: any): ControlTransport_SetScaleModeControlType {
     return {
       mode: isSet(object.mode) ? media_ScaleBehaviorFromJSON(object.mode) : 0,
+      isBlurred: isSet(object.isBlurred)
+        ? globalThis.Boolean(object.isBlurred)
+        : false,
       alignment: isSet(object.alignment)
         ? media_ScaleAlignmentFromJSON(object.alignment)
         : 0,
@@ -4199,6 +3791,9 @@ export const ControlTransport_SetScaleModeControlType = {
     const obj: any = {};
     if (message.mode !== 0) {
       obj.mode = media_ScaleBehaviorToJSON(message.mode);
+    }
+    if (message.isBlurred !== false) {
+      obj.isBlurred = message.isBlurred;
     }
     if (message.alignment !== 0) {
       obj.alignment = media_ScaleAlignmentToJSON(message.alignment);
@@ -4218,6 +3813,7 @@ export const ControlTransport_SetScaleModeControlType = {
   >(object: I): ControlTransport_SetScaleModeControlType {
     const message = createBaseControlTransport_SetScaleModeControlType();
     message.mode = object.mode ?? 0;
+    message.isBlurred = object.isBlurred ?? false;
     message.alignment = object.alignment ?? 0;
     return message;
   },
@@ -4232,10 +3828,10 @@ export const ControlTransport_SetFlippedModeControlType = {
     message: ControlTransport_SetFlippedModeControlType,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.horizontal === true) {
+    if (message.horizontal !== false) {
       writer.uint32(8).bool(message.horizontal);
     }
-    if (message.vertical === true) {
+    if (message.vertical !== false) {
       writer.uint32(16).bool(message.vertical);
     }
     return writer;
@@ -4288,10 +3884,10 @@ export const ControlTransport_SetFlippedModeControlType = {
 
   toJSON(message: ControlTransport_SetFlippedModeControlType): unknown {
     const obj: any = {};
-    if (message.horizontal === true) {
+    if (message.horizontal !== false) {
       obj.horizontal = message.horizontal;
     }
-    if (message.vertical === true) {
+    if (message.vertical !== false) {
       obj.vertical = message.vertical;
     }
     return obj;
@@ -5049,10 +4645,10 @@ export const ControlTransport_SetAudioFadeType = {
     if (message.fadeOutDuration !== 0) {
       writer.uint32(17).double(message.fadeOutDuration);
     }
-    if (message.shouldFadeIn === true) {
+    if (message.shouldFadeIn !== false) {
       writer.uint32(24).bool(message.shouldFadeIn);
     }
-    if (message.shouldFadeOut === true) {
+    if (message.shouldFadeOut !== false) {
       writer.uint32(32).bool(message.shouldFadeOut);
     }
     return writer;
@@ -5131,10 +4727,10 @@ export const ControlTransport_SetAudioFadeType = {
     if (message.fadeOutDuration !== 0) {
       obj.fadeOutDuration = message.fadeOutDuration;
     }
-    if (message.shouldFadeIn === true) {
+    if (message.shouldFadeIn !== false) {
       obj.shouldFadeIn = message.shouldFadeIn;
     }
-    if (message.shouldFadeOut === true) {
+    if (message.shouldFadeOut !== false) {
       obj.shouldFadeOut = message.shouldFadeOut;
     }
     return obj;
@@ -5912,717 +5508,54 @@ export const TextSegmentRequest_Segment = {
   },
 };
 
-function createBaseProClockSource(): ProClockSource {
-  return { uuid: '', name: '', connected: false, active: false, type: 0 };
-}
-
-export const ProClockSource = {
-  encode(
-    message: ProClockSource,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.uuid !== '') {
-      writer.uint32(10).string(message.uuid);
-    }
-    if (message.name !== '') {
-      writer.uint32(18).string(message.name);
-    }
-    if (message.connected === true) {
-      writer.uint32(24).bool(message.connected);
-    }
-    if (message.active === true) {
-      writer.uint32(32).bool(message.active);
-    }
-    if (message.type !== 0) {
-      writer.uint32(40).int32(message.type);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProClockSource {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseProClockSource();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.uuid = reader.string();
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.name = reader.string();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.connected = reader.bool();
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.active = reader.bool();
-          continue;
-        case 5:
-          if (tag !== 40) {
-            break;
-          }
-
-          message.type = reader.int32() as any;
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): ProClockSource {
-    return {
-      uuid: isSet(object.uuid) ? globalThis.String(object.uuid) : '',
-      name: isSet(object.name) ? globalThis.String(object.name) : '',
-      connected: isSet(object.connected)
-        ? globalThis.Boolean(object.connected)
-        : false,
-      active: isSet(object.active) ? globalThis.Boolean(object.active) : false,
-      type: isSet(object.type) ? proClockSource_TypeFromJSON(object.type) : 0,
-    };
-  },
-
-  toJSON(message: ProClockSource): unknown {
-    const obj: any = {};
-    if (message.uuid !== '') {
-      obj.uuid = message.uuid;
-    }
-    if (message.name !== '') {
-      obj.name = message.name;
-    }
-    if (message.connected === true) {
-      obj.connected = message.connected;
-    }
-    if (message.active === true) {
-      obj.active = message.active;
-    }
-    if (message.type !== 0) {
-      obj.type = proClockSource_TypeToJSON(message.type);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<ProClockSource>, I>>(
-    base?: I,
-  ): ProClockSource {
-    return ProClockSource.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<ProClockSource>, I>>(
-    object: I,
-  ): ProClockSource {
-    const message = createBaseProClockSource();
-    message.uuid = object.uuid ?? '';
-    message.name = object.name ?? '';
-    message.connected = object.connected ?? false;
-    message.active = object.active ?? false;
-    message.type = object.type ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback(): TimedPlayback {
-  return { sequence: undefined, timing: undefined };
-}
-
-export const TimedPlayback = {
-  encode(
-    message: TimedPlayback,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.sequence !== undefined) {
-      TimedPlayback_Sequence.encode(
-        message.sequence,
-        writer.uint32(10).fork(),
-      ).ldelim();
-    }
-    if (message.timing !== undefined) {
-      TimedPlayback_Timing.encode(
-        message.timing,
-        writer.uint32(18).fork(),
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): TimedPlayback {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sequence = TimedPlayback_Sequence.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.timing = TimedPlayback_Timing.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback {
-    return {
-      sequence: isSet(object.sequence)
-        ? TimedPlayback_Sequence.fromJSON(object.sequence)
-        : undefined,
-      timing: isSet(object.timing)
-        ? TimedPlayback_Timing.fromJSON(object.timing)
-        : undefined,
-    };
-  },
-
-  toJSON(message: TimedPlayback): unknown {
-    const obj: any = {};
-    if (message.sequence !== undefined) {
-      obj.sequence = TimedPlayback_Sequence.toJSON(message.sequence);
-    }
-    if (message.timing !== undefined) {
-      obj.timing = TimedPlayback_Timing.toJSON(message.timing);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback>, I>>(
-    base?: I,
-  ): TimedPlayback {
-    return TimedPlayback.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback>, I>>(
-    object: I,
-  ): TimedPlayback {
-    const message = createBaseTimedPlayback();
-    message.sequence =
-      object.sequence !== undefined && object.sequence !== null
-        ? TimedPlayback_Sequence.fromPartial(object.sequence)
-        : undefined;
-    message.timing =
-      object.timing !== undefined && object.timing !== null
-        ? TimedPlayback_Timing.fromPartial(object.timing)
-        : undefined;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Sequence(): TimedPlayback_Sequence {
-  return { sequence: [], contentDestination: 0, presentation: undefined };
-}
-
-export const TimedPlayback_Sequence = {
-  encode(
-    message: TimedPlayback_Sequence,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    for (const v of message.sequence) {
-      TimedPlayback_Sequence_SequenceItem.encode(
-        v!,
-        writer.uint32(10).fork(),
-      ).ldelim();
-    }
-    if (message.contentDestination !== 0) {
-      writer.uint32(16).int32(message.contentDestination);
-    }
-    if (message.presentation !== undefined) {
-      Presentation.encode(
-        message.presentation,
-        writer.uint32(26).fork(),
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Sequence {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Sequence();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.sequence.push(
-            TimedPlayback_Sequence_SequenceItem.decode(reader, reader.uint32()),
-          );
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.contentDestination = reader.int32() as any;
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.presentation = Presentation.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Sequence {
-    return {
-      sequence: globalThis.Array.isArray(object?.sequence)
-        ? object.sequence.map((e: any) =>
-            TimedPlayback_Sequence_SequenceItem.fromJSON(e),
-          )
-        : [],
-      contentDestination: isSet(object.contentDestination)
-        ? action_ContentDestinationFromJSON(object.contentDestination)
-        : 0,
-      presentation: isSet(object.presentation)
-        ? Presentation.fromJSON(object.presentation)
-        : undefined,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Sequence): unknown {
-    const obj: any = {};
-    if (message.sequence?.length) {
-      obj.sequence = message.sequence.map((e) =>
-        TimedPlayback_Sequence_SequenceItem.toJSON(e),
-      );
-    }
-    if (message.contentDestination !== 0) {
-      obj.contentDestination = action_ContentDestinationToJSON(
-        message.contentDestination,
-      );
-    }
-    if (message.presentation !== undefined) {
-      obj.presentation = Presentation.toJSON(message.presentation);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Sequence>, I>>(
-    base?: I,
-  ): TimedPlayback_Sequence {
-    return TimedPlayback_Sequence.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Sequence>, I>>(
-    object: I,
-  ): TimedPlayback_Sequence {
-    const message = createBaseTimedPlayback_Sequence();
-    message.sequence =
-      object.sequence?.map((e) =>
-        TimedPlayback_Sequence_SequenceItem.fromPartial(e),
-      ) || [];
-    message.contentDestination = object.contentDestination ?? 0;
-    message.presentation =
-      object.presentation !== undefined && object.presentation !== null
-        ? Presentation.fromPartial(object.presentation)
-        : undefined;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Sequence_SequenceItem(): TimedPlayback_Sequence_SequenceItem {
+function createBaseTriggerCue(): TriggerCue {
   return {
-    identifier: undefined,
-    time: 0,
-    triggerSource: undefined,
-    contentDestination: 0,
-    endTime: 0,
+    triggerHandle: 0,
+    triggerOptions: undefined,
     cue: undefined,
-    action: undefined,
+    presentation: undefined,
+    playlist: undefined,
+    clientData: 0,
   };
 }
 
-export const TimedPlayback_Sequence_SequenceItem = {
+export const TriggerCue = {
   encode(
-    message: TimedPlayback_Sequence_SequenceItem,
+    message: TriggerCue,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.identifier !== undefined) {
-      UUID.encode(message.identifier, writer.uint32(10).fork()).ldelim();
+    if (message.triggerHandle !== 0) {
+      writer.uint32(8).uint64(message.triggerHandle);
     }
-    if (message.time !== 0) {
-      writer.uint32(17).double(message.time);
-    }
-    if (message.triggerSource !== undefined) {
-      TriggerSource.encode(
-        message.triggerSource,
-        writer.uint32(26).fork(),
-      ).ldelim();
-    }
-    if (message.contentDestination !== 0) {
-      writer.uint32(32).int32(message.contentDestination);
-    }
-    if (message.endTime !== 0) {
-      writer.uint32(57).double(message.endTime);
-    }
-    if (message.cue !== undefined) {
-      Cue.encode(message.cue, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.action !== undefined) {
-      Action.encode(message.action, writer.uint32(50).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Sequence_SequenceItem {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Sequence_SequenceItem();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.identifier = UUID.decode(reader, reader.uint32());
-          continue;
-        case 2:
-          if (tag !== 17) {
-            break;
-          }
-
-          message.time = reader.double();
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.triggerSource = TriggerSource.decode(reader, reader.uint32());
-          continue;
-        case 4:
-          if (tag !== 32) {
-            break;
-          }
-
-          message.contentDestination = reader.int32() as any;
-          continue;
-        case 7:
-          if (tag !== 57) {
-            break;
-          }
-
-          message.endTime = reader.double();
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.cue = Cue.decode(reader, reader.uint32());
-          continue;
-        case 6:
-          if (tag !== 50) {
-            break;
-          }
-
-          message.action = Action.decode(reader, reader.uint32());
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Sequence_SequenceItem {
-    return {
-      identifier: isSet(object.identifier)
-        ? UUID.fromJSON(object.identifier)
-        : undefined,
-      time: isSet(object.time) ? globalThis.Number(object.time) : 0,
-      triggerSource: isSet(object.triggerSource)
-        ? TriggerSource.fromJSON(object.triggerSource)
-        : undefined,
-      contentDestination: isSet(object.contentDestination)
-        ? action_ContentDestinationFromJSON(object.contentDestination)
-        : 0,
-      endTime: isSet(object.endTime) ? globalThis.Number(object.endTime) : 0,
-      cue: isSet(object.cue) ? Cue.fromJSON(object.cue) : undefined,
-      action: isSet(object.action) ? Action.fromJSON(object.action) : undefined,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Sequence_SequenceItem): unknown {
-    const obj: any = {};
-    if (message.identifier !== undefined) {
-      obj.identifier = UUID.toJSON(message.identifier);
-    }
-    if (message.time !== 0) {
-      obj.time = message.time;
-    }
-    if (message.triggerSource !== undefined) {
-      obj.triggerSource = TriggerSource.toJSON(message.triggerSource);
-    }
-    if (message.contentDestination !== 0) {
-      obj.contentDestination = action_ContentDestinationToJSON(
-        message.contentDestination,
-      );
-    }
-    if (message.endTime !== 0) {
-      obj.endTime = message.endTime;
-    }
-    if (message.cue !== undefined) {
-      obj.cue = Cue.toJSON(message.cue);
-    }
-    if (message.action !== undefined) {
-      obj.action = Action.toJSON(message.action);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Sequence_SequenceItem>, I>>(
-    base?: I,
-  ): TimedPlayback_Sequence_SequenceItem {
-    return TimedPlayback_Sequence_SequenceItem.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<
-    I extends Exact<DeepPartial<TimedPlayback_Sequence_SequenceItem>, I>,
-  >(object: I): TimedPlayback_Sequence_SequenceItem {
-    const message = createBaseTimedPlayback_Sequence_SequenceItem();
-    message.identifier =
-      object.identifier !== undefined && object.identifier !== null
-        ? UUID.fromPartial(object.identifier)
-        : undefined;
-    message.time = object.time ?? 0;
-    message.triggerSource =
-      object.triggerSource !== undefined && object.triggerSource !== null
-        ? TriggerSource.fromPartial(object.triggerSource)
-        : undefined;
-    message.contentDestination = object.contentDestination ?? 0;
-    message.endTime = object.endTime ?? 0;
-    message.cue =
-      object.cue !== undefined && object.cue !== null
-        ? Cue.fromPartial(object.cue)
-        : undefined;
-    message.action =
-      object.action !== undefined && object.action !== null
-        ? Action.fromPartial(object.action)
-        : undefined;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Timing(): TimedPlayback_Timing {
-  return {
-    layerTransport: undefined,
-    smpteTimecode: undefined,
-    internal: undefined,
-  };
-}
-
-export const TimedPlayback_Timing = {
-  encode(
-    message: TimedPlayback_Timing,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.layerTransport !== undefined) {
-      TimedPlayback_Timing_LayerTransport.encode(
-        message.layerTransport,
-        writer.uint32(10).fork(),
-      ).ldelim();
-    }
-    if (message.smpteTimecode !== undefined) {
-      TimedPlayback_Timing_SMPTETimecode.encode(
-        message.smpteTimecode,
+    if (message.triggerOptions !== undefined) {
+      TriggerOptions.encode(
+        message.triggerOptions,
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.internal !== undefined) {
-      TimedPlayback_Timing_Internal.encode(
-        message.internal,
-        writer.uint32(26).fork(),
+    if (message.cue !== undefined) {
+      Cue.encode(message.cue, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.presentation !== undefined) {
+      TriggerCue_PresentationCue.encode(
+        message.presentation,
+        writer.uint32(34).fork(),
       ).ldelim();
     }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Timing {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Timing();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.layerTransport = TimedPlayback_Timing_LayerTransport.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.smpteTimecode = TimedPlayback_Timing_SMPTETimecode.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.internal = TimedPlayback_Timing_Internal.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
+    if (message.playlist !== undefined) {
+      Playlist.encode(message.playlist, writer.uint32(42).fork()).ldelim();
     }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Timing {
-    return {
-      layerTransport: isSet(object.layerTransport)
-        ? TimedPlayback_Timing_LayerTransport.fromJSON(object.layerTransport)
-        : undefined,
-      smpteTimecode: isSet(object.smpteTimecode)
-        ? TimedPlayback_Timing_SMPTETimecode.fromJSON(object.smpteTimecode)
-        : undefined,
-      internal: isSet(object.internal)
-        ? TimedPlayback_Timing_Internal.fromJSON(object.internal)
-        : undefined,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Timing): unknown {
-    const obj: any = {};
-    if (message.layerTransport !== undefined) {
-      obj.layerTransport = TimedPlayback_Timing_LayerTransport.toJSON(
-        message.layerTransport,
-      );
-    }
-    if (message.smpteTimecode !== undefined) {
-      obj.smpteTimecode = TimedPlayback_Timing_SMPTETimecode.toJSON(
-        message.smpteTimecode,
-      );
-    }
-    if (message.internal !== undefined) {
-      obj.internal = TimedPlayback_Timing_Internal.toJSON(message.internal);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Timing>, I>>(
-    base?: I,
-  ): TimedPlayback_Timing {
-    return TimedPlayback_Timing.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Timing>, I>>(
-    object: I,
-  ): TimedPlayback_Timing {
-    const message = createBaseTimedPlayback_Timing();
-    message.layerTransport =
-      object.layerTransport !== undefined && object.layerTransport !== null
-        ? TimedPlayback_Timing_LayerTransport.fromPartial(object.layerTransport)
-        : undefined;
-    message.smpteTimecode =
-      object.smpteTimecode !== undefined && object.smpteTimecode !== null
-        ? TimedPlayback_Timing_SMPTETimecode.fromPartial(object.smpteTimecode)
-        : undefined;
-    message.internal =
-      object.internal !== undefined && object.internal !== null
-        ? TimedPlayback_Timing_Internal.fromPartial(object.internal)
-        : undefined;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Timing_LayerTransport(): TimedPlayback_Timing_LayerTransport {
-  return { layer: 0 };
-}
-
-export const TimedPlayback_Timing_LayerTransport = {
-  encode(
-    message: TimedPlayback_Timing_LayerTransport,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.layer !== 0) {
-      writer.uint32(8).int32(message.layer);
+    if (message.clientData !== 0) {
+      writer.uint32(48).uint64(message.clientData);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Timing_LayerTransport {
+  decode(input: _m0.Reader | Uint8Array, length?: number): TriggerCue {
     const reader =
       input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Timing_LayerTransport();
+    const message = createBaseTriggerCue();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -6631,368 +5564,14 @@ export const TimedPlayback_Timing_LayerTransport = {
             break;
           }
 
-          message.layer = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Timing_LayerTransport {
-    return { layer: isSet(object.layer) ? globalThis.Number(object.layer) : 0 };
-  },
-
-  toJSON(message: TimedPlayback_Timing_LayerTransport): unknown {
-    const obj: any = {};
-    if (message.layer !== 0) {
-      obj.layer = Math.round(message.layer);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Timing_LayerTransport>, I>>(
-    base?: I,
-  ): TimedPlayback_Timing_LayerTransport {
-    return TimedPlayback_Timing_LayerTransport.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<
-    I extends Exact<DeepPartial<TimedPlayback_Timing_LayerTransport>, I>,
-  >(object: I): TimedPlayback_Timing_LayerTransport {
-    const message = createBaseTimedPlayback_Timing_LayerTransport();
-    message.layer = object.layer ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Timing_SMPTETimecode(): TimedPlayback_Timing_SMPTETimecode {
-  return { deviceIdentifier: '', channel: 0, format: 0, offset: 0 };
-}
-
-export const TimedPlayback_Timing_SMPTETimecode = {
-  encode(
-    message: TimedPlayback_Timing_SMPTETimecode,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.deviceIdentifier !== '') {
-      writer.uint32(10).string(message.deviceIdentifier);
-    }
-    if (message.channel !== 0) {
-      writer.uint32(16).int32(message.channel);
-    }
-    if (message.format !== 0) {
-      writer.uint32(24).int32(message.format);
-    }
-    if (message.offset !== 0) {
-      writer.uint32(33).double(message.offset);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Timing_SMPTETimecode {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Timing_SMPTETimecode();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.deviceIdentifier = reader.string();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.channel = reader.int32();
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.format = reader.int32() as any;
-          continue;
-        case 4:
-          if (tag !== 33) {
-            break;
-          }
-
-          message.offset = reader.double();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Timing_SMPTETimecode {
-    return {
-      deviceIdentifier: isSet(object.deviceIdentifier)
-        ? globalThis.String(object.deviceIdentifier)
-        : '',
-      channel: isSet(object.channel) ? globalThis.Number(object.channel) : 0,
-      format: isSet(object.format)
-        ? timedPlayback_Timing_SMPTETimecode_FormatFromJSON(object.format)
-        : 0,
-      offset: isSet(object.offset) ? globalThis.Number(object.offset) : 0,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Timing_SMPTETimecode): unknown {
-    const obj: any = {};
-    if (message.deviceIdentifier !== '') {
-      obj.deviceIdentifier = message.deviceIdentifier;
-    }
-    if (message.channel !== 0) {
-      obj.channel = Math.round(message.channel);
-    }
-    if (message.format !== 0) {
-      obj.format = timedPlayback_Timing_SMPTETimecode_FormatToJSON(
-        message.format,
-      );
-    }
-    if (message.offset !== 0) {
-      obj.offset = message.offset;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Timing_SMPTETimecode>, I>>(
-    base?: I,
-  ): TimedPlayback_Timing_SMPTETimecode {
-    return TimedPlayback_Timing_SMPTETimecode.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<
-    I extends Exact<DeepPartial<TimedPlayback_Timing_SMPTETimecode>, I>,
-  >(object: I): TimedPlayback_Timing_SMPTETimecode {
-    const message = createBaseTimedPlayback_Timing_SMPTETimecode();
-    message.deviceIdentifier = object.deviceIdentifier ?? '';
-    message.channel = object.channel ?? 0;
-    message.format = object.format ?? 0;
-    message.offset = object.offset ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Timing_Internal(): TimedPlayback_Timing_Internal {
-  return { duration: 0, shouldLoop: false };
-}
-
-export const TimedPlayback_Timing_Internal = {
-  encode(
-    message: TimedPlayback_Timing_Internal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.duration !== 0) {
-      writer.uint32(9).double(message.duration);
-    }
-    if (message.shouldLoop === true) {
-      writer.uint32(16).bool(message.shouldLoop);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Timing_Internal {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Timing_Internal();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 9) {
-            break;
-          }
-
-          message.duration = reader.double();
-          continue;
-        case 2:
-          if (tag !== 16) {
-            break;
-          }
-
-          message.shouldLoop = reader.bool();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Timing_Internal {
-    return {
-      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
-      shouldLoop: isSet(object.shouldLoop)
-        ? globalThis.Boolean(object.shouldLoop)
-        : false,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Timing_Internal): unknown {
-    const obj: any = {};
-    if (message.duration !== 0) {
-      obj.duration = message.duration;
-    }
-    if (message.shouldLoop === true) {
-      obj.shouldLoop = message.shouldLoop;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Timing_Internal>, I>>(
-    base?: I,
-  ): TimedPlayback_Timing_Internal {
-    return TimedPlayback_Timing_Internal.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Timing_Internal>, I>>(
-    object: I,
-  ): TimedPlayback_Timing_Internal {
-    const message = createBaseTimedPlayback_Timing_Internal();
-    message.duration = object.duration ?? 0;
-    message.shouldLoop = object.shouldLoop ?? false;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update(): TimedPlayback_Update {
-  return {
-    play: undefined,
-    record: undefined,
-    pause: undefined,
-    reset: undefined,
-    jumpToTime: undefined,
-    startScrub: undefined,
-    endScrub: undefined,
-    duration: undefined,
-    loop: undefined,
-    updateSequence: undefined,
-    monitorSource: undefined,
-  };
-}
-
-export const TimedPlayback_Update = {
-  encode(
-    message: TimedPlayback_Update,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.play !== undefined) {
-      TimedPlayback_Update_Play.encode(
-        message.play,
-        writer.uint32(10).fork(),
-      ).ldelim();
-    }
-    if (message.record !== undefined) {
-      TimedPlayback_Update_Record.encode(
-        message.record,
-        writer.uint32(18).fork(),
-      ).ldelim();
-    }
-    if (message.pause !== undefined) {
-      TimedPlayback_Update_Pause.encode(
-        message.pause,
-        writer.uint32(26).fork(),
-      ).ldelim();
-    }
-    if (message.reset !== undefined) {
-      TimedPlayback_Update_Reset.encode(
-        message.reset,
-        writer.uint32(34).fork(),
-      ).ldelim();
-    }
-    if (message.jumpToTime !== undefined) {
-      TimedPlayback_Update_JumpToTime.encode(
-        message.jumpToTime,
-        writer.uint32(42).fork(),
-      ).ldelim();
-    }
-    if (message.startScrub !== undefined) {
-      TimedPlayback_Update_StartScrub.encode(
-        message.startScrub,
-        writer.uint32(50).fork(),
-      ).ldelim();
-    }
-    if (message.endScrub !== undefined) {
-      TimedPlayback_Update_EndScrub.encode(
-        message.endScrub,
-        writer.uint32(58).fork(),
-      ).ldelim();
-    }
-    if (message.duration !== undefined) {
-      TimedPlayback_Update_Duration.encode(
-        message.duration,
-        writer.uint32(66).fork(),
-      ).ldelim();
-    }
-    if (message.loop !== undefined) {
-      TimedPlayback_Update_Loop.encode(
-        message.loop,
-        writer.uint32(74).fork(),
-      ).ldelim();
-    }
-    if (message.updateSequence !== undefined) {
-      TimedPlayback_Sequence.encode(
-        message.updateSequence,
-        writer.uint32(82).fork(),
-      ).ldelim();
-    }
-    if (message.monitorSource !== undefined) {
-      TimedPlayback_Update_MonitorSource.encode(
-        message.monitorSource,
-        writer.uint32(90).fork(),
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.play = TimedPlayback_Update_Play.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.triggerHandle = longToNumber(reader.uint64() as Long);
           continue;
         case 2:
           if (tag !== 18) {
             break;
           }
 
-          message.record = TimedPlayback_Update_Record.decode(
+          message.triggerOptions = TriggerOptions.decode(
             reader,
             reader.uint32(),
           );
@@ -7002,17 +5581,14 @@ export const TimedPlayback_Update = {
             break;
           }
 
-          message.pause = TimedPlayback_Update_Pause.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.cue = Cue.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.reset = TimedPlayback_Update_Reset.decode(
+          message.presentation = TriggerCue_PresentationCue.decode(
             reader,
             reader.uint32(),
           );
@@ -7022,70 +5598,14 @@ export const TimedPlayback_Update = {
             break;
           }
 
-          message.jumpToTime = TimedPlayback_Update_JumpToTime.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.playlist = Playlist.decode(reader, reader.uint32());
           continue;
         case 6:
-          if (tag !== 50) {
+          if (tag !== 48) {
             break;
           }
 
-          message.startScrub = TimedPlayback_Update_StartScrub.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 7:
-          if (tag !== 58) {
-            break;
-          }
-
-          message.endScrub = TimedPlayback_Update_EndScrub.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 8:
-          if (tag !== 66) {
-            break;
-          }
-
-          message.duration = TimedPlayback_Update_Duration.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 9:
-          if (tag !== 74) {
-            break;
-          }
-
-          message.loop = TimedPlayback_Update_Loop.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 10:
-          if (tag !== 82) {
-            break;
-          }
-
-          message.updateSequence = TimedPlayback_Sequence.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 11:
-          if (tag !== 90) {
-            break;
-          }
-
-          message.monitorSource = TimedPlayback_Update_MonitorSource.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.clientData = longToNumber(reader.uint64() as Long);
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -7096,212 +5616,101 @@ export const TimedPlayback_Update = {
     return message;
   },
 
-  fromJSON(object: any): TimedPlayback_Update {
+  fromJSON(object: any): TriggerCue {
     return {
-      play: isSet(object.play)
-        ? TimedPlayback_Update_Play.fromJSON(object.play)
+      triggerHandle: isSet(object.triggerHandle)
+        ? globalThis.Number(object.triggerHandle)
+        : 0,
+      triggerOptions: isSet(object.triggerOptions)
+        ? TriggerOptions.fromJSON(object.triggerOptions)
         : undefined,
-      record: isSet(object.record)
-        ? TimedPlayback_Update_Record.fromJSON(object.record)
+      cue: isSet(object.cue) ? Cue.fromJSON(object.cue) : undefined,
+      presentation: isSet(object.presentation)
+        ? TriggerCue_PresentationCue.fromJSON(object.presentation)
         : undefined,
-      pause: isSet(object.pause)
-        ? TimedPlayback_Update_Pause.fromJSON(object.pause)
+      playlist: isSet(object.playlist)
+        ? Playlist.fromJSON(object.playlist)
         : undefined,
-      reset: isSet(object.reset)
-        ? TimedPlayback_Update_Reset.fromJSON(object.reset)
-        : undefined,
-      jumpToTime: isSet(object.jumpToTime)
-        ? TimedPlayback_Update_JumpToTime.fromJSON(object.jumpToTime)
-        : undefined,
-      startScrub: isSet(object.startScrub)
-        ? TimedPlayback_Update_StartScrub.fromJSON(object.startScrub)
-        : undefined,
-      endScrub: isSet(object.endScrub)
-        ? TimedPlayback_Update_EndScrub.fromJSON(object.endScrub)
-        : undefined,
-      duration: isSet(object.duration)
-        ? TimedPlayback_Update_Duration.fromJSON(object.duration)
-        : undefined,
-      loop: isSet(object.loop)
-        ? TimedPlayback_Update_Loop.fromJSON(object.loop)
-        : undefined,
-      updateSequence: isSet(object.updateSequence)
-        ? TimedPlayback_Sequence.fromJSON(object.updateSequence)
-        : undefined,
-      monitorSource: isSet(object.monitorSource)
-        ? TimedPlayback_Update_MonitorSource.fromJSON(object.monitorSource)
-        : undefined,
+      clientData: isSet(object.clientData)
+        ? globalThis.Number(object.clientData)
+        : 0,
     };
   },
 
-  toJSON(message: TimedPlayback_Update): unknown {
+  toJSON(message: TriggerCue): unknown {
     const obj: any = {};
-    if (message.play !== undefined) {
-      obj.play = TimedPlayback_Update_Play.toJSON(message.play);
+    if (message.triggerHandle !== 0) {
+      obj.triggerHandle = Math.round(message.triggerHandle);
     }
-    if (message.record !== undefined) {
-      obj.record = TimedPlayback_Update_Record.toJSON(message.record);
+    if (message.triggerOptions !== undefined) {
+      obj.triggerOptions = TriggerOptions.toJSON(message.triggerOptions);
     }
-    if (message.pause !== undefined) {
-      obj.pause = TimedPlayback_Update_Pause.toJSON(message.pause);
+    if (message.cue !== undefined) {
+      obj.cue = Cue.toJSON(message.cue);
     }
-    if (message.reset !== undefined) {
-      obj.reset = TimedPlayback_Update_Reset.toJSON(message.reset);
-    }
-    if (message.jumpToTime !== undefined) {
-      obj.jumpToTime = TimedPlayback_Update_JumpToTime.toJSON(
-        message.jumpToTime,
+    if (message.presentation !== undefined) {
+      obj.presentation = TriggerCue_PresentationCue.toJSON(
+        message.presentation,
       );
     }
-    if (message.startScrub !== undefined) {
-      obj.startScrub = TimedPlayback_Update_StartScrub.toJSON(
-        message.startScrub,
-      );
+    if (message.playlist !== undefined) {
+      obj.playlist = Playlist.toJSON(message.playlist);
     }
-    if (message.endScrub !== undefined) {
-      obj.endScrub = TimedPlayback_Update_EndScrub.toJSON(message.endScrub);
-    }
-    if (message.duration !== undefined) {
-      obj.duration = TimedPlayback_Update_Duration.toJSON(message.duration);
-    }
-    if (message.loop !== undefined) {
-      obj.loop = TimedPlayback_Update_Loop.toJSON(message.loop);
-    }
-    if (message.updateSequence !== undefined) {
-      obj.updateSequence = TimedPlayback_Sequence.toJSON(
-        message.updateSequence,
-      );
-    }
-    if (message.monitorSource !== undefined) {
-      obj.monitorSource = TimedPlayback_Update_MonitorSource.toJSON(
-        message.monitorSource,
-      );
+    if (message.clientData !== 0) {
+      obj.clientData = Math.round(message.clientData);
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TimedPlayback_Update>, I>>(
-    base?: I,
-  ): TimedPlayback_Update {
-    return TimedPlayback_Update.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<TriggerCue>, I>>(base?: I): TriggerCue {
+    return TriggerCue.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update>, I>>(
+  fromPartial<I extends Exact<DeepPartial<TriggerCue>, I>>(
     object: I,
-  ): TimedPlayback_Update {
-    const message = createBaseTimedPlayback_Update();
-    message.play =
-      object.play !== undefined && object.play !== null
-        ? TimedPlayback_Update_Play.fromPartial(object.play)
+  ): TriggerCue {
+    const message = createBaseTriggerCue();
+    message.triggerHandle = object.triggerHandle ?? 0;
+    message.triggerOptions =
+      object.triggerOptions !== undefined && object.triggerOptions !== null
+        ? TriggerOptions.fromPartial(object.triggerOptions)
         : undefined;
-    message.record =
-      object.record !== undefined && object.record !== null
-        ? TimedPlayback_Update_Record.fromPartial(object.record)
+    message.cue =
+      object.cue !== undefined && object.cue !== null
+        ? Cue.fromPartial(object.cue)
         : undefined;
-    message.pause =
-      object.pause !== undefined && object.pause !== null
-        ? TimedPlayback_Update_Pause.fromPartial(object.pause)
+    message.presentation =
+      object.presentation !== undefined && object.presentation !== null
+        ? TriggerCue_PresentationCue.fromPartial(object.presentation)
         : undefined;
-    message.reset =
-      object.reset !== undefined && object.reset !== null
-        ? TimedPlayback_Update_Reset.fromPartial(object.reset)
+    message.playlist =
+      object.playlist !== undefined && object.playlist !== null
+        ? Playlist.fromPartial(object.playlist)
         : undefined;
-    message.jumpToTime =
-      object.jumpToTime !== undefined && object.jumpToTime !== null
-        ? TimedPlayback_Update_JumpToTime.fromPartial(object.jumpToTime)
-        : undefined;
-    message.startScrub =
-      object.startScrub !== undefined && object.startScrub !== null
-        ? TimedPlayback_Update_StartScrub.fromPartial(object.startScrub)
-        : undefined;
-    message.endScrub =
-      object.endScrub !== undefined && object.endScrub !== null
-        ? TimedPlayback_Update_EndScrub.fromPartial(object.endScrub)
-        : undefined;
-    message.duration =
-      object.duration !== undefined && object.duration !== null
-        ? TimedPlayback_Update_Duration.fromPartial(object.duration)
-        : undefined;
-    message.loop =
-      object.loop !== undefined && object.loop !== null
-        ? TimedPlayback_Update_Loop.fromPartial(object.loop)
-        : undefined;
-    message.updateSequence =
-      object.updateSequence !== undefined && object.updateSequence !== null
-        ? TimedPlayback_Sequence.fromPartial(object.updateSequence)
-        : undefined;
-    message.monitorSource =
-      object.monitorSource !== undefined && object.monitorSource !== null
-        ? TimedPlayback_Update_MonitorSource.fromPartial(object.monitorSource)
-        : undefined;
+    message.clientData = object.clientData ?? 0;
     return message;
   },
 };
 
-function createBaseTimedPlayback_Update_Play(): TimedPlayback_Update_Play {
-  return {};
+function createBaseTriggerCue_PresentationCue(): TriggerCue_PresentationCue {
+  return { presentation: undefined, arrangementId: undefined, cueIndex: 0 };
 }
 
-export const TimedPlayback_Update_Play = {
+export const TriggerCue_PresentationCue = {
   encode(
-    _: TimedPlayback_Update_Play,
+    message: TriggerCue_PresentationCue,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_Play {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_Play();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
+    if (message.presentation !== undefined) {
+      Presentation.encode(
+        message.presentation,
+        writer.uint32(10).fork(),
+      ).ldelim();
     }
-    return message;
-  },
-
-  fromJSON(_: any): TimedPlayback_Update_Play {
-    return {};
-  },
-
-  toJSON(_: TimedPlayback_Update_Play): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_Play>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_Play {
-    return TimedPlayback_Update_Play.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_Play>, I>>(
-    _: I,
-  ): TimedPlayback_Update_Play {
-    const message = createBaseTimedPlayback_Update_Play();
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_Record(): TimedPlayback_Update_Record {
-  return { isRecording: false };
-}
-
-export const TimedPlayback_Update_Record = {
-  encode(
-    message: TimedPlayback_Update_Record,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.isRecording === true) {
-      writer.uint32(8).bool(message.isRecording);
+    if (message.arrangementId !== undefined) {
+      UUID.encode(message.arrangementId, writer.uint32(18).fork()).ldelim();
+    }
+    if (message.cueIndex !== 0) {
+      writer.uint32(24).int32(message.cueIndex);
     }
     return writer;
   },
@@ -7309,336 +5718,34 @@ export const TimedPlayback_Update_Record = {
   decode(
     input: _m0.Reader | Uint8Array,
     length?: number,
-  ): TimedPlayback_Update_Record {
+  ): TriggerCue_PresentationCue {
     const reader =
       input instanceof _m0.Reader ? input : _m0.Reader.create(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_Record();
+    const message = createBaseTriggerCue_PresentationCue();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.isRecording = reader.bool();
+          message.presentation = Presentation.decode(reader, reader.uint32());
           continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Update_Record {
-    return {
-      isRecording: isSet(object.isRecording)
-        ? globalThis.Boolean(object.isRecording)
-        : false,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Update_Record): unknown {
-    const obj: any = {};
-    if (message.isRecording === true) {
-      obj.isRecording = message.isRecording;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_Record>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_Record {
-    return TimedPlayback_Update_Record.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_Record>, I>>(
-    object: I,
-  ): TimedPlayback_Update_Record {
-    const message = createBaseTimedPlayback_Update_Record();
-    message.isRecording = object.isRecording ?? false;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_Pause(): TimedPlayback_Update_Pause {
-  return {};
-}
-
-export const TimedPlayback_Update_Pause = {
-  encode(
-    _: TimedPlayback_Update_Pause,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_Pause {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_Pause();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(_: any): TimedPlayback_Update_Pause {
-    return {};
-  },
-
-  toJSON(_: TimedPlayback_Update_Pause): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_Pause>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_Pause {
-    return TimedPlayback_Update_Pause.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_Pause>, I>>(
-    _: I,
-  ): TimedPlayback_Update_Pause {
-    const message = createBaseTimedPlayback_Update_Pause();
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_Reset(): TimedPlayback_Update_Reset {
-  return {};
-}
-
-export const TimedPlayback_Update_Reset = {
-  encode(
-    _: TimedPlayback_Update_Reset,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_Reset {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_Reset();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(_: any): TimedPlayback_Update_Reset {
-    return {};
-  },
-
-  toJSON(_: TimedPlayback_Update_Reset): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_Reset>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_Reset {
-    return TimedPlayback_Update_Reset.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_Reset>, I>>(
-    _: I,
-  ): TimedPlayback_Update_Reset {
-    const message = createBaseTimedPlayback_Update_Reset();
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_JumpToTime(): TimedPlayback_Update_JumpToTime {
-  return { time: 0 };
-}
-
-export const TimedPlayback_Update_JumpToTime = {
-  encode(
-    message: TimedPlayback_Update_JumpToTime,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.time !== 0) {
-      writer.uint32(9).double(message.time);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_JumpToTime {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_JumpToTime();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 9) {
-            break;
-          }
-
-          message.time = reader.double();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Update_JumpToTime {
-    return { time: isSet(object.time) ? globalThis.Number(object.time) : 0 };
-  },
-
-  toJSON(message: TimedPlayback_Update_JumpToTime): unknown {
-    const obj: any = {};
-    if (message.time !== 0) {
-      obj.time = message.time;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_JumpToTime>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_JumpToTime {
-    return TimedPlayback_Update_JumpToTime.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_JumpToTime>, I>>(
-    object: I,
-  ): TimedPlayback_Update_JumpToTime {
-    const message = createBaseTimedPlayback_Update_JumpToTime();
-    message.time = object.time ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_StartScrub(): TimedPlayback_Update_StartScrub {
-  return { time: 0 };
-}
-
-export const TimedPlayback_Update_StartScrub = {
-  encode(
-    message: TimedPlayback_Update_StartScrub,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.time !== 0) {
-      writer.uint32(9).double(message.time);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_StartScrub {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_StartScrub();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 9) {
-            break;
-          }
-
-          message.time = reader.double();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Update_StartScrub {
-    return { time: isSet(object.time) ? globalThis.Number(object.time) : 0 };
-  },
-
-  toJSON(message: TimedPlayback_Update_StartScrub): unknown {
-    const obj: any = {};
-    if (message.time !== 0) {
-      obj.time = message.time;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_StartScrub>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_StartScrub {
-    return TimedPlayback_Update_StartScrub.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_StartScrub>, I>>(
-    object: I,
-  ): TimedPlayback_Update_StartScrub {
-    const message = createBaseTimedPlayback_Update_StartScrub();
-    message.time = object.time ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_EndScrub(): TimedPlayback_Update_EndScrub {
-  return { time: 0 };
-}
-
-export const TimedPlayback_Update_EndScrub = {
-  encode(
-    message: TimedPlayback_Update_EndScrub,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.time !== 0) {
-      writer.uint32(17).double(message.time);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_EndScrub {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_EndScrub();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
         case 2:
-          if (tag !== 17) {
+          if (tag !== 18) {
             break;
           }
 
-          message.time = reader.double();
+          message.arrangementId = UUID.decode(reader, reader.uint32());
+          continue;
+        case 3:
+          if (tag !== 24) {
+            break;
+          }
+
+          message.cueIndex = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -7649,244 +5756,61 @@ export const TimedPlayback_Update_EndScrub = {
     return message;
   },
 
-  fromJSON(object: any): TimedPlayback_Update_EndScrub {
-    return { time: isSet(object.time) ? globalThis.Number(object.time) : 0 };
-  },
-
-  toJSON(message: TimedPlayback_Update_EndScrub): unknown {
-    const obj: any = {};
-    if (message.time !== 0) {
-      obj.time = message.time;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_EndScrub>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_EndScrub {
-    return TimedPlayback_Update_EndScrub.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_EndScrub>, I>>(
-    object: I,
-  ): TimedPlayback_Update_EndScrub {
-    const message = createBaseTimedPlayback_Update_EndScrub();
-    message.time = object.time ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_Duration(): TimedPlayback_Update_Duration {
-  return { duration: 0 };
-}
-
-export const TimedPlayback_Update_Duration = {
-  encode(
-    message: TimedPlayback_Update_Duration,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.duration !== 0) {
-      writer.uint32(9).double(message.duration);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_Duration {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_Duration();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 9) {
-            break;
-          }
-
-          message.duration = reader.double();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Update_Duration {
+  fromJSON(object: any): TriggerCue_PresentationCue {
     return {
-      duration: isSet(object.duration) ? globalThis.Number(object.duration) : 0,
+      presentation: isSet(object.presentation)
+        ? Presentation.fromJSON(object.presentation)
+        : undefined,
+      arrangementId: isSet(object.arrangementId)
+        ? UUID.fromJSON(object.arrangementId)
+        : undefined,
+      cueIndex: isSet(object.cueIndex) ? globalThis.Number(object.cueIndex) : 0,
     };
   },
 
-  toJSON(message: TimedPlayback_Update_Duration): unknown {
+  toJSON(message: TriggerCue_PresentationCue): unknown {
     const obj: any = {};
-    if (message.duration !== 0) {
-      obj.duration = message.duration;
+    if (message.presentation !== undefined) {
+      obj.presentation = Presentation.toJSON(message.presentation);
+    }
+    if (message.arrangementId !== undefined) {
+      obj.arrangementId = UUID.toJSON(message.arrangementId);
+    }
+    if (message.cueIndex !== 0) {
+      obj.cueIndex = Math.round(message.cueIndex);
     }
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_Duration>, I>>(
+  create<I extends Exact<DeepPartial<TriggerCue_PresentationCue>, I>>(
     base?: I,
-  ): TimedPlayback_Update_Duration {
-    return TimedPlayback_Update_Duration.fromPartial(base ?? ({} as any));
+  ): TriggerCue_PresentationCue {
+    return TriggerCue_PresentationCue.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_Duration>, I>>(
+  fromPartial<I extends Exact<DeepPartial<TriggerCue_PresentationCue>, I>>(
     object: I,
-  ): TimedPlayback_Update_Duration {
-    const message = createBaseTimedPlayback_Update_Duration();
-    message.duration = object.duration ?? 0;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_Loop(): TimedPlayback_Update_Loop {
-  return { loop: false };
-}
-
-export const TimedPlayback_Update_Loop = {
-  encode(
-    message: TimedPlayback_Update_Loop,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.loop === true) {
-      writer.uint32(8).bool(message.loop);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_Loop {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_Loop();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.loop = reader.bool();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Update_Loop {
-    return {
-      loop: isSet(object.loop) ? globalThis.Boolean(object.loop) : false,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Update_Loop): unknown {
-    const obj: any = {};
-    if (message.loop === true) {
-      obj.loop = message.loop;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_Loop>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_Loop {
-    return TimedPlayback_Update_Loop.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TimedPlayback_Update_Loop>, I>>(
-    object: I,
-  ): TimedPlayback_Update_Loop {
-    const message = createBaseTimedPlayback_Update_Loop();
-    message.loop = object.loop ?? false;
-    return message;
-  },
-};
-
-function createBaseTimedPlayback_Update_MonitorSource(): TimedPlayback_Update_MonitorSource {
-  return { enable: false };
-}
-
-export const TimedPlayback_Update_MonitorSource = {
-  encode(
-    message: TimedPlayback_Update_MonitorSource,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.enable === true) {
-      writer.uint32(8).bool(message.enable);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TimedPlayback_Update_MonitorSource {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTimedPlayback_Update_MonitorSource();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.enable = reader.bool();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TimedPlayback_Update_MonitorSource {
-    return {
-      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
-    };
-  },
-
-  toJSON(message: TimedPlayback_Update_MonitorSource): unknown {
-    const obj: any = {};
-    if (message.enable === true) {
-      obj.enable = message.enable;
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TimedPlayback_Update_MonitorSource>, I>>(
-    base?: I,
-  ): TimedPlayback_Update_MonitorSource {
-    return TimedPlayback_Update_MonitorSource.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<
-    I extends Exact<DeepPartial<TimedPlayback_Update_MonitorSource>, I>,
-  >(object: I): TimedPlayback_Update_MonitorSource {
-    const message = createBaseTimedPlayback_Update_MonitorSource();
-    message.enable = object.enable ?? false;
+  ): TriggerCue_PresentationCue {
+    const message = createBaseTriggerCue_PresentationCue();
+    message.presentation =
+      object.presentation !== undefined && object.presentation !== null
+        ? Presentation.fromPartial(object.presentation)
+        : undefined;
+    message.arrangementId =
+      object.arrangementId !== undefined && object.arrangementId !== null
+        ? UUID.fromPartial(object.arrangementId)
+        : undefined;
+    message.cueIndex = object.cueIndex ?? 0;
     return message;
   },
 };
 
 function createBaseNetworkTriggerDataItem(): NetworkTriggerDataItem {
-  return { triggerOptions: undefined, action: undefined, cue: undefined };
+  return {
+    triggerOptions: undefined,
+    triggerCue: undefined,
+    action: undefined,
+    cue: undefined,
+  };
 }
 
 export const NetworkTriggerDataItem = {
@@ -7899,6 +5823,9 @@ export const NetworkTriggerDataItem = {
         message.triggerOptions,
         writer.uint32(26).fork(),
       ).ldelim();
+    }
+    if (message.triggerCue !== undefined) {
+      TriggerCue.encode(message.triggerCue, writer.uint32(34).fork()).ldelim();
     }
     if (message.action !== undefined) {
       Action.encode(message.action, writer.uint32(10).fork()).ldelim();
@@ -7930,6 +5857,13 @@ export const NetworkTriggerDataItem = {
             reader.uint32(),
           );
           continue;
+        case 4:
+          if (tag !== 34) {
+            break;
+          }
+
+          message.triggerCue = TriggerCue.decode(reader, reader.uint32());
+          continue;
         case 1:
           if (tag !== 10) {
             break;
@@ -7958,6 +5892,9 @@ export const NetworkTriggerDataItem = {
       triggerOptions: isSet(object.triggerOptions)
         ? TriggerOptions.fromJSON(object.triggerOptions)
         : undefined,
+      triggerCue: isSet(object.triggerCue)
+        ? TriggerCue.fromJSON(object.triggerCue)
+        : undefined,
       action: isSet(object.action) ? Action.fromJSON(object.action) : undefined,
       cue: isSet(object.cue) ? Cue.fromJSON(object.cue) : undefined,
     };
@@ -7967,6 +5904,9 @@ export const NetworkTriggerDataItem = {
     const obj: any = {};
     if (message.triggerOptions !== undefined) {
       obj.triggerOptions = TriggerOptions.toJSON(message.triggerOptions);
+    }
+    if (message.triggerCue !== undefined) {
+      obj.triggerCue = TriggerCue.toJSON(message.triggerCue);
     }
     if (message.action !== undefined) {
       obj.action = Action.toJSON(message.action);
@@ -7989,6 +5929,10 @@ export const NetworkTriggerDataItem = {
     message.triggerOptions =
       object.triggerOptions !== undefined && object.triggerOptions !== null
         ? TriggerOptions.fromPartial(object.triggerOptions)
+        : undefined;
+    message.triggerCue =
+      object.triggerCue !== undefined && object.triggerCue !== null
+        ? TriggerCue.fromPartial(object.triggerCue)
         : undefined;
     message.action =
       object.action !== undefined && object.action !== null
@@ -8353,7 +6297,7 @@ export const ValidateEncoderResponse = {
     message: ValidateEncoderResponse,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isValid === true) {
+    if (message.isValid !== false) {
       writer.uint32(8).bool(message.isValid);
     }
     return writer;
@@ -8396,7 +6340,7 @@ export const ValidateEncoderResponse = {
 
   toJSON(message: ValidateEncoderResponse): unknown {
     const obj: any = {};
-    if (message.isValid === true) {
+    if (message.isValid !== false) {
       obj.isValid = message.isValid;
     }
     return obj;
@@ -8412,302 +6356,6 @@ export const ValidateEncoderResponse = {
   ): ValidateEncoderResponse {
     const message = createBaseValidateEncoderResponse();
     message.isValid = object.isValid ?? false;
-    return message;
-  },
-};
-
-function createBaseTriggerCue(): TriggerCue {
-  return {
-    triggerHandle: 0,
-    triggerOptions: undefined,
-    cue: undefined,
-    presentation: undefined,
-    playlist: undefined,
-    clientData: 0,
-  };
-}
-
-export const TriggerCue = {
-  encode(
-    message: TriggerCue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.triggerHandle !== 0) {
-      writer.uint32(8).uint64(message.triggerHandle);
-    }
-    if (message.triggerOptions !== undefined) {
-      TriggerOptions.encode(
-        message.triggerOptions,
-        writer.uint32(18).fork(),
-      ).ldelim();
-    }
-    if (message.cue !== undefined) {
-      Cue.encode(message.cue, writer.uint32(26).fork()).ldelim();
-    }
-    if (message.presentation !== undefined) {
-      TriggerCue_PresentationCue.encode(
-        message.presentation,
-        writer.uint32(34).fork(),
-      ).ldelim();
-    }
-    if (message.playlist !== undefined) {
-      Playlist.encode(message.playlist, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.clientData !== 0) {
-      writer.uint32(48).uint64(message.clientData);
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): TriggerCue {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTriggerCue();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 8) {
-            break;
-          }
-
-          message.triggerHandle = longToNumber(reader.uint64() as Long);
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.triggerOptions = TriggerOptions.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 3:
-          if (tag !== 26) {
-            break;
-          }
-
-          message.cue = Cue.decode(reader, reader.uint32());
-          continue;
-        case 4:
-          if (tag !== 34) {
-            break;
-          }
-
-          message.presentation = TriggerCue_PresentationCue.decode(
-            reader,
-            reader.uint32(),
-          );
-          continue;
-        case 5:
-          if (tag !== 42) {
-            break;
-          }
-
-          message.playlist = Playlist.decode(reader, reader.uint32());
-          continue;
-        case 6:
-          if (tag !== 48) {
-            break;
-          }
-
-          message.clientData = longToNumber(reader.uint64() as Long);
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TriggerCue {
-    return {
-      triggerHandle: isSet(object.triggerHandle)
-        ? globalThis.Number(object.triggerHandle)
-        : 0,
-      triggerOptions: isSet(object.triggerOptions)
-        ? TriggerOptions.fromJSON(object.triggerOptions)
-        : undefined,
-      cue: isSet(object.cue) ? Cue.fromJSON(object.cue) : undefined,
-      presentation: isSet(object.presentation)
-        ? TriggerCue_PresentationCue.fromJSON(object.presentation)
-        : undefined,
-      playlist: isSet(object.playlist)
-        ? Playlist.fromJSON(object.playlist)
-        : undefined,
-      clientData: isSet(object.clientData)
-        ? globalThis.Number(object.clientData)
-        : 0,
-    };
-  },
-
-  toJSON(message: TriggerCue): unknown {
-    const obj: any = {};
-    if (message.triggerHandle !== 0) {
-      obj.triggerHandle = Math.round(message.triggerHandle);
-    }
-    if (message.triggerOptions !== undefined) {
-      obj.triggerOptions = TriggerOptions.toJSON(message.triggerOptions);
-    }
-    if (message.cue !== undefined) {
-      obj.cue = Cue.toJSON(message.cue);
-    }
-    if (message.presentation !== undefined) {
-      obj.presentation = TriggerCue_PresentationCue.toJSON(
-        message.presentation,
-      );
-    }
-    if (message.playlist !== undefined) {
-      obj.playlist = Playlist.toJSON(message.playlist);
-    }
-    if (message.clientData !== 0) {
-      obj.clientData = Math.round(message.clientData);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TriggerCue>, I>>(base?: I): TriggerCue {
-    return TriggerCue.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TriggerCue>, I>>(
-    object: I,
-  ): TriggerCue {
-    const message = createBaseTriggerCue();
-    message.triggerHandle = object.triggerHandle ?? 0;
-    message.triggerOptions =
-      object.triggerOptions !== undefined && object.triggerOptions !== null
-        ? TriggerOptions.fromPartial(object.triggerOptions)
-        : undefined;
-    message.cue =
-      object.cue !== undefined && object.cue !== null
-        ? Cue.fromPartial(object.cue)
-        : undefined;
-    message.presentation =
-      object.presentation !== undefined && object.presentation !== null
-        ? TriggerCue_PresentationCue.fromPartial(object.presentation)
-        : undefined;
-    message.playlist =
-      object.playlist !== undefined && object.playlist !== null
-        ? Playlist.fromPartial(object.playlist)
-        : undefined;
-    message.clientData = object.clientData ?? 0;
-    return message;
-  },
-};
-
-function createBaseTriggerCue_PresentationCue(): TriggerCue_PresentationCue {
-  return { presentation: undefined, arrangementId: undefined, cueIndex: 0 };
-}
-
-export const TriggerCue_PresentationCue = {
-  encode(
-    message: TriggerCue_PresentationCue,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.presentation !== undefined) {
-      Presentation.encode(
-        message.presentation,
-        writer.uint32(10).fork(),
-      ).ldelim();
-    }
-    if (message.arrangementId !== undefined) {
-      UUID.encode(message.arrangementId, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.cueIndex !== 0) {
-      writer.uint32(24).int32(message.cueIndex);
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): TriggerCue_PresentationCue {
-    const reader =
-      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTriggerCue_PresentationCue();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          if (tag !== 10) {
-            break;
-          }
-
-          message.presentation = Presentation.decode(reader, reader.uint32());
-          continue;
-        case 2:
-          if (tag !== 18) {
-            break;
-          }
-
-          message.arrangementId = UUID.decode(reader, reader.uint32());
-          continue;
-        case 3:
-          if (tag !== 24) {
-            break;
-          }
-
-          message.cueIndex = reader.int32();
-          continue;
-      }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
-      }
-      reader.skipType(tag & 7);
-    }
-    return message;
-  },
-
-  fromJSON(object: any): TriggerCue_PresentationCue {
-    return {
-      presentation: isSet(object.presentation)
-        ? Presentation.fromJSON(object.presentation)
-        : undefined,
-      arrangementId: isSet(object.arrangementId)
-        ? UUID.fromJSON(object.arrangementId)
-        : undefined,
-      cueIndex: isSet(object.cueIndex) ? globalThis.Number(object.cueIndex) : 0,
-    };
-  },
-
-  toJSON(message: TriggerCue_PresentationCue): unknown {
-    const obj: any = {};
-    if (message.presentation !== undefined) {
-      obj.presentation = Presentation.toJSON(message.presentation);
-    }
-    if (message.arrangementId !== undefined) {
-      obj.arrangementId = UUID.toJSON(message.arrangementId);
-    }
-    if (message.cueIndex !== 0) {
-      obj.cueIndex = Math.round(message.cueIndex);
-    }
-    return obj;
-  },
-
-  create<I extends Exact<DeepPartial<TriggerCue_PresentationCue>, I>>(
-    base?: I,
-  ): TriggerCue_PresentationCue {
-    return TriggerCue_PresentationCue.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<TriggerCue_PresentationCue>, I>>(
-    object: I,
-  ): TriggerCue_PresentationCue {
-    const message = createBaseTriggerCue_PresentationCue();
-    message.presentation =
-      object.presentation !== undefined && object.presentation !== null
-        ? Presentation.fromPartial(object.presentation)
-        : undefined;
-    message.arrangementId =
-      object.arrangementId !== undefined && object.arrangementId !== null
-        ? UUID.fromPartial(object.arrangementId)
-        : undefined;
-    message.cueIndex = object.cueIndex ?? 0;
     return message;
   },
 };
@@ -9355,7 +7003,7 @@ export const CaptureActionResponse_StopCapture = {
     message: CaptureActionResponse_StopCapture,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.stopCapture === true) {
+    if (message.stopCapture !== false) {
       writer.uint32(8).bool(message.stopCapture);
     }
     return writer;
@@ -9398,7 +7046,7 @@ export const CaptureActionResponse_StopCapture = {
 
   toJSON(message: CaptureActionResponse_StopCapture): unknown {
     const obj: any = {};
-    if (message.stopCapture === true) {
+    if (message.stopCapture !== false) {
       obj.stopCapture = message.stopCapture;
     }
     return obj;
@@ -9414,6 +7062,216 @@ export const CaptureActionResponse_StopCapture = {
   >(object: I): CaptureActionResponse_StopCapture {
     const message = createBaseCaptureActionResponse_StopCapture();
     message.stopCapture = object.stopCapture ?? false;
+    return message;
+  },
+};
+
+function createBaseMacroIcons(): MacroIcons {
+  return { icons: [] };
+}
+
+export const MacroIcons = {
+  encode(
+    message: MacroIcons,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.icons) {
+      MacroIcons_MacroIcon.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MacroIcons {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMacroIcons();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.icons.push(
+            MacroIcons_MacroIcon.decode(reader, reader.uint32()),
+          );
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MacroIcons {
+    return {
+      icons: globalThis.Array.isArray(object?.icons)
+        ? object.icons.map((e: any) => MacroIcons_MacroIcon.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: MacroIcons): unknown {
+    const obj: any = {};
+    if (message.icons?.length) {
+      obj.icons = message.icons.map((e) => MacroIcons_MacroIcon.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MacroIcons>, I>>(base?: I): MacroIcons {
+    return MacroIcons.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MacroIcons>, I>>(
+    object: I,
+  ): MacroIcons {
+    const message = createBaseMacroIcons();
+    message.icons =
+      object.icons?.map((e) => MacroIcons_MacroIcon.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseMacroIcons_MacroIcon(): MacroIcons_MacroIcon {
+  return { imageType: 0, imageData: new Uint8Array(0) };
+}
+
+export const MacroIcons_MacroIcon = {
+  encode(
+    message: MacroIcons_MacroIcon,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.imageType !== 0) {
+      writer.uint32(8).int32(message.imageType);
+    }
+    if (message.imageData.length !== 0) {
+      writer.uint32(18).bytes(message.imageData);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MacroIcons_MacroIcon {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMacroIcons_MacroIcon();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.imageType = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 18) {
+            break;
+          }
+
+          message.imageData = reader.bytes();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MacroIcons_MacroIcon {
+    return {
+      imageType: isSet(object.imageType)
+        ? macrosDocument_Macro_ImageTypeFromJSON(object.imageType)
+        : 0,
+      imageData: isSet(object.imageData)
+        ? bytesFromBase64(object.imageData)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: MacroIcons_MacroIcon): unknown {
+    const obj: any = {};
+    if (message.imageType !== 0) {
+      obj.imageType = macrosDocument_Macro_ImageTypeToJSON(message.imageType);
+    }
+    if (message.imageData.length !== 0) {
+      obj.imageData = base64FromBytes(message.imageData);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MacroIcons_MacroIcon>, I>>(
+    base?: I,
+  ): MacroIcons_MacroIcon {
+    return MacroIcons_MacroIcon.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MacroIcons_MacroIcon>, I>>(
+    object: I,
+  ): MacroIcons_MacroIcon {
+    const message = createBaseMacroIcons_MacroIcon();
+    message.imageType = object.imageType ?? 0;
+    message.imageData = object.imageData ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseGenericEvent(): GenericEvent {
+  return {};
+}
+
+export const GenericEvent = {
+  encode(
+    _: GenericEvent,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenericEvent {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGenericEvent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GenericEvent {
+    return {};
+  },
+
+  toJSON(_: GenericEvent): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GenericEvent>, I>>(
+    base?: I,
+  ): GenericEvent {
+    return GenericEvent.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GenericEvent>, I>>(
+    _: I,
+  ): GenericEvent {
+    const message = createBaseGenericEvent();
     return message;
   },
 };
@@ -9437,6 +7295,22 @@ function createBaseSendData(): SendData {
     recordingSettingsDocument: undefined,
     captureActionResponse: undefined,
     copyrightLayout: undefined,
+    globalBackgroundTransition: undefined,
+    globalMessagesTransition: undefined,
+    globalForegroundTransition: undefined,
+    globalBibleTransition: undefined,
+    globalPropsTransition: undefined,
+    globalAudioTransition: undefined,
+    preferences: undefined,
+    testPattern: undefined,
+    startupComplete: undefined,
+    visualPlaylistDoc: undefined,
+    audioPlaylistDoc: undefined,
+    killWatchdog: undefined,
+    macroIcons: undefined,
+    debugTriggerDataDump: undefined,
+    libraryPlaylistDoc: undefined,
+    audioPlaylistFocusUuid: undefined,
   };
 }
 
@@ -9536,6 +7410,99 @@ export const SendData = {
       CopyrightLayout.encode(
         message.copyrightLayout,
         writer.uint32(138).fork(),
+      ).ldelim();
+    }
+    if (message.globalBackgroundTransition !== undefined) {
+      Transition.encode(
+        message.globalBackgroundTransition,
+        writer.uint32(146).fork(),
+      ).ldelim();
+    }
+    if (message.globalMessagesTransition !== undefined) {
+      Transition.encode(
+        message.globalMessagesTransition,
+        writer.uint32(154).fork(),
+      ).ldelim();
+    }
+    if (message.globalForegroundTransition !== undefined) {
+      Transition.encode(
+        message.globalForegroundTransition,
+        writer.uint32(162).fork(),
+      ).ldelim();
+    }
+    if (message.globalBibleTransition !== undefined) {
+      Transition.encode(
+        message.globalBibleTransition,
+        writer.uint32(170).fork(),
+      ).ldelim();
+    }
+    if (message.globalPropsTransition !== undefined) {
+      Transition.encode(
+        message.globalPropsTransition,
+        writer.uint32(178).fork(),
+      ).ldelim();
+    }
+    if (message.globalAudioTransition !== undefined) {
+      Transition.encode(
+        message.globalAudioTransition,
+        writer.uint32(186).fork(),
+      ).ldelim();
+    }
+    if (message.preferences !== undefined) {
+      Preferences.encode(
+        message.preferences,
+        writer.uint32(194).fork(),
+      ).ldelim();
+    }
+    if (message.testPattern !== undefined) {
+      TestPatternRequest.encode(
+        message.testPattern,
+        writer.uint32(202).fork(),
+      ).ldelim();
+    }
+    if (message.startupComplete !== undefined) {
+      GenericEvent.encode(
+        message.startupComplete,
+        writer.uint32(210).fork(),
+      ).ldelim();
+    }
+    if (message.visualPlaylistDoc !== undefined) {
+      PlaylistDocument.encode(
+        message.visualPlaylistDoc,
+        writer.uint32(218).fork(),
+      ).ldelim();
+    }
+    if (message.audioPlaylistDoc !== undefined) {
+      PlaylistDocument.encode(
+        message.audioPlaylistDoc,
+        writer.uint32(226).fork(),
+      ).ldelim();
+    }
+    if (message.killWatchdog !== undefined) {
+      GenericEvent.encode(
+        message.killWatchdog,
+        writer.uint32(234).fork(),
+      ).ldelim();
+    }
+    if (message.macroIcons !== undefined) {
+      MacroIcons.encode(message.macroIcons, writer.uint32(242).fork()).ldelim();
+    }
+    if (message.debugTriggerDataDump !== undefined) {
+      GenericEvent.encode(
+        message.debugTriggerDataDump,
+        writer.uint32(250).fork(),
+      ).ldelim();
+    }
+    if (message.libraryPlaylistDoc !== undefined) {
+      PlaylistDocument.encode(
+        message.libraryPlaylistDoc,
+        writer.uint32(258).fork(),
+      ).ldelim();
+    }
+    if (message.audioPlaylistFocusUuid !== undefined) {
+      UUID.encode(
+        message.audioPlaylistFocusUuid,
+        writer.uint32(266).fork(),
       ).ldelim();
     }
     return writer;
@@ -9704,6 +7671,154 @@ export const SendData = {
             reader.uint32(),
           );
           continue;
+        case 18:
+          if (tag !== 146) {
+            break;
+          }
+
+          message.globalBackgroundTransition = Transition.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 19:
+          if (tag !== 154) {
+            break;
+          }
+
+          message.globalMessagesTransition = Transition.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 20:
+          if (tag !== 162) {
+            break;
+          }
+
+          message.globalForegroundTransition = Transition.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 21:
+          if (tag !== 170) {
+            break;
+          }
+
+          message.globalBibleTransition = Transition.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 22:
+          if (tag !== 178) {
+            break;
+          }
+
+          message.globalPropsTransition = Transition.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 23:
+          if (tag !== 186) {
+            break;
+          }
+
+          message.globalAudioTransition = Transition.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 24:
+          if (tag !== 194) {
+            break;
+          }
+
+          message.preferences = Preferences.decode(reader, reader.uint32());
+          continue;
+        case 25:
+          if (tag !== 202) {
+            break;
+          }
+
+          message.testPattern = TestPatternRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 26:
+          if (tag !== 210) {
+            break;
+          }
+
+          message.startupComplete = GenericEvent.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 27:
+          if (tag !== 218) {
+            break;
+          }
+
+          message.visualPlaylistDoc = PlaylistDocument.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 28:
+          if (tag !== 226) {
+            break;
+          }
+
+          message.audioPlaylistDoc = PlaylistDocument.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 29:
+          if (tag !== 234) {
+            break;
+          }
+
+          message.killWatchdog = GenericEvent.decode(reader, reader.uint32());
+          continue;
+        case 30:
+          if (tag !== 242) {
+            break;
+          }
+
+          message.macroIcons = MacroIcons.decode(reader, reader.uint32());
+          continue;
+        case 31:
+          if (tag !== 250) {
+            break;
+          }
+
+          message.debugTriggerDataDump = GenericEvent.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 32:
+          if (tag !== 258) {
+            break;
+          }
+
+          message.libraryPlaylistDoc = PlaylistDocument.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 33:
+          if (tag !== 266) {
+            break;
+          }
+
+          message.audioPlaylistFocusUuid = UUID.decode(reader, reader.uint32());
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -9765,6 +7880,54 @@ export const SendData = {
         : undefined,
       copyrightLayout: isSet(object.copyrightLayout)
         ? CopyrightLayout.fromJSON(object.copyrightLayout)
+        : undefined,
+      globalBackgroundTransition: isSet(object.globalBackgroundTransition)
+        ? Transition.fromJSON(object.globalBackgroundTransition)
+        : undefined,
+      globalMessagesTransition: isSet(object.globalMessagesTransition)
+        ? Transition.fromJSON(object.globalMessagesTransition)
+        : undefined,
+      globalForegroundTransition: isSet(object.globalForegroundTransition)
+        ? Transition.fromJSON(object.globalForegroundTransition)
+        : undefined,
+      globalBibleTransition: isSet(object.globalBibleTransition)
+        ? Transition.fromJSON(object.globalBibleTransition)
+        : undefined,
+      globalPropsTransition: isSet(object.globalPropsTransition)
+        ? Transition.fromJSON(object.globalPropsTransition)
+        : undefined,
+      globalAudioTransition: isSet(object.globalAudioTransition)
+        ? Transition.fromJSON(object.globalAudioTransition)
+        : undefined,
+      preferences: isSet(object.preferences)
+        ? Preferences.fromJSON(object.preferences)
+        : undefined,
+      testPattern: isSet(object.testPattern)
+        ? TestPatternRequest.fromJSON(object.testPattern)
+        : undefined,
+      startupComplete: isSet(object.startupComplete)
+        ? GenericEvent.fromJSON(object.startupComplete)
+        : undefined,
+      visualPlaylistDoc: isSet(object.visualPlaylistDoc)
+        ? PlaylistDocument.fromJSON(object.visualPlaylistDoc)
+        : undefined,
+      audioPlaylistDoc: isSet(object.audioPlaylistDoc)
+        ? PlaylistDocument.fromJSON(object.audioPlaylistDoc)
+        : undefined,
+      killWatchdog: isSet(object.killWatchdog)
+        ? GenericEvent.fromJSON(object.killWatchdog)
+        : undefined,
+      macroIcons: isSet(object.macroIcons)
+        ? MacroIcons.fromJSON(object.macroIcons)
+        : undefined,
+      debugTriggerDataDump: isSet(object.debugTriggerDataDump)
+        ? GenericEvent.fromJSON(object.debugTriggerDataDump)
+        : undefined,
+      libraryPlaylistDoc: isSet(object.libraryPlaylistDoc)
+        ? PlaylistDocument.fromJSON(object.libraryPlaylistDoc)
+        : undefined,
+      audioPlaylistFocusUuid: isSet(object.audioPlaylistFocusUuid)
+        ? UUID.fromJSON(object.audioPlaylistFocusUuid)
         : undefined,
     };
   },
@@ -9829,6 +7992,72 @@ export const SendData = {
     }
     if (message.copyrightLayout !== undefined) {
       obj.copyrightLayout = CopyrightLayout.toJSON(message.copyrightLayout);
+    }
+    if (message.globalBackgroundTransition !== undefined) {
+      obj.globalBackgroundTransition = Transition.toJSON(
+        message.globalBackgroundTransition,
+      );
+    }
+    if (message.globalMessagesTransition !== undefined) {
+      obj.globalMessagesTransition = Transition.toJSON(
+        message.globalMessagesTransition,
+      );
+    }
+    if (message.globalForegroundTransition !== undefined) {
+      obj.globalForegroundTransition = Transition.toJSON(
+        message.globalForegroundTransition,
+      );
+    }
+    if (message.globalBibleTransition !== undefined) {
+      obj.globalBibleTransition = Transition.toJSON(
+        message.globalBibleTransition,
+      );
+    }
+    if (message.globalPropsTransition !== undefined) {
+      obj.globalPropsTransition = Transition.toJSON(
+        message.globalPropsTransition,
+      );
+    }
+    if (message.globalAudioTransition !== undefined) {
+      obj.globalAudioTransition = Transition.toJSON(
+        message.globalAudioTransition,
+      );
+    }
+    if (message.preferences !== undefined) {
+      obj.preferences = Preferences.toJSON(message.preferences);
+    }
+    if (message.testPattern !== undefined) {
+      obj.testPattern = TestPatternRequest.toJSON(message.testPattern);
+    }
+    if (message.startupComplete !== undefined) {
+      obj.startupComplete = GenericEvent.toJSON(message.startupComplete);
+    }
+    if (message.visualPlaylistDoc !== undefined) {
+      obj.visualPlaylistDoc = PlaylistDocument.toJSON(
+        message.visualPlaylistDoc,
+      );
+    }
+    if (message.audioPlaylistDoc !== undefined) {
+      obj.audioPlaylistDoc = PlaylistDocument.toJSON(message.audioPlaylistDoc);
+    }
+    if (message.killWatchdog !== undefined) {
+      obj.killWatchdog = GenericEvent.toJSON(message.killWatchdog);
+    }
+    if (message.macroIcons !== undefined) {
+      obj.macroIcons = MacroIcons.toJSON(message.macroIcons);
+    }
+    if (message.debugTriggerDataDump !== undefined) {
+      obj.debugTriggerDataDump = GenericEvent.toJSON(
+        message.debugTriggerDataDump,
+      );
+    }
+    if (message.libraryPlaylistDoc !== undefined) {
+      obj.libraryPlaylistDoc = PlaylistDocument.toJSON(
+        message.libraryPlaylistDoc,
+      );
+    }
+    if (message.audioPlaylistFocusUuid !== undefined) {
+      obj.audioPlaylistFocusUuid = UUID.toJSON(message.audioPlaylistFocusUuid);
     }
     return obj;
   },
@@ -9909,6 +8138,80 @@ export const SendData = {
       object.copyrightLayout !== undefined && object.copyrightLayout !== null
         ? CopyrightLayout.fromPartial(object.copyrightLayout)
         : undefined;
+    message.globalBackgroundTransition =
+      object.globalBackgroundTransition !== undefined &&
+      object.globalBackgroundTransition !== null
+        ? Transition.fromPartial(object.globalBackgroundTransition)
+        : undefined;
+    message.globalMessagesTransition =
+      object.globalMessagesTransition !== undefined &&
+      object.globalMessagesTransition !== null
+        ? Transition.fromPartial(object.globalMessagesTransition)
+        : undefined;
+    message.globalForegroundTransition =
+      object.globalForegroundTransition !== undefined &&
+      object.globalForegroundTransition !== null
+        ? Transition.fromPartial(object.globalForegroundTransition)
+        : undefined;
+    message.globalBibleTransition =
+      object.globalBibleTransition !== undefined &&
+      object.globalBibleTransition !== null
+        ? Transition.fromPartial(object.globalBibleTransition)
+        : undefined;
+    message.globalPropsTransition =
+      object.globalPropsTransition !== undefined &&
+      object.globalPropsTransition !== null
+        ? Transition.fromPartial(object.globalPropsTransition)
+        : undefined;
+    message.globalAudioTransition =
+      object.globalAudioTransition !== undefined &&
+      object.globalAudioTransition !== null
+        ? Transition.fromPartial(object.globalAudioTransition)
+        : undefined;
+    message.preferences =
+      object.preferences !== undefined && object.preferences !== null
+        ? Preferences.fromPartial(object.preferences)
+        : undefined;
+    message.testPattern =
+      object.testPattern !== undefined && object.testPattern !== null
+        ? TestPatternRequest.fromPartial(object.testPattern)
+        : undefined;
+    message.startupComplete =
+      object.startupComplete !== undefined && object.startupComplete !== null
+        ? GenericEvent.fromPartial(object.startupComplete)
+        : undefined;
+    message.visualPlaylistDoc =
+      object.visualPlaylistDoc !== undefined &&
+      object.visualPlaylistDoc !== null
+        ? PlaylistDocument.fromPartial(object.visualPlaylistDoc)
+        : undefined;
+    message.audioPlaylistDoc =
+      object.audioPlaylistDoc !== undefined && object.audioPlaylistDoc !== null
+        ? PlaylistDocument.fromPartial(object.audioPlaylistDoc)
+        : undefined;
+    message.killWatchdog =
+      object.killWatchdog !== undefined && object.killWatchdog !== null
+        ? GenericEvent.fromPartial(object.killWatchdog)
+        : undefined;
+    message.macroIcons =
+      object.macroIcons !== undefined && object.macroIcons !== null
+        ? MacroIcons.fromPartial(object.macroIcons)
+        : undefined;
+    message.debugTriggerDataDump =
+      object.debugTriggerDataDump !== undefined &&
+      object.debugTriggerDataDump !== null
+        ? GenericEvent.fromPartial(object.debugTriggerDataDump)
+        : undefined;
+    message.libraryPlaylistDoc =
+      object.libraryPlaylistDoc !== undefined &&
+      object.libraryPlaylistDoc !== null
+        ? PlaylistDocument.fromPartial(object.libraryPlaylistDoc)
+        : undefined;
+    message.audioPlaylistFocusUuid =
+      object.audioPlaylistFocusUuid !== undefined &&
+      object.audioPlaylistFocusUuid !== null
+        ? UUID.fromPartial(object.audioPlaylistFocusUuid)
+        : undefined;
     return message;
   },
 };
@@ -9921,6 +8224,7 @@ function createBaseTimerRuntimeState(): TimerRuntimeState {
     isRunning: false,
     hasOverrun: false,
     state: 0,
+    currentTime: 0,
   };
 }
 
@@ -9941,14 +8245,17 @@ export const TimerRuntimeState = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       writer.uint32(32).bool(message.isRunning);
     }
-    if (message.hasOverrun === true) {
+    if (message.hasOverrun !== false) {
       writer.uint32(40).bool(message.hasOverrun);
     }
     if (message.state !== 0) {
       writer.uint32(48).int32(message.state);
+    }
+    if (message.currentTime !== 0) {
+      writer.uint32(57).double(message.currentTime);
     }
     return writer;
   },
@@ -10003,6 +8310,13 @@ export const TimerRuntimeState = {
 
           message.state = reader.int32() as any;
           continue;
+        case 7:
+          if (tag !== 57) {
+            break;
+          }
+
+          message.currentTime = reader.double();
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -10032,6 +8346,9 @@ export const TimerRuntimeState = {
       state: isSet(object.state)
         ? timerRuntimeState_ResourceStateFromJSON(object.state)
         : 0,
+      currentTime: isSet(object.currentTime)
+        ? globalThis.Number(object.currentTime)
+        : 0,
     };
   },
 
@@ -10046,14 +8363,17 @@ export const TimerRuntimeState = {
     if (message.actionType !== undefined) {
       obj.actionType = Action_TimerType.toJSON(message.actionType);
     }
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       obj.isRunning = message.isRunning;
     }
-    if (message.hasOverrun === true) {
+    if (message.hasOverrun !== false) {
       obj.hasOverrun = message.hasOverrun;
     }
     if (message.state !== 0) {
       obj.state = timerRuntimeState_ResourceStateToJSON(message.state);
+    }
+    if (message.currentTime !== 0) {
+      obj.currentTime = message.currentTime;
     }
     return obj;
   },
@@ -10079,6 +8399,7 @@ export const TimerRuntimeState = {
     message.isRunning = object.isRunning ?? false;
     message.hasOverrun = object.hasOverrun ?? false;
     message.state = object.state ?? 0;
+    message.currentTime = object.currentTime ?? 0;
     return message;
   },
 };
@@ -10176,12 +8497,158 @@ export const TimerStateUpdate = {
   },
 };
 
+function createBaseHandledException(): HandledException {
+  return { description: '' };
+}
+
+export const HandledException = {
+  encode(
+    message: HandledException,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.description !== '') {
+      writer.uint32(10).string(message.description);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): HandledException {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHandledException();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.description = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): HandledException {
+    return {
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : '',
+    };
+  },
+
+  toJSON(message: HandledException): unknown {
+    const obj: any = {};
+    if (message.description !== '') {
+      obj.description = message.description;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<HandledException>, I>>(
+    base?: I,
+  ): HandledException {
+    return HandledException.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<HandledException>, I>>(
+    object: I,
+  ): HandledException {
+    const message = createBaseHandledException();
+    message.description = object.description ?? '';
+    return message;
+  },
+};
+
+function createBaseCoreDataStateDump(): CoreDataStateDump {
+  return { macros: undefined };
+}
+
+export const CoreDataStateDump = {
+  encode(
+    message: CoreDataStateDump,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.macros !== undefined) {
+      MacrosDocument.encode(message.macros, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): CoreDataStateDump {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCoreDataStateDump();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.macros = MacrosDocument.decode(reader, reader.uint32());
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CoreDataStateDump {
+    return {
+      macros: isSet(object.macros)
+        ? MacrosDocument.fromJSON(object.macros)
+        : undefined,
+    };
+  },
+
+  toJSON(message: CoreDataStateDump): unknown {
+    const obj: any = {};
+    if (message.macros !== undefined) {
+      obj.macros = MacrosDocument.toJSON(message.macros);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CoreDataStateDump>, I>>(
+    base?: I,
+  ): CoreDataStateDump {
+    return CoreDataStateDump.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CoreDataStateDump>, I>>(
+    object: I,
+  ): CoreDataStateDump {
+    const message = createBaseCoreDataStateDump();
+    message.macros =
+      object.macros !== undefined && object.macros !== null
+        ? MacrosDocument.fromPartial(object.macros)
+        : undefined;
+    return message;
+  },
+};
+
 function createBaseSendDataResponse(): SendDataResponse {
   return {
     messageId: 0,
     validateEncoderResponse: undefined,
     timerState: undefined,
     captureActionRequest: undefined,
+    testPattern: undefined,
+    handledException: undefined,
+    testStateDump: undefined,
+    audioPlaylistFocusUuid: undefined,
+    audioPlaylistItemTriggeredUuid: undefined,
   };
 }
 
@@ -10209,6 +8676,36 @@ export const SendDataResponse = {
       CaptureActionRequest.encode(
         message.captureActionRequest,
         writer.uint32(34).fork(),
+      ).ldelim();
+    }
+    if (message.testPattern !== undefined) {
+      TestPatternResponse.encode(
+        message.testPattern,
+        writer.uint32(42).fork(),
+      ).ldelim();
+    }
+    if (message.handledException !== undefined) {
+      HandledException.encode(
+        message.handledException,
+        writer.uint32(50).fork(),
+      ).ldelim();
+    }
+    if (message.testStateDump !== undefined) {
+      CoreDataStateDump.encode(
+        message.testStateDump,
+        writer.uint32(58).fork(),
+      ).ldelim();
+    }
+    if (message.audioPlaylistFocusUuid !== undefined) {
+      UUID.encode(
+        message.audioPlaylistFocusUuid,
+        writer.uint32(66).fork(),
+      ).ldelim();
+    }
+    if (message.audioPlaylistItemTriggeredUuid !== undefined) {
+      UUID.encode(
+        message.audioPlaylistItemTriggeredUuid,
+        writer.uint32(74).fork(),
       ).ldelim();
     }
     return writer;
@@ -10256,6 +8753,53 @@ export const SendDataResponse = {
             reader.uint32(),
           );
           continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.testPattern = TestPatternResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 6:
+          if (tag !== 50) {
+            break;
+          }
+
+          message.handledException = HandledException.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 7:
+          if (tag !== 58) {
+            break;
+          }
+
+          message.testStateDump = CoreDataStateDump.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        case 8:
+          if (tag !== 66) {
+            break;
+          }
+
+          message.audioPlaylistFocusUuid = UUID.decode(reader, reader.uint32());
+          continue;
+        case 9:
+          if (tag !== 74) {
+            break;
+          }
+
+          message.audioPlaylistItemTriggeredUuid = UUID.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -10279,6 +8823,23 @@ export const SendDataResponse = {
       captureActionRequest: isSet(object.captureActionRequest)
         ? CaptureActionRequest.fromJSON(object.captureActionRequest)
         : undefined,
+      testPattern: isSet(object.testPattern)
+        ? TestPatternResponse.fromJSON(object.testPattern)
+        : undefined,
+      handledException: isSet(object.handledException)
+        ? HandledException.fromJSON(object.handledException)
+        : undefined,
+      testStateDump: isSet(object.testStateDump)
+        ? CoreDataStateDump.fromJSON(object.testStateDump)
+        : undefined,
+      audioPlaylistFocusUuid: isSet(object.audioPlaylistFocusUuid)
+        ? UUID.fromJSON(object.audioPlaylistFocusUuid)
+        : undefined,
+      audioPlaylistItemTriggeredUuid: isSet(
+        object.audioPlaylistItemTriggeredUuid,
+      )
+        ? UUID.fromJSON(object.audioPlaylistItemTriggeredUuid)
+        : undefined,
     };
   },
 
@@ -10298,6 +8859,23 @@ export const SendDataResponse = {
     if (message.captureActionRequest !== undefined) {
       obj.captureActionRequest = CaptureActionRequest.toJSON(
         message.captureActionRequest,
+      );
+    }
+    if (message.testPattern !== undefined) {
+      obj.testPattern = TestPatternResponse.toJSON(message.testPattern);
+    }
+    if (message.handledException !== undefined) {
+      obj.handledException = HandledException.toJSON(message.handledException);
+    }
+    if (message.testStateDump !== undefined) {
+      obj.testStateDump = CoreDataStateDump.toJSON(message.testStateDump);
+    }
+    if (message.audioPlaylistFocusUuid !== undefined) {
+      obj.audioPlaylistFocusUuid = UUID.toJSON(message.audioPlaylistFocusUuid);
+    }
+    if (message.audioPlaylistItemTriggeredUuid !== undefined) {
+      obj.audioPlaylistItemTriggeredUuid = UUID.toJSON(
+        message.audioPlaylistItemTriggeredUuid,
       );
     }
     return obj;
@@ -10326,6 +8904,28 @@ export const SendDataResponse = {
       object.captureActionRequest !== undefined &&
       object.captureActionRequest !== null
         ? CaptureActionRequest.fromPartial(object.captureActionRequest)
+        : undefined;
+    message.testPattern =
+      object.testPattern !== undefined && object.testPattern !== null
+        ? TestPatternResponse.fromPartial(object.testPattern)
+        : undefined;
+    message.handledException =
+      object.handledException !== undefined && object.handledException !== null
+        ? HandledException.fromPartial(object.handledException)
+        : undefined;
+    message.testStateDump =
+      object.testStateDump !== undefined && object.testStateDump !== null
+        ? CoreDataStateDump.fromPartial(object.testStateDump)
+        : undefined;
+    message.audioPlaylistFocusUuid =
+      object.audioPlaylistFocusUuid !== undefined &&
+      object.audioPlaylistFocusUuid !== null
+        ? UUID.fromPartial(object.audioPlaylistFocusUuid)
+        : undefined;
+    message.audioPlaylistItemTriggeredUuid =
+      object.audioPlaylistItemTriggeredUuid !== undefined &&
+      object.audioPlaylistItemTriggeredUuid !== null
+        ? UUID.fromPartial(object.audioPlaylistItemTriggeredUuid)
         : undefined;
     return message;
   },
@@ -10723,10 +9323,10 @@ export const TriggerTransferRenderState_TimerState = {
     if (message.timer !== undefined) {
       Timer.encode(message.timer, writer.uint32(10).fork()).ldelim();
     }
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       writer.uint32(16).bool(message.isRunning);
     }
-    if (message.hasOverrun === true) {
+    if (message.hasOverrun !== false) {
       writer.uint32(24).bool(message.hasOverrun);
     }
     if (message.value !== 0) {
@@ -10801,10 +9401,10 @@ export const TriggerTransferRenderState_TimerState = {
     if (message.timer !== undefined) {
       obj.timer = Timer.toJSON(message.timer);
     }
-    if (message.isRunning === true) {
+    if (message.isRunning !== false) {
       obj.isRunning = message.isRunning;
     }
-    if (message.hasOverrun === true) {
+    if (message.hasOverrun !== false) {
       obj.hasOverrun = message.hasOverrun;
     }
     if (message.value !== 0) {
@@ -10856,10 +9456,10 @@ export const TriggerTransferRenderState_MediaState = {
     if (message.currentMedia !== undefined) {
       Media.encode(message.currentMedia, writer.uint32(10).fork()).ldelim();
     }
-    if (message.isPlaying === true) {
+    if (message.isPlaying !== false) {
       writer.uint32(16).bool(message.isPlaying);
     }
-    if (message.isLooping === true) {
+    if (message.isLooping !== false) {
       writer.uint32(24).bool(message.isLooping);
     }
     if (message.currentTime !== 0) {
@@ -10997,10 +9597,10 @@ export const TriggerTransferRenderState_MediaState = {
     if (message.currentMedia !== undefined) {
       obj.currentMedia = Media.toJSON(message.currentMedia);
     }
-    if (message.isPlaying === true) {
+    if (message.isPlaying !== false) {
       obj.isPlaying = message.isPlaying;
     }
-    if (message.isLooping === true) {
+    if (message.isLooping !== false) {
       obj.isLooping = message.isLooping;
     }
     if (message.currentTime !== 0) {
@@ -11155,7 +9755,7 @@ export const TriggerTransferRenderState_AutoAdvanceState = {
     message: TriggerTransferRenderState_AutoAdvanceState,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.active === true) {
+    if (message.active !== false) {
       writer.uint32(8).bool(message.active);
     }
     if (message.remainingTime !== 0) {
@@ -11209,7 +9809,7 @@ export const TriggerTransferRenderState_AutoAdvanceState = {
 
   toJSON(message: TriggerTransferRenderState_AutoAdvanceState): unknown {
     const obj: any = {};
-    if (message.active === true) {
+    if (message.active !== false) {
       obj.active = message.active;
     }
     if (message.remainingTime !== 0) {
@@ -11250,7 +9850,7 @@ export const TriggerTransferRenderState_TimelineState = {
     message: TriggerTransferRenderState_TimelineState,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.active === true) {
+    if (message.active !== false) {
       writer.uint32(8).bool(message.active);
     }
     if (message.currentTime !== 0) {
@@ -11317,7 +9917,7 @@ export const TriggerTransferRenderState_TimelineState = {
 
   toJSON(message: TriggerTransferRenderState_TimelineState): unknown {
     const obj: any = {};
-    if (message.active === true) {
+    if (message.active !== false) {
       obj.active = message.active;
     }
     if (message.currentTime !== 0) {
@@ -11350,13 +9950,13 @@ export const TriggerTransferRenderState_TimelineState = {
 function createBaseTriggerTransferRenderState_SlideState(): TriggerTransferRenderState_SlideState {
   return {
     presentation: undefined,
-    playlistUuid: undefined,
-    playlistName: '',
+    playlist: undefined,
     currentCue: undefined,
     nextCue: undefined,
     autoAdvance: undefined,
     timelineState: undefined,
     currentCueIndex: 0,
+    currentPlaylistIndex: 0,
   };
 }
 
@@ -11371,32 +9971,32 @@ export const TriggerTransferRenderState_SlideState = {
         writer.uint32(10).fork(),
       ).ldelim();
     }
-    if (message.playlistUuid !== undefined) {
-      UUID.encode(message.playlistUuid, writer.uint32(18).fork()).ldelim();
-    }
-    if (message.playlistName !== '') {
-      writer.uint32(26).string(message.playlistName);
+    if (message.playlist !== undefined) {
+      Playlist.encode(message.playlist, writer.uint32(18).fork()).ldelim();
     }
     if (message.currentCue !== undefined) {
-      UUID.encode(message.currentCue, writer.uint32(34).fork()).ldelim();
+      UUID.encode(message.currentCue, writer.uint32(26).fork()).ldelim();
     }
     if (message.nextCue !== undefined) {
-      UUID.encode(message.nextCue, writer.uint32(42).fork()).ldelim();
+      UUID.encode(message.nextCue, writer.uint32(34).fork()).ldelim();
     }
     if (message.autoAdvance !== undefined) {
       TriggerTransferRenderState_AutoAdvanceState.encode(
         message.autoAdvance,
-        writer.uint32(50).fork(),
+        writer.uint32(42).fork(),
       ).ldelim();
     }
     if (message.timelineState !== undefined) {
       TriggerTransferRenderState_TimelineState.encode(
         message.timelineState,
-        writer.uint32(58).fork(),
+        writer.uint32(50).fork(),
       ).ldelim();
     }
     if (message.currentCueIndex !== 0) {
-      writer.uint32(64).int32(message.currentCueIndex);
+      writer.uint32(56).int32(message.currentCueIndex);
+    }
+    if (message.currentPlaylistIndex !== 0) {
+      writer.uint32(64).int32(message.currentPlaylistIndex);
     }
     return writer;
   },
@@ -11424,31 +10024,24 @@ export const TriggerTransferRenderState_SlideState = {
             break;
           }
 
-          message.playlistUuid = UUID.decode(reader, reader.uint32());
+          message.playlist = Playlist.decode(reader, reader.uint32());
           continue;
         case 3:
           if (tag !== 26) {
             break;
           }
 
-          message.playlistName = reader.string();
+          message.currentCue = UUID.decode(reader, reader.uint32());
           continue;
         case 4:
           if (tag !== 34) {
             break;
           }
 
-          message.currentCue = UUID.decode(reader, reader.uint32());
+          message.nextCue = UUID.decode(reader, reader.uint32());
           continue;
         case 5:
           if (tag !== 42) {
-            break;
-          }
-
-          message.nextCue = UUID.decode(reader, reader.uint32());
-          continue;
-        case 6:
-          if (tag !== 50) {
             break;
           }
 
@@ -11458,8 +10051,8 @@ export const TriggerTransferRenderState_SlideState = {
               reader.uint32(),
             );
           continue;
-        case 7:
-          if (tag !== 58) {
+        case 6:
+          if (tag !== 50) {
             break;
           }
 
@@ -11469,12 +10062,19 @@ export const TriggerTransferRenderState_SlideState = {
               reader.uint32(),
             );
           continue;
+        case 7:
+          if (tag !== 56) {
+            break;
+          }
+
+          message.currentCueIndex = reader.int32();
+          continue;
         case 8:
           if (tag !== 64) {
             break;
           }
 
-          message.currentCueIndex = reader.int32();
+          message.currentPlaylistIndex = reader.int32();
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -11490,12 +10090,9 @@ export const TriggerTransferRenderState_SlideState = {
       presentation: isSet(object.presentation)
         ? Presentation.fromJSON(object.presentation)
         : undefined,
-      playlistUuid: isSet(object.playlistUuid)
-        ? UUID.fromJSON(object.playlistUuid)
+      playlist: isSet(object.playlist)
+        ? Playlist.fromJSON(object.playlist)
         : undefined,
-      playlistName: isSet(object.playlistName)
-        ? globalThis.String(object.playlistName)
-        : '',
       currentCue: isSet(object.currentCue)
         ? UUID.fromJSON(object.currentCue)
         : undefined,
@@ -11515,6 +10112,9 @@ export const TriggerTransferRenderState_SlideState = {
       currentCueIndex: isSet(object.currentCueIndex)
         ? globalThis.Number(object.currentCueIndex)
         : 0,
+      currentPlaylistIndex: isSet(object.currentPlaylistIndex)
+        ? globalThis.Number(object.currentPlaylistIndex)
+        : 0,
     };
   },
 
@@ -11523,11 +10123,8 @@ export const TriggerTransferRenderState_SlideState = {
     if (message.presentation !== undefined) {
       obj.presentation = Presentation.toJSON(message.presentation);
     }
-    if (message.playlistUuid !== undefined) {
-      obj.playlistUuid = UUID.toJSON(message.playlistUuid);
-    }
-    if (message.playlistName !== '') {
-      obj.playlistName = message.playlistName;
+    if (message.playlist !== undefined) {
+      obj.playlist = Playlist.toJSON(message.playlist);
     }
     if (message.currentCue !== undefined) {
       obj.currentCue = UUID.toJSON(message.currentCue);
@@ -11548,6 +10145,9 @@ export const TriggerTransferRenderState_SlideState = {
     if (message.currentCueIndex !== 0) {
       obj.currentCueIndex = Math.round(message.currentCueIndex);
     }
+    if (message.currentPlaylistIndex !== 0) {
+      obj.currentPlaylistIndex = Math.round(message.currentPlaylistIndex);
+    }
     return obj;
   },
 
@@ -11566,11 +10166,10 @@ export const TriggerTransferRenderState_SlideState = {
       object.presentation !== undefined && object.presentation !== null
         ? Presentation.fromPartial(object.presentation)
         : undefined;
-    message.playlistUuid =
-      object.playlistUuid !== undefined && object.playlistUuid !== null
-        ? UUID.fromPartial(object.playlistUuid)
+    message.playlist =
+      object.playlist !== undefined && object.playlist !== null
+        ? Playlist.fromPartial(object.playlist)
         : undefined;
-    message.playlistName = object.playlistName ?? '';
     message.currentCue =
       object.currentCue !== undefined && object.currentCue !== null
         ? UUID.fromPartial(object.currentCue)
@@ -11592,6 +10191,7 @@ export const TriggerTransferRenderState_SlideState = {
           )
         : undefined;
     message.currentCueIndex = object.currentCueIndex ?? 0;
+    message.currentPlaylistIndex = object.currentPlaylistIndex ?? 0;
     return message;
   },
 };
@@ -11686,6 +10286,31 @@ export const TriggerTransferRenderState_TimecodeState = {
     return message;
   },
 };
+
+function bytesFromBase64(b64: string): Uint8Array {
+  if ((globalThis as any).Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, 'base64'));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString('base64');
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(''));
+  }
+}
 
 type Builtin =
   | Date

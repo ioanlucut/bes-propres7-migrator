@@ -703,7 +703,7 @@ export const APIV1StatusRequest_PutStageScreens = {
     message: APIV1StatusRequest_PutStageScreens,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
@@ -746,7 +746,7 @@ export const APIV1StatusRequest_PutStageScreens = {
 
   toJSON(message: APIV1StatusRequest_PutStageScreens): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     return obj;
@@ -831,7 +831,7 @@ export const APIV1StatusRequest_PutAudienceScreens = {
     message: APIV1StatusRequest_PutAudienceScreens,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
@@ -874,7 +874,7 @@ export const APIV1StatusRequest_PutAudienceScreens = {
 
   toJSON(message: APIV1StatusRequest_PutAudienceScreens): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     return obj;
@@ -1289,25 +1289,25 @@ export const APIV1StatusResponse_GetLayers = {
     message: APIV1StatusResponse_GetLayers,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.videoInput === true) {
+    if (message.videoInput !== false) {
       writer.uint32(8).bool(message.videoInput);
     }
-    if (message.media === true) {
+    if (message.media !== false) {
       writer.uint32(16).bool(message.media);
     }
-    if (message.slide === true) {
+    if (message.slide !== false) {
       writer.uint32(24).bool(message.slide);
     }
-    if (message.announcements === true) {
+    if (message.announcements !== false) {
       writer.uint32(32).bool(message.announcements);
     }
-    if (message.props === true) {
+    if (message.props !== false) {
       writer.uint32(40).bool(message.props);
     }
-    if (message.messages === true) {
+    if (message.messages !== false) {
       writer.uint32(48).bool(message.messages);
     }
-    if (message.audio === true) {
+    if (message.audio !== false) {
       writer.uint32(56).bool(message.audio);
     }
     return writer;
@@ -1402,25 +1402,25 @@ export const APIV1StatusResponse_GetLayers = {
 
   toJSON(message: APIV1StatusResponse_GetLayers): unknown {
     const obj: any = {};
-    if (message.videoInput === true) {
+    if (message.videoInput !== false) {
       obj.videoInput = message.videoInput;
     }
-    if (message.media === true) {
+    if (message.media !== false) {
       obj.media = message.media;
     }
-    if (message.slide === true) {
+    if (message.slide !== false) {
       obj.slide = message.slide;
     }
-    if (message.announcements === true) {
+    if (message.announcements !== false) {
       obj.announcements = message.announcements;
     }
-    if (message.props === true) {
+    if (message.props !== false) {
       obj.props = message.props;
     }
-    if (message.messages === true) {
+    if (message.messages !== false) {
       obj.messages = message.messages;
     }
-    if (message.audio === true) {
+    if (message.audio !== false) {
       obj.audio = message.audio;
     }
     return obj;
@@ -1455,7 +1455,7 @@ export const APIV1StatusResponse_GetStageScreens = {
     message: APIV1StatusResponse_GetStageScreens,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
@@ -1498,7 +1498,7 @@ export const APIV1StatusResponse_GetStageScreens = {
 
   toJSON(message: APIV1StatusResponse_GetStageScreens): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     return obj;
@@ -1581,7 +1581,7 @@ export const APIV1StatusResponse_GetAudienceScreens = {
     message: APIV1StatusResponse_GetAudienceScreens,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
@@ -1624,7 +1624,7 @@ export const APIV1StatusResponse_GetAudienceScreens = {
 
   toJSON(message: APIV1StatusResponse_GetAudienceScreens): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     return obj;

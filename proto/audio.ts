@@ -165,7 +165,7 @@ export const Audio_SettingsDocument = {
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.monitorOnMains === true) {
+    if (message.monitorOnMains !== false) {
       writer.uint32(24).bool(message.monitorOnMains);
     }
     return writer;
@@ -237,7 +237,7 @@ export const Audio_SettingsDocument = {
     if (message.monitorDevice !== undefined) {
       obj.monitorDevice = Audio_Device.toJSON(message.monitorDevice);
     }
-    if (message.monitorOnMains === true) {
+    if (message.monitorOnMains !== false) {
       obj.monitorOnMains = message.monitorOnMains;
     }
     return obj;
@@ -721,7 +721,7 @@ export const Audio_LogicalChannel = {
     if (message.index !== 0) {
       writer.uint32(24).uint32(message.index);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       writer.uint32(32).bool(message.muted);
     }
     for (const v of message.physicalAudioChannels) {
@@ -730,10 +730,10 @@ export const Audio_LogicalChannel = {
         writer.uint32(42).fork(),
       ).ldelim();
     }
-    if (message.solo === true) {
+    if (message.solo !== false) {
       writer.uint32(48).bool(message.solo);
     }
-    if (message.testTone === true) {
+    if (message.testTone !== false) {
       writer.uint32(56).bool(message.testTone);
     }
     return writer;
@@ -841,7 +841,7 @@ export const Audio_LogicalChannel = {
     if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       obj.muted = message.muted;
     }
     if (message.physicalAudioChannels?.length) {
@@ -849,10 +849,10 @@ export const Audio_LogicalChannel = {
         Audio_LogicalChannel_OutputChannel.toJSON(e),
       );
     }
-    if (message.solo === true) {
+    if (message.solo !== false) {
       obj.solo = message.solo;
     }
-    if (message.testTone === true) {
+    if (message.testTone !== false) {
       obj.testTone = message.testTone;
     }
     return obj;
@@ -896,13 +896,13 @@ export const Audio_LogicalChannel_OutputChannel = {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       writer.uint32(16).bool(message.muted);
     }
-    if (message.solo === true) {
+    if (message.solo !== false) {
       writer.uint32(24).bool(message.solo);
     }
-    if (message.testTone === true) {
+    if (message.testTone !== false) {
       writer.uint32(32).bool(message.testTone);
     }
     return writer;
@@ -972,13 +972,13 @@ export const Audio_LogicalChannel_OutputChannel = {
     if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.muted === true) {
+    if (message.muted !== false) {
       obj.muted = message.muted;
     }
-    if (message.solo === true) {
+    if (message.solo !== false) {
       obj.solo = message.solo;
     }
-    if (message.testTone === true) {
+    if (message.testTone !== false) {
       obj.testTone = message.testTone;
     }
     return obj;
@@ -1013,13 +1013,13 @@ export const Audio_PhysicalChannel = {
     if (message.index !== 0) {
       writer.uint32(8).uint32(message.index);
     }
-    if (message.muteEnable === true) {
+    if (message.muteEnable !== false) {
       writer.uint32(16).bool(message.muteEnable);
     }
-    if (message.soloEnable === true) {
+    if (message.soloEnable !== false) {
       writer.uint32(24).bool(message.soloEnable);
     }
-    if (message.toneEnable === true) {
+    if (message.toneEnable !== false) {
       writer.uint32(32).bool(message.toneEnable);
     }
     return writer;
@@ -1093,13 +1093,13 @@ export const Audio_PhysicalChannel = {
     if (message.index !== 0) {
       obj.index = Math.round(message.index);
     }
-    if (message.muteEnable === true) {
+    if (message.muteEnable !== false) {
       obj.muteEnable = message.muteEnable;
     }
-    if (message.soloEnable === true) {
+    if (message.soloEnable !== false) {
       obj.soloEnable = message.soloEnable;
     }
-    if (message.toneEnable === true) {
+    if (message.toneEnable !== false) {
       obj.toneEnable = message.toneEnable;
     }
     return obj;

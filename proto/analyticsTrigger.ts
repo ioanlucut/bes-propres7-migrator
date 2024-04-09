@@ -9,6 +9,7 @@ export interface Trigger {
   action?: Trigger_Action | undefined;
   mediaBin?: Trigger_MediaBin | undefined;
   audioBin?: Trigger_AudioBin | undefined;
+  testPattern?: Trigger_TestPattern | undefined;
 }
 
 export interface Trigger_Cue {
@@ -339,7 +340,94 @@ export interface Trigger_Action {
   captureStop?: Trigger_Action_CaptureStop | undefined;
 }
 
-export interface Trigger_Action_ClearLayer {}
+export interface Trigger_Action_ClearLayer {
+  type: Trigger_Action_ClearLayer_ClearLayerType;
+}
+
+export enum Trigger_Action_ClearLayer_ClearLayerType {
+  CLEAR_LAYER_TYPE_UNKNOWN = 0,
+  CLEAR_LAYER_TYPE_AUDIO = 1,
+  CLEAR_LAYER_TYPE_MESSAGES = 2,
+  CLEAR_LAYER_TYPE_PROPS = 3,
+  CLEAR_LAYER_TYPE_ANNOUNCEMENTS = 4,
+  CLEAR_LAYER_TYPE_SLIDE = 5,
+  CLEAR_LAYER_TYPE_MEDIA = 6,
+  CLEAR_LAYER_TYPE_VIDEO_INPUT = 7,
+  CLEAR_LAYER_TYPE_CLEAR_TO_LOGO = 8,
+  CLEAR_LAYER_TYPE_CLEAR_GROUP = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function trigger_Action_ClearLayer_ClearLayerTypeFromJSON(
+  object: any,
+): Trigger_Action_ClearLayer_ClearLayerType {
+  switch (object) {
+    case 0:
+    case 'CLEAR_LAYER_TYPE_UNKNOWN':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_UNKNOWN;
+    case 1:
+    case 'CLEAR_LAYER_TYPE_AUDIO':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_AUDIO;
+    case 2:
+    case 'CLEAR_LAYER_TYPE_MESSAGES':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_MESSAGES;
+    case 3:
+    case 'CLEAR_LAYER_TYPE_PROPS':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_PROPS;
+    case 4:
+    case 'CLEAR_LAYER_TYPE_ANNOUNCEMENTS':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_ANNOUNCEMENTS;
+    case 5:
+    case 'CLEAR_LAYER_TYPE_SLIDE':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_SLIDE;
+    case 6:
+    case 'CLEAR_LAYER_TYPE_MEDIA':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_MEDIA;
+    case 7:
+    case 'CLEAR_LAYER_TYPE_VIDEO_INPUT':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_VIDEO_INPUT;
+    case 8:
+    case 'CLEAR_LAYER_TYPE_CLEAR_TO_LOGO':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_CLEAR_TO_LOGO;
+    case 9:
+    case 'CLEAR_LAYER_TYPE_CLEAR_GROUP':
+      return Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_CLEAR_GROUP;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Trigger_Action_ClearLayer_ClearLayerType.UNRECOGNIZED;
+  }
+}
+
+export function trigger_Action_ClearLayer_ClearLayerTypeToJSON(
+  object: Trigger_Action_ClearLayer_ClearLayerType,
+): string {
+  switch (object) {
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_UNKNOWN:
+      return 'CLEAR_LAYER_TYPE_UNKNOWN';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_AUDIO:
+      return 'CLEAR_LAYER_TYPE_AUDIO';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_MESSAGES:
+      return 'CLEAR_LAYER_TYPE_MESSAGES';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_PROPS:
+      return 'CLEAR_LAYER_TYPE_PROPS';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_ANNOUNCEMENTS:
+      return 'CLEAR_LAYER_TYPE_ANNOUNCEMENTS';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_SLIDE:
+      return 'CLEAR_LAYER_TYPE_SLIDE';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_MEDIA:
+      return 'CLEAR_LAYER_TYPE_MEDIA';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_VIDEO_INPUT:
+      return 'CLEAR_LAYER_TYPE_VIDEO_INPUT';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_CLEAR_TO_LOGO:
+      return 'CLEAR_LAYER_TYPE_CLEAR_TO_LOGO';
+    case Trigger_Action_ClearLayer_ClearLayerType.CLEAR_LAYER_TYPE_CLEAR_GROUP:
+      return 'CLEAR_LAYER_TYPE_CLEAR_GROUP';
+    case Trigger_Action_ClearLayer_ClearLayerType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
 
 export interface Trigger_Action_MediaBinPlaylist {}
 
@@ -614,12 +702,146 @@ export interface Trigger_MediaBin {}
 
 export interface Trigger_AudioBin {}
 
+export interface Trigger_TestPattern {
+  testPatternType: Trigger_TestPattern_TestPatternType;
+  logo: Trigger_TestPattern_LogoType;
+}
+
+export enum Trigger_TestPattern_TestPatternType {
+  TEST_PATTERN_TYPE_AUDIO_VIDEO_SYNC = 0,
+  TEST_PATTERN_TYPE_BLEND_GRID = 1,
+  TEST_PATTERN_TYPE_COLOR_BARS = 2,
+  TEST_PATTERN_TYPE_CUSTOM_COLORS = 3,
+  TEST_PATTERN_TYPE_FOCUS = 4,
+  TEST_PATTERN_TYPE_GRAY_SCALE = 5,
+  TEST_PATTERN_TYPE_LINES = 6,
+  TEST_PATTERN_TYPE_LOGO_BOUNCE = 7,
+  TEST_PATTERN_TYPE_RADAR = 8,
+  TEST_PATTERN_TYPE_TEXT = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function trigger_TestPattern_TestPatternTypeFromJSON(
+  object: any,
+): Trigger_TestPattern_TestPatternType {
+  switch (object) {
+    case 0:
+    case 'TEST_PATTERN_TYPE_AUDIO_VIDEO_SYNC':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_AUDIO_VIDEO_SYNC;
+    case 1:
+    case 'TEST_PATTERN_TYPE_BLEND_GRID':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_BLEND_GRID;
+    case 2:
+    case 'TEST_PATTERN_TYPE_COLOR_BARS':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_COLOR_BARS;
+    case 3:
+    case 'TEST_PATTERN_TYPE_CUSTOM_COLORS':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_CUSTOM_COLORS;
+    case 4:
+    case 'TEST_PATTERN_TYPE_FOCUS':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_FOCUS;
+    case 5:
+    case 'TEST_PATTERN_TYPE_GRAY_SCALE':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_GRAY_SCALE;
+    case 6:
+    case 'TEST_PATTERN_TYPE_LINES':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_LINES;
+    case 7:
+    case 'TEST_PATTERN_TYPE_LOGO_BOUNCE':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_LOGO_BOUNCE;
+    case 8:
+    case 'TEST_PATTERN_TYPE_RADAR':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_RADAR;
+    case 9:
+    case 'TEST_PATTERN_TYPE_TEXT':
+      return Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_TEXT;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Trigger_TestPattern_TestPatternType.UNRECOGNIZED;
+  }
+}
+
+export function trigger_TestPattern_TestPatternTypeToJSON(
+  object: Trigger_TestPattern_TestPatternType,
+): string {
+  switch (object) {
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_AUDIO_VIDEO_SYNC:
+      return 'TEST_PATTERN_TYPE_AUDIO_VIDEO_SYNC';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_BLEND_GRID:
+      return 'TEST_PATTERN_TYPE_BLEND_GRID';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_COLOR_BARS:
+      return 'TEST_PATTERN_TYPE_COLOR_BARS';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_CUSTOM_COLORS:
+      return 'TEST_PATTERN_TYPE_CUSTOM_COLORS';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_FOCUS:
+      return 'TEST_PATTERN_TYPE_FOCUS';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_GRAY_SCALE:
+      return 'TEST_PATTERN_TYPE_GRAY_SCALE';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_LINES:
+      return 'TEST_PATTERN_TYPE_LINES';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_LOGO_BOUNCE:
+      return 'TEST_PATTERN_TYPE_LOGO_BOUNCE';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_RADAR:
+      return 'TEST_PATTERN_TYPE_RADAR';
+    case Trigger_TestPattern_TestPatternType.TEST_PATTERN_TYPE_TEXT:
+      return 'TEST_PATTERN_TYPE_TEXT';
+    case Trigger_TestPattern_TestPatternType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
+export enum Trigger_TestPattern_LogoType {
+  LOGO_TYPE_NONE = 0,
+  LOGO_TYPE_PROPRESENTER = 1,
+  LOGO_TYPE_CUSTOM = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function trigger_TestPattern_LogoTypeFromJSON(
+  object: any,
+): Trigger_TestPattern_LogoType {
+  switch (object) {
+    case 0:
+    case 'LOGO_TYPE_NONE':
+      return Trigger_TestPattern_LogoType.LOGO_TYPE_NONE;
+    case 1:
+    case 'LOGO_TYPE_PROPRESENTER':
+      return Trigger_TestPattern_LogoType.LOGO_TYPE_PROPRESENTER;
+    case 2:
+    case 'LOGO_TYPE_CUSTOM':
+      return Trigger_TestPattern_LogoType.LOGO_TYPE_CUSTOM;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return Trigger_TestPattern_LogoType.UNRECOGNIZED;
+  }
+}
+
+export function trigger_TestPattern_LogoTypeToJSON(
+  object: Trigger_TestPattern_LogoType,
+): string {
+  switch (object) {
+    case Trigger_TestPattern_LogoType.LOGO_TYPE_NONE:
+      return 'LOGO_TYPE_NONE';
+    case Trigger_TestPattern_LogoType.LOGO_TYPE_PROPRESENTER:
+      return 'LOGO_TYPE_PROPRESENTER';
+    case Trigger_TestPattern_LogoType.LOGO_TYPE_CUSTOM:
+      return 'LOGO_TYPE_CUSTOM';
+    case Trigger_TestPattern_LogoType.UNRECOGNIZED:
+    default:
+      return 'UNRECOGNIZED';
+  }
+}
+
 function createBaseTrigger(): Trigger {
   return {
     cue: undefined,
     action: undefined,
     mediaBin: undefined,
     audioBin: undefined,
+    testPattern: undefined,
   };
 }
 
@@ -644,6 +866,12 @@ export const Trigger = {
       Trigger_AudioBin.encode(
         message.audioBin,
         writer.uint32(34).fork(),
+      ).ldelim();
+    }
+    if (message.testPattern !== undefined) {
+      Trigger_TestPattern.encode(
+        message.testPattern,
+        writer.uint32(42).fork(),
       ).ldelim();
     }
     return writer;
@@ -685,6 +913,16 @@ export const Trigger = {
 
           message.audioBin = Trigger_AudioBin.decode(reader, reader.uint32());
           continue;
+        case 5:
+          if (tag !== 42) {
+            break;
+          }
+
+          message.testPattern = Trigger_TestPattern.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -706,6 +944,9 @@ export const Trigger = {
       audioBin: isSet(object.audioBin)
         ? Trigger_AudioBin.fromJSON(object.audioBin)
         : undefined,
+      testPattern: isSet(object.testPattern)
+        ? Trigger_TestPattern.fromJSON(object.testPattern)
+        : undefined,
     };
   },
 
@@ -722,6 +963,9 @@ export const Trigger = {
     }
     if (message.audioBin !== undefined) {
       obj.audioBin = Trigger_AudioBin.toJSON(message.audioBin);
+    }
+    if (message.testPattern !== undefined) {
+      obj.testPattern = Trigger_TestPattern.toJSON(message.testPattern);
     }
     return obj;
   },
@@ -746,6 +990,10 @@ export const Trigger = {
     message.audioBin =
       object.audioBin !== undefined && object.audioBin !== null
         ? Trigger_AudioBin.fromPartial(object.audioBin)
+        : undefined;
+    message.testPattern =
+      object.testPattern !== undefined && object.testPattern !== null
+        ? Trigger_TestPattern.fromPartial(object.testPattern)
         : undefined;
     return message;
   },
@@ -1028,7 +1276,7 @@ export const Trigger_Cue_Slide_Trigger = {
     if (message.actionCount !== 0) {
       writer.uint32(32).int32(message.actionCount);
     }
-    if (message.hasTextFx === true) {
+    if (message.hasTextFx !== false) {
       writer.uint32(40).bool(message.hasTextFx);
     }
     if (message.mediaTextFillObjectCount !== 0) {
@@ -1179,7 +1427,7 @@ export const Trigger_Cue_Slide_Trigger = {
     if (message.actionCount !== 0) {
       obj.actionCount = Math.round(message.actionCount);
     }
-    if (message.hasTextFx === true) {
+    if (message.hasTextFx !== false) {
       obj.hasTextFx = message.hasTextFx;
     }
     if (message.mediaTextFillObjectCount !== 0) {
@@ -1250,7 +1498,7 @@ export const Trigger_Cue_Slide_ScrollingTextElement = {
     if (message.startPosition !== 0) {
       writer.uint32(16).int32(message.startPosition);
     }
-    if (message.isRepeatEnabled === true) {
+    if (message.isRepeatEnabled !== false) {
       writer.uint32(24).bool(message.isRepeatEnabled);
     }
     if (message.speed !== 0) {
@@ -1354,7 +1602,7 @@ export const Trigger_Cue_Slide_ScrollingTextElement = {
           message.startPosition,
         );
     }
-    if (message.isRepeatEnabled === true) {
+    if (message.isRepeatEnabled !== false) {
       obj.isRepeatEnabled = message.isRepeatEnabled;
     }
     if (message.speed !== 0) {
@@ -1402,7 +1650,7 @@ export const Trigger_Cue_Slide_RSSFeedElement = {
     if (message.content !== 0) {
       writer.uint32(8).int32(message.content);
     }
-    if (message.isDelimiterEnabled === true) {
+    if (message.isDelimiterEnabled !== false) {
       writer.uint32(16).bool(message.isDelimiterEnabled);
     }
     if (message.destinationLayer !== 0) {
@@ -1473,7 +1721,7 @@ export const Trigger_Cue_Slide_RSSFeedElement = {
         message.content,
       );
     }
-    if (message.isDelimiterEnabled === true) {
+    if (message.isDelimiterEnabled !== false) {
       obj.isDelimiterEnabled = message.isDelimiterEnabled;
     }
     if (message.destinationLayer !== 0) {
@@ -2028,14 +2276,17 @@ export const Trigger_Action = {
 };
 
 function createBaseTrigger_Action_ClearLayer(): Trigger_Action_ClearLayer {
-  return {};
+  return { type: 0 };
 }
 
 export const Trigger_Action_ClearLayer = {
   encode(
-    _: Trigger_Action_ClearLayer,
+    message: Trigger_Action_ClearLayer,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    if (message.type !== 0) {
+      writer.uint32(8).int32(message.type);
+    }
     return writer;
   },
 
@@ -2050,6 +2301,13 @@ export const Trigger_Action_ClearLayer = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.type = reader.int32() as any;
+          continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2059,12 +2317,19 @@ export const Trigger_Action_ClearLayer = {
     return message;
   },
 
-  fromJSON(_: any): Trigger_Action_ClearLayer {
-    return {};
+  fromJSON(object: any): Trigger_Action_ClearLayer {
+    return {
+      type: isSet(object.type)
+        ? trigger_Action_ClearLayer_ClearLayerTypeFromJSON(object.type)
+        : 0,
+    };
   },
 
-  toJSON(_: Trigger_Action_ClearLayer): unknown {
+  toJSON(message: Trigger_Action_ClearLayer): unknown {
     const obj: any = {};
+    if (message.type !== 0) {
+      obj.type = trigger_Action_ClearLayer_ClearLayerTypeToJSON(message.type);
+    }
     return obj;
   },
 
@@ -2074,9 +2339,10 @@ export const Trigger_Action_ClearLayer = {
     return Trigger_Action_ClearLayer.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<Trigger_Action_ClearLayer>, I>>(
-    _: I,
+    object: I,
   ): Trigger_Action_ClearLayer {
     const message = createBaseTrigger_Action_ClearLayer();
+    message.type = object.type ?? 0;
     return message;
   },
 };
@@ -3038,25 +3304,25 @@ export const Trigger_Action_ClearGroup = {
     message: Trigger_Action_ClearGroup,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.layerAudio === true) {
+    if (message.layerAudio !== false) {
       writer.uint32(8).bool(message.layerAudio);
     }
-    if (message.layerMessages === true) {
+    if (message.layerMessages !== false) {
       writer.uint32(16).bool(message.layerMessages);
     }
-    if (message.layerProps === true) {
+    if (message.layerProps !== false) {
       writer.uint32(24).bool(message.layerProps);
     }
-    if (message.layerAnnouncement === true) {
+    if (message.layerAnnouncement !== false) {
       writer.uint32(32).bool(message.layerAnnouncement);
     }
-    if (message.layerSlide === true) {
+    if (message.layerSlide !== false) {
       writer.uint32(40).bool(message.layerSlide);
     }
-    if (message.layerMedia === true) {
+    if (message.layerMedia !== false) {
       writer.uint32(48).bool(message.layerMedia);
     }
-    if (message.layerVideoInput === true) {
+    if (message.layerVideoInput !== false) {
       writer.uint32(56).bool(message.layerVideoInput);
     }
     return writer;
@@ -3159,25 +3425,25 @@ export const Trigger_Action_ClearGroup = {
 
   toJSON(message: Trigger_Action_ClearGroup): unknown {
     const obj: any = {};
-    if (message.layerAudio === true) {
+    if (message.layerAudio !== false) {
       obj.layerAudio = message.layerAudio;
     }
-    if (message.layerMessages === true) {
+    if (message.layerMessages !== false) {
       obj.layerMessages = message.layerMessages;
     }
-    if (message.layerProps === true) {
+    if (message.layerProps !== false) {
       obj.layerProps = message.layerProps;
     }
-    if (message.layerAnnouncement === true) {
+    if (message.layerAnnouncement !== false) {
       obj.layerAnnouncement = message.layerAnnouncement;
     }
-    if (message.layerSlide === true) {
+    if (message.layerSlide !== false) {
       obj.layerSlide = message.layerSlide;
     }
-    if (message.layerMedia === true) {
+    if (message.layerMedia !== false) {
       obj.layerMedia = message.layerMedia;
     }
-    if (message.layerVideoInput === true) {
+    if (message.layerVideoInput !== false) {
       obj.layerVideoInput = message.layerVideoInput;
     }
     return obj;
@@ -3286,7 +3552,7 @@ export const Trigger_Action_CaptureStop = {
     message: Trigger_Action_CaptureStop,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.confirmBeforeStopping === true) {
+    if (message.confirmBeforeStopping !== false) {
       writer.uint32(8).bool(message.confirmBeforeStopping);
     }
     return writer;
@@ -3329,7 +3595,7 @@ export const Trigger_Action_CaptureStop = {
 
   toJSON(message: Trigger_Action_CaptureStop): unknown {
     const obj: any = {};
-    if (message.confirmBeforeStopping === true) {
+    if (message.confirmBeforeStopping !== false) {
       obj.confirmBeforeStopping = message.confirmBeforeStopping;
     }
     return obj;
@@ -3447,6 +3713,94 @@ export const Trigger_AudioBin = {
     _: I,
   ): Trigger_AudioBin {
     const message = createBaseTrigger_AudioBin();
+    return message;
+  },
+};
+
+function createBaseTrigger_TestPattern(): Trigger_TestPattern {
+  return { testPatternType: 0, logo: 0 };
+}
+
+export const Trigger_TestPattern = {
+  encode(
+    message: Trigger_TestPattern,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.testPatternType !== 0) {
+      writer.uint32(8).int32(message.testPatternType);
+    }
+    if (message.logo !== 0) {
+      writer.uint32(16).int32(message.logo);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Trigger_TestPattern {
+    const reader =
+      input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTrigger_TestPattern();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 8) {
+            break;
+          }
+
+          message.testPatternType = reader.int32() as any;
+          continue;
+        case 2:
+          if (tag !== 16) {
+            break;
+          }
+
+          message.logo = reader.int32() as any;
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Trigger_TestPattern {
+    return {
+      testPatternType: isSet(object.testPatternType)
+        ? trigger_TestPattern_TestPatternTypeFromJSON(object.testPatternType)
+        : 0,
+      logo: isSet(object.logo)
+        ? trigger_TestPattern_LogoTypeFromJSON(object.logo)
+        : 0,
+    };
+  },
+
+  toJSON(message: Trigger_TestPattern): unknown {
+    const obj: any = {};
+    if (message.testPatternType !== 0) {
+      obj.testPatternType = trigger_TestPattern_TestPatternTypeToJSON(
+        message.testPatternType,
+      );
+    }
+    if (message.logo !== 0) {
+      obj.logo = trigger_TestPattern_LogoTypeToJSON(message.logo);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Trigger_TestPattern>, I>>(
+    base?: I,
+  ): Trigger_TestPattern {
+    return Trigger_TestPattern.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Trigger_TestPattern>, I>>(
+    object: I,
+  ): Trigger_TestPattern {
+    const message = createBaseTrigger_TestPattern();
+    message.testPatternType = object.testPatternType ?? 0;
+    message.logo = object.logo ?? 0;
     return message;
   },
 };

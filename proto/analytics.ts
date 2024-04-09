@@ -5905,13 +5905,13 @@ export const Analytics_Timecode_Startup = {
     message: Analytics_Timecode_Startup,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isInputConfigured === true) {
+    if (message.isInputConfigured !== false) {
       writer.uint32(8).bool(message.isInputConfigured);
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(16).bool(message.isEnabled);
     }
-    if (message.isPlaylistSelected === true) {
+    if (message.isPlaylistSelected !== false) {
       writer.uint32(24).bool(message.isPlaylistSelected);
     }
     return writer;
@@ -5974,13 +5974,13 @@ export const Analytics_Timecode_Startup = {
 
   toJSON(message: Analytics_Timecode_Startup): unknown {
     const obj: any = {};
-    if (message.isInputConfigured === true) {
+    if (message.isInputConfigured !== false) {
       obj.isInputConfigured = message.isInputConfigured;
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
-    if (message.isPlaylistSelected === true) {
+    if (message.isPlaylistSelected !== false) {
       obj.isPlaylistSelected = message.isPlaylistSelected;
     }
     return obj;
@@ -6017,7 +6017,7 @@ export const Analytics_Timecode_Activate = {
     if (message.cueCount !== 0) {
       writer.uint32(16).int32(message.cueCount);
     }
-    if (message.isStartup === true) {
+    if (message.isStartup !== false) {
       writer.uint32(24).bool(message.isStartup);
     }
     return writer;
@@ -6084,7 +6084,7 @@ export const Analytics_Timecode_Activate = {
     if (message.cueCount !== 0) {
       obj.cueCount = Math.round(message.cueCount);
     }
-    if (message.isStartup === true) {
+    if (message.isStartup !== false) {
       obj.isStartup = message.isStartup;
     }
     return obj;
@@ -6201,22 +6201,22 @@ export const Analytics_Sync_Local = {
     if (message.syncType !== 0) {
       writer.uint32(8).int32(message.syncType);
     }
-    if (message.includeLibrary === true) {
+    if (message.includeLibrary !== false) {
       writer.uint32(16).bool(message.includeLibrary);
     }
-    if (message.includeMedia === true) {
+    if (message.includeMedia !== false) {
       writer.uint32(24).bool(message.includeMedia);
     }
-    if (message.includePlaylists === true) {
+    if (message.includePlaylists !== false) {
       writer.uint32(32).bool(message.includePlaylists);
     }
-    if (message.includeThemes === true) {
+    if (message.includeThemes !== false) {
       writer.uint32(40).bool(message.includeThemes);
     }
-    if (message.includeSupportFiles === true) {
+    if (message.includeSupportFiles !== false) {
       writer.uint32(48).bool(message.includeSupportFiles);
     }
-    if (message.replaceFiles === true) {
+    if (message.replaceFiles !== false) {
       writer.uint32(56).bool(message.replaceFiles);
     }
     return writer;
@@ -6322,22 +6322,22 @@ export const Analytics_Sync_Local = {
     if (message.syncType !== 0) {
       obj.syncType = analytics_Sync_Local_SyncTypeToJSON(message.syncType);
     }
-    if (message.includeLibrary === true) {
+    if (message.includeLibrary !== false) {
       obj.includeLibrary = message.includeLibrary;
     }
-    if (message.includeMedia === true) {
+    if (message.includeMedia !== false) {
       obj.includeMedia = message.includeMedia;
     }
-    if (message.includePlaylists === true) {
+    if (message.includePlaylists !== false) {
       obj.includePlaylists = message.includePlaylists;
     }
-    if (message.includeThemes === true) {
+    if (message.includeThemes !== false) {
       obj.includeThemes = message.includeThemes;
     }
-    if (message.includeSupportFiles === true) {
+    if (message.includeSupportFiles !== false) {
       obj.includeSupportFiles = message.includeSupportFiles;
     }
-    if (message.replaceFiles === true) {
+    if (message.replaceFiles !== false) {
       obj.replaceFiles = message.replaceFiles;
     }
     return obj;
@@ -6606,7 +6606,7 @@ export const Analytics_MultiTracks_Import = {
         writer.uint32(10).fork(),
       ).ldelim();
     }
-    if (message.chartsAutomation === true) {
+    if (message.chartsAutomation !== false) {
       writer.uint32(16).bool(message.chartsAutomation);
     }
     if (message.lines !== 0) {
@@ -6676,7 +6676,7 @@ export const Analytics_MultiTracks_Import = {
     if (message.account !== undefined) {
       obj.account = Analytics_MultiTracks_Account.toJSON(message.account);
     }
-    if (message.chartsAutomation === true) {
+    if (message.chartsAutomation !== false) {
       obj.chartsAutomation = message.chartsAutomation;
     }
     if (message.lines !== 0) {
@@ -6926,19 +6926,19 @@ export const Analytics_TriggerMediaInformation_Video = {
     if (message.scaleMode !== 0) {
       writer.uint32(32).int32(message.scaleMode);
     }
-    if (message.hasInPoint === true) {
+    if (message.hasInPoint !== false) {
       writer.uint32(40).bool(message.hasInPoint);
     }
-    if (message.hasOutPoint === true) {
+    if (message.hasOutPoint !== false) {
       writer.uint32(48).bool(message.hasOutPoint);
     }
-    if (message.hasEffects === true) {
+    if (message.hasEffects !== false) {
       writer.uint32(56).bool(message.hasEffects);
     }
-    if (message.hasTransition === true) {
+    if (message.hasTransition !== false) {
       writer.uint32(64).bool(message.hasTransition);
     }
-    if (message.hasAudio === true) {
+    if (message.hasAudio !== false) {
       writer.uint32(72).bool(message.hasAudio);
     }
     return writer;
@@ -7087,19 +7087,19 @@ export const Analytics_TriggerMediaInformation_Video = {
         message.scaleMode,
       );
     }
-    if (message.hasInPoint === true) {
+    if (message.hasInPoint !== false) {
       obj.hasInPoint = message.hasInPoint;
     }
-    if (message.hasOutPoint === true) {
+    if (message.hasOutPoint !== false) {
       obj.hasOutPoint = message.hasOutPoint;
     }
-    if (message.hasEffects === true) {
+    if (message.hasEffects !== false) {
       obj.hasEffects = message.hasEffects;
     }
-    if (message.hasTransition === true) {
+    if (message.hasTransition !== false) {
       obj.hasTransition = message.hasTransition;
     }
-    if (message.hasAudio === true) {
+    if (message.hasAudio !== false) {
       obj.hasAudio = message.hasAudio;
     }
     return obj;
@@ -10296,16 +10296,16 @@ export const Analytics_UI_MainView_Bible_GenerateSlides = {
     if (message.referenceLocation !== 0) {
       writer.uint32(32).int32(message.referenceLocation);
     }
-    if (message.showVerseNumbers === true) {
+    if (message.showVerseNumbers !== false) {
       writer.uint32(40).bool(message.showVerseNumbers);
     }
-    if (message.breakNewVerse === true) {
+    if (message.breakNewVerse !== false) {
       writer.uint32(48).bool(message.breakNewVerse);
     }
-    if (message.displayTranslation === true) {
+    if (message.displayTranslation !== false) {
       writer.uint32(56).bool(message.displayTranslation);
     }
-    if (message.preserveFontColor === true) {
+    if (message.preserveFontColor !== false) {
       writer.uint32(64).bool(message.preserveFontColor);
     }
     if (message.referenceStyle !== 0) {
@@ -10455,16 +10455,16 @@ export const Analytics_UI_MainView_Bible_GenerateSlides = {
           message.referenceLocation,
         );
     }
-    if (message.showVerseNumbers === true) {
+    if (message.showVerseNumbers !== false) {
       obj.showVerseNumbers = message.showVerseNumbers;
     }
-    if (message.breakNewVerse === true) {
+    if (message.breakNewVerse !== false) {
       obj.breakNewVerse = message.breakNewVerse;
     }
-    if (message.displayTranslation === true) {
+    if (message.displayTranslation !== false) {
       obj.displayTranslation = message.displayTranslation;
     }
-    if (message.preserveFontColor === true) {
+    if (message.preserveFontColor !== false) {
       obj.preserveFontColor = message.preserveFontColor;
     }
     if (message.referenceStyle !== 0) {
@@ -15220,7 +15220,7 @@ export const Analytics_UI_TextInspector_UnderlineColor = {
     message: Analytics_UI_TextInspector_UnderlineColor,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(8).bool(message.isEnabled);
     }
     if (message.selectionMode !== 0) {
@@ -15276,7 +15276,7 @@ export const Analytics_UI_TextInspector_UnderlineColor = {
 
   toJSON(message: Analytics_UI_TextInspector_UnderlineColor): unknown {
     const obj: any = {};
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.selectionMode !== 0) {
@@ -15501,7 +15501,7 @@ export const Analytics_UI_TextInspector_ScrollingText_Enable = {
     message: Analytics_UI_TextInspector_ScrollingText_Enable,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
@@ -15544,7 +15544,7 @@ export const Analytics_UI_TextInspector_ScrollingText_Enable = {
 
   toJSON(message: Analytics_UI_TextInspector_ScrollingText_Enable): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     return obj;
@@ -17377,7 +17377,7 @@ export const Analytics_UI_ClearGroups_Group_ChangeIcon = {
     if (message.iconType !== 0) {
       writer.uint32(8).int32(message.iconType);
     }
-    if (message.isTinted === true) {
+    if (message.isTinted !== false) {
       writer.uint32(16).bool(message.isTinted);
     }
     return writer;
@@ -17437,7 +17437,7 @@ export const Analytics_UI_ClearGroups_Group_ChangeIcon = {
         message.iconType,
       );
     }
-    if (message.isTinted === true) {
+    if (message.isTinted !== false) {
       obj.isTinted = message.isTinted;
     }
     return obj;
@@ -18598,7 +18598,7 @@ export const Analytics_UI_NetworkGroup_Invite = {
     message: Analytics_UI_NetworkGroup_Invite,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.didAccept === true) {
+    if (message.didAccept !== false) {
       writer.uint32(8).bool(message.didAccept);
     }
     return writer;
@@ -18641,7 +18641,7 @@ export const Analytics_UI_NetworkGroup_Invite = {
 
   toJSON(message: Analytics_UI_NetworkGroup_Invite): unknown {
     const obj: any = {};
-    if (message.didAccept === true) {
+    if (message.didAccept !== false) {
       obj.didAccept = message.didAccept;
     }
     return obj;
@@ -20131,10 +20131,10 @@ export const Analytics_Startup_ScreenConfiguration_Output = {
     if (message.outputType !== 0) {
       writer.uint32(16).int32(message.outputType);
     }
-    if (message.colorCorrectionEnabled === true) {
+    if (message.colorCorrectionEnabled !== false) {
       writer.uint32(24).bool(message.colorCorrectionEnabled);
     }
-    if (message.cornerPinEnabled === true) {
+    if (message.cornerPinEnabled !== false) {
       writer.uint32(32).bool(message.cornerPinEnabled);
     }
     if (message.alphaKeyEnabled !== 0) {
@@ -20275,10 +20275,10 @@ export const Analytics_Startup_ScreenConfiguration_Output = {
           message.outputType,
         );
     }
-    if (message.colorCorrectionEnabled === true) {
+    if (message.colorCorrectionEnabled !== false) {
       obj.colorCorrectionEnabled = message.colorCorrectionEnabled;
     }
-    if (message.cornerPinEnabled === true) {
+    if (message.cornerPinEnabled !== false) {
       obj.cornerPinEnabled = message.cornerPinEnabled;
     }
     if (message.alphaKeyEnabled !== 0) {
@@ -20343,7 +20343,7 @@ export const Analytics_Startup_ScreenConfiguration_Single = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     return writer;
@@ -20403,7 +20403,7 @@ export const Analytics_Startup_ScreenConfiguration_Single = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     return obj;
@@ -20444,7 +20444,7 @@ export const Analytics_Startup_ScreenConfiguration_Mirrored = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     if (message.count !== 0) {
@@ -20515,7 +20515,7 @@ export const Analytics_Startup_ScreenConfiguration_Mirrored = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     if (message.count !== 0) {
@@ -20560,7 +20560,7 @@ export const Analytics_Startup_ScreenConfiguration_EdgeBlend = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     if (message.count !== 0) {
@@ -20631,7 +20631,7 @@ export const Analytics_Startup_ScreenConfiguration_EdgeBlend = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     if (message.count !== 0) {
@@ -20676,7 +20676,7 @@ export const Analytics_Startup_ScreenConfiguration_Grouped = {
     if (message.screenType !== 0) {
       writer.uint32(8).int32(message.screenType);
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       writer.uint32(16).bool(message.screenColorEnabled);
     }
     if (message.columns !== 0) {
@@ -20758,7 +20758,7 @@ export const Analytics_Startup_ScreenConfiguration_Grouped = {
         message.screenType,
       );
     }
-    if (message.screenColorEnabled === true) {
+    if (message.screenColorEnabled !== false) {
       obj.screenColorEnabled = message.screenColorEnabled;
     }
     if (message.columns !== 0) {
@@ -20815,31 +20815,31 @@ export const Analytics_Startup_Preferences = {
     message: Analytics_Startup_Preferences,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.houseOfWorship === true) {
+    if (message.houseOfWorship !== false) {
       writer.uint32(8).bool(message.houseOfWorship);
     }
-    if (message.hasCustomLogo === true) {
+    if (message.hasCustomLogo !== false) {
       writer.uint32(16).bool(message.hasCustomLogo);
     }
-    if (message.copyrightEnabled === true) {
+    if (message.copyrightEnabled !== false) {
       writer.uint32(24).bool(message.copyrightEnabled);
     }
     if (message.copyrightStyle !== 0) {
       writer.uint32(32).int32(message.copyrightStyle);
     }
-    if (message.copyrightHasLicense === true) {
+    if (message.copyrightHasLicense !== false) {
       writer.uint32(40).bool(message.copyrightHasLicense);
     }
     if (message.renderMode !== 0) {
       writer.uint32(48).int32(message.renderMode);
     }
-    if (message.suppressAutoStart === true) {
+    if (message.suppressAutoStart !== false) {
       writer.uint32(56).bool(message.suppressAutoStart);
     }
-    if (message.manageMediaAutomatically === true) {
+    if (message.manageMediaAutomatically !== false) {
       writer.uint32(64).bool(message.manageMediaAutomatically);
     }
-    if (message.searchPathsRelink === true) {
+    if (message.searchPathsRelink !== false) {
       writer.uint32(72).bool(message.searchPathsRelink);
     }
     if (message.updateChannel !== 0) {
@@ -20979,13 +20979,13 @@ export const Analytics_Startup_Preferences = {
 
   toJSON(message: Analytics_Startup_Preferences): unknown {
     const obj: any = {};
-    if (message.houseOfWorship === true) {
+    if (message.houseOfWorship !== false) {
       obj.houseOfWorship = message.houseOfWorship;
     }
-    if (message.hasCustomLogo === true) {
+    if (message.hasCustomLogo !== false) {
       obj.hasCustomLogo = message.hasCustomLogo;
     }
-    if (message.copyrightEnabled === true) {
+    if (message.copyrightEnabled !== false) {
       obj.copyrightEnabled = message.copyrightEnabled;
     }
     if (message.copyrightStyle !== 0) {
@@ -20993,7 +20993,7 @@ export const Analytics_Startup_Preferences = {
         message.copyrightStyle,
       );
     }
-    if (message.copyrightHasLicense === true) {
+    if (message.copyrightHasLicense !== false) {
       obj.copyrightHasLicense = message.copyrightHasLicense;
     }
     if (message.renderMode !== 0) {
@@ -21001,13 +21001,13 @@ export const Analytics_Startup_Preferences = {
         message.renderMode,
       );
     }
-    if (message.suppressAutoStart === true) {
+    if (message.suppressAutoStart !== false) {
       obj.suppressAutoStart = message.suppressAutoStart;
     }
-    if (message.manageMediaAutomatically === true) {
+    if (message.manageMediaAutomatically !== false) {
       obj.manageMediaAutomatically = message.manageMediaAutomatically;
     }
-    if (message.searchPathsRelink === true) {
+    if (message.searchPathsRelink !== false) {
       obj.searchPathsRelink = message.searchPathsRelink;
     }
     if (message.updateChannel !== 0) {
@@ -21055,16 +21055,16 @@ export const Analytics_Startup_Screens = {
     message: Analytics_Startup_Screens,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.showScreensLaunch === true) {
+    if (message.showScreensLaunch !== false) {
       writer.uint32(8).bool(message.showScreensLaunch);
     }
-    if (message.showPerformanceOnScreen === true) {
+    if (message.showPerformanceOnScreen !== false) {
       writer.uint32(16).bool(message.showPerformanceOnScreen);
     }
-    if (message.ignoreBackgroundColors === true) {
+    if (message.ignoreBackgroundColors !== false) {
       writer.uint32(24).bool(message.ignoreBackgroundColors);
     }
-    if (message.showKeynotePptScreens === true) {
+    if (message.showKeynotePptScreens !== false) {
       writer.uint32(32).bool(message.showKeynotePptScreens);
     }
     return writer;
@@ -21137,16 +21137,16 @@ export const Analytics_Startup_Screens = {
 
   toJSON(message: Analytics_Startup_Screens): unknown {
     const obj: any = {};
-    if (message.showScreensLaunch === true) {
+    if (message.showScreensLaunch !== false) {
       obj.showScreensLaunch = message.showScreensLaunch;
     }
-    if (message.showPerformanceOnScreen === true) {
+    if (message.showPerformanceOnScreen !== false) {
       obj.showPerformanceOnScreen = message.showPerformanceOnScreen;
     }
-    if (message.ignoreBackgroundColors === true) {
+    if (message.ignoreBackgroundColors !== false) {
       obj.ignoreBackgroundColors = message.ignoreBackgroundColors;
     }
-    if (message.showKeynotePptScreens === true) {
+    if (message.showKeynotePptScreens !== false) {
       obj.showKeynotePptScreens = message.showKeynotePptScreens;
     }
     return obj;
@@ -21186,25 +21186,25 @@ export const Analytics_Startup_PlanningCenter = {
     message: Analytics_Startup_PlanningCenter,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       writer.uint32(8).bool(message.loggedIn);
     }
-    if (message.autoUpdate === true) {
+    if (message.autoUpdate !== false) {
       writer.uint32(16).bool(message.autoUpdate);
     }
-    if (message.matchSongs === true) {
+    if (message.matchSongs !== false) {
       writer.uint32(24).bool(message.matchSongs);
     }
-    if (message.showHistory === true) {
+    if (message.showHistory !== false) {
       writer.uint32(32).bool(message.showHistory);
     }
-    if (message.makeArrangements === true) {
+    if (message.makeArrangements !== false) {
       writer.uint32(40).bool(message.makeArrangements);
     }
-    if (message.autoUpload === true) {
+    if (message.autoUpload !== false) {
       writer.uint32(48).bool(message.autoUpload);
     }
-    if (message.autoDownload === true) {
+    if (message.autoDownload !== false) {
       writer.uint32(56).bool(message.autoDownload);
     }
     return writer;
@@ -21307,25 +21307,25 @@ export const Analytics_Startup_PlanningCenter = {
 
   toJSON(message: Analytics_Startup_PlanningCenter): unknown {
     const obj: any = {};
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       obj.loggedIn = message.loggedIn;
     }
-    if (message.autoUpdate === true) {
+    if (message.autoUpdate !== false) {
       obj.autoUpdate = message.autoUpdate;
     }
-    if (message.matchSongs === true) {
+    if (message.matchSongs !== false) {
       obj.matchSongs = message.matchSongs;
     }
-    if (message.showHistory === true) {
+    if (message.showHistory !== false) {
       obj.showHistory = message.showHistory;
     }
-    if (message.makeArrangements === true) {
+    if (message.makeArrangements !== false) {
       obj.makeArrangements = message.makeArrangements;
     }
-    if (message.autoUpload === true) {
+    if (message.autoUpload !== false) {
       obj.autoUpload = message.autoUpload;
     }
-    if (message.autoDownload === true) {
+    if (message.autoDownload !== false) {
       obj.autoDownload = message.autoDownload;
     }
     return obj;
@@ -21360,7 +21360,7 @@ export const Analytics_Startup_SongSelect = {
     message: Analytics_Startup_SongSelect,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       writer.uint32(8).bool(message.loggedIn);
     }
     return writer;
@@ -21403,7 +21403,7 @@ export const Analytics_Startup_SongSelect = {
 
   toJSON(message: Analytics_Startup_SongSelect): unknown {
     const obj: any = {};
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       obj.loggedIn = message.loggedIn;
     }
     return obj;
@@ -21460,7 +21460,7 @@ export const Analytics_Startup_Audio = {
     if (message.mainDelay !== 0) {
       writer.uint32(48).int32(message.mainDelay);
     }
-    if (message.sdiNdi === true) {
+    if (message.sdiNdi !== false) {
       writer.uint32(56).bool(message.sdiNdi);
     }
     if (message.sdiNdiRouting !== 0) {
@@ -21613,7 +21613,7 @@ export const Analytics_Startup_Audio = {
     if (message.mainDelay !== 0) {
       obj.mainDelay = Math.round(message.mainDelay);
     }
-    if (message.sdiNdi === true) {
+    if (message.sdiNdi !== false) {
       obj.sdiNdi = message.sdiNdi;
     }
     if (message.sdiNdiRouting !== 0) {
@@ -21730,7 +21730,7 @@ export const Analytics_Startup_Resi = {
     message: Analytics_Startup_Resi,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       writer.uint32(8).bool(message.loggedIn);
     }
     return writer;
@@ -21773,7 +21773,7 @@ export const Analytics_Startup_Resi = {
 
   toJSON(message: Analytics_Startup_Resi): unknown {
     const obj: any = {};
-    if (message.loggedIn === true) {
+    if (message.loggedIn !== false) {
       obj.loggedIn = message.loggedIn;
     }
     return obj;
@@ -21826,7 +21826,7 @@ export const Analytics_Startup_Interface = {
     if (message.audioOutline !== 0) {
       writer.uint32(24).int32(message.audioOutline);
     }
-    if (message.continuousPlaylist === true) {
+    if (message.continuousPlaylist !== false) {
       writer.uint32(32).bool(message.continuousPlaylist);
     }
     if (message.mediaBin !== 0) {
@@ -21856,7 +21856,7 @@ export const Analytics_Startup_Interface = {
     if (message.mediaTransition !== '') {
       writer.uint32(106).string(message.mediaTransition);
     }
-    if (message.audioShuffle === true) {
+    if (message.audioShuffle !== false) {
       writer.uint32(112).bool(message.audioShuffle);
     }
     return writer;
@@ -22054,7 +22054,7 @@ export const Analytics_Startup_Interface = {
         message.audioOutline,
       );
     }
-    if (message.continuousPlaylist === true) {
+    if (message.continuousPlaylist !== false) {
       obj.continuousPlaylist = message.continuousPlaylist;
     }
     if (message.mediaBin !== 0) {
@@ -22098,7 +22098,7 @@ export const Analytics_Startup_Interface = {
     if (message.mediaTransition !== '') {
       obj.mediaTransition = message.mediaTransition;
     }
-    if (message.audioShuffle === true) {
+    if (message.audioShuffle !== false) {
       obj.audioShuffle = message.audioShuffle;
     }
     return obj;
@@ -23043,7 +23043,7 @@ export const Analytics_Startup_NetworkLink = {
     message: Analytics_Startup_NetworkLink,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.memberCount !== 0) {
@@ -23099,7 +23099,7 @@ export const Analytics_Startup_NetworkLink = {
 
   toJSON(message: Analytics_Startup_NetworkLink): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.memberCount !== 0) {
@@ -23580,7 +23580,7 @@ export const Analytics_Trigger_Cue_Slide_Trigger = {
     if (message.actionCount !== 0) {
       writer.uint32(32).int32(message.actionCount);
     }
-    if (message.hasTextFx === true) {
+    if (message.hasTextFx !== false) {
       writer.uint32(40).bool(message.hasTextFx);
     }
     if (message.mediaTextFillObjectCount !== 0) {
@@ -23731,7 +23731,7 @@ export const Analytics_Trigger_Cue_Slide_Trigger = {
     if (message.actionCount !== 0) {
       obj.actionCount = Math.round(message.actionCount);
     }
-    if (message.hasTextFx === true) {
+    if (message.hasTextFx !== false) {
       obj.hasTextFx = message.hasTextFx;
     }
     if (message.mediaTextFillObjectCount !== 0) {
@@ -23802,7 +23802,7 @@ export const Analytics_Trigger_Cue_Slide_ScrollingTextElement = {
     if (message.startPosition !== 0) {
       writer.uint32(16).int32(message.startPosition);
     }
-    if (message.isRepeatEnabled === true) {
+    if (message.isRepeatEnabled !== false) {
       writer.uint32(24).bool(message.isRepeatEnabled);
     }
     if (message.speed !== 0) {
@@ -23912,7 +23912,7 @@ export const Analytics_Trigger_Cue_Slide_ScrollingTextElement = {
           message.startPosition,
         );
     }
-    if (message.isRepeatEnabled === true) {
+    if (message.isRepeatEnabled !== false) {
       obj.isRepeatEnabled = message.isRepeatEnabled;
     }
     if (message.speed !== 0) {
@@ -23967,7 +23967,7 @@ export const Analytics_Trigger_Cue_Slide_RSSFeedElement = {
     if (message.content !== 0) {
       writer.uint32(8).int32(message.content);
     }
-    if (message.isDelimiterEnabled === true) {
+    if (message.isDelimiterEnabled !== false) {
       writer.uint32(16).bool(message.isDelimiterEnabled);
     }
     if (message.destinationLayer !== 0) {
@@ -24042,7 +24042,7 @@ export const Analytics_Trigger_Cue_Slide_RSSFeedElement = {
         message.content,
       );
     }
-    if (message.isDelimiterEnabled === true) {
+    if (message.isDelimiterEnabled !== false) {
       obj.isDelimiterEnabled = message.isDelimiterEnabled;
     }
     if (message.destinationLayer !== 0) {
@@ -25449,25 +25449,25 @@ export const Analytics_Trigger_Action_ClearGroup = {
     message: Analytics_Trigger_Action_ClearGroup,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.layerAudio === true) {
+    if (message.layerAudio !== false) {
       writer.uint32(8).bool(message.layerAudio);
     }
-    if (message.layerMessages === true) {
+    if (message.layerMessages !== false) {
       writer.uint32(16).bool(message.layerMessages);
     }
-    if (message.layerProps === true) {
+    if (message.layerProps !== false) {
       writer.uint32(24).bool(message.layerProps);
     }
-    if (message.layerAnnouncement === true) {
+    if (message.layerAnnouncement !== false) {
       writer.uint32(32).bool(message.layerAnnouncement);
     }
-    if (message.layerSlide === true) {
+    if (message.layerSlide !== false) {
       writer.uint32(40).bool(message.layerSlide);
     }
-    if (message.layerMedia === true) {
+    if (message.layerMedia !== false) {
       writer.uint32(48).bool(message.layerMedia);
     }
-    if (message.layerVideoInput === true) {
+    if (message.layerVideoInput !== false) {
       writer.uint32(56).bool(message.layerVideoInput);
     }
     return writer;
@@ -25570,25 +25570,25 @@ export const Analytics_Trigger_Action_ClearGroup = {
 
   toJSON(message: Analytics_Trigger_Action_ClearGroup): unknown {
     const obj: any = {};
-    if (message.layerAudio === true) {
+    if (message.layerAudio !== false) {
       obj.layerAudio = message.layerAudio;
     }
-    if (message.layerMessages === true) {
+    if (message.layerMessages !== false) {
       obj.layerMessages = message.layerMessages;
     }
-    if (message.layerProps === true) {
+    if (message.layerProps !== false) {
       obj.layerProps = message.layerProps;
     }
-    if (message.layerAnnouncement === true) {
+    if (message.layerAnnouncement !== false) {
       obj.layerAnnouncement = message.layerAnnouncement;
     }
-    if (message.layerSlide === true) {
+    if (message.layerSlide !== false) {
       obj.layerSlide = message.layerSlide;
     }
-    if (message.layerMedia === true) {
+    if (message.layerMedia !== false) {
       obj.layerMedia = message.layerMedia;
     }
-    if (message.layerVideoInput === true) {
+    if (message.layerVideoInput !== false) {
       obj.layerVideoInput = message.layerVideoInput;
     }
     return obj;
@@ -26390,7 +26390,7 @@ export const Analytics_Import_SongSelect = {
     if (message.templateSlideTextElementCount !== 0) {
       writer.uint32(8).int32(message.templateSlideTextElementCount);
     }
-    if (message.importIntoPlaylist === true) {
+    if (message.importIntoPlaylist !== false) {
       writer.uint32(16).bool(message.importIntoPlaylist);
     }
     if (message.lineDelimiter !== 0) {
@@ -26399,7 +26399,7 @@ export const Analytics_Import_SongSelect = {
     if (message.lineDelimiterCount !== 0) {
       writer.uint32(32).int32(message.lineDelimiterCount);
     }
-    if (message.didOpenEditView === true) {
+    if (message.didOpenEditView !== false) {
       writer.uint32(40).bool(message.didOpenEditView);
     }
     return writer;
@@ -26489,7 +26489,7 @@ export const Analytics_Import_SongSelect = {
         message.templateSlideTextElementCount,
       );
     }
-    if (message.importIntoPlaylist === true) {
+    if (message.importIntoPlaylist !== false) {
       obj.importIntoPlaylist = message.importIntoPlaylist;
     }
     if (message.lineDelimiter !== 0) {
@@ -26500,7 +26500,7 @@ export const Analytics_Import_SongSelect = {
     if (message.lineDelimiterCount !== 0) {
       obj.lineDelimiterCount = Math.round(message.lineDelimiterCount);
     }
-    if (message.didOpenEditView === true) {
+    if (message.didOpenEditView !== false) {
       obj.didOpenEditView = message.didOpenEditView;
     }
     return obj;

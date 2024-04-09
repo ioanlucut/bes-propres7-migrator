@@ -20,7 +20,7 @@ export const Background = {
     message: Background,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(24).bool(message.isEnabled);
     }
     if (message.color !== undefined) {
@@ -87,7 +87,7 @@ export const Background = {
 
   toJSON(message: Background): unknown {
     const obj: any = {};
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
     if (message.color !== undefined) {

@@ -1009,6 +1009,7 @@ exports[`proPresenter7SongConverter Advanced song (w/ subsection) should convert
               "parameterUuid": {
                 "string": "ANY_REF_MACRO_ID",
               },
+              "parentCollection": undefined,
             },
           },
           "mask": undefined,
@@ -9049,6 +9050,7 @@ exports[`proPresenter7SongConverter Basic song (no subsection) should convert to
               "parameterUuid": {
                 "string": "ANY_REF_MACRO_ID",
               },
+              "parentCollection": undefined,
             },
           },
           "mask": undefined,

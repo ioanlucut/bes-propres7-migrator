@@ -106,7 +106,7 @@ export const ProPresenterScreen = {
     if (message.uuid !== undefined) {
       UUID.encode(message.uuid, writer.uint32(58).fork()).ldelim();
     }
-    if (message.backgroundColorEnabled === true) {
+    if (message.backgroundColorEnabled !== false) {
       writer.uint32(64).bool(message.backgroundColorEnabled);
     }
     if (message.arrangementSingle !== undefined) {
@@ -260,7 +260,7 @@ export const ProPresenterScreen = {
     if (message.uuid !== undefined) {
       obj.uuid = UUID.toJSON(message.uuid);
     }
-    if (message.backgroundColorEnabled === true) {
+    if (message.backgroundColorEnabled !== false) {
       obj.backgroundColorEnabled = message.backgroundColorEnabled;
     }
     if (message.arrangementSingle !== undefined) {

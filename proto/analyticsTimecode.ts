@@ -127,13 +127,13 @@ export const Timecode_Startup = {
     message: Timecode_Startup,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.isInputConfigured === true) {
+    if (message.isInputConfigured !== false) {
       writer.uint32(8).bool(message.isInputConfigured);
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       writer.uint32(16).bool(message.isEnabled);
     }
-    if (message.isPlaylistSelected === true) {
+    if (message.isPlaylistSelected !== false) {
       writer.uint32(24).bool(message.isPlaylistSelected);
     }
     return writer;
@@ -193,13 +193,13 @@ export const Timecode_Startup = {
 
   toJSON(message: Timecode_Startup): unknown {
     const obj: any = {};
-    if (message.isInputConfigured === true) {
+    if (message.isInputConfigured !== false) {
       obj.isInputConfigured = message.isInputConfigured;
     }
-    if (message.isEnabled === true) {
+    if (message.isEnabled !== false) {
       obj.isEnabled = message.isEnabled;
     }
-    if (message.isPlaylistSelected === true) {
+    if (message.isPlaylistSelected !== false) {
       obj.isPlaylistSelected = message.isPlaylistSelected;
     }
     return obj;
@@ -236,7 +236,7 @@ export const Timecode_Activate = {
     if (message.cueCount !== 0) {
       writer.uint32(16).int32(message.cueCount);
     }
-    if (message.isStartup === true) {
+    if (message.isStartup !== false) {
       writer.uint32(24).bool(message.isStartup);
     }
     return writer;
@@ -300,7 +300,7 @@ export const Timecode_Activate = {
     if (message.cueCount !== 0) {
       obj.cueCount = Math.round(message.cueCount);
     }
-    if (message.isStartup === true) {
+    if (message.isStartup !== false) {
       obj.isStartup = message.isStartup;
     }
     return obj;

@@ -1715,10 +1715,10 @@ export const APIV1PlaylistItem = {
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.isHidden === true) {
+    if (message.isHidden !== false) {
       writer.uint32(24).bool(message.isHidden);
     }
-    if (message.isPco === true) {
+    if (message.isPco !== false) {
       writer.uint32(32).bool(message.isPco);
     }
     if (message.headerColor !== undefined) {
@@ -1817,10 +1817,10 @@ export const APIV1PlaylistItem = {
     if (message.type !== 0) {
       obj.type = aPIV1PlaylistItem_APIV1PlaylistItemTypeToJSON(message.type);
     }
-    if (message.isHidden === true) {
+    if (message.isHidden !== false) {
       obj.isHidden = message.isHidden;
     }
-    if (message.isPco === true) {
+    if (message.isPco !== false) {
       obj.isPco = message.isPco;
     }
     if (message.headerColor !== undefined) {
@@ -1888,13 +1888,13 @@ export const APIV1ClearGroup = {
       writer.int32(v);
     }
     writer.ldelim();
-    if (message.stopTimelineAnnouncements === true) {
+    if (message.stopTimelineAnnouncements !== false) {
       writer.uint32(40).bool(message.stopTimelineAnnouncements);
     }
-    if (message.stopTimelinePresentation === true) {
+    if (message.stopTimelinePresentation !== false) {
       writer.uint32(48).bool(message.stopTimelinePresentation);
     }
-    if (message.clearNextPresentation === true) {
+    if (message.clearNextPresentation !== false) {
       writer.uint32(56).bool(message.clearNextPresentation);
     }
     return writer;
@@ -2014,13 +2014,13 @@ export const APIV1ClearGroup = {
         aPIV1ClearGroup_APIV1ClearGroupLayerTypeToJSON(e),
       );
     }
-    if (message.stopTimelineAnnouncements === true) {
+    if (message.stopTimelineAnnouncements !== false) {
       obj.stopTimelineAnnouncements = message.stopTimelineAnnouncements;
     }
-    if (message.stopTimelinePresentation === true) {
+    if (message.stopTimelinePresentation !== false) {
       obj.stopTimelinePresentation = message.stopTimelinePresentation;
     }
-    if (message.clearNextPresentation === true) {
+    if (message.clearNextPresentation !== false) {
       obj.clearNextPresentation = message.clearNextPresentation;
     }
     return obj;
@@ -2440,7 +2440,7 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.format !== undefined) {
@@ -2567,7 +2567,7 @@ export const APIV1Message_APIV1MessageToken_APIV1TimerToken = {
     if (message.id !== undefined) {
       obj.id = APIV1Identifier.toJSON(message.id);
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       obj.allowsOverrun = message.allowsOverrun;
     }
     if (message.format !== undefined) {
@@ -2646,7 +2646,7 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
     if (message.time !== 0) {
       writer.uint32(16).int32(message.time);
     }
-    if (message.is24Hours === true) {
+    if (message.is24Hours !== false) {
       writer.uint32(24).bool(message.is24Hours);
     }
     return writer;
@@ -2725,7 +2725,7 @@ export const APIV1Message_APIV1MessageToken_APIV1ClockToken = {
           message.time,
         );
     }
-    if (message.is24Hours === true) {
+    if (message.is24Hours !== false) {
       obj.is24Hours = message.is24Hours;
     }
     return obj;
@@ -2773,7 +2773,7 @@ export const APIV1Timer = {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       writer.uint32(16).bool(message.allowsOverrun);
     }
     if (message.countdown !== undefined) {
@@ -2881,7 +2881,7 @@ export const APIV1Timer = {
     if (message.id !== undefined) {
       obj.id = APIV1Identifier.toJSON(message.id);
     }
-    if (message.allowsOverrun === true) {
+    if (message.allowsOverrun !== false) {
       obj.allowsOverrun = message.allowsOverrun;
     }
     if (message.countdown !== undefined) {
@@ -3104,7 +3104,7 @@ export const APIV1Timer_APIV1TimerElapsed = {
     if (message.endTime !== 0) {
       writer.uint32(16).int32(message.endTime);
     }
-    if (message.hasEndTime === true) {
+    if (message.hasEndTime !== false) {
       writer.uint32(24).bool(message.hasEndTime);
     }
     return writer;
@@ -3171,7 +3171,7 @@ export const APIV1Timer_APIV1TimerElapsed = {
     if (message.endTime !== 0) {
       obj.endTime = Math.round(message.endTime);
     }
-    if (message.hasEndTime === true) {
+    if (message.hasEndTime !== false) {
       obj.hasEndTime = message.hasEndTime;
     }
     return obj;
@@ -3637,22 +3637,22 @@ export const APIV1Screen = {
     message: APIV1Screen,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.videoInput === true) {
+    if (message.videoInput !== false) {
       writer.uint32(8).bool(message.videoInput);
     }
-    if (message.media === true) {
+    if (message.media !== false) {
       writer.uint32(16).bool(message.media);
     }
-    if (message.slide === true) {
+    if (message.slide !== false) {
       writer.uint32(24).bool(message.slide);
     }
-    if (message.announcements === true) {
+    if (message.announcements !== false) {
       writer.uint32(32).bool(message.announcements);
     }
-    if (message.props === true) {
+    if (message.props !== false) {
       writer.uint32(40).bool(message.props);
     }
-    if (message.messages === true) {
+    if (message.messages !== false) {
       writer.uint32(48).bool(message.messages);
     }
     if (message.presentation !== '') {
@@ -3760,22 +3760,22 @@ export const APIV1Screen = {
 
   toJSON(message: APIV1Screen): unknown {
     const obj: any = {};
-    if (message.videoInput === true) {
+    if (message.videoInput !== false) {
       obj.videoInput = message.videoInput;
     }
-    if (message.media === true) {
+    if (message.media !== false) {
       obj.media = message.media;
     }
-    if (message.slide === true) {
+    if (message.slide !== false) {
       obj.slide = message.slide;
     }
-    if (message.announcements === true) {
+    if (message.announcements !== false) {
       obj.announcements = message.announcements;
     }
-    if (message.props === true) {
+    if (message.props !== false) {
       obj.props = message.props;
     }
-    if (message.messages === true) {
+    if (message.messages !== false) {
       obj.messages = message.messages;
     }
     if (message.presentation !== '') {
@@ -4867,7 +4867,7 @@ export const APIV1RTMPCapture = {
     if (message.encoding !== '') {
       writer.uint32(26).string(message.encoding);
     }
-    if (message.saveLocal === true) {
+    if (message.saveLocal !== false) {
       writer.uint32(32).bool(message.saveLocal);
     }
     if (message.fileLocation !== '') {
@@ -4955,7 +4955,7 @@ export const APIV1RTMPCapture = {
     if (message.encoding !== '') {
       obj.encoding = message.encoding;
     }
-    if (message.saveLocal === true) {
+    if (message.saveLocal !== false) {
       obj.saveLocal = message.saveLocal;
     }
     if (message.fileLocation !== '') {
@@ -5131,7 +5131,7 @@ export const APIV1Presentation = {
         writer.uint32(18).fork(),
       ).ldelim();
     }
-    if (message.hasTimeline === true) {
+    if (message.hasTimeline !== false) {
       writer.uint32(24).bool(message.hasTimeline);
     }
     if (message.presentationPath !== '') {
@@ -5227,7 +5227,7 @@ export const APIV1Presentation = {
         APIV1Presentation_SlideGroup.toJSON(e),
       );
     }
-    if (message.hasTimeline === true) {
+    if (message.hasTimeline !== false) {
       obj.hasTimeline = message.hasTimeline;
     }
     if (message.presentationPath !== '') {
@@ -5392,7 +5392,7 @@ export const APIV1Presentation_SlideGroup_Slide = {
     message: APIV1Presentation_SlideGroup_Slide,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       writer.uint32(8).bool(message.enabled);
     }
     if (message.notes !== '') {
@@ -5479,7 +5479,7 @@ export const APIV1Presentation_SlideGroup_Slide = {
 
   toJSON(message: APIV1Presentation_SlideGroup_Slide): unknown {
     const obj: any = {};
-    if (message.enabled === true) {
+    if (message.enabled !== false) {
       obj.enabled = message.enabled;
     }
     if (message.notes !== '') {
@@ -6204,7 +6204,7 @@ export const APIV1PropData = {
     if (message.id !== undefined) {
       APIV1Identifier.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.isActive === true) {
+    if (message.isActive !== false) {
       writer.uint32(16).bool(message.isActive);
     }
     return writer;
@@ -6255,7 +6255,7 @@ export const APIV1PropData = {
     if (message.id !== undefined) {
       obj.id = APIV1Identifier.toJSON(message.id);
     }
-    if (message.isActive === true) {
+    if (message.isActive !== false) {
       obj.isActive = message.isActive;
     }
     return obj;

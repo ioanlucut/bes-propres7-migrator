@@ -11,6 +11,7 @@ import "color.proto";
 import "digitalAudio.proto";
 import "effects.proto";
 import "fileProperties.proto";
+import "font.proto";
 import "intRange.proto";
 import "url.proto";
 import "uuid.proto";
@@ -252,19 +253,6 @@ message Graphics {
     }
 
     message Attributes {
-      message Font {
-        reserved 3;
-        reserved 5;
-        reserved 6;
-        reserved 7;
-        string name = 1;
-        double size = 2;
-        bool italic = 4;
-        bool bold = 8;
-        string family = 9;
-        string face = 10;
-      }
-
       message Underline {
         enum Style {
           STYLE_NONE = 0;
@@ -362,7 +350,7 @@ message Graphics {
         ALIGNMENT_NATURAL = 4;
       }
 
-      .rv.data.Graphics.Text.Attributes.Font font = 1;
+      .rv.data.Font font = 1;
       .rv.data.Graphics.Text.Attributes.Capitalization capitalization = 2;
       .rv.data.Graphics.Text.Attributes.Underline underline_style = 4;
       .rv.data.Color underline_color = 5;
@@ -522,6 +510,7 @@ message Media {
     }
 
     .rv.data.Media.ScaleBehavior scale_behavior = 1;
+    bool is_blurred = 16;
     .rv.data.Media.ScaleAlignment scale_alignment = 2;
     bool flipped_horizontally = 3;
     bool flipped_vertically = 4;
