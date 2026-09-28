@@ -1,71 +1,65 @@
 # bes-propres7-migrator
 
-The `bes-propres7-migrator` is a utility designed to facilitate the conversion of song files from a custom `txt` format,
-using a special markup, to the `ProPresenter7` format (`.pro` files). This tool is particularly useful for those
-transitioning their song libraries to `ProPresenter7` and ensures a smooth conversion process.
+[![CI](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml/badge.svg)](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml) [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white) ![ProPresenter 7](https://img.shields.io/badge/ProPresenter-7-orange)
 
-Right now, I am using it to convert the songs from our church that are written and maintained in a different repository.
+**Turns a Git-managed song library into native ProPresenter 7 presentations, and ships only what changed to the presentation Mac.**
 
-## Features
+ProPresenter's `.pro` format is an undocumented binary protobuf. Instead of scripting the app or hand-importing lyrics, this project reverse-engineers ProPresenter's schemas and writes presentations directly: slides, section groups, a ready-to-play arrangement, CCLI metadata and a setup macro, generated from plain-text lyrics.
 
-- **Simple Conversion**: Easily convert `.txt` song files to `.pro` format for `ProPresenter7`.
-- **Custom Configuration**: Flexible configuration options to suit your specific conversion needs.
-- **Advanced Sequencing with `BES` Sequence**: Automates song sequencing for efficient live presentation.
-- **Initial Setup Slide with `Macro` Reference**: Automates presentation environment setup for each song.
+![A converted song in ProPresenter 7: the Groups row holds each section once, the BES arrangement replays the chorus where it is sung, and the first Blank slide carries the setup macro](docs/assets/propresenter-outcome.png)
 
-## Why I made it?
+## In production
 
-I noticed a gap in the process of converting and managing song files efficiently in `ProPresenter7`, especially for
-those transitioning from other formats or systems. My goal was to create something that would not only address this need
-but also enhance the presentation experience for operators and audiences alike.
+Since March 2023 this pipeline has generated the entire worship library of Biserica Emanuel Sibiu (BES): roughly 1,900 songs, maintained as text files in [`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics). Songs are not imported or edited by hand in ProPresenter: a lyric fix merged on GitHub is converted in about 30 seconds and moved into the library on the presentation Mac by its next sync.
 
-## How can you help?
+```mermaid
+flowchart LR
+    A["bes-lyrics<br/>verified/*.txt"] -- push to main --> B["GitHub Actions"]
+    B -- "npm run convert:remote" --> C["bes-propres7-migrator<br/>parse → protobuf .pro"]
+    C -- "only new, changed<br/>or renamed songs" --> D["Google Drive<br/>one folder per deploy"]
+    D -- "Drive for desktop" --> E["Presentation Mac"]
+    E -- "cron, every minute" --> F["ProPresenter 7 library"]
+```
 
-I'd love for you to check out the project on GitHub. If you find it useful, giving it a star would mean the world to me!
-Your feedback is invaluable, and I’m open to any suggestions, issues, or contributions you might have to make the tool
-even better.
+## Highlights
 
-## Installation
+- **Native `.pro` files from reverse-engineered protobuf.** The 121 `.proto` schemas in [`proto/`](proto/) were extracted from the ProPresenter binary with [`protodump`](https://github.com/arkadiyt/protodump) and compiled to typed TypeScript with [`ts-proto`](https://github.com/stephenh/ts-proto), so every presentation is built as a typed object and encoded exactly as ProPresenter stores it. See [ProPresenter format](docs/propresenter-format.md).
 
-To get started with `bes-propres7-migrator`, ensure you have Node.js installed on your machine. Clone this repository
-and run `npm install` to install all dependencies.
+- **Arrangements that follow the song.** Each section becomes one group, and a `BES` arrangement replays the groups in the song's sequence. The chorus exists once but plays everywhere it is sung, so the operator only ever presses → during worship.
+
+- **A setup slide that runs a macro.** Every song opens on a blank slide that triggers a ProPresenter macro, which prepares the screens before the first lyric appears.
+
+- **Incremental, versioned deploys.** Each deploy writes a manifest of song IDs and content hashes, diffs it against the previous deploy, and uploads only new, changed or renamed songs into a timestamped Google Drive folder, together with the list of songs to remove. See [Architecture](docs/architecture.md).
+
+- **Romanian typography that survives RTF.** Slide text is RTF; the converter escapes diacritics (`ă â î ș ț`) and typographic quotes (`„ ” ‘ ’`) to RTF Unicode, including RTF's habit of swallowing the space after a control word. Snapshot tests pin the output.
+
+- **The last mile is automated too.** A cron job on the presentation Mac moves each deploy into the ProPresenter library ([`client-sync-macos/`](client-sync-macos/)), and a one-click AppleScript switches the displays between ProPresenter and PowerPoint layouts ([`displays-switch/`](displays-switch/)).
+
+## Quick start
+
+Requires Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/ilucut/bes-propres7-migrator.git
+git clone https://github.com/ioanlucut/bes-propres7-migrator.git
 cd bes-propres7-migrator
-
-npm install
+npm ci
 ```
 
-## Usage
+Point `LOCAL_SOURCE_DIR` in [`.env.local`](.env.local) at a folder of songs (it defaults to a sibling checkout of [`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics)), then convert:
 
-### Expected Song Format
-
-Your .txt song files should follow this specific markup format for successful conversion:
-
+```bash
+npm run convert:local
 ```
+
+The `.pro` files and a `manifest.json` are written to `out_temp_for_local/<YYYY-MM-DD-HH:MM:SS>/`. Copy them into a ProPresenter library folder (by default under `~/Documents/ProPresenter/Libraries/`), which is what the [presentation Mac sync](client-sync-macos/README.md) automates. Later runs only write songs that changed since the previous run.
+
+## Song format
+
+One `.txt` file per song: a title with metadata, the sequence to play, then the sections.
+
+```text
 [title]
-Your Song Title
-
-[sequence]
-1,c,2,c
-
-[1]
-Verse 1 lyrics here...
-
-[chorus]
-Chorus lyrics here...
-
-[2]
-Verse 2 lyrics here...
-
-```
-
-#### Example (romanian song):
-
-```
-[title]
-Aceasta mi-e dorința, să Te-onorez {alternative: {_}, composer: {_}, writer: {_}, arranger: {_}, interpreter: {_}, band: {_}, key: {_}, tempo: {_}, tags: {_}, version: {_}, genre: {\*}, rcId: {59763}, id: {8ipLZddXG3Zy7Hbbo93Vm7}, contentHash: {418384}}
+Aceasta mi-e dorința, să Te-onorez {id: {8ipLZddXG3Zy7Hbbo93Vm7}, contentHash: {418384}}
 
 [sequence]
 v1,c,v2,c
@@ -73,291 +67,89 @@ v1,c,v2,c
 [v1]
 Aceasta mi-e dorința, să Te-onorez,
 Cu ființa-ntreagă să Te slăvesc.
-Te ador, Stăpâne, și mă închin,
-Lauda și onoarea Ți se cuvin!
 
 [c]
 Ție-Ți dau inima și sufletul meu,
 Pentru Tine vreau să trăiesc!
-Domnul meu, Te iubesc!
-Zi de zi vreau să-mplinesc
-Doar sfântă voia Ta!
 
 [v2]
 Vrednic ești de cinste, fii lăudat!
 Împărat al slavei, fii înălțat!
-Alfa și Omega, de-a pururi viu,
-Domn al veșniciei, în veci! Amin!
-
 ```
 
-### Running the Migrator locally
+| Section    | Codes         | ProPresenter group            |
+| ---------- | ------------- | ----------------------------- |
+| Verse      | `v1`, `v2`, … | `Verse 1`, `Verse 2`, …       |
+| Pre-chorus | `p`, `p2`, …  | `Prechorus`, `Prechorus 2`, … |
+| Chorus     | `c`, `c2`, …  | `Chorus`, `Chorus 2`, …       |
+| Bridge     | `b`, `b2`, …  | `Bridge`, `Bridge 2`, …       |
+| Recital    | `s`, `s2`, …  | `Recital`, `Recital 2`, …     |
+| Ending     | `e`           | `Ending`                      |
 
-You can migrate your songs locally by following these steps:
+A long section can be split across slides with sub-sections such as `v1.1` and `v1.2`, which ProPresenter labels `1/2` and `2/2`. The full rules, including what fails a deploy, are in [Song format](docs/song-format.md).
 
-1. Set up your environment variables according to your local setup:
+## Configuration
 
-```dotenv
-# .env.local
-TZ=Europe/Bucharest
-# src-directory-with-txt-songs
-LOCAL_SOURCE_DIR=../bes-lyrics/verified
-# out-directory-with-pro-songs
-LOCAL_OUT_DIR=./out_temp_for_local
-CONNECT_TO_G_DRIVE=false
+[`runner.ts`](runner.ts) holds the BES settings and picks the local or remote mode:
 
+| `Config` field               | Purpose                                | BES value                       |
+| ---------------------------- | -------------------------------------- | ------------------------------- |
+| `arrangementName`            | Name of the generated arrangement      | `BES`                           |
+| `ccliSettings`               | CCLI publisher, author, album and year | Church name and year            |
+| `fontConfig`                 | Slide font                             | `CMG Sans Cn CAPS`, bold, 58 pt |
+| `graphicSize`                | Slide size                             | 1920 × 1080                     |
+| `presentationCategory`       | ProPresenter category                  | `Worship Songs ~ BES <year>`    |
+| `refMacroId`, `refMacroName` | Macro run by the first slide           | The `Songs` macro               |
+
+| Environment variable                                                                  | Used by | Purpose                                                                 |
+| ------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------- |
+| `LOCAL_SOURCE_DIR`                                                                    | both    | Folder with the `.txt` songs, read recursively                          |
+| `LOCAL_OUT_DIR`                                                                       | both    | Where each run's folder is written                                      |
+| `CONNECT_TO_G_DRIVE`                                                                  | both    | `true` uploads to Google Drive; anything else stays local               |
+| `TZ`                                                                                  | both    | Time zone of the timestamped folder names                               |
+| `GDRIVE_ROOT_FOLDER_ID`                                                               | remote  | Google Drive folder that receives one sub-folder per deploy             |
+| `GDRIVE_BES_CLIENT_ID`, `GDRIVE_BES_CLIENT_SECRET`, `GDRIVE_BES_CLIENT_REFRESH_TOKEN` | remote  | OAuth credentials; see [Google Drive setup](docs/google-drive-setup.md) |
+| `FORCE_RELEASE_OF_ALL_SONGS`                                                          | remote  | `true` re-uploads every song instead of the diff                        |
+
+Remote mode runs with `npm run convert:remote`, which reads [`.env.remote`](.env.remote); in production the [`bes-lyrics` deploy workflow](https://github.com/ioanlucut/bes-lyrics/blob/main/.github/workflows/deploy_to_gdrive.yml) runs it on every push that touches `verified/`.
+
+## Repository map
+
+```text
+src/                 parser, protobuf converter, local and Google Drive deploy runners
+proto/               ProPresenter 7 protobuf schemas and the generated TypeScript
+rtfs/                RTF template used for slide text
+mocks/               song fixtures for the tests
+client-sync-macos/   cron sync from Google Drive into the ProPresenter library
+displays-switch/     one-click display layouts for ProPresenter and PowerPoint
+windows-templates/   reference .pro files saved by ProPresenter for Windows
+docs/                architecture, formats and setup guides
 ```
 
-2. To convert your songs locally, execute the following command:
+## Development
 
-```bash
-npm run convert:local
-```
+| Command                    | What it does                                                     |
+| -------------------------- | ---------------------------------------------------------------- |
+| `npm test`                 | Jest unit and integration tests (watch mode outside CI)          |
+| `npm run lint`             | ESLint                                                           |
+| `npm run typecheck`        | TypeScript, including the generated protobuf code                |
+| `npm run format:check`     | Prettier                                                         |
+| `npm run test:sync-script` | Tests the presentation Mac sync script against throwaway folders |
 
-As a result, the migrator will convert all `.txt` song files from the specified source directory to `.pro` format in the
-given directory, with the following format:
+CI runs all of them on every push and pull request.
 
-Under the `./out_temp_for_local`, and a dynamically created directory like `/2024-04-09-17:18:05`,
-the `Aceasta mi-e dorinta sa Te-onorez.pro` will be generated.
-Also, a `manifest.json` will be generated like e.g.:
+## Documentation
 
-```json
-{
-  "inventory": [
-    {
-      "id": "8ipLZddXG3Zy7Hbbo93Vm7",
-      "fileName": "Aceasta mi-e dorinta sa Te-onorez.txt",
-      "contentHash": "418384"
-    }
-  ],
-  "updatedOn": "2024-04-09-17:18:05"
-}
-```
+- [Architecture](docs/architecture.md): the deploy lifecycle and how the manifest diff decides what ships.
+- [Song format](docs/song-format.md): the full `.txt` grammar and validation rules.
+- [ProPresenter format](docs/propresenter-format.md): how a song maps onto ProPresenter's protobuf model, and how to regenerate or decode it.
+- [Google Drive setup](docs/google-drive-setup.md): creating the OAuth credentials for remote deploys.
+- [Presentation Mac sync](client-sync-macos/README.md) and [display switch](displays-switch/README.md).
 
-### Running the Migrator remotely
+## Adapting it
 
-You can migrate your songs remotely to a Google Drive account by following these steps:
+Built for one church, but only [`runner.ts`](runner.ts) is church-specific. Change the config, point it at your own song folder, and it works for any ProPresenter 7 library. Issues and pull requests are welcome.
 
-1. Set up your environment variables according to your local setup:
+## License
 
-```dotenv
-# .env.remote
-TZ=Europe/Bucharest
-# src-directory-with-txt-songs
-LOCAL_SOURCE_DIR=../bes-lyrics/verified
-GDRIVE_ROOT_FOLDER_ID=id-of-your-folder-in-gdrive
-CONNECT_TO_G_DRIVE=true
-GDRIVE_BES_CLIENT_ID=taken-from-the-gdrive-app-config
-GDRIVE_BES_CLIENT_SECRET=taken-from-the-gdrive-app-config
-GDRIVE_BES_CLIENT_REFRESH_TOKEN=taken-from-the-gdrive-app-config
-```
-
-2. To convert your songs remotely, execute the following command:
-
-```bash
-npm run convert:remote
-```
-
-As a result, the migrator will convert all `.txt` song files from the specified source directory to `.pro` format in the
-given directory, with the following format:
-
-Under the given `GDRIVE_ROOT_FOLDER_ID` and a dynamically created directory like `/2024-04-09-17:18:05`,
-the `Aceasta mi-e dorinta sa Te-onorez.pro` will be generated and uploaded.
-Also, a `manifest.json` will be generated:
-
-```json
-{
-  "inventory": [
-    {
-      "id": "8ipLZddXG3Zy7Hbbo93Vm7",
-      "fileName": "Aceasta mi-e dorinta sa Te-onorez.txt",
-      "contentHash": "418384"
-    }
-  ],
-  "updatedOn": "2024-04-09-17:18:05"
-}
-```
-
-3. The upload will check the previous deployments (previous `manifest.json` files) and will upload only the new files.
-   If there is no previous deployment, all files will be uploaded.
-
-4. In order to sync the files with the GDrive, you can use the you can use the `sync-via-gdrive.sh` script,
-   see [this documentation](./client-sync-macos/README.md).
-
-### Customization Options
-
-You can customize the conversion process by adjusting the environment variables or by directly using
-the `convertSongsToPP7FormatLocally` method with your own configurations:
-
-```typescript
-import dotenv from 'dotenv';
-import { convertSongsToPP7FormatLocally } from './';
-import { Presentation_CCLI } from './proto/presentation';
-import { Font } from './proto/graphicsData';
-
-dotenv.config();
-
-const CONFIG = {
-  arrangementName: 'Any arrangement name',
-  ccliSettings: {
-    publisher: 'Any publisher info',
-    author: 'Any author info',
-    copyrightYear: new Date().getFullYear(),
-    album: `Any album from ${new Date().getFullYear()}`,
-    songNumber: 0,
-  } as Presentation_CCLI,
-  fontConfig: {
-    name: 'CMGSans-Regular',
-    size: 58,
-    family: 'CMGSans',
-    bold: true,
-  } as Font,
-  graphicSize: {
-    width: 1920,
-    height: 1080,
-  },
-  presentationCategory: 'Any presentation category',
-  refMacroId:
-    'A UUID string for referencing the macro id in the first intro blank slide',
-  refMacroName:
-    'A macro name for referencing the macro id in the first intro blank slide',
-};
-
-convertSongsToPP7FormatLocally({
-  sourceDir: process.env.LOCAL_SOURCE_DIR as string,
-  baseLocalDir: process.env.LOCAL_OUT_DIR as string,
-  config: CONFIG,
-});
-```
-
-### The ProPresenter7 outcome
-
-![alt text](outcome_pp7.png 'Aceasta mi-e dorința in .pro format')
-
-### How It Works
-
-The `bes-propres7-migrator` leverages reverse engineering of the `ProPresenter` `protobuf` format through
-the `protodump` utility for encoding and decoding presentation files. To utilize this:
-
-```bash
-git clone https://github.com/arkadiyt/protodump.git
-go build -o protodump cmd/protodump/main.go
-```
-
-### FAQ
-
-<details>
-<summary>📖 Advanced Sequencing with BES Sequence.</summary>
-
-A standout feature of the `bes-propres7-migrator` is its ability to intelligently create BES sequences
-in `ProPresenter7`,
-enhancing the presentation of songs during live events. This section explains how the BES sequence works and the
-advantages it offers.
-
-#### How BES Sequence Works
-
-When converting songs, `the bes-propres7-migrator` not only transfers the lyrics and formatting but also smartly
-organizes song sections into an efficient sequence for live presentation. Given a song with the sequence (1,c,2,c), the
-migrator
-constructs what is referred to as a BES sequence in `ProPresenter7`.
-
-This BES sequence strategically references the chorus (c) only once in the `ProPresenter7` sequence setup, even though
-it appears twice in the song's progression. This approach results in a sequence where the chorus is prepared to be
-displayed each time it's needed, without requiring multiple entries in the sequence.
-
-#### Benefits of BES Sequence
-
-- **Simplicity in Navigation**: Operators can advance through the song by simply pressing the forward key, without
-  needing
-  to remember the song's order or manually navigate back to the chorus. This is especially useful in live settings where
-  attention and timing are critical.
-- **Efficiency in Presentation**: Reduces the clutter and complexity of the song's visual presentation, making it easier
-  for
-  the audience to follow along.
-- **Optimized Performance**: Minimizes the cognitive load on the person controlling the presentation, allowing them to
-  focus
-  more on the event's flow and less on the technical aspects of the presentation software.
-- **Implementation**
-  When utilizing the `convertSongsToPP7FormatLocally` method, the migrator automatically analyzes the song's sequence
-  and applies the BES sequence logic. There's no need for manual setup or additional configuration to enable this
-  feature.
-  This automated process ensures your songs are ready for efficient and effective presentation with minimal effort on
-  your part.
-
-#### Example
-
-For a song with a specified sequence of (1,c,2,c), the migrator creates a sequence in `ProPresenter7` that smartly
-incorporates the chorus to appear at the correct intervals, optimizing both the operator's experience and the audience's
-engagement.
-
-</details>
-
-<details>
-<summary>📖 Initial Setup Slide with Macro Reference</summary>
-
-An innovative feature of the `bes-propres7-migrator` is the automatic inclusion of an initial setup slide in every
-exported file. This first slide is intentionally left empty and contains a reference to a predefined macro. The purpose
-of this slide is to facilitate the seamless preparation of the presentation environment before the actual song content
-is displayed.
-
-#### Purpose and Benefits
-
-- **Environment Preparation**: The macro referenced in the first slide is designed to automate the setup process for
-  your live event presentation. This includes clearing previous settings, configuring the appropriate audience and stage
-  layouts, setting clocks, backgrounds, and other necessary adjustments.
-- **Efficiency and Consistency**: By automating the setup process, this feature ensures that all songs start with a
-  consistent
-  environment, reducing manual setup errors and saving time during live events.
-- **Seamless Transition into Content**: Since every song starts from the second slide, the initial setup slide ensures
-  that all preliminary adjustments are made without displaying unnecessary content to the audience, leading to a
-  smoother transition and a more professional presentation.
-
-- #### How to Use
-  The initial setup slide is included automatically with every song conversion. To customize the actions performed by
-  the referenced macro, you may need to edit the macro settings within `ProPresenter7` according to your event's
-  specific requirements. This customization allows you to tailor the environment setup process to match the unique needs
-  of your presentation.
-
-</details>
-
-<details>
-<summary>📖 How to regenerate the `.proto` files when a new version of `ProPresenter7` arrives.</summary>
-
-### Step 1: Find `.proto` files from `ProPresenter7`
-
-> Assuming that `protodump` is a sibling of this dir:
-
-```unix
-find /Applications/ProPresenter.app/ -type f -perm +111 -print -exec ../protodump/protodump -file {} -output ./proto \;
-```
-
-#### Decode `ProPresenter7` `.proto` files to `.ts`
-
-```unix
-cd proto
-
-for f in ./*; do protoc --plugin=../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./ --ts_proto_opt=esModuleInterop=true ./$f ; done
-```
-
-</details>
-
-<details>
-<summary>📖 How to decode a single `.pro` presentation files for debugging purposes..</summary>
-
-#### Decode a single presentation file called `TEMP.pro` to `TS`
-
-```unix
-cd proto
-
-protoc --decode rv.data.Presentation ./presentation.proto < ~/Documents/ProPresenter/Libraries/Default/TEMP.pro > ../TEMP_decoded_from_propres7.txt
-```
-
-#### Decode a single win presentation file called `TEMP.pro` to `TS`
-
-```unix
-cd proto
-
-protoc --decode rv.data.Presentation ./presentation.proto < ../windows-templates/TEST_TEMPLATE_3.pro > ../windows-templates/TEST_TEMPLATE_3.txt
-```
-
-</details>
+[Apache 2.0](LICENSE) © Ioan Lucut
