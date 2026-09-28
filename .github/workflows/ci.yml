@@ -1,22 +1,51 @@
-on: [pull_request]
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  Build:
+  build:
+    name: Lint, typecheck and test (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # 20 is the minimum in `engines`; 24 is what the bes-lyrics deploy runs.
+        node-version:
+          - 20.x
+          - 24.x
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 20.x
+          node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - name: Install dependencies
-        run: npm i
+        run: npm ci
 
-      - name: Build
-        run: npm run test
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Test
+        run: npm test
         env:
           CI: true
           FORCE_COLOR: 2
+
+      - name: Test the presentation Mac sync script
+        run: npm run test:sync-script
