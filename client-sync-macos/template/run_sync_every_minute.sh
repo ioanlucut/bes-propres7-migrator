@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Cron starts in $HOME; run from this folder so ./sync-via-gdrive.sh resolves
+cd "$(dirname "$0")" || exit 1
+
 # Directory where log files will be stored
-LOG_DIR="~/Documents/pp7/sync/log"
+LOG_DIR="$HOME/Documents/pp7/sync/log"
 
 # Ensure the log directory exists
 mkdir -p "$LOG_DIR"

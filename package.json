@@ -35,7 +35,8 @@
     "convert:remote": "dotenv -e .env.remote ts-node runner.ts",
     "lint": "eslint src runner.ts index.ts",
     "typecheck": "tsc --noEmit",
-    "format:check": "prettier --check src runner.ts index.ts jest.config.ts"
+    "format:check": "prettier --check src runner.ts index.ts jest.config.ts",
+    "test:sync-script": "bash client-sync-macos/template/sync-via-gdrive.test.sh"
   },
   "dependencies": {
     "@googleapis/drive": "^8.7.0",
