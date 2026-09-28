@@ -12,7 +12,7 @@ export const getMatchingSubGroupLabel = (
   ).exec(songSectionIdentifier);
 
   if (maybeMatch) {
-    const [match, sequenceChar, mainIdentifier, c, maybeSubSectionIdentifier] =
+    const [match, sequenceChar, mainIdentifier, , maybeSubSectionIdentifier] =
       maybeMatch;
     if (!match.includes(DOT)) {
       return EMPTY_STRING;

@@ -243,7 +243,6 @@ const createEmptySmartIntroCue = (config: Config) => {
 
 const processVerse = (
   { content, sectionGroup, subSectionLabel }: Section,
-  { title }: Song,
   config: Config,
 ) => {
   const cueUUID = UUID.create({
@@ -341,7 +340,7 @@ export const convertSongToProPresenter7 = (
   >;
 
   const slidesConfig = verses.map((verse) => {
-    const { cue, cueGroup } = processVerse(verse, song, config);
+    const { cue, cueGroup } = processVerse(verse, config);
 
     songConfigHashMap[verse.sectionIdentifier] = { cue, cueGroup };
 

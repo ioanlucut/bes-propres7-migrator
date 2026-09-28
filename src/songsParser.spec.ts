@@ -4,7 +4,7 @@ import {
   SONG_WITH_MISMATCHING_SEQUENCE_MOCK_FILE_CONTENT,
   SONG_WITH_SUBSECTIONS_MOCK_FILE_CONTENT,
 } from '../mocks';
-import { createAdvancedSongMock, createSongMock } from './core';
+import { createAdvancedSongMock } from './core';
 import { DOUBLE_LINE_TUPLE } from './constants';
 
 describe('songsParser', () => {
