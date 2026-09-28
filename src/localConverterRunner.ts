@@ -118,7 +118,7 @@ export const convertSongsToPP7FormatLocally = async ({
     previousManifest,
   );
 
-  if (isEmpty(newOrUpdatedSongs)) {
+  if (isEmpty(newOrUpdatedSongs) && isEmpty(toBeRemovedFileNames)) {
     console.log(
       `Skip incremental local deployments as no changes have been found between the last two versions.`,
     );
