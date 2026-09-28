@@ -7,7 +7,7 @@ export const getMatchingSubGroupLabel = (
   definedSequenceWithMarkup: string[],
 ) => {
   const maybeMatch = new RegExp(
-    `(${SequenceChar.PRECHORUS}|${SequenceChar.CHORUS}|${SequenceChar.BRIDGE}|${SequenceChar.VERSE})([1-9]\\d*)(\\.?)([1-9]\\d*)?$`,
+    `(${SequenceChar.PRECHORUS}|${SequenceChar.CHORUS}|${SequenceChar.BRIDGE}|${SequenceChar.VERSE}|${SequenceChar.RECITAL})([1-9]\\d*)(\\.?)([1-9]\\d*)?$`,
     'gi',
   ).exec(songSectionIdentifier);
 

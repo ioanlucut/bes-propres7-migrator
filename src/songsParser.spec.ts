@@ -616,4 +616,45 @@ describe('songsParser', () => {
       }
     `);
   });
+
+  it('should correctly parse a song with a recital section', () => {
+    expect(
+      parseSong(
+        createAdvancedSongMock([
+          ['v1', 'Verse 1'],
+          ['s', 'Recital'],
+          ['c', 'Chorus'],
+        ]),
+      ),
+    ).toMatchInlineSnapshot(`
+      {
+        "sequence": [
+          "[v1]",
+          "[s]",
+          "[c]",
+        ],
+        "title": "My custom title",
+        "verses": [
+          {
+            "content": "Verse 1",
+            "sectionGroup": "Verse 1",
+            "sectionIdentifier": "[v1]",
+            "subSectionLabel": "",
+          },
+          {
+            "content": "Recital",
+            "sectionGroup": "Recital",
+            "sectionIdentifier": "[s]",
+            "subSectionLabel": "",
+          },
+          {
+            "content": "Chorus",
+            "sectionGroup": "Chorus",
+            "sectionIdentifier": "[c]",
+            "subSectionLabel": "",
+          },
+        ],
+      }
+    `);
+  });
 });

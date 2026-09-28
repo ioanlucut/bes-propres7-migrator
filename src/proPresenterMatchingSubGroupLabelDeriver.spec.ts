@@ -73,4 +73,16 @@ describe('proPresenterMatchingSubGroupLabelDeriver', () => {
       getMatchingSubGroupLabel('b1.3', ['b1.1', 'b1.2', 'b1.3', 'e', 'b2.1']),
     ).toMatchInlineSnapshot(`"3/3"`);
   });
+
+  it('should identify the sub labels correctly for `recital`', () => {
+    expect(getMatchingSubGroupLabel('s', ['s'])).toMatchInlineSnapshot(`""`);
+
+    expect(
+      getMatchingSubGroupLabel('s2.1', ['v1', 's2.1', 's2.2', 'e']),
+    ).toMatchInlineSnapshot(`"1/2"`);
+
+    expect(
+      getMatchingSubGroupLabel('s2.2', ['v1', 's2.1', 's2.2', 'e']),
+    ).toMatchInlineSnapshot(`"2/2"`);
+  });
 });
