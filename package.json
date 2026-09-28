@@ -1,18 +1,45 @@
 {
   "name": "bes-propres7-migrator",
   "version": "1.0.0",
-  "description": "A converter from .txt song lyrics to ProPresenter7 .pro format.",
+  "description": "Turns a Git-managed song library into native ProPresenter 7 presentations and ships only what changed to the presentation Mac.",
+  "keywords": [
+    "propresenter",
+    "propresenter7",
+    "protobuf",
+    "reverse-engineering",
+    "church",
+    "worship",
+    "lyrics",
+    "google-drive",
+    "typescript"
+  ],
+  "homepage": "https://github.com/ioanlucut/bes-propres7-migrator#readme",
+  "bugs": {
+    "url": "https://github.com/ioanlucut/bes-propres7-migrator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioanlucut/bes-propres7-migrator.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Ioan Lucut",
   "main": "index.ts",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test:ci": "NODE_ENV=test TZ='Europe/Bucharest' jest --runInBand --no-cache",
     "test:watch": "NODE_ENV=test TZ='Europe/Bucharest' jest --watch --logHeapUsage",
     "test": "is-ci-cli test:ci test:watch",
     "convert:local": "dotenv -e .env.local ts-node runner.ts",
-    "convert:remote": "dotenv -e .env.remote ts-node runner.ts"
+    "convert:remote": "dotenv -e .env.remote ts-node runner.ts",
+    "lint": "eslint src runner.ts index.ts",
+    "typecheck": "tsc --noEmit",
+    "format:check": "prettier --check src runner.ts index.ts jest.config.ts"
   },
-  "author": "Ioan Lucut",
   "dependencies": {
     "@googleapis/drive": "^8.7.0",
+    "chalk": "^4.1.2",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.1",
     "fs-extra": "^11.2.0",
