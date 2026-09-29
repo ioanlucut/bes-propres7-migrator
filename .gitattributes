@@ -1,1 +1,5 @@
 *.txt    eol=lf diff=astextplain
+# Windows reads batch files with CRLF, and Task Scheduler writes task XML as UTF-16 with a BOM;
+# the XML is stored as UTF-8 so it diffs as text.
+*.bat    text eol=crlf
+client-sync-windows/*.xml    text working-tree-encoding=UTF-16LE-BOM eol=crlf

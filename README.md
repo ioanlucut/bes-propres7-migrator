@@ -43,7 +43,7 @@ Since March 2023 the migrator has built the whole worship library of Biserica Em
 
 - **Romanian typography survives RTF.** Slide text is RTF, which needs non-ASCII letters escaped and swallows the space after a control word; the converter escapes `ă â î ș ț` and `„ ” ‘ ’` so they render correctly, and snapshot tests pin the output.
 
-- **The last mile is automated too.** A cron job on the presentation Mac moves each deploy into the ProPresenter library ([`client-sync-macos/`](client-sync-macos/)), and a one-click AppleScript switches the displays between ProPresenter and PowerPoint layouts ([`displays-switch/`](displays-switch/)).
+- **The last mile is automated too.** A cron job on the presentation Mac moves each deploy into the ProPresenter library ([`client-sync-macos/`](client-sync-macos/), or a scheduled task on Windows in [`client-sync-windows/`](client-sync-windows/)), and a one-click AppleScript switches the displays between ProPresenter and PowerPoint layouts ([`displays-switch/`](displays-switch/)).
 
 - **The docs are tested.** The song examples are parsed in CI, the section-code table is checked against the parser, and every link is verified, internal and external. [How the docs stay true →](docs/README.md#keeping-the-docs-true)
 
@@ -103,6 +103,7 @@ proto/               ProPresenter 7 protobuf schemas and the generated TypeScrip
 rtfs/                RTF template used for slide text
 mocks/               song fixtures for the tests
 client-sync-macos/   cron sync from Google Drive into the ProPresenter library
+client-sync-windows/ the same sync as a Windows scheduled task
 displays-switch/     one-click display layouts for ProPresenter and PowerPoint
 windows-templates/   reference .pro files saved by ProPresenter for Windows
 docs/                guides, reference and explanations
