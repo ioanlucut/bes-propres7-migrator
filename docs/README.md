@@ -11,6 +11,7 @@ Each page answers one kind of question. Start from what you are trying to do.
 | Understand what a `.pro` file contains                       | [ProPresenter format](propresenter-format.md)                                                         | Explanation |
 | Set up remote deploys to Google Drive                        | [Google Drive setup](google-drive-setup.md)                                                           | How-to      |
 | Set up the presentation Mac                                  | [Presentation Mac sync](../client-sync-macos/README.md)                                               | How-to      |
+| Set up a Windows presentation PC                             | [Presentation PC sync (Windows)](../client-sync-windows/README.md)                                    | How-to      |
 | Switch the desk displays between ProPresenter and PowerPoint | [Display switch](../displays-switch/README.md)                                                        | How-to      |
 | Update the schema after a ProPresenter release               | [Regenerating the schema](propresenter-format.md#regenerating-the-schema-after-a-propresenter-update) | How-to      |
 
