@@ -4,30 +4,31 @@ Each song is one UTF-8 `.txt` file. Blocks start with a `[marker]` line; `[title
 
 ```text
 [title]
-Aceasta mi-e dorința, să Te-onorez {alternative: {_}, composer: {_}, key: {_}, rcId: {59763}, id: {8ipLZddXG3Zy7Hbbo93Vm7}, contentHash: {418384}}
+Blessed Assurance {composer: {Phoebe Knapp}, writer: {Fanny Crosby}, id: {x7Qm2Lp9RtVb4Nc8Kd1Ws3}, contentHash: {5a1f09}}
 
 [sequence]
 v1,c,v2,c
 
 [v1]
-Aceasta mi-e dorința, să Te-onorez,
-Cu ființa-ntreagă să Te slăvesc.
-Te ador, Stăpâne, și mă închin,
-Lauda și onoarea Ți se cuvin!
+Blessed assurance, Jesus is mine!
+Oh, what a foretaste of glory divine!
+Heir of salvation, purchase of God,
+Born of His Spirit, washed in His blood.
 
 [c]
-Ție-Ți dau inima și sufletul meu,
-Pentru Tine vreau să trăiesc!
-Domnul meu, Te iubesc!
-Zi de zi vreau să-mplinesc
-Doar sfântă voia Ta!
+This is my story, this is my song,
+Praising my Savior all the day long;
+This is my story, this is my song,
+Praising my Savior all the day long.
 
 [v2]
-Vrednic ești de cinste, fii lăudat!
-Împărat al slavei, fii înălțat!
-Alfa și Omega, de-a pururi viu,
-Domn al veșniciei, în veci! Amin!
+Perfect submission, perfect delight,
+Visions of rapture now burst on my sight;
+Angels descending bring from above
+Echoes of mercy, whispers of love.
 ```
+
+Lyrics can use any Unicode text. The BES library is in Romanian, and letters such as `ă`, `ș` and `ț` and the quotes `„ ”` are escaped for ProPresenter's RTF automatically; see [ProPresenter format](propresenter-format.md#slide-text-is-rtf).
 
 ## Title and metadata
 
@@ -55,9 +56,12 @@ The first line of `[title]` is the song title, optionally followed by metadata i
 
 ## Sub-sections
 
-A section too long for one slide can be split with a dot: `v1.1`, `v1.2`, `v1.3`. Each part becomes its own slide in the `Verse 1` group, labelled with its position among the parts in the sequence, here `1/3`, `2/3` and `3/3`. Sub-sections work for verses, pre-choruses, choruses, bridges and recitals; the base number is written out, as in `c1.1` for the first chorus.
+A section too long for one slide can be split with a dot. Each part becomes its own slide in the same group, labelled with its position among the parts in the sequence: below, `v1.1` and `v1.2` both belong to `Verse 1` and are labelled `1/2` and `2/2`. Sub-sections work for verses, pre-choruses, choruses, bridges and recitals; the base number is written out, as in `c1.1` for the first chorus.
 
 ```text
+[title]
+A long first verse {id: {example-sub-sections}, contentHash: {1}}
+
 [sequence]
 v1.1,v1.2,c
 

@@ -1,5 +1,22 @@
 # Architecture
 
+## The pipeline
+
+Four systems hand a song along, and only the middle one is this repository:
+
+```mermaid
+flowchart LR
+    A["bes-lyrics<br/>verified/*.txt"] -- push to main --> B["GitHub Actions"]
+    B -- "npm run convert:remote" --> C["bes-propres7-migrator<br/>parse → protobuf .pro"]
+    C -- "only new, changed<br/>or renamed songs" --> D["Google Drive<br/>one folder per deploy"]
+    D -- "Drive for desktop" --> E["Presentation Mac"]
+    E -- "cron, every minute" --> F["ProPresenter 7 library"]
+```
+
+Git is the source of truth and the review step; Google Drive is only a transport that the presentation Mac can reach without any inbound connection, and the Mac never runs the migrator itself.
+
+## Inside the migrator
+
 The migrator is a batch job: it reads every song, decides which ones changed since the last deploy, converts those to `.pro` files, and publishes them as a new timestamped folder. Both modes share one pipeline and differ only in where the previous deploy lives and where the new one goes.
 
 ```text
