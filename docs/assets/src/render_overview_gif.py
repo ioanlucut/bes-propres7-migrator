@@ -12,6 +12,7 @@ Fonts are Inter and JetBrains Mono (SIL Open Font License); they are downloaded 
 
 from __future__ import annotations
 
+import hashlib
 import io
 import math
 import urllib.request
@@ -23,11 +24,17 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[3]
 OUTPUT = ROOT / "docs" / "assets" / "overview.gif"
 FONTS_DIR = Path.home() / ".cache" / "bes-propres7-migrator" / "fonts"
+INTER_ZIP = "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
+JETBRAINS_MONO_ZIP = "https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip"
+ARCHIVE_SHA256 = {
+    INTER_ZIP: "9883fdd4a49d4fb66bd8177ba6625ef9a64aa45899767dde3d36aa425756b11e",
+    JETBRAINS_MONO_ZIP: "6f6376c6ed2960ea8a963cd7387ec9d76e3f629125bc33d1fdcd7eb7012f7bbf",
+}
 FONT_SOURCES = {
-    "Inter-Regular.ttf": ("https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip", "extras/ttf/Inter-Regular.ttf"),
-    "Inter-SemiBold.ttf": ("https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip", "extras/ttf/Inter-SemiBold.ttf"),
-    "Inter-Bold.ttf": ("https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip", "extras/ttf/Inter-Bold.ttf"),
-    "JetBrainsMono-Regular.ttf": ("https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip", "fonts/ttf/JetBrainsMono-Regular.ttf"),
+    "Inter-Regular.ttf": (INTER_ZIP, "extras/ttf/Inter-Regular.ttf"),
+    "Inter-SemiBold.ttf": (INTER_ZIP, "extras/ttf/Inter-SemiBold.ttf"),
+    "Inter-Bold.ttf": (INTER_ZIP, "extras/ttf/Inter-Bold.ttf"),
+    "JetBrainsMono-Regular.ttf": (JETBRAINS_MONO_ZIP, "fonts/ttf/JetBrainsMono-Regular.ttf"),
 }
 
 WIDTH, HEIGHT = 1200, 675
@@ -60,7 +67,10 @@ def ensure_fonts() -> None:
             continue
         if url not in archives:
             with urllib.request.urlopen(url) as response:
-                archives[url] = zipfile.ZipFile(io.BytesIO(response.read()))
+                data = response.read()
+            if hashlib.sha256(data).hexdigest() != ARCHIVE_SHA256[url]:
+                raise RuntimeError(f"Checksum mismatch for {url}")
+            archives[url] = zipfile.ZipFile(io.BytesIO(data))
         target.write_bytes(archives[url].read(member))
 
 
@@ -217,7 +227,7 @@ def node_x(index: int) -> float:
 
 
 def scene_pipeline(draw: ImageDraw.ImageDraw, t: float) -> None:
-    heading(draw, t, 0, "The solution", "Edit text, merge, and the slides follow")
+    heading(draw, t, 0, "The solution: songs as code", "Edit text, merge, and the slides follow")
     intro = progress(t, 0.2, 0.6)
     travel = t - 1.0
     stage = int(clamp(travel / STAGE_SECONDS, 0, len(PIPELINE) - 1))
@@ -385,6 +395,7 @@ def scene_diff(draw: ImageDraw.ImageDraw, t: float) -> None:
 
 
 def scene_end(draw: ImageDraw.ImageDraw, t: float) -> None:
+    text(draw, (WIDTH / 2, 135), "SONGS AS CODE", semibold(20), mix(ACCENT, progress(t, 0.0, 0.5)), "mm")
     lines = [("Edit a text file.", TEXT), ("Merge.", TEXT), ("It's in ProPresenter.", ACCENT)]
     for index, (line, colour) in enumerate(lines):
         alpha = progress(t, 0.2 + index * 0.7, 0.5)

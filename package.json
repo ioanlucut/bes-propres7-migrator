@@ -1,8 +1,9 @@
 {
   "name": "bes-propres7-migrator",
   "version": "1.0.0",
-  "description": "Turns a Git-managed song library into native ProPresenter 7 presentations and ships only what changed to the presentation Mac.",
+  "description": "Songs as code for ProPresenter 7: compiles a Git-managed song library into native .pro presentations and ships only what changed to the presentation Mac.",
   "keywords": [
+    "songs-as-code",
     "propresenter",
     "propresenter7",
     "protobuf",

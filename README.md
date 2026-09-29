@@ -2,23 +2,28 @@
 
 [![CI](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml/badge.svg)](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml) [![Links](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/links.yml/badge.svg)](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/links.yml) [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white) ![ProPresenter 7](https://img.shields.io/badge/ProPresenter-7-orange)
 
-**Edit a text file. Merge. It's in ProPresenter.**
+**Songs as code for ProPresenter 7.** Edit a text file. Merge. It's in ProPresenter.
 
-A song library kept as plain text in Git, compiled into native ProPresenter 7 presentations by writing ProPresenter's undocumented protobuf format directly, and delivered to the presentation Mac without anyone touching the app.
+A worship library kept as plain text in Git and treated the way infrastructure as code treats servers: every change is reviewed, validated, versioned and deployed by CI. The migrator is the compiler in the middle. It writes ProPresenter's undocumented protobuf format directly and ships only what changed to the presentation Mac, so nobody edits songs in the app.
 
 ![Animated overview: maintaining songs by hand in ProPresenter is slow and drifts; with the migrator, a lyric fix merged on GitHub flows through GitHub Actions, the migrator and Google Drive into ProPresenter on the presentation Mac; the text file becomes groups, a BES arrangement and slides; a deploy parses all 1,935 songs and uploads only the one that changed](docs/assets/overview.gif)
 
-## Why it exists
+## Songs as code
 
-ProPresenter is built for editing one presentation at a time. A church library of almost two thousand songs needs the opposite: bulk edits, review, history, and the same result on every machine.
+ProPresenter is built for editing one presentation at a time. A church library of almost two thousand songs needs what software teams take for granted, so this project gives it the same workflow as infrastructure as code:
 
-| Task                              | In ProPresenter by hand                          | With the migrator                                              |
-| --------------------------------- | ------------------------------------------------ | -------------------------------------------------------------- |
-| Fix a typo                        | Find the song in ProPresenter and edit the slide | Edit one line in a `.txt` file and merge                       |
-| Order the song                    | Build the arrangement group by group             | Write `v1,c,v2,c`                                              |
-| Prepare the screens before a song | Add the setup action to each song                | Every song opens on a slide that runs the setup macro          |
-| Review a change                   | No diff, no history                              | A pull request with a diff, and Git history                    |
-| Update the presentation Mac       | Export, copy and import files                    | Synced by Google Drive and moved in by a cron job every minute |
+| Practice                  | Songs kept in ProPresenter by hand              | Songs as code                                                                                      |
+| ------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Source of truth           | The library on one Mac                          | Plain `.txt` files in Git ([`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics))                |
+| Declarative               | Build groups and the arrangement slide by slide | Declare the sections and write the order as `v1,c,v2,c`                                            |
+| Review                    | None                                            | Every change is a pull request with a diff                                                         |
+| Formatting and validation | By eye                                          | A Prettier plugin formats songs, and CI validates structure, IDs and file names before merge       |
+| History                   | None                                            | `git log` and `git blame` for every line of every song                                             |
+| Build                     | Done in the app                                 | The migrator compiles text into native `.pro` files                                                |
+| Plan and apply            | Copy whatever looks changed                     | A manifest diff ships only new, changed or renamed songs, like `terraform plan` and `apply`        |
+| Idempotent                | —                                               | A deploy with no changes ships nothing                                                             |
+| Releases                  | Files overwritten in place                      | Append-only, timestamped deploy folders, each with its manifest                                    |
+| Delivery                  | Export, copy, import                            | Merge to `main`, deployed by CI in about 30 seconds, moved into the library on the Mac's next sync |
 
 ## In production
 
