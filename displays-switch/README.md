@@ -1,39 +1,26 @@
-# Display Configuration Toggle Script
+# Display switch
 
-This AppleScript allows you to toggle between two different display configurations on macOS. It is designed to be used
-with the `displayplacer` command-line tool.
+A one-click macOS app for the presentation desk. Songs run in ProPresenter, which drives the outputs as separate extended displays, while some presentations run in PowerPoint, which needs them mirrored. Rearranging three displays in System Settings between two parts of a service is slow and easy to get wrong; [`bes-display-switch.scpt`](bes-display-switch.scpt) does it with one dialog.
 
-## Prerequisites
+The dialog asks `Alege configurația monitoarelor:` ("choose the display layout") and offers two buttons:
 
-- **`displayplacer`**: Ensure you have `displayplacer` installed. You can install it via Homebrew with the following
-  command:
+| Button                                   | Layout applied with [`displayplacer`](https://github.com/jakehilborn/displayplacer)                                          |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `Pro Presenter - Extend Display & Stage` | Operator screen 2560×1440 in the middle, one output at 1920×1080 on its left and one at 1344×768 on its right, all extended. |
+| `PowerPoint - Mirror Display & Stage`    | Operator screen 2560×1440, with both outputs mirrored as one 1344×768 display on its right.                                  |
 
-  ```bash
-  brew install displayplacer
-  ```
+Any error from `displayplacer` is shown in a dialog instead of failing silently.
 
-## Script Overview
+## Adapt it to your displays
 
-### The script provides two display configurations:
+The display IDs, resolutions and positions are specific to the BES desk.
 
-    1. Initial Configuration (example):
-    • Display 1: id:37D8832A-2D66-02CA-B9F7-8F30A301B230 at 2056x1329 resolution, 120Hz, 8-bit color depth, enabled, scaling on, origin at (0,0).
-    • Display 2: id:9261071D-C9FC-4476-9F8D-BC7B52CF4071 at 2560x1440 resolution, 60Hz, 8-bit color depth, enabled, scaling on, origin at (2056,0).
-    2. Alternate Configuration (example):
-    • Display 1: id:9261071D-C9FC-4476-9F8D-BC7B52CF4071 at 2880x1620 resolution, 60Hz, 8-bit color depth, enabled, scaling on, origin at (0,0).
+1. Install the tool: `brew install displayplacer`. The script calls it at `/opt/homebrew/bin/displayplacer`, the Homebrew path on Apple silicon.
+2. Arrange the displays by hand for the first layout, run `displayplacer list`, and copy the command it prints at the end. Repeat for the second layout.
+3. Paste the two commands into `BES_DEFAULT_PROPRESENTER_CONFIG_COMMAND` and `BES_POWERPOINT_CONFIG_COMMAND`, keeping the `BES_DISPLAYPLACER_PATH & " …"` form. Joining two IDs with `+`, as in `id:A+B`, mirrors those displays.
 
-### Using the Script
+## Install as an app
 
-    1. Open Script Editor:
-    • Open the Script Editor application on macOS.
-    2. Paste the Script:
-    • Copy and paste the provided AppleScript code into Script Editor.
-    3. Save the Script as an Application:
-    • Go to File -> Export.
-    • Set File Format to Application.
-    • Choose a name (e.g., “Display Config Toggle”) and location for your app, then click Save.
-    4. Grant Necessary Permissions:
-    • Open System Preferences -> Security & Privacy -> Privacy tab.
-    • Select Full Disk Access or Automation, then add your new app if it’s not listed.
-    5. Run the Application:
-    • Double-click the app to run it. You will see a dialog prompting you to choose between the “Initial” and “Alternate” configurations.
+1. Open `bes-display-switch.scpt` in Script Editor.
+2. Choose File → Export, set the file format to **Application**, and save it where the operators will find it, for example the Dock.
+3. Run the app and pick a layout. macOS may ask for permission the first time; allow it.

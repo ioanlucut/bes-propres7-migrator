@@ -1,6 +1,8 @@
 node_modules/
 .idea
-out_temp_for_local
+.DS_Store
 .env.debug
+out_temp_for_local
 out_temp_for_remote
 out_temp_for_remote_debug
+out_temp_for_tests

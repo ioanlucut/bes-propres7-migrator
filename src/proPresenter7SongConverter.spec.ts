@@ -174,7 +174,7 @@ Row 2-2`,
               cue.actions[0].slide?.presentation?.baseSlide?.elements[0].element
                 ?.text?.rtfData,
           )
-          .map((entry: any) => entry.toString()),
+          .map((rtfData) => Buffer.from(rtfData as Uint8Array).toString()),
       ).toMatchSnapshot();
     });
   });
@@ -202,7 +202,7 @@ Row 2-2`,
               cue.actions[0].slide?.presentation?.baseSlide?.elements[0].element
                 ?.text?.rtfData,
           )
-          .map((entry: any) => entry.toString()),
+          .map((rtfData) => Buffer.from(rtfData as Uint8Array).toString()),
       ).toMatchSnapshot();
     });
   });

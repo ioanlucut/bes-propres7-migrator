@@ -5,6 +5,7 @@ import {
   getChorusRegex,
   getEndingRegex,
   getPrechorusRegex,
+  getRecitalRegex,
   getVerseRegex,
 } from './core';
 
@@ -52,6 +53,15 @@ export const getMatchingGroup = (songSectionIdentifier: string) => {
   const maybeEnding = getEndingRegex().exec(songSectionIdentifier);
   if (maybeEnding) {
     return SectionGroupCategory.ENDING;
+  }
+
+  const maybeRecital = getRecitalRegex().exec(songSectionIdentifier);
+  if (maybeRecital) {
+    const [, index] = maybeRecital;
+
+    return [SectionGroupCategory.RECITAL, index]
+      .filter(Boolean)
+      .join(EMPTY_SPACE);
   }
 
   throw new Error(`Unknown song sectionIdentifier: ${songSectionIdentifier}`);

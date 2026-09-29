@@ -95,6 +95,18 @@ describe('proPresenterMatchingGroupDeriver', () => {
     );
   });
 
+  it('should identify the labels correctly for `recital`', () => {
+    expect(getMatchingGroup('s')).toEqual('Recital');
+
+    expect(() => getMatchingGroup('s1')).toThrowErrorMatchingInlineSnapshot(
+      `"Unknown song sectionIdentifier: s1"`,
+    );
+
+    expect(getMatchingGroup('s2')).toEqual('Recital 2');
+    expect(getMatchingGroup('s12')).toEqual('Recital 12');
+    expect(getMatchingGroup('s2.1')).toEqual('Recital 2');
+  });
+
   it('should throw for unsupported song sections', () => {
     expect(() => getMatchingGroup('x')).toThrowErrorMatchingInlineSnapshot(
       `"Unknown song sectionIdentifier: x"`,

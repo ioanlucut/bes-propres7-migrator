@@ -1,5 +1,14 @@
 import fs from 'fs';
+import path from 'path';
 import { convertToRtf } from './txtToRtfConverter';
+
+// Written for manual inspection in TextEdit or ProPresenter; git-ignored.
+const GENERATED_RTF_DIR = path.join(__dirname, '..', 'out_temp_for_tests');
+
+const writeGeneratedRtf = (fileName: string, rtfContent: string) => {
+  fs.mkdirSync(GENERATED_RTF_DIR, { recursive: true });
+  fs.writeFileSync(path.join(GENERATED_RTF_DIR, fileName), rtfContent);
+};
 
 describe('txtToRtfConverter', () => {
   it('should convert to expected `rtf` correctly', () => {
@@ -10,7 +19,7 @@ Row 1-3`);
 
     expect(rtfContent).toMatchSnapshot();
 
-    fs.writeFileSync('./txtToRtfConverterGeneratedRtf.rtf', rtfContent);
+    writeGeneratedRtf('txtToRtfConverterGeneratedRtf.rtf', rtfContent);
   });
 
   it('should convert to expected `rtf` correctly for edge cases', () => {
@@ -64,6 +73,6 @@ end-of-line-works-without-extra-space-text„`);
 
     expect(rtfContent).toMatchSnapshot();
 
-    fs.writeFileSync('./txtToRtfConverterGeneratedRtf_II.rtf', rtfContent);
+    writeGeneratedRtf('txtToRtfConverterGeneratedRtf_II.rtf', rtfContent);
   });
 });

@@ -110,7 +110,7 @@ export const getSongDiffFromManifest = (
 
   const toBeRemovedFileNames = previousManifest.inventory
     .filter(
-      ({ id, fileName, contentHash }) =>
+      ({ id, fileName }) =>
         // File-name has changed
         !isEqual(currentManifestHashMap[id]?.fileName, fileName),
     )

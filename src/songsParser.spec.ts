@@ -4,7 +4,7 @@ import {
   SONG_WITH_MISMATCHING_SEQUENCE_MOCK_FILE_CONTENT,
   SONG_WITH_SUBSECTIONS_MOCK_FILE_CONTENT,
 } from '../mocks';
-import { createAdvancedSongMock, createSongMock } from './core';
+import { createAdvancedSongMock } from './core';
 import { DOUBLE_LINE_TUPLE } from './constants';
 
 describe('songsParser', () => {
@@ -610,6 +610,47 @@ describe('songsParser', () => {
       Subsection 1.2",
             "sectionGroup": "Ending",
             "sectionIdentifier": "[e]",
+            "subSectionLabel": "",
+          },
+        ],
+      }
+    `);
+  });
+
+  it('should correctly parse a song with a recital section', () => {
+    expect(
+      parseSong(
+        createAdvancedSongMock([
+          ['v1', 'Verse 1'],
+          ['s', 'Recital'],
+          ['c', 'Chorus'],
+        ]),
+      ),
+    ).toMatchInlineSnapshot(`
+      {
+        "sequence": [
+          "[v1]",
+          "[s]",
+          "[c]",
+        ],
+        "title": "My custom title",
+        "verses": [
+          {
+            "content": "Verse 1",
+            "sectionGroup": "Verse 1",
+            "sectionIdentifier": "[v1]",
+            "subSectionLabel": "",
+          },
+          {
+            "content": "Recital",
+            "sectionGroup": "Recital",
+            "sectionIdentifier": "[s]",
+            "subSectionLabel": "",
+          },
+          {
+            "content": "Chorus",
+            "sectionGroup": "Chorus",
+            "sectionIdentifier": "[c]",
             "subSectionLabel": "",
           },
         ],

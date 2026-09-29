@@ -57,6 +57,12 @@ export const getBridgeRegex = () =>
     'gi',
   );
 
+export const getRecitalRegex = () =>
+  new RegExp(
+    `${SequenceChar.RECITAL}(?!1$)([1-9]\\d*)?(\\.?)([1-9]\\d*)?$`,
+    'gi',
+  );
+
 export const getEndingRegex = () =>
   new RegExp(`${SequenceChar.ENDING}(?!1$)w?`, 'gi');
 
@@ -160,10 +166,12 @@ export const parseDateFromVersionedDir = (versionFolder: string) => {
 
 export const getClosestVersionedDir = (diffDate: Date, dates: Date[]) =>
   first(
-    dates.sort((a, b) => {
-      // @ts-ignore
-      return Math.abs(diffDate - a) - Math.abs(diffDate - b); // sort a before b when the distance is smaller
-    }),
+    // Sort a before b when its distance to `diffDate` is smaller
+    dates.sort(
+      (a, b) =>
+        Math.abs(diffDate.getTime() - a.getTime()) -
+        Math.abs(diffDate.getTime() - b.getTime()),
+    ),
   );
 
 export const assertUniqueness = (array: string[]) =>
