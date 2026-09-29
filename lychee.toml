@@ -1,0 +1,10 @@
+# Link check settings for .github/workflows/links.yml; run locally with `lychee --config lychee.toml './**/*.md'`.
+
+max_retries = 3
+exclude_path = ["node_modules", "out_temp_.*"]
+exclude = [
+  # A workflow badge only exists after the workflow has run on the default branch.
+  '/actions/workflows/[^/]+/badge\.svg$',
+  # Stack Exchange answers automated requests with 403.
+  '^https://apple\.stackexchange\.com/',
+]

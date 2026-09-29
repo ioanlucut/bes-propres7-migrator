@@ -1,39 +1,51 @@
 # bes-propres7-migrator
 
-[![CI](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml/badge.svg)](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml) [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white) ![ProPresenter 7](https://img.shields.io/badge/ProPresenter-7-orange)
+[![CI](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml/badge.svg)](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/ci.yml) [![Links](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/links.yml/badge.svg)](https://github.com/ioanlucut/bes-propres7-migrator/actions/workflows/links.yml) [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white) ![ProPresenter 7](https://img.shields.io/badge/ProPresenter-7-orange)
 
-**Turns a Git-managed song library into native ProPresenter 7 presentations, and ships only what changed to the presentation Mac.**
+**Songs as code for ProPresenter 7.** Edit a text file. Merge. It's in ProPresenter.
 
-ProPresenter's `.pro` format is an undocumented binary protobuf. Instead of scripting the app or hand-importing lyrics, this project reverse-engineers ProPresenter's schemas and writes presentations directly: slides, section groups, a ready-to-play arrangement, CCLI metadata and a setup macro, generated from plain-text lyrics.
+A worship library kept as plain text in Git and treated the way infrastructure as code treats servers: every change is reviewed, validated, versioned and deployed by CI. The migrator is the compiler in the middle. It writes ProPresenter's undocumented protobuf format directly and ships only what changed to the presentation Mac, so nobody edits songs in the app.
 
-![A converted song in ProPresenter 7: the Groups row holds each section once, the BES arrangement replays the chorus where it is sung, and the first Blank slide carries the setup macro](docs/assets/propresenter-outcome.png)
+![Animated overview: maintaining songs by hand in ProPresenter is slow and drifts; with the migrator, a lyric fix merged on GitHub flows through GitHub Actions, the migrator and Google Drive into ProPresenter on the presentation Mac; the text file becomes groups, a BES arrangement and slides; a deploy parses all 1,935 songs and uploads only the one that changed](docs/assets/overview.gif)
+
+## Songs as code
+
+ProPresenter is built for editing one presentation at a time. A church library of almost two thousand songs needs what software teams take for granted, so this project gives it the same workflow as infrastructure as code:
+
+| Practice                  | Songs kept in ProPresenter by hand              | Songs as code                                                                                      |
+| ------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Source of truth           | The library on one Mac                          | Plain `.txt` files in Git ([`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics))                |
+| Declarative               | Build groups and the arrangement slide by slide | Declare the sections and write the order as `v1,c,v2,c`                                            |
+| Review                    | None                                            | Every change is a pull request with a diff                                                         |
+| Formatting and validation | By eye                                          | A Prettier plugin formats songs, and CI validates structure, IDs and file names before merge       |
+| History                   | None                                            | `git log` and `git blame` for every line of every song                                             |
+| Build                     | Done in the app                                 | The migrator compiles text into native `.pro` files                                                |
+| Plan and apply            | Copy whatever looks changed                     | A manifest diff ships only new, changed or renamed songs, like `terraform plan` and `apply`        |
+| Idempotent                | —                                               | A deploy with no changes ships nothing                                                             |
+| Releases                  | Files overwritten in place                      | Append-only, timestamped deploy folders, each with its manifest                                    |
+| Delivery                  | Export, copy, import                            | Merge to `main`, deployed by CI in about 30 seconds, moved into the library on the Mac's next sync |
 
 ## In production
 
-Since March 2023 this pipeline has generated the entire worship library of Biserica Emanuel Sibiu (BES): roughly 1,900 songs, maintained as text files in [`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics). Songs are not imported or edited by hand in ProPresenter: a lyric fix merged on GitHub is converted in about 30 seconds and moved into the library on the presentation Mac by its next sync.
+Since March 2023 the migrator has built the whole worship library of Biserica Emanuel Sibiu (BES), a church in Sibiu, Romania: about 1,900 songs kept in [`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics). Every merge there runs a deploy that takes about 30 seconds, and the presentation Mac picks up the result on its next sync. Songs reach ProPresenter without being imported or edited by hand; only removals are still done manually.
 
-```mermaid
-flowchart LR
-    A["bes-lyrics<br/>verified/*.txt"] -- push to main --> B["GitHub Actions"]
-    B -- "npm run convert:remote" --> C["bes-propres7-migrator<br/>parse → protobuf .pro"]
-    C -- "only new, changed<br/>or renamed songs" --> D["Google Drive<br/>one folder per deploy"]
-    D -- "Drive for desktop" --> E["Presentation Mac"]
-    E -- "cron, every minute" --> F["ProPresenter 7 library"]
-```
+![A real BES song in ProPresenter 7: the Groups row holds each section once, the BES arrangement replays the chorus where it is sung, and the first Blank slide carries the setup macro](docs/assets/propresenter-outcome.png)
 
-## Highlights
+<sub>A real song from the BES library, generated by the migrator: sections appear once under **Groups**, the **BES** arrangement plays them in order with the chorus repeated, and the first slide carries the macro badge.</sub>
 
-- **Native `.pro` files from reverse-engineered protobuf.** The 121 `.proto` schemas in [`proto/`](proto/) were extracted from the ProPresenter binary with [`protodump`](https://github.com/arkadiyt/protodump) and compiled to typed TypeScript with [`ts-proto`](https://github.com/stephenh/ts-proto), so every presentation is built as a typed object and encoded exactly as ProPresenter stores it. See [ProPresenter format](docs/propresenter-format.md).
+## What makes it interesting
 
-- **Arrangements that follow the song.** Each section becomes one group, and a `BES` arrangement replays the groups in the song's sequence. The chorus exists once but plays everywhere it is sung, so the operator only ever presses → during worship.
+- **It writes a format nobody documented.** ProPresenter's 121 protobuf schemas were recovered from the app binary with [`protodump`](https://github.com/arkadiyt/protodump) and compiled into typed TypeScript with [`ts-proto`](https://github.com/stephenh/ts-proto). Each song is built as a typed `Presentation` object and encoded exactly as ProPresenter saves it. [How the format maps →](docs/propresenter-format.md)
 
-- **A setup slide that runs a macro.** Every song opens on a blank slide that triggers a ProPresenter macro, which prepares the screens before the first lyric appears.
+- **Arrangements come from the sequence.** Each section becomes one group, and the `BES` arrangement replays them in the sung order, so a chorus exists once and plays everywhere it is sung. The operator only ever presses →.
 
-- **Incremental, versioned deploys.** Each deploy writes a manifest of song IDs and content hashes, diffs it against the previous deploy, and uploads only new, changed or renamed songs into a timestamped Google Drive folder, together with the list of songs to remove. See [Architecture](docs/architecture.md).
+- **Deploys ship only what changed.** Every deploy writes a manifest of song IDs and content hashes and diffs it against the previous one, so a one-line fix uploads one file, into a timestamped folder that doubles as history. [How deploys work →](docs/architecture.md)
 
-- **Romanian typography that survives RTF.** Slide text is RTF; the converter escapes diacritics (`ă â î ș ț`) and typographic quotes (`„ ” ‘ ’`) to RTF Unicode, including RTF's habit of swallowing the space after a control word. Snapshot tests pin the output.
+- **Romanian typography survives RTF.** Slide text is RTF, which needs non-ASCII letters escaped and swallows the space after a control word; the converter escapes `ă â î ș ț` and `„ ” ‘ ’` so they render correctly, and snapshot tests pin the output.
 
 - **The last mile is automated too.** A cron job on the presentation Mac moves each deploy into the ProPresenter library ([`client-sync-macos/`](client-sync-macos/)), and a one-click AppleScript switches the displays between ProPresenter and PowerPoint layouts ([`displays-switch/`](displays-switch/)).
+
+- **The docs are tested.** The song examples are parsed in CI, the section-code table is checked against the parser, and every link is verified, internal and external. [How the docs stay true →](docs/README.md#keeping-the-docs-true)
 
 ## Quick start
 
@@ -45,73 +57,43 @@ cd bes-propres7-migrator
 npm ci
 ```
 
-Point `LOCAL_SOURCE_DIR` in [`.env.local`](.env.local) at a folder of songs (it defaults to a sibling checkout of [`bes-lyrics`](https://github.com/ioanlucut/bes-lyrics)), then convert:
+Point `LOCAL_SOURCE_DIR` in [`.env.local`](.env.local) at a folder of `.txt` songs, then convert:
 
 ```bash
 npm run convert:local
 ```
 
-The `.pro` files and a `manifest.json` are written to `out_temp_for_local/<YYYY-MM-DD-HH:MM:SS>/`. Copy them into a ProPresenter library folder (by default under `~/Documents/ProPresenter/Libraries/`), which is what the [presentation Mac sync](client-sync-macos/README.md) automates. Later runs only write songs that changed since the previous run.
+The `.pro` files and a `manifest.json` appear in `out_temp_for_local/<YYYY-MM-DD-HH:MM:SS>/`. Copy them into a ProPresenter library folder, by default under `~/Documents/ProPresenter/Libraries/`. Run it again after editing a song and only that song is written.
 
-## Song format
-
-One `.txt` file per song: a title with metadata, the sequence to play, then the sections.
+## A song, in text
 
 ```text
 [title]
-Aceasta mi-e dorința, să Te-onorez {id: {8ipLZddXG3Zy7Hbbo93Vm7}, contentHash: {418384}}
+Blessed Assurance {id: {x7Qm2Lp9RtVb4Nc8Kd1Ws3}, contentHash: {5a1f09}}
 
 [sequence]
 v1,c,v2,c
 
 [v1]
-Aceasta mi-e dorința, să Te-onorez,
-Cu ființa-ntreagă să Te slăvesc.
+Blessed assurance, Jesus is mine!
+Oh, what a foretaste of glory divine!
+Heir of salvation, purchase of God,
+Born of His Spirit, washed in His blood.
 
 [c]
-Ție-Ți dau inima și sufletul meu,
-Pentru Tine vreau să trăiesc!
+This is my story, this is my song,
+Praising my Savior all the day long;
+This is my story, this is my song,
+Praising my Savior all the day long.
 
 [v2]
-Vrednic ești de cinste, fii lăudat!
-Împărat al slavei, fii înălțat!
+Perfect submission, perfect delight,
+Visions of rapture now burst on my sight;
+Angels descending bring from above
+Echoes of mercy, whispers of love.
 ```
 
-| Section    | Codes         | ProPresenter group            |
-| ---------- | ------------- | ----------------------------- |
-| Verse      | `v1`, `v2`, … | `Verse 1`, `Verse 2`, …       |
-| Pre-chorus | `p`, `p2`, …  | `Prechorus`, `Prechorus 2`, … |
-| Chorus     | `c`, `c2`, …  | `Chorus`, `Chorus 2`, …       |
-| Bridge     | `b`, `b2`, …  | `Bridge`, `Bridge 2`, …       |
-| Recital    | `s`, `s2`, …  | `Recital`, `Recital 2`, …     |
-| Ending     | `e`           | `Ending`                      |
-
-A long section can be split across slides with sub-sections such as `v1.1` and `v1.2`, which ProPresenter labels `1/2` and `2/2`. The full rules, including what fails a deploy, are in [Song format](docs/song-format.md).
-
-## Configuration
-
-[`runner.ts`](runner.ts) holds the BES settings and picks the local or remote mode:
-
-| `Config` field               | Purpose                                | BES value                       |
-| ---------------------------- | -------------------------------------- | ------------------------------- |
-| `arrangementName`            | Name of the generated arrangement      | `BES`                           |
-| `ccliSettings`               | CCLI publisher, author, album and year | Church name and year            |
-| `fontConfig`                 | Slide font                             | `CMG Sans Cn CAPS`, bold, 58 pt |
-| `graphicSize`                | Slide size                             | 1920 × 1080                     |
-| `presentationCategory`       | ProPresenter category                  | `Worship Songs ~ BES <year>`    |
-| `refMacroId`, `refMacroName` | Macro run by the first slide           | The `Songs` macro               |
-
-| Environment variable                                                                  | Used by | Purpose                                                                 |
-| ------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------- |
-| `LOCAL_SOURCE_DIR`                                                                    | both    | Folder with the `.txt` songs, read recursively                          |
-| `LOCAL_OUT_DIR`                                                                       | both    | Where each run's folder is written                                      |
-| `CONNECT_TO_G_DRIVE`                                                                  | both    | `true` uploads to Google Drive; anything else stays local               |
-| `TZ`                                                                                  | both    | Time zone of the timestamped folder names                               |
-| `GDRIVE_ROOT_FOLDER_ID`                                                               | remote  | Google Drive folder that receives one sub-folder per deploy             |
-| `GDRIVE_BES_CLIENT_ID`, `GDRIVE_BES_CLIENT_SECRET`, `GDRIVE_BES_CLIENT_REFRESH_TOKEN` | remote  | OAuth credentials; see [Google Drive setup](docs/google-drive-setup.md) |
-| `FORCE_RELEASE_OF_ALL_SONGS`                                                          | remote  | `true` re-uploads every song instead of the diff                        |
-
-Remote mode runs with `npm run convert:remote`, which reads [`.env.remote`](.env.remote); in production the [`bes-lyrics` deploy workflow](https://github.com/ioanlucut/bes-lyrics/blob/main/.github/workflows/deploy_to_gdrive.yml) runs it on every push that touches `verified/`.
+The title carries a stable `id` and a `contentHash`, the sequence is the order the song is sung in, and each section becomes one slide group. Verses, pre-choruses, choruses, bridges, recitals and endings are supported, and long sections can be split across slides. [Full song format →](docs/song-format.md)
 
 ## Repository map
 
@@ -123,32 +105,35 @@ mocks/               song fixtures for the tests
 client-sync-macos/   cron sync from Google Drive into the ProPresenter library
 displays-switch/     one-click display layouts for ProPresenter and PowerPoint
 windows-templates/   reference .pro files saved by ProPresenter for Windows
-docs/                architecture, formats and setup guides
+docs/                guides, reference and explanations
 ```
 
 ## Development
 
-| Command                    | What it does                                                     |
-| -------------------------- | ---------------------------------------------------------------- |
-| `npm test`                 | Jest unit and integration tests (watch mode outside CI)          |
-| `npm run lint`             | ESLint                                                           |
-| `npm run typecheck`        | TypeScript, including the generated protobuf code                |
-| `npm run format:check`     | Prettier                                                         |
-| `npm run test:sync-script` | Tests the presentation Mac sync script against throwaway folders |
+| Command                    | What it does                                                           |
+| -------------------------- | ---------------------------------------------------------------------- |
+| `npm test`                 | Jest unit, integration and documentation tests (watch mode outside CI) |
+| `npm run lint`             | ESLint                                                                 |
+| `npm run typecheck`        | TypeScript, including the generated protobuf code                      |
+| `npm run format:check`     | Prettier                                                               |
+| `npm run test:sync-script` | Tests the presentation Mac sync script against throwaway folders       |
+| `npm run convert:local`    | Converts a song folder into `out_temp_for_local/`                      |
+| `npm run convert:remote`   | Converts and uploads the changes to Google Drive                       |
 
-CI runs all of them on every push and pull request.
+CI runs every check on each push and pull request, on Node 20 and 24.
 
 ## Documentation
 
-- [Architecture](docs/architecture.md): the deploy lifecycle and how the manifest diff decides what ships.
-- [Song format](docs/song-format.md): the full `.txt` grammar and validation rules.
-- [ProPresenter format](docs/propresenter-format.md): how a song maps onto ProPresenter's protobuf model, and how to regenerate or decode it.
-- [Google Drive setup](docs/google-drive-setup.md): creating the OAuth credentials for remote deploys.
-- [Presentation Mac sync](client-sync-macos/README.md) and [display switch](displays-switch/README.md).
+Start at the [documentation index](docs/README.md). The most useful pages:
+
+- [Architecture](docs/architecture.md): the pipeline, the deploy lifecycle and how the manifest diff decides what ships.
+- [Song format](docs/song-format.md): every section code and the rules that fail a deploy.
+- [Configuration](docs/configuration.md): the `Config` object and environment variables.
+- [ProPresenter format](docs/propresenter-format.md): how a song maps onto ProPresenter's protobuf model.
 
 ## Adapting it
 
-Built for one church, but only [`runner.ts`](runner.ts) is church-specific. Change the config, point it at your own song folder, and it works for any ProPresenter 7 library. Issues and pull requests are welcome.
+It was built for one church, but only [`runner.ts`](runner.ts) is church-specific. Change the config, point it at your own song folder, and it works for any ProPresenter 7 library. Issues and pull requests are welcome.
 
 ## License
 

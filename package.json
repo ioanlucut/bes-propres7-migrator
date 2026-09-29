@@ -1,8 +1,9 @@
 {
   "name": "bes-propres7-migrator",
   "version": "1.0.0",
-  "description": "Turns a Git-managed song library into native ProPresenter 7 presentations and ships only what changed to the presentation Mac.",
+  "description": "Songs as code for ProPresenter 7: compiles a Git-managed song library into native .pro presentations and ships only what changed to the presentation Mac.",
   "keywords": [
+    "songs-as-code",
     "propresenter",
     "propresenter7",
     "protobuf",
@@ -35,7 +36,7 @@
     "convert:remote": "dotenv -e .env.remote ts-node runner.ts",
     "lint": "eslint src runner.ts index.ts",
     "typecheck": "tsc --noEmit",
-    "format:check": "prettier --check src runner.ts index.ts jest.config.ts",
+    "format:check": "prettier --check src runner.ts index.ts jest.config.ts \"**/*.md\" \".github/**/*.yml\"",
     "test:sync-script": "bash client-sync-macos/template/sync-via-gdrive.test.sh"
   },
   "dependencies": {

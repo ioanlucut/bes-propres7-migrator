@@ -15,7 +15,7 @@ Create a folder in Google Drive to receive the deploys, for example `PP7 Generat
 
 ## 3. Get a refresh token
 
-1. Open the [OAuth 2.0 Playground](https://developers.google.com/oauthplayground), open the settings (gear icon), tick **Use your own OAuth credentials** and enter the client ID and secret.
+1. Open the [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/), open the settings (gear icon), tick **Use your own OAuth credentials** and enter the client ID and secret.
 2. Authorise the scope `https://www.googleapis.com/auth/drive`. The narrower `drive.file` scope is not enough, because the migrator creates folders inside a folder that was created by hand.
 3. Sign in with the deploying account, then exchange the authorisation code for tokens and copy the refresh token.
 
