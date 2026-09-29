@@ -45,10 +45,18 @@ const getBacktickedValues = (value: string) =>
   [...value.matchAll(/`([^`]+)`/g)].map(([, inner]) => inner);
 
 const getSection = (markdown: string, heading: string) => {
-  const start = markdown.indexOf(`## ${heading}\n`);
-  const end = markdown.indexOf('\n## ', start + 1);
+  const lines = markdown.split('\n');
+  const start = lines.indexOf(`## ${heading}`);
 
-  return markdown.slice(start, end === -1 ? undefined : end);
+  if (start === -1) {
+    throw new Error(`Missing section "## ${heading}"`);
+  }
+
+  const end = lines.findIndex(
+    (line, index) => index > start && line.startsWith('## '),
+  );
+
+  return lines.slice(start, end === -1 ? undefined : end).join('\n');
 };
 
 const getTableRows = (markdown: string) =>
